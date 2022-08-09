@@ -7,7 +7,7 @@ global class SM_AP66_FindDuplicateContact implements vlocity_cmt.VlocityOpenInte
                                 Map < String, Object > options) {
                                     
                                     if (methodName.equals('findDuplicates')) {
-                                        findDuplicates(inputMap, outMap, new Map< String, Object>());
+                                        findDuplicatesCustom(inputMap, outMap, new Map< String, Object>());
                                         
                                     }
                                     return true;
@@ -17,7 +17,7 @@ global class SM_AP66_FindDuplicateContact implements vlocity_cmt.VlocityOpenInte
 * @Date: 03/09/2019
 * @Description: Detecter les duplicates contactes selon les  3 duplications rules  sur contact avec recordtype 'Contact Smile'
 */
-    public static void findDuplicates(Map < String, Object > inputMap, Map < String, Object > outMap, Map < String, Object > options) {
+    public static void findDuplicatesCustom(Map < String, Object > inputMap, Map < String, Object > outMap, Map < String, Object > options) {
              
         Map<String,Object> contactInfoMap = (Map<String,Object>) inputMap.get('ContactInfo');
         Map<String,Object> civilityBlock = (Map<String,Object>) contactInfoMap.get('CivilityBlock');
@@ -32,8 +32,8 @@ global class SM_AP66_FindDuplicateContact implements vlocity_cmt.VlocityOpenInte
         newCont.RecordTypeId=Schema.SObjectType.Contact.getRecordTypeInfosByName().get('Contact Smile').getRecordTypeId();
         newCont.tech_bypass_dupRul__c=false;
         //Address
-        newCont.MailingCity=(String) addressMap.get('CityFormula');
-        newCont.MailingStreet=(String) addressMap.get('StreetFormula');
+        newCont.MailingCity=(String) addressMap.get('City');
+        newCont.MailingStreet=(String) addressMap.get('Street');
         newCont.MailingPostalCode=(String) addressMap.get('PC');
         //Email    
         if(emailMap.get('selectedEmail')!=null){

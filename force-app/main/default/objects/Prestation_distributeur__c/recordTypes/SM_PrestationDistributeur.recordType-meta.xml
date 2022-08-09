@@ -2,8 +2,7 @@
 <RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>SM_PrestationDistributeur</fullName>
     <active>true</active>
-    <compactLayoutAssignment>SM_OPS</compactLayoutAssignment>
-    <label>SM_PrestationDistributeur</label>
+    <label>SM_Prestation_distributeur</label>
     <picklistValues>
         <picklist>Civilite_interlocuteur_intervention__c</picklist>
         <values>
@@ -95,6 +94,36 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>HP_Origine_Retablissement__c</picklist>
+        <values>
+            <fullName>HP_Client</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HP_happe</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>HP_Type_de_prestation__c</picklist>
+        <values>
+            <fullName>Coupure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ReductionDePuissance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Retablissement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Souscription</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Niveau_d_ouverture_aux_services__c</picklist>
         <values>
             <fullName>Inconnu</fullName>
@@ -153,14 +182,6 @@
             <fullName>Emménagement</fullName>
             <default>false</default>
         </values>
-        <values>
-            <fullName>Restauration</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Rétablissement</fullName>
-            <default>false</default>
-        </values>
     </picklistValues>
     <picklistValues>
         <picklist>Statut__c</picklist>
@@ -184,27 +205,11 @@
     <picklistValues>
         <picklist>Type_OPS__c</picklist>
         <values>
-            <fullName>Demande de coupure</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Différé</fullName>
-            <default>false</default>
-        </values>
-        <values>
             <fullName>Online</fullName>
             <default>false</default>
         </values>
         <values>
             <fullName>Recollement</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Réduction de puissance</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Rétablissement</fullName>
             <default>false</default>
         </values>
     </picklistValues>

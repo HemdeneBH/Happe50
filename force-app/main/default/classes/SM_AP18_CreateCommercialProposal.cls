@@ -11,8 +11,6 @@ global class SM_AP18_CreateCommercialProposal implements vlocity_cmt.VlocityOpen
     *@CreatedDate:05/09/2018
     *@LastModified: 19/12/2018
     */
-    
-    private static SM_WS_Suffix__mdt suffixs_PropositionCommerciale = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'PropositionCommerciale' limit 1];
     global Boolean invokeMethod(String methodName, Map < String, Object > inputMap, Map < String, Object > outMap, Map < String, Object > options) {
         boolean returnValue = true;
         if (methodName.equals('createCommercialProposal')) {
@@ -93,7 +91,7 @@ global class SM_AP18_CreateCommercialProposal implements vlocity_cmt.VlocityOpen
         SM_OCTOPUS__c octopusCS = SM_OCTOPUS__c.getOrgDefaults();
         gdfsuezBefCalypsoPropositioncommerc.Dependency port = new gdfsuezBefCalypsoPropositioncommerc.Dependency();
         port.clientCertName_x = octopusCS.certName__c;
-        port.endpoint_x = octopusCS.endpoint__c +suffixs_PropositionCommerciale.suffix__c;
+        port.endpoint_x = octopusCS.endpoint__c + 'ES-PropositionCommerciale_v3';
         port.inputHttpHeaders_x = new Map<String, String> {'Content-Type' => 'text/xml;charset=utf-8'};
         port.timeout_x = 120000;
         return port;
@@ -742,7 +740,7 @@ global class SM_AP18_CreateCommercialProposal implements vlocity_cmt.VlocityOpen
         SM_OCTOPUS__c octopusCS = SM_OCTOPUS__c.getOrgDefaults();
         gdfsuezBefCalypsoPropositioncommerc.Dependency port = new gdfsuezBefCalypsoPropositioncommerc.Dependency();
         port.clientCertName_x = octopusCS.certName__c;
-        port.endpoint_x = octopusCS.endpoint__c + suffixs_PropositionCommerciale.suffix__c;
+        port.endpoint_x = octopusCS.endpoint__c + 'ES-PropositionCommerciale_v3';
         port.inputHttpHeaders_x = new Map<String, String> {'Content-Type' => 'text/xml;charset=utf-8'};
         port.timeout_x = 60000;
 
@@ -959,7 +957,7 @@ global class SM_AP18_CreateCommercialProposal implements vlocity_cmt.VlocityOpen
                 SM_OCTOPUS__c octopusCS = SM_OCTOPUS__c.getOrgDefaults();
                 gdfsuezBefCalypsoPropositioncommerc.Dependency port = new gdfsuezBefCalypsoPropositioncommerc.Dependency();
                 port.clientCertName_x = octopusCS.certName__c;
-                port.endpoint_x = octopusCS.endpoint__c + suffixs_PropositionCommerciale.suffix__c;
+                port.endpoint_x = octopusCS.endpoint__c + 'ES-PropositionCommerciale_v3';
                 port.inputHttpHeaders_x = new Map<String, String> {'Content-Type' => 'text/xml;charset=utf-8'};
                 port.timeout_x = 120000;
                 /*port.inputHttpHeaders_x.put('Username','HV1002');

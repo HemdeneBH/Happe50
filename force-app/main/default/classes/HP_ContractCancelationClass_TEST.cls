@@ -3,8 +3,8 @@
  * @Description        : 
  * @Author             : Mohamed Aamer
  * @Group              : 
- * @Last Modified By   : Mouhamadoune Coulibaly
- * @Last Modified On   : 01/04/2020 à 14:08:07
+ * @Last Modified By   : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @Last Modified On   : 03-18-2022
  * @Modification Log   : 
  * Ver       Date            Author      		    Modification
  * 1.0    06/01/2020   Mohamed Aamer     Initial Version
@@ -93,6 +93,7 @@ public with sharing class HP_ContractCancelationClass_TEST {
         Decimal contactId = [SELECT Id_Tiers__c FROM Contact WHERE LastName='LastName Test' LIMIT 1].Id_Tiers__c;
         String caseId = String.valueOf([SELECT Id FROM Case WHERE Subject='Case Test' LIMIT 1].Id);
         Date prestationDate = Date.newInstance(2019, 12, 27);
+        String contractResiliationDate = HP_ContractCancelationClass.getResilationDate(Integer.valueOf(idContract),prestationDate);
         String businessNumber = 'ZEJDD322';
         String caseSourceStr = 'HP_CLIENT';
         String pdlPce = '24309261797984';

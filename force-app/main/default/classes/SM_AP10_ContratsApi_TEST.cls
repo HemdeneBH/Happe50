@@ -6,8 +6,16 @@ global class SM_AP10_ContratsApi_TEST {
             System.debug('*** req : ' + req.getEndpoint());
             HttpResponse res = new HttpResponse();
             res.setHeader('Content-Type', 'application/json');
+            
             String endpoint = req.getEndpoint();
-            res.setBody('{"_data":[{"id":98194,"idPortefeuilleContrat":169158,"idPersonne":140975,"numeroContrat":"6009277011","typeContrat":"Electricité","statutComposante":"Actif","dureeContratEnMois":null,"dateEmmenagement":"2017-10-14","dateDemenagement":"9999-12-31","dateDebutContrat":"2017-10-14","dateFinContrat":"9999-12-31","facture":false,"numeroContratCRM":"6011997021","numeroInstallation":"0919248984","idOffre":304,"offre":"ÉlecAjust2ans","codeOffre":"EBUA2","idInstallation":133693,"idPointDeLivraison":233343,"dateDebutValidite":"2017-10-14","dateFinValidite":"9999-12-31","numeroContratExterne":"","idPropositionCommerciale":320657,"idAgence":0,"codeEquipement":null,"libelleEquipement":null,"_links":{"self":"https://qa-rec-dmzext-gtw.api.engie.fr:8550/api/apiset/0.1/contrats/98194"}},{"id":98201,"idPortefeuilleContrat":169158,"idPersonne":140975,"numeroContrat":"6009277012","typeContrat":"GazNaturel","statutComposante":"Actif","dureeContratEnMois":null,"dateEmmenagement":"2017-10-19","dateDemenagement":"9999-12-31","dateDebutContrat":"2017-10-19","dateFinContrat":"9999-12-31","facture":false,"numeroContratCRM":"6011997021","numeroInstallation":"0901078010","idOffre":335,"offre":"GazAjust2ans","codeOffre":"GBUA2","idInstallation":4442,"idPointDeLivraison":126214,"dateDebutValidite":"2017-10-19","dateFinValidite":"9999-12-31","numeroContratExterne":"","idPropositionCommerciale":320665,"idAgence":0,"codeEquipement":null,"libelleEquipement":null,"_links":{"self":"https://qa-rec-dmzext-gtw.api.engie.fr:8550/api/apiset/0.1/contrats/98201"}}]}');
+            
+            if(endpoint.contains('token')){
+                res.setBody('{"access_token":"6085ce33-f4e4-420f-83ba-4c3b97ccd643","token_type":"Bearer","expires_in":86400,"scope":"apiset.read smile.read apiset-consentements.write"}');
+            } else if(endpoint.contains('contrat')){
+                res.setBody('{"_data":[{"id":486149,"idPortefeuilleContrat":216045,"idPersonne":192607,"numeroContrat":"6009189019","typeContrat":"GN","secteurActivite":"Gaz Naturel","idOffre":244,"codeOffre":"GBUF2C","libelleOffre":"GAZ COMPENSÉ CARBONE 2 ANS","uniteReleve":"A10131DB","numeroPointDeLivraison":"21101817660531","statutContrat":"Actif","statutComposante":"Actif","dateDebutContrat":"2018-11-05","dateFinContrat":"9999-12-31","dateEmmenagement":"2018-11-05","dateDemenagement":"9999-12-31","numeroContratCRM":"6011928655","_links":{"self":"https://qa-rec-dmzext-gtw.api.engie.fr:8550/api/smile/0.1/contrats/486149"}},{"id":486150,"idPortefeuilleContrat":216045,"idPersonne":192607,"numeroContrat":"6009189018","typeContrat":"E","secteurActivite":"Electricité","idOffre":148,"codeOffre":"EBUF2V100","libelleOffre":"ELEC FIXE 2 ANS","uniteReleve":"A10131EB","numeroPointDeLivraison":"09701143164444","statutContrat":"Actif","statutComposante":"Actif","dateDebutContrat":"2018-11-05","dateFinContrat":"9999-12-31","dateEmmenagement":"2018-11-05","dateDemenagement":"9999-12-31","numeroContratCRM":"6011928655","_links":{"self":"https://qa-rec-dmzext-gtw.api.engie.fr:8550/api/smile/0.1/contrats/486150"}},{"id":486151,"idPortefeuilleContrat":216045,"idPersonne":192607,"numeroContrat":"6009189018","typeContrat":"E","secteurActivite":"Electricité","idOffre":148,"codeOffre":"EBUF2V100","libelleOffre":"ELEC FIXE 2 ANS","uniteReleve":"A10131EB","numeroPointDeLivraison":"09701143164444","statutContrat":"Inactif","statutComposante":"Inactif","dateDebutContrat":"2018-11-05","dateFinContrat":"9999-12-31","dateEmmenagement":"2018-11-05","dateDemenagement":"9999-12-31","numeroContratCRM":"6011928655","_links":{"self":"https://qa-rec-dmzext-gtw.api.engie.fr:8550/api/smile/0.1/contrats/486150"}}]}');
+            } else{
+                res.setBody('');
+            }
             res.setStatusCode(200);
             return res;
         }
@@ -80,7 +88,7 @@ global class SM_AP10_ContratsApi_TEST {
         
         List<Object> outContrat = (List<Object>) outMap.get('resultdata');
         
-        System.assertEquals(2, outContrat.size());
+        System.assertEquals(3, outContrat .size());
     }
     
     @IsTest(SeeAllData = false)
@@ -89,7 +97,7 @@ global class SM_AP10_ContratsApi_TEST {
         Map<String,Object> outMap = new Map<String,Object>();
         Map <String,Object> options = new Map<String,Object>();
         
-        inputMap.put('IdPortefeuilleContrat', '919202');
+        inputMap.put('IdPortefeuilleContrat', '123456789');
         
         Test.startTest();
         
@@ -104,33 +112,8 @@ global class SM_AP10_ContratsApi_TEST {
         List<Object> outContratElec = (List<Object>) outMap.get('resultdataElec');
         List<Object> outContratGaz = (List<Object>) outMap.get('resultdataGaz');
         
-        // System.assertEquals(1, outContratElec.size());
-        // System.assertEquals(1, outContratGaz .size());
-    }
-    
-    @IsTest(SeeAllData = false)
-    public static void callContratsActifwithIdTest(){
-        Map<String,Object> inputMap = new Map<String,Object>();
-        Map<String,Object> outMap = new Map<String,Object>();
-        Map <String,Object> options = new Map<String,Object>();
-        
-        inputMap.put('IdPortefeuilleContrat', '143921');
-        inputMap.put('idContrat', '6011928655');
-        Test.startTest();
-        
-        Test.setMock(HttpCalloutMock.class, new Mock());
-        SM_AP10_ContratsApiService ctrl = new SM_AP10_ContratsApiService();
-        ctrl.invokeMethod('callContratswithId', inputMap, outMap, options);
-        
-        Test.stopTest();
-        
-        System.debug(outMap);
-        
-        // List<Object> outContratElec = (List<Object>) outMap.get('resultdataElec');
-        Map<String,Object> outContratGaz = (Map<String,Object>) outMap.get('resultdataGaz');
-        
-        // System.assertEquals(1, outContratElec.size());
-        //System.assertEquals(1, outContratGaz .size());
+        System.assertEquals(1, outContratElec.size());
+        System.assertEquals(1, outContratGaz .size());
     }
         
     @IsTest(SeeAllData = false)
@@ -157,5 +140,4 @@ global class SM_AP10_ContratsApi_TEST {
         System.assertEquals(1, outElec.size());
         System.assertEquals(1, outGaz.size());
     }
-    
 }

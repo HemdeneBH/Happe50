@@ -3,7 +3,7 @@
     <apiVersion>46.0</apiVersion>
     <packageVersions>
         <majorNumber>900</majorNumber>
-        <minorNumber>408</minorNumber>
+        <minorNumber>251</minorNumber>
         <namespace>vlocity_cmt</namespace>
     </packageVersions>
     <status>Active</status>

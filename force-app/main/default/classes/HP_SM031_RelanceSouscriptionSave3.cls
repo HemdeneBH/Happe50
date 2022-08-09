@@ -3,8 +3,8 @@
  * @Description        : 
  * @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
  * @Group              : 
- * @Last Modified By   : Badr Eddine Belkarchi
- * @Last Modified On   : 02-23-2022
+ * @Last Modified By   : Hemdene Ben Hammouda
+ * @Last Modified On   : 04-25-2022
  * @Modification Log   : 
  * Ver       Date            Author      		    Modification
  * 1.0    22/05/2020   Sara El-Hannaoui     Initial Version
@@ -84,6 +84,9 @@ public with sharing class HP_SM031_RelanceSouscriptionSave3 {
                                 HP_SM063_WelcomeEmailSender.sendWelcomeEmail(souscription.Id,electricityContractXdataId, gasContractXdataId, souscription.OK_Electricite__c, souscription.OK_Gaz__c);
                         }
                 }
+                if(!isContractualisationEnErreurAgilab){
+                        ID jobID = System.enqueueJob(new HP_EC_CommunityUserManagerAsync(cont.Id_Tiers__c));
+		}
                 resultApi.get('case').add(myCase);
                 HP_SM022_SouscriptionSave3.updateDataProcessing(null, resultApi, souscription, cont, contractList, false, true, response);
                 return relanceContractResult; 

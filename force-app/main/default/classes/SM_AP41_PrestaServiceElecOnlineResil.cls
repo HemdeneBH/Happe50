@@ -11,10 +11,6 @@ global  class SM_AP41_PrestaServiceElecOnlineResil extends SM_AP41_PrestaService
                 
             } 
             catch (Exception e) {
-                //String error = e.getStackTraceString() + '\n' + e.getMessage() ;
-				//String data=  SM_Utilities.buildLog(error,'Error','creerPrestationElecOnlineResil') ;
-				//SM_Utilities.traceLog(data) ;
-
                 if(!Test.isRunningTest()) {
                     system.debug('error '+e);
                     system.debug('error '+e.getStackTraceString());
@@ -70,7 +66,7 @@ global  class SM_AP41_PrestaServiceElecOnlineResil extends SM_AP41_PrestaService
         system.debug('DateOpsElecForm'+DateOpsElecForm) ;
         String idBp = inputMap != null ? (String) inputMap.get('getIdBP') : null;
         system.debug('idBp'+idBp) ;
-        String idContrat = String.valueof(inputMap.get('idContrat'));
+        String idContrat = (String) inputMap.get('idContrat') ; 
         system.debug('idContrat'+idContrat) ;
         Map<String,Object > blocIntervention   =  ( Map<String,Object > )inputMap.get('InterventionElec') ;   
         system.debug('blocIntervention'+blocIntervention) ;
@@ -93,8 +89,7 @@ global  class SM_AP41_PrestaServiceElecOnlineResil extends SM_AP41_PrestaService
         gdfsuezBefCalypsoPrestationServiceElec.Dependency port = new gdfsuezBefCalypsoPrestationServiceElec.Dependency();
         SM_OCTOPUS__c octopusCS = SM_OCTOPUS__c.getOrgDefaults();
         port.clientCertName_x = octopusCS.certName__c;
-        SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'PrestationServiceElec' limit 1];
-        port.endpoint_x = octopusCS.endpoint__c + suffixs.suffix__c;
+        port.endpoint_x = octopusCS.endpoint__c + 'ES-PrestationServiceElec_v3'; //ES-PrestationServiceElectricite_v3';
         System.debug('*** endpoint : ' + port.endpoint_x);
         port.inputHttpHeaders_x = new Map < String, String > {
             'Content-Type' => 'text/xml;charset=utf-8'

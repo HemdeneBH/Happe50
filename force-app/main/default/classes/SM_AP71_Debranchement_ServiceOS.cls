@@ -19,6 +19,7 @@ global class SM_AP71_Debranchement_ServiceOS implements vlocity_cmt.VlocityOpenI
 				getChaineCryptee(inputMap, outMap, options);
 				// your implementation, use outMap to send response back to OmniScript
 			} catch (Exception e) {
+				system.debug(e);
 				return false;
 			}
         }
@@ -31,14 +32,17 @@ global class SM_AP71_Debranchement_ServiceOS implements vlocity_cmt.VlocityOpenI
         String ContactIdValue ;
          String contactIdBP;
         String chaineCryptee;
+        system.debug(inputMap.get('ContextId'));
         if (inputMap.get('ContextId') != '') {
 			ContactIdValue = (String)inputMap.get('ContextId');
 		} else {
+			System.debug('Contact missing');
 			return;
 		}
         
         if(!Test.isRunningTest()) {
             contactIdBP= [SELECT Id,Identifiant_Buisness_Partener__c FROM Contact WHERE Id =: ContactIdValue].Identifiant_Buisness_Partener__c;
+            system.debug('contactIdBP' + contactIdBP);
         }
         else {
             contactIdBP = ContactIdValue;
@@ -66,6 +70,7 @@ global class SM_AP71_Debranchement_ServiceOS implements vlocity_cmt.VlocityOpenI
             
 
         }
+            system.debug(res.getStatusCode());
             if(res != null && res.getStatusCode() == 200){
                  String chaineCrypteeValue = res.getBody();
             	chaineCryptee = Label.SM_CL_Api_Debranchement_endpoint + '/modification-rdv-distributeur.html?token='+chaineCrypteeValue;
@@ -79,6 +84,7 @@ global class SM_AP71_Debranchement_ServiceOS implements vlocity_cmt.VlocityOpenI
             chaineCryptee =  Label.SM_CL_Api_Debranchement_endpoint + '/modification-rdv-distributeur.html?token='+contactIdBP;
         } */
 
+        system.debug('chaineCryptee'+chaineCryptee);
 
         outMap.put('chaineCryptee', chaineCryptee);
        

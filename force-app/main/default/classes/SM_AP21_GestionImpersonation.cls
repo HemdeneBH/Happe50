@@ -30,9 +30,11 @@ public static String getURLImpersonation(String refBP) {
     
     // Login and Id Conseiller
     loginConseiller = UserInfo.getUserName();    
+    system.debug('login : '+loginConseiller+' id : '+UserInfo.getUserId());
     
     // get Current Token    
     currentToken = SM_Utils_TokenOctopus.getOctopusToken(true);
+    system.debug('currentToken : '+currentToken);    
     
     string uname = SM_Utils_TokenOctopus.getOctopusUsername();
     if(uname==null) uname = 'HV1002';
@@ -45,15 +47,19 @@ public static String getURLImpersonation(String refBP) {
     
     JetonClair = uname + ';'+currentToken+';Conseillers;'+refBP;  
     //JetonClair = loginConseiller+';'+currentToken+';Conseillers;'+refBP;   
+    system.debug('JetonClair : '+JetonClair);
     
     // JetonClair Encryption
      
     
     JetonChiffre = service.encrypt(JetonClair);
+    system.debug('JetonChiffre : '+JetonChiffre);
     
     JetonChiffreFinal = EncodingUtil.urlEncode(JetonChiffre, 'UTF-8');
+    system.debug('JetonChiffreFinal : '+JetonChiffreFinal);
     
     LienVisualiserEC = Label.SM_CL01_URL_CEL+JetonChiffreFinal;
+    system.debug('LienVisualiserEC : '+LienVisualiserEC);
 
     
 	return LienVisualiserEC;        

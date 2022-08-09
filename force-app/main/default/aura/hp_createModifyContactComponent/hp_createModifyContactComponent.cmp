@@ -12,14 +12,12 @@
   1.0    02/07/2020   ChangeMeIn@UserSettingsUnder.SFDoc     Initial Version
 -->
 
-
 <aura:component implements="force:lightningQuickActionWithoutHeader,lightning:isUrlAddressable,flexipage:availableForAllPageTypes" access="global">
   <aura:html tag="style">
     .panel.scrollable.slds-docked-composer.slds-grid.slds-grid--vertical.slds-is-open{
       width: 80rem!important;
       height : 38rem!important;
   }
-
 
   .slds-button.slds-button_icon.maxButton.slds-m-left_xx-small.slds-p-around_xx-small.slds-button_icon-bare{
     display: none;

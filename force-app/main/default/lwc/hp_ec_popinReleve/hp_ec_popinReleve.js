@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Hemdene Ben Hammouda
  * @group             : 
- * @last modified on  : 07-06-2022
+ * @last modified on  : 07-15-2022
  * @last modified by  : Badr Eddine Belkarchi
 **/
 import { LightningElement, api, track, wire } from 'lwc';
@@ -38,8 +38,8 @@ export default class Hp_ec_releve extends NavigationMixin(LightningElement) {
     // @api idclient;
     @api contractgaz;
     @api contractelec;
-    // @api isperiodeargaz;
-    // @api isperiodearelec;
+    @api isperiodeargaz;
+    @api isperiodearelec;
     @api typecomptage;
     @api pdl;
     @api pce;
@@ -416,6 +416,19 @@ export default class Hp_ec_releve extends NavigationMixin(LightningElement) {
 
     initializeComponantProperties() {
         this.isElec = false;this.isGaz = false; this.isHPHC = false;
+
+        if(this.isperiodeargaz == false) {
+            this.contractgaz = null;
+            this.pce = null;
+            this.latestindexgaz = null;
+        }
+        if(this.isperiodearelec == false) {
+            this.contractelec = null;
+            this.pdl = null;
+            this.lastestindexelec = null;
+            this.lastestindexhpelec = null;
+        }
+
 
         this.contractelec && this.contractgaz ? this.isDual = true: this.isDual = false;
         this.currentEnergy == 'Electricité' ? this.isElec = true: this.isElec = false;

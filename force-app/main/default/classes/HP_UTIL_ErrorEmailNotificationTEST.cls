@@ -43,7 +43,7 @@ public class HP_UTIL_ErrorEmailNotificationTEST {
     
         System.runAs(HP_UTIL_SmartFactory.runAsUserHP()){
             Test.startTest();
-            system.schedule('HP_SCH008_EmailErrorNotificationTest','0 0 23 * * ?', new HP_SCH008_EmailErrorNotification());
+            system.schedule('HP_SCH008_EmailErrorNotification','0 0 23 * * ?', new HP_SCH008_EmailErrorNotification());
             Test.stopTest();
         }
     }

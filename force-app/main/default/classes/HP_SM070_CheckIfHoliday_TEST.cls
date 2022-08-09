@@ -57,7 +57,7 @@ public with sharing class HP_SM070_CheckIfHoliday_TEST {
             System.debug('aCase  test before:'+ c.HP_TreatmentDate__c);
         }
 
-        HP_SM070_HolidayWeekend.checkTreatmentDay(idList); 
+    	HP_SM070_HolidayWeekend.checkTreatmentDay(idList); 
         System.debug('aCase  test before:'+ cList[0].HP_TreatmentDate__c);
 
         

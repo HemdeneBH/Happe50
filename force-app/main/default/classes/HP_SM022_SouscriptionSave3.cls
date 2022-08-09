@@ -4,9 +4,9 @@
  * @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
  * @Group              : 
 
- * @Last Modified By   : Badr Eddine Belkarchi
+ * @Last Modified By   : Hemdene Ben Hammouda
 
- * @Last Modified On   : 02-23-2022
+ * @Last Modified On   : 04-25-2022
 
 
  * @Modification Log   :
@@ -86,10 +86,10 @@ public without sharing class HP_SM022_SouscriptionSave3 {
 					System.debug('souscription.OK_Electricite__c = true;');
 				}
 				if (acontrat.HP_Type_de_Compteur__c == 'GAS' && !erreurAgilabContractIds.contains(acontrat.id)) {
-					souscription.OK_Gaz__c = true;
-					System.debug('souscription.OK_Gaz__c = true;');
-				} 
-			}
+						souscription.OK_Gaz__c = true;
+						System.debug('souscription.OK_Gaz__c = true;');
+					} 
+				}
 
 			if (!isContractualisationEnErreurAgilab) {
 				HP_SM063_WelcomeEmailSender.sendWelcomeEmail(souscription.Id,String.valueOf(selfcare.electricityContractXdataId), String.valueOf(selfcare.gasContractXdataId), souscription.OK_Electricite__c, souscription.OK_Gaz__c);
@@ -101,8 +101,11 @@ public without sharing class HP_SM022_SouscriptionSave3 {
 			if(acase != null) {
 				resultApi.get('case').add(acase);
 			}
+			if(!isContractualisationEnErreurAgilab){
+				ID jobID = System.enqueueJob(new HP_EC_CommunityUserManagerAsync(cont.Id_Tiers__c));
+			}
         }
-
+		
         updateDataProcessing(selfcare, resultApi, souscription, cont, contractList, isUpdateSave3, false, response);
 		System.debug('After updateDataProcessing optinMarketing: '+souscription.HP_Contact__r.HP_OptinMarketing__c);
         if (selfcare.cancelContract == true) {

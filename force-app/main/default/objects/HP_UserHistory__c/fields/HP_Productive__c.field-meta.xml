@@ -3,7 +3,7 @@
     <fullName>HP_Productive__c</fullName>
     <externalId>false</externalId>
     <formula>(HP_DureeTraitement__c   /  HP_TempsPresence__c)</formula>
-    <label>Productivité</label>
+    <label>Productivé</label>
     <precision>18</precision>
     <required>false</required>
     <scale>2</scale>

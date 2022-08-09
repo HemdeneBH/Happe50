@@ -15,8 +15,10 @@
                 
                 action.setCallback(this, function(response) {
                     var state = response.getState();
+
                     if (state === "SUCCESS" && response.getReturnValue() != null) {
                         component.set('v.taskDisplay', true);
+
                         component.set('v.lastTask', response.getReturnValue());
                         
                     }

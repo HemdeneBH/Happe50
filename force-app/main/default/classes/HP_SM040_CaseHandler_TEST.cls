@@ -311,7 +311,6 @@ public class HP_SM040_CaseHandler_TEST {
                 )
             };
             
-            // start the tests
         Test.startTest();
         Test.setMock(HttpCalloutMock.class, new HP_UTIL_ResponseRestMock(bodyResponseMap));
         insert aCase;
@@ -600,5 +599,140 @@ public class HP_SM040_CaseHandler_TEST {
         Test.stopTest();
         Case aCas = [Select Id, Status,Description from Case limit 1];
         System.assertEquals(true, aCas.Status== 'TO_DO', 'Cas Elec avec un solde supérieur à 100€');
+    }
+
+    @isTest
+    public static void testRetablissementElec(){
+        Contact cont = [select Id, ID_Tiers__c from Contact limit 1]; 
+        HP_Souscription__c sous = [select Id from HP_Souscription__c limit 1]; 
+        HP_Contrat__c aContrat = [SELECT Id FROM HP_Contrat__c WHERE HP_Type_de_Compteur__c = 'ELEC' LIMIT 1];
+        Case aCase = (Case) HP_UTIL_SmartFactory.createSObject('Case','HP_Facturation',new  Map<String, Object> {'Status' =>  HP_SLCT_Case.Status.NEW_CASE.name(),
+			'ContactId' => cont.Id,
+			'HP_Energy__c' => 'Electricity',
+            'HP_Type__c' =>'HP_Retablissement',
+            'Status' => 'NEW_CASE',
+            'HP_Client_Aide__c' => true,
+            'HP_Souscription__c' => sous.Id,
+            'HP_Contrat__c' => aContrat.Id
+            //,'HP_PDL_PCE__c' => '24197395015850'
+			}, null,null,null);
+        insert aCase;
+        Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> bodyResponseMap = new Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> {
+            'oauth2/v1/token' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(
+                200,
+                'HP_ApigeeAccessTokenResponse_MOCK',
+                new Map<String, String> {'Content-Type' => 'application/json'}
+            ),
+            'ES-PDLElec_v3' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(
+                200,
+                'HP_ES_PDLElec_MOCK',
+                new Map<String, String> {'Content-Type' => 'application/xml'}
+            ),
+            'ES-PrestationServiceElec_v3' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(
+                200,
+                'HP_PrestationReductionElecKoMOCK',
+                new Map<String, String> {'Content-Type' => 'application/xml'}
+            )
+        };
+        
+        Test.startTest();
+        Test.setMock(WebServiceMock.class, new HP_UTIL_ResponseSoapMock());
+        Test.setMock(HttpCalloutMock.class, new HP_UTIL_ResponseRestMock(bodyResponseMap));
+        HP_SM075_CoupureReduction.processRetablissement(aCase.Id, false,'HP_Client');
+        Test.stopTest();
+        Case updatedCase = [SELECT Id, Status, HP_Origine_Retablissement__c FROM Case LIMIT 1];
+        System.debug('@@@@ Case : '+updatedCase);
+        System.assert(updatedCase.Status != 'HP_PENDING', 'Batch exécuté OK');
+    }
+
+    @isTest
+    public static void testRetablissementGaz(){
+        Contact cont = [select Id, ID_Tiers__c from Contact limit 1]; 
+        HP_Souscription__c sous = [select Id from HP_Souscription__c limit 1]; 
+        HP_Contrat__c aContrat = [SELECT Id FROM HP_Contrat__c WHERE HP_Type_de_Compteur__c = 'GAS' LIMIT 1];
+        Case aCase = (Case) HP_UTIL_SmartFactory.createSObject('Case','HP_Facturation',new  Map<String, Object> {'Status' =>  HP_SLCT_Case.Status.NEW_CASE.name(),
+			'ContactId' => cont.Id,
+			'HP_Energy__c' => 'Gas',
+            'HP_Type__c' =>'HP_Retablissement',
+            'Status' => 'NEW_CASE',
+            'HP_Client_Aide__c' => true,
+            'HP_Souscription__c' => sous.Id,
+            'HP_Contrat__c' => aContrat.Id
+            //,'HP_PDL_PCE__c' => '21101817687620'
+			}, null,null,null);
+        insert aCase;
+        Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> bodyResponseMap = new Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> {
+            'oauth2/v1/token' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(
+                200,
+                'HP_ApigeeAccessTokenResponse_MOCK',
+                new Map<String, String> {'Content-Type' => 'application/json'}
+            ),
+            'ES-PDLGaz_v2' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(
+                200,
+                'HP_ES_PDLGaz_v2_Mock',
+                new Map<String, String> {'Content-Type' => 'application/xml'}
+            ),
+            'ES-PrestationServiceGaz_v2' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(
+                200,
+                'HP_PrestaGazOk_Mock',
+                new Map<String, String> {'Content-Type' => 'application/xml'}
+            )
+        };
+        
+        Test.startTest();
+        Test.setMock(WebServiceMock.class, new HP_UTIL_ResponseSoapMock());
+        Test.setMock(HttpCalloutMock.class, new HP_UTIL_ResponseRestMock(bodyResponseMap));
+        try{
+            HP_SM075_CoupureReduction.processRetablissement(aCase.Id, false,'HP_Client');
+        }catch(Exception ex){
+            System.debug(ex.getMessage());
+        }
+        Test.stopTest();
+        Case updatedCase = [SELECT Id, Status, HP_Origine_Retablissement__c FROM Case LIMIT 1];
+        System.debug('@@@@ Case : '+updatedCase);
+    }
+
+    @isTest
+    public static void coverUntestMethods(){
+        Contact cont = [select Id, ID_Tiers__c from Contact limit 1]; 
+        HP_Souscription__c sous = [select Id from HP_Souscription__c limit 1]; 
+        HP_Contrat__c aContrat = [SELECT Id,HP_Type_de_Compteur__c FROM HP_Contrat__c WHERE HP_Type_de_Compteur__c = 'GAS' LIMIT 1];
+        Case aCase = (Case) HP_UTIL_SmartFactory.createSObject('Case','HP_Facturation',new  Map<String, Object> {'Status' =>  HP_SLCT_Case.Status.NEW_CASE.name(),
+			'ContactId' => cont.Id,
+			'HP_Energy__c' => 'Gas',
+            'HP_Type__c' =>'HP_Retablissement',
+            'Status' => 'NEW_CASE',
+            'HP_Client_Aide__c' => true,
+            'HP_Souscription__c' => sous.Id,
+            'HP_Contrat__c' => aContrat.Id
+            ,'HP_PDL_PCE__c' => '21101817687620'
+			}, null,null,null);
+        insert aCase;
+        Case myCase = [SELECT Id, HP_Contrat__r.HP_Contrat_XdataId__c, HP_Contrat__c, HP_PDL_PCE__c FROM Case LIMIT 1 ];
+        Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> bodyResponseMap = new Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> {
+            'oauth2/v1/token' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(
+                200,
+                'HP_ApigeeAccessTokenResponse_MOCK',
+                new Map<String, String> {'Content-Type' => 'application/json'}
+            ),
+            'oauth2s/access_token' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(
+                200,
+                'HP_AgilabAccessTokenResponse_MOCK',
+                new Map<String, String> {'Content-Type' => 'application/json'}
+            ),
+            'propositions/modifier?' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(
+                200,
+                'HP_AGILAB_PROPOSITION_MODIFIER_MOCK',
+                new Map<String, String> {'Content-Type' => 'application/json'}
+            )
+        };
+
+        Test.startTest();
+        Test.setMock(HttpCalloutMock.class, new HP_UTIL_ResponseRestMock(bodyResponseMap));
+        HP_EM054_CoupureReduction.closeCaseAndNotifyAgilab(myCase, false, 'HP_Client');
+        HP_EM054_CoupureReduction.closeCaseAndNotifyAgilab(myCase, true, 'HP_happe');
+        HP_EM054_CoupureReduction.closeCaseAndNotifyAgilab(myCase, true, 'HP_happe');
+        HP_EM054_CoupureReduction.createPrestation(aCase, cont, aContrat, 'HP_Client', false, 'HP_Client');
+        Test.stopTest();
     }
 }

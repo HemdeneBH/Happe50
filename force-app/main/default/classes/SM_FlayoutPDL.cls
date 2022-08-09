@@ -57,8 +57,7 @@ global class SM_FlayoutPDL {
         SM_OCTOPUS__c octopusCS = SM_OCTOPUS__c.getOrgDefaults();
         gdfsuezBefCalypsoPdlelectriciteV3.Dependency port = new gdfsuezBefCalypsoPdlelectriciteV3.Dependency();
         port.clientCertName_x = octopusCS.certName__c;
-        SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'PDLElec' limit 1];
-        port.endpoint_x = octopusCS.endpoint__c + suffixs.suffix__c;
+        port.endpoint_x = octopusCS.endpoint__c + 'ES-PDLElec_v3';
         port.inputHttpHeaders_x = new Map < String, String > {
             'Content-Type' => 'text/xml;charset=utf-8'
         };
@@ -362,7 +361,7 @@ global class SM_FlayoutPDL {
                 outMap.put('ftaCode', pdlElecInfo.ftaCode);
                 outMap.put('typeComptageDifferencie', pdlElecInfo.typeComptageDifferencie);
                 outMap.put('dateDerniereModificationFormuleTarifaireAcheminement', pdlElecInfo.dateDerniereModificationFormuleTarifaireAcheminement);
-                //MEP 25/10
+
                 
                 
             }
@@ -407,8 +406,7 @@ global class SM_FlayoutPDL {
 		public String natureIndex;
 		public String perimetre;
 		public String periodeDeDeploiement ;
-        public String typeComptageDifferencie;
-        //MEP25/10
+		public String typeComptageDifferencie;
 		public Datetime dateDerniereModificationFormuleTarifaireAcheminement ;
 
 		public PdlInfo(String idPDLElectricite, String secteurActivite, String situationContractuelle, String typeCompteur,
@@ -446,8 +444,7 @@ global class SM_FlayoutPDL {
 			this.cAE_WE = cAE_WE;
 			this.cAEGlobale = cAEGlobale;
 			this.natureIndex = natureIndex;
-            this.perimetre = perimetre;
-            //MEP 25/10
+			this.perimetre = perimetre;
 			if('DISCO'.equalsIgnoreCase(situationContractuelle)){
 				switch on numbreCadrans {
 				   when 1 {

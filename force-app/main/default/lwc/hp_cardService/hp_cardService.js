@@ -1,3 +1,10 @@
+/**
+ * @description       : 
+ * @author            : Hemdene Ben Hammouda
+ * @group             : 
+ * @last modified on  : 07-07-2022
+ * @last modified by  : Hemdene Ben Hammouda
+**/
 import { NavigationMixin } from 'lightning/navigation';
 import { LightningElement,api,track } from 'lwc';
 import updateFactureModeEnvoie from '@salesforce/apex/HP_SM006_FactureManager.updateFactureModeEnvoi';
@@ -57,13 +64,11 @@ export default class Hp_cardService extends NavigationMixin(LightningElement) {
     contenuVert;
 
 
-    @track 
-
+    @track
     energieVertActivation = false;
 
 
     @track 
-
     showSpinner = false;
     @api
     set masterdata(value) {
@@ -166,9 +171,7 @@ export default class Hp_cardService extends NavigationMixin(LightningElement) {
         this.optionVertElecLabel = isActive ? 'Activée' : 'Désactivée';
         this.energieVertButtonLabel = !isActive ? 'Confirmer l’activation' : 'Confirmer la désactivation';
         this.titreVert = isActive ? 'Désactiver l’option' : 'Activer l’option';
-
         this.contenuVert = isActive ? "La désactivation de l’option Vertelec+ happ-e sera effective à la fin du mois en cours." : "L’option Vertelec+ happ-e d’un montant de 2,99€/mois sera effective le 1ier du mois prochain.";
-
         this.numeroPointDeLivraisonVert = this.currentPfc.pointsDeLivraison[0].numeroPointDeLivraison;
         this.idContratVert = this.energieVert.id;
     }
@@ -363,7 +366,7 @@ export default class Hp_cardService extends NavigationMixin(LightningElement) {
         const isActive =  aux != null && aux.length != 0;
         console.log('@@@ this.energieVert.id ' + this.energieVert.id);
         updateEnergieVert({
-            contractId: this.energieVert.id , energieVert : isActive ? '0' : '1'
+            contractId: this.energieVert.id , energieVert : isActive ? '0' : '1', profil : '1'
         }).then(result => {
             if(result.status == 200) {
                 loadEnergieVerOption({

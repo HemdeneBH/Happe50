@@ -4,7 +4,7 @@
  * @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
  * @Group              :
  * @Last Modified By   : ChangeMeIn@UserSettingsUnder.SFDoc
- * @Last Modified On   : 08-17-2020
+ * @Last Modified On   : 03-18-2022
  * @Modification Log   :
  * Ver       Date            Author      		    Modification
  * 1.0    13/12/2019   mouhamadoune.coulybaly@external.engie.com     Initial Version
@@ -96,22 +96,22 @@ public with sharing class HP_ContractCancelationClass {
 		createPrestation(prestationDate, businessNumber, caseId, pdlPce,energyType,contact.Id);
 		System.debug('@@@@@After Presta');
 		
-		HP_SM010_SendMailWhenCancellation.sendMailViaCabestanAsync(
-					contact.email,
-					String.valueOf(contact.Id_Tiers__c),
-					contact.salutation,
-					contact.lastname,
-					contact.firstname,
-					energie,
-					SF21,
-					CONFIRM,
-					INDEX_RESIL,
-					indexResil
-				);
+		// HP_SM010_SendMailWhenCancellation.sendMailViaCabestanAsync(
+		// 			contact.email,
+		// 			String.valueOf(contact.Id_Tiers__c),
+		// 			contact.salutation,
+		// 			contact.lastname,
+		// 			contact.firstname,
+		// 			energie,
+		// 			SF21,
+		// 			CONFIRM,
+		// 			INDEX_RESIL,
+		// 			indexResil
+		// 		);
 		}
 	}
 
-	private static String getResilationDate(Integer contractid, Date prestationDate) {
+	public static String getResilationDate(Integer contractid, Date prestationDate) {
 		if(prestationDate != null) {
 			DateTime currentDate = prestationDate;
 			return currentDate.format('dd/MM/yyyy');

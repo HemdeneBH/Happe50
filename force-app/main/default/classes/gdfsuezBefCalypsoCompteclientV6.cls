@@ -417,13 +417,13 @@ public class gdfsuezBefCalypsoCompteclientV6 {
 			String xsd = 'http://www.w3.org/2001/XMLSchema';
             String v6 ='http://gdfsuez/bef/calypso/compteclient/v6';
 			DOM.XmlNode envelope = doc.createRootElement('Envelope', env, 'soapenv');
-			//envelope.setNamespace('xsd', xsd);
-			//envelope.setNamespace('xsi', xsi);
+			envelope.setNamespace('xsd', xsd);
+			envelope.setNamespace('xsi', xsi);
             envelope.setNamespace('v6', v6);
-			DOM.XmlNode header = envelope.addChildElement('Header', env, 'soapenv');
+			DOM.XmlNode header = envelope.addChildElement('Header', env, '');
 			AddHeader(header);
 			//System.debug(doc.toXmlString());
-			DOM.XmlNode body = envelope.addChildElement('Body', env, 'soapenv');
+			DOM.XmlNode body = envelope.addChildElement('Body', env, 'env');
 			return body;
 		}
 
@@ -488,64 +488,27 @@ public class gdfsuezBefCalypsoCompteclientV6 {
 		public gdfsuezBefCalypsoCompteclientV6.desactiverServiceGestionResponse_element DesactiverServiceGestion_Http(gdfsuezBefCalypsoCompteclientV6.desactiverServiceGestionInputDt desactiverServiceGestionInput,gdfsuezComBefChpPivotCompteClient.contextDt context) {
 			DOM.Document doc = new DOM.Document();
 			DOM.XmlNode body = populateDoc(doc);
-			DOM.XmlNode methodNode = body.addChildElement('desactiverServiceGestion', 'http://gdfsuez/bef/calypso/compteclient/v6', 'v6');			
+			DOM.XmlNode methodNode = body.addChildElement('DesactiverServiceGestion', 'http://gdfsuez/bef/calypso/compteclient/v6', '');			
 			gdfsuezBefCalypsoCompteclientV6.desactiverServiceGestion_element request_x = new gdfsuezBefCalypsoCompteclientV6.desactiverServiceGestion_element(desactiverServiceGestionInput,context);
 			request_x.populateXmlNode(methodNode);
 			
 			HttpRequest req = new HttpRequest();
-            //req.setClientCertificateName(clientCertName_x);
-            req.setClientCertificateName(Label.SM_CL_OctopusCertificate) ;
 			req.setEndpoint(endpoint_x);
 			req.setMethod('POST');
 			req.setHeader('Content-Type', 'text/xml; charset=UTF-8');
 			req.setHeader('SOAPAction', 'tns:DesactiverServiceGestion');
 			req.setBodyDocument(doc);
-			System.debug('request =>'+doc.toXmlString());
+			//System.debug(req.getBody());
 			Http http = new Http();
 			HTTPResponse res = http.send(req);
-            //res.setBody('<?xml version=\'1.0\' encoding=\'UTF-8\'?><SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><SOAP-ENV:Header/><SOAP-ENV:Body><tns:desactiverServiceGestionResponse xmlns:tns="http://gdfsuez/bef/calypso/compteclient/v6"><desactiverServiceGestionOutput/><messageRetours><retourTraitementMessage><id>87af5f4a-e0a1-4a64-9291-7777cf97ed82</id><source>Middleware Octopus</source><libelle>Traitement effectué sans erreur.</libelle><classe>Fonctionnelle</classe><type>Information</type><code>OCTOPUS_DesactiverServiceGestion_01</code><timestamp>2020-09-30T18:09:33+01:00</timestamp></retourTraitementMessage></messageRetours></tns:desactiverServiceGestionResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>');
-			System.debug('debug'+res.getBody());
-            Dom.Document responseDoc = res.getBodyDocument();
-            Dom.XmlNode rootNode = responseDoc.getRootElement();
-            
-            Dom.XmlNode bodyNode = rootNode.getChildElement('Body','http://schemas.xmlsoap.org/soap/envelope/');
-            System.debug('bodyNode'+bodyNode.getChildElements() );
-            Dom.XmlNode desactiverServiceGestionResponseNode = bodyNode.getChildElement('desactiverServiceGestionResponse', 'http://gdfsuez/bef/calypso/compteclient/v6');
-           
-            gdfsuezBefCalypsoCompteclientV6.desactiverServiceGestionResponse_element response_x = new gdfsuezBefCalypsoCompteclientV6.desactiverServiceGestionResponse_element(desactiverServiceGestionResponseNode);
-            return response_x;
-		}
-        //this methode need refactoring
-        public String DesactiverServiceGestion_HttpRef(gdfsuezBefCalypsoCompteclientV6.desactiverServiceGestionInputDt desactiverServiceGestionInput,gdfsuezComBefChpPivotCompteClient.contextDt context) {
-			DOM.Document doc = new DOM.Document();
-			DOM.XmlNode body = populateDoc(doc);
-			DOM.XmlNode methodNode = body.addChildElement('desactiverServiceGestion', 'http://gdfsuez/bef/calypso/compteclient/v6', 'v6');			
-			gdfsuezBefCalypsoCompteclientV6.desactiverServiceGestion_element request_x = new gdfsuezBefCalypsoCompteclientV6.desactiverServiceGestion_element(desactiverServiceGestionInput,context);
-			request_x.populateXmlNode(methodNode);
-			
-			HttpRequest req = new HttpRequest();
-            //req.setClientCertificateName(clientCertName_x);
-            req.setClientCertificateName(Label.SM_CL_OctopusCertificate);
-
-			req.setEndpoint(endpoint_x);
-			req.setMethod('POST');
-			req.setHeader('Content-Type', 'text/xml; charset=UTF-8');
-			req.setHeader('SOAPAction', 'tns:DesactiverServiceGestion');
-			req.setBodyDocument(doc);
-			System.debug('request =>'+doc.toXmlString());
-			Http http = new Http();
-			HTTPResponse res = http.send(req);
-			System.debug('response =>'+res.getBody());
-		    Dom.Document responseDoc = res.getBodyDocument();
-		 //  Dom.Document responseDoc = new  Dom.Document (res.getBody());
-            Dom.XmlNode rootNode = responseDoc.getRootElement();
-            
-            Dom.XmlNode bodyNode = rootNode.getChildElement('Body','http://schemas.xmlsoap.org/soap/envelope/');
-            Dom.XmlNode desactiverServiceGestionResponseNode = bodyNode.getChildElement('desactiverServiceGestionResponse', 'http://gdfsuez/bef/calypso/compteclient/v6');
-           return res.getBody();
-            /*
-            gdfsuezBefCalypsoCompteclientV6.desactiverServiceGestionResponse_element response_x = new gdfsuezBefCalypsoCompteclientV6.desactiverServiceGestionResponse_element(desactiverServiceGestionResponseNode);
-            return response_x;*/
+			//System.debug(res.getBody());
+			Dom.Document responseDoc = res.getBodyDocument();
+			Dom.XmlNode rootNode = responseDoc.getRootElement();
+			Dom.XmlNode bodyNode = rootNode.getChildElement('Body','http://schemas.xmlsoap.org/soap/envelope/');
+			Dom.XmlNode desactiverServiceGestionResponseNode = bodyNode.getChildElement('desactiverServiceGestionResponse', 'http://gdfsuez/bef/calypso/compteclient/v6');
+						
+			gdfsuezBefCalypsoCompteclientV6.desactiverServiceGestionResponse_element response_x = new gdfsuezBefCalypsoCompteclientV6.desactiverServiceGestionResponse_element(desactiverServiceGestionResponseNode);
+			return response_x;
 		}
  
 		public gdfsuezBefCalypsoCompteclientV6.lireCompteClientResponse_element LireCompteClient_Http(gdfsuezBefCalypsoCompteclientV6.lireCompteClientInputDt lireCompteClientInput,gdfsuezComBefChpPivotCompteClient.contextDt context) {
@@ -644,9 +607,7 @@ public class gdfsuezBefCalypsoCompteclientV6 {
 			//System.debug(req.getBody());
 			Http http = new Http();
 			HTTPResponse res = http.send(req);
-            Dom.Document doc2 = new Dom.Document();
-            doc2.load(res.getBody());
-			System.debug('doc');
+			//System.debug(res.getBody());
 			Dom.Document responseDoc = res.getBodyDocument();
 			Dom.XmlNode rootNode = responseDoc.getRootElement();
 			Dom.XmlNode bodyNode = rootNode.getChildElement('Body','http://schemas.xmlsoap.org/soap/envelope/');
@@ -674,13 +635,13 @@ public class gdfsuezBefCalypsoCompteclientV6 {
 			//System.assertEquals('DesactiverServiceGestion', outerNode.getName());
 			
 			gdfsuezBefCalypsoCompteclientV6.desactiverServiceGestionInputDt desactiverServiceGestionInputObj = this.desactiverServiceGestionInput;
-			Dom.XmlNode desactiverServiceGestionInputNode = outerNode.addChildElement('desactiverServiceGestionInput', '', '');
+			Dom.XmlNode desactiverServiceGestionInputNode = outerNode.addChildElement('desactiverServiceGestionInput', 'http://gdfsuez/bef/calypso/compteclient/v6', '');
 			if(desactiverServiceGestionInputObj != null){
 				desactiverServiceGestionInputObj.populateXmlNode(desactiverServiceGestionInputNode);
 			}
 			
 			gdfsuezComBefChpPivotCompteClient.contextDt contextObj = this.context;
-			Dom.XmlNode contextNode = outerNode.addChildElement('context', '', '');
+			Dom.XmlNode contextNode = outerNode.addChildElement('context', 'http://gdfsuez/bef/calypso/compteclient/v6', '');
 			if(contextObj != null){
 				contextObj.populateXmlNode(contextNode);
 			}
@@ -708,7 +669,7 @@ public class gdfsuezBefCalypsoCompteclientV6 {
 		public void populateXmlNode(Dom.XmlNode outerNode){
 			
 			gdfsuezComBefCalypsoComptecltV6.CompteClient compteClientObj = this.compteClient;
-			Dom.XmlNode compteClientNode = outerNode.addChildElement('compteClient', '', '');
+			Dom.XmlNode compteClientNode = outerNode.addChildElement('compteClient', 'http://gdfsuez/bef/calypso/compteclient/v6', '');
 			if(compteClientObj != null){
 				compteClientObj.populateXmlNode(compteClientNode);
 			}
@@ -753,32 +714,25 @@ public class gdfsuezBefCalypsoCompteclientV6 {
 		}
 		public desactiverServiceGestionResponse_element(DOM.XmlNode responseNode){
 			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
-           //  DOM.XmlNode desactiverServiceGestionOutput2 = responseNode.getChildElement('messageRetours', null);
-			//System.debug('desactiverServiceGestionOutput'+desactiverServiceGestionOutput2);
-            
+			//System.assertEquals('DesactiverServiceGestionResponse', responseNode.getName());
 			DOM.XmlNode desactiverServiceGestionOutputNode = responseNode.getChildElement('desactiverServiceGestionOutput', 'http://gdfsuez/bef/calypso/compteclient/v6');
-		//	System.debug('desactiverServiceGestionOutputNode'+desactiverServiceGestionOutputNode);
-
-            if(desactiverServiceGestionOutputNode == null){
+			if(desactiverServiceGestionOutputNode == null){
 				this.desactiverServiceGestionOutput = null;
 			} else{
 				gdfsuezBefCalypsoCompteclientV6.desactiverServiceGestionOutputDt desactiverServiceGestionOutputObj = new gdfsuezBefCalypsoCompteclientV6.desactiverServiceGestionOutputDt(desactiverServiceGestionOutputNode);
 				nodesParsed.add(desactiverServiceGestionOutputNode);
 				this.desactiverServiceGestionOutput = desactiverServiceGestionOutputObj;
 			}
-			DOM.XmlNode messageRetoursNode = responseNode.getChildElement('messageRetours', null);
-			//DOM.XmlNode messageRetoursNode = responseNode.getChildElement('messageRetours', 'http://gdfsuez.com/bef/chp/commun/v2');
-          //  System.debug('messageRetoursNode'+messageRetoursNode);
-            if(messageRetoursNode == null){
+			//System.debug(this.desactiverServiceGestionOutput);			
+			DOM.XmlNode messageRetoursNode = responseNode.getChildElement('messageRetours', 'http://gdfsuez/bef/calypso/compteclient/v6');
+			if(messageRetoursNode == null){
 				this.messageRetours = null;
 			} else{
-                
 				gdfsuezComBefChpPivotCompteClient.retourTraitementMessagesDt messageRetoursObj = new gdfsuezComBefChpPivotCompteClient.retourTraitementMessagesDt(messageRetoursNode);
-                System.debug('messageRetoursObj'+messageRetoursObj);			
-                nodesParsed.add(messageRetoursNode);
+				nodesParsed.add(messageRetoursNode);
 				this.messageRetours = messageRetoursObj;
 			}
-			System.debug('messageRetours'+this.messageRetours);			
+			//System.debug(this.messageRetours);			
 		}
 	}
 	public class lireCompteClient_element {

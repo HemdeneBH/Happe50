@@ -48,6 +48,10 @@
             sm_scope.Value__c = 'apiset.read';
             sm_scope.Name = 'sm_scope';
             insert sm_scope;
+
+			//Modification START @date: 2019-01-19 @description: Test coverage for funtion getTokenMyPowerToOpencell
+			MP_AP18_TestUtils.CreateCustomMetadataForAPICall();
+            //Modification END
             
             SM_MP_AP04_GetTokenService.getTokenFromSmile();
             

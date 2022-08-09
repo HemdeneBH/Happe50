@@ -4,12 +4,15 @@
  * @Author             : Sara El-Hannaoui
  * @Group              : 
  * @Last Modified By   : Vincent Albiser
- * @Last Modified On   : 22/04/2020 à 04:22:26
+ * @Last Modified On   : 02/07/2020 à 14:32:00
  * @Modification Log   : 
  * Ver       Date            Author      		    Modification
  * 1.0    27/01/2020   Sara El-Hannaoui     Initial Version
 **/
 public with sharing class HP_UTIL_ByPassTrigger {
+
+    //1 seul champ bypass par objet
+    //préfixé par HP uniquement si objet spécifique HP
    
     /**
     * @description Permet de gérer les BypPass au niveau des triggers 

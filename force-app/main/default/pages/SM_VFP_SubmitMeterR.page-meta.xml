@@ -5,4 +5,9 @@
     <confirmationTokenRequired>false</confirmationTokenRequired>
     <description>VFP pour l&apos;OS transmission d&apos;index</description>
     <label>Index</label>
+    <packageVersions>
+        <majorNumber>900</majorNumber>
+        <minorNumber>289</minorNumber>
+        <namespace>vlocity_cmt</namespace>
+    </packageVersions>
 </ApexPage>

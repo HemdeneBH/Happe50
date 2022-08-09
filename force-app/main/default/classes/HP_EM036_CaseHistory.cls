@@ -41,7 +41,7 @@ public with sharing  class HP_EM036_CaseHistory {
         return [ select Id ,Case__c, HP_DateAttribution__c, HP_DateChangementStatut__c, HP_ChangementStatutAncien__c, HP_ChangementStatutNouveau__c,HP_DureeTraitement__c, User__c, User__r.name from HP_CaseHistory__c where( (  DAY_ONLY(HP_DateAttribution__c) =:batchDate  or DAY_ONLY(HP_DateChangementStatut__c) =: batchDate)  and  User__c IN :users) ];
     }
 
-/*complément mep Happe 46*/
+
     public static List<CaseHistory> getCaseHistoryByCasesIds(Set<Id> casesIds) {
         return [SELECT Id, CaseId, CreatedDate, Field, NewValue, OldValue FROM CaseHistory WHERE CaseId in : casesIds ORDER BY CreatedDate ASC];
     }

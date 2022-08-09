@@ -27,6 +27,10 @@ global class HP_BAT010_OmnichannelAujourdhui implements Database.Batchable<sObje
     global Database.QueryLocator start(Database.BatchableContext bc) {
         Set<Id> queueIds = HP_Util_QueueManager.getQueueMapById().keySet();
         Time currentTimePlus15 = System.now().time().addMinutes(15);
+
+
+
+
         return Database.getQueryLocator(
             [SELECT Id FROM Case 
             WHERE HP_isHappe__c = true 

@@ -1,98 +1,117 @@
-/**
- * @author Unknown
- * @date 12/04/2022 - Refactoring by Sutharsan Pushparajah
- * @description SM_AP71_LocauxContratsApiService - Controller class to access the LocauxContrats API
- */
-global with sharing class SM_AP71_LocauxContratsApiService implements vlocity_cmt.VlocityOpenInterface {
-    
-    /**
-     * @author Sutharsan Pushparajah
-     * @date 12/04/2022
-     * @description LocauxContratsException - Custom Exception to fire message for LocauxContrats API
-     */
-	public class LocauxContratsException extends Exception{}
-
-    /**
-     * @author Unknown
-     * @date 12/04/2022
-     * @description Expose LocauxContrats API to IP
-     * @param methodName the name of the method to call
-     * @param inputMap Input parameters
-	 * @param outMap results from API call
-	 * @param options options parameters from IP
-     * @return Boolean true if the call succeeds
-     */
-    global Boolean invokeMethod(String methodName, Map<String,Object> inputMap, Map<String,Object> outputMap, Map<String,Object> options) {
-        
-        try{
-            if (methodName.equals('callLocauxContrats_IP')) {
-                callLocauxContrats_IP(inputMap, outputMap, options);
-            }
-        } catch (Exception exp) {
-            APU000_Logger.log(LoggingLevel.ERROR, 'SM_AP71_LocauxContratsApiService', 'invokeMethod', exp.getMessage());
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * @author Unknown
-     * @date 12/04/2022
-     * @description Search LocauxContrats API from IP
-     * @param inputMap Input parameters
-     * @param outputMap results from API call
-	 * @param options options parameters from IP
-     * @return N/A
-     */
-    public static void callLocauxContrats_IP(Map<String,Object> inputMap, Map<String,Object> outputMap, Map<String,Object> options) {
-        
-        try{
-            String idsPortefeuilleContrat = String.valueOf(inputMap.get('idsPortefeuilleContrat'));
-
-            if (String.isNotEmpty(idsPortefeuilleContrat)){
-                List<String> idPortfeuilles = idsPortefeuilleContrat.replaceAll('[() ]','').split(',');
-                inputMap.put('idsPortefeuilleContrat',String.join(idPortfeuilles,','));
-                outputMap.putAll(callLocauxContrats(inputMap));
-            } else {
-                throw new LocauxContratsException('idsPortefeuilleContrat is empty : '+inputMap);
-            }
-        } catch(Exception exp){
-            APU000_Logger.log(LoggingLevel.ERROR, 'SM_AP71_LocauxContratsApiService', 'callLocauxContrats_IP', exp.getMessage());
-            outputMap.put('resultdata', new  List<Object>());
-        }
-    }
-    
-    /**
-     * @author Unknown
-     * @date 12/04/2022
-     * @description Search LocauxContrats API
-     * @param inputMap Input parameters
-     * @return Map<String, Object> results from the LocauxContrats API call
-     */
+public class SM_AP71_LocauxContratsApiService {
     @AuraEnabled(cacheable=false)
-    public static Map <String, Object> callLocauxContrats(Map<String,Object> inputMap) {
-        Map<String, Object> outMap = new Map<String, Object>();
+    public static Map < String, Object > callLocauxContrats(Map<String,Object> inputMap) {
+        Map < String, Object > outMap  = new Map<String, Object>();
+        system.debug('@@ SM_AP71 inputMap ' +inputMap);
         
-        try{
-            String idsPortefeuilleContrat = String.valueOf(inputMap.get('idsPortefeuilleContrat'));
-
-            if (String.isEmpty(idsPortefeuilleContrat)){
-                throw new LocauxContratsException('idsPortefeuilleContrat is empty : '+inputMap);
-            }
-
-            List<Object> locauxContrats = SM_WS104_LocauxContrats.getLocauxContrats(idsPortefeuilleContrat, null);
-
-            if (locauxContrats.size() == 0){
-                throw new LocauxContratsException('No data to get the idsPortefeuilleContrat : '+idsPortefeuilleContrat);
-            }
-          
-            outMap.put('resultdata', locauxContrats);
-        } catch(Exception exp){
-            APU000_Logger.log(LoggingLevel.ERROR, 'SM_AP71_LocauxContratsApiService', 'callLocauxContrats', exp.getMessage());
-            outMap.put('resultdata', new  List<Object>());
+        if (inputMap.get('idsPortefeuilleContrat') == null || String.valueOf(inputMap.get('idsPortefeuilleContrat')).length() == 0) {
+            system.debug('idsPortefeuilleContrat is not found ...');
+            return outMap;
         }
 
+        String token;
+        if(!Test.isRunningTest()){
+            token = SM_MP_AP04_GetTokenService.getTokenFromSmile();
+        }else{
+            token = 'test';
+        }
+        if (token == null) {
+            system.debug('Token not found ...');
+            return outMap;
+        }
+        /*HttpResponse httpResponse = getResponse(token, (String) inputMap.get('idsPortefeuilleContrat'));*/
+
+        HttpResponse httpResponse = new HttpResponse();
+        if(Test.isRunningTest()){
+            StaticResourceCalloutMock mock = new StaticResourceCalloutMock();
+            mock.setStaticResource('SM_MockTestLocauxContrats');
+            mock.setStatusCode(200);
+            mock.setHeader('Content-Type', 'application/json');
+            // system.debug('@@ mock '+mock);
+            // Set the mock callout mode
+            Test.setMock(HttpCalloutMock.class, mock);
+            httpResponse = getResponse(token, String.valueOf(inputMap.get('idsPortefeuilleContrat')), null);
+        }else{
+            httpResponse = getResponse(token, String.valueOf(inputMap.get('idsPortefeuilleContrat')), null);
+        }
+        Map<String,Object> resultAsMap;
+        if(httpResponse != null){
+            // system.debug('@@ httpResponse '+httpResponse);
+            resultAsMap = (Map<String,Object>) JSON.deserializeUntyped(httpResponse.getBody());
+            // system.debug('@@ resultAsMap '+resultAsMap);
+            List<Object> LocauxContrats = (List <Object> ) resultAsMap.get('_data');
+            // system.debug('@@ LocauxContrats '+LocauxContrats);
+            if (LocauxContrats.Size() == 0) {
+                system.debug('No data to get the idsPortefeuilleContrat ' + inputMap.get('idsPortefeuilleContrat'));
+                //return;
+                outMap.put('resultdata', new  List<Object>());
+            }
+        else{
+                // List<Object> transformedData = transformDataToCard(contracts) ;
+                outMap.put('resultdata', LocauxContrats);
+                // outMap.put('nombreRythmeFacturation',transformedData.size() == 1 ? 'OK' :'NOK' ) ;
+        
+                
+            }
+            // system.debug('### MGH :: ' + outMap);
+        }
         return outMap;
     }
+
+    public static HttpResponse getResponse(String token, String idBusinessPartner, String idPersonne) {
+        HttpRequest httpReq = buildHttpRequestHeaders(token, idBusinessPartner, idPersonne);
+        HttpResponse httpResp = sendData(httpReq);
+        if (httpResponseFailureDetected(httpResp)) {
+            // should abort next step's
+            system.debug('## [Contrats] error occured when sending data ##');
+            system.debug(httpResp != null ? httpResp.getBody() : 'http response is null');
+            return null;
+        }
+        return httpResp;
+    }
+
+    public static HttpResponse sendData(HttpRequest request) {
+        Http http = new Http();
+        HttpResponse res;
+        try {
+            res = http.send(request);
+        } catch (Exception e) {
+            system.debug('## [LocauxContrats] failed to send data ##');
+            return null;
+        }
+        return res;
+
+    }
+
+    public static HttpRequest buildHttpRequestHeaders(String token, String idsPortefeuilleContrat, String idPersonne) {
+        HttpRequest req = new HttpRequest();
+        req.setMethod('GET');
+        
+        
+        String endPoint = 'LocauxContrats';
+        if (!Test.isRunningTest()) {
+            SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'LocauxContrats' limit 1];
+            endPoint = 'callout:AuthAPIHour' +suffixs.suffix__c;           
+        }
+        if(!String.isBlank(idsPortefeuilleContrat)){
+            // System.debug('*** Call with idsPortefeuilleContrat = ' + idsPortefeuilleContrat);
+            req.setEndpoint(endPoint + '?idsPortefeuilleContrat=' + idsPortefeuilleContrat + '&size=50');
+        } else if (!String.isBlank(idPersonne)){
+            // System.debug('*** Call with idPersonne = ' + idPersonne);
+            // System.debug('*** : ' + MP_Generics_Endpoints__c.getInstance('api_endpoint'));
+            // System.debug('*** : ' + MP_Xdata_credentials__c.getInstance('sm_api_version'));
+            req.setEndpoint(endPoint + '?idPersonne=' + idPersonne);
+        }
+        // System.debug('*** Endpoint : ' + req.getEndpoint());
+        req.setHeader('X-Correlation-Id', MP_AP13_GuidUtil.NewGuid());
+        req.setHeader('api_key', MP_Xdata_credentials__c.getInstance('sm_api_key_INT').Value__c);
+        req.setHeader('Authorization', 'Bearer ' + token);
+        req.setHeader('Content-Type', 'application/json');
+        return req;
+    }
+
+    private static Boolean httpResponseFailureDetected(HttpResponse response) {
+        return (response == null || (response.getStatusCode() != 201 && response.getStatusCode() != 200 && response.getStatusCode() != 206));
+    }
+
 }

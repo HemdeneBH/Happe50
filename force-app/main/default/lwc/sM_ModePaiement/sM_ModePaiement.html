@@ -2,243 +2,141 @@
   @description       : 
   @author            : ChangeMeIn@UserSettingsUnder.SFDoc
   @group             : 
-
-  @last modified on  : 10-13-2021
-
+  @last modified on  : 08-07-2020
   @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
   Modifications Log 
   Ver   Date         Author                               Modification
   1.0   08-04-2020   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
-  1.1   24-06-2021   AE                                   FT2-1423
 -->
 <template>
     <lightning-card>
         <div class="slds-card__body slds-card__body_inner">
-            <h2 class="pageTitle">MODE DE PAIEMENT</h2>
+            <h2 class="pageTitle">MODE DE PAIEMENT</h2>				                        
         </div>
         <div class="slds-p-around_large">
             <h6 class="addressTitle">ADRESSE DU LOGEMENT</h6>
-            <div class="slds-grid slds-wrap">
-                <div>
-                    <lightning-icon icon-name="utility:home" size="x-small" alternative-text="Home">
-                    </lightning-icon> &nbsp;&nbsp;
-                </div>
+            <div class="slds-grid slds-wrap"> 
+                    <div>
+                    <lightning-icon
+                    icon-name="utility:home"
+                    size="x-small"
+                    alternative-text="Home">
+            </lightning-icon> &nbsp;&nbsp;</div>
                 <div>
                     <p>{numeroVoie}&nbsp;{libelleVoie} </p>
                     <p>{complementAdresse}</p>
                     <p>{codePostal}&nbsp;{ville}</p>
                     <p if:true={NoCompteContratMaj}>({NoCompteContratMaj})</p>
-
                 </div>
-            </div>
+            </div>                
         </div>
         <!-- US FT2-230 ajout Mode de Paiement : Bloc Mode de Paiement + tache FT2-332 cas 2  -->
         <div class="slds-p-around_large">
             <div class="slds-grid slds-wrap">
                 <div class="slds-col slds-size_12-of-12">
-                </div>
-                <div class="slds-col slds-size_4-of-12">
-                    <h6 class="sectionTitle">MODE DE PAIEMENT</h6>
-                    <div if:false={isResilier}>
-                        <div if:true={isPreleve}>
-                            <p>Prélevé</p>
-                            <a class="disabledLink" href="#">Paiement Ponctuel</a>
-                        </div>
-                    </div>
-                    <div if:true={isResilier}>
-                        <div if:true={isPreleve}>
-                            <p>Prélevé</p>
-                            <p>Paiement Ponctuel</p>
-                        </div>
-                    </div>
-                    <div if:false={isResilier}>
-                        <div if:true={isNonPrelevee}>
-                            <a onclick={NavigationPrel}>Prélèvement</a>
-                            <p>Paiement Ponctuel</p>
-                        </div>
-                    </div>
-                    <div if:true={isResilier}>
-                        <div if:true={isNonPrelevee}>
-                            <p>Prélèvement</p>
-                            <p>Paiement Ponctuel</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="slds-col slds-size_4-of-12">
-                    <div>
-                        <h6 class="sectionTitle">MENSUALISATION</h6>
-                        <div if:true={isMensualisee}>
-                            <p>Mensualisé</p>
-                            <a if:true={isNonResilier} class="disabledLink" href="#">Démensualiser</a>
-                        </div>
-                        <div if:false={isMensualisee}>
-                            <div if:true={isOkMensualisation}>
-                                <div if:true={isNoDemandeMens}>
-                                    <p>Non mensualisé</p>
-                                    <a onclick={NavigationMens}>Passer à la mensualisation</a>
-                                </div>
-                                <div if:false={isNoDemandeMens}>
-                                    <p>Suivi</p>
-
-                                    <a onclick={handleOpenAnnulMens}>Annuler</a>
-
-                                </div>
+                </div> 
+                    <div class="slds-col slds-size_6-of-12">
+                        <h6 class="sectionTitle">MODE DE PAIEMENT</h6>
+                        <div if:false={isResilier} >   
+                            <div if:true={isPreleve}>
+                                <p>Prélevé</p>
+                                <a class="disabledLink" href="#" >Paiement Ponctuel</a>
                             </div>
-                            <div if:false={isOkMensualisation}>
-                                <p>Passer à la mensualisation</p>
+                        </div>
+                        <div if:true={isResilier} >   
+                            <div if:true={isPreleve}>
+                                <p>Prélevé</p>
+                                <p>Paiement Ponctuel</p>
+                            </div>
+                        </div>
+                        <div if:false={isResilier} >
+                            <div if:true={isNonPrelevee}>
+                                <a onclick={NavigationPrel} >Prélèvement</a>
+                                <p>Paiement Ponctuel</p>
+                            </div>
+                        </div>
+                        <div if:true={isResilier} >
+                            <div if:true={isNonPrelevee}>
+                                <p>Prélèvement</p>
+                                <p>Paiement Ponctuel</p>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- US : FT2-1275 Ajout de la 3 eme colonne -->
-                <div class="slds-col slds-size_4-of-12">
-                    <h6 class="sectionTitle">DATE DE REGLEMENT PERSONNALISEE (DRP)</h6>
-                    <div if:false={isResilier}>
-                        <p if:true={hasDRP}>Le {jourDRP} du mois</p>
-                        <p if:false={hasDRP}>Le client n'a pas de DRP <!-- FT2-1660  DRP sèche désactivé sur MDP--><!--a if:true={mensSansDRP}
-                                onclick={parcoursAjoutDRP}> Ajouter une DRP </a--></p>
+                    <div  class="slds-col slds-size_6-of-12">
+                        <div>
+                            <h6 class="sectionTitle">MENSUALISATION</h6>
+                            <div if:true={isMensualisee}>
+                                <p>Client mensualisé</p>
+                                <a if:true={isNonResilier} class="disabledLink" href="#">Démensualiser</a>
+                            </div>
+                            <div if:false={isMensualisee}>
+                                <div if:true={isOkMensualisation}>
+                                    <div if:true={isNoDemandeMens}>
+                                        <a onclick={NavigationMens} >Passer à la mensualisation</a>
+                                    </div>
+                                    <div if:false={isNoDemandeMens}>
+                                        <p>Passer à la mensualisation</p>
+                                    </div>
+                                </div>
+                                <div if:false={isOkMensualisation}>
+                                    <p>Passer à la mensualisation</p>
+                                </div>
+                            </div>
+                            
+                            
+                            <!--<div >
+                                <a onclick={NavigationMens} >Passer à la mensualisation*</a>
+                            </div>-->
+                        </div>
                     </div>
-                    <div if:true={isResilier}>
-                        <p if:true={hasDRP}>Le {jourDRP} du mois </p>
-                        <p if:false={hasDRP}>Le client n’a pas de DRP </p>
-                    </div>
-                </div>
                 <!-- Début US FT2-71 & 72 ajout Mode de Paiement : Bloc Coordonnées Bancaires-->
-            </div>
+               </div>
         </div>
-        <div class="slds-p-around_large">
-            <div class="slds-grid slds-wrap">
-                <div class="slds-col slds-size_4-of-12">
+                <div class="slds-p-around_large">
+                    <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_6-of-12">
                     <h6 class="sectionTitle">COORDONNEES BANCAIRES
-                        <div if:true={isPreleve}>
-                            <a class="Modifier" if:true={iBANExists} onclick={parcoursAjoutCOOB}>Modifier</a>
-                            <a class="Modifier" if:false={iBANExists} onclick={parcoursAjoutCOOB}>Ajouter</a>
-                        </div>
-
-                        <div if:false={isPreleve}>
-                            <a class="Modifier" if:true={iBANExists}>Modifier</a>
-                            <a class="Modifier" if:false={iBANExists}>Ajouter</a>
-                        </div>
+                        <a class="Modifier" if:true={iBANExists} onclick={parcoursModificationCOOB} >Modifier</a>
+                        <a class="Modifier" if:false={iBANExists} onclick={parcoursAjoutCOOB} >Ajouter</a>
                     </h6>
                     <div if:true={iBANExists}>
-                        <div class="slds-grid slds-wrap" style="padding-top: 1%;">
-                            <div>
-                                <p style="padding-bottom: 20%;color:#858585;font-size:10px">
-                                    IBAN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                                <p style="padding-bottom: 20%;color:#858585;font-size:10px">
-                                    BANQUE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                                <p style="padding-bottom: 20%;color:#858585;font-size:10px">
-                                    TITULAIRE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                            </div>
-                            <div>
-                                <p style="padding-bottom: 4%;font-size:13px">{getiBAN}</p>
-                                <p style="padding-bottom: 4%;font-size:13px">{nomInstitutBancaire}</p>
-                                <p style="font-size:13px">{titulaireCompte}</p>
-                            </div>
-                        </div>
-                        <div if:true={mandatActif}>
-                            <li style="font-size:14px;color:#19a546;text-transform: uppercase;margin-left:5px;"><span
-                                    style="font-size:10px;margin-left:-5px;">Mandat actif</span></li>
-                        </div>
-                        <div if:true={mandatAConfirmer}>
-                            <li style="font-size:14px;color:#ff7f1d;text-transform: uppercase;margin-left:5px;"><span
-                                    style="font-size:10px;margin-left:-5px;">Mandat à confirmer</span></li>
-                        </div>
-                        <div if:true={mandatCloture}>
-                            <li style="font-size:14px;color:#D3D3D3;text-transform: uppercase;margin-left:5px;"><span
-                                    style="font-size:10px;margin-left:-5px;">Mandat clôturé</span></li>
-                        </div>
+                        <div class="slds-grid slds-wrap" style="padding-top: 1%;"> 
+                        <div>
+                        <p style="padding-bottom: 20%;color:#858585;font-size:10px">IBAN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                        <p style="padding-bottom: 20%;color:#858585;font-size:10px">BANQUE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                        <p style="padding-bottom: 20%;color:#858585;font-size:10px">TITULAIRE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                    </div>
+                    <div>
+                        <p style="padding-bottom: 4%;font-size:13px">{iBAN}</p>
+                        <p style="padding-bottom: 4%;font-size:13px">{nomInstitutBancaire}</p>
+                        <p style="font-size:13px">{titulaireCompte}</p>
+                    </div>
+                    </div>
+                    <div if:true={mandatActif}>
+                        <li style="font-size:14px;color:#19a546;text-transform: uppercase;margin-left:5px;"><span style="font-size:10px;margin-left:-5px;">Mandat actif</span></li>
+                    </div>
+                    <div if:true={mandatAConfirmer}>
+                        <li style="font-size:14px;color:#ff7f1d;text-transform: uppercase;margin-left:5px;"><span style="font-size:10px;margin-left:-5px;">Mandat à confirmer</span></li>
+                    </div>
+                    <div if:true={mandatCloture}>
+                        <li style="font-size:14px;color:#D3D3D3;text-transform: uppercase;margin-left:5px;"><span style="font-size:10px;margin-left:-5px;">Mandat clôturé</span></li>
+                    </div>
                     </div>
                 </div>
-                <!-- US : FT2-1275 Ajout du bloc Montant des mensualités -->
-                <div if:true={isMensualisee} class="slds-col slds-size_4-of-12">
-                    <h6 class="sectionTitle">MONTANT DES MENSUALITES</h6>
-                    <!--<div if:false={showSpinner} class="demo-only demo--inverse" style="height:6rem;;position:relative">
-                        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
-                    </div>-->
-                   
-                    <p class="montantEcheance"> {montantCumuleEcheance} </p>
-                    <!--FT2-1278 INTEGRATION - InitierAjustement-->
-                    <!--<div if:false={isErrorInitierAjustMens}>-->
-                    <div>
-                    <!--<a if:true={isEligibleAjustement} class="Modifier" onclick={navigateToModifierMontant}> Modifier </a>-->
-                    
-                    <!--FT2-1604: Ajustement mensualité update 0.2 : Intégration au clic sur le bouton NON dans le parcours-->
-                    <a class="Modifier" onclick={navigateToModifierMontant}> Modifier </a>	
-                    
-                    
-                    <!--<p if:false={isEligibleAjustement} class="AjustMens"><b>{libelleRetourAjustMens}</b></p>
-                    </div>
-                     <div if:true={isErrorInitierAjustMens}>
-                    <b if:false={isEligibleAjustement} class="AjustMens">{libelleRetourAjustMens}</b>-->
-                    </div>
+                <div class="slds-col slds-size_6-of-12">
+                    <h6 class="sectionTitle">DATE DE REGLEMENT PERSONNALISEE (DRP)</h6>
+                    <div if:false = {isResilier}>
+                        <p if:true= {hasDRP}>Le {jourDRP} du mois</p>
+                        <p if:false= {hasDRP}>Le client n'a pas de DRP <a if:true= {mensSansDRP} onclick={parcoursAjoutDRP} > Ajouter une DRP </a></p>
+                    </div> 
+                    <div if:true = {isResilier}>
+                        <p if:true= {hasDRP}>Le {jourDRP} du mois </p>
+                        <p if:false= {hasDRP}>Le client n’a pas de DRP </p>
+                    </div> 
                 </div>
                 <!-- fin US FT2-71 & 72 ajout Mode de Paiement : Bloc Coordonnées Bancaires-->
-            </div>
+                </div>
         </div>
         <!-- Fin US FT2-230 ajout Mode de Paiement : Bloc Mode de Paiement -->
     </lightning-card>
-
-    <!--PopUp Annulation Mens-->
-    <!--  US FT2-1423 Gestion des messages de succès ou d'échec lors de l'annulation d'une demande de mensualisation en cours-->
-    <div if:true={isOpenModal}>
-        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
-            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
-            <div class="slds-modal__container">
-                <header class="slds-modal__header slds-theme--info slds-text-heading_medium slds-theme--alert-texture">
-
-
-                    Annulation demande de mensualisation
-
-
-                </header>
-                <div if:false={isSentCancelled}>
-                    <div class="slds-modal__content slds-p-around_medium slds-text-heading_small slds-text-align_center"
-                        id="modal-content-id-1">
-                        &Ecirc;tes-vous sûr de vouloir annuler la demande de la mensualisation ?
-                    </div>
-                </div>
-                <div if:true={isSentCancelled}>
-                    <div if:true={isLoading} class="loadSpinner">
-                        <div
-                            class="slds-modal__content slds-p-around_medium slds-text-heading_medium slds-text-align_center">
-                            <lightning-spinner size="small" alternative-text="Chargement"></lightning-spinner>
-                        </div>
-                    </div>
-                    <div if:false={isLoading}>
-
-                        <div if:false={isError}
-                            class="slds-modal__content slds-p-around_medium slds-text-heading_small slds-text-align_center">
-                            {returnedWSmessage}
-                        </div>
-                        <div if:true={isError}
-                            class="slds-modal__content slds-p-around_medium slds-text-heading_small slds-text-align_center error-color">
-
-                            {returnedWSmessage}
-                        </div>
-                    </div>
-                </div>
-                <footer class="slds-modal__footer">
-                    <div if:false={isSentCancelled}>
-                        <lightning-button label="Non" variant="neutral" onclick={handleCloseAnnulMens}
-                            class="slds-float_left"></lightning-button>
-
-
-                        <lightning-button label="Oui" variant="destructive" onclick={handleAnnulMensConfirmed}
-                            class="slds-float_right"></lightning-button>
-                    </div>
-                    <div if:true={isSentCancelled}>
-
-                        <div if:true={showSuivant}>
-                            <lightning-button label="Suivant" variant="neutral" onclick={handleSuivant}
-                                class="slds-float_right"></lightning-button>
-                        </div>
-                    </div>
-
-                </footer>
-            </div>
-        </section>
-        <div class="slds-backdrop slds-backdrop_open"></div>
-    </div>
-
 </template>

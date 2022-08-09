@@ -149,9 +149,9 @@
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>HP_Header</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <enableActivities>true</enableActivities>
+    <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
-    <enableFeeds>false</enableFeeds>
+    <enableFeeds>true</enableFeeds>
     <enableHistory>true</enableHistory>
     <enableLicensing>false</enableLicensing>
     <enableReports>true</enableReports>
@@ -164,6 +164,7 @@
     <nameField>
         <displayFormat>HPS-{00000000}</displayFormat>
         <label>Nom de Souscription</label>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>AutoNumber</type>
     </nameField>

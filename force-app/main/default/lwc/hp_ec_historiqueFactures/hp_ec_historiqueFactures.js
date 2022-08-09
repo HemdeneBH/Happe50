@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Zaatouche Younes
  * @group             : 
- * @last modified on  : 07-12-2022
+ * @last modified on  : 08-03-2022
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 **/
 
@@ -33,6 +33,7 @@ export default class Hp_ec_historiqueFactures extends LightningElement {
     @api labelPopinBouton;
     @api lienTarif;
     @api contenuToolTip;
+    @api toolTipTitle;
     @api tarifURL;
     @track factures;
     @track paiements; 
@@ -340,9 +341,9 @@ export default class Hp_ec_historiqueFactures extends LightningElement {
               
               
           }
-          const tabEcheancier = [...echeanceGazLink.map(v => ({ ...v, enrg: 'gaz'})),...echeanceElecLink.map(v => ({ ...v, enrg: 'Electricité'}))];
+          const tabEcheancier = [...echeanceGazLink.map(v => ({ ...v, enrg: 'GAZ'})),...echeanceElecLink.map(v => ({ ...v, enrg: 'ELECTRICITE'}))];
               this.echeanceLink = tabEcheancier.sort((a,b)=>{
-                return  a.id_document_agilab - b.id_document_agilab;
+                return   b.id_document_agilab - a.id_document_agilab;
               })
               if(this.echeanceLink.length > 0){
                 this.containEcheancier = true;
@@ -494,18 +495,18 @@ export default class Hp_ec_historiqueFactures extends LightningElement {
       })
   }
 
-  async getEcheanceData(c) {
-    return new Promise(async (resolve, reject) => {
-        var result = await getEcheance({ id_contrat_xdata: c.id.toString() })
-            .then(data => {
-                return data;
-            })
-            .catch(error => {
-                console.log('error Eéchéence: ' + JSON.stringify(error));
-            });
-        resolve(result);
-    })
-  }
+  // async getEcheanceData(c) {
+  //   return new Promise(async (resolve, reject) => {
+  //       var result = await getEcheance({ id_contrat_xdata: c.id.toString() })
+  //           .then(data => {
+  //               return data;
+  //           })
+  //           .catch(error => {
+  //               console.log('error Eéchéence: ' + JSON.stringify(error));
+  //           });
+  //       resolve(result);
+  //   })
+  // }
 
   async getPorteFeuilleContratXdata(c) {
     return new Promise(async (resolve, reject) => {
@@ -587,5 +588,4 @@ export default class Hp_ec_historiqueFactures extends LightningElement {
     })
   }
   
-
 }

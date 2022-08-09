@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 03-26-2021
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 03-10-2022
+ * @last modified by  : Hemdene Ben Hammouda
  * Modifications Log 
  * Ver   Date         Author                               Modification
  * 1.0   03-26-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
@@ -26,7 +26,11 @@ public with sharing class HP_DistributorEnergyResponse implements HP_ConversionU
 	public Integer nbCadrans;
 	public String typeComptageLibelle;
 	public String niveauOuvertureServicesLibelle;
-
+	public Integer nombreFils;
+	public String deliveryPointStreetName;
+	public String deliveryPointStreetNumber;
+	public String deliveryPointCity;
+	public String deliveryPointPostalCode;
 
 	private static final Map<String, Boolean> ALIMENTATION = new Map<String, Boolean> {'COUP' => true, 'LIMI' => true, 'NALI' => true, 'NRAC' => true};
 	private static final Map<String, Boolean> ALIM = new Map<String, Boolean> {'ALIM' => true, '' => true, NULL => true};
@@ -52,7 +56,12 @@ public with sharing class HP_DistributorEnergyResponse implements HP_ConversionU
 			this.nbCadrans,
 			this.typeComptageLibelle,
 			this.niveauOuvertureServicescode,
-			this.niveauOuvertureServicesLibelle
+			this.niveauOuvertureServicesLibelle,
+			this.nombreFils,
+			this.deliveryPointStreetName,
+			this.deliveryPointStreetNumber,
+			this.deliveryPointCity,
+			this.deliveryPointPostalCode
 			);
 	}
 	public HP_DistributorEnergyResponse(final List<gdfsuezComBefCalypsoPdlelectricite.PDLElectricite> pdlList) {
@@ -68,6 +77,12 @@ public with sharing class HP_DistributorEnergyResponse implements HP_ConversionU
 			}
 			if( pdlList[0].situationAlimentation != null  && pdlList[0].situationAlimentation[0].etatAlimentation != null ) {
 				this.etatAlimentationcode = pdlList[0].situationAlimentation[0].etatAlimentation.code;
+			}
+			if( pdlList[0].donneesGenerales[0].adresse != null ){
+				this.deliveryPointStreetName = pdlList[0].donneesGenerales[0].adresse.libelleVoie;
+				this.deliveryPointStreetNumber = pdlList[0].donneesGenerales[0].adresse.nVoie;
+				this.deliveryPointCity = pdlList[0].donneesGenerales[0].adresse.ville;
+				this.deliveryPointPostalCode = pdlList[0].donneesGenerales[0].adresse.cP;
 			}
 		}
 
@@ -96,6 +111,9 @@ public with sharing class HP_DistributorEnergyResponse implements HP_ConversionU
 			}
 			if ( pdlList[0].situationComptage[0].dispositifComptage.typeComptage.code != null) {
 				this.typeComptageLibelle = pdlList[0].situationComptage[0].dispositifComptage.typeComptage.code;
+			}
+			if(pdlList[0].situationComptage[0].dispositifComptage.compteurs.compteur[0].nombreFils != null){
+				this.nombreFils = pdlList[0].situationComptage[0].dispositifComptage.compteurs.compteur[0].nombreFils ;
 			}
 		}
 	}

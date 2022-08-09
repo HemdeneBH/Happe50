@@ -100,5 +100,12 @@
 		System.assert(prestaGaz != null);
     }
 
+	@isTest static void loadPrestationDistributeur() {
+		Test.startTest();
+		Prestation_Distributeur__c prestation = HP_EM007_PrestationDistributeurManager.loadPrestationDistributeur('12345678');
+		Test.stopTest();
+		System.assert(prestation != null);
+    }
+
 
 }

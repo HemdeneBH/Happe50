@@ -6,7 +6,7 @@
     <externalId>false</externalId>
     <inlineHelpText>Préciser si l&apos;escalade était justifiée</inlineHelpText>
     <label>Escalade justifiée</label>
-    <required>false</required>
+    <required>true</required>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
@@ -17,22 +17,12 @@
             <value>
                 <fullName>Oui</fullName>
                 <default>false</default>
-                <label>Oui - Demande Complète</label>
-            </value>
-            <value>
-                <fullName>Oui - Demande Incomplète</fullName>
-                <default>false</default>
-                <label>Oui - Demande Incomplète</label>
+                <label>Oui</label>
             </value>
             <value>
                 <fullName>Non</fullName>
                 <default>false</default>
                 <label>Non</label>
-            </value>
-            <value>
-                <fullName>Traitement BO sans escalade</fullName>
-                <default>false</default>
-                <label>Traitement BO sans escalade</label>
             </value>
         </valueSetDefinition>
     </valueSet>

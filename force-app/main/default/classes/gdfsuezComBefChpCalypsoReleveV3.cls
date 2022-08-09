@@ -1412,17 +1412,15 @@ public class gdfsuezComBefChpCalypsoReleveV3 {
 			gdfsuezComBefChpCalypsoReleveV3.verifierFenetreReleve_element request_x = new gdfsuezComBefChpCalypsoReleveV3.verifierFenetreReleve_element(verifierFenetreReleveInput,context);
 			request_x.populateXmlNode(methodNode);
 			
-            HttpRequest req = new HttpRequest();
-            req.setEndpoint(endpoint_x);
-            req.setTimeout(60000) ;
-            if(!Test.isRunningTest()){
-                req.setClientCertificateName(SM_OCTOPUS__c.getOrgDefaults().certName__c);
-            }			
-            req.setMethod('POST');
-            req.setHeader('Content-Type', 'text/xml; charset=UTF-8');
-            req.setHeader('SOAPAction', 'tns:VerifierFenetreReleve');
-            req.setBodyDocument(doc);
-            System.debug('request ##'+doc.toXmlString());
+			HttpRequest req = new HttpRequest();
+			req.setEndpoint(endpoint_x);
+             req.setTimeout(60000) ;
+            req.setClientCertificateName('smilecert');
+			req.setMethod('POST');
+			req.setHeader('Content-Type', 'text/xml; charset=UTF-8');
+			req.setHeader('SOAPAction', 'tns:VerifierFenetreReleve');
+			req.setBodyDocument(doc);
+			System.debug('request ##'+doc.toXmlString());
 			Http http = new Http();
 			HTTPResponse res = http.send(req);
 			System.debug('response##'+res.getBody());

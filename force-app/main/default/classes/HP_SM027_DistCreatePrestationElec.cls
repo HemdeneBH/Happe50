@@ -3,8 +3,8 @@
  * @Description        : 
  * @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
  * @Group              : 
- * @Last Modified By   : Badr Eddine Belkarchi
- * @Last Modified On   : 11-23-2021
+ * @Last Modified By   : Hemdene Ben Hammouda
+ * @Last Modified On   : 03-14-2022
  * @Modification Log   : 
  * Ver       Date            Author      		    Modification
  * 1.0    23/03/2020   ChangeMeIn@UserSettingsUnder.SFDoc     Initial Version
@@ -38,7 +38,7 @@ public with sharing class HP_SM027_DistCreatePrestationElec {
 		// DONNEES GENERALES
 		inputDt.donneesGenerales = new  gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectriciteInputDt_donneesGenerales_element();
 		inputDt.donneesGenerales.natureDemande = new gdfsuezComBefChpPSEPivot.listeValeursDt();
-		inputDt.donneesGenerales.natureDemande.code =  enrolmentType == 'SWITCH_SUPLIER' ? 'CFN' : 'MES';
+		//inputDt.donneesGenerales.natureDemande.code =  enrolmentType == 'SWITCH_SUPLIER' ? 'CFN' : enrolmentType == 'MOVING_IN' ? 'MES' : enrolmentType == 'REDUCTION'? 'RPI' : 'SAI';
 		inputDt.donneesGenerales.loginUtilisateur = HP_SLCT_User.retriveUser(System.UserInfo.getUserId()).Distributor_Login__c;
 		
 		if(inputDt.donneesGenerales.loginUtilisateur == null || inputDt.donneesGenerales.loginUtilisateur == '') {
@@ -46,7 +46,7 @@ public with sharing class HP_SM027_DistCreatePrestationElec {
 		}
 		
 		inputDt.donneesGenerales.idPDLElectricite = energyContractRequest.energyMeterId;
-		inputDt.donneesGenerales.dateEffetSouhaitee = ((DateTime)energyContractRequest.contractStartDate).format(HP_OctopusUtils.DATE_TIME_FORMAT);
+		inputDt.donneesGenerales.dateEffetSouhaitee = (enrolmentType == 'REDUCTION' || enrolmentType == 'COUPURE') ? (Datetime.now().addDays(1)).format(HP_OctopusUtils.DATE_TIME_FORMAT) : ((DateTime)energyContractRequest.contractStartDate).format(HP_OctopusUtils.DATE_TIME_FORMAT);
 		inputDt.donneesGenerales.idPersonne = energyContractRequest.personId;
 
 		inputDt.donneesGenerales.idPrestationServiceFournisseurRegroupement = '3';
@@ -69,32 +69,89 @@ public with sharing class HP_SM027_DistCreatePrestationElec {
 		inputDt.clientFinal.adressePostale.ville = energyContractRequest.deliveryPointCity;
 		inputDt.clientFinal.residencePrincipale = true;
 		//PLANIFICATIONEXPRESSSOUHAITEE
-		inputDt.planificationExpressSouhaitee = false;
-		fillStructureTarifaire(inputDt, energyContractRequest);
-		// fillAutoreleve(inputDt, energyContractRequest);
-		if(energyResponse.isSmartMeter) {
-			inputDt.autoReleve = null;
-		} else {
-			fillAutoreleve(inputDt, energyContractRequest);
+		if(enrolmentType == 'SWITCH_SUPLIER' || enrolmentType == 'MOVING_IN'){
+			inputDt.planificationExpressSouhaitee = false;
+			fillStructureTarifaire(inputDt, energyContractRequest);
+			// fillAutoreleve(inputDt, energyContractRequest);
+			if(energyResponse.isSmartMeter) {
+				inputDt.autoReleve = null;
+			} else {
+				fillAutoreleve(inputDt, energyContractRequest);
+			}
 		}
+		
 
 		// MISE EN SERVICE OU CHANGEMENTFOURNISSEUR
 		if (enrolmentType == 'SWITCH_SUPLIER') {
+			inputDt.donneesGenerales.natureDemande.code = 'CFN';
 			inputDt.changementFournisseur = new gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectriciteInputDt_changementFournisseur_element();
 			inputDt.changementFournisseur.releveSpecial = false;
 			inputDt.changementFournisseur.correction = false;
 			inputDt.changementFournisseur.serviceCalendrierFournisseur = false;
 		}
-		else {
+		else if(enrolmentType == 'MOVING_IN'){
+			inputDt.donneesGenerales.natureDemande.code = 'MES';
 			inputDt.miseEnService = new  gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectriciteInputDt_miseEnService_element();
 			inputDt.miseEnService.urgent = false;
 			inputDt.miseEnService.releveSpecial = false;
 			inputDt.miseEnService.correction = false;
 			inputDt.miseEnService.serviceCalendrierFournisseur = false;
+		}else if(enrolmentType == 'REDUCTION'){
+			inputDt.donneesGenerales.natureDemande.code = 'RPI';
+			inputDt.interlocuteurIntervention = new gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectriciteInputDt_interlocuteurIntervention_element();
+			inputDt.interlocuteurIntervention.personnePhysique = new gdfsuezBefCalypsoPrestationServiceElec.identiteDt();
+			inputDt.interlocuteurIntervention.personnePhysique.civilite = new gdfsuezComBefChpPSEPivot.listeValeursDt();
+			inputDt.interlocuteurIntervention.personnePhysique.civilite.code = energyContractRequest.salutation;
+			inputDt.interlocuteurIntervention.personnePhysique.civilite.libelleCourt = energyContractRequest.salutation;
+			inputDt.interlocuteurIntervention.personnePhysique.nom = energyContractRequest.customerLastName;
+			inputDt.interlocuteurIntervention.personnePhysique.prenom = energyContractRequest.customerFirstName;
+			inputDt.interlocuteurIntervention.coordonneesContact =  new gdfsuezBefCalypsoPrestationServiceElec.coordonneesContactDt();
+			inputDt.interlocuteurIntervention.coordonneesContact.telephone =  new List<String> {energyContractRequest.customerMainPhone};
+			inputDt.reductionPuissance = new gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectriciteInputDt_reductionPuissance_element();
+			inputDt.reductionPuissance.puissanceReduite = new gdfsuezComBefChpPSEDistributeurelec.puissanceDt();
+			inputDt.reductionPuissance.puissanceReduite.unite = 'kVA';
+			inputDt.reductionPuissance.puissanceReduite.valeur = energyResponse.puissanceReduite;
+			inputDt.reductionPuissance.montantCreance = new gdfsuezComBefChpPSEDistributeurelec.deviseDt();
+			inputDt.reductionPuissance.montantCreance.unite = 'euro';
+			inputDt.reductionPuissance.montantCreance.valeur = energyResponse.montantCreance;
+
+		}
+		else if(enrolmentType == 'COUPURE'){
+			inputDt.donneesGenerales.natureDemande.code = 'SAI';
+			inputDt.interlocuteurIntervention = new gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectriciteInputDt_interlocuteurIntervention_element();
+			inputDt.interlocuteurIntervention.personnePhysique = new gdfsuezBefCalypsoPrestationServiceElec.identiteDt();
+			inputDt.interlocuteurIntervention.personnePhysique.civilite = new gdfsuezComBefChpPSEPivot.listeValeursDt();
+			inputDt.interlocuteurIntervention.personnePhysique.civilite.code = energyContractRequest.salutation;
+			inputDt.interlocuteurIntervention.personnePhysique.civilite.libelleCourt = energyContractRequest.salutation;
+			inputDt.interlocuteurIntervention.personnePhysique.nom = energyContractRequest.customerLastName;
+			inputDt.interlocuteurIntervention.personnePhysique.prenom = energyContractRequest.customerFirstName;
+			inputDt.interlocuteurIntervention.coordonneesContact =  new gdfsuezBefCalypsoPrestationServiceElec.coordonneesContactDt();
+			inputDt.interlocuteurIntervention.coordonneesContact.telephone =  new List<String> {energyContractRequest.customerMainPhone};
+			inputDt.suspensionAlimentation =  new gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectriciteInputDt_suspensionAlimentation_element();
+			inputDt.suspensionAlimentation.clientAvise = true;
+			inputDt.suspensionAlimentation.reductionPuissanceClientAbsent = false;
+			inputDt.suspensionAlimentation.deplacementSouhaite = false;
+			inputDt.suspensionAlimentation.typeClientPrioritaire = null;
+			inputDt.suspensionAlimentation.montantCreance = new gdfsuezComBefChpPSEDistributeurelec.deviseDt();
+			inputDt.suspensionAlimentation.montantCreance.unite = 'euro';
+			inputDt.suspensionAlimentation.montantCreance.valeur = energyResponse.montantCreance;
+		}else if(enrolmentType == 'RETABLISSEMENT'){
+			inputDt.donneesGenerales.natureDemande.code = 'RET';
+			inputDt.interlocuteurIntervention = new gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectriciteInputDt_interlocuteurIntervention_element();
+			inputDt.interlocuteurIntervention.personnePhysique = new gdfsuezBefCalypsoPrestationServiceElec.identiteDt();
+			inputDt.interlocuteurIntervention.personnePhysique.civilite = new gdfsuezComBefChpPSEPivot.listeValeursDt();
+			inputDt.interlocuteurIntervention.personnePhysique.civilite.code = energyContractRequest.salutation;
+			inputDt.interlocuteurIntervention.personnePhysique.civilite.libelleCourt = energyContractRequest.salutation;
+			inputDt.interlocuteurIntervention.personnePhysique.nom = energyContractRequest.customerLastName;
+			inputDt.interlocuteurIntervention.personnePhysique.prenom = energyContractRequest.customerFirstName;
+			inputDt.interlocuteurIntervention.coordonneesContact =  new gdfsuezBefCalypsoPrestationServiceElec.coordonneesContactDt();
+			inputDt.interlocuteurIntervention.coordonneesContact.telephone =  new List<String> {energyContractRequest.customerMainPhone};
+			inputDt.retablissement = new gdfsuezBefCalypsoPrestationServiceElec.retablissementDt();
+			inputDt.retablissement.urgent = energyResponse.retablissementUrgent;
 		}
 		HP_DistributorEnergyContractResponse grdOutput = new  HP_DistributorEnergyContractResponse();
 		gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectriciteResponse_element response = port.CreerPrestationServiceElectricite_Http(inputDt, context);
-		System.debug(JSON.serializePretty(response, true));
+		System.debug('@@@@@@response : '+JSON.serializePretty(response, true));
 		gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectriciteOutputDt elecOutput = new gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectriciteOutputDt ();
 		elecOutput = response.creerPrestationServiceElectriciteOutput;
 		final List<gdfsuezComBefChpPSEPivot.retourTraitementMessageDt> CreatePrestationServiceMessageRetours = response.messageRetours.retourTraitementMessage;
@@ -108,8 +165,13 @@ public with sharing class HP_SM027_DistCreatePrestationElec {
 			}
 		}
 		if( CreatePrestationServiceMessageRetours != null) {
-			grdOutput.code = CreatePrestationServiceMessageRetours[0].code;
-			grdOutput.libelle = CreatePrestationServiceMessageRetours[0].libelle;
+			if(CreatePrestationServiceMessageRetours[0].causedBy != null && !elecOutput.prestationServiceDistributeurCree){
+				grdOutput.code = CreatePrestationServiceMessageRetours[0].causedBy.code;
+				grdOutput.libelle = CreatePrestationServiceMessageRetours[0].causedBy.libelle;
+			}else{
+				grdOutput.code = CreatePrestationServiceMessageRetours[0].code;
+				grdOutput.libelle = CreatePrestationServiceMessageRetours[0].libelle;
+			}
 		}
 		return (grdOutput.toCoreType());
 	}

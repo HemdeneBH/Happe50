@@ -9,8 +9,27 @@ global class SM_AP36_DocumentApiService {
 			return outMap;
 		}
 		String idFacture = String.valueOf(inputMap.get('idFacture'));
+		/*String idMandat;*/
+		String param;
+		if(idFacture != null){
+			param = idFacture;
+		}
+		
 
-		HttpResponse httpResponse = getResponse(idFacture,null);
+		String token;
+		if(!Test.isRunningTest()){
+			token = SM_MP_AP04_GetTokenService.getTokenFromSmile();
+		}
+		else{
+			token = 'test';
+		}
+
+		if (token == null) {
+			system.debug('Token not found ...');
+			return outMap;
+		}
+
+		HttpResponse httpResponse = getResponse(token, (String)param);
 		if(httpResponse != null){
 			Map < String, Object > resultAsMap = (Map < String, Object > ) JSON.deserializeUntyped(httpResponse.getBody());
 			List < Object > documentList = (List < Object > ) resultAsMap.get('_data');
@@ -35,8 +54,27 @@ global class SM_AP36_DocumentApiService {
 			return;
 		}
 		String idFacture = String.valueOf(inputMap.get('idFacture'));
+		/*String idMandat;*/
+		String param;
+		if(idFacture != null){
+			param = idFacture;
+		}
+		
 
-		HttpResponse httpResponse = getResponse(idFacture,null);
+		String token;
+		if(!Test.isRunningTest()){
+			token = SM_MP_AP04_GetTokenService.getTokenFromSmile();
+		}
+		else{
+			token = 'test';
+		}
+
+		if (token == null) {
+			system.debug('Token not found ...');
+			return;
+		}
+
+		HttpResponse httpResponse = getResponse(token, (String)param);
 		if(httpResponse != null){
 			Map < String, Object > resultAsMap = (Map < String, Object > ) JSON.deserializeUntyped(httpResponse.getBody());
 			List < Object > documentList = (List < Object > ) resultAsMap.get('_data');
@@ -59,8 +97,25 @@ global class SM_AP36_DocumentApiService {
 			return;
 		}
 		String idMandat = String.valueOf(inputMap.get('idMandat'));
+		/*String idMandat;*/
+		String param;
+		if(idMandat != null){
+			param = idMandat;
+		}
 
-		HttpResponse httpResponse = getResponse(null,idMandat);
+		String token;
+		if(!Test.isRunningTest()){
+			token = SM_MP_AP04_GetTokenService.getTokenFromSmile();
+		}else{
+			token = 'test';
+		}
+
+		if (token == null) {
+			system.debug('Token not found ...');
+			return;
+		}
+
+		HttpResponse httpResponse = getResponse1(token, (String)param);
 		if(httpResponse != null){
 			Map < String, Object > resultAsMap = (Map < String, Object > ) JSON.deserializeUntyped(httpResponse.getBody());
 			List < Object > documentList = (List < Object > ) resultAsMap.get('_data');
@@ -85,20 +140,75 @@ global class SM_AP36_DocumentApiService {
 		}
 	}
 
-	public static String buildRequestParams(String idFacture,String idMandat) {
-		String endpointParams='';
-		if(!String.isBlank(idFacture))
-			endpointParams += '?size=1&idFacture=' + idFacture;
-		else if(!String.isBlank(idMandat))
-			endpointParams += '?size=1&idMandat=' + idMandat;
+	public static HttpRequest buildHttpRequestHeaders(String token, String param) {
+		HttpRequest req = new HttpRequest();
+		req.setMethod('GET');
+		String endpointURL = '';
 		
-		return endpointParams;
+		SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'Documents' limit 1];
+		endpointURL = 'callout:AuthAPIHour' +suffixs.suffix__c;
+		
+		req.setEndpoint(endpointURL + '?size=1&idFacture=' + param);
+		req.setHeader('X-Correlation-Id', MP_AP13_GuidUtil.NewGuid());
+		req.setHeader('api_key', MP_Xdata_credentials__c.getInstance('sm_api_key_INT').Value__c);
+		req.setHeader('Authorization', 'Bearer ' + token);
+		req.setHeader('Content-Type', 'application/json');
+		return req;
 	}
 
-	public static HttpResponse getResponse(String idFacture,String idMandat) {
-		String endpointParams = buildRequestParams(idFacture,idMandat);
-		HttpResponse httpResp = CalloutManager.sendRequest('Documents', endpointParams, 'GET', CalloutManager.Scope.READ, null,null);
-		if (CalloutManager.httpResponseFailureDetected(httpResp)) {
+	public static HttpRequest buildHttpRequestHeaders1(String token, String param) {
+		HttpRequest req = new HttpRequest();
+		req.setMethod('GET');
+		String endpointURL = '';
+
+		SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'Documents' limit 1];
+		endpointURL = 'callout:AuthAPIHour' +suffixs.suffix__c;
+
+		req.setEndpoint(endpointURL + '?size=1&idMandat=' + param);
+		req.setHeader('X-Correlation-Id', MP_AP13_GuidUtil.NewGuid());
+		req.setHeader('api_key', MP_Xdata_credentials__c.getInstance('sm_api_key_INT').Value__c);
+		req.setHeader('Authorization', 'Bearer ' + token);
+		req.setHeader('Content-Type', 'application/json');
+		return req;
+	}
+
+	public static HttpResponse sendData(HttpRequest request) {
+		Http http = new Http();
+		HttpResponse res;
+		try {
+			res = http.send(request);
+
+		} catch (Exception e) {
+			system.debug('## [Factures] failed to send data ##');
+			return null;
+		}
+		return res;
+
+	}
+
+	private static Boolean httpResponseFailureDetected(HttpResponse response) {
+		return (response == null || (response.getStatusCode() != 201 && response.getStatusCode() != 200 && response.getStatusCode() != 206));
+
+	}
+
+	public static HttpResponse getResponse(String token, String param) {
+		HttpRequest httpReq = buildHttpRequestHeaders(token, param);
+		HttpResponse httpResp = sendData(httpReq);
+		if (httpResponseFailureDetected(httpResp)) {
+			// should abort next step's
+			system.debug('## [ factures] error occured when sending data ##');
+			system.debug(httpResp != null ? httpResp.getBody() : 'http response is null');
+			return null;
+		}
+
+		return httpResp;
+
+	}
+
+	public static HttpResponse getResponse1(String token, String param) {
+		HttpRequest httpReq = buildHttpRequestHeaders1(token, param);
+		HttpResponse httpResp = sendData(httpReq);
+		if (httpResponseFailureDetected(httpResp)) {
 			// should abort next step's
 			system.debug('## [ factures] error occured when sending data ##');
 			system.debug(httpResp != null ? httpResp.getBody() : 'http response is null');

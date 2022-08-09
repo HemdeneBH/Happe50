@@ -1,14 +1,12 @@
 <template>
 	<div class="smile-profile-box slds-card">
-		<!-- Edit titulaire contrat -->
+
 		<div class="slds-float--right" style="text-align: right; line-height: 1;">
-			<div class="slds-p-around_x-small">
-				<lightning-button-icon icon-name="utility:user_role" size="large" variant="bare" alternative-text="Modifier titulaire"  onclick={updateTitulaire}></lightning-button-icon>
-			</div>
-		</div>
-		<div class="slds-float--right" style="text-align: right; line-height: 1;">
-			<div class="slds-p-around_x-small">
+			<!-- <div class="slds-p-around_x-small">
 				<lightning-button-icon icon-name="action:edit" size="large" variant="bare" alternative-text="Modifier"  onclick={updateCoords}></lightning-button-icon>
+			</div> -->
+			<div class="slds-p-around_x-small">
+				<lightning-button-icon icon-name="action:edit" size="large" variant="bare" alternative-text="Modifier contact"  onclick={updateCoordsLWC}></lightning-button-icon>
 			</div>
 		<!--  utiliser l'icon' SLDS "utility:warning" a la place de ce truc -->
 			<div if:true={arequalifier} class="engie-profile-warning slds-m-top_x-small">
@@ -16,9 +14,11 @@
 						viewBox="0 0 576 512">
 						<path d="M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z" ></path>
 						</svg>
-						&Agrave; requalifier</font>
+					 A requalifier</font>
 			</div>
 		</div>
+
+
 		<div class="profile-rond">
 			<svg if:true={ismister} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41.08 45.16">
 				<g>
@@ -36,27 +36,16 @@
 				</g>
 			</svg>
 		</div>
+
+
 		<div>
 			<ul class="slds-text-body_small slds-p-around_small">
 					<!-- <b><font size=2>{salutation}</font></b> -->
 					<li><b>{firstname} {lastname}</b></li>
-					<li class="slds-p-bottom_small"><b style="text-transform: capitalize;">{refclient}</b><b if:false={isClientVip} if:true={segmentmarketing}> - {segmentmarketing}</b></li>
-					<!-- Affichage du code client pour un client VIP  -->
-					<li if:true={isClientVip} style="margin-bottom: 1em;">
-						<lightning-icon icon-name="utility:warning" alternative-text="Warning!" variant="error" size="x-small" title="Warning" ></lightning-icon>
-						<b style="text-transform: capitalize ; vertical-align: -0.250em ;">  {messageClientVIP}</b>
- 					</li>
+					<li class="slds-p-bottom_small"><b style="text-transform: capitalize;">{refclient}</b><b if:true={segmentmarketing}> - {segmentmarketing}</b></li>
 					<li if:true={isinternaute} class="profile-details"><lightning-button label='Espace Client actif' icon-name="action:web_link"  onclick={navigateToEC}></lightning-button></li>
 					<li if:true={becomesinternaute} class="profile-details" style="color:#059ce7;"><a onclick={ouvrirRenvoieCodeActivation}>Espace Client en cours d'activation</a></li>
 					<li if:true={notinternaute} class="profile-details"><lightning-button label="Créer l'Espace Client" variant="base" onclick={ouvrirCreationEspaceClient}></lightning-button></li>
-
-					<li if:false={eDocumentStatus} class="profile-details"><lightning-button label="Activer les e-Documents" variant="base" onclick={handleOpenFreeServices} disabled={accountUndefined}></lightning-button></li>
-					<li if:true={eDocumentStatus} class="profile-details"><img src={imgedocactif}  alt="Edoc actif"/></li>
-					<li if:true={eDocumentStatus} class="profile-details">
-						<span if:false={accountUndefined} class="text-color" onclick={handleOpenFreeServices}>Modifier le service</span>
-						<span if:true={accountUndefined} class="text-color-disabled">Modifier le service</span>
-					</li>
-
 					<li class="slds-p-top_small">{numvoierue}</li>
 					<li if:true={complementadresse}>{complementadresse}</li>
 					<li class="slds-p-bottom_small">{mailingpostalcode} {mailingcity}</li>
@@ -64,25 +53,11 @@
 					<li if:true={emailprincipal}>{emailprincipal}</li>
 					<li if:true={telfixeprincipal}>{telfixeprincipal}</li>
 					<li if:true={mobileprincipal}>{mobileprincipal}</li>
-					<li if:true={estConnuEHS} style="display: inline-flex; align-items: center;">	
-						<span title={messageEhsConnu} style="margin-left: -1px;">	
-							<svg version="1.1"  xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40px" height="21px" viewBox="0 0 40 21" enable-background="new 0 0 40 21" xml:space="preserve">
-								<image width="40" height="21" x="0" y="0" xlink:href="data:image/png;base64,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" ></image>
-							</svg>
-						</span>
-						<p class="smile-HomeServices-Red">HOME SERVICES</p>
-					</li>
-					<li if:true={estClientEHS} style="display: inline-flex; align-items: center;">
-						<span title={messageEhsActif} style="margin-left: -1px;">	
-							<svg version="1.1"  xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40px" height="21px" viewBox="0 0 40 21" enable-background="new 0 0 40 21" xml:space="preserve">
-								<image width="40" height="21" x="0" y="0" xlink:href="data:image/png;base64,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" ></image>
-							</svg>
-						</span>
-						<p class="smile-HomeServices-Green">HOME SERVICES</p>
-					</li>
 			</ul>
 		</div>
+	
 	<!-- Popup de la création de l'espace client-->
+
 		<template if:true={creerEspaceClientModel}>
         	<div class="smile-espaceClient-popup">
 				<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_medium">
@@ -97,10 +72,10 @@
 						</header>
 						<div class="slds-modal__content slds-p-around_medium smile-espaceClient-box" id="modal-content-id-1">
 								<div class="slds-grid slds-gutters">
+
 									<!--Le contact possède au moins un email dans sa fiche contact-->
 									<div if:true={isThereAnEmail} class="slds-col slds-size_1-of-3">
 										<lightning-combobox
-											class="EmailPicklist"
 											name="Email"
 											label="Email de connexion"
 											value={emailprincipalitem}
@@ -114,9 +89,10 @@
 											<span class="smile-background-message-text">L' email de connexion à l'Espace Client sera automatiquement défini comme email de préférence.</span>
 										</p>
 									</div>
+
 									<!--Le contact ne possède pas d'emails dans sa fiche contact-->
 									<div if:false={isThereAnEmail} class="slds-col slds-size_1-of-2">
-											<lightning-input type="email" label = "Email de connexion" name="newEmail" class="EmailInput" required value={emailNewEspaceClient} onchange={handleChangeNewEmail}>
+											<lightning-input type="email" label = "Email de connexion" name="newEmail" required value={emailNewEspaceClient} onchange={handleChangeNewEmail}>
 												</lightning-input>
 									</div>
 									<div if:false={isThereAnEmail} class="slds-col slds-size_1-of-2">
@@ -135,7 +111,10 @@
             	<div class="slds-backdrop slds-backdrop_open"></div>
         	</div>
 		</template>
+		
+
 		<!-- Popup du renvoi du code d'activation -->
+
 		<template if:true={renvoyerCodeActivationModel}>
         	<div class="smile-espaceClient-popup">
 				<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true" aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open slds-modal_small">
@@ -150,6 +129,7 @@
 						</header>
 						<div class="slds-modal__content slds-p-around_medium smile-espaceClient-box" id="modal-content-id-2">
 								<div class="slds-grid slds-gutters">
+
 									<div class="slds-col slds-size_1-of-3">
 										<lightning-input type="email" label = "Email de connexion" name="newEmail" readonly value={emailprincipal}>
 										</lightning-input>
@@ -159,6 +139,7 @@
 											<span class="smile-background-message-text">Si le client ne reçoit pas cet email d’ici quelques minutes, dites-lui de vérifier dans ses « courriers indésirables » ou « SPAM ».</span>
 										</p>
 									</div>
+
 								</div>	
 						</div>
 						<footer class="slds-modal__footer">
@@ -170,6 +151,7 @@
             	<div class="slds-backdrop slds-backdrop_open"></div>
         	</div>
 		</template>
+		
 		<!--Popup cas d'erreurs-->
 		<template if:true={erreurPopupModel}>
 			<div class="smile-espaceClient-popup">
@@ -180,12 +162,7 @@
 								<lightning-icon icon-name="utility:close" size="medium">
 								</lightning-icon>
 							</button>
-							<h2 id="modal-heading-03" class="slds-text-heading_medium slds-hyphenate" >
-								
-								<template if:false={erreurPopupModel}>Erreur technique</template>
-								<template if:true={erreurPopupModel}>Information</template>
-
-							</h2>
+							<h2 id="modal-heading-03" class="slds-text-heading_medium slds-hyphenate">Erreur technique</h2>
 						</header>
 						<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-3">
 								<p>
@@ -200,5 +177,8 @@
 				<div class="slds-backdrop slds-backdrop_open"></div>
 			</div>
 		</template>
+		
+
 	</div>
+
 </template>

@@ -3,8 +3,8 @@
  * @Description        : 
  * @Author             : Antoine Latour
  * @Group              : 
- * @Last Modified By   : Badr Eddine Belkarchi
- * @Last Modified On   : 09-21-2021
+ * @Last Modified By   : Clément Bauny
+ * @Last Modified On   : 04-04-2022
  * @Modification Log   : 
  * Ver       Date            Author      		    Modification
  * 1.0    08/07/2020   Antoine Latour     Initial Version
@@ -21,6 +21,13 @@ public with sharing class HP_SM003_MetadataManager_TEST {
             offreLibelle__c='Offre de test',
             Name='TEST'
         );
+
+        Account ac = new Account(name = 'HP Portal Account');
+        insert ac;
+
+        Contact con = new Contact(LastName = 'Portal Account', AccountId = ac.Id);
+        insert con;
+        
     }
 
     @IsTest 
@@ -43,6 +50,19 @@ public with sharing class HP_SM003_MetadataManager_TEST {
         System.assertEquals(expectedResult, result);
     }
     
+    @IsTest
+    static void getEspaceClientURL() {
+        Id p = [SELECT id FROM profile where name = 'HP_Community_User'].id;
+        Contact con = [SELECT id FROM Contact WHERE lastname = 'Portal Account' LIMIT 1];
+        User portalUser = new User(alias = 'hpPortal', email = 'portaluser@noemail.com', EmailEncodingKey = 'UTF-8', lastname = 'Portal', 
+        LanguageLocaleKey = 'en_US', LocaleSidKey ='en_US', ProfileId = p, country = 'United States', IsActive = true, contactId = con.Id, TimeZoneSidKey = 'Europe/Paris', UserName = 'portaluser@noemail.com');
+        insert portalUser;
+        Test.startTest();
+        String result = HP_SM003_MetadataManager.getEspaceClientURL(con.Id);
+        Test.stopTest();
+        System.assert(String.isNotBlank(result));
+    }
+
     @IsTest
     static void getAgilabEspaceClientURL() {
         Test.startTest();

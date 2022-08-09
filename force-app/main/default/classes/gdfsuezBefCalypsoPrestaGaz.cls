@@ -2048,8 +2048,7 @@ public class gdfsuezBefCalypsoPrestaGaz {
 			}           
 		}
 	}
-	public class Dependency implements ITF006_SoapRequestMock {
-		private String serviceId;
+	public class Dependency {
 		public String endpoint_x = 'http://localhost:8080/ws/I-PrestationServiceGaz_v2';
 		public Map<String,String> inputHttpHeaders_x;
 		public Map<String,String> outputHttpHeaders_x;
@@ -2059,14 +2058,6 @@ public class gdfsuezBefCalypsoPrestaGaz {
 		public Integer timeout_x;
 		private String[] ns_map_type_info = new String[]{'http://gdfsuez.com/bef/chp/pivot','gdfsuezComBefChpPivotPrestaGaz','http://gdfsuez.com/bef/chp/communadresse','gdfsuezComBefChpCommunadressePrestaGaz'};
 
-		public String getServiceId(){
-            return serviceId;
-        }
-        
-        public void setServiceId(String serviceId){
-            this.serviceId = serviceId;
-        }
-
 		public gdfsuezBefCalypsoPrestaGaz.creerPrestationServiceGazOfflineResponse_element CreerPrestationServiceGazOffline(gdfsuezBefCalypsoPrestaGaz.creerPrestationServiceGazOfflineInputDt creerPrestationServiceGazOfflineInput,gdfsuezComBefChpPivotPrestaGaz.contextDt context) {
 			gdfsuezBefCalypsoPrestaGaz.creerPrestationServiceGazOffline_element request_x = new gdfsuezBefCalypsoPrestaGaz.creerPrestationServiceGazOffline_element();
 			gdfsuezBefCalypsoPrestaGaz.creerPrestationServiceGazOfflineResponse_element response_x;
@@ -2074,8 +2065,8 @@ public class gdfsuezBefCalypsoPrestaGaz {
 			request_x.context = context;
 			Map<String, gdfsuezBefCalypsoPrestaGaz.creerPrestationServiceGazOfflineResponse_element> response_map_x = new Map<String, gdfsuezBefCalypsoPrestaGaz.creerPrestationServiceGazOfflineResponse_element>();
 			response_map_x.put('response_x', response_x);
-
-			SM_WS110_PrestationGaz.createPrestationServiceGazOffline(this,
+			WebServiceCallout.invoke(
+				this,
 				request_x,
 				response_map_x,
 				new String[]{endpoint_x,
@@ -2086,7 +2077,6 @@ public class gdfsuezBefCalypsoPrestaGaz {
 				'creerPrestationServiceGazOfflineResponse',
 				'gdfsuezBefCalypsoPrestaGaz.creerPrestationServiceGazOfflineResponse_element'}
 			);
-
 			response_x = response_map_x.get('response_x');
 			return response_x;
 		}
@@ -2124,37 +2114,35 @@ public class gdfsuezBefCalypsoPrestaGaz {
 			gdfsuezBefCalypsoPrestaGaz.creerPrestationServiceGaz_element request_x = new gdfsuezBefCalypsoPrestaGaz.creerPrestationServiceGaz_element(creerPrestationServiceGazInput,context);
 			request_x.populateXmlNode(methodNode);
 			
-			Dom.XmlNode creerPrestationServiceGazResponseNode;
-			
-			if(HP_Constantes.IS_HAPPE_PROFILE){
-				HttpRequest req = new HttpRequest();
-				
-				req.setTimeout(120000)  ;  
-				req.setEndpoint(endpoint_x);
-				req.setMethod('POST');
-				req.setHeader('Content-Type', 'text/xml; charset=UTF-8');
-				req.setHeader('SOAPAction', 'tns:CreerPrestationServiceGaz');
-				req.setBodyDocument(doc);
-				String request = doc.toXmlString() ;
-				system.debug('request => '+request);
-				Http http = new Http();
-				Datetime startCall = Datetime.now();
-				HTTPResponse res = http.send(req);
-				String response = res.getBody() ;
-				System.debug('Response =>'+response);
-				// debut LOG SMILE
-			    String data = 'input : \n '+ request + '\n  output : \n' +response ;
-				//data=  SM_Utilities.buildLog(data,'DEBUG','CreerPrestationServiceGazOnline') ;
-				//SM_Utilities.traceLog(data) ;
-				// fin LOG SMILE 
-				HP_UTIL_HTTPUtils.saveLogResponse(req, res, (Datetime.now().getTime() - startCall.getTime() ));
-				Dom.Document responseDoc = res.getBodyDocument();
-				Dom.XmlNode rootNode = responseDoc.getRootElement();
-				Dom.XmlNode bodyNode = rootNode.getChildElement('Body','http://schemas.xmlsoap.org/soap/envelope/');
-				creerPrestationServiceGazResponseNode = bodyNode.getChildElement('creerPrestationServiceGazResponse', 'http://gdfsuez/bef/calypso/prestationservicegaz/v2');
-			} else {	
-				creerPrestationServiceGazResponseNode = SM_WS110_PrestationGaz.createPrestationServiceGaz('POST', doc, 'Body', 'http://schemas.xmlsoap.org/soap/envelope/', 'creerPrestationServiceGazResponse', 'http://gdfsuez/bef/calypso/prestationservicegaz/v2');
-			}
+			HttpRequest req = new HttpRequest();
+			if(!HP_Constantes.IS_HAPPE_PROFILE){
+				system.debug('certif'+SM_OCTOPUS__c.getOrgDefaults().certName__c);
+				req.setClientCertificateName(SM_OCTOPUS__c.getOrgDefaults().certName__c);
+			}		
+			req.setTimeout(120000)  ;  
+			req.setEndpoint(endpoint_x);
+			req.setMethod('POST');
+			req.setHeader('Content-Type', 'text/xml; charset=UTF-8');
+			req.setHeader('SOAPAction', 'tns:CreerPrestationServiceGaz');
+			req.setBodyDocument(doc);
+			String request = doc.toXmlString() ;
+			system.debug('request => '+request);
+			Http http = new Http();
+			Datetime startCall = Datetime.now();
+			HTTPResponse res = http.send(req);
+			String response = res.getBody() ;
+			System.debug('Response =>'+response);
+			// debut LOG SMILE
+		    String data = 'input : \n '+ request + '\n  output : \n' +response ;
+			//data=  SM_Utilities.buildLog(data,'DEBUG','CreerPrestationServiceGazOnline') ;
+			//SM_Utilities.traceLog(data) ;
+			// fin LOG SMILE 
+			HP_UTIL_HTTPUtils.saveLogResponse(req, res, (Datetime.now().getTime() - startCall.getTime() ));
+			Dom.Document responseDoc = res.getBodyDocument();
+			Dom.XmlNode rootNode = responseDoc.getRootElement();
+			Dom.XmlNode bodyNode = rootNode.getChildElement('Body','http://schemas.xmlsoap.org/soap/envelope/');
+			Dom.XmlNode creerPrestationServiceGazResponseNode = bodyNode.getChildElement('creerPrestationServiceGazResponse', 'http://gdfsuez/bef/calypso/prestationservicegaz/v2');
+						
 			gdfsuezBefCalypsoPrestaGaz.creerPrestationServiceGazResponse_element response_x = new gdfsuezBefCalypsoPrestaGaz.creerPrestationServiceGazResponse_element(creerPrestationServiceGazResponseNode);
 			return response_x;
 		}
@@ -2171,49 +2159,42 @@ public class gdfsuezBefCalypsoPrestaGaz {
 			gdfsuezBefCalypsoPrestaGaz.creerPrestationServiceGazOffline_element request_x = new gdfsuezBefCalypsoPrestaGaz.creerPrestationServiceGazOffline_element(creerPrestationServiceGazOfflineInput,context);
 			request_x.populateXmlNode(methodNode);
 			
-			Dom.XmlNode creerPrestationServiceGazOfflineResponseNode;
-			
-			if(HP_Constantes.IS_HAPPE_PROFILE){
-				HttpRequest req = new HttpRequest();
-				system.debug('certif'+SM_OCTOPUS__c.getOrgDefaults().certName__c);
-				if(!Test.isRunningTest()){
-					req.setClientCertificateName(SM_OCTOPUS__c.getOrgDefaults().certName__c);
-				}
-				// Ajouté par RJM le 10/08/2020 dans le cadre de l'US FT2-771
-				req.setTimeout(120000);
-				// 
-				req.setEndpoint(endpoint_x);
-				req.setMethod('POST');
-				req.setHeader('Content-Type', 'text/xml; charset=UTF-8');
-				req.setHeader('SOAPAction', 'tns:CreerPrestationServiceGazOffline');
-				req.setBodyDocument(doc);
-	
-				Http http = new Http();
-				datetime startCall = datetime.now();
-				String request = doc.toXmlString() ;
-				system.debug('request => '+request);
-	
-				HTTPResponse res = http.send(req);
-				datetime endCall = datetime.now();
-				HP_UTIL_HTTPUtils.saveLogResponse(req, res, (endCall.getTime() - startCall.getTime()));
-				String response = res.getBody() ;
-				System.debug('*** Response : ' + response);
-	
-			    // debut LOG SMILE
-			    String data = 'input : \n '+ request + '\n  output : \n' +response ;
-			    //data=  SM_Utilities.buildLog(data,'DEBUG','CreerPrestationServiceGazOffline') ;
-			    //SM_Utilities.traceLog(data) ;
-			    // fin LOG SMILE 
-	
-				Dom.Document responseDoc = res.getBodyDocument();
-				Dom.XmlNode rootNode = responseDoc.getRootElement();
-				Dom.XmlNode bodyNode = rootNode.getChildElement('Body','http://schemas.xmlsoap.org/soap/envelope/');
-				creerPrestationServiceGazOfflineResponseNode = bodyNode.getChildElement('creerPrestationServiceGazOfflineResponse', 'http://gdfsuez/bef/calypso/prestationservicegaz/v2');
-				System.debug('*** Node : ' + creerPrestationServiceGazOfflineResponseNode);
-			} else {	
-				creerPrestationServiceGazOfflineResponseNode = SM_WS110_PrestationGaz.createPrestationServiceGazOffline('POST', doc, 'Body', 'http://schemas.xmlsoap.org/soap/envelope/', 'creerPrestationServiceGazOfflineResponse', 'http://gdfsuez/bef/calypso/prestationservicegaz/v2');
+			HttpRequest req = new HttpRequest();
+			system.debug('certif'+SM_OCTOPUS__c.getOrgDefaults().certName__c);
+			if(!Test.isRunningTest()){
+				req.setClientCertificateName(SM_OCTOPUS__c.getOrgDefaults().certName__c);
 			}
+			// Ajouté par RJM le 10/08/2020 dans le cadre de l'US FT2-771
+			req.setTimeout(120000);
+			// 
+			req.setEndpoint(endpoint_x);
+			req.setMethod('POST');
+			req.setHeader('Content-Type', 'text/xml; charset=UTF-8');
+			req.setHeader('SOAPAction', 'tns:CreerPrestationServiceGazOffline');
+			req.setBodyDocument(doc);
 
+			Http http = new Http();
+			datetime startCall = datetime.now();
+			String request = doc.toXmlString() ;
+			system.debug('request => '+request);
+
+			HTTPResponse res = http.send(req);
+			datetime endCall = datetime.now();
+			HP_UTIL_HTTPUtils.saveLogResponse(req, res, (endCall.getTime() - startCall.getTime()));
+			String response = res.getBody() ;
+			System.debug('*** Response : ' + response);
+
+		    // debut LOG SMILE
+		    String data = 'input : \n '+ request + '\n  output : \n' +response ;
+		    //data=  SM_Utilities.buildLog(data,'DEBUG','CreerPrestationServiceGazOffline') ;
+		    //SM_Utilities.traceLog(data) ;
+		    // fin LOG SMILE 
+
+			Dom.Document responseDoc = res.getBodyDocument();
+			Dom.XmlNode rootNode = responseDoc.getRootElement();
+			Dom.XmlNode bodyNode = rootNode.getChildElement('Body','http://schemas.xmlsoap.org/soap/envelope/');
+			Dom.XmlNode creerPrestationServiceGazOfflineResponseNode = bodyNode.getChildElement('creerPrestationServiceGazOfflineResponse', 'http://gdfsuez/bef/calypso/prestationservicegaz/v2');
+			System.debug('*** Node : ' + creerPrestationServiceGazOfflineResponseNode);
 			gdfsuezBefCalypsoPrestaGaz.creerPrestationServiceGazOfflineResponse_element response_x = new gdfsuezBefCalypsoPrestaGaz.creerPrestationServiceGazOfflineResponse_element(creerPrestationServiceGazOfflineResponseNode);
 			return response_x;
 		}
@@ -2224,31 +2205,25 @@ public class gdfsuezBefCalypsoPrestaGaz {
 			gdfsuezBefCalypsoPrestaGaz.lirePrestationServiceGaz_element request_x = new gdfsuezBefCalypsoPrestaGaz.lirePrestationServiceGaz_element(lirePrestationServiceGazInput,context);
 			request_x.populateXmlNode(methodNode);
 			
-			Dom.XmlNode lirePrestationServiceGazResponseNode;
-			
-			if (HP_Constantes.IS_HAPPE_PROFILE){
-				HttpRequest req = new HttpRequest();
-				req.setEndpoint(endpoint_x);
-				req.setClientCertificateName(SM_OCTOPUS__c.getOrgDefaults().certName__c);
-				req.setMethod('POST');
-				req.setHeader('Content-Type', 'text/xml; charset=UTF-8');
-				req.setHeader('SOAPAction', 'tns:LirePrestationServiceGaz');
-				req.setBodyDocument(doc);
-				System.debug(doc.toXmlString());
-				Http http = new Http();
-				datetime startCall = datetime.now();
-				HTTPResponse res = http.send(req);
-				datetime endCall = datetime.now();
-				HP_UTIL_HTTPUtils.saveLogResponse(req, res, (endCall.getTime() - startCall.getTime()));
-				System.debug(res.getBody());
-				Dom.Document responseDoc = res.getBodyDocument();
-				Dom.XmlNode rootNode = responseDoc.getRootElement();
-				Dom.XmlNode bodyNode = rootNode.getChildElement('Body','http://schemas.xmlsoap.org/soap/envelope/');
-				lirePrestationServiceGazResponseNode = bodyNode.getChildElement('lirePrestationServiceGazResponse', 'http://gdfsuez/bef/calypso/prestationservicegaz/v2');
-			} else {	
-				lirePrestationServiceGazResponseNode = SM_WS110_PrestationGaz.readPrestationServiceGaz('POST', doc, 'Body', 'http://schemas.xmlsoap.org/soap/envelope/', 'lirePrestationServiceGazResponse', 'http://gdfsuez/bef/calypso/prestationservicegaz/v2');
-			}
-			
+			HttpRequest req = new HttpRequest();
+			req.setEndpoint(endpoint_x);
+			req.setClientCertificateName(SM_OCTOPUS__c.getOrgDefaults().certName__c);
+			req.setMethod('POST');
+			req.setHeader('Content-Type', 'text/xml; charset=UTF-8');
+			req.setHeader('SOAPAction', 'tns:LirePrestationServiceGaz');
+			req.setBodyDocument(doc);
+			System.debug(doc.toXmlString());
+			Http http = new Http();
+			datetime startCall = datetime.now();
+			HTTPResponse res = http.send(req);
+			datetime endCall = datetime.now();
+			HP_UTIL_HTTPUtils.saveLogResponse(req, res, (endCall.getTime() - startCall.getTime()));
+			System.debug(res.getBody());
+			Dom.Document responseDoc = res.getBodyDocument();
+			Dom.XmlNode rootNode = responseDoc.getRootElement();
+			Dom.XmlNode bodyNode = rootNode.getChildElement('Body','http://schemas.xmlsoap.org/soap/envelope/');
+			Dom.XmlNode lirePrestationServiceGazResponseNode = bodyNode.getChildElement('lirePrestationServiceGazResponse', 'http://gdfsuez/bef/calypso/prestationservicegaz/v2');
+						
 			gdfsuezBefCalypsoPrestaGaz.lirePrestationServiceGazResponse_element response_x = new gdfsuezBefCalypsoPrestaGaz.lirePrestationServiceGazResponse_element(lirePrestationServiceGazResponseNode);
 			return response_x;
 		}
@@ -2259,30 +2234,24 @@ public class gdfsuezBefCalypsoPrestaGaz {
 			gdfsuezBefCalypsoPrestaGaz.modifierPrestationServiceGaz_element request_x = new gdfsuezBefCalypsoPrestaGaz.modifierPrestationServiceGaz_element(modifierPrestationServiceGazInput,context);
 			request_x.populateXmlNode(methodNode);
 			
-			Dom.XmlNode modifierPrestationServiceGazResponseNode;
-			
-			if (HP_Constantes.IS_HAPPE_PROFILE){
-				HttpRequest req = new HttpRequest();
-				req.setEndpoint(endpoint_x);
-				req.setClientCertificateName(Label.SM_CL_OctopusCertificate);
-				req.setMethod('POST');
-				req.setHeader('Content-Type', 'text/xml; charset=UTF-8');
-				req.setHeader('SOAPAction', 'tns:ModifierPrestationServiceGaz');
-				req.setBodyDocument(doc);
-				System.debug(doc.toXmlString());
-				Http http = new Http();
-				datetime startCall = datetime.now();
-				HTTPResponse res = http.send(req);
-				datetime endCall = datetime.now();
-				HP_UTIL_HTTPUtils.saveLogResponse(req, res, (endCall.getTime() - startCall.getTime()));
-				System.debug(res.getBody());
-				Dom.Document responseDoc = res.getBodyDocument();
-				Dom.XmlNode rootNode = responseDoc.getRootElement();
-				Dom.XmlNode bodyNode = rootNode.getChildElement('Body','http://schemas.xmlsoap.org/soap/envelope/');
-				modifierPrestationServiceGazResponseNode = bodyNode.getChildElement('modifierPrestationServiceGazResponse', 'http://gdfsuez/bef/calypso/prestationservicegaz/v2');
-			} else{
-				modifierPrestationServiceGazResponseNode = SM_WS110_PrestationGaz.modifyPrestationServiceGaz('POST', doc, 'Body', 'http://schemas.xmlsoap.org/soap/envelope/', 'modifierPrestationServiceGazResponse', 'http://gdfsuez/bef/calypso/prestationservicegaz/v2');
-			}
+			HttpRequest req = new HttpRequest();
+			req.setEndpoint(endpoint_x);
+			req.setClientCertificateName(Label.SM_CL_OctopusCertificate);
+			req.setMethod('POST');
+			req.setHeader('Content-Type', 'text/xml; charset=UTF-8');
+			req.setHeader('SOAPAction', 'tns:ModifierPrestationServiceGaz');
+			req.setBodyDocument(doc);
+			System.debug(doc.toXmlString());
+			Http http = new Http();
+			datetime startCall = datetime.now();
+			HTTPResponse res = http.send(req);
+			datetime endCall = datetime.now();
+			HP_UTIL_HTTPUtils.saveLogResponse(req, res, (endCall.getTime() - startCall.getTime()));
+			System.debug(res.getBody());
+			Dom.Document responseDoc = res.getBodyDocument();
+			Dom.XmlNode rootNode = responseDoc.getRootElement();
+			Dom.XmlNode bodyNode = rootNode.getChildElement('Body','http://schemas.xmlsoap.org/soap/envelope/');
+			Dom.XmlNode modifierPrestationServiceGazResponseNode = bodyNode.getChildElement('modifierPrestationServiceGazResponse', 'http://gdfsuez/bef/calypso/prestationservicegaz/v2');
 			
 			gdfsuezBefCalypsoPrestaGaz.modifierPrestationServiceGazResponse_element response_x = new gdfsuezBefCalypsoPrestaGaz.modifierPrestationServiceGazResponse_element(modifierPrestationServiceGazResponseNode);
 			return response_x;
@@ -2810,10 +2779,29 @@ public class gdfsuezBefCalypsoPrestaGaz {
 		public lirePrestationServiceGazOutputDt_prestationServiceLire_donneesGenerales_dateEffetDemandee_element(DOM.XmlNode responseNode){
 			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
 			DOM.XmlNode date_xNode = responseNode.getChildElement('date', 'http://gdfsuez/bef/calypso/prestationservicegaz/v2');
+			
+			Dom.XmlNode[] mesureIndexChildren = responseNode.getChildElements();
+			if(date_xNode == null) {
+                for(DOM.XmlNode childNode : mesureIndexChildren){
+                    if( childNode.GetName() == 'date') {
+                        date_xNode = childNode;
+                    }
+                    
+                 }
+            }
 			this.date_x = (date_xNode == null) ? null :  gdfsuezBefCalypsoPrestaGaz.parseDateTime(date_xNode.getText());
+			
 			nodesParsed.add(date_xNode);
 			//System.debug(this.date_x);            
 			DOM.XmlNode creneauHoraireNode = responseNode.getChildElement('creneauHoraire', 'http://gdfsuez/bef/calypso/prestationservicegaz/v2');
+			
+			Dom.XmlNode[] creneauHoraireChildren = responseNode.getChildElements();
+			for(DOM.XmlNode childNode : mesureIndexChildren){
+				if( childNode.GetName() == 'creneauHoraire') {
+					creneauHoraireNode = childNode;
+				}
+				
+			 }
 			if(creneauHoraireNode == null){
 				this.creneauHoraire = null;
 			} else{
@@ -3014,6 +3002,16 @@ public class gdfsuezBefCalypsoPrestaGaz {
 			}
 			//System.debug(this.priseEnCompteContractuelle);            
 			DOM.XmlNode dateEffetDemandeeNode = responseNode.getChildElement('dateEffetDemandee', null);
+
+			Dom.XmlNode[] mesureIndexChildren = responseNode.getChildElements();
+			if(dateEffetDemandeeNode == null) {
+                for(DOM.XmlNode childNode : mesureIndexChildren){
+                    if( childNode.GetName() == 'dateEffetDemandee') {
+                        dateEffetDemandeeNode = childNode;
+                    }
+                    
+                 }
+            }
 			if(dateEffetDemandeeNode == null){
 				this.dateEffetDemandee = null;
 			} else{

@@ -2,18 +2,23 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
+
  * @last modified on  : 05-20-2021
+
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
  * Modifications Log 
  * Ver   Date         Author                               Modification
  * 1.0   05-10-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
 **/
 
+
+
 global with sharing  class HP_BAT022_ArchiveContactLog implements Database.batchable<sObject>, Schedulable, Database.RaisesPlatformEvents,Database.AllowsCallouts,Database.stateful,  HP_UTIL_BatchInterface{
 
     public static final Integer BATCH_CHUNK_SIZE = 200;
     global static Id idClient;
     Id myIdContact ;
+
 
     global HP_BAT022_ArchiveContactLog(Id idContact) {
         System.debug('idContact.id constructo before**********'+ idContact);
@@ -26,6 +31,7 @@ global with sharing  class HP_BAT022_ArchiveContactLog implements Database.batch
 
     }
 
+
     global HP_BAT022_ArchiveContactLog() {
     }
 
@@ -36,6 +42,8 @@ global with sharing  class HP_BAT022_ArchiveContactLog implements Database.batch
         return Database.getQueryLocator(
             [select Id from case where ( HP_isHappe__c = true  and ContactId =:cont[0].Id)]
         );
+
+
     }
 
     global static void launchNewScheduler(String schedule, String jobName){
@@ -47,7 +55,9 @@ global with sharing  class HP_BAT022_ArchiveContactLog implements Database.batch
     }
 
     global static void execute(){
-       
+
+
+
 
        List<Contact> cont = [select id,AccountId, name from contact where name ='Tel Sans Contact Diabolocom'];
        System.debug('cont :'+cont);
@@ -62,6 +72,7 @@ global with sharing  class HP_BAT022_ArchiveContactLog implements Database.batch
         System.debug('numerCount :'+numerCount);
 
         Boolean isLimitReached = Test.isRunningTest() ? true : ((numerCountTask + numerCount) >= 9000 );
+
         isLimitReached = true;
         System.debug('isLimitReached :'+ isLimitReached);
        if(isLimitReached){
@@ -71,19 +82,24 @@ global with sharing  class HP_BAT022_ArchiveContactLog implements Database.batch
            HP_BAT022_ArchiveContactLog archiveContact = new HP_BAT022_ArchiveContactLog(con.Id);
            System.debug('con.id**********'+ con.Id);
 
-           Database.executeBatch(archiveContact, BATCH_CHUNK_SIZE);
+
+            Database.executeBatch(archiveContact, BATCH_CHUNK_SIZE);
         }
     }
 
     public void execute(Database.BatchableContext bc, List<case> cases) { 
         System.debug('cases  size'+ cases.size());
+
         System.debug('myIdContact***'+ myIdContact);
 
         HP_SM61_ArchiveContactLog.archiveContact(cases, myIdContact);
+
     }
 
     global void finish(Database.BatchableContext bc){
         System.debug('myIdContact  :' + myIdContact);
         HP_BAT023_ArchiveTaskLog.execute(myIdContact);
+
+
     }   
 }

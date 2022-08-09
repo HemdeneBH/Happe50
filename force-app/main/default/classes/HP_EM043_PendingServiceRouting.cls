@@ -15,12 +15,15 @@ public with sharing  class HP_EM043_PendingServiceRouting {
     * @author Antoine Latour | 12-11-2020 
     * @param Set<Id> pendingServiceRoutingIds 
     **/
+
     public static void deletePendingRoutinService(Set<Id> pendingServiceRoutingIds) {
         if(pendingServiceRoutingIds.isEmpty()) {
             return;
         }
 
         List<PendingServiceRouting> psrToDelete = [SELECT Id FROM PendingServiceRouting WHERE Id IN : pendingServiceRoutingIds];
+
+
 
         if(psrToDelete.size() > 0) {
             delete psrToDelete;

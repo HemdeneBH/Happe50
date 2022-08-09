@@ -76,4 +76,19 @@ public with sharing class HP_EM007_PrestationDistributeurManager {
 		}                 
 		return srList;
 	}
+
+	/**
+	* @description 
+	* @author Badr Eddine Belkarchi | 03-03-2022
+	* @param String numeroAffaire 
+	* @return Prestation_distributeur__c 
+	**/
+	public static Prestation_distributeur__c loadPrestationDistributeur(String numeroAffaire) {
+		try {
+			List<Prestation_distributeur__c> prestations = [SELECT Id, Name, RecordTypeId, Numero_PDL_PCE__c, Statut__c, Numero_affaire_distributeur__c, Case__c FROM Prestation_distributeur__c WHERE Numero_affaire_distributeur__c = :numeroAffaire LIMIT 1];
+			return prestations[0];
+		} catch (Exception e) {
+			return null;
+		}
+	}
 }

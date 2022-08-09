@@ -8,122 +8,11 @@
     <valueSet>
         <restricted>true</restricted>
         <valueSetDefinition>
-            <sorted>true</sorted>
-            <value>
-                <fullName>ANNULATION DE L&apos;OPS</fullName>
-                <default>false</default>
-                <label>ANNULATION DE L&apos;OPS</label>
-            </value>
-            <value>
-                <fullName>ANNULATION ET REMPLACEMENT DE FACTURE</fullName>
-                <default>false</default>
-                <label>ANNULATION ET REMPLACEMENT DE FACTURE</label>
-            </value>
-            <value>
-                <fullName>AUTO RELEVE OK</fullName>
-                <default>false</default>
-                <label>AUTO RELEVE OK</label>
-            </value>
-            <value>
-                <fullName>CHOIX DE L&apos;OFFRE</fullName>
-                <default>false</default>
-                <label>CHOIX DE L&apos;OFFRE</label>
-            </value>
-            <value>
-                <fullName>CHOIX DES CONTRATS</fullName>
-                <default>false</default>
-                <label>CHOIX DES CONTRATS</label>
-            </value>
-            <value>
-                <fullName>CHOIX DES COORDONNEES BANCAIRES</fullName>
-                <default>false</default>
-                <label>CHOIX DES COORDONNEES BANCAIRES</label>
-            </value>
-            <value>
-                <fullName>CHOIX DES SERVICES</fullName>
-                <default>false</default>
-                <label>CHOIX DES SERVICES</label>
-            </value>
-            <value>
-                <fullName>CONSIGNES MÉTIERS</fullName>
-                <default>false</default>
-                <label>CONSIGNES MÉTIERS</label>
-            </value>
-            <value>
-                <fullName>CONTESTATION AVEC FRAIS</fullName>
-                <default>false</default>
-                <label>CONTESTATION AVEC FRAIS</label>
-            </value>
+            <sorted>false</sorted>
             <value>
                 <fullName>CONTEXTE</fullName>
                 <default>false</default>
                 <label>CONTEXTE</label>
-            </value>
-            <value>
-                <fullName>CREATION DE LA FICHE CLIENT</fullName>
-                <default>false</default>
-                <label>CREATION DE LA FICHE CLIENT</label>
-            </value>
-            <value>
-                <fullName>CREATION NOTE DEBIT/CREDIT</fullName>
-                <default>false</default>
-                <label>CREATION NOTE DEBIT/CREDIT</label>
-            </value>
-            <value>
-                <fullName>CREATION NOTE DEBIT CREDIT</fullName>
-                <default>false</default>
-                <label>CREATION NOTE DEBIT CREDIT</label>
-            </value>
-            <value>
-                <fullName>CREATION OPS</fullName>
-                <default>false</default>
-                <label>CREATION OPS</label>
-            </value>
-            <value>
-                <fullName>CRÉATION OPS</fullName>
-                <default>false</default>
-                <isActive>false</isActive>
-                <label>CRÉATION OPS</label>
-            </value>
-            <value>
-                <fullName>CRITÈRES DE NON RECEVABILITÉ DE L&apos;INDEX</fullName>
-                <default>false</default>
-                <label>CRITÈRES DE NON RECEVABILITÉ DE L&apos;INDEX</label>
-            </value>
-            <value>
-                <fullName>DEMANDE DE JUSTIFICATIF</fullName>
-                <default>false</default>
-                <label>DEMANDE DE JUSTIFICATIF</label>
-            </value>
-            <value>
-                <fullName>DOSSIER DE RECOUVREMENT</fullName>
-                <default>false</default>
-                <label>DOSSIER DE RECOUVREMENT</label>
-            </value>
-            <value>
-                <fullName>DOUBLONS DETECTES</fullName>
-                <default>false</default>
-                <label>DOUBLONS DETECTES</label>
-            </value>
-            <value>
-                <fullName>ENVOI DE DUPLICATA</fullName>
-                <default>false</default>
-                <label>ENVOI DE DUPLICATA</label>
-            </value>
-            <value>
-                <fullName>ESTIMATION DE LA CONSOMMATION</fullName>
-                <default>false</default>
-                <label>ESTIMATION DE LA CONSOMMATION</label>
-            </value>
-            <value>
-                <fullName>FACTURE EN LIGNE</fullName>
-                <default>false</default>
-                <label>FACTURE EN LIGNE</label>
-            </value>
-            <value>
-                <fullName>FACTURE ET INDEX</fullName>
-                <default>false</default>
-                <label>FACTURE ET INDEX</label>
             </value>
             <value>
                 <fullName>LOGEMENT</fullName>
@@ -131,106 +20,9 @@
                 <label>LOGEMENT</label>
             </value>
             <value>
-                <fullName>MENSUALISATION</fullName>
+                <fullName>CHOIX DE L&apos;OFFRE</fullName>
                 <default>false</default>
-                <label>MENSUALISATION</label>
-            </value>
-            <value>
-                <fullName>MENSUALITÉS ET ÉCHÉANCES</fullName>
-                <default>false</default>
-                <label>MENSUALITÉS ET ÉCHÉANCES</label>
-            </value>
-            <value>
-                <fullName>MODIFICATION DU RDV</fullName>
-                <default>false</default>
-                <label>MODIFICATION DU RDV</label>
-            </value>
-            <value>
-                <fullName>MODIFIER LES MENSUALITÉS</fullName>
-                <default>false</default>
-                <label>MODIFIER LES MENSUALITÉS</label>
-            </value>
-            <value>
-                <fullName>OPS ELEC</fullName>
-                <default>false</default>
-                <label>OPS ELEC</label>
-            </value>
-            <value>
-                <fullName>OPS GAZ</fullName>
-                <default>false</default>
-                <label>OPS GAZ</label>
-            </value>
-            <value>
-                <fullName>OPS GAZ RELEVE SPECIALE</fullName>
-                <default>false</default>
-                <label>OPS GAZ RELEVE SPECIALE</label>
-            </value>
-            <value>
-                <fullName>OPTIONS</fullName>
-                <default>false</default>
-                <label>OPTIONS</label>
-            </value>
-            <value>
-                <fullName>PAYEUR DIVERGENT</fullName>
-                <default>false</default>
-                <label>PAYEUR DIVERGENT</label>
-            </value>
-            <value>
-                <fullName>PROMOTION DU SELFCARE</fullName>
-                <default>false</default>
-                <isActive>false</isActive>
-                <label>PROMOTION DU SELFCARE</label>
-            </value>
-            <value>
-                <fullName>PUSH DE l’ESPACE CLIENT</fullName>
-                <default>false</default>
-                <label>PUSH DE l’ESPACE CLIENT</label>
-            </value>
-            <value>
-                <fullName>RÉCAPITULATIF</fullName>
-                <default>false</default>
-                <label>RÉCAPITULATIF</label>
-            </value>
-            <value>
-                <fullName>RECAPITULATIF CHO</fullName>
-                <default>false</default>
-                <label>RECAPITULATIF CHO</label>
-            </value>
-            <value>
-                <fullName>RÉCAPITULATIF SERVICES PAYANTS</fullName>
-                <default>false</default>
-                <label>RÉCAPITULATIF SERVICES PAYANTS</label>
-            </value>
-            <value>
-                <fullName>RECHERCHE COMPTE CLIENT</fullName>
-                <default>false</default>
-                <label>RECHERCHE COMPTE CLIENT</label>
-            </value>
-            <value>
-                <fullName>RECHERCHER OU CRÉER UN PAYEUR DIVERGENT</fullName>
-                <default>false</default>
-                <label>RECHERCHER OU CRÉER UN PAYEUR DIVERGENT</label>
-            </value>
-            <value>
-                <fullName>RENSEIGNER VOTRE INTERACTION</fullName>
-                <default>false</default>
-                <label>RENSEIGNER VOTRE INTERACTION</label>
-            </value>
-            <value>
-                <fullName>SAISIE D&apos;INDEX</fullName>
-                <default>false</default>
-                <label>SAISIE D&apos;INDEX</label>
-            </value>
-            <value>
-                <fullName>SECURISATION DE LA DEMANDE</fullName>
-                <default>false</default>
-                <label>SECURISATION DE LA DEMANDE</label>
-            </value>
-            <value>
-                <fullName>SERVICES AFFINITAIRES</fullName>
-                <default>false</default>
-                <isActive>false</isActive>
-                <label>SERVICES AFFINITAIRES</label>
+                <label>CHOIX DE L&apos;OFFRE</label>
             </value>
             <value>
                 <fullName>SERVICES DE GESTION</fullName>
@@ -238,20 +30,29 @@
                 <label>SERVICES DE GESTION</label>
             </value>
             <value>
-                <fullName>SERVICES GESTION</fullName>
+                <fullName>CREATION OPS</fullName>
                 <default>false</default>
-                <label>SERVICES GESTION</label>
+                <label>CREATION OPS</label>
             </value>
             <value>
-                <fullName>SERVICES GESTION PAYEUR DIVERGENT</fullName>
+                <fullName>CRITÈRES DE NON RECEVABILITÉ DE L&apos;INDEX</fullName>
                 <default>false</default>
-                <isActive>false</isActive>
-                <label>SERVICES GESTION PAYEUR DIVERGENT</label>
+                <label>CRITÈRES DE NON RECEVABILITÉ DE L&apos;INDEX</label>
             </value>
             <value>
-                <fullName>SERVICES PAYANTS</fullName>
+                <fullName>PROMOTION DU SELFCARE</fullName>
                 <default>false</default>
-                <label>SERVICES PAYANTS</label>
+                <label>PROMOTION DU SELFCARE</label>
+            </value>
+            <value>
+                <fullName>CONSIGNES MÉTIERS</fullName>
+                <default>false</default>
+                <label>CONSIGNES MÉTIERS</label>
+            </value>
+            <value>
+                <fullName>TRAITEMENT DEMANDE</fullName>
+                <default>false</default>
+                <label>TRAITEMENT DEMANDE</label>
             </value>
             <value>
                 <fullName>SYNTHÈSE OPS</fullName>
@@ -259,51 +60,14 @@
                 <label>SYNTHÈSE OPS</label>
             </value>
             <value>
-                <fullName>TRAITEMENT DEMANDE</fullName>
+                <fullName>VISUALISATION DE LA PC / DES CPV</fullName>
                 <default>false</default>
-                <isActive>false</isActive>
-                <label>TRAITEMENT DEMANDE</label>
+                <label>VISUALISATION DE LA PC / DES CPV</label>
             </value>
             <value>
-                <fullName>TRANSFORMER PC ChF</fullName>
+                <fullName>CRÉATION OPS</fullName>
                 <default>false</default>
-                <label>TRANSFORMER PC ChF</label>
-            </value>
-            <value>
-                <fullName>TRANSFORMER PC CHO</fullName>
-                <default>false</default>
-                <label>TRANSFORMER PC CHO</label>
-            </value>
-            <value>
-                <fullName>TRANSFORMER PC EM</fullName>
-                <default>false</default>
-                <label>TRANSFORMER PC EM</label>
-            </value>
-            <value>
-                <fullName>VALIDATION CPV</fullName>
-                <default>false</default>
-                <label>VALIDATION CPV</label>
-            </value>
-            <value>
-                <fullName>VALIDATION DU MANDAT</fullName>
-                <default>false</default>
-                <label>VALIDATION DU MANDAT</label>
-            </value>
-            <value>
-                <fullName>VALIDATION DU MANDAT PAYEUR DIVERGENT</fullName>
-                <default>false</default>
-                <isActive>false</isActive>
-                <label>VALIDATION DU MANDAT PAYEUR DIVERGENT</label>
-            </value>
-            <value>
-                <fullName>VALIDATION OPS</fullName>
-                <default>false</default>
-                <label>VALIDATION OPS</label>
-            </value>
-            <value>
-                <fullName>VALIDATION OPS CHO</fullName>
-                <default>false</default>
-                <label>VALIDATION OPS CHO</label>
+                <label>CRÉATION OPS</label>
             </value>
             <value>
                 <fullName>VÉRIFICATION DE L&apos;ACTIVATION DU CONTRAT</fullName>
@@ -311,39 +75,14 @@
                 <label>VÉRIFICATION DE L&apos;ACTIVATION DU CONTRAT</label>
             </value>
             <value>
-                <fullName>VERIFICATION DE LA COHERENCE</fullName>
+                <fullName>SERVICES AFFINITAIRES</fullName>
                 <default>false</default>
-                <label>VERIFICATION DE LA COHERENCE</label>
+                <label>SERVICES AFFINITAIRES</label>
             </value>
             <value>
-                <fullName>VERIFICATION DES COORDONNEES</fullName>
+                <fullName>RÉCAPITULATIF</fullName>
                 <default>false</default>
-                <label>VERIFICATION DES COORDONNEES</label>
-            </value>
-            <value>
-                <fullName>VERIFICATION DONNEE CONTACT</fullName>
-                <default>false</default>
-                <label>VERIFICATION DONNEE CONTACT</label>
-            </value>
-            <value>
-                <fullName>VÉRIFICATION DONNÉES OBLIGATOIRES</fullName>
-                <default>false</default>
-                <label>VÉRIFICATION DONNÉES OBLIGATOIRES</label>
-            </value>
-            <value>
-                <fullName>VERIFICATION DU MANDAT</fullName>
-                <default>false</default>
-                <label>VERIFICATION DU MANDAT</label>
-            </value>
-            <value>
-                <fullName>VERIFICATION FOURNISSEUR</fullName>
-                <default>false</default>
-                <label>VERIFICATION FOURNISSEUR</label>
-            </value>
-            <value>
-                <fullName>VISUALISATION DE LA PC / DES CPV</fullName>
-                <default>false</default>
-                <label>VISUALISATION DE LA PC / DES CPV</label>
+                <label>RÉCAPITULATIF</label>
             </value>
         </valueSetDefinition>
     </valueSet>

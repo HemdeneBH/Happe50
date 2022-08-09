@@ -7,1247 +7,1216 @@
 //Methods Included: RechercherPropositionCommerciale, MajPropositionCommerciale, TransformerPropositionCommerciale, CreerPropositionCommerciale, LirePropositionCommerciale
 // Primary Port Class Name: Dependency
 public class gdfsuezBefCalypsoPropositioncommerc {
-	public class creerPropositionCommerciale_element {
-		public gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeInputDt creerPropositionCommercialeInput;
-		public gdfsuezComBefChpPivotPC.contextDt context;
-		private String[] creerPropositionCommercialeInput_type_info = new String[]{'creerPropositionCommercialeInput','http://gdfsuez/bef/calypso/propositioncommerciale/v5','creerPropositionCommercialeInputDt','1','1','false'};
-		private String[] context_type_info = new String[]{'context','http://gdfsuez/bef/calypso/propositioncommerciale/v5','contextDt','1','1','false'};
-		private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v5','true','false'};
-		private String[] field_order_type_info = new String[]{'creerPropositionCommercialeInput','context'};
-		public creerPropositionCommerciale_element(){
-		}
-		public creerPropositionCommerciale_element(gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeInputDt creerPropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context){
-			this.creerPropositionCommercialeInput = creerPropositionCommercialeInput;
-			this.context = context;
-		}
-		public void populateXmlNode(Dom.XmlNode outerNode){
-
-			//System.assertEquals('CreerPropositionCommerciale', outerNode.getName());
-
-			gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeInputDt creerPropositionCommercialeInputObj = this.creerPropositionCommercialeInput;
-			Dom.XmlNode creerPropositionCommercialeInputNode = outerNode.addChildElement('creerPropositionCommercialeInput', '', '');
-			if(creerPropositionCommercialeInputObj != null){
-				creerPropositionCommercialeInputObj.populateXmlNode(creerPropositionCommercialeInputNode);
-			}
-
-			gdfsuezComBefChpPivotPC.contextDt contextObj = this.context;
-			Dom.XmlNode contextNode = outerNode.addChildElement('context', '', '');
-			if(contextObj != null){
-				contextObj.populateXmlNode(contextNode);
-			}
-		}
-	}
-	public class creerPropositionCommercialeInputDt {
-		public gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale propositionCommerciale;
-		private String[] propositionCommerciale_type_info = new String[]{'propositionCommerciale','http://gdfsuez/bef/calypso/propositioncommerciale/v5','PropositionCommerciale','1','1','false'};
-		private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v5','true','false'};
-		private String[] field_order_type_info = new String[]{'propositionCommerciale'};
-		public creerPropositionCommercialeInputDt(){
-		}
-		public creerPropositionCommercialeInputDt(DOM.XmlNode responseNode){
-			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
-			DOM.XmlNode propositionCommercialeNode = responseNode.getChildElement('propositionCommerciale', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5');
-			if(propositionCommercialeNode == null){
-				this.propositionCommerciale = null;
-			} else{
-				gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale propositionCommercialeObj = new gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale(propositionCommercialeNode);
-				nodesParsed.add(propositionCommercialeNode);
-				this.propositionCommerciale = propositionCommercialeObj;
-			}
-			//System.debug(this.propositionCommerciale);
-		}
-		public void populateXmlNode(Dom.XmlNode outerNode){
-
-			gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale propositionCommercialeObj = this.propositionCommerciale;
-			Dom.XmlNode propositionCommercialeNode = outerNode.addChildElement('propositionCommerciale', '', '');
-			if(propositionCommercialeObj != null){
-				propositionCommercialeObj.populateXmlNode(propositionCommercialeNode);
-			}
-		}
-	}
-	public class creerPropositionCommercialeOutputDt {
-		public gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract propositionCommerciale;
-		public gdfsuezComBefCalypsoDemande.DemandeAbstract idContactCPVEnvoi;
-		private String[] propositionCommerciale_type_info = new String[]{'propositionCommerciale','http://gdfsuez/bef/calypso/propositioncommerciale/v5','PropositionCommercialeAbstract','0','1','false'};
-		private String[] idContactCPVEnvoi_type_info = new String[]{'idContactCPVEnvoi','http://gdfsuez/bef/calypso/propositioncommerciale/v5','DemandeAbstract','0','1','false'};
-		private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v5','true','false'};
-		private String[] field_order_type_info = new String[]{'propositionCommerciale','idContactCPVEnvoi'};
-		public creerPropositionCommercialeOutputDt(){
-		}
-		public creerPropositionCommercialeOutputDt(DOM.XmlNode responseNode){
-			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
-			DOM.XmlNode propositionCommercialeNode = responseNode.getChildElement('propositionCommerciale', null);
-			if(propositionCommercialeNode == null){
-				this.propositionCommerciale = null;
-			} else{
-				gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract propositionCommercialeObj = new gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract(propositionCommercialeNode);
-				nodesParsed.add(propositionCommercialeNode);
-				this.propositionCommerciale = propositionCommercialeObj;
-			}
-			//System.debug(this.propositionCommerciale);
-			DOM.XmlNode idContactCPVEnvoiNode = responseNode.getChildElement('idContactCPVEnvoi', null);
-			if(idContactCPVEnvoiNode == null){
-				this.idContactCPVEnvoi = null;
-			} else{
-				gdfsuezComBefCalypsoDemande.DemandeAbstract idContactCPVEnvoiObj = new gdfsuezComBefCalypsoDemande.DemandeAbstract(idContactCPVEnvoiNode);
-				nodesParsed.add(idContactCPVEnvoiNode);
-				this.idContactCPVEnvoi = idContactCPVEnvoiObj;
-			}
-			//System.debug(this.idContactCPVEnvoi);
-		}
-		public void populateXmlNode(Dom.XmlNode outerNode){
-
-			gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract propositionCommercialeObj = this.propositionCommerciale;
-			Dom.XmlNode propositionCommercialeNode = outerNode.addChildElement('propositionCommerciale', '', '');
-			if(propositionCommercialeObj != null){
-				propositionCommercialeObj.populateXmlNode(propositionCommercialeNode);
-			}
-
-			gdfsuezComBefCalypsoDemande.DemandeAbstract idContactCPVEnvoiObj = this.idContactCPVEnvoi;
-			Dom.XmlNode idContactCPVEnvoiNode = outerNode.addChildElement('idContactCPVEnvoi', '', '');
-			if(idContactCPVEnvoiObj != null){
-				idContactCPVEnvoiObj.populateXmlNode(idContactCPVEnvoiNode);
-			}
-		}
-	}
-	public class creerPropositionCommercialeResponse_element {
-		public gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeOutputDt creerPropositionCommercialeOutput;
-		public gdfsuezComBefChpPivotPC.retourTraitementMessagesDt messageRetours;
-		private String[] creerPropositionCommercialeOutput_type_info = new String[]{'creerPropositionCommercialeOutput','http://gdfsuez/bef/calypso/propositioncommerciale/v5','creerPropositionCommercialeOutputDt','0','1','false'};
-		private String[] messageRetours_type_info = new String[]{'messageRetours','http://gdfsuez/bef/calypso/propositioncommerciale/v5','retourTraitementMessagesDt','1','1','false'};
-		private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v5','true','false'};
-		private String[] field_order_type_info = new String[]{'creerPropositionCommercialeOutput','messageRetours'};
-		public creerPropositionCommercialeResponse_element(){
-		}
-		public creerPropositionCommercialeResponse_element(DOM.XmlNode responseNode){
-			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
-			//System.assertEquals('CreerPropositionCommercialeResponse', responseNode.getName());
-			System.debug('response'+responseNode.getChildElement('creerPropositionCommercialeOutput', null));
-			DOM.XmlNode creerPropositionCommercialeOutputNode = responseNode.getChildElement('creerPropositionCommercialeOutput', null);
-			if(creerPropositionCommercialeOutputNode == null){
-				this.creerPropositionCommercialeOutput = null;
-			} else{
-				gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeOutputDt creerPropositionCommercialeOutputObj = new gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeOutputDt(creerPropositionCommercialeOutputNode);
-				nodesParsed.add(creerPropositionCommercialeOutputNode);
-				this.creerPropositionCommercialeOutput = creerPropositionCommercialeOutputObj;
-			}
-			//System.debug(this.creerPropositionCommercialeOutput);
-			DOM.XmlNode messageRetoursNode = responseNode.getChildElement('messageRetours', null);
-			if(messageRetoursNode == null){
-				this.messageRetours = null;
-			} else{
-				gdfsuezComBefChpPivotPC.retourTraitementMessagesDt messageRetoursObj = new gdfsuezComBefChpPivotPC.retourTraitementMessagesDt(messageRetoursNode);
-				nodesParsed.add(messageRetoursNode);
-				this.messageRetours = messageRetoursObj;
-			}
-			//System.debug(this.messageRetours);
-		}
-	}
-
-	//Unexpected WSDL node under definitions: {http://schemas.xmlsoap.org/wsdl/}documentation
-//WSDL node {http://schemas.xmlsoap.org/wsdl/}types expected before other nodes
-	public class Dependency {
-		public String endpoint_x = 'http://localhost:8080/services/PropositionCommerciale/v2';
-		public Map<String,String> inputHttpHeaders_x;
-		public Map<String,String> outputHttpHeaders_x;
-		public String clientCertName_x;
-		public String clientCert_x;
-		public String clientCertPasswd_x;
-		public Integer timeout_x;
-		private String[] ns_map_type_info = new String[]{'http://gdfsuez.com/bef/calypso/demande','gdfsuezComBefCalypsoDemande','http://gdfsuez.com/bef/calypso/notedebitcredit','gdfsuezComBefCalypsoNotedebitcredit','http://gdfsuez.com/bef/calypso/propositioncommerciale','gdfsuezComBefCalypsoPropositioncomm','http://gdfsuez.com/bef/chp/pivot','gdfsuezComBefChpPivotPC','http://gdfsuez.com/bef/calypso/prestationservice','gdfsuezComBefCalypsoPrestationservi','http://gdfsuez.com/bef/calypso/contrat','gdfsuezComBefCalypsoContrat','http://gdfsuez.com/bef/calypso/personne','gdfsuezComBefCalypsoPersonne'};
-
-		public gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeResponse_element CreerPropositionCommerciale(gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeInputDt creerPropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context) {
-			gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommerciale_element request_x = new gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommerciale_element();
-			gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeResponse_element response_x;
-			request_x.creerPropositionCommercialeInput = creerPropositionCommercialeInput;
-			request_x.context = context;
-			Map<String, gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeResponse_element> response_map_x = new Map<String, gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeResponse_element>();
-			response_map_x.put('response_x', response_x);
-			WebServiceCallout.invoke(
-				this,
-				request_x,
-				response_map_x,
-				new String[]{endpoint_x,
-				'tns:CreerPropositionCommerciale',
-				'http://gdfsuez/bef/calypso/propositioncommerciale/v5',
-				'creerPropositionCommerciale',
-				'http://gdfsuez/bef/calypso/propositioncommerciale/v5',
-				'creerPropositionCommercialeResponse',
-				'gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeResponse_element'}
-			);
-			response_x = response_map_x.get('response_x');
-			return response_x;
-		}
-
-		public gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeResponse_element LirePropositionCommerciale(gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeInputDt lirePropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context) {
-			gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommerciale_element request_x = new gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommerciale_element();
-			gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeResponse_element response_x;
-			request_x.lirePropositionCommercialeInput = lirePropositionCommercialeInput;
-			request_x.context = context;
-			Map<String, gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeResponse_element> response_map_x = new Map<String, gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeResponse_element>();
-			response_map_x.put('response_x', response_x);
-			WebServiceCallout.invoke(
-				this,
-				request_x,
-				response_map_x,
-				new String[]{endpoint_x,
-				'tns:ConsulterPropositionCommerciale',
-				'http://gdfsuez/bef/calypso/propositioncommerciale/v5',
-				'lirePropositionCommerciale',
-				'http://gdfsuez/bef/calypso/propositioncommerciale/v5',
-				'lirePropositionCommercialeResponse',
-				'gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeResponse_element'}
-			);
-			response_x = response_map_x.get('response_x');
-			return response_x;
-		}
-
-		public gdfsuezComBefChpPivotPC.retourTraitementMessagesDt MajPropositionCommerciale(gdfsuezBefCalypsoPropositioncommerc.majPropositionCommercialeInputDt majPropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context) {
-			gdfsuezBefCalypsoPropositioncommerc.majPropositionCommerciale_element request_x = new gdfsuezBefCalypsoPropositioncommerc.majPropositionCommerciale_element();
-			gdfsuezBefCalypsoPropositioncommerc.majPropositionCommercialeResponse_element response_x;
-			request_x.majPropositionCommercialeInput = majPropositionCommercialeInput;
-			request_x.context = context;
-			Map<String, gdfsuezBefCalypsoPropositioncommerc.majPropositionCommercialeResponse_element> response_map_x = new Map<String, gdfsuezBefCalypsoPropositioncommerc.majPropositionCommercialeResponse_element>();
-			response_map_x.put('response_x', response_x);
-			WebServiceCallout.invoke(
-				this,
-				request_x,
-				response_map_x,
-				new String[]{endpoint_x,
-				'tns:MajPropositionCommerciale',
-				'http://gdfsuez/bef/calypso/propositioncommerciale/v5',
-				'majPropositionCommerciale',
-				'http://gdfsuez/bef/calypso/propositioncommerciale/v5',
-				'majPropositionCommercialeResponse',
-				'gdfsuezBefCalypsoPropositioncommerc.majPropositionCommercialeResponse_element'}
-			);
-			response_x = response_map_x.get('response_x');
-			return response_x.messageRetours;
-		}
-
-		public gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeResponse_element RechercherPropositionCommerciale(gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeInputDt rechercherPropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context) {
-			gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommerciale_element request_x = new gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommerciale_element();
-			gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeResponse_element response_x;
-			request_x.rechercherPropositionCommercialeInput = rechercherPropositionCommercialeInput;
-			request_x.context = context;
-			Map<String, gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeResponse_element> response_map_x = new Map<String, gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeResponse_element>();
-			response_map_x.put('response_x', response_x);
-			WebServiceCallout.invoke(
-				this,
-				request_x,
-				response_map_x,
-				new String[]{endpoint_x,
-				'tns:RechercherPropositionCommerciale',
-				'http://gdfsuez/bef/calypso/propositioncommerciale/v5',
-				'rechercherPropositionCommerciale',
-				'http://gdfsuez/bef/calypso/propositioncommerciale/v5',
-				'rechercherPropositionCommercialeResponse',
-				'gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeResponse_element'}
-			);
-			response_x = response_map_x.get('response_x');
-			return response_x;
-		}
-
-		public gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeResponse_element TransformerPropositionCommerciale(gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeInputDt transformerPropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context) {
-			gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommerciale_element request_x = new gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommerciale_element();
-			gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeResponse_element response_x;
-			request_x.transformerPropositionCommercialeInput = transformerPropositionCommercialeInput;
-			request_x.context = context;
-			Map<String, gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeResponse_element> response_map_x = new Map<String, gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeResponse_element>();
-			response_map_x.put('response_x', response_x);
-			WebServiceCallout.invoke(
-				this,
-				request_x,
-				response_map_x,
-				new String[]{endpoint_x,
-				'tns:TransformerPropositionCommerciale',
-				'http://gdfsuez/bef/calypso/propositioncommerciale/v5',
-				'transformerPropositionCommerciale',
-				'http://gdfsuez/bef/calypso/propositioncommerciale/v5',
-				'transformerPropositionCommercialeResponse',
-				'gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeResponse_element'}
-			);
-			response_x = response_map_x.get('response_x');
-			return response_x;
-		}
-
-		private DOM.XmlNode populateDoc(DOM.Document doc){
-			String env = 'http://schemas.xmlsoap.org/soap/envelope/';
-			String xsi = 'http://www.w3.org/2001/XMLSchema-instance';
-			String xsd = 'http://www.w3.org/2001/XMLSchema';
-
-			DOM.XmlNode envelope = doc.createRootElement('Envelope', env, 'soapenv');
-			envelope.setNamespace('xsd', xsd);
-			envelope.setNamespace('xsi', xsi);
-			DOM.XmlNode header = envelope.addChildElement('Header', env, '');
-			AddHeader(header);
-			//System.debug(doc.toXmlString());
-			DOM.XmlNode body = envelope.addChildElement('Body', env, '');
-			return body;
-		}
-
-		private void AddHeader(DOM.XmlNode header){
-			if(!Test.isRunningTest()){
-				SM_Utils_TokenOctopus.addOcTokenToSOAPReq(header);
-			}
-		}
-
-		public gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeResponse_element CreerPropositionCommerciale_Http(gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeInputDt creerPropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context) {
-			DOM.Document doc = new DOM.Document();
-			DOM.XmlNode body = populateDoc(doc);
-			DOM.XmlNode methodNode = body.addChildElement('creerPropositionCommerciale', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5', '');
-			gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommerciale_element request_x = new gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommerciale_element(creerPropositionCommercialeInput,context);
-			request_x.populateXmlNode(methodNode);
-
-			HttpRequest req = new HttpRequest();
-			req.setEndpoint(endpoint_x);
-			req.setClientCertificateName(Label.SM_CL_OctopusCertificate);
-			req.setMethod('POST');
-			req.setHeader('Content-Type', 'text/xml; charset=UTF-8');
-			req.setHeader('SOAPAction', 'tns:CreerPropositionCommerciale');
-			if(timeout_x != null){
-				req.setTimeout(timeout_x);
-			}
-			req.setBodyDocument(doc);
-			System.debug('request =>'+doc.toXmlString());
-			//System.debug(req.getBody());
-			/*HTTPResponse res;
-			if(timeout_x != null){
-				Continuation con = new Continuation(timeout_x);
-				String requestLabel = con.addHttpRequest(req);
-				res = Continuation.getResponse(requestLabel);
-			}*/
-
-
-			Http http = new Http();
-			HTTPResponse res = http.send(req);
-			System.debug('response'+res.getBody());
-			Dom.Document responseDoc = res.getBodyDocument();
-			Dom.XmlNode rootNode = responseDoc.getRootElement();
-			Dom.XmlNode bodyNode = rootNode.getChildElement('Body','http://schemas.xmlsoap.org/soap/envelope/');
-			Dom.XmlNode creerPropositionCommercialeResponseNode = bodyNode.getChildElement('creerPropositionCommercialeResponse', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5');
-
-			gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeResponse_element response_x = new gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeResponse_element(creerPropositionCommercialeResponseNode);
-			return response_x;
-		}
-
-		public gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeResponse_element LirePropositionCommerciale_Http(gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeInputDt lirePropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context) {
-			DOM.Document doc = new DOM.Document();
-			DOM.XmlNode body = populateDoc(doc);
-			DOM.XmlNode methodNode = body.addChildElement('LirePropositionCommerciale', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5', '');
-			gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommerciale_element request_x = new gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommerciale_element(lirePropositionCommercialeInput,context);
-			request_x.populateXmlNode(methodNode);
-
-			HttpRequest req = new HttpRequest();
-			req.setEndpoint(endpoint_x);
-			req.setMethod('POST');
-			req.setHeader('Content-Type', 'text/xml; charset=UTF-8');
-			req.setHeader('SOAPAction', 'tns:ConsulterPropositionCommerciale');
-			req.setBodyDocument(doc);
-			//System.debug(req.getBody());
-			Http http = new Http();
-			HTTPResponse res = http.send(req);
-			//System.debug(res.getBody());
-			Dom.Document responseDoc = res.getBodyDocument();
-			Dom.XmlNode rootNode = responseDoc.getRootElement();
-			Dom.XmlNode bodyNode = rootNode.getChildElement('Body','http://schemas.xmlsoap.org/soap/envelope/');
-			Dom.XmlNode lirePropositionCommercialeResponseNode = bodyNode.getChildElement('lirePropositionCommercialeResponse', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5');
-
-			gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeResponse_element response_x = new gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeResponse_element(lirePropositionCommercialeResponseNode);
-			return response_x;
-		}
-
-		public gdfsuezComBefChpPivotPC.retourTraitementMessagesDt MajPropositionCommerciale_Http(gdfsuezBefCalypsoPropositioncommerc.majPropositionCommercialeInputDt majPropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context) {
-			DOM.Document doc = new DOM.Document();
-			DOM.XmlNode body = populateDoc(doc);
-			DOM.XmlNode methodNode = body.addChildElement('majPropositionCommerciale', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5', '');
-			gdfsuezBefCalypsoPropositioncommerc.majPropositionCommerciale_element request_x = new gdfsuezBefCalypsoPropositioncommerc.majPropositionCommerciale_element(majPropositionCommercialeInput,context);
-			request_x.populateXmlNode(methodNode);
-
-			HttpRequest req = new HttpRequest();
-			req.setEndpoint(endpoint_x);
-			req.setMethod('POST');
-			req.setHeader('Content-Type', 'text/xml; charset=UTF-8');
-			if(!Test.isRunningTest()){
-				req.setClientCertificateName(clientCertName_x);
-			}
-			req.setHeader('SOAPAction', 'tns:MajPropositionCommerciale');
-			req.setBodyDocument(doc);
-			System.debug('request =>'+doc.toXmlString());
-			//System.debug(req.getBody());
-			Http http = new Http();
-			HTTPResponse res = http.send(req);
-			//System.debug(res.getBody());
-			Dom.Document responseDoc = res.getBodyDocument();
-			System.debug('@response=>'+responseDoc.toXmlString());
-			Dom.XmlNode rootNode = responseDoc.getRootElement();
-			Dom.XmlNode bodyNode = rootNode.getChildElement('Body','http://schemas.xmlsoap.org/soap/envelope/');
-			Dom.XmlNode majPropositionCommercialeResponseNode = bodyNode.getChildElement('majPropositionCommercialeResponse', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5');
-
-			gdfsuezBefCalypsoPropositioncommerc.majPropositionCommercialeResponse_element response_x = new gdfsuezBefCalypsoPropositioncommerc.majPropositionCommercialeResponse_element(majPropositionCommercialeResponseNode);
-			System.debug('@MHA response'+response_x);
-			return response_x.messageRetours;
-		}
-
-		public gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeResponse_element RechercherPropositionCommerciale_Http(gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeInputDt rechercherPropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context) {
-			DOM.Document doc = new DOM.Document();
-			DOM.XmlNode body = populateDoc(doc);
-			DOM.XmlNode methodNode = body.addChildElement('RechercherPropositionCommerciale', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5', '');
-			gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommerciale_element request_x = new gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommerciale_element(rechercherPropositionCommercialeInput,context);
-			request_x.populateXmlNode(methodNode);
-
-			HttpRequest req = new HttpRequest();
-			req.setEndpoint(endpoint_x);
-			req.setMethod('POST');
-			req.setHeader('Content-Type', 'text/xml; charset=UTF-8');
-			req.setHeader('SOAPAction', 'tns:RechercherPropositionCommerciale');
-			req.setBodyDocument(doc);
-			//System.debug(req.getBody());
-			Http http = new Http();
-			HTTPResponse res = http.send(req);
-			//System.debug(res.getBody());
-			Dom.Document responseDoc = res.getBodyDocument();
-			Dom.XmlNode rootNode = responseDoc.getRootElement();
-			Dom.XmlNode bodyNode = rootNode.getChildElement('Body','http://schemas.xmlsoap.org/soap/envelope/');
-			Dom.XmlNode rechercherPropositionCommercialeResponseNode = bodyNode.getChildElement('rechercherPropositionCommercialeResponse', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5');
-
-			gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeResponse_element response_x = new gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeResponse_element(rechercherPropositionCommercialeResponseNode);
-			return response_x;
-		}
-
-		public gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeResponse_element TransformerPropositionCommerciale_Http(gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeInputDt transformerPropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context) {
-			DOM.Document doc = new DOM.Document();
-			DOM.XmlNode body = populateDoc(doc);
-			DOM.XmlNode methodNode = body.addChildElement('transformerPropositionCommerciale', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5', '');
-			gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommerciale_element request_x = new gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommerciale_element(transformerPropositionCommercialeInput,context);
-			request_x.populateXmlNode(methodNode);
-
-			HttpRequest req = new HttpRequest();
-			req.setEndpoint(endpoint_x);
-			req.setMethod('POST');
-			req.setHeader('Content-Type', 'text/xml; charset=UTF-8');
-			if(!Test.isRunningTest()){
-				req.setClientCertificateName(clientCertName_x);
-			}
-			req.setHeader('SOAPAction', 'tns:TransformerPropositionCommerciale');
-			if(timeout_x != null){
-				req.setTimeout(timeout_x);
-			}
-			req.setBodyDocument(doc);
-			System.debug('request =>'+doc.toXmlString());
-			//System.debug(req.getBody());
-			Http http = new Http();
-			HTTPResponse res = http.send(req);
-			System.debug('response'+res.getBody());
-			//System.debug(res.getBody());
-			Dom.Document responseDoc = res.getBodyDocument();
-			System.debug('response =>'+responseDoc.toXmlString());
-			Dom.XmlNode rootNode = responseDoc.getRootElement();
-			Dom.XmlNode bodyNode = rootNode.getChildElement('Body','http://schemas.xmlsoap.org/soap/envelope/');
-			Dom.XmlNode transformerPropositionCommercialeResponseNode = bodyNode.getChildElement('transformerPropositionCommercialeResponse', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5');
-
-			gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeResponse_element response_x = new gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeResponse_element(transformerPropositionCommercialeResponseNode);
-			return response_x;
-		}
-	}
-	public class lirePropositionCommerciale_element {
-		public gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeInputDt lirePropositionCommercialeInput;
-		public gdfsuezComBefChpPivotPC.contextDt context;
-		private String[] lirePropositionCommercialeInput_type_info = new String[]{'lirePropositionCommercialeInput','http://gdfsuez/bef/calypso/propositioncommerciale/v5','lirePropositionCommercialeInputDt','1','1','false'};
-		private String[] context_type_info = new String[]{'context','http://gdfsuez/bef/calypso/propositioncommerciale/v5','contextDt','1','1','false'};
-		private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v5','true','false'};
-		private String[] field_order_type_info = new String[]{'lirePropositionCommercialeInput','context'};
-		public lirePropositionCommerciale_element(){
-		}
-		public lirePropositionCommerciale_element(gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeInputDt lirePropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context){
-			this.lirePropositionCommercialeInput = lirePropositionCommercialeInput;
-			this.context = context;
-		}
-		public void populateXmlNode(Dom.XmlNode outerNode){
-
-			//System.assertEquals('LirePropositionCommerciale', outerNode.getName());
-
-			gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeInputDt lirePropositionCommercialeInputObj = this.lirePropositionCommercialeInput;
-			Dom.XmlNode lirePropositionCommercialeInputNode = outerNode.addChildElement('lirePropositionCommercialeInput', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5', '');
-			if(lirePropositionCommercialeInputObj != null){
-				lirePropositionCommercialeInputObj.populateXmlNode(lirePropositionCommercialeInputNode);
-			}
-
-			gdfsuezComBefChpPivotPC.contextDt contextObj = this.context;
-			Dom.XmlNode contextNode = outerNode.addChildElement('context', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5', '');
-			if(contextObj != null){
-				contextObj.populateXmlNode(contextNode);
-			}
-		}
-	}
-	public class lirePropositionCommercialeInputDt {
-		public gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract[] propositionCommerciale;
-		private String[] propositionCommerciale_type_info = new String[]{'propositionCommerciale','http://gdfsuez/bef/calypso/propositioncommerciale/v5','PropositionCommercialeAbstract','0','-1','false'};
-		private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v5','true','false'};
-		private String[] field_order_type_info = new String[]{'propositionCommerciale'};
-		public lirePropositionCommercialeInputDt(){
-		}
-		public lirePropositionCommercialeInputDt(DOM.XmlNode responseNode){
-			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
-			Dom.XmlNode[] propositionCommercialeChildren = responseNode.getChildElements();
-			gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract[] propositionCommercialeList = new List<gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract>();
-			if(propositionCommercialeChildren == null || propositionCommercialeChildren.size() == 0){
-				this.propositionCommerciale = null;
-			} else{
-				for(DOM.XmlNode childNode : propositionCommercialeChildren){
-					if(childNode.GetName() == 'propositionCommerciale'){
-						gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract Obj = new gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract(childNode);
-						propositionCommercialeList.Add(Obj);
-						nodesParsed.add(childNode);
-					}
-				}
-				this.propositionCommerciale = propositionCommercialeList;
-			}
-			//System.debug(this.propositionCommerciale);
-		}
-		public void populateXmlNode(Dom.XmlNode outerNode){
-
-			gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract[] propositionCommercialeObj = this.propositionCommerciale;
-			if(propositionCommercialeObj != null){
-				for(gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract element: propositionCommercialeObj){
-					Dom.XmlNode propositionCommercialeNode = outerNode.addChildElement('propositionCommerciale', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5', '');
-					element.populateXmlNode(propositionCommercialeNode);
-				}
-			}
-		}
-	}
-	public class lirePropositionCommercialeOutputDt {
-		public gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale[] propositionCommerciale;
-		private String[] propositionCommerciale_type_info = new String[]{'propositionCommerciale','http://gdfsuez/bef/calypso/propositioncommerciale/v5','PropositionCommerciale','0','-1','false'};
-		private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v5','true','false'};
-		private String[] field_order_type_info = new String[]{'propositionCommerciale'};
-		public lirePropositionCommercialeOutputDt(){
-		}
-		public lirePropositionCommercialeOutputDt(DOM.XmlNode responseNode){
-			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
-			Dom.XmlNode[] propositionCommercialeChildren = responseNode.getChildElements();
-			gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale[] propositionCommercialeList = new List<gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale>();
-			if(propositionCommercialeChildren == null || propositionCommercialeChildren.size() == 0){
-				this.propositionCommerciale = null;
-			} else{
-				for(DOM.XmlNode childNode : propositionCommercialeChildren){
-					if(childNode.GetName() == 'propositionCommerciale'){
-						gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale Obj = new gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale(childNode);
-						propositionCommercialeList.Add(Obj);
-						nodesParsed.add(childNode);
-					}
-				}
-				this.propositionCommerciale = propositionCommercialeList;
-			}
-			//System.debug(this.propositionCommerciale);
-		}
-		public void populateXmlNode(Dom.XmlNode outerNode){
-
-			gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale[] propositionCommercialeObj = this.propositionCommerciale;
-			if(propositionCommercialeObj != null){
-				for(gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale element: propositionCommercialeObj){
-					Dom.XmlNode propositionCommercialeNode = outerNode.addChildElement('propositionCommerciale', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5', '');
-					element.populateXmlNode(propositionCommercialeNode);
-				}
-			}
-		}
-	}
-	public class lirePropositionCommercialeResponse_element {
-		public gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeOutputDt lirePropositionCommercialeOutput;
-		public gdfsuezComBefChpPivotPC.retourTraitementMessagesDt messageRetours;
-		private String[] lirePropositionCommercialeOutput_type_info = new String[]{'lirePropositionCommercialeOutput','http://gdfsuez/bef/calypso/propositioncommerciale/v5','lirePropositionCommercialeOutputDt','0','1','false'};
-		private String[] messageRetours_type_info = new String[]{'messageRetours','http://gdfsuez/bef/calypso/propositioncommerciale/v5','retourTraitementMessagesDt','1','1','false'};
-		private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v5','true','false'};
-		private String[] field_order_type_info = new String[]{'lirePropositionCommercialeOutput','messageRetours'};
-		public lirePropositionCommercialeResponse_element(){
-		}
-		public lirePropositionCommercialeResponse_element(DOM.XmlNode responseNode){
-			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
-			//System.assertEquals('LirePropositionCommercialeResponse', responseNode.getName());
-			DOM.XmlNode lirePropositionCommercialeOutputNode = responseNode.getChildElement('lirePropositionCommercialeOutput', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5');
-			if(lirePropositionCommercialeOutputNode == null){
-				this.lirePropositionCommercialeOutput = null;
-			} else{
-				gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeOutputDt lirePropositionCommercialeOutputObj = new gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeOutputDt(lirePropositionCommercialeOutputNode);
-				nodesParsed.add(lirePropositionCommercialeOutputNode);
-				this.lirePropositionCommercialeOutput = lirePropositionCommercialeOutputObj;
-			}
-			//System.debug(this.lirePropositionCommercialeOutput);
-			DOM.XmlNode messageRetoursNode = responseNode.getChildElement('messageRetours', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5');
-			if(messageRetoursNode == null){
-				this.messageRetours = null;
-			} else{
-				gdfsuezComBefChpPivotPC.retourTraitementMessagesDt messageRetoursObj = new gdfsuezComBefChpPivotPC.retourTraitementMessagesDt(messageRetoursNode);
-				nodesParsed.add(messageRetoursNode);
-				this.messageRetours = messageRetoursObj;
-			}
-			//System.debug(this.messageRetours);
-		}
-	}
-	public class majPropositionCommerciale_element {
-		public gdfsuezBefCalypsoPropositioncommerc.majPropositionCommercialeInputDt majPropositionCommercialeInput;
-		public gdfsuezComBefChpPivotPC.contextDt context;
-		private String[] majPropositionCommercialeInput_type_info = new String[]{'majPropositionCommercialeInput','http://gdfsuez/bef/calypso/propositioncommerciale/v5','majPropositionCommercialeInputDt','1','1','false'};
-		private String[] context_type_info = new String[]{'context','http://gdfsuez/bef/calypso/propositioncommerciale/v5','contextDt','1','1','false'};
-		private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v5','true','false'};
-		private String[] field_order_type_info = new String[]{'majPropositionCommercialeInput','context'};
-		public majPropositionCommerciale_element(){
-		}
-		public majPropositionCommerciale_element(gdfsuezBefCalypsoPropositioncommerc.majPropositionCommercialeInputDt majPropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context){
-			this.majPropositionCommercialeInput = majPropositionCommercialeInput;
-			this.context = context;
-		}
-		public void populateXmlNode(Dom.XmlNode outerNode){
-
-			//System.assertEquals('MajPropositionCommerciale', outerNode.getName());
-
-			gdfsuezBefCalypsoPropositioncommerc.majPropositionCommercialeInputDt majPropositionCommercialeInputObj = this.majPropositionCommercialeInput;
-			Dom.XmlNode majPropositionCommercialeInputNode = outerNode.addChildElement('majPropositionCommercialeInput', '', '');
-			if(majPropositionCommercialeInputObj != null){
-				majPropositionCommercialeInputObj.populateXmlNode(majPropositionCommercialeInputNode);
-			}
-
-			gdfsuezComBefChpPivotPC.contextDt contextObj = this.context;
-			Dom.XmlNode contextNode = outerNode.addChildElement('context', '', '');
-			if(contextObj != null){
-				contextObj.populateXmlNode(contextNode);
-			}
-		}
-	}
-	public class majPropositionCommercialeInputDt {
-		public gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract propositionCommerciale;
-		private String[] propositionCommerciale_type_info = new String[]{'propositionCommerciale','http://gdfsuez/bef/calypso/propositioncommerciale/v5','PropositionCommerciale','1','1','false'};
-		private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v5','true','false'};
-		private String[] field_order_type_info = new String[]{'propositionCommerciale'};
-		public majPropositionCommercialeInputDt(){
-		}
-		public majPropositionCommercialeInputDt(DOM.XmlNode responseNode){
-			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
-			DOM.XmlNode propositionCommercialeNode = responseNode.getChildElement('propositionCommerciale', '');
-			if(propositionCommercialeNode == null){
-				this.propositionCommerciale = null;
-			} else{
-				gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract propositionCommercialeObj = new gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract(propositionCommercialeNode);
-				nodesParsed.add(propositionCommercialeNode);
-				this.propositionCommerciale = propositionCommercialeObj;
-			}
-			//System.debug(this.propositionCommerciale);
-		}
-		public void populateXmlNode(Dom.XmlNode outerNode){
-
-			gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract propositionCommercialeObj = this.propositionCommerciale;
-			Dom.XmlNode propositionCommercialeNode = outerNode.addChildElement('propositionCommerciale', '', '');
-			if(propositionCommercialeObj != null){
-				propositionCommercialeObj.populateXmlNode(propositionCommercialeNode);
-			}
-		}
-	}
-	public class majPropositionCommercialeResponse_element {
-		public gdfsuezComBefChpPivotPC.retourTraitementMessagesDt messageRetours;
-		private String[] messageRetours_type_info = new String[]{'messageRetours','http://gdfsuez/bef/calypso/propositioncommerciale/v5','retourTraitementMessagesDt','1','1','false'};
-		private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v5','true','false'};
-		private String[] field_order_type_info = new String[]{'messageRetours'};
-		public majPropositionCommercialeResponse_element(){
-		}
-		public majPropositionCommercialeResponse_element(DOM.XmlNode responseNode){
-			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
-			//System.assertEquals('MajPropositionCommercialeResponse', responseNode.getName());
-			System.debug('reponseNode=>'+responseNode);
-			DOM.XmlNode messageRetoursNode = responseNode.getChildElement('messageRetours', null);
-			if(messageRetoursNode == null){
-				this.messageRetours = null;
-			} else{
-				gdfsuezComBefChpPivotPC.retourTraitementMessagesDt messageRetoursObj = new gdfsuezComBefChpPivotPC.retourTraitementMessagesDt(messageRetoursNode);
-				nodesParsed.add(messageRetoursNode);
-				this.messageRetours = messageRetoursObj;
-			}
-			//System.debug(this.messageRetours);
-		}
-	}
-	public class rechercherPropositionCommerciale_element {
-		public gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeInputDt rechercherPropositionCommercialeInput;
-		public gdfsuezComBefChpPivotPC.contextDt context;
-		private String[] rechercherPropositionCommercialeInput_type_info = new String[]{'rechercherPropositionCommercialeInput','http://gdfsuez/bef/calypso/propositioncommerciale/v5','rechercherPropositionCommercialeInputDt','1','1','false'};
-		private String[] context_type_info = new String[]{'context','http://gdfsuez/bef/calypso/propositioncommerciale/v5','contextDt','1','1','false'};
-		private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v5','true','false'};
-		private String[] field_order_type_info = new String[]{'rechercherPropositionCommercialeInput','context'};
-		public rechercherPropositionCommerciale_element(){
-		}
-		public rechercherPropositionCommerciale_element(gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeInputDt rechercherPropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context){
-			this.rechercherPropositionCommercialeInput = rechercherPropositionCommercialeInput;
-			this.context = context;
-		}
-		public void populateXmlNode(Dom.XmlNode outerNode){
-
-			//System.assertEquals('RechercherPropositionCommerciale', outerNode.getName());
-
-			gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeInputDt rechercherPropositionCommercialeInputObj = this.rechercherPropositionCommercialeInput;
-			Dom.XmlNode rechercherPropositionCommercialeInputNode = outerNode.addChildElement('rechercherPropositionCommercialeInput', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5', '');
-			if(rechercherPropositionCommercialeInputObj != null){
-				rechercherPropositionCommercialeInputObj.populateXmlNode(rechercherPropositionCommercialeInputNode);
-			}
-
-			gdfsuezComBefChpPivotPC.contextDt contextObj = this.context;
-			Dom.XmlNode contextNode = outerNode.addChildElement('context', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5', '');
-			if(contextObj != null){
-				contextObj.populateXmlNode(contextNode);
-			}
-		}
-	}
-	public class rechercherPropositionCommercialeInputDt {
-		public gdfsuezComBefCalypsoPersonne.PersonneAbstract Personne;
-		public gdfsuezComBefChpPivotPC.searchControlRequestHeaderDt searchControlRequest;
-		private String[] Personne_type_info = new String[]{'Personne','http://gdfsuez/bef/calypso/propositioncommerciale/v5','PersonneAbstract','1','1','false'};
-		private String[] searchControlRequest_type_info = new String[]{'searchControlRequest','http://gdfsuez/bef/calypso/propositioncommerciale/v5','searchControlRequestHeaderDt','1','1','false'};
-		private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v5','true','false'};
-		private String[] field_order_type_info = new String[]{'Personne','searchControlRequest'};
-		public rechercherPropositionCommercialeInputDt(){
-		}
-		public rechercherPropositionCommercialeInputDt(DOM.XmlNode responseNode){
-			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
-			DOM.XmlNode PersonneNode = responseNode.getChildElement('Personne', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5');
-			if(PersonneNode == null){
-				this.Personne = null;
-			} else{
-				gdfsuezComBefCalypsoPersonne.PersonneAbstract PersonneObj = new gdfsuezComBefCalypsoPersonne.PersonneAbstract(PersonneNode);
-				nodesParsed.add(PersonneNode);
-				this.Personne = PersonneObj;
-			}
-			//System.debug(this.Personne);
-			DOM.XmlNode searchControlRequestNode = responseNode.getChildElement('searchControlRequest', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5');
-			if(searchControlRequestNode == null){
-				this.searchControlRequest = null;
-			} else{
-				gdfsuezComBefChpPivotPC.searchControlRequestHeaderDt searchControlRequestObj = new gdfsuezComBefChpPivotPC.searchControlRequestHeaderDt(searchControlRequestNode);
-				nodesParsed.add(searchControlRequestNode);
-				this.searchControlRequest = searchControlRequestObj;
-			}
-			//System.debug(this.searchControlRequest);
-		}
-		public void populateXmlNode(Dom.XmlNode outerNode){
-
-			gdfsuezComBefCalypsoPersonne.PersonneAbstract PersonneObj = this.Personne;
-			Dom.XmlNode PersonneNode = outerNode.addChildElement('Personne', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5', '');
-			if(PersonneObj != null){
-				PersonneObj.populateXmlNode(PersonneNode);
-			}
-
-			gdfsuezComBefChpPivotPC.searchControlRequestHeaderDt searchControlRequestObj = this.searchControlRequest;
-			Dom.XmlNode searchControlRequestNode = outerNode.addChildElement('searchControlRequest', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5', '');
-			if(searchControlRequestObj != null){
-				searchControlRequestObj.populateXmlNode(searchControlRequestNode);
-			}
-		}
-	}
-	public class rechercherPropositionCommercialeOutputDt {
-		public gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale[] propositionCommerciale;
-		public gdfsuezComBefChpPivotPC.paginationDt searchControlResponse;
-		private String[] propositionCommerciale_type_info = new String[]{'propositionCommerciale','http://gdfsuez/bef/calypso/propositioncommerciale/v5','PropositionCommerciale','0','-1','false'};
-		private String[] searchControlResponse_type_info = new String[]{'searchControlResponse','http://gdfsuez/bef/calypso/propositioncommerciale/v5','paginationDt','1','1','false'};
-		private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v5','true','false'};
-		private String[] field_order_type_info = new String[]{'propositionCommerciale','searchControlResponse'};
-		public rechercherPropositionCommercialeOutputDt(){
-		}
-		public rechercherPropositionCommercialeOutputDt(DOM.XmlNode responseNode){
-			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
-			Dom.XmlNode[] propositionCommercialeChildren = responseNode.getChildElements();
-			gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale[] propositionCommercialeList = new List<gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale>();
-			if(propositionCommercialeChildren == null || propositionCommercialeChildren.size() == 0){
-				this.propositionCommerciale = null;
-			} else{
-				for(DOM.XmlNode childNode : propositionCommercialeChildren){
-					if(childNode.GetName() == 'propositionCommerciale'){
-						gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale Obj = new gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale(childNode);
-						propositionCommercialeList.Add(Obj);
-						nodesParsed.add(childNode);
-					}
-				}
-				this.propositionCommerciale = propositionCommercialeList;
-			}
-			//System.debug(this.propositionCommerciale);
-			DOM.XmlNode searchControlResponseNode = responseNode.getChildElement('searchControlResponse', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5');
-			if(searchControlResponseNode == null){
-				this.searchControlResponse = null;
-			} else{
-				gdfsuezComBefChpPivotPC.paginationDt searchControlResponseObj = new gdfsuezComBefChpPivotPC.paginationDt(searchControlResponseNode);
-				nodesParsed.add(searchControlResponseNode);
-				this.searchControlResponse = searchControlResponseObj;
-			}
-			//System.debug(this.searchControlResponse);
-		}
-		public void populateXmlNode(Dom.XmlNode outerNode){
-
-			gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale[] propositionCommercialeObj = this.propositionCommerciale;
-			if(propositionCommercialeObj != null){
-				for(gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale element: propositionCommercialeObj){
-					Dom.XmlNode propositionCommercialeNode = outerNode.addChildElement('propositionCommerciale', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5', '');
-					element.populateXmlNode(propositionCommercialeNode);
-				}
-			}
-
-			gdfsuezComBefChpPivotPC.paginationDt searchControlResponseObj = this.searchControlResponse;
-			Dom.XmlNode searchControlResponseNode = outerNode.addChildElement('searchControlResponse', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5', '');
-			if(searchControlResponseObj != null){
-				searchControlResponseObj.populateXmlNode(searchControlResponseNode);
-			}
-		}
-	}
-	public class rechercherPropositionCommercialeResponse_element {
-		public gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeOutputDt rechercherPropositionCommercialeOutput;
-		public gdfsuezComBefChpPivotPC.retourTraitementMessagesDt messageRetours;
-		private String[] rechercherPropositionCommercialeOutput_type_info = new String[]{'rechercherPropositionCommercialeOutput','http://gdfsuez/bef/calypso/propositioncommerciale/v5','rechercherPropositionCommercialeOutputDt','0','1','false'};
-		private String[] messageRetours_type_info = new String[]{'messageRetours','http://gdfsuez/bef/calypso/propositioncommerciale/v5','retourTraitementMessagesDt','1','1','false'};
-		private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v5','true','false'};
-		private String[] field_order_type_info = new String[]{'rechercherPropositionCommercialeOutput','messageRetours'};
-		public rechercherPropositionCommercialeResponse_element(){
-		}
-		public rechercherPropositionCommercialeResponse_element(DOM.XmlNode responseNode){
-			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
-			//System.assertEquals('RechercherPropositionCommercialeResponse', responseNode.getName());
-			DOM.XmlNode rechercherPropositionCommercialeOutputNode = responseNode.getChildElement('rechercherPropositionCommercialeOutput', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5');
-			if(rechercherPropositionCommercialeOutputNode == null){
-				this.rechercherPropositionCommercialeOutput = null;
-			} else{
-				gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeOutputDt rechercherPropositionCommercialeOutputObj = new gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeOutputDt(rechercherPropositionCommercialeOutputNode);
-				nodesParsed.add(rechercherPropositionCommercialeOutputNode);
-				this.rechercherPropositionCommercialeOutput = rechercherPropositionCommercialeOutputObj;
-			}
-			//System.debug(this.rechercherPropositionCommercialeOutput);
-			DOM.XmlNode messageRetoursNode = responseNode.getChildElement('messageRetours', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5');
-			if(messageRetoursNode == null){
-				this.messageRetours = null;
-			} else{
-				gdfsuezComBefChpPivotPC.retourTraitementMessagesDt messageRetoursObj = new gdfsuezComBefChpPivotPC.retourTraitementMessagesDt(messageRetoursNode);
-				nodesParsed.add(messageRetoursNode);
-				this.messageRetours = messageRetoursObj;
-			}
-			//System.debug(this.messageRetours);
-		}
-	}
-	public class transformerPropositionCommerciale_element {
-		public gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeInputDt transformerPropositionCommercialeInput;
-		public gdfsuezComBefChpPivotPC.contextDt context;
-		private String[] transformerPropositionCommercialeInput_type_info = new String[]{'transformerPropositionCommercialeInput','http://gdfsuez/bef/calypso/propositioncommerciale/v5','transformerPropositionCommercialeInputDt','1','1','false'};
-		private String[] context_type_info = new String[]{'context','http://gdfsuez/bef/calypso/propositioncommerciale/v5','contextDt','1','1','false'};
-		private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v5','true','false'};
-		private String[] field_order_type_info = new String[]{'transformerPropositionCommercialeInput','context'};
-		public transformerPropositionCommerciale_element(){
-		}
-		public transformerPropositionCommerciale_element(gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeInputDt transformerPropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context){
-			this.transformerPropositionCommercialeInput = transformerPropositionCommercialeInput;
-			this.context = context;
-		}
-		public void populateXmlNode(Dom.XmlNode outerNode){
-
-			//System.assertEquals('TransformerPropositionCommerciale', outerNode.getName());
-
-			gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeInputDt transformerPropositionCommercialeInputObj = this.transformerPropositionCommercialeInput;
-			Dom.XmlNode transformerPropositionCommercialeInputNode = outerNode.addChildElement('transformerPropositionCommercialeInput', '', '');
-			if(transformerPropositionCommercialeInputObj != null){
-				transformerPropositionCommercialeInputObj.populateXmlNode(transformerPropositionCommercialeInputNode);
-			}
-
-			gdfsuezComBefChpPivotPC.contextDt contextObj = this.context;
-			Dom.XmlNode contextNode = outerNode.addChildElement('context', '', '');
-			if(contextObj != null){
-				contextObj.populateXmlNode(contextNode);
-			}
-		}
-	}
-	public class transformerPropositionCommercialeInputDt {
-		public gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract propositionCommerciale;
-		public gdfsuezComBefChpPivotPC.listeValeursDt typeCompteur;
-		public gdfsuezComBefChpPivotPC.listeValeursDt SIContractuel;
-		public gdfsuezComBefChpPivotPC.listeValeursDt plagesHeuresCreuses;
-		public gdfsuezComBefChpPivotPC.listeValeursDt futuresPlagesHeuresCreuses;
-		private String[] propositionCommerciale_type_info = new String[]{'propositionCommerciale','http://gdfsuez/bef/calypso/propositioncommerciale/v5','PropositionCommercialeAbstract','1','1','false'};
-		private String[] typeCompteur_type_info = new String[]{'typeCompteur','http://gdfsuez/bef/calypso/propositioncommerciale/v5','listeValeursDt','0','1','false'};
-		private String[] SIContractuel_type_info = new String[]{'SIContractuel','http://gdfsuez/bef/calypso/propositioncommerciale/v5','listeValeursDt','0','1','false'};
-		private String[] plagesHeuresCreuses_type_info = new String[]{'plagesHeuresCreuses','http://gdfsuez/bef/calypso/propositioncommerciale/v5','listeValeursDt','0','1','false'};
-		private String[] futuresPlagesHeuresCreuses_type_info = new String[]{'futuresPlagesHeuresCreuses','http://gdfsuez/bef/calypso/propositioncommerciale/v5','listeValeursDt','0','1','false'};
-		private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v5','true','false'};
-		private String[] field_order_type_info = new String[]{'propositionCommerciale','typeCompteur','SIContractuel','plagesHeuresCreuses','futuresPlagesHeuresCreuses'};
-		public transformerPropositionCommercialeInputDt(){
-		}
-		public transformerPropositionCommercialeInputDt(DOM.XmlNode responseNode){
-			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
-			DOM.XmlNode propositionCommercialeNode = responseNode.getChildElement('propositionCommerciale', '');
-			if(propositionCommercialeNode == null){
-				this.propositionCommerciale = null;
-			} else{
-				gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract propositionCommercialeObj = new gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract(propositionCommercialeNode);
-				nodesParsed.add(propositionCommercialeNode);
-				this.propositionCommerciale = propositionCommercialeObj;
-			}
-			//System.debug(this.propositionCommerciale);
-			DOM.XmlNode typeCompteurNode = responseNode.getChildElement('typeCompteur', '');
-			if(typeCompteurNode == null){
-				this.typeCompteur = null;
-			} else{
-				gdfsuezComBefChpPivotPC.listeValeursDt typeCompteurObj = new gdfsuezComBefChpPivotPC.listeValeursDt(typeCompteurNode);
-				nodesParsed.add(typeCompteurNode);
-				this.typeCompteur = typeCompteurObj;
-			}
-			//System.debug(this.typeCompteur);
-			DOM.XmlNode SIContractuelNode = responseNode.getChildElement('SIContractuel', '');
-			if(SIContractuelNode == null){
-				this.SIContractuel = null;
-			} else{
-				gdfsuezComBefChpPivotPC.listeValeursDt SIContractuelObj = new gdfsuezComBefChpPivotPC.listeValeursDt(SIContractuelNode);
-				nodesParsed.add(SIContractuelNode);
-				this.SIContractuel = SIContractuelObj;
-			}
-			//System.debug(this.SIContractuel);
-			DOM.XmlNode plagesHeuresCreusesNode = responseNode.getChildElement('plagesHeuresCreuses', '');
-			if(plagesHeuresCreusesNode == null){
-				this.plagesHeuresCreuses = null;
-			} else{
-				gdfsuezComBefChpPivotPC.listeValeursDt plagesHeuresCreusesObj = new gdfsuezComBefChpPivotPC.listeValeursDt(plagesHeuresCreusesNode);
-				nodesParsed.add(plagesHeuresCreusesNode);
-				this.plagesHeuresCreuses = plagesHeuresCreusesObj;
-			}
-			//System.debug(this.plagesHeuresCreuses);
-			DOM.XmlNode futuresPlagesHeuresCreusesNode = responseNode.getChildElement('futuresPlagesHeuresCreuses', '');
-			if(futuresPlagesHeuresCreusesNode == null){
-				this.futuresPlagesHeuresCreuses = null;
-			} else{
-				gdfsuezComBefChpPivotPC.listeValeursDt futuresPlagesHeuresCreusesObj = new gdfsuezComBefChpPivotPC.listeValeursDt(futuresPlagesHeuresCreusesNode);
-				nodesParsed.add(futuresPlagesHeuresCreusesNode);
-				this.futuresPlagesHeuresCreuses = futuresPlagesHeuresCreusesObj;
-			}
-			//System.debug(this.futuresPlagesHeuresCreuses);
-		}
-		public void populateXmlNode(Dom.XmlNode outerNode){
-
-			gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract propositionCommercialeObj = this.propositionCommerciale;
-			Dom.XmlNode propositionCommercialeNode = outerNode.addChildElement('propositionCommerciale', '', '');
-			if(propositionCommercialeObj != null){
-				propositionCommercialeObj.populateXmlNode(propositionCommercialeNode);
-			}
-
-			gdfsuezComBefChpPivotPC.listeValeursDt typeCompteurObj = this.typeCompteur;
-			if(typeCompteurObj != null){
-				Dom.XmlNode typeCompteurNode = outerNode.addChildElement('typeCompteur', '', '');
-				typeCompteurObj.populateXmlNode(typeCompteurNode);
-			}
-
-			gdfsuezComBefChpPivotPC.listeValeursDt SIContractuelObj = this.SIContractuel;
-			if(SIContractuelObj != null){
-				Dom.XmlNode SIContractuelNode = outerNode.addChildElement('SIContractuel', '', '');
-				SIContractuelObj.populateXmlNode(SIContractuelNode);
-			}
-
-			gdfsuezComBefChpPivotPC.listeValeursDt plagesHeuresCreusesObj = this.plagesHeuresCreuses;
-			if(plagesHeuresCreusesObj != null){
-				Dom.XmlNode plagesHeuresCreusesNode = outerNode.addChildElement('plagesHeuresCreuses', '', '');
-				plagesHeuresCreusesObj.populateXmlNode(plagesHeuresCreusesNode);
-			}
-
-			gdfsuezComBefChpPivotPC.listeValeursDt futuresPlagesHeuresCreusesObj = this.futuresPlagesHeuresCreuses;
-			if(futuresPlagesHeuresCreusesObj != null){
-				Dom.XmlNode futuresPlagesHeuresCreusesNode = outerNode.addChildElement('futuresPlagesHeuresCreuses', '', '');
-				futuresPlagesHeuresCreusesObj.populateXmlNode(futuresPlagesHeuresCreusesNode);
-			}
-		}
-	}
-	public class transformerPropositionCommercialeOutputDt {
-		public gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeOutputDt_objetsMAJ_element objetsMAJ;
-		public gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeOutputDt_objetsCrees_element objetsCrees;
-		private String[] objetsMAJ_type_info = new String[]{'objetsMAJ','http://gdfsuez/bef/calypso/propositioncommerciale/v5','','0','1','false'};
-		private String[] objetsCrees_type_info = new String[]{'objetsCrees','http://gdfsuez/bef/calypso/propositioncommerciale/v5','','0','1','false'};
-		private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v5','true','false'};
-		private String[] field_order_type_info = new String[]{'objetsMAJ','objetsCrees'};
-		public transformerPropositionCommercialeOutputDt(){
-		}
-		public transformerPropositionCommercialeOutputDt(DOM.XmlNode responseNode){
-			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
-			DOM.XmlNode objetsMAJNode = responseNode.getChildElement('objetsMAJ', null);
-			if(objetsMAJNode == null){
-				this.objetsMAJ = null;
-			} else{
-				gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeOutputDt_objetsMAJ_element objetsMAJObj = new gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeOutputDt_objetsMAJ_element(objetsMAJNode);
-				nodesParsed.add(objetsMAJNode);
-				this.objetsMAJ = objetsMAJObj;
-			}
-			//System.debug(this.objetsMAJ);
-			DOM.XmlNode objetsCreesNode = responseNode.getChildElement('objetsCrees', null);
-			if(objetsCreesNode == null){
-				this.objetsCrees = null;
-			} else{
-				gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeOutputDt_objetsCrees_element objetsCreesObj = new gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeOutputDt_objetsCrees_element(objetsCreesNode);
-				nodesParsed.add(objetsCreesNode);
-				this.objetsCrees = objetsCreesObj;
-			}
-			//System.debug(this.objetsCrees);
-		}
-		public void populateXmlNode(Dom.XmlNode outerNode){
-
-			gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeOutputDt_objetsMAJ_element objetsMAJObj = this.objetsMAJ;
-			Dom.XmlNode objetsMAJNode = outerNode.addChildElement('objetsMAJ', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5', '');
-			if(objetsMAJObj != null){
-				objetsMAJObj.populateXmlNode(objetsMAJNode);
-			}
-
-			gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeOutputDt_objetsCrees_element objetsCreesObj = this.objetsCrees;
-			Dom.XmlNode objetsCreesNode = outerNode.addChildElement('objetsCrees', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5', '');
-			if(objetsCreesObj != null){
-				objetsCreesObj.populateXmlNode(objetsCreesNode);
-			}
-		}
-	}
-    
-    public class ContratTransformeDt {
-        public String idContrat;
-        public String typeContrat;
-        private String[] idContrat_type_info = new String[]{'idContrat','http://gdfsuez.com/bef/calypso/propositioncommerciale/v5','string','0','1','false'};
-        private String[] typeContrat_type_info = new String[]{'typeContrat','http://gdfsuez.com/bef/calypso/propositioncommerciale/v5','string','0','1','false'};
-        private String[] apex_schema_type_info = new String[]{'http://gdfsuez.com/bef/calypso/propositioncommerciale/v5','true','false'};
-        private String[] field_order_type_info = new String[]{'idContrat', 'typeContrat'};
-        public ContratTransformeDt(){
-        }
-        public ContratTransformeDt(DOM.XmlNode responseNode){
-            Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
-            
-            DOM.XmlNode idContratNode = responseNode.getChildElement('idContrat', null);
-            this.idContrat = (idContratNode == null) ? null : idContratNode.getText();
-            nodesParsed.add(idContratNode);
-            
-            DOM.XmlNode typeContratNode = responseNode.getChildElement('typeContrat', null);
-            this.typeContrat = (typeContratNode == null) ? null : typeContratNode.getText();
-            nodesParsed.add(typeContratNode);
-        }
-        public void populateXmlNode(Dom.XmlNode outerNode){
-            Dom.XmlNode idContratNode = outerNode.addChildElement('idContrat', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5', null);
-            idContratNode.addTextNode((this.idContrat == null) ? '' : this.idContrat);
-            
-            Dom.XmlNode typeContratNode = outerNode.addChildElement('typeContrat', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5', null);
-            typeContratNode.addTextNode((this.typeContrat == null) ? '' : this.typeContrat);
-        }
+  public class creerPropositionCommerciale_element {
+    public gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeInputDt creerPropositionCommercialeInput;
+    public gdfsuezComBefChpPivotPC.contextDt context;
+    private String[] creerPropositionCommercialeInput_type_info = new String[]{'creerPropositionCommercialeInput','http://gdfsuez/bef/calypso/propositioncommerciale/v3','creerPropositionCommercialeInputDt','1','1','false'};
+    private String[] context_type_info = new String[]{'context','http://gdfsuez/bef/calypso/propositioncommerciale/v3','contextDt','1','1','false'};
+    private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v3','true','false'};
+    private String[] field_order_type_info = new String[]{'creerPropositionCommercialeInput','context'};
+    public creerPropositionCommerciale_element(){
     }
- 
-    
-	public class transformerPropositionCommercialeOutputDt_objetsCrees_element {
-		public String[] prestationServiceDiag;
-		public gdfsuezComBefCalypsoNotedebitcredit.NoteDebitCreditAbstract[] noteDebitCredit;
-		public gdfsuezBefCalypsoPropositioncommerc.ContratTransformeDt[] contrat;
-		public String[] remise;
-		private String[] prestationServiceDiag_type_info = new String[]{'prestationServiceDiag','http://gdfsuez/bef/calypso/propositioncommerciale/v5','string12','0','-1','false'};
-		private String[] noteDebitCredit_type_info = new String[]{'noteDebitCredit','http://gdfsuez/bef/calypso/propositioncommerciale/v5','NoteDebitCreditAbstract','0','-1','false'};
-		private String[] contrat_type_info = new String[]{'contrat','http://gdfsuez/bef/calypso/propositioncommerciale/v5','ContratTransformeDt','0','-1','false'};
-		private String[] remise_type_info = new String[]{'remise','http://gdfsuez/bef/calypso/propositioncommerciale/v5','string20','0','-1','false'};
-		private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v5','true','false'};
-		private String[] field_order_type_info = new String[]{'prestationServiceDiag','noteDebitCredit','contrat','remise'};
-		public transformerPropositionCommercialeOutputDt_objetsCrees_element(){
-		}
-		public transformerPropositionCommercialeOutputDt_objetsCrees_element(DOM.XmlNode responseNode){
-			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
-			String[] prestationServiceDiagList = new List<String>();
-			if(responseNode.getChildElements() == null){
-				this.prestationServiceDiag = null;
-			} else{
-				for(DOM.XmlNode childNode: responseNode.getChildElements()){
-					if(childNode.GetName() == 'prestationServiceDiag'){
-					prestationServiceDiagList.Add((childNode == null || childNode.getAttributeValue('nil', 'http://www.w3.org/2001/XMLSchema-instance') == 'true') ? null : String.valueOf(childNode.getText()));
-						nodesParsed.add(childNode);
-					}
-				}
-				this.prestationServiceDiag = prestationServiceDiagList;
-			}
-			//System.debug(this.prestationServiceDiag);
-			Dom.XmlNode[] noteDebitCreditChildren = responseNode.getChildElements();
-			gdfsuezComBefCalypsoNotedebitcredit.NoteDebitCreditAbstract[] noteDebitCreditList = new List<gdfsuezComBefCalypsoNotedebitcredit.NoteDebitCreditAbstract>();
-			if(noteDebitCreditChildren == null || noteDebitCreditChildren.size() == 0){
-				this.noteDebitCredit = null;
-			} else{
-				for(DOM.XmlNode childNode : noteDebitCreditChildren){
-					if(childNode.GetName() == 'noteDebitCredit'){
-						gdfsuezComBefCalypsoNotedebitcredit.NoteDebitCreditAbstract Obj = new gdfsuezComBefCalypsoNotedebitcredit.NoteDebitCreditAbstract(childNode);
-						noteDebitCreditList.Add(Obj);
-						nodesParsed.add(childNode);
-					}
-				}
-				this.noteDebitCredit = noteDebitCreditList;
-			}
-			//System.debug(this.noteDebitCredit);
-			Dom.XmlNode[] contratChildren = responseNode.getChildElements();
-			gdfsuezBefCalypsoPropositioncommerc.ContratTransformeDt[] contratList = new List<gdfsuezBefCalypsoPropositioncommerc.ContratTransformeDt>();
-			if(contratChildren == null || contratChildren.size() == 0){
-				this.contrat = null;
-			} else{
-				for(DOM.XmlNode childNode : contratChildren){
-					if(childNode.GetName() == 'contrat'){
-						gdfsuezBefCalypsoPropositioncommerc.ContratTransformeDt Obj = new gdfsuezBefCalypsoPropositioncommerc.ContratTransformeDt(childNode);
-						contratList.Add(Obj);
-						nodesParsed.add(childNode);
-					}
-				}
-				this.contrat = contratList;
-			}
-			//System.debug(this.contrat);
-			String[] remiseList = new List<String>();
-			if(responseNode.getChildElements() == null){
-				this.remise = null;
-			} else{
-				for(DOM.XmlNode childNode: responseNode.getChildElements()){
-					if(childNode.GetName() == 'remise'){
-					remiseList.Add((childNode == null || childNode.getAttributeValue('nil', 'http://www.w3.org/2001/XMLSchema-instance') == 'true') ? null : String.valueOf(childNode.getText()));
-						nodesParsed.add(childNode);
-					}
-				}
-				this.remise = remiseList;
-			}
-			//System.debug(this.remise);
-		}
-		public void populateXmlNode(Dom.XmlNode outerNode){
-			if(this.prestationServiceDiag != null){
-				for(String element: this.prestationServiceDiag){
-					Dom.XmlNode prestationServiceDiagNode = outerNode.addChildElement('prestationServiceDiag', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5', '');
-					prestationServiceDiagNode.addTextNode(String.valueOf(element));
-				}
-			}
+    public creerPropositionCommerciale_element(gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeInputDt creerPropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context){
+      this.creerPropositionCommercialeInput = creerPropositionCommercialeInput;
+      this.context = context;
+    }
+    public void populateXmlNode(Dom.XmlNode outerNode){
 
-			gdfsuezComBefCalypsoNotedebitcredit.NoteDebitCreditAbstract[] noteDebitCreditObj = this.noteDebitCredit;
-			if(noteDebitCreditObj != null){
-				for(gdfsuezComBefCalypsoNotedebitcredit.NoteDebitCreditAbstract element: noteDebitCreditObj){
-					Dom.XmlNode noteDebitCreditNode = outerNode.addChildElement('noteDebitCredit', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5', '');
-					element.populateXmlNode(noteDebitCreditNode);
-				}
-			}
+      //System.assertEquals('CreerPropositionCommerciale', outerNode.getName());
 
-			gdfsuezBefCalypsoPropositioncommerc.ContratTransformeDt[] contratObj = this.contrat;
-			if(contratObj != null){
-				for(gdfsuezBefCalypsoPropositioncommerc.ContratTransformeDt element: contratObj){
-					Dom.XmlNode contratNode = outerNode.addChildElement('contrat', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5', '');
-					element.populateXmlNode(contratNode);
-				}
-			}
-			if(this.remise != null){
-				for(String element: this.remise){
-					Dom.XmlNode remiseNode = outerNode.addChildElement('remise', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5', '');
-					remiseNode.addTextNode(String.valueOf(element));
-				}
-			}
-		}
-	}
-	public class transformerPropositionCommercialeOutputDt_objetsMAJ_element {
-		public gdfsuezBefCalypsoPropositioncommerc.ContratTransformeDt[] contrat;
-		public gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract propositionCommerciale;
-		private String[] contrat_type_info = new String[]{'contrat','http://gdfsuez/bef/calypso/propositioncommerciale/v5','ContratTransformeDt','0','-1','false'};
-		private String[] propositionCommerciale_type_info = new String[]{'propositionCommerciale','http://gdfsuez/bef/calypso/propositioncommerciale/v5','PropositionCommercialeAbstract','1','1','false'};
-		private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v5','true','false'};
-		private String[] field_order_type_info = new String[]{'contrat','propositionCommerciale'};
-		public transformerPropositionCommercialeOutputDt_objetsMAJ_element(){
-		}
-		public transformerPropositionCommercialeOutputDt_objetsMAJ_element(DOM.XmlNode responseNode){
-			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
-			Dom.XmlNode[] contratChildren = responseNode.getChildElements();
-			gdfsuezBefCalypsoPropositioncommerc.ContratTransformeDt[] contratList = new List<gdfsuezBefCalypsoPropositioncommerc.ContratTransformeDt>();
-			if(contratChildren == null || contratChildren.size() == 0){
-				this.contrat = null;
-			} else{
-				for(DOM.XmlNode childNode : contratChildren){
-					if(childNode.GetName() == 'contrat'){
-						gdfsuezBefCalypsoPropositioncommerc.ContratTransformeDt Obj = new gdfsuezBefCalypsoPropositioncommerc.ContratTransformeDt(childNode);
-						contratList.Add(Obj);
-						nodesParsed.add(childNode);
-					}
-				}
-				this.contrat = contratList;
-			}
-			//System.debug(this.contrat);
-			DOM.XmlNode propositionCommercialeNode = responseNode.getChildElement('propositionCommerciale', null);
-			if(propositionCommercialeNode == null){
-				this.propositionCommerciale = null;
-			} else{
-				gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract propositionCommercialeObj = new gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract(propositionCommercialeNode);
-				nodesParsed.add(propositionCommercialeNode);
-				this.propositionCommerciale = propositionCommercialeObj;
-			}
-			//System.debug(this.propositionCommerciale);
-		}
-		public void populateXmlNode(Dom.XmlNode outerNode){
+      gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeInputDt creerPropositionCommercialeInputObj = this.creerPropositionCommercialeInput;
+      Dom.XmlNode creerPropositionCommercialeInputNode = outerNode.addChildElement('creerPropositionCommercialeInput', '', '');
+      if(creerPropositionCommercialeInputObj != null){
+        creerPropositionCommercialeInputObj.populateXmlNode(creerPropositionCommercialeInputNode);
+      }
 
-			gdfsuezBefCalypsoPropositioncommerc.ContratTransformeDt[] contratObj = this.contrat;
-			if(contratObj != null){
-				for(gdfsuezBefCalypsoPropositioncommerc.ContratTransformeDt element: contratObj){
-					Dom.XmlNode contratNode = outerNode.addChildElement('contrat', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5', '');
-					element.populateXmlNode(contratNode);
-				}
-			}
+      gdfsuezComBefChpPivotPC.contextDt contextObj = this.context;
+      Dom.XmlNode contextNode = outerNode.addChildElement('context', '', '');
+      if(contextObj != null){
+        contextObj.populateXmlNode(contextNode);
+      }
+    }
+  }
+  public class creerPropositionCommercialeInputDt {
+    public gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale propositionCommerciale;
+    private String[] propositionCommerciale_type_info = new String[]{'propositionCommerciale','http://gdfsuez/bef/calypso/propositioncommerciale/v3','PropositionCommerciale','1','1','false'};
+    private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v3','true','false'};
+    private String[] field_order_type_info = new String[]{'propositionCommerciale'};
+    public creerPropositionCommercialeInputDt(){
+    }
+    public creerPropositionCommercialeInputDt(DOM.XmlNode responseNode){
+      Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+      DOM.XmlNode propositionCommercialeNode = responseNode.getChildElement('propositionCommerciale', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3');
+      if(propositionCommercialeNode == null){
+        this.propositionCommerciale = null;
+      } else{
+        gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale propositionCommercialeObj = new gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale(propositionCommercialeNode);
+        nodesParsed.add(propositionCommercialeNode);
+        this.propositionCommerciale = propositionCommercialeObj;
+      }
+      //System.debug(this.propositionCommerciale);
+    }
+    public void populateXmlNode(Dom.XmlNode outerNode){
 
-			gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract propositionCommercialeObj = this.propositionCommerciale;
-			Dom.XmlNode propositionCommercialeNode = outerNode.addChildElement('propositionCommerciale', 'http://gdfsuez/bef/calypso/propositioncommerciale/v5', '');
-			if(propositionCommercialeObj != null){
-				propositionCommercialeObj.populateXmlNode(propositionCommercialeNode);
-			}
-		}
-	}
-	public class transformerPropositionCommercialeResponse_element {
-		public gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeOutputDt transformerPropositionCommercialeOutput;
-		public gdfsuezComBefChpPivotPC.retourTraitementMessagesDt messageRetours;
-		private String[] transformerPropositionCommercialeOutput_type_info = new String[]{'transformerPropositionCommercialeOutput','http://gdfsuez/bef/calypso/propositioncommerciale/v5','transformerPropositionCommercialeOutputDt','0','1','false'};
-		private String[] messageRetours_type_info = new String[]{'messageRetours','http://gdfsuez/bef/calypso/propositioncommerciale/v5','retourTraitementMessagesDt','1','1','false'};
-		private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v5','true','false'};
-		private String[] field_order_type_info = new String[]{'transformerPropositionCommercialeOutput','messageRetours'};
-		public transformerPropositionCommercialeResponse_element(){
-		}
-		public transformerPropositionCommercialeResponse_element(DOM.XmlNode responseNode){
-			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
-			//System.assertEquals('TransformerPropositionCommercialeResponse', responseNode.getName());
-			DOM.XmlNode transformerPropositionCommercialeOutputNode = responseNode.getChildElement('transformerPropositionCommercialeOutput', null);
-			if(transformerPropositionCommercialeOutputNode == null){
-				this.transformerPropositionCommercialeOutput = null;
-			} else{
-				gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeOutputDt transformerPropositionCommercialeOutputObj = new gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeOutputDt(transformerPropositionCommercialeOutputNode);
-				nodesParsed.add(transformerPropositionCommercialeOutputNode);
-				this.transformerPropositionCommercialeOutput = transformerPropositionCommercialeOutputObj;
-			}
-			//System.debug(this.transformerPropositionCommercialeOutput);
-			DOM.XmlNode messageRetoursNode = responseNode.getChildElement('messageRetours', null);
-			if(messageRetoursNode == null){
-				this.messageRetours = null;
-			} else{
-				gdfsuezComBefChpPivotPC.retourTraitementMessagesDt messageRetoursObj = new gdfsuezComBefChpPivotPC.retourTraitementMessagesDt(messageRetoursNode);
-				nodesParsed.add(messageRetoursNode);
-				this.messageRetours = messageRetoursObj;
-			}
-			//System.debug(this.messageRetours);
-		}
-	}
-	public class PropositionCommercialeAbstract{
-		public String idPropositionCommerciale;
-		public gdfsuezComBefChpPivotPC.listeValeursDt statutPropositionCommerciale;
-		private String[] idPropositionCommerciale_type_info = new String[]{'idPropositionCommerciale','http://gdfsuez.com/bef/calypso/propositioncommerciale','String','0','1','false'};
-		private String[] statutPropositionCommerciale_type_info = new String[]{'statutPropositionCommerciale','http://gdfsuez.com/bef/calypso/propositioncommerciale','listeValeursDt','0','1','false'};
-		private String[] apex_schema_type_info = new String[]{'http://gdfsuez.com/bef/calypso/propositioncommerciale','true','false'};
-		private String[] field_order_type_info = new String[]{'idPropositionCommerciale'};
-		public PropositionCommercialeAbstract(){
-		}
-		public PropositionCommercialeAbstract(DOM.XmlNode propositionCommercialeNode){
-			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
-			DOM.XmlNode idPropositionCommercialeNode = propositionCommercialeNode.getChildElement('idPropositionCommerciale', null);
-			this.idPropositionCommerciale = (idPropositionCommercialeNode == null) ? null : idPropositionCommercialeNode.getText();
-			nodesParsed.add(idPropositionCommercialeNode);
+      gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale propositionCommercialeObj = this.propositionCommerciale;
+      Dom.XmlNode propositionCommercialeNode = outerNode.addChildElement('propositionCommerciale', '', '');
+      if(propositionCommercialeObj != null){
+        propositionCommercialeObj.populateXmlNode(propositionCommercialeNode);
+      }
+    }
+  }
+  public class creerPropositionCommercialeOutputDt {
+    public gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract propositionCommerciale;
+    public gdfsuezComBefCalypsoDemande.DemandeAbstract idContactCPVEnvoi;
+    private String[] propositionCommerciale_type_info = new String[]{'propositionCommerciale','http://gdfsuez/bef/calypso/propositioncommerciale/v3','PropositionCommercialeAbstract','0','1','false'};
+    private String[] idContactCPVEnvoi_type_info = new String[]{'idContactCPVEnvoi','http://gdfsuez/bef/calypso/propositioncommerciale/v3','DemandeAbstract','0','1','false'};
+    private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v3','true','false'};
+    private String[] field_order_type_info = new String[]{'propositionCommerciale','idContactCPVEnvoi'};
+    public creerPropositionCommercialeOutputDt(){
+    }
+    public creerPropositionCommercialeOutputDt(DOM.XmlNode responseNode){
+      Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+      DOM.XmlNode propositionCommercialeNode = responseNode.getChildElement('propositionCommerciale', null);
+      if(propositionCommercialeNode == null){
+        this.propositionCommerciale = null;
+      } else{
+        gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract propositionCommercialeObj = new gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract(propositionCommercialeNode);
+        nodesParsed.add(propositionCommercialeNode);
+        this.propositionCommerciale = propositionCommercialeObj;
+      }
+      //System.debug(this.propositionCommerciale);
+      DOM.XmlNode idContactCPVEnvoiNode = responseNode.getChildElement('idContactCPVEnvoi', null);
+      if(idContactCPVEnvoiNode == null){
+        this.idContactCPVEnvoi = null;
+      } else{
+        gdfsuezComBefCalypsoDemande.DemandeAbstract idContactCPVEnvoiObj = new gdfsuezComBefCalypsoDemande.DemandeAbstract(idContactCPVEnvoiNode);
+        nodesParsed.add(idContactCPVEnvoiNode);
+        this.idContactCPVEnvoi = idContactCPVEnvoiObj;
+      }
+      //System.debug(this.idContactCPVEnvoi);
+    }
+    public void populateXmlNode(Dom.XmlNode outerNode){
 
-			DOM.XmlNode statutPropositionCommercialeNode = propositionCommercialeNode.getChildElement('statutPropositionCommerciale', 'http://gdfsuez.com/bef/calypso/propositioncommerciale');
-			if(statutPropositionCommercialeNode == null){
-				this.statutPropositionCommerciale = null;
-			} else{
-				gdfsuezComBefChpPivotPC.listeValeursDt statutPropositionCommercialeObj = new gdfsuezComBefChpPivotPC.listeValeursDt(statutPropositionCommercialeNode);
-				nodesParsed.add(statutPropositionCommercialeNode);
-				this.statutPropositionCommerciale = statutPropositionCommercialeObj;
-			}
-		}
-		public void populateXmlNode(DOM.XmlNode propositionCommercialeNode){
-			Dom.XmlNode idPropositionCommercialeNode = propositionCommercialeNode.addChildElement('idPropositionCommerciale', '', '');
-			idPropositionCommercialeNode.addTextNode((this.idPropositionCommerciale == null) ? '' : this.idPropositionCommerciale);
+      gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract propositionCommercialeObj = this.propositionCommerciale;
+      Dom.XmlNode propositionCommercialeNode = outerNode.addChildElement('propositionCommerciale', '', '');
+      if(propositionCommercialeObj != null){
+        propositionCommercialeObj.populateXmlNode(propositionCommercialeNode);
+      }
 
-			gdfsuezComBefChpPivotPC.listeValeursDt statutPropositionCommercialeObj = this.statutPropositionCommerciale;
-			if(statutPropositionCommercialeObj != null){
-				Dom.XmlNode statutPropositionCommercialeNode = propositionCommercialeNode.addChildElement('statutPropositionCommerciale', '', '');
-				statutPropositionCommercialeObj.populateXmlNode(statutPropositionCommercialeNode);
-			}
-		}
-	}
+      gdfsuezComBefCalypsoDemande.DemandeAbstract idContactCPVEnvoiObj = this.idContactCPVEnvoi;
+      Dom.XmlNode idContactCPVEnvoiNode = outerNode.addChildElement('idContactCPVEnvoi', '', '');
+      if(idContactCPVEnvoiObj != null){
+        idContactCPVEnvoiObj.populateXmlNode(idContactCPVEnvoiNode);
+      }
+    }
+  }
+  public class creerPropositionCommercialeResponse_element {
+    public gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeOutputDt creerPropositionCommercialeOutput;
+    public gdfsuezComBefChpPivotPC.retourTraitementMessagesDt messageRetours;
+    private String[] creerPropositionCommercialeOutput_type_info = new String[]{'creerPropositionCommercialeOutput','http://gdfsuez/bef/calypso/propositioncommerciale/v3','creerPropositionCommercialeOutputDt','0','1','false'};
+    private String[] messageRetours_type_info = new String[]{'messageRetours','http://gdfsuez/bef/calypso/propositioncommerciale/v3','retourTraitementMessagesDt','1','1','false'};
+    private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v3','true','false'};
+    private String[] field_order_type_info = new String[]{'creerPropositionCommercialeOutput','messageRetours'};
+    public creerPropositionCommercialeResponse_element(){
+    }
+    public creerPropositionCommercialeResponse_element(DOM.XmlNode responseNode){
+      Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+      //System.assertEquals('CreerPropositionCommercialeResponse', responseNode.getName());
+      System.debug('response'+responseNode.getChildElement('creerPropositionCommercialeOutput', null));
+      DOM.XmlNode creerPropositionCommercialeOutputNode = responseNode.getChildElement('creerPropositionCommercialeOutput', null);
+      if(creerPropositionCommercialeOutputNode == null){
+        this.creerPropositionCommercialeOutput = null;
+      } else{
+        gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeOutputDt creerPropositionCommercialeOutputObj = new gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeOutputDt(creerPropositionCommercialeOutputNode);
+        nodesParsed.add(creerPropositionCommercialeOutputNode);
+        this.creerPropositionCommercialeOutput = creerPropositionCommercialeOutputObj;
+      }
+      //System.debug(this.creerPropositionCommercialeOutput);
+      DOM.XmlNode messageRetoursNode = responseNode.getChildElement('messageRetours', null);
+      if(messageRetoursNode == null){
+        this.messageRetours = null;
+      } else{
+        gdfsuezComBefChpPivotPC.retourTraitementMessagesDt messageRetoursObj = new gdfsuezComBefChpPivotPC.retourTraitementMessagesDt(messageRetoursNode);
+        nodesParsed.add(messageRetoursNode);
+        this.messageRetours = messageRetoursObj;
+      }
+      //System.debug(this.messageRetours);
+    }
+  }
+
+  //Unexpected WSDL node under definitions: {http://schemas.xmlsoap.org/wsdl/}documentation
+//WSDL node {http://schemas.xmlsoap.org/wsdl/}types expected before other nodes
+  public class Dependency {
+    public String endpoint_x = 'http://localhost:8080/services/PropositionCommerciale/v2';
+    public Map<String,String> inputHttpHeaders_x;
+    public Map<String,String> outputHttpHeaders_x;
+    public String clientCertName_x;
+    public String clientCert_x;
+    public String clientCertPasswd_x;
+    public Integer timeout_x;
+    private String[] ns_map_type_info = new String[]{'http://gdfsuez.com/bef/calypso/demande','gdfsuezComBefCalypsoDemande','http://gdfsuez.com/bef/calypso/notedebitcredit','gdfsuezComBefCalypsoNotedebitcredit','http://gdfsuez.com/bef/calypso/propositioncommerciale','gdfsuezComBefCalypsoPropositioncomm','http://gdfsuez.com/bef/chp/pivot','gdfsuezComBefChpPivotPC','http://gdfsuez.com/bef/calypso/prestationservice','gdfsuezComBefCalypsoPrestationservi','http://gdfsuez.com/bef/calypso/contrat','gdfsuezComBefCalypsoContrat','http://gdfsuez.com/bef/calypso/personne','gdfsuezComBefCalypsoPersonne'};
+
+    public gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeResponse_element CreerPropositionCommerciale(gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeInputDt creerPropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context) {
+      gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommerciale_element request_x = new gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommerciale_element();
+      gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeResponse_element response_x;
+      request_x.creerPropositionCommercialeInput = creerPropositionCommercialeInput;
+      request_x.context = context;
+      Map<String, gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeResponse_element> response_map_x = new Map<String, gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeResponse_element>();
+      response_map_x.put('response_x', response_x);
+      WebServiceCallout.invoke(
+        this,
+        request_x,
+        response_map_x,
+        new String[]{endpoint_x,
+        'tns:CreerPropositionCommerciale',
+        'http://gdfsuez/bef/calypso/propositioncommerciale/v3',
+        'creerPropositionCommerciale',
+        'http://gdfsuez/bef/calypso/propositioncommerciale/v3',
+        'creerPropositionCommercialeResponse',
+        'gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeResponse_element'}
+      );
+      response_x = response_map_x.get('response_x');
+      return response_x;
+    }
+
+    public gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeResponse_element LirePropositionCommerciale(gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeInputDt lirePropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context) {
+      gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommerciale_element request_x = new gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommerciale_element();
+      gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeResponse_element response_x;
+      request_x.lirePropositionCommercialeInput = lirePropositionCommercialeInput;
+      request_x.context = context;
+      Map<String, gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeResponse_element> response_map_x = new Map<String, gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeResponse_element>();
+      response_map_x.put('response_x', response_x);
+      WebServiceCallout.invoke(
+        this,
+        request_x,
+        response_map_x,
+        new String[]{endpoint_x,
+        'tns:ConsulterPropositionCommerciale',
+        'http://gdfsuez/bef/calypso/propositioncommerciale/v3',
+        'lirePropositionCommerciale',
+        'http://gdfsuez/bef/calypso/propositioncommerciale/v3',
+        'lirePropositionCommercialeResponse',
+        'gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeResponse_element'}
+      );
+      response_x = response_map_x.get('response_x');
+      return response_x;
+    }
+
+    public gdfsuezComBefChpPivotPC.retourTraitementMessagesDt MajPropositionCommerciale(gdfsuezBefCalypsoPropositioncommerc.majPropositionCommercialeInputDt majPropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context) {
+      gdfsuezBefCalypsoPropositioncommerc.majPropositionCommerciale_element request_x = new gdfsuezBefCalypsoPropositioncommerc.majPropositionCommerciale_element();
+      gdfsuezBefCalypsoPropositioncommerc.majPropositionCommercialeResponse_element response_x;
+      request_x.majPropositionCommercialeInput = majPropositionCommercialeInput;
+      request_x.context = context;
+      Map<String, gdfsuezBefCalypsoPropositioncommerc.majPropositionCommercialeResponse_element> response_map_x = new Map<String, gdfsuezBefCalypsoPropositioncommerc.majPropositionCommercialeResponse_element>();
+      response_map_x.put('response_x', response_x);
+      WebServiceCallout.invoke(
+        this,
+        request_x,
+        response_map_x,
+        new String[]{endpoint_x,
+        'tns:MajPropositionCommerciale',
+        'http://gdfsuez/bef/calypso/propositioncommerciale/v3',
+        'majPropositionCommerciale',
+        'http://gdfsuez/bef/calypso/propositioncommerciale/v3',
+        'majPropositionCommercialeResponse',
+        'gdfsuezBefCalypsoPropositioncommerc.majPropositionCommercialeResponse_element'}
+      );
+      response_x = response_map_x.get('response_x');
+      return response_x.messageRetours;
+    }
+
+    public gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeResponse_element RechercherPropositionCommerciale(gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeInputDt rechercherPropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context) {
+      gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommerciale_element request_x = new gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommerciale_element();
+      gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeResponse_element response_x;
+      request_x.rechercherPropositionCommercialeInput = rechercherPropositionCommercialeInput;
+      request_x.context = context;
+      Map<String, gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeResponse_element> response_map_x = new Map<String, gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeResponse_element>();
+      response_map_x.put('response_x', response_x);
+      WebServiceCallout.invoke(
+        this,
+        request_x,
+        response_map_x,
+        new String[]{endpoint_x,
+        'tns:RechercherPropositionCommerciale',
+        'http://gdfsuez/bef/calypso/propositioncommerciale/v3',
+        'rechercherPropositionCommerciale',
+        'http://gdfsuez/bef/calypso/propositioncommerciale/v3',
+        'rechercherPropositionCommercialeResponse',
+        'gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeResponse_element'}
+      );
+      response_x = response_map_x.get('response_x');
+      return response_x;
+    }
+
+    public gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeResponse_element TransformerPropositionCommerciale(gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeInputDt transformerPropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context) {
+      gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommerciale_element request_x = new gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommerciale_element();
+      gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeResponse_element response_x;
+      request_x.transformerPropositionCommercialeInput = transformerPropositionCommercialeInput;
+      request_x.context = context;
+      Map<String, gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeResponse_element> response_map_x = new Map<String, gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeResponse_element>();
+      response_map_x.put('response_x', response_x);
+      WebServiceCallout.invoke(
+        this,
+        request_x,
+        response_map_x,
+        new String[]{endpoint_x,
+        'tns:TransformerPropositionCommerciale',
+        'http://gdfsuez/bef/calypso/propositioncommerciale/v3',
+        'transformerPropositionCommerciale',
+        'http://gdfsuez/bef/calypso/propositioncommerciale/v3',
+        'transformerPropositionCommercialeResponse',
+        'gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeResponse_element'}
+      );
+      response_x = response_map_x.get('response_x');
+      return response_x;
+    }
+
+    private DOM.XmlNode populateDoc(DOM.Document doc){
+      String env = 'http://schemas.xmlsoap.org/soap/envelope/';
+      String xsi = 'http://www.w3.org/2001/XMLSchema-instance';
+      String xsd = 'http://www.w3.org/2001/XMLSchema';
+
+      DOM.XmlNode envelope = doc.createRootElement('Envelope', env, 'soapenv');
+      envelope.setNamespace('xsd', xsd);
+      envelope.setNamespace('xsi', xsi);
+      DOM.XmlNode header = envelope.addChildElement('Header', env, '');
+      AddHeader(header);
+      //System.debug(doc.toXmlString());
+      DOM.XmlNode body = envelope.addChildElement('Body', env, '');
+      return body;
+    }
+
+    private void AddHeader(DOM.XmlNode header){
+            if(!Test.isRunningTest()){
+                SM_Utils_TokenOctopus.addOcTokenToSOAPReq(header);
+            }
+    }
+
+    public gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeResponse_element CreerPropositionCommerciale_Http(gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeInputDt creerPropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context) {
+      DOM.Document doc = new DOM.Document();
+      DOM.XmlNode body = populateDoc(doc);
+      DOM.XmlNode methodNode = body.addChildElement('creerPropositionCommerciale', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3', '');
+      gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommerciale_element request_x = new gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommerciale_element(creerPropositionCommercialeInput,context);
+      request_x.populateXmlNode(methodNode);
+
+      HttpRequest req = new HttpRequest();
+      req.setEndpoint(endpoint_x);
+      req.setClientCertificateName(Label.SM_CL_OctopusCertificate);
+      req.setMethod('POST');
+      req.setHeader('Content-Type', 'text/xml; charset=UTF-8');
+      req.setHeader('SOAPAction', 'tns:CreerPropositionCommerciale');
+      if(timeout_x != null){
+        req.setTimeout(timeout_x);
+      }
+      req.setBodyDocument(doc);
+      System.debug('request =>'+doc.toXmlString());
+      //System.debug(req.getBody());
+      /*HTTPResponse res;
+      if(timeout_x != null){
+        Continuation con = new Continuation(timeout_x);
+        String requestLabel = con.addHttpRequest(req);
+        res = Continuation.getResponse(requestLabel);
+      }*/
+
+
+      Http http = new Http();
+      HTTPResponse res = http.send(req);
+      System.debug('response'+res.getBody());
+      Dom.Document responseDoc = res.getBodyDocument();
+      Dom.XmlNode rootNode = responseDoc.getRootElement();
+      Dom.XmlNode bodyNode = rootNode.getChildElement('Body','http://schemas.xmlsoap.org/soap/envelope/');
+      Dom.XmlNode creerPropositionCommercialeResponseNode = bodyNode.getChildElement('creerPropositionCommercialeResponse', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3');
+
+      gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeResponse_element response_x = new gdfsuezBefCalypsoPropositioncommerc.creerPropositionCommercialeResponse_element(creerPropositionCommercialeResponseNode);
+      return response_x;
+    }
+
+    public gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeResponse_element LirePropositionCommerciale_Http(gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeInputDt lirePropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context) {
+      DOM.Document doc = new DOM.Document();
+      DOM.XmlNode body = populateDoc(doc);
+      DOM.XmlNode methodNode = body.addChildElement('LirePropositionCommerciale', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3', '');
+      gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommerciale_element request_x = new gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommerciale_element(lirePropositionCommercialeInput,context);
+      request_x.populateXmlNode(methodNode);
+
+      HttpRequest req = new HttpRequest();
+      req.setEndpoint(endpoint_x);
+      req.setMethod('POST');
+      req.setHeader('Content-Type', 'text/xml; charset=UTF-8');
+      req.setHeader('SOAPAction', 'tns:ConsulterPropositionCommerciale');
+      req.setBodyDocument(doc);
+      //System.debug(req.getBody());
+      Http http = new Http();
+      HTTPResponse res = http.send(req);
+      //System.debug(res.getBody());
+      Dom.Document responseDoc = res.getBodyDocument();
+      Dom.XmlNode rootNode = responseDoc.getRootElement();
+      Dom.XmlNode bodyNode = rootNode.getChildElement('Body','http://schemas.xmlsoap.org/soap/envelope/');
+      Dom.XmlNode lirePropositionCommercialeResponseNode = bodyNode.getChildElement('lirePropositionCommercialeResponse', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3');
+
+      gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeResponse_element response_x = new gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeResponse_element(lirePropositionCommercialeResponseNode);
+      return response_x;
+    }
+
+    public gdfsuezComBefChpPivotPC.retourTraitementMessagesDt MajPropositionCommerciale_Http(gdfsuezBefCalypsoPropositioncommerc.majPropositionCommercialeInputDt majPropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context) {
+      DOM.Document doc = new DOM.Document();
+      DOM.XmlNode body = populateDoc(doc);
+      DOM.XmlNode methodNode = body.addChildElement('majPropositionCommerciale', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3', '');
+      gdfsuezBefCalypsoPropositioncommerc.majPropositionCommerciale_element request_x = new gdfsuezBefCalypsoPropositioncommerc.majPropositionCommerciale_element(majPropositionCommercialeInput,context);
+      request_x.populateXmlNode(methodNode);
+
+      HttpRequest req = new HttpRequest();
+      req.setEndpoint(endpoint_x);
+      req.setMethod('POST');
+      req.setHeader('Content-Type', 'text/xml; charset=UTF-8');
+      if(!Test.isRunningTest()){
+        req.setClientCertificateName(clientCertName_x);
+      }
+      req.setHeader('SOAPAction', 'tns:MajPropositionCommerciale');
+      req.setBodyDocument(doc);
+      System.debug('request =>'+doc.toXmlString());
+      //System.debug(req.getBody());
+      Http http = new Http();
+      HTTPResponse res = http.send(req);
+      //System.debug(res.getBody());
+      Dom.Document responseDoc = res.getBodyDocument();
+      System.debug('@response=>'+responseDoc.toXmlString());
+      Dom.XmlNode rootNode = responseDoc.getRootElement();
+      Dom.XmlNode bodyNode = rootNode.getChildElement('Body','http://schemas.xmlsoap.org/soap/envelope/');
+      Dom.XmlNode majPropositionCommercialeResponseNode = bodyNode.getChildElement('majPropositionCommercialeResponse', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3');
+
+      gdfsuezBefCalypsoPropositioncommerc.majPropositionCommercialeResponse_element response_x = new gdfsuezBefCalypsoPropositioncommerc.majPropositionCommercialeResponse_element(majPropositionCommercialeResponseNode);
+      System.debug('@MHA response'+response_x);
+      return response_x.messageRetours;
+    }
+
+    public gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeResponse_element RechercherPropositionCommerciale_Http(gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeInputDt rechercherPropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context) {
+      DOM.Document doc = new DOM.Document();
+      DOM.XmlNode body = populateDoc(doc);
+      DOM.XmlNode methodNode = body.addChildElement('RechercherPropositionCommerciale', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3', '');
+      gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommerciale_element request_x = new gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommerciale_element(rechercherPropositionCommercialeInput,context);
+      request_x.populateXmlNode(methodNode);
+
+      HttpRequest req = new HttpRequest();
+      req.setEndpoint(endpoint_x);
+      req.setMethod('POST');
+      req.setHeader('Content-Type', 'text/xml; charset=UTF-8');
+      req.setHeader('SOAPAction', 'tns:RechercherPropositionCommerciale');
+      req.setBodyDocument(doc);
+      //System.debug(req.getBody());
+      Http http = new Http();
+      HTTPResponse res = http.send(req);
+      //System.debug(res.getBody());
+      Dom.Document responseDoc = res.getBodyDocument();
+      Dom.XmlNode rootNode = responseDoc.getRootElement();
+      Dom.XmlNode bodyNode = rootNode.getChildElement('Body','http://schemas.xmlsoap.org/soap/envelope/');
+      Dom.XmlNode rechercherPropositionCommercialeResponseNode = bodyNode.getChildElement('rechercherPropositionCommercialeResponse', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3');
+
+      gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeResponse_element response_x = new gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeResponse_element(rechercherPropositionCommercialeResponseNode);
+      return response_x;
+    }
+
+    public gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeResponse_element TransformerPropositionCommerciale_Http(gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeInputDt transformerPropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context) {
+      DOM.Document doc = new DOM.Document();
+      DOM.XmlNode body = populateDoc(doc);
+      DOM.XmlNode methodNode = body.addChildElement('transformerPropositionCommerciale', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3', '');
+      gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommerciale_element request_x = new gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommerciale_element(transformerPropositionCommercialeInput,context);
+      request_x.populateXmlNode(methodNode);
+
+      HttpRequest req = new HttpRequest();
+      req.setEndpoint(endpoint_x);
+      req.setMethod('POST');
+      req.setHeader('Content-Type', 'text/xml; charset=UTF-8');
+      if(!Test.isRunningTest()){
+        req.setClientCertificateName(clientCertName_x);
+      }
+      req.setHeader('SOAPAction', 'tns:TransformerPropositionCommerciale');
+      if(timeout_x != null){
+        req.setTimeout(timeout_x);
+      }
+      req.setBodyDocument(doc);
+      System.debug('request =>'+doc.toXmlString());
+      //System.debug(req.getBody());
+      Http http = new Http();
+      HTTPResponse res = http.send(req);
+      System.debug('response'+res.getBody());
+      //System.debug(res.getBody());
+      Dom.Document responseDoc = res.getBodyDocument();
+      System.debug('response =>'+responseDoc.toXmlString());
+      Dom.XmlNode rootNode = responseDoc.getRootElement();
+      Dom.XmlNode bodyNode = rootNode.getChildElement('Body','http://schemas.xmlsoap.org/soap/envelope/');
+      Dom.XmlNode transformerPropositionCommercialeResponseNode = bodyNode.getChildElement('transformerPropositionCommercialeResponse', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3');
+
+      gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeResponse_element response_x = new gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeResponse_element(transformerPropositionCommercialeResponseNode);
+      return response_x;
+    }
+   }
+  public class lirePropositionCommerciale_element {
+    public gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeInputDt lirePropositionCommercialeInput;
+    public gdfsuezComBefChpPivotPC.contextDt context;
+    private String[] lirePropositionCommercialeInput_type_info = new String[]{'lirePropositionCommercialeInput','http://gdfsuez/bef/calypso/propositioncommerciale/v3','lirePropositionCommercialeInputDt','1','1','false'};
+    private String[] context_type_info = new String[]{'context','http://gdfsuez/bef/calypso/propositioncommerciale/v3','contextDt','1','1','false'};
+    private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v3','true','false'};
+    private String[] field_order_type_info = new String[]{'lirePropositionCommercialeInput','context'};
+    public lirePropositionCommerciale_element(){
+    }
+    public lirePropositionCommerciale_element(gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeInputDt lirePropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context){
+      this.lirePropositionCommercialeInput = lirePropositionCommercialeInput;
+      this.context = context;
+    }
+    public void populateXmlNode(Dom.XmlNode outerNode){
+
+      //System.assertEquals('LirePropositionCommerciale', outerNode.getName());
+
+      gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeInputDt lirePropositionCommercialeInputObj = this.lirePropositionCommercialeInput;
+      Dom.XmlNode lirePropositionCommercialeInputNode = outerNode.addChildElement('lirePropositionCommercialeInput', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3', '');
+      if(lirePropositionCommercialeInputObj != null){
+        lirePropositionCommercialeInputObj.populateXmlNode(lirePropositionCommercialeInputNode);
+      }
+
+      gdfsuezComBefChpPivotPC.contextDt contextObj = this.context;
+      Dom.XmlNode contextNode = outerNode.addChildElement('context', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3', '');
+      if(contextObj != null){
+        contextObj.populateXmlNode(contextNode);
+      }
+    }
+  }
+  public class lirePropositionCommercialeInputDt {
+    public gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract[] propositionCommerciale;
+    private String[] propositionCommerciale_type_info = new String[]{'propositionCommerciale','http://gdfsuez/bef/calypso/propositioncommerciale/v3','PropositionCommercialeAbstract','0','-1','false'};
+    private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v3','true','false'};
+    private String[] field_order_type_info = new String[]{'propositionCommerciale'};
+    public lirePropositionCommercialeInputDt(){
+    }
+    public lirePropositionCommercialeInputDt(DOM.XmlNode responseNode){
+      Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+      Dom.XmlNode[] propositionCommercialeChildren = responseNode.getChildElements();
+      gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract[] propositionCommercialeList = new List<gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract>();
+      if(propositionCommercialeChildren == null || propositionCommercialeChildren.size() == 0){
+        this.propositionCommerciale = null;
+      } else{
+        for(DOM.XmlNode childNode : propositionCommercialeChildren){
+          if(childNode.GetName() == 'propositionCommerciale'){
+            gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract Obj = new gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract(childNode);
+            propositionCommercialeList.Add(Obj);
+            nodesParsed.add(childNode);
+          }
+        }
+        this.propositionCommerciale = propositionCommercialeList;
+      }
+      //System.debug(this.propositionCommerciale);
+    }
+    public void populateXmlNode(Dom.XmlNode outerNode){
+
+      gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract[] propositionCommercialeObj = this.propositionCommerciale;
+      if(propositionCommercialeObj != null){
+        for(gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract element: propositionCommercialeObj){
+          Dom.XmlNode propositionCommercialeNode = outerNode.addChildElement('propositionCommerciale', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3', '');
+          element.populateXmlNode(propositionCommercialeNode);
+        }
+      }
+    }
+  }
+  public class lirePropositionCommercialeOutputDt {
+    public gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale[] propositionCommerciale;
+    private String[] propositionCommerciale_type_info = new String[]{'propositionCommerciale','http://gdfsuez/bef/calypso/propositioncommerciale/v3','PropositionCommerciale','0','-1','false'};
+    private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v3','true','false'};
+    private String[] field_order_type_info = new String[]{'propositionCommerciale'};
+    public lirePropositionCommercialeOutputDt(){
+    }
+    public lirePropositionCommercialeOutputDt(DOM.XmlNode responseNode){
+      Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+      Dom.XmlNode[] propositionCommercialeChildren = responseNode.getChildElements();
+      gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale[] propositionCommercialeList = new List<gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale>();
+      if(propositionCommercialeChildren == null || propositionCommercialeChildren.size() == 0){
+        this.propositionCommerciale = null;
+      } else{
+        for(DOM.XmlNode childNode : propositionCommercialeChildren){
+          if(childNode.GetName() == 'propositionCommerciale'){
+            gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale Obj = new gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale(childNode);
+            propositionCommercialeList.Add(Obj);
+            nodesParsed.add(childNode);
+          }
+        }
+        this.propositionCommerciale = propositionCommercialeList;
+      }
+      //System.debug(this.propositionCommerciale);
+    }
+    public void populateXmlNode(Dom.XmlNode outerNode){
+
+      gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale[] propositionCommercialeObj = this.propositionCommerciale;
+      if(propositionCommercialeObj != null){
+        for(gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale element: propositionCommercialeObj){
+          Dom.XmlNode propositionCommercialeNode = outerNode.addChildElement('propositionCommerciale', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3', '');
+          element.populateXmlNode(propositionCommercialeNode);
+        }
+      }
+    }
+  }
+  public class lirePropositionCommercialeResponse_element {
+    public gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeOutputDt lirePropositionCommercialeOutput;
+    public gdfsuezComBefChpPivotPC.retourTraitementMessagesDt messageRetours;
+    private String[] lirePropositionCommercialeOutput_type_info = new String[]{'lirePropositionCommercialeOutput','http://gdfsuez/bef/calypso/propositioncommerciale/v3','lirePropositionCommercialeOutputDt','0','1','false'};
+    private String[] messageRetours_type_info = new String[]{'messageRetours','http://gdfsuez/bef/calypso/propositioncommerciale/v3','retourTraitementMessagesDt','1','1','false'};
+    private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v3','true','false'};
+    private String[] field_order_type_info = new String[]{'lirePropositionCommercialeOutput','messageRetours'};
+    public lirePropositionCommercialeResponse_element(){
+    }
+    public lirePropositionCommercialeResponse_element(DOM.XmlNode responseNode){
+      Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+      //System.assertEquals('LirePropositionCommercialeResponse', responseNode.getName());
+      DOM.XmlNode lirePropositionCommercialeOutputNode = responseNode.getChildElement('lirePropositionCommercialeOutput', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3');
+      if(lirePropositionCommercialeOutputNode == null){
+        this.lirePropositionCommercialeOutput = null;
+      } else{
+        gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeOutputDt lirePropositionCommercialeOutputObj = new gdfsuezBefCalypsoPropositioncommerc.lirePropositionCommercialeOutputDt(lirePropositionCommercialeOutputNode);
+        nodesParsed.add(lirePropositionCommercialeOutputNode);
+        this.lirePropositionCommercialeOutput = lirePropositionCommercialeOutputObj;
+      }
+      //System.debug(this.lirePropositionCommercialeOutput);
+      DOM.XmlNode messageRetoursNode = responseNode.getChildElement('messageRetours', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3');
+      if(messageRetoursNode == null){
+        this.messageRetours = null;
+      } else{
+        gdfsuezComBefChpPivotPC.retourTraitementMessagesDt messageRetoursObj = new gdfsuezComBefChpPivotPC.retourTraitementMessagesDt(messageRetoursNode);
+        nodesParsed.add(messageRetoursNode);
+        this.messageRetours = messageRetoursObj;
+      }
+      //System.debug(this.messageRetours);
+    }
+  }
+  public class majPropositionCommerciale_element {
+    public gdfsuezBefCalypsoPropositioncommerc.majPropositionCommercialeInputDt majPropositionCommercialeInput;
+    public gdfsuezComBefChpPivotPC.contextDt context;
+    private String[] majPropositionCommercialeInput_type_info = new String[]{'majPropositionCommercialeInput','http://gdfsuez/bef/calypso/propositioncommerciale/v3','majPropositionCommercialeInputDt','1','1','false'};
+    private String[] context_type_info = new String[]{'context','http://gdfsuez/bef/calypso/propositioncommerciale/v3','contextDt','1','1','false'};
+    private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v3','true','false'};
+    private String[] field_order_type_info = new String[]{'majPropositionCommercialeInput','context'};
+    public majPropositionCommerciale_element(){
+    }
+    public majPropositionCommerciale_element(gdfsuezBefCalypsoPropositioncommerc.majPropositionCommercialeInputDt majPropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context){
+      this.majPropositionCommercialeInput = majPropositionCommercialeInput;
+      this.context = context;
+    }
+    public void populateXmlNode(Dom.XmlNode outerNode){
+
+      //System.assertEquals('MajPropositionCommerciale', outerNode.getName());
+
+      gdfsuezBefCalypsoPropositioncommerc.majPropositionCommercialeInputDt majPropositionCommercialeInputObj = this.majPropositionCommercialeInput;
+      Dom.XmlNode majPropositionCommercialeInputNode = outerNode.addChildElement('majPropositionCommercialeInput', '', '');
+      if(majPropositionCommercialeInputObj != null){
+        majPropositionCommercialeInputObj.populateXmlNode(majPropositionCommercialeInputNode);
+      }
+
+      gdfsuezComBefChpPivotPC.contextDt contextObj = this.context;
+      Dom.XmlNode contextNode = outerNode.addChildElement('context', '', '');
+      if(contextObj != null){
+        contextObj.populateXmlNode(contextNode);
+      }
+    }
+  }
+  public class majPropositionCommercialeInputDt {
+    public gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract propositionCommerciale;
+    private String[] propositionCommerciale_type_info = new String[]{'propositionCommerciale','http://gdfsuez/bef/calypso/propositioncommerciale/v3','PropositionCommerciale','1','1','false'};
+    private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v3','true','false'};
+    private String[] field_order_type_info = new String[]{'propositionCommerciale'};
+    public majPropositionCommercialeInputDt(){
+    }
+    public majPropositionCommercialeInputDt(DOM.XmlNode responseNode){
+      Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+      DOM.XmlNode propositionCommercialeNode = responseNode.getChildElement('propositionCommerciale', '');
+      if(propositionCommercialeNode == null){
+        this.propositionCommerciale = null;
+      } else{
+        gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract propositionCommercialeObj = new gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract(propositionCommercialeNode);
+        nodesParsed.add(propositionCommercialeNode);
+        this.propositionCommerciale = propositionCommercialeObj;
+      }
+      //System.debug(this.propositionCommerciale);
+    }
+    public void populateXmlNode(Dom.XmlNode outerNode){
+
+      gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract propositionCommercialeObj = this.propositionCommerciale;
+      Dom.XmlNode propositionCommercialeNode = outerNode.addChildElement('propositionCommerciale', '', '');
+      if(propositionCommercialeObj != null){
+        propositionCommercialeObj.populateXmlNode(propositionCommercialeNode);
+      }
+    }
+  }
+  public class majPropositionCommercialeResponse_element {
+    public gdfsuezComBefChpPivotPC.retourTraitementMessagesDt messageRetours;
+    private String[] messageRetours_type_info = new String[]{'messageRetours','http://gdfsuez/bef/calypso/propositioncommerciale/v3','retourTraitementMessagesDt','1','1','false'};
+    private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v3','true','false'};
+    private String[] field_order_type_info = new String[]{'messageRetours'};
+    public majPropositionCommercialeResponse_element(){
+    }
+    public majPropositionCommercialeResponse_element(DOM.XmlNode responseNode){
+      Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+      //System.assertEquals('MajPropositionCommercialeResponse', responseNode.getName());
+      System.debug('reponseNode=>'+responseNode);
+      DOM.XmlNode messageRetoursNode = responseNode.getChildElement('messageRetours', null);
+      if(messageRetoursNode == null){
+        this.messageRetours = null;
+      } else{
+        gdfsuezComBefChpPivotPC.retourTraitementMessagesDt messageRetoursObj = new gdfsuezComBefChpPivotPC.retourTraitementMessagesDt(messageRetoursNode);
+        nodesParsed.add(messageRetoursNode);
+        this.messageRetours = messageRetoursObj;
+      }
+      //System.debug(this.messageRetours);
+    }
+  }
+  public class rechercherPropositionCommerciale_element {
+    public gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeInputDt rechercherPropositionCommercialeInput;
+    public gdfsuezComBefChpPivotPC.contextDt context;
+    private String[] rechercherPropositionCommercialeInput_type_info = new String[]{'rechercherPropositionCommercialeInput','http://gdfsuez/bef/calypso/propositioncommerciale/v3','rechercherPropositionCommercialeInputDt','1','1','false'};
+    private String[] context_type_info = new String[]{'context','http://gdfsuez/bef/calypso/propositioncommerciale/v3','contextDt','1','1','false'};
+    private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v3','true','false'};
+    private String[] field_order_type_info = new String[]{'rechercherPropositionCommercialeInput','context'};
+    public rechercherPropositionCommerciale_element(){
+    }
+    public rechercherPropositionCommerciale_element(gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeInputDt rechercherPropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context){
+      this.rechercherPropositionCommercialeInput = rechercherPropositionCommercialeInput;
+      this.context = context;
+    }
+    public void populateXmlNode(Dom.XmlNode outerNode){
+
+      //System.assertEquals('RechercherPropositionCommerciale', outerNode.getName());
+
+      gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeInputDt rechercherPropositionCommercialeInputObj = this.rechercherPropositionCommercialeInput;
+      Dom.XmlNode rechercherPropositionCommercialeInputNode = outerNode.addChildElement('rechercherPropositionCommercialeInput', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3', '');
+      if(rechercherPropositionCommercialeInputObj != null){
+        rechercherPropositionCommercialeInputObj.populateXmlNode(rechercherPropositionCommercialeInputNode);
+      }
+
+      gdfsuezComBefChpPivotPC.contextDt contextObj = this.context;
+      Dom.XmlNode contextNode = outerNode.addChildElement('context', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3', '');
+      if(contextObj != null){
+        contextObj.populateXmlNode(contextNode);
+      }
+    }
+  }
+  public class rechercherPropositionCommercialeInputDt {
+    public gdfsuezComBefCalypsoPersonne.PersonneAbstract Personne;
+    public gdfsuezComBefChpPivotPC.searchControlRequestHeaderDt searchControlRequest;
+    private String[] Personne_type_info = new String[]{'Personne','http://gdfsuez/bef/calypso/propositioncommerciale/v3','PersonneAbstract','1','1','false'};
+    private String[] searchControlRequest_type_info = new String[]{'searchControlRequest','http://gdfsuez/bef/calypso/propositioncommerciale/v3','searchControlRequestHeaderDt','1','1','false'};
+    private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v3','true','false'};
+    private String[] field_order_type_info = new String[]{'Personne','searchControlRequest'};
+    public rechercherPropositionCommercialeInputDt(){
+    }
+    public rechercherPropositionCommercialeInputDt(DOM.XmlNode responseNode){
+      Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+      DOM.XmlNode PersonneNode = responseNode.getChildElement('Personne', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3');
+      if(PersonneNode == null){
+        this.Personne = null;
+      } else{
+        gdfsuezComBefCalypsoPersonne.PersonneAbstract PersonneObj = new gdfsuezComBefCalypsoPersonne.PersonneAbstract(PersonneNode);
+        nodesParsed.add(PersonneNode);
+        this.Personne = PersonneObj;
+      }
+      //System.debug(this.Personne);
+      DOM.XmlNode searchControlRequestNode = responseNode.getChildElement('searchControlRequest', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3');
+      if(searchControlRequestNode == null){
+        this.searchControlRequest = null;
+      } else{
+        gdfsuezComBefChpPivotPC.searchControlRequestHeaderDt searchControlRequestObj = new gdfsuezComBefChpPivotPC.searchControlRequestHeaderDt(searchControlRequestNode);
+        nodesParsed.add(searchControlRequestNode);
+        this.searchControlRequest = searchControlRequestObj;
+      }
+      //System.debug(this.searchControlRequest);
+    }
+    public void populateXmlNode(Dom.XmlNode outerNode){
+
+      gdfsuezComBefCalypsoPersonne.PersonneAbstract PersonneObj = this.Personne;
+      Dom.XmlNode PersonneNode = outerNode.addChildElement('Personne', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3', '');
+      if(PersonneObj != null){
+        PersonneObj.populateXmlNode(PersonneNode);
+      }
+
+      gdfsuezComBefChpPivotPC.searchControlRequestHeaderDt searchControlRequestObj = this.searchControlRequest;
+      Dom.XmlNode searchControlRequestNode = outerNode.addChildElement('searchControlRequest', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3', '');
+      if(searchControlRequestObj != null){
+        searchControlRequestObj.populateXmlNode(searchControlRequestNode);
+      }
+    }
+  }
+  public class rechercherPropositionCommercialeOutputDt {
+    public gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale[] propositionCommerciale;
+    public gdfsuezComBefChpPivotPC.paginationDt searchControlResponse;
+    private String[] propositionCommerciale_type_info = new String[]{'propositionCommerciale','http://gdfsuez/bef/calypso/propositioncommerciale/v3','PropositionCommerciale','0','-1','false'};
+    private String[] searchControlResponse_type_info = new String[]{'searchControlResponse','http://gdfsuez/bef/calypso/propositioncommerciale/v3','paginationDt','1','1','false'};
+    private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v3','true','false'};
+    private String[] field_order_type_info = new String[]{'propositionCommerciale','searchControlResponse'};
+    public rechercherPropositionCommercialeOutputDt(){
+    }
+    public rechercherPropositionCommercialeOutputDt(DOM.XmlNode responseNode){
+      Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+      Dom.XmlNode[] propositionCommercialeChildren = responseNode.getChildElements();
+      gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale[] propositionCommercialeList = new List<gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale>();
+      if(propositionCommercialeChildren == null || propositionCommercialeChildren.size() == 0){
+        this.propositionCommerciale = null;
+      } else{
+        for(DOM.XmlNode childNode : propositionCommercialeChildren){
+          if(childNode.GetName() == 'propositionCommerciale'){
+            gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale Obj = new gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale(childNode);
+            propositionCommercialeList.Add(Obj);
+            nodesParsed.add(childNode);
+          }
+        }
+        this.propositionCommerciale = propositionCommercialeList;
+      }
+      //System.debug(this.propositionCommerciale);
+      DOM.XmlNode searchControlResponseNode = responseNode.getChildElement('searchControlResponse', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3');
+      if(searchControlResponseNode == null){
+        this.searchControlResponse = null;
+      } else{
+        gdfsuezComBefChpPivotPC.paginationDt searchControlResponseObj = new gdfsuezComBefChpPivotPC.paginationDt(searchControlResponseNode);
+        nodesParsed.add(searchControlResponseNode);
+        this.searchControlResponse = searchControlResponseObj;
+      }
+      //System.debug(this.searchControlResponse);
+    }
+    public void populateXmlNode(Dom.XmlNode outerNode){
+
+      gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale[] propositionCommercialeObj = this.propositionCommerciale;
+      if(propositionCommercialeObj != null){
+        for(gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale element: propositionCommercialeObj){
+          Dom.XmlNode propositionCommercialeNode = outerNode.addChildElement('propositionCommerciale', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3', '');
+          element.populateXmlNode(propositionCommercialeNode);
+        }
+      }
+
+      gdfsuezComBefChpPivotPC.paginationDt searchControlResponseObj = this.searchControlResponse;
+      Dom.XmlNode searchControlResponseNode = outerNode.addChildElement('searchControlResponse', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3', '');
+      if(searchControlResponseObj != null){
+        searchControlResponseObj.populateXmlNode(searchControlResponseNode);
+      }
+    }
+  }
+  public class rechercherPropositionCommercialeResponse_element {
+    public gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeOutputDt rechercherPropositionCommercialeOutput;
+    public gdfsuezComBefChpPivotPC.retourTraitementMessagesDt messageRetours;
+    private String[] rechercherPropositionCommercialeOutput_type_info = new String[]{'rechercherPropositionCommercialeOutput','http://gdfsuez/bef/calypso/propositioncommerciale/v3','rechercherPropositionCommercialeOutputDt','0','1','false'};
+    private String[] messageRetours_type_info = new String[]{'messageRetours','http://gdfsuez/bef/calypso/propositioncommerciale/v3','retourTraitementMessagesDt','1','1','false'};
+    private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v3','true','false'};
+    private String[] field_order_type_info = new String[]{'rechercherPropositionCommercialeOutput','messageRetours'};
+    public rechercherPropositionCommercialeResponse_element(){
+    }
+    public rechercherPropositionCommercialeResponse_element(DOM.XmlNode responseNode){
+      Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+      //System.assertEquals('RechercherPropositionCommercialeResponse', responseNode.getName());
+      DOM.XmlNode rechercherPropositionCommercialeOutputNode = responseNode.getChildElement('rechercherPropositionCommercialeOutput', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3');
+      if(rechercherPropositionCommercialeOutputNode == null){
+        this.rechercherPropositionCommercialeOutput = null;
+      } else{
+        gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeOutputDt rechercherPropositionCommercialeOutputObj = new gdfsuezBefCalypsoPropositioncommerc.rechercherPropositionCommercialeOutputDt(rechercherPropositionCommercialeOutputNode);
+        nodesParsed.add(rechercherPropositionCommercialeOutputNode);
+        this.rechercherPropositionCommercialeOutput = rechercherPropositionCommercialeOutputObj;
+      }
+      //System.debug(this.rechercherPropositionCommercialeOutput);
+      DOM.XmlNode messageRetoursNode = responseNode.getChildElement('messageRetours', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3');
+      if(messageRetoursNode == null){
+        this.messageRetours = null;
+      } else{
+        gdfsuezComBefChpPivotPC.retourTraitementMessagesDt messageRetoursObj = new gdfsuezComBefChpPivotPC.retourTraitementMessagesDt(messageRetoursNode);
+        nodesParsed.add(messageRetoursNode);
+        this.messageRetours = messageRetoursObj;
+      }
+      //System.debug(this.messageRetours);
+    }
+  }
+  public class transformerPropositionCommerciale_element {
+    public gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeInputDt transformerPropositionCommercialeInput;
+    public gdfsuezComBefChpPivotPC.contextDt context;
+    private String[] transformerPropositionCommercialeInput_type_info = new String[]{'transformerPropositionCommercialeInput','http://gdfsuez/bef/calypso/propositioncommerciale/v3','transformerPropositionCommercialeInputDt','1','1','false'};
+    private String[] context_type_info = new String[]{'context','http://gdfsuez/bef/calypso/propositioncommerciale/v3','contextDt','1','1','false'};
+    private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v3','true','false'};
+    private String[] field_order_type_info = new String[]{'transformerPropositionCommercialeInput','context'};
+    public transformerPropositionCommerciale_element(){
+    }
+    public transformerPropositionCommerciale_element(gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeInputDt transformerPropositionCommercialeInput,gdfsuezComBefChpPivotPC.contextDt context){
+      this.transformerPropositionCommercialeInput = transformerPropositionCommercialeInput;
+      this.context = context;
+    }
+    public void populateXmlNode(Dom.XmlNode outerNode){
+
+      //System.assertEquals('TransformerPropositionCommerciale', outerNode.getName());
+
+      gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeInputDt transformerPropositionCommercialeInputObj = this.transformerPropositionCommercialeInput;
+      Dom.XmlNode transformerPropositionCommercialeInputNode = outerNode.addChildElement('transformerPropositionCommercialeInput', '', '');
+      if(transformerPropositionCommercialeInputObj != null){
+        transformerPropositionCommercialeInputObj.populateXmlNode(transformerPropositionCommercialeInputNode);
+      }
+
+      gdfsuezComBefChpPivotPC.contextDt contextObj = this.context;
+      Dom.XmlNode contextNode = outerNode.addChildElement('context', '', '');
+      if(contextObj != null){
+        contextObj.populateXmlNode(contextNode);
+      }
+    }
+  }
+  public class transformerPropositionCommercialeInputDt {
+    public gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract propositionCommerciale;
+    public gdfsuezComBefChpPivotPC.listeValeursDt typeCompteur;
+    public gdfsuezComBefChpPivotPC.listeValeursDt SIContractuel;
+    public gdfsuezComBefChpPivotPC.listeValeursDt plagesHeuresCreuses;
+    public gdfsuezComBefChpPivotPC.listeValeursDt futuresPlagesHeuresCreuses;
+    private String[] propositionCommerciale_type_info = new String[]{'propositionCommerciale','http://gdfsuez/bef/calypso/propositioncommerciale/v3','PropositionCommercialeAbstract','1','1','false'};
+    private String[] typeCompteur_type_info = new String[]{'typeCompteur','http://gdfsuez/bef/calypso/propositioncommerciale/v3','listeValeursDt','0','1','false'};
+    private String[] SIContractuel_type_info = new String[]{'SIContractuel','http://gdfsuez/bef/calypso/propositioncommerciale/v3','listeValeursDt','0','1','false'};
+    private String[] plagesHeuresCreuses_type_info = new String[]{'plagesHeuresCreuses','http://gdfsuez/bef/calypso/propositioncommerciale/v3','listeValeursDt','0','1','false'};
+    private String[] futuresPlagesHeuresCreuses_type_info = new String[]{'futuresPlagesHeuresCreuses','http://gdfsuez/bef/calypso/propositioncommerciale/v3','listeValeursDt','0','1','false'};
+    private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v3','true','false'};
+    private String[] field_order_type_info = new String[]{'propositionCommerciale','typeCompteur','SIContractuel','plagesHeuresCreuses','futuresPlagesHeuresCreuses'};
+    public transformerPropositionCommercialeInputDt(){
+    }
+    public transformerPropositionCommercialeInputDt(DOM.XmlNode responseNode){
+      Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+      DOM.XmlNode propositionCommercialeNode = responseNode.getChildElement('propositionCommerciale', '');
+      if(propositionCommercialeNode == null){
+        this.propositionCommerciale = null;
+      } else{
+        gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract propositionCommercialeObj = new gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract(propositionCommercialeNode);
+        nodesParsed.add(propositionCommercialeNode);
+        this.propositionCommerciale = propositionCommercialeObj;
+      }
+      //System.debug(this.propositionCommerciale);
+      DOM.XmlNode typeCompteurNode = responseNode.getChildElement('typeCompteur', '');
+      if(typeCompteurNode == null){
+        this.typeCompteur = null;
+      } else{
+        gdfsuezComBefChpPivotPC.listeValeursDt typeCompteurObj = new gdfsuezComBefChpPivotPC.listeValeursDt(typeCompteurNode);
+        nodesParsed.add(typeCompteurNode);
+        this.typeCompteur = typeCompteurObj;
+      }
+      //System.debug(this.typeCompteur);
+      DOM.XmlNode SIContractuelNode = responseNode.getChildElement('SIContractuel', '');
+      if(SIContractuelNode == null){
+        this.SIContractuel = null;
+      } else{
+        gdfsuezComBefChpPivotPC.listeValeursDt SIContractuelObj = new gdfsuezComBefChpPivotPC.listeValeursDt(SIContractuelNode);
+        nodesParsed.add(SIContractuelNode);
+        this.SIContractuel = SIContractuelObj;
+      }
+      //System.debug(this.SIContractuel);
+      DOM.XmlNode plagesHeuresCreusesNode = responseNode.getChildElement('plagesHeuresCreuses', '');
+      if(plagesHeuresCreusesNode == null){
+        this.plagesHeuresCreuses = null;
+      } else{
+        gdfsuezComBefChpPivotPC.listeValeursDt plagesHeuresCreusesObj = new gdfsuezComBefChpPivotPC.listeValeursDt(plagesHeuresCreusesNode);
+        nodesParsed.add(plagesHeuresCreusesNode);
+        this.plagesHeuresCreuses = plagesHeuresCreusesObj;
+      }
+      //System.debug(this.plagesHeuresCreuses);
+      DOM.XmlNode futuresPlagesHeuresCreusesNode = responseNode.getChildElement('futuresPlagesHeuresCreuses', '');
+      if(futuresPlagesHeuresCreusesNode == null){
+        this.futuresPlagesHeuresCreuses = null;
+      } else{
+        gdfsuezComBefChpPivotPC.listeValeursDt futuresPlagesHeuresCreusesObj = new gdfsuezComBefChpPivotPC.listeValeursDt(futuresPlagesHeuresCreusesNode);
+        nodesParsed.add(futuresPlagesHeuresCreusesNode);
+        this.futuresPlagesHeuresCreuses = futuresPlagesHeuresCreusesObj;
+      }
+      //System.debug(this.futuresPlagesHeuresCreuses);
+    }
+    public void populateXmlNode(Dom.XmlNode outerNode){
+
+      gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract propositionCommercialeObj = this.propositionCommerciale;
+      Dom.XmlNode propositionCommercialeNode = outerNode.addChildElement('propositionCommerciale', '', '');
+      if(propositionCommercialeObj != null){
+        propositionCommercialeObj.populateXmlNode(propositionCommercialeNode);
+      }
+
+      gdfsuezComBefChpPivotPC.listeValeursDt typeCompteurObj = this.typeCompteur;
+      if(typeCompteurObj != null){
+        Dom.XmlNode typeCompteurNode = outerNode.addChildElement('typeCompteur', '', '');
+        typeCompteurObj.populateXmlNode(typeCompteurNode);
+      }
+
+      gdfsuezComBefChpPivotPC.listeValeursDt SIContractuelObj = this.SIContractuel;
+      if(SIContractuelObj != null){
+        Dom.XmlNode SIContractuelNode = outerNode.addChildElement('SIContractuel', '', '');
+        SIContractuelObj.populateXmlNode(SIContractuelNode);
+      }
+
+      gdfsuezComBefChpPivotPC.listeValeursDt plagesHeuresCreusesObj = this.plagesHeuresCreuses;
+      if(plagesHeuresCreusesObj != null){
+        Dom.XmlNode plagesHeuresCreusesNode = outerNode.addChildElement('plagesHeuresCreuses', '', '');
+        plagesHeuresCreusesObj.populateXmlNode(plagesHeuresCreusesNode);
+      }
+
+      gdfsuezComBefChpPivotPC.listeValeursDt futuresPlagesHeuresCreusesObj = this.futuresPlagesHeuresCreuses;
+      if(futuresPlagesHeuresCreusesObj != null){
+        Dom.XmlNode futuresPlagesHeuresCreusesNode = outerNode.addChildElement('futuresPlagesHeuresCreuses', '', '');
+        futuresPlagesHeuresCreusesObj.populateXmlNode(futuresPlagesHeuresCreusesNode);
+      }
+    }
+  }
+  public class transformerPropositionCommercialeOutputDt {
+    public gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeOutputDt_objetsMAJ_element objetsMAJ;
+    public gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeOutputDt_objetsCrees_element objetsCrees;
+    private String[] objetsMAJ_type_info = new String[]{'objetsMAJ','http://gdfsuez/bef/calypso/propositioncommerciale/v3','','0','1','false'};
+    private String[] objetsCrees_type_info = new String[]{'objetsCrees','http://gdfsuez/bef/calypso/propositioncommerciale/v3','','0','1','false'};
+    private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v3','true','false'};
+    private String[] field_order_type_info = new String[]{'objetsMAJ','objetsCrees'};
+    public transformerPropositionCommercialeOutputDt(){
+    }
+    public transformerPropositionCommercialeOutputDt(DOM.XmlNode responseNode){
+      Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+      DOM.XmlNode objetsMAJNode = responseNode.getChildElement('objetsMAJ', null);
+      if(objetsMAJNode == null){
+        this.objetsMAJ = null;
+      } else{
+        gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeOutputDt_objetsMAJ_element objetsMAJObj = new gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeOutputDt_objetsMAJ_element(objetsMAJNode);
+        nodesParsed.add(objetsMAJNode);
+        this.objetsMAJ = objetsMAJObj;
+      }
+      //System.debug(this.objetsMAJ);
+      DOM.XmlNode objetsCreesNode = responseNode.getChildElement('objetsCrees', null);
+      if(objetsCreesNode == null){
+        this.objetsCrees = null;
+      } else{
+        gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeOutputDt_objetsCrees_element objetsCreesObj = new gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeOutputDt_objetsCrees_element(objetsCreesNode);
+        nodesParsed.add(objetsCreesNode);
+        this.objetsCrees = objetsCreesObj;
+      }
+      //System.debug(this.objetsCrees);
+    }
+    public void populateXmlNode(Dom.XmlNode outerNode){
+
+      gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeOutputDt_objetsMAJ_element objetsMAJObj = this.objetsMAJ;
+      Dom.XmlNode objetsMAJNode = outerNode.addChildElement('objetsMAJ', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3', '');
+      if(objetsMAJObj != null){
+        objetsMAJObj.populateXmlNode(objetsMAJNode);
+      }
+
+      gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeOutputDt_objetsCrees_element objetsCreesObj = this.objetsCrees;
+      Dom.XmlNode objetsCreesNode = outerNode.addChildElement('objetsCrees', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3', '');
+      if(objetsCreesObj != null){
+        objetsCreesObj.populateXmlNode(objetsCreesNode);
+      }
+    }
+  }
+  public class transformerPropositionCommercialeOutputDt_objetsCrees_element {
+    public String[] prestationServiceDiag;
+    public gdfsuezComBefCalypsoNotedebitcredit.NoteDebitCreditAbstract[] noteDebitCredit;
+    public gdfsuezComBefCalypsoContrat.ContratAbstract[] contrat;
+    public String[] remise;
+    private String[] prestationServiceDiag_type_info = new String[]{'prestationServiceDiag','http://gdfsuez/bef/calypso/propositioncommerciale/v3','string12','0','-1','false'};
+    private String[] noteDebitCredit_type_info = new String[]{'noteDebitCredit','http://gdfsuez/bef/calypso/propositioncommerciale/v3','NoteDebitCreditAbstract','0','-1','false'};
+    private String[] contrat_type_info = new String[]{'contrat','http://gdfsuez/bef/calypso/propositioncommerciale/v3','ContratAbstract','0','-1','false'};
+    private String[] remise_type_info = new String[]{'remise','http://gdfsuez/bef/calypso/propositioncommerciale/v3','string20','0','-1','false'};
+    private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v3','true','false'};
+    private String[] field_order_type_info = new String[]{'prestationServiceDiag','noteDebitCredit','contrat','remise'};
+    public transformerPropositionCommercialeOutputDt_objetsCrees_element(){
+    }
+    public transformerPropositionCommercialeOutputDt_objetsCrees_element(DOM.XmlNode responseNode){
+      Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+      String[] prestationServiceDiagList = new List<String>();
+      if(responseNode.getChildElements() == null){
+        this.prestationServiceDiag = null;
+      } else{
+        for(DOM.XmlNode childNode: responseNode.getChildElements()){
+          if(childNode.GetName() == 'prestationServiceDiag'){
+          prestationServiceDiagList.Add((childNode == null || childNode.getAttributeValue('nil', 'http://www.w3.org/2001/XMLSchema-instance') == 'true') ? null : String.valueOf(childNode.getText()));
+            nodesParsed.add(childNode);
+          }
+        }
+        this.prestationServiceDiag = prestationServiceDiagList;
+      }
+      //System.debug(this.prestationServiceDiag);
+      Dom.XmlNode[] noteDebitCreditChildren = responseNode.getChildElements();
+      gdfsuezComBefCalypsoNotedebitcredit.NoteDebitCreditAbstract[] noteDebitCreditList = new List<gdfsuezComBefCalypsoNotedebitcredit.NoteDebitCreditAbstract>();
+      if(noteDebitCreditChildren == null || noteDebitCreditChildren.size() == 0){
+        this.noteDebitCredit = null;
+      } else{
+        for(DOM.XmlNode childNode : noteDebitCreditChildren){
+          if(childNode.GetName() == 'noteDebitCredit'){
+            gdfsuezComBefCalypsoNotedebitcredit.NoteDebitCreditAbstract Obj = new gdfsuezComBefCalypsoNotedebitcredit.NoteDebitCreditAbstract(childNode);
+            noteDebitCreditList.Add(Obj);
+            nodesParsed.add(childNode);
+          }
+        }
+        this.noteDebitCredit = noteDebitCreditList;
+      }
+      //System.debug(this.noteDebitCredit);
+      Dom.XmlNode[] contratChildren = responseNode.getChildElements();
+      gdfsuezComBefCalypsoContrat.ContratAbstract[] contratList = new List<gdfsuezComBefCalypsoContrat.ContratAbstract>();
+      if(contratChildren == null || contratChildren.size() == 0){
+        this.contrat = null;
+      } else{
+        for(DOM.XmlNode childNode : contratChildren){
+          if(childNode.GetName() == 'contrat'){
+            gdfsuezComBefCalypsoContrat.ContratAbstract Obj = new gdfsuezComBefCalypsoContrat.ContratAbstract(childNode);
+            contratList.Add(Obj);
+            nodesParsed.add(childNode);
+          }
+        }
+        this.contrat = contratList;
+      }
+      //System.debug(this.contrat);
+      String[] remiseList = new List<String>();
+      if(responseNode.getChildElements() == null){
+        this.remise = null;
+      } else{
+        for(DOM.XmlNode childNode: responseNode.getChildElements()){
+          if(childNode.GetName() == 'remise'){
+          remiseList.Add((childNode == null || childNode.getAttributeValue('nil', 'http://www.w3.org/2001/XMLSchema-instance') == 'true') ? null : String.valueOf(childNode.getText()));
+            nodesParsed.add(childNode);
+          }
+        }
+        this.remise = remiseList;
+      }
+      //System.debug(this.remise);
+    }
+    public void populateXmlNode(Dom.XmlNode outerNode){
+      if(this.prestationServiceDiag != null){
+        for(String element: this.prestationServiceDiag){
+          Dom.XmlNode prestationServiceDiagNode = outerNode.addChildElement('prestationServiceDiag', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3', '');
+          prestationServiceDiagNode.addTextNode(String.valueOf(element));
+        }
+      }
+
+      gdfsuezComBefCalypsoNotedebitcredit.NoteDebitCreditAbstract[] noteDebitCreditObj = this.noteDebitCredit;
+      if(noteDebitCreditObj != null){
+        for(gdfsuezComBefCalypsoNotedebitcredit.NoteDebitCreditAbstract element: noteDebitCreditObj){
+          Dom.XmlNode noteDebitCreditNode = outerNode.addChildElement('noteDebitCredit', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3', '');
+          element.populateXmlNode(noteDebitCreditNode);
+        }
+      }
+
+      gdfsuezComBefCalypsoContrat.ContratAbstract[] contratObj = this.contrat;
+      if(contratObj != null){
+        for(gdfsuezComBefCalypsoContrat.ContratAbstract element: contratObj){
+          Dom.XmlNode contratNode = outerNode.addChildElement('contrat', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3', '');
+          element.populateXmlNode(contratNode);
+        }
+      }
+      if(this.remise != null){
+        for(String element: this.remise){
+          Dom.XmlNode remiseNode = outerNode.addChildElement('remise', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3', '');
+          remiseNode.addTextNode(String.valueOf(element));
+        }
+      }
+    }
+  }
+  public class transformerPropositionCommercialeOutputDt_objetsMAJ_element {
+    public gdfsuezComBefCalypsoContrat.ContratAbstract[] contrat;
+    public gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract propositionCommerciale;
+    private String[] contrat_type_info = new String[]{'contrat','http://gdfsuez/bef/calypso/propositioncommerciale/v3','ContratAbstract','0','-1','false'};
+    private String[] propositionCommerciale_type_info = new String[]{'propositionCommerciale','http://gdfsuez/bef/calypso/propositioncommerciale/v3','PropositionCommercialeAbstract','1','1','false'};
+    private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v3','true','false'};
+    private String[] field_order_type_info = new String[]{'contrat','propositionCommerciale'};
+    public transformerPropositionCommercialeOutputDt_objetsMAJ_element(){
+    }
+    public transformerPropositionCommercialeOutputDt_objetsMAJ_element(DOM.XmlNode responseNode){
+      Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+      Dom.XmlNode[] contratChildren = responseNode.getChildElements();
+      gdfsuezComBefCalypsoContrat.ContratAbstract[] contratList = new List<gdfsuezComBefCalypsoContrat.ContratAbstract>();
+      if(contratChildren == null || contratChildren.size() == 0){
+        this.contrat = null;
+      } else{
+        for(DOM.XmlNode childNode : contratChildren){
+          if(childNode.GetName() == 'contrat'){
+            gdfsuezComBefCalypsoContrat.ContratAbstract Obj = new gdfsuezComBefCalypsoContrat.ContratAbstract(childNode);
+            contratList.Add(Obj);
+            nodesParsed.add(childNode);
+          }
+        }
+        this.contrat = contratList;
+      }
+      //System.debug(this.contrat);
+      DOM.XmlNode propositionCommercialeNode = responseNode.getChildElement('propositionCommerciale', null);
+      if(propositionCommercialeNode == null){
+        this.propositionCommerciale = null;
+      } else{
+        gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract propositionCommercialeObj = new gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract(propositionCommercialeNode);
+        nodesParsed.add(propositionCommercialeNode);
+        this.propositionCommerciale = propositionCommercialeObj;
+      }
+      //System.debug(this.propositionCommerciale);
+    }
+    public void populateXmlNode(Dom.XmlNode outerNode){
+
+      gdfsuezComBefCalypsoContrat.ContratAbstract[] contratObj = this.contrat;
+      if(contratObj != null){
+        for(gdfsuezComBefCalypsoContrat.ContratAbstract element: contratObj){
+          Dom.XmlNode contratNode = outerNode.addChildElement('contrat', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3', '');
+          element.populateXmlNode(contratNode);
+        }
+      }
+
+      gdfsuezBefCalypsoPropositioncommerc.PropositionCommercialeAbstract propositionCommercialeObj = this.propositionCommerciale;
+      Dom.XmlNode propositionCommercialeNode = outerNode.addChildElement('propositionCommerciale', 'http://gdfsuez/bef/calypso/propositioncommerciale/v3', '');
+      if(propositionCommercialeObj != null){
+        propositionCommercialeObj.populateXmlNode(propositionCommercialeNode);
+      }
+    }
+  }
+  public class transformerPropositionCommercialeResponse_element {
+    public gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeOutputDt transformerPropositionCommercialeOutput;
+    public gdfsuezComBefChpPivotPC.retourTraitementMessagesDt messageRetours;
+    private String[] transformerPropositionCommercialeOutput_type_info = new String[]{'transformerPropositionCommercialeOutput','http://gdfsuez/bef/calypso/propositioncommerciale/v3','transformerPropositionCommercialeOutputDt','0','1','false'};
+    private String[] messageRetours_type_info = new String[]{'messageRetours','http://gdfsuez/bef/calypso/propositioncommerciale/v3','retourTraitementMessagesDt','1','1','false'};
+    private String[] apex_schema_type_info = new String[]{'http://gdfsuez/bef/calypso/propositioncommerciale/v3','true','false'};
+    private String[] field_order_type_info = new String[]{'transformerPropositionCommercialeOutput','messageRetours'};
+    public transformerPropositionCommercialeResponse_element(){
+    }
+    public transformerPropositionCommercialeResponse_element(DOM.XmlNode responseNode){
+      Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+      //System.assertEquals('TransformerPropositionCommercialeResponse', responseNode.getName());
+      DOM.XmlNode transformerPropositionCommercialeOutputNode = responseNode.getChildElement('transformerPropositionCommercialeOutput', null);
+      if(transformerPropositionCommercialeOutputNode == null){
+        this.transformerPropositionCommercialeOutput = null;
+      } else{
+        gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeOutputDt transformerPropositionCommercialeOutputObj = new gdfsuezBefCalypsoPropositioncommerc.transformerPropositionCommercialeOutputDt(transformerPropositionCommercialeOutputNode);
+        nodesParsed.add(transformerPropositionCommercialeOutputNode);
+        this.transformerPropositionCommercialeOutput = transformerPropositionCommercialeOutputObj;
+      }
+      //System.debug(this.transformerPropositionCommercialeOutput);
+      DOM.XmlNode messageRetoursNode = responseNode.getChildElement('messageRetours', null);
+      if(messageRetoursNode == null){
+        this.messageRetours = null;
+      } else{
+        gdfsuezComBefChpPivotPC.retourTraitementMessagesDt messageRetoursObj = new gdfsuezComBefChpPivotPC.retourTraitementMessagesDt(messageRetoursNode);
+        nodesParsed.add(messageRetoursNode);
+        this.messageRetours = messageRetoursObj;
+      }
+      //System.debug(this.messageRetours);
+    }
+  }
+  public class PropositionCommercialeAbstract{
+    public String idPropositionCommerciale;
+    public gdfsuezComBefChpPivotPC.listeValeursDt statutPropositionCommerciale;
+    private String[] idPropositionCommerciale_type_info = new String[]{'idPropositionCommerciale','http://gdfsuez.com/bef/calypso/propositioncommerciale','String','0','1','false'};
+    private String[] statutPropositionCommerciale_type_info = new String[]{'statutPropositionCommerciale','http://gdfsuez.com/bef/calypso/propositioncommerciale','listeValeursDt','0','1','false'};
+    private String[] apex_schema_type_info = new String[]{'http://gdfsuez.com/bef/calypso/propositioncommerciale','true','false'};
+    private String[] field_order_type_info = new String[]{'idPropositionCommerciale'};
+    public PropositionCommercialeAbstract(){
+    }
+    public PropositionCommercialeAbstract(DOM.XmlNode propositionCommercialeNode){
+      Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+      DOM.XmlNode idPropositionCommercialeNode = propositionCommercialeNode.getChildElement('idPropositionCommerciale', null);
+      this.idPropositionCommerciale = (idPropositionCommercialeNode == null) ? null : idPropositionCommercialeNode.getText();
+      nodesParsed.add(idPropositionCommercialeNode);
+
+      DOM.XmlNode statutPropositionCommercialeNode = propositionCommercialeNode.getChildElement('statutPropositionCommerciale', 'http://gdfsuez.com/bef/calypso/propositioncommerciale');
+      if(statutPropositionCommercialeNode == null){
+        this.statutPropositionCommerciale = null;
+      } else{
+        gdfsuezComBefChpPivotPC.listeValeursDt statutPropositionCommercialeObj = new gdfsuezComBefChpPivotPC.listeValeursDt(statutPropositionCommercialeNode);
+        nodesParsed.add(statutPropositionCommercialeNode);
+        this.statutPropositionCommerciale = statutPropositionCommercialeObj;
+      }
+    }
+    public void populateXmlNode(DOM.XmlNode propositionCommercialeNode){
+      Dom.XmlNode idPropositionCommercialeNode = propositionCommercialeNode.addChildElement('idPropositionCommerciale', '', '');
+      idPropositionCommercialeNode.addTextNode((this.idPropositionCommerciale == null) ? '' : this.idPropositionCommerciale);
+
+      gdfsuezComBefChpPivotPC.listeValeursDt statutPropositionCommercialeObj = this.statutPropositionCommerciale;
+      if(statutPropositionCommercialeObj != null){
+        Dom.XmlNode statutPropositionCommercialeNode = propositionCommercialeNode.addChildElement('statutPropositionCommerciale', '', '');
+        statutPropositionCommercialeObj.populateXmlNode(statutPropositionCommercialeNode);
+      }
+    }
+  }
 
 }

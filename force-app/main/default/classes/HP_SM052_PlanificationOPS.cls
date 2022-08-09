@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Slimene Belhaj Ali
  * @group             : 
- * @last modified on  : 03-03-2021
+ * @last modified on  : 03-02-2021
  * @last modified by  : Slimene Belhaj Ali
  * Modifications Log 
  * Ver   Date         Author               Modification
@@ -69,7 +69,7 @@ public inherited sharing class HP_SM052_PlanificationOPS {
                 }
             }
         }
-        if(result.get('creneau') == null && elem.demande?.disponibilite?.creneauHoraire?.libelleCourt != null) {
+        if(result.get('creneau') == null && elem.demande.disponibilite.creneauHoraire.libelleCourt != null) {
             result.put('creneau', elem.demande.disponibilite.creneauHoraire.libelleCourt);
         }
         if(result.get('datePrevue') == null && elem?.demande?.disponibilite?.dateInterventionSouhaitee != null) {
@@ -141,15 +141,9 @@ public inherited sharing class HP_SM052_PlanificationOPS {
 
         boolean disabledModify = (elem?.donneesGenerales?.statutPrestationService?.code == '63' ||
         elem?.donneesGenerales?.statutPrestationService?.code == '45');
-        System.debug('@@  elem?.donneesGenerales?.donneesPDL?.etatPDL?.code ' +  elem?.donneesGenerales?.donneesPDL?.etatPDL?.code);
         result.put('disabledModify', !disabledModify);
         if(disabledModify == false) {
-            if(elem?.donneesGenerales?.statutPrestationService?.code == '50' && elem?.donneesGenerales?.donneesPDL?.etatPDL?.code == '3') {
-                result.put('errorMessage', 'L’intervention sera réalisée à distance car il s’agit d’un compteur télé-opérable (Gazpar). Aucune action ou présence du client requise lors de l’intervention.');
-            } else {
-                result.put('errorMessage', 'Le statut de l’intervention ne permet pas de la replanifier.');
-
-            }
+            result.put('errorMessage', 'L’intervention sera réalisée à distance car il s’agit d’un compteur télé-opérable (Gazpar). Aucune action ou présence du client requise lors de l’intervention.');
         }
         return result;
     }
@@ -357,7 +351,7 @@ public inherited sharing class HP_SM052_PlanificationOPS {
             input.put('numMobile', cont.mobilePhone.replace('+33', '0'));
             input.put('canalCommunicationCode', 'SMS');
             HP_UTIL_MailSmsEnvoi.envoiAsync(input);
-        } else if(sms == true && cont.mobilePhone != null) {
+        } else if(sms && cont.mobilePhone != null) {
             System.debug('Le contact n\'a pas un tel mobile');
         }
 
@@ -370,10 +364,10 @@ public inherited sharing class HP_SM052_PlanificationOPS {
             input.put('canalCommunicationLibCourt', 'Email');
             input.put('idFormulaireLibCourt', 'Mail happe');
             input.put('objet', 'Modification de la date de votre rendez-vous ' + distName);
-            input.put('contenu', cont.Salutation + ' ' +cont.FirstName + ' ' +cont.LastName + ',<br/>' + 'Votre rendez-vous avec le distributeur '+
+            input.put('contenu', cont.Salutation + ' ' +cont.FirstName + ' ' +cont.LastName + '\n' + 'Votre rendez-vous avec le distributeur '+
             distName +' a bien été modifié suite à votre contact avec notre service Client pour votre logement situé ' + address
-            +'.<br/>Votre nouvelle date de rendez-vous est le ' + dateRDV + ', ' + creneau
-            + '.<br/><br/>Le service Client happ-e');
+            +'\nVotre nouvelle date de rendez-vous est le ' + dateRDV + ', ' + creneau
+            + '\n\nLe service Client happ-e');
             HP_UTIL_MailSmsEnvoi.envoiAsync(input);
         }
      }

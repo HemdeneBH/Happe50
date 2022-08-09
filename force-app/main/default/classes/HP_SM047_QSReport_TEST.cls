@@ -67,4 +67,8 @@ public class HP_SM047_QSReport_TEST {
         System.assert(emailPrecedent.HP_QS24__c != null && emailPrecedent.HP_QS48__c != null);
     }
 
+
+
+
+
 }

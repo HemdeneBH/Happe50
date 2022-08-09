@@ -8,8 +8,7 @@
     <columns>Metadata__c</columns>
     <columns>ErrorMessage__c</columns>
     <columns>Status__c</columns>
-    <columns>Comment__c</columns>
-    <columns>Ticket__c</columns>
+    <columns>EmailBody__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
 </ListView>

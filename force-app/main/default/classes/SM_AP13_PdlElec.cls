@@ -77,8 +77,7 @@ global class SM_AP13_PdlElec implements vlocity_cmt.VlocityOpenInterface {
 		SM_OCTOPUS__c octopusCS = SM_OCTOPUS__c.getOrgDefaults();
 		gdfsuezBefCalypsoPdlelectriciteV3.Dependency port = new gdfsuezBefCalypsoPdlelectriciteV3.Dependency();
 		port.clientCertName_x = octopusCS.certName__c;
-		SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'PDLElec' limit 1];
-		port.endpoint_x = octopusCS.endpoint__c + suffixs.suffix__c;
+		port.endpoint_x = octopusCS.endpoint__c + 'ES-PDLElec_v3';
 		port.inputHttpHeaders_x = new Map < String, String > {
 			'Content-Type' => 'text/xml;charset=utf-8'
 		};

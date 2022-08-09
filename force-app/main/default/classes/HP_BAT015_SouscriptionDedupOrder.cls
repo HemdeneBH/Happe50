@@ -1,7 +1,9 @@
 /**
  * @description       : 
  * @author            : Ali AJELLAL
+
  * @last modified on  : 03-23-2021
+
  * Modifications Log 
  * 1.0   12-02-2020   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
 **/
@@ -9,16 +11,20 @@
 global with sharing class HP_BAT015_SouscriptionDedupOrder implements  Database.Batchable<SObject>, Schedulable, Database.RaisesPlatformEvents, HP_UTIL_BatchInterface {
    
     public static final Integer BATCH_CHUNK_SIZE = 100;
+
     public static Date dateQuery = System.now().date().addDays(-30);
     private Date  souscriptionDate;
+
 
     global String query = 'select id , HP_NumPDL__c, HP_NumberPCE__c, HP_TECH_FormulaConcatField__c, HP_Statut__c from hp_souscription__c';  
 
 
     public HP_BAT015_SouscriptionDedupOrder() {
     
+
         query = query + '  where  DAY_ONLY(HP_Date_Origine__c ) >= :dateQuery';
         souscriptionDate = dateQuery;
+
 
     }
 

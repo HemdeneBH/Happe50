@@ -8,7 +8,7 @@
     <picklistValues>
         <picklist>Categorie_Consigne__c</picklist>
         <values>
-            <fullName>Acquisition - EM</fullName>
+            <fullName>Acquisition</fullName>
             <default>false</default>
         </values>
         <values>
@@ -32,11 +32,11 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Modification OPS</fullName>
+            <fullName>Modification des données personnelles</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Modification des données personnelles</fullName>
+            <fullName>Modification%2Fannulation des OPS</fullName>
             <default>false</default>
         </values>
         <values>
@@ -71,11 +71,15 @@
             <default>false</default>
         </values>
         <values>
+            <fullName>CRÉATION OPS</fullName>
+            <default>false</default>
+        </values>
+        <values>
             <fullName>LOGEMENT</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>PUSH DE l%E2%80%99ESPACE CLIENT</fullName>
+            <fullName>PROMOTION DU SELFCARE</fullName>
             <default>false</default>
         </values>
         <values>
@@ -83,7 +87,7 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>SAISIE D%27INDEX</fullName>
+            <fullName>SERVICES AFFINITAIRES</fullName>
             <default>false</default>
         </values>
         <values>
@@ -92,6 +96,10 @@
         </values>
         <values>
             <fullName>SYNTHÈSE OPS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TRAITEMENT DEMANDE</fullName>
             <default>false</default>
         </values>
         <values>

@@ -1,48 +1,116 @@
-/**
- * @author Unknown
- * @date 14/04/2022 - Refactoring by Sutharsan Pushparajah
- * @description SM_AP75_FacturationsMApiService - Controller class to access the FacturationsMensualisees API
- */
-public with sharing class SM_AP75_FacturationsMApiService {
-
-    /**
-     * @author Sutharsan Pushparajah
-     * @date 14/04/2022
-     * @description FacturationsMensualiseesException - Custom Exception to fire message for FacturationsMensualisees API
-     */
-	public class FacturationsMensualiseesException extends Exception{}
-
-     /**
-     * @author Unknown
-     * @date 14/04/2022
-     * @description Search FacturationsMensualisees API
-     * @param inputMap Input parameters
-     * @return Map<String, Object> results from the FacturationsMensualisees API call
-     */
+public class SM_AP75_FacturationsMApiService {
     @AuraEnabled(cacheable=false)
-    public static Map <String, Object> callFacturationsMensualisees(Map<String, Object> inputMap) {
-
-        Map<String, Object> outMap = new Map<String, Object>();
+    public static Map < String, Object > callFacturationsMensualisees(Map<String,Object> inputMap) {
+        Map < String, Object > outMap  = new Map<String, Object>();
+        system.debug('@@ SM_AP75 inputMap ' +inputMap);
         
-        try{
-            String idsPortefeuilleContrat = String.valueOf(inputMap.get('idsPortefeuilleContrat'));
-
-            if (String.isEmpty(idsPortefeuilleContrat)){
-                throw new FacturationsMensualiseesException('idsPortefeuilleContrat is empty : '+inputMap);
-            }
-
-            List<Object> facturationsPaiements = SM_WS106_FacturationsMensualisees.getFacturationsMensualisees(idsPortefeuilleContrat, null);
-
-            if (facturationsPaiements.size() == 0){
-                throw new FacturationsMensualiseesException('No data to get the idsPortefeuilleContrat : '+idsPortefeuilleContrat);
-            }
-          
-            outMap.put('resultdata', facturationsPaiements);
-        } catch(Exception exp){
-            APU000_Logger.log(LoggingLevel.ERROR, 'SM_AP75_FacturationsMApiService', 'callFacturationsMensualisees', exp.getMessage());
-            outMap.put('resultdata', new  List<Object>());
+        if (inputMap.get('idsPortefeuilleContrat') == null || String.valueOf(inputMap.get('idsPortefeuilleContrat')).length() == 0) {
+            system.debug('idsPortefeuilleContrat is not found ...');
+            return outMap;
         }
 
+        String token;
+        if(!Test.isRunningTest()){
+            token = SM_MP_AP04_GetTokenService.getTokenFromSmile();
+        }else{
+            token = 'test';
+        }
+        if (token == null) {
+            system.debug('Token not found ...');
+            return outMap;
+        }
+        // HttpResponse httpResponse = getResponse(token, String.valueOf(inputMap.get('idsPortefeuilleContrat')), null);
+        HttpResponse httpResponse = new HttpResponse();
+        if(Test.isRunningTest()){
+            StaticResourceCalloutMock mock = new StaticResourceCalloutMock();
+            mock.setStaticResource('SM_MockTestFacturationMensualisee');
+            mock.setStatusCode(200);
+            mock.setHeader('Content-Type', 'application/json');
+            // system.debug('@@ mock '+mock);
+            // Set the mock callout mode
+            Test.setMock(HttpCalloutMock.class, mock);
+            httpResponse = getResponse(token, String.valueOf(inputMap.get('idsPortefeuilleContrat')), null);
+        }else{
+            httpResponse = getResponse(token, String.valueOf(inputMap.get('idsPortefeuilleContrat')), null);
+        }
+        
+        // system.debug('@@ httpResponse '+httpResponse);
+        if(httpResponse != null){
+            Map<String,Object> resultAsMap = (Map<String,Object>) JSON.deserializeUntyped(httpResponse.getBody());
+            // system.debug('@@ resultAsMap '+resultAsMap);
+            List<Object> FacturationsMensualisees = (List <Object> ) resultAsMap.get('_data');
+            system.debug('@@ FacturationsMensualisees '+FacturationsMensualisees);
+            if (FacturationsMensualisees.Size() == 0) {
+                system.debug('No data to get the idsPortefeuilleContrat ' + inputMap.get('idsPortefeuilleContrat'));
+                //return;
+                outMap.put('resultdata', new  List<Object>());
+            }
+        else{
+                // List<Object> transformedData = transformDataToCard(contracts) ;
+                outMap.put('resultdata', FacturationsMensualisees);
+                // outMap.put('nombreRythmeFacturation',transformedData.size() == 1 ? 'OK' :'NOK' ) ;
+        
+                
+            }
+            // system.debug('### MGH :: ' + outMap);
+        }
         return outMap;
     }
+
+    public static HttpResponse getResponse(String token, String idBusinessPartner, String idPersonne) {
+        HttpRequest httpReq = buildHttpRequestHeaders(token, idBusinessPartner, idPersonne);
+        HttpResponse httpResp = sendData(httpReq);
+        if (httpResponseFailureDetected(httpResp)) {
+            // should abort next step's
+            system.debug('## [Contrats] error occured when sending data ##');
+            system.debug(httpResp != null ? httpResp.getBody() : 'http response is null');
+            return null;
+        }
+        return httpResp;
+    }
+
+    public static HttpResponse sendData(HttpRequest request) {
+        Http http = new Http();
+        HttpResponse res;
+        try {
+            res = http.send(request);
+        } catch (Exception e) {
+            system.debug('## [FacturationsMensualisees] failed to send data ##');
+            return null;
+        }
+        return res;
+
+    }
+
+    public static HttpRequest buildHttpRequestHeaders(String token, String idsPortefeuilleContrat, String idPersonne) {
+        HttpRequest req = new HttpRequest();
+        req.setMethod('GET');
+        
+        
+        String endPoint = 'FacturationsMensualisees';
+        if (!Test.isRunningTest()) {
+            SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'FacturationsMensualisees' limit 1];
+            endPoint = 'callout:AuthAPIHour' +suffixs.suffix__c;           
+        }
+        if(!String.isBlank(idsPortefeuilleContrat)){
+            // System.debug('*** Call with idsPortefeuilleContrat = ' + idsPortefeuilleContrat);
+            req.setEndpoint(endPoint + '?idsPortefeuilleContrat=' + idsPortefeuilleContrat);
+        } else if (!String.isBlank(idPersonne)){
+            // System.debug('*** Call with idPersonne = ' + idPersonne);
+            // System.debug('*** : ' + MP_Generics_Endpoints__c.getInstance('api_endpoint'));
+            // System.debug('*** : ' + MP_Xdata_credentials__c.getInstance('sm_api_version'));
+            req.setEndpoint(endPoint + '?idPersonne=' + idPersonne);
+        }
+        // System.debug('*** Endpoint : ' + req.getEndpoint());
+        req.setHeader('X-Correlation-Id', MP_AP13_GuidUtil.NewGuid());
+        req.setHeader('api_key', MP_Xdata_credentials__c.getInstance('sm_api_key_INT').Value__c);
+        req.setHeader('Authorization', 'Bearer ' + token);
+        req.setHeader('Content-Type', 'application/json');
+        return req;
+    }
+
+    private static Boolean httpResponseFailureDetected(HttpResponse response) {
+        return (response == null || (response.getStatusCode() != 201 && response.getStatusCode() != 200 && response.getStatusCode() != 206));
+    }
+
 }

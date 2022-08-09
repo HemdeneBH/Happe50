@@ -115,7 +115,7 @@ public with sharing class HP_BAT016_SouscriptionPerimee_TEST {
                                                  null, 'OK',
                                                  new Map<String, String> { 'Content-Type' => 'application/json;charset=UTF-8'})
        };
-       final String jobName = 'HP_BAT016_SouscriptionPerimee'+String.valueOf(Math.random() * 9999);
+       final String jobName = 'HP_BAT016_SouscriptionPerimee';
        final String cronExp = '0 0 23 ? * * *';
         Test.startTest();
 

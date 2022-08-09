@@ -4,9 +4,6 @@
     <fields>Title</fields>
     <fields>RecordTypeId</fields>
     <fields>LastModifiedDate</fields>
-    <fields>MasterVersionId</fields>
-    <fields>ValidationStatus</fields>
     <fields>PublishStatus</fields>
-    <fields>OwnerId</fields>
     <label>KnowledgeCompactLayout</label>
 </CompactLayout>

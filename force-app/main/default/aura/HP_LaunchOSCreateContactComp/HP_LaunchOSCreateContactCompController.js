@@ -7,7 +7,7 @@
             pageReference: {
                 'type': 'standard__component',
                 'attributes': {
-                    'componentName': 'c__HP_CreationFicheClientComp',
+                    'componentName': 'c__hp_createModifyContactComponent',
                 },
                 'state': {}
             },

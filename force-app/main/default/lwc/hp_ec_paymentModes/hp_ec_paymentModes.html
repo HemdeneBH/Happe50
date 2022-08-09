@@ -2,117 +2,86 @@
   @description       : 
   @author            : Hemdene Ben Hammouda
   @group             : 
-  @last modified on  : 06-10-2022
-  @last modified by  : Hemdene Ben Hammouda
+  @last modified on  : 06-30-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 -->
 <template>
-    <template if:true={version1}>
         <div class="c-payments c-content-bg">
-        <h2 class="hp-bigTitle">{titreV1}</h2>
-    <div class="payment-modes">
-        <ul>
-            <li>
-                <span>Carte Bancaire</span>
-                    <template if:false={isEtatInactif}>
-                        <template if:true={showLienEnSavoirPlusPaiement1}>
-                            <a class="hp-link" onclick={handleNavigateEnSavoirPlusPaiement1}>En savoir +</a>
-                        </template>
-                    </template>
-                        <button disabled={isEtatInactif} onclick={handleClickCB}>
-                    <span>Payer par &nbsp;</span>
-                    <span aria-hidden="true" class="icon icon-cb" style={styleIconCB}></span>
-                    <span class="visually-hidden">CB</span>
-                </button>
-            </li>
-            <li>
-                <span>Paylib</span>
-                    <template if:false={isEtatInactif}>
-                        <template if:true={showLienEnSavoirPlusPaiement2}>
-                            <a class="hp-link" onclick={handleNavigateEnSavoirPlusPaiement2}>En savoir +</a>
-                        </template>
-                    </template>
-                        <button disabled={isEtatInactif} onclick={handleClickPaylib}>
-                    <span aria-hidden="true" class="icon icon-paylib" style={styleIconPaylib}></span>
-                    <span class="visually-hidden">Paylib</span>
-                </button>
-            </li>
-            <li>
-                <span>AmazonPay</span>
-                    <template if:false={isEtatInactif}>
-                        <template if:true={showLienEnSavoirPlusPaiement3}>
-                            <a class="hp-link" onclick={handleNavigateEnSavoirPlusPaiement3}>En savoir +</a>
-                        </template>
-                    </template>
-                    <button disabled={isEtatInactif} onclick={handleClickAmazonPay}>
-                    <span aria-hidden="true" class="icon icon-paypal" style={styleIconAmazonPay}></span>
-                    <span class="visually-hidden">AmazonPay</span>
-                </button>
-            </li>
-            <!-- <li>
-                <span>Paypal</span>
-                    <template if:false={isEtatInactif}>
-                        <template if:true={showLienEnSavoirPlusPaiement3}>
-                            <a class="hp-link" onclick={handleNavigateEnSavoirPlusPaiement3}>En savoir +</a>
-                        </template>
-                    </template>
-                    <button disabled={isEtatInactif} onclick={handleClickAmazonPay}>
-                    <span aria-hidden="true" class="icon icon-paypal" style={styleIconPaypal}></span>
-                    <span class="visually-hidden">Paypal</span>
-                </button>
-            </li> -->
-            <li>
-                <span>Paiement à plusieurs</span>
-                    <template if:false={isEtatInactif}>
-                        <template if:true={showLienEnSavoirPlusPaiement4}>
-                            <a class="hp-link" onclick={handleNavigateEnSavoirPlusPaiement4}>En savoir +</a>
-                        </template>
-                    </template>
-                        <button disabled={isEtatInactif} onclick={openPaiementAplusieursPopin}>Payer à plusieurs</button>
-                </li>
-                <li>
-                    <span>Coupon chèque</span>
-                    <template if:false={isEtatInactif}>
-                        <template if:true={showLienEnSavoirPlusPaiement5}>
-                            <a class="hp-link" onclick={handleNavigateEnSavoirPlusPaiement5}>En savoir +</a>
-                        </template>
-                    </template>
-                    <button disabled={isEtatInactif}>Télécharger</button>
-            </li>
-        </ul>
-    </div>
-        </div>
-    </template>
-
-    <template if:true={version2}>
-        <div class="c-payments c-content-bg">
-            <h2 class="hp-bigTitle">{titreV2}</h2>
-            <div class="hp-option-item">
-                <div class="left">
-                    <span class="iconChecked">
-                        <img class="hp-checked_icon" src ={iconChecked} alt="checked icon"/>
-                    </span>
-                    <span class="option-item">
-                        {textModePaiement} : {actifPRTF.libelleModeEncaissement}
-                    </span>
-                </div>
-                <span class="hp-status">Actif</span>
+            <h2 class="hp-bigTitle">{titleText}</h2>
+            <div class="payment-modes">
+                <ul>
+                    <li>
+                        <span>Carte Bancaire</span>
+                            <template if:false={isEtatInactif}>
+                                <template if:true={showLienEnSavoirPlusPaiement1}>
+                                    <a class="hp-link" onclick={handleNavigateEnSavoirPlusPaiement1}>En savoir +</a>
+                                </template>
+                            </template>
+                                <button disabled={isEtatInactif} onclick={handleClickCB}>
+                            <span>Payer par &nbsp;</span>
+                            <span aria-hidden="true" class="icon icon-cb" style={styleIconCB}></span>
+                            <span class="visually-hidden">CB</span>
+                        </button>
+                    </li>
+                    <li>
+                        <span>Paylib</span>
+                            <template if:false={isEtatInactif}>
+                                <template if:true={showLienEnSavoirPlusPaiement2}>
+                                    <a class="hp-link" onclick={handleNavigateEnSavoirPlusPaiement2}>En savoir +</a>
+                                </template>
+                            </template>
+                                <button disabled={isEtatInactif} onclick={handleClickPaylib}>
+                            <span aria-hidden="true" class="icon icon-paylib" style={styleIconPaylib}></span>
+                            <span class="visually-hidden">Paylib</span>
+                        </button>
+                    </li>
+                    <li>
+                        <span>AmazonPay</span>
+                            <template if:false={isEtatInactif}>
+                                <template if:true={showLienEnSavoirPlusPaiement3}>
+                                    <a class="hp-link" onclick={handleNavigateEnSavoirPlusPaiement3}>En savoir +</a>
+                                </template>
+                            </template>
+                            <button disabled={isEtatInactif} onclick={handleClickAmazonPay}>
+                            <span aria-hidden="true" class="icon icon-paypal" style={styleIconAmazonPay}></span>
+                            <span class="visually-hidden">AmazonPay</span>
+                        </button>
+                    </li>
+                    <!-- <li>
+                        <span>Paypal</span>
+                            <template if:false={isEtatInactif}>
+                                <template if:true={showLienEnSavoirPlusPaiement3}>
+                                    <a class="hp-link" onclick={handleNavigateEnSavoirPlusPaiement3}>En savoir +</a>
+                                </template>
+                            </template>
+                            <button disabled={isEtatInactif} onclick={handleClickAmazonPay}>
+                            <span aria-hidden="true" class="icon icon-paypal" style={styleIconPaypal}></span>
+                            <span class="visually-hidden">Paypal</span>
+                        </button>
+                    </li> -->
+                    <li>
+                        <span>Paiement à plusieurs</span>
+                            <template if:false={isEtatInactif}>
+                                <template if:true={showLienEnSavoirPlusPaiement4}>
+                                    <a class="hp-link" onclick={handleNavigateEnSavoirPlusPaiement4}>En savoir +</a>
+                                </template>
+                            </template>
+                                <button disabled={isEtatInactif} onclick={openPaiementAplusieursPopin}>Payer à plusieurs</button>
+                        </li>
+                        <li>
+                            <span>Coupon chèque</span>
+                            <template if:false={isEtatInactif}>
+                                <template if:true={showLienEnSavoirPlusPaiement5}>
+                                    <a class="hp-link" onclick={handleNavigateEnSavoirPlusPaiement5}>En savoir +</a>
+                                </template>
+                            </template>
+                            <button disabled={isEtatInactif}>Télécharger</button>
+                    </li>
+                </ul>
             </div>
-            <template if:true={datePrelevement}>
-                <div class="c-blocConfirm">
-                    <div class="c-blocConfirm-icon">
-                        <div class="c-blocConfirm-innerCircle">
-                            <img class="c-blocConfirm-img" src={iconConfirm} alt="confirm icon" />
-                        </div>
-                    </div>
-                    <div class="c-blocConfirm__text-wrapper">
-                        <div class="c-blocConfirm__text">
-                            <p>{textDatePrelevementPart1} {datePrelevement} {textDatePrelevementPart2}.</p>
-                        </div>
-                    </div>
-                </div>
-            </template>
+    
         </div>
-    </template>
+
     <form method="POST" action={sogenactifRedirectionURL} data-id="sogenactif">
         <input data-id="redirectionVersion" type="hidden" name="redirectionVersion" value={redirectionVersion}>
         <input data-id="redirectionData" type="hidden" name="redirectionData" value={redirectionData}>

@@ -51,16 +51,15 @@
 
         workspaceAPI.getFocusedTabInfo().then(function(response) {
             var focusedTabId = response.tabId;
-            if (response.closeable) {
-                workspaceAPI.closeTab({tabId: focusedTabId});
-            } else {
-                workspaceAPI.disableTabClose({
-                    tabId: focusedTabId,
-                    disabled: false})
-                .then(function(res){
-                    workspaceAPI.closeTab({tabId: focusedTabId});
-                })
-            }
+            workspaceAPI.disableTabClose({
+                tabId: focusedTabId,
+                disabled: false
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+
+            workspaceAPI.closeTab({tabId: focusedTabId});
         })
         .catch(function(error) {
             console.log(error);
@@ -79,8 +78,7 @@
             + '&StepNameOS=' + (event.getParam("StepNameOS") || '')
             + '&refClientIdBP=' + (event.getParam("refClientIdBP") || '')
             + '&isLWC=' + (event.getParam("isLWC") || '')
-            + '&ContextId=' + component.get("v.recordId")
-            +'&EnqSat='+ component.get('v.EnqSat');
+            + '&ContextId=' + component.get("v.recordId");
             workspaceAPI.openSubtab({
                 parentTabId: tabId,
                 url: urlOmni,
@@ -89,43 +87,6 @@
             	workspaceAPI.setTabLabel({
                 	tabId: subtabId,
                 	label: "TraceInteraction"});
-            }).catch(function(error) {
-           			 console.log(error);
-            });
-        }).catch(function(error) {
-            console.log(error);
-        });
-    },
-    //lancer l'OS SituationCompte à partir historique des factures
-    openSituationCompte: function(component, event) {
-        var workspaceAPI = component.find("workspace");
-        workspaceAPI.getEnclosingTabId().then(function(tabId) {   
-
-            var urlOmni = '/lightning/cmp/vlocity_cmt__vlocityLWCOmniWrapper?c__target=c:smContactSituationCompteFrench&c__layout=lightning&c__tabLabel=Situation de Compte&c__tabIcon=custom:custom18&c__id='+component.get("v.recordId")+ 
-            '&c__ContextId=' + component.get("v.recordId") +
-            '&c__IdBusinessPartner=' + event.getParam('IdBusinessPartner') +
-            '&c__IdPortefeuilleContrat=' + event.getParam('IdPortefeuilleContrat') +
-            '&c__numeroVoie=' + event.getParam('numeroVoie')+
-            '&c__ville='+ event.getParam('ville') +
-            '&c__libelleVoie='+event.getParam('libelleVoie') +
-            '&c__complementAdresse='+event.getParam('complementAdresse')+
-            '&c__codePostal='+event.getParam('codePostal') +
-            '&c__NoCompteContratMaj='+event.getParam('NoCompteContratMaj') +
-            '&c__solde='+event.getParam('solde') +
-            '&c__DLP='+event.getParam('DLP') +
-            '&c__soldeColor='+event.getParam('soldeColor')
-            +'&EnqSat='+ component.get('v.EnqSat');
-
-            
-            console.log("urlOmni"+urlOmni);
-            workspaceAPI.openSubtab({
-                parentTabId: tabId,
-                url: urlOmni,
-                focus: true
-            }).then(function(subtabId) {
-            	workspaceAPI.setTabLabel({
-                	tabId: subtabId,
-                	label: "Situation de Compte"});
             }).catch(function(error) {
            			 console.log(error);
             });

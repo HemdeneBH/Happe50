@@ -18,10 +18,6 @@
    <aura:attribute name="pdl" type="String" default="{!v.pageReference.state.c__pdl}"></aura:attribute>
    <aura:attribute name="pce" type="String" default="{!v.pageReference.state.c__pce}"></aura:attribute>
    <aura:attribute name="AccountId" type="String" default="{!v.pageReference.state.c__AccountId}"></aura:attribute>
-   <aura:attribute name="solde" type="String" default="{!v.pageReference.state.c__solde}"></aura:attribute>
-   <aura:attribute name="DLP" type="String" default="{!v.pageReference.state.c__DLP}"></aura:attribute>
-   <aura:attribute name="soldeColor" type="String" default="{!v.pageReference.state.c__soldeColor}"></aura:attribute>
-   <aura:attribute name="EnqSat" type="String" default="{!v.pageReference.state.c__EnqSat}"></aura:attribute>
 
     
    <c:sM_HistoriqueFactures recordId="{!v.recordId}" libelleVoie="{!v.libelleVoie}" ville="{!v.ville}" 
@@ -29,9 +25,7 @@
       numeroVoie="{!v.numeroVoie}" codePostal="{!v.codePostal}" NoCompteContrat="{!v.NoCompteContrat}" 
       IdBusinessPartner="{!v.IdBusinessPartner}" IdPortefeuilleContrat="{!v.IdPortefeuilleContrat}" dateReelleProchaineFacture="{!v.dateReelleProchaineFacture}" 
       pce="{!v.pce}" pdl="{!v.pdl}" dateTechniqueProchaineFacture="{!v.dateTechniqueProchaineFacture}" uniteReleveElec="{!v.uniteReleveElec}" uniteReleveGaz="{!v.uniteReleveGaz}" 
-      solde="{!v.solde}" DLP="{!v.DLP}" soldeColor="{!v.soldeColor}" oncloseclicked="{!c.handleFilterChange}" AccountId="{!v.AccountId}" 
-      onopenInteraction="{!c.openInteraction}" onopenSituationCompte="{!c.openSituationCompte}" EnqSat="{!v.EnqSat}" >
-      
+      oncloseclicked="{!c.handleFilterChange}" AccountId="{!v.AccountId}"  onopenInteraction="{!c.openInteraction}">
    </c:sM_HistoriqueFactures>	
 
 </aura:component>

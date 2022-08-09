@@ -1,6 +1,7 @@
 /**
  * @File Name          : HP_SM046_OmnichannelStopRoutage.cls
  * @Description        : 
+
  * @Author             : Antoine Latour
  * @Group              : 
  * @Last Modified By   : ChangeMeIn@UserSettingsUnder.SFDoc
@@ -16,6 +17,7 @@ global class HP_SM046_OmnichannelStopRoutage {
     * @author Antoine Latour | 12-11-2020 
     * @param List<PendingServiceRouting> psrList 
     **/
+
     public static void ejectCaseFromOmnichannel(List<PendingServiceRouting> psrList) {
         Set<Id> psrIds = (new Map<Id,PendingServiceRouting>(psrList)).keySet();
 

@@ -1,17 +1,14 @@
-/* @Author: Raouaa Jmour	
-* @Date: 21/01/2020	
+/*
+* @Author: Raouaa Jmour
+* @Date: 21/01/2020
 * @Description: Classe Apex faisant appel à l'opération lirePdlElec
 */
-global class SM_AP13_PdlElec_Bis implements vlocity_cmt.VlocityOpenInterface {
+global class SM_AP13_PdlElec_Bis implements vlocity_cmt.VlocityOpenInterface  {
+    
+    
+    public static SM_UTIL_Cache_Management service = new SM_UTIL_Cache_Management();
 
-	public static SM_UTIL_Cache_Management service = new SM_UTIL_Cache_Management();
-
-	/*
-	* @Author: Mohamed Kchaou
-	* @Date: 11/02/2019
-	* @Description: invoke method called by omniscript
-	*/
-	global Boolean invokeMethod(String methodName, Map < String, Object > inputMap, Map < String, Object > outMap, Map < String, Object > options) {
+    global Boolean invokeMethod(String methodName, Map < String, Object > inputMap, Map < String, Object > outMap, Map < String, Object > options) {
 
 		if (methodName.equals('lirePdlElec')) {
 			try {
@@ -26,12 +23,8 @@ global class SM_AP13_PdlElec_Bis implements vlocity_cmt.VlocityOpenInterface {
 		return true;
 	}
 
-	/*
-	* @Author: Mohamed Kchaou
-	* @Date: 11/02/2019
-	* @Description: init context
-	*/
-	public static gdfsuezComBefChpPivot.contextDt initContext(String application, String version) {
+
+    public static gdfsuezComBefChpPivot.contextDt initContext(String application, String version) {
 		// Créer le contexte d'appel, à créer avec une méthode pour tout les appels octopus
 		gdfsuezComBefChpPivot.system_element osource = new gdfsuezComBefChpPivot.system_element();
 		osource.systemId = application;
@@ -45,31 +38,24 @@ global class SM_AP13_PdlElec_Bis implements vlocity_cmt.VlocityOpenInterface {
 		return octx;
 	}
 
-	/*
-	* @Author: Mohamed Kchaou
-	* @Date: 11/02/2019
-	* @Description: method calling lirePDL
-	*/
-	public static void lirePdl(Map < String, Object > inputMap, Map < String, Object > outMap, Map < String, Object > options) {
+
+    public static void lirePdl(Map < String, Object > inputMap, Map < String, Object > outMap, Map < String, Object > options) {
 
 		
+		String pdlElc = null;
+		
+		pdlElc  = (String) inputMap.get('pdl');
 
-	
-        String pdlElc = null;	
-        pdlElc = String.valueOf(inputMap.get('pdl'));	
-        if (pdlElc == null || pdlElc.length() == 0) {	
-            system.debug('no pdl selected ');	
-            return;	
-
-		}
-
-
+		if (pdlElc == null || pdlElc.length() == 0) {
+				system.debug('no pdl selected ');
+				return;
+			}
+		
 		gdfsuezComBefChpPivot.contextDt octx = initContext('Smile', '3.0');
 		SM_OCTOPUS__c octopusCS = SM_OCTOPUS__c.getOrgDefaults();
 		gdfsuezBefCalypsoPdlelectriciteV3.Dependency port = new gdfsuezBefCalypsoPdlelectriciteV3.Dependency();
 		port.clientCertName_x = octopusCS.certName__c;
-		SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'PDLElec' limit 1];
-		port.endpoint_x = octopusCS.endpoint__c + suffixs.suffix__c;
+		port.endpoint_x = octopusCS.endpoint__c + 'ES-PDLElec_v3';
 		port.inputHttpHeaders_x = new Map < String, String > {
 			'Content-Type' => 'text/xml;charset=utf-8'
 		};
@@ -176,72 +162,48 @@ global class SM_AP13_PdlElec_Bis implements vlocity_cmt.VlocityOpenInterface {
 					}
 				}
 
-				Datetime dateDernierIndexReleve ;
-				String natureIndexReleve ;
-				String natureIndexReleveCode ;
-				String indexBaseReleve ;
-				String indexHPReleve ;
-				String indexHCReleve ;
+				
 				// => dans le cadre de l'us SMIL-1982
 				if (response.lirePDLElectriciteOutput.donneesPDL[0].derniersIndexReleves != null && response.lirePDLElectriciteOutput.donneesPDL[0].derniersIndexReleves[0].programmationFournisseur != null &&
 					response.lirePDLElectriciteOutput.donneesPDL[0].derniersIndexReleves[0].programmationFournisseur.mesuresIndex != null  &&
 					response.lirePDLElectriciteOutput.donneesPDL[0].derniersIndexReleves[0].programmationFournisseur.mesuresIndex.mesureIndex != null ) {
-						dateDernierIndexReleve = response.lirePDLElectriciteOutput.donneesPDL[0].derniersIndexReleves[0].date_x;
-						natureIndexReleve =   response.lirePDLElectriciteOutput.donneesPDL[0].derniersIndexReleves[0].nature.libelleCourt;
-						natureIndexReleveCode =   response.lirePDLElectriciteOutput.donneesPDL[0].derniersIndexReleves[0].nature.code;
+						dateDernierIndex = response.lirePDLElectriciteOutput.donneesPDL[0].derniersIndexReleves[0].date_x;
+						natureIndex =   response.lirePDLElectriciteOutput.donneesPDL[0].derniersIndexReleves[0].nature.libelleCourt;
 						for(gdfsuezComBefCalypsoPdlelectricite.mesureIndex_element mesureIndex :  response.lirePDLElectriciteOutput.donneesPDL[0].derniersIndexReleves[0].programmationFournisseur.mesuresIndex.mesureIndex){
 							if(mesureIndex.mesureIndex != null &&  mesureIndex.mesureIndex.code != null &&  mesureIndex.mesureIndex.code.equals('BASE')){
-								indexBaseReleve = String.valueOf(mesureIndex.indexes[0].index.valeur);                             
+								index = String.valueOf(mesureIndex.indexes[0].index.valeur);                             
 							}else if(mesureIndex.mesureIndex != null &&  mesureIndex.mesureIndex.code != null &&  mesureIndex.mesureIndex.code.equals('HP')){
-								indexHPReleve = String.valueOf(mesureIndex.indexes[0].index.valeur);
+								hp = String.valueOf(mesureIndex.indexes[0].index.valeur);
 							}else if(mesureIndex.mesureIndex != null &&  mesureIndex.mesureIndex.code != null &&  mesureIndex.mesureIndex.code.equals('HC')){
-								indexHCReleve = String.valueOf( mesureIndex.indexes[0].index.valeur);
+								hc = String.valueOf( mesureIndex.indexes[0].index.valeur);
 							}
 						}
 					} 
 				
-
-				Datetime dateDernierIndexPublies ;
-				String natureIndexPublies ;
-				String natureIndexCodePublies ;
-				String indexBasePublies ;
-				String indexHPPublies ;
-				String indexHCPublies ;
-				if ( response.lirePDLElectriciteOutput.donneesPDL[0].historiqueMesures != null && response.lirePDLElectriciteOutput.donneesPDL[0].historiqueMesures.derniersIndexPublies != null 
+				if (response.lirePDLElectriciteOutput.donneesPDL[0].historiqueMesures != null && response.lirePDLElectriciteOutput.donneesPDL[0].historiqueMesures.derniersIndexPublies != null 
 							   && response.lirePDLElectriciteOutput.donneesPDL[0].historiqueMesures.derniersIndexPublies.programmationFournisseur != null &&
 							   response.lirePDLElectriciteOutput.donneesPDL[0].historiqueMesures.derniersIndexPublies.programmationFournisseur.mesuresIndex != null  &&
 							   response.lirePDLElectriciteOutput.donneesPDL[0].historiqueMesures.derniersIndexPublies.programmationFournisseur.mesuresIndex.mesureIndex != null ) {
 								   if(dateDernierIndex == null ||  response.lirePDLElectriciteOutput.donneesPDL[0].historiqueMesures.derniersIndexPublies.date_x >  dateDernierIndex) {
-									dateDernierIndexPublies = response.lirePDLElectriciteOutput.donneesPDL[0].historiqueMesures.derniersIndexPublies.date_x;
-									   natureIndexPublies =   response.lirePDLElectriciteOutput.donneesPDL[0].historiqueMesures.derniersIndexPublies.nature.libelleCourt;
-								   	   natureIndexCodePublies =   response.lirePDLElectriciteOutput.donneesPDL[0].historiqueMesures.derniersIndexPublies.nature.code;
-						
+									dateDernierIndex = response.lirePDLElectriciteOutput.donneesPDL[0].historiqueMesures.derniersIndexPublies.date_x;
+									   natureIndex =   response.lirePDLElectriciteOutput.donneesPDL[0].historiqueMesures.derniersIndexPublies.nature.libelleCourt;
 								   for(gdfsuezComBefCalypsoPdlelectricite.mesureIndex_element mesureIndex :  response.lirePDLElectriciteOutput.donneesPDL[0].historiqueMesures.derniersIndexPublies.programmationFournisseur.mesuresIndex.mesureIndex){
 									   if(mesureIndex.mesureIndex != null &&  mesureIndex.mesureIndex.code != null &&  mesureIndex.mesureIndex.code.equals('BASE')){
-										   indexBasePublies = String.valueOf(mesureIndex.indexes[0].index.valeur);                             
+										   index = String.valueOf(mesureIndex.indexes[0].index.valeur);                             
 									   }else if(mesureIndex.mesureIndex != null &&  mesureIndex.mesureIndex.code != null &&  mesureIndex.mesureIndex.code.equals('HP')){
-										   indexHPPublies = String.valueOf(mesureIndex.indexes[0].index.valeur);
+										   hp = String.valueOf(mesureIndex.indexes[0].index.valeur);
 									   }else if(mesureIndex.mesureIndex != null &&  mesureIndex.mesureIndex.code != null &&  mesureIndex.mesureIndex.code.equals('HC')){
-										   indexHCPublies = String.valueOf( mesureIndex.indexes[0].index.valeur);
+										   hc = String.valueOf( mesureIndex.indexes[0].index.valeur);
 									   }
 								   }
 								   }
 							   }
 				
-				   // <= dans le cadre de l'us FT2-409
+				   // <= dans le cadre de l'us SMIL-1982
 				
-                IndexInfo indexObject  = getIndex( dateDernierIndexReleve , natureIndexReleve 
-                                                  , natureIndexReleveCode ,
-                                                  indexBaseReleve ,
-                                                  indexHPReleve ,
-                                                  indexHCReleve , dateDernierIndexPublies , natureIndexPublies, natureIndexCodePublies,  indexBasePublies, indexHPPublies, indexHCPublies ) ;
-                
-                index =  indexObject.index ;
-                hp	=indexObject.hp ;
-                hc  =      indexObject.hc ;
-                dateDernierIndex	=  indexObject.dateDernierIndex ;
-                natureIndex	=  indexObject.natureIndex ;
 				
+				System.debug('### aka response.lirePDLElectriciteOutput.donneesPDL[0].donneesGenerales ' + response.lirePDLElectriciteOutput.donneesPDL[0].donneesGenerales);
+                System.debug('### aka response.lirePDLElectriciteOutput.donneesPDL[0].donneesGenerales[0].niveauOuvertureServices ' + response.lirePDLElectriciteOutput.donneesPDL[0].donneesGenerales[0].niveauOuvertureServices);
 				if (response.lirePDLElectriciteOutput.donneesPDL[0].donneesGenerales != null && response.lirePDLElectriciteOutput.donneesPDL[0].donneesGenerales[0].niveauOuvertureServices != null) {
 					niveauOuvertureServices = response.lirePDLElectriciteOutput.donneesPDL[0].donneesGenerales[0].niveauOuvertureServices.code;
 					if (niveauOuvertureServices != null) {
@@ -374,20 +336,6 @@ global class SM_AP13_PdlElec_Bis implements vlocity_cmt.VlocityOpenInterface {
 
 
 				autoReleve = processAutoReleve(response.lirePDLElectriciteOutput.donneesPDL[0], inputMap, etatPdl, typeCompteur, situationContractuelle, niveauOuvertureServices);
-				gdfsuezComBefCalypsoPdlelectricite.alimentationPrincipale_element alimentationPrincipale;	
-                alimentationPrincipale = (response.lirePDLElectriciteOutput.donneesPDL[0].situationAlimentation != null) ? response.lirePDLElectriciteOutput.donneesPDL[0].situationAlimentation[0].alimentationPrincipale : null;	
-                gdfsuezComBefChpDistributeurelectric.puissanceSansDecimalDt puissanceRaccordementSoutirage = (alimentationPrincipale != null) ? alimentationPrincipale.puissanceRaccordementSoutirage : null;	
-                // FT2-450 Ajouté par RJM le 20/04/2020	
-                String typeDePhases = 'Inconnu';	
-                if (alimentationPrincipale != null) {	
-                    if (alimentationPrincipale.nbFilsBranchement == 2) {	
-                        typeDePhases = 'Monophasé';	
-                    } else if (alimentationPrincipale.nbFilsBranchement == 4) {	
-                        typeDePhases = 'Triphasé';	
-                    }	
-                }	
-                //
-				
 				pdlInfo pdlElecInfo = new pdlInfo(idPDLElectricite, secteurActivite, situationContractuelle, typeCompteur,
 												  niveauOuvertureServices, index, statut, matricule, etatPdl, dateMHS,
 												  dateDernierIndex, numbreCadrans, numRoues, acessibilite, autoreleve,
@@ -397,27 +345,18 @@ global class SM_AP13_PdlElec_Bis implements vlocity_cmt.VlocityOpenInterface {
 												  cAE_HP, cAE_HC, cAE_WE, cAEGlobale, natureIndex, perimetre);
 				pdlElecInfo.periodeDeDeploiement = periodeDeDeploiement ;
                 pdlElecInfo.dateDerniereModificationFormuleTarifaireAcheminement = dateDerniereModificationFormuleTarifaireAcheminement ;
-				// US FT2-225	
-				pdlElecInfo.situationCompteur = (response.lirePDLElectriciteOutput.donneesPDL[0].situationComptage != null && response.lirePDLElectriciteOutput.donneesPDL[0].situationComptage[0].dispositifComptage != null && response.lirePDLElectriciteOutput.donneesPDL[0].situationComptage[0].dispositifComptage.compteurs != null && response.lirePDLElectriciteOutput.donneesPDL[0].situationComptage[0].dispositifComptage.compteurs.compteur[0] != null && response.lirePDLElectriciteOutput.donneesPDL[0].situationComptage[0].dispositifComptage.compteurs.compteur[0].localisation != null && response.lirePDLElectriciteOutput.donneesPDL[0].situationComptage[0].dispositifComptage.compteurs.compteur[0].localisation.libelleCourt != null) ? response.lirePDLElectriciteOutput.donneesPDL[0].situationComptage[0].dispositifComptage.compteurs.compteur[0].localisation.libelleCourt.toLowerCase('fr') : null;
-					                // US FT2-329	
-				pdlElecInfo.puissanceRaccordementSoutirageValeur = puissanceRaccordementSoutirage.valeur;	
-				pdlElecInfo.puissanceRaccordementSoutirageUnite = puissanceRaccordementSoutirage.unite;	
-				// US FT2-450	
-				pdlElecInfo.typeDePhases = typeDePhases;
+				// US FT2-225
+				pdlElecInfo.situationCompteur = (response.lirePDLElectriciteOutput.donneesPDL[0].situationComptage != null && response.lirePDLElectriciteOutput.donneesPDL[0].situationComptage[0].dispositifComptage != null && response.lirePDLElectriciteOutput.donneesPDL[0].situationComptage[0].dispositifComptage.compteurs != null && response.lirePDLElectriciteOutput.donneesPDL[0].situationComptage[0].dispositifComptage.compteurs.compteur[0] != null && response.lirePDLElectriciteOutput.donneesPDL[0].situationComptage[0].dispositifComptage.compteurs.compteur[0].localisation != null && response.lirePDLElectriciteOutput.donneesPDL[0].situationComptage[0].dispositifComptage.compteurs.compteur[0].localisation.libelleCourt != null) ? response.lirePDLElectriciteOutput.donneesPDL[0].situationComptage[0].dispositifComptage.compteurs.compteur[0].localisation.libelleCourt : null;
 				system.debug('## pdlElecInfo' + pdlElecInfo);
 				system.debug('##response##' + response);
+   
 				outMap.put('pdlElecInfo', pdlElecInfo);
 			}
 
 		}
 	}
 
-	/*
-	* @Author: Mohamed Kchaou
-	* @Date: 11/02/2019
-	* @Description: static method to processAutoReleve called in lirePDL
-	*/
-	private static boolean processAutoReleve(gdfsuezComBefCalypsoPdlelectricite.PDLElectricite pdlElec, Map < String, Object > inputMap, String etatAli, String typeCompteur, String siContractuel, String niveauOuvertureServices) {
+    private static boolean processAutoReleve(gdfsuezComBefCalypsoPdlelectricite.PDLElectricite pdlElec, Map < String, Object > inputMap, String etatAli, String typeCompteur, String siContractuel, String niveauOuvertureServices) {
 		boolean situation = (inputMap.get('chooseSellingOption') != null && ((String) inputMap.get('chooseSellingOption')).equals('Mise en Service / Emménagement')) ? true : false;
 		boolean etatAliBool = (etatAli != null && etatAli.equals('non coupe')) ? true : false;
 		boolean etatContractuel = (pdlElec.donneesGenerales[0] != null && pdlElec.donneesGenerales[0].etatContractuel != null && pdlElec.donneesGenerales[0].etatContractuel.code != null && pdlElec.donneesGenerales[0].etatContractuel.code.equals('SERVC')) ? true : false;
@@ -425,16 +364,7 @@ global class SM_AP13_PdlElec_Bis implements vlocity_cmt.VlocityOpenInterface {
 		return situation && etatAliBool && etatContractuel && typeComptage;
 	}
 
-
-public class IndexInfo{
-   public String  index  ;
-	public	String  hp ;
-    public    String    hc ;
-	public	Datetime	 dateDernierIndex  ;
-	public	String	 natureIndex  ;
-
-}
-	public class PdlInfo {
+    public class PdlInfo {
 
 		public String idPDLElectricite = null;
 		public String secteurActivite;
@@ -471,10 +401,7 @@ public class IndexInfo{
 		public String periodeDeDeploiement ;
 		public String typeComptageDifferencie;
 		public Datetime dateDerniereModificationFormuleTarifaireAcheminement ;
-	    public String situationCompteur;     //donneesPDL . situationComptage . dispositifComptage . compteurs . compteur . localisation . libelleCourt
-		public Integer puissanceRaccordementSoutirageValeur; //donneesPDL . situationAlimentation . alimentationPrincipale . puissanceRaccordementSoutirage . valeur	
-        public String puissanceRaccordementSoutirageUnite; //donneesPDL . situationAlimentation . alimentationPrincipale . puissanceRaccordementSoutirage . unite	
-        public String typeDePhases; //donneesPDL . situationAlimentation . alimentationPrincipale.nbFilsBranchement
+		public String situationCompteur;     //donneesPDL . situationComptage . dispositifComptage . compteurs . compteur . localisation . libelleCourt
 
 		public PdlInfo(String idPDLElectricite, String secteurActivite, String situationContractuelle, String typeCompteur,
 					   String niveauOuvertureServices, string index, String statut, String matricule, string etatPdl, datetime dateMHS, datetime dateDernierIndex, Integer numbreCadrans, Integer numRoues, String acessibilite, boolean autoreleve,  String indexHp,
@@ -540,73 +467,4 @@ public class IndexInfo{
 			}
 		}
 	}
-
-    
-    
-    public static IndexInfo  getIndex(Datetime dateDernierIndexReleve, String natureIndexReleve, String natureIndexReleveCode, String indexBaseReleve, String indexHPReleve, String indexHCReleve, Datetime dateDernierIndexPublies, String natureIndexPublies, String natureIndexCodePublies, String indexBasePublies, String indexHPPublies, String indexHCPublies){
-        
-        IndexInfo index= new IndexInfo() ;
-        // <= dans le cadre de l'us FT2-409
-        if(natureIndexCodePublies != null && natureIndexReleveCode != null){
-            
-            if(natureIndexCodePublies.equalsIgnoreCase('REEL') && natureIndexReleveCode.equalsIgnoreCase('REEL')){
-                if(dateDernierIndexPublies >= dateDernierIndexReleve){
-                    index.index =indexBasePublies ;
-                    index.hp = indexHPPublies ;
-                    index.hc = indexHCPublies ;
-                    index.dateDernierIndex = dateDernierIndexPublies ;
-                    index.natureIndex = natureIndexPublies ;
-                }else{
-                    index.index =indexBaseReleve ;
-                    index.hp = indexHPReleve ;
-                    index.hc = indexHCReleve ;
-                    index.dateDernierIndex = dateDernierIndexReleve ;
-                    index.natureIndex = natureIndexReleve ;
-                }
-            }else if(natureIndexCodePublies.equalsIgnoreCase('REEL')){
-                index.index =indexBasePublies ;
-                index.hp = indexHPPublies ;
-                index.hc = indexHCPublies ;
-                index.dateDernierIndex = dateDernierIndexPublies ;
-                index.natureIndex = natureIndexPublies ;
-            }else if(natureIndexReleveCode.equalsIgnoreCase('REEL')) {
-                index.index =indexBaseReleve ;
-                index.hp = indexHPReleve ;
-                index.hc = indexHCReleve ;
-                index.dateDernierIndex = dateDernierIndexReleve ;
-                index.natureIndex = natureIndexReleve ;
-            }else{
-                
-                if(dateDernierIndexPublies >= dateDernierIndexReleve){
-                    index.index =indexBasePublies ;
-                    index.hp = indexHPPublies ;
-                    index.hc = indexHCPublies ;
-                    index.dateDernierIndex = dateDernierIndexPublies ;
-                    index.natureIndex = natureIndexPublies ;
-                }else{
-                    index.index =indexBaseReleve ;
-                    index.hp = indexHPReleve ;
-                    index.hc = indexHCReleve ;
-                    index.dateDernierIndex = dateDernierIndexReleve ;
-                    index.natureIndex = natureIndexReleve ;
-                }
-                
-            }
-            
-        }else if(natureIndexReleve != null){
-            index.index =indexBaseReleve ;
-            index.hp = indexHPReleve ;
-            index.hc = indexHCReleve ;
-            index.dateDernierIndex = dateDernierIndexReleve ;
-            index.natureIndex = natureIndexReleve ;	
-        }else if(natureIndexPublies != null ){
-            index.index =indexBasePublies ;
-            index.hp = indexHPPublies ;
-            index.hc = indexHCPublies ;
-            index.dateDernierIndex = dateDernierIndexPublies ;
-            index.natureIndex = natureIndexPublies ;
-        }
-        
-        return index ;
-    } 
 }

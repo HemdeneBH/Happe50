@@ -1,3 +1,10 @@
+/**
+ * @description       : 
+ * @author            : Hemdene Ben Hammouda
+ * @group             : 
+ * @last modified on  : 11-23-2021
+ * @last modified by  : Hemdene Ben Hammouda
+**/
 import { NavigationMixin } from 'lightning/navigation';
 import { wire, LightningElement,api,track } from 'lwc';
 import getFlyoutEnergieGrille from '@salesforce/apex/HP_SM001_Agilab.getGrilleTarifaire';
@@ -6,7 +13,7 @@ import getURLPortailAdmin from '@salesforce/apex/HP_SM003_MetadataManager.getURL
 
 export default class Hp_cardEnergie extends NavigationMixin(LightningElement) {
     @wire(getURLPortailAdmin, { keyPortailAdmin: 'HP_URL_PORTAIL_ADMIN' })
-    urlPortailAdmin;
+    urlPortailAdmin;    
     @api type;
     @track _masterdata;
     @track _selectedpfc;

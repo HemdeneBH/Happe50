@@ -80,13 +80,23 @@ global class SM_AP27_ConsentementAPI implements vlocity_cmt.VlocityOpenInterface
 				return;
 			}
 		}
-		System.debug('personne.get(idPersonneUnifie) ='+personne.get('idPersonneUnifie') );
-		System.debug('personne.get(id) ='+personne.get('id') );
-		HttpResponse httpResponse = getResponse(idPersonneFinal,null,null,'GET',CalloutManager.Scope.READ);
+
+		String token;
+        if (Test.isRunningTest()) {
+            token = 'wadfkoa1234';
+        } else {
+            token = SM_MP_AP04_GetTokenService.getTokenFromSmile();
+        }
+
+		if (token == null) {
+			system.debug('Token not found ...');
+			return;
+		}
+		HttpResponse httpResponse = getResponse(token, idPersonneFinal);
 
 		Map < String, Object > resultAsMap = (Map < String, Object > ) JSON.deserializeUntyped(httpResponse.getBody());
 		List < Object > clientAccounts = (List < Object > ) resultAsMap.get('_data');
-		System.debug('clientAccounts**'+clientAccounts);
+
 		if (clientAccounts.Size() == 0) {
 			system.debug('No data to get the idBusinessPartner ' + inputMap.get('IdBuisnessPartner'));
 			/*callCreateConsentement(inputMap, outMap, options);*/
@@ -266,12 +276,18 @@ global class SM_AP27_ConsentementAPI implements vlocity_cmt.VlocityOpenInterface
 		bodyRequest2.put('canal', canalPreference);
 		bodyRequest2.put('application', 'SMILE');
 
+		String token = SM_MP_AP04_GetTokenService.getTokenFromSmile();
+		if (token == null) {
+			system.debug('Token not found ...');
+			return;
+		}
 
 		System.debug('@MHA body' +JSON.serialize(bodyRequest));
 		System.debug('@MHA body2' +JSON.serialize(bodyRequest2));
 
-		HttpResponse httpResponse = getResponse(null,null,bodyRequest,'POST',CalloutManager.Scope.WRITE);
-		HttpResponse httpResponse2 = getResponse(null,null,bodyRequest2,'POST',CalloutManager.Scope.WRITE);
+		HttpResponse httpResponse = getResponseWrite(token, bodyRequest);
+		HttpResponse httpResponse2 = getResponseWrite(token, bodyRequest2);
+
 		/*Map < String, Object > resultAsMap = (Map < String, Object > ) JSON.deserializeUntyped(httpResponse.getBody());
 		List < Object > clientAccounts = (List < Object > ) resultAsMap.get('_data');
 
@@ -494,11 +510,18 @@ global class SM_AP27_ConsentementAPI implements vlocity_cmt.VlocityOpenInterface
 		bodyRequest2.put('canal', canalPreference);
 		bodyRequest2.put('application', 'SMILE');
 
+		String token = SM_MP_AP04_GetTokenService.getTokenFromSmile();
+		if (token == null) {
+			system.debug('Token not found ...');
+			return;
+		}
+
 		System.debug('@MHA body' +JSON.serialize(bodyRequest));
 		System.debug('@MHA body2' +JSON.serialize(bodyRequest2));
 
-		HttpResponse httpResponse = getResponse(null,idAnswer,bodyRequest,'PUT',CalloutManager.Scope.READWRITE);
-		HttpResponse httpResponse2 = getResponse(null,idAnswer2,bodyRequest2,'PUT',CalloutManager.Scope.READWRITE);
+
+		HttpResponse httpResponse = getResponseUpdate(token, bodyRequest, idAnswer);
+		HttpResponse httpResponse2 = getResponseUpdate(token, bodyRequest2, idAnswer2);
 
 		/*Map < String, Object > resultAsMap = (Map < String, Object > ) JSON.deserializeUntyped(httpResponse.getBody());
 		List < Object > clientAccounts = (List < Object > ) resultAsMap.get('_data');
@@ -573,14 +596,101 @@ global class SM_AP27_ConsentementAPI implements vlocity_cmt.VlocityOpenInterface
 	*@CreatedDate : 28/09/2018
 	*LastModified: MHA 17/01/2019
 	*/
-	public static String buildRequestParams(String idPersonneFinal, String idAnswer) {
-		
-		String endpointParams='';
-		if(!String.isBlank(idPersonneFinal))
-			endpointParams += '?idPersonne=' + idPersonneFinal;
-		else if(!String.isBlank(idAnswer))
-			endpointParams += '/' + idAnswer;
-		return endpointParams;
+	public static HttpRequest buildHttpRequestHeaders(String token, String idPersonneFinal) {
+		System.debug('test3');
+		HttpRequest req = new HttpRequest();
+		req.setMethod('GET');
+		String endpointURL = '';
+		if (!Test.isRunningTest()) {
+			SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'Consentements' limit 1];
+			endpointURL = 'callout:AuthAPIHour' +suffixs.suffix__c;
+		}
+		endpointURL = endpointURL+'?idPersonne=' + idPersonneFinal;
+		req.setEndpoint(endpointURL);
+		req.setHeader('X-Correlation-Id', MP_AP13_GuidUtil.NewGuid());
+		if(!Test.isRunningTest()){
+			req.setHeader('api_key', MP_Xdata_credentials__c.getInstance('sm_api_key_INT').Value__c);
+		}
+		req.setHeader('Authorization', 'Bearer ' + token);
+		req.setHeader('Content-Type', 'application/json');
+		return req;
+	}
+
+	/*@Author: MHA
+	*@Description : Construction du header en cas de création
+	*@CreatedDate : 28/09/2018
+	*LastModified: MHA 17/01/2019
+	*/
+	public static HttpRequest buildHttpRequestHeadersPost(String token, Map<String, Object> bodyRequest) {
+		HttpRequest req = new HttpRequest();
+		req.setMethod('POST');
+		String endpointURL = '';
+		if (!Test.isRunningTest()) {
+			SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'Consentements' limit 1];
+			endpointURL = 'callout:AuthAPIHour' +suffixs.suffix__c;
+		}
+		req.setEndpoint(endpointURL);
+		req.setHeader('X-Correlation-Id', MP_AP13_GuidUtil.NewGuid());
+		if(!Test.isRunningTest()){
+			req.setHeader('api_key', MP_Xdata_credentials__c.getInstance('sm_api_key_INT').Value__c);
+		}
+		req.setHeader('Authorization', 'Bearer ' + token);
+		req.setHeader('Content-Type', 'application/json');
+		req.setBody(JSON.serialize(bodyRequest));
+		return req;
+	}
+
+	/*@Author: MHA
+	*@Description : Construction du header en cas de modification
+	*@CreatedDate : 28/09/2018
+	*LastModified: MHA 17/01/2019
+	*/
+	public static HttpRequest buildHttpRequestHeadersPUT(String token, Map<String, Object> bodyRequest, String idAnswer) {
+		HttpRequest req = new HttpRequest();
+		req.setMethod('PUT');
+		String endpointURL = '';
+		if (!Test.isRunningTest()) {
+			SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'Consentements' limit 1];
+			endpointURL = 'callout:AuthAPIHour' +suffixs.suffix__c;
+		}
+		req.setEndpoint(endpointURL + '/' + idAnswer);
+		req.setHeader('X-Correlation-Id', MP_AP13_GuidUtil.NewGuid());
+		if(!Test.isRunningTest()){
+			req.setHeader('api_key', MP_Xdata_credentials__c.getInstance('sm_api_key_INT').Value__c);
+		}
+		req.setHeader('Authorization', 'Bearer ' + token);
+		req.setHeader('Content-Type', 'application/json');
+		req.setBody(JSON.serialize(bodyRequest));
+		return req;
+	}
+
+	/*@Author: MHA
+	*@Description : appel HTTP
+	*@CreatedDate : 28/09/2018
+	*LastModified: MHA 17/01/2019
+	*/
+	public static HttpResponse sendData(HttpRequest request) {
+		Http http = new Http();
+		HttpResponse res;
+		try {
+			res = http.send(request);
+
+		} catch (Exception e) {
+			system.debug('## [consenstement] failed to send data ##');
+			return null;
+		}
+		return res;
+
+	}
+
+	/*@Author: MHA
+	*@Description : gestiond de l'erreur
+	*@CreatedDate : 28/09/2018
+	*LastModified: MHA 17/01/2019
+	*/
+	private static Boolean httpResponseFailureDetected(HttpResponse response) {
+		return (response == null || (response.getStatusCode() != 201 && response.getStatusCode() != 200 && response.getStatusCode() != 206));
+
 	}
 
 	/*@Author: MHA
@@ -588,13 +698,54 @@ global class SM_AP27_ConsentementAPI implements vlocity_cmt.VlocityOpenInterface
 	*@CreatedDate : 28/09/2018
 	*LastModified: MHA 17/01/2019
 	*/
-	public static HttpResponse getResponse(String idPersonneFinal, String idAnswerMap, Map<String, Object> bodyRequest, String method, CalloutManager.Scope scope) {
+	public static HttpResponse getResponse(String token, String idPersonneFinal) {
 
-		String endpointParams = buildRequestParams(idPersonneFinal,idAnswerMap);
-		HttpResponse httpResp = CalloutManager.sendRequest('Consentements', endpointParams, Method, scope,(bodyRequest!=null)?JSON.serialize(bodyRequest):null,null);
-		if (CalloutManager.httpResponseFailureDetected(httpResp)) {
+		System.debug('test4');
+		HttpRequest httpReq = buildHttpRequestHeaders(token, idPersonneFinal);
+		HttpResponse httpResp = sendData(httpReq);
+		if (httpResponseFailureDetected(httpResp)) {
 			// should abort next step's
 			system.debug('## [ consentement] error occured when sending data ##');
+			system.debug(httpResp != null ? httpResp.getBody() : 'http response is null');
+			return null;
+		}
+
+		return httpResp;
+
+	}
+
+	/*@Author: MHA
+	*@Description : appel dans le cas de la création
+	*@CreatedDate : 28/09/2018
+	*LastModified: MHA 17/01/2019
+	*/
+	public static HttpResponse getResponseWrite(String token, Map<String, Object> bodyRequest) {
+		HttpRequest httpReq = buildHttpRequestHeadersPost(token, bodyRequest);
+		HttpResponse httpResp = sendData(httpReq);
+		if (httpResponseFailureDetected(httpResp)) {
+			// should abort next step's
+			system.debug('## [ consentement] error occured when sending data ##');
+			system.debug(httpResp != null ? httpResp.getBody() : 'http response is null');
+			return null;
+		}
+
+		return httpResp;
+
+	}
+
+	/*@Author: MHA
+	*@Description : appel dans le cas de la modification
+	*@CreatedDate : 28/09/2018
+	*LastModified: MHA 17/01/2019
+	*/
+	public static HttpResponse getResponseUpdate(String token, Map<String, Object> bodyRequest, String idAnswer) {
+
+
+		HttpRequest httpReq = buildHttpRequestHeadersPUT(token, bodyRequest, idAnswer);
+		HttpResponse httpResp = sendData(httpReq);
+		if (httpResponseFailureDetected(httpResp)) {
+			// should abort next step's
+			system.debug('## [ PortefeuillesContrats] error occured when sending data ##');
 			system.debug(httpResp != null ? httpResp.getBody() : 'http response is null');
 			return null;
 		}

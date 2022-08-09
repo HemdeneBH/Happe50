@@ -2,7 +2,7 @@
   @description       : 
   @author            : Hemdene Ben Hammouda
   @group             : 
-  @last modified on  : 12-20-2021
+  @last modified on  : 12-16-2021
   @last modified by  : Hemdene Ben Hammouda
 -->
 <template>
@@ -34,7 +34,7 @@
       </div>
     </div>
   </lightning-card>
-    <lightning-accordion allow-multiple-sections-open active-section-name="listCases">
+    <lightning-accordion onsectiontoggle={handleToggleSection} allow-multiple-sections-open active-section-name="listCases">
         <lightning-accordion-section name="generatePDF" label="Générer fiche navette">
             <lightning-card>
               <div class="slds-p-bottom_medium">

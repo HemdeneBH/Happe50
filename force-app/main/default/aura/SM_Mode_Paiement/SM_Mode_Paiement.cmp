@@ -2,122 +2,50 @@
   @description       : 
   @author            : ChangeMeIn@UserSettingsUnder.SFDoc
   @group             : 
-
-  @last modified on  : 04-19-2022
-
-  @last modified by  : FT2-AE
+  @last modified on  : 08-06-2020
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
   Modifications Log 
   Ver   Date         Author                               Modification
   1.0   08-04-2020   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
 -->
 <aura:component implements="flexipage:availableForAllPageTypes,lightning:isUrlAddressable" access="global">
-  <lightning:workspaceAPI aura:id="workspace" />
-  <aura:handler value="{!this}" name="init" action="{!c.init}" />
-
-  <aura:attribute name="AccountId" type="String" default="{!v.pageReference.state.c__AccountId}"></aura:attribute>
-
-  <aura:attribute name="recordId" type="String" default="{!v.pageReference.state.c__recordId}"></aura:attribute>
-  <aura:attribute name="libelleVoie" type="String" default="{!v.pageReference.state.c__libelleVoie}"></aura:attribute>
-  <aura:attribute name="ville" type="String" default="{!v.pageReference.state.c__ville}"></aura:attribute>
-  <aura:attribute name="complementAdresse" type="String" default="{!v.pageReference.state.c__complementAdresse}">
-  </aura:attribute>
-  <aura:attribute name="numeroVoie" type="String" default="{!v.pageReference.state.c__numeroVoie}"></aura:attribute>
-  <aura:attribute name="codePostal" type="String" default="{!v.pageReference.state.c__codePostal}"></aura:attribute>
-  <aura:attribute name="NoCompteContrat" type="String" default="{!v.pageReference.state.c__NoCompteContrat}">
-  </aura:attribute>
-  <aura:attribute name="NoCompteContratMaj" type="String" default="{!v.pageReference.state.c__NoCompteContratMaj}">
-  </aura:attribute>
-  <aura:attribute name="isPrelevee" type="Boolean" default="{!v.pageReference.state.c__isPrelevee}"></aura:attribute>
-  <aura:attribute name="isNonPrelevee" type="Boolean" default="{!v.pageReference.state.c__isNonPrelevee}">
-  </aura:attribute>
-  <aura:attribute name="isMensualisee" type="Boolean" default="{!v.pageReference.state.c__isMensualisee}">
-  </aura:attribute>
-  <aura:attribute name="conditionPaiement" type="String" default="{!v.pageReference.state.c__conditionPaiement}">
-  </aura:attribute>
-  <aura:attribute name="idCoordonneeBancaire" type="String" default="{!v.pageReference.state.c__idCoordonneeBancaire}">
-  </aura:attribute>
-  <aura:attribute name="iBAN" type="String" default="{!v.pageReference.state.c__iBAN}"></aura:attribute>
-  <aura:attribute name="nomInstitutBancaire" type="String" default="{!v.pageReference.state.c__nomInstitutBancaire}">
-  </aura:attribute>
-  <aura:attribute name="titulaireCompte" type="String" default="{!v.pageReference.state.c__titulaireCompte}">
-  </aura:attribute>
-  <aura:attribute name="codeStatutMandat" type="String" default="{!v.pageReference.state.c__codeStatutMandat}">
-  </aura:attribute>
-  <aura:attribute name="libelleStatutMandat" type="String" default="{!v.pageReference.state.c__libelleStatutMandat}">
-  </aura:attribute>
-  <aura:attribute name="bp" type="String" default="{!v.pageReference.state.c__IdBusinessPartner}" />
-  <aura:attribute name="isResilie" type="Boolean" default="{!v.pageReference.state.c__isResilie}" />
-  <aura:attribute name="listAddress" type="String" default="{!v.pageReference.state.c__listAdresses}" />
-  <aura:attribute name="isMensualisation" type="Boolean" default="{!v.pageReference.state.c__isMensualisation}" />
-  <aura:attribute name="solde" type="String" default="{!v.pageReference.state.c__solde}" />
-  <aura:attribute name="pce" type="String" default="{!v.pageReference.state.c__pce}" />
-  <aura:attribute name="pdl" type="String" default="{!v.pageReference.state.c__pdl}" />
-  <aura:attribute name="idContratGaz" type="String" default="{!v.pageReference.state.c__idContratGaz}" />
-  <aura:attribute name="idContratElec" type="String" default="{!v.pageReference.state.c__idContratElec}" />
-  <aura:attribute name="codeINSEE" type="String" default="{!v.pageReference.state.c__codeINSEE}" />
-  <aura:attribute name="numeroMandat" type="String" default="{!v.pageReference.state.c__numeroMandat}" />
-
-  <aura:attribute name="dateTheoriqueReleve" type="String" default="{!v.pageReference.state.c__dateTheoriqueReleve}" />
-  <aura:attribute name="dateReelleProchaineFacture" type="String"
-    default="{!v.pageReference.state.c__dateReelleProchaineFacture}" />
-  <aura:attribute name="dateTechniqueProchaineFacture" type="String"
-    default="{!v.pageReference.state.c__dateTechniqueProchaineFacture}" />
-
-  <aura:attribute name="numeroLocal" type="String" default="{!v.pageReference.state.c__numeroLocal}" />
-  <aura:attribute name="listAdressesPrel" type="String" default="{!v.pageReference.state.c__listAdressesPrel}" />
-  <aura:attribute name="montantEcheance" type="String" default="{!v.pageReference.state.c__montantEcheance}" />
-  <aura:attribute name="montantCumuleEcheance" type="String" default="{!v.pageReference.state.c__montantCumuleEcheance}" />
-  <aura:attribute name="eDocument" type="Boolean" default="{!v.pageReference.state.c__eDocument}" />
-  <aura:attribute name="factureEnLigne" type="String" default="{!v.pageReference.state.c__factureEnLigne}" />
-  <aura:attribute name="libelleFactureEnLigne" type="String" default="{!v.pageReference.state.c__libelleFactureEnLigne}" />
-  <aura:attribute name="tableDataMens" type="String" default="{!v.pageReference.state.c__tableDataMens}" />
-  <aura:attribute name="showCumule" type="String" default="{!v.pageReference.state.c__showCumuleMens}" />
-  <aura:attribute name="isGaz" type="String" default="{!v.pageReference.state.c__isGaz}" />
-  <aura:attribute name="isElec" type="String" default="{!v.pageReference.state.c__isElec}" />
-  <aura:attribute name="isService1" type="String" default="{!v.pageReference.state.c__isService1}" />
-  <aura:attribute name="isService2" type="String" default="{!v.pageReference.state.c__isService2}" />
-  <aura:attribute name="montantGlobal" type="String" default="{!v.pageReference.state.c__montantGlobal}" />
-  <aura:attribute name="montantPaye" type="String" default="{!v.pageReference.state.c__montantPaye}" />
-  <aura:attribute name="idPlanDePaiement" type="String" default="{!v.pageReference.state.c__idPlanDePaiement}" />
-
-  <!--FT2-1298: Ajustement mensualité 1.3 : Etape 1 - intégration-->
-  <aura:attribute name="montantGlobalOriginal" type="String" default="{!v.pageReference.state.c__montantGlobalOriginal}" />
-  <aura:attribute name="categorie" type="String" default="{!v.pageReference.state.c__categorie}" />
-  
-  <aura:attribute name="listOrderedAdresses" type="String" default="{!v.pageReference.state.c__listorderedadresses}" />
-  <!--FT2-1724 Ajustement mensualité V2 : Récupération du montant estimée depuis l’Outil d’estimation-->
-  <aura:attribute name="idPackElec" type="String" default="{!v.pageReference.state.c__idPackElec}" />
-  <aura:attribute name="idPackGaz" type="String" default="{!v.pageReference.state.c__idPackGaz}" />
-  <aura:attribute name="idOfferElec" type="String" default="{!v.pageReference.state.c__idOfferElec}" />
-  <aura:attribute name="idOfferGaz" type="String" default="{!v.pageReference.state.c__idOfferGaz}" />
-  <aura:attribute name="effectiveDateElec" type="String" default="{!v.pageReference.state.c__effectiveDateElec}" />
-  <aura:attribute name="effectiveDateGaz" type="String" default="{!v.pageReference.state.c__effectiveDateGaz}" />
-  
-  <aura:attribute name="EnqSat" type="String" default="{!v.pageReference.state.c__EnqSat}"></aura:attribute>
-  <aura:attribute name="isPlanMensValid" type="String" default="{!v.pageReference.state.c__isPlanMensValid}"></aura:attribute>
-
-  <c:sM_ModePaiement recordId="{!v.recordId}" libelleVoie="{!v.libelleVoie}" ville="{!v.ville}"
-    complementAdresse="{!v.complementAdresse}" numeroVoie="{!v.numeroVoie}" codePostal="{!v.codePostal}"
-    NoCompteContrat="{!v.NoCompteContrat}" isPrelevee="{!v.isPrelevee}" isNonPrelevee="{!v.isNonPrelevee}"
-    conditionPaiement="{!v.conditionPaiement}" idCoordonneeBancaire="{!v.idCoordonneeBancaire}"
-    codeINSEE="{!v.codeINSEE}" iBAN="{!v.iBAN}" nomInstitutBancaire="{!v.nomInstitutBancaire}"
-    titulaireCompte="{!v.titulaireCompte}" codeStatutMandat="{!v.codeStatutMandat}" numeroMandat="{!v.numeroMandat}"
-    dateTechniqueProchaineFacture="{!v.dateTechniqueProchaineFacture}" dateTheoriqueReleve="{!v.dateTheoriqueReleve}"
-    libelleStatutMandat="{!v.libelleStatutMandat}" isMensualisee="{!v.isMensualisee}" onopenprel="{!c.openPrelevement}"
-    onopencoob="{!c.openCoob}" onopenMens="{!c.openMensualisation}" onopenAjustementMens="{!c.openAjustementMens}" bp="{!v.bp}"
-    NoCompteContratMaj="{!v.NoCompteContratMaj}" dateReelleProchaineFacture="{!v.dateReelleProchaineFacture}"
-    isResilie="{!v.isResilie}" numeroLocal="{!v.numeroLocal}" listAddress="{!v.listAddress}"
-    isMensualisation="{!v.isMensualisation}" solde="{!v.solde}" pce="{!v.pce}" pdl="{!v.pdl}"
-    idContratGaz="{!v.idContratGaz}" idContratElec="{!v.idContratElec}" listAdressesPrel="{!v.listAdressesPrel}"
-    AccountId="{!v.AccountId}" onopenInteraction="{!c.openInteraction}" oncloseclicked="{!c.handleCloseClick}" 
-    montantEcheance="{!v.montantEcheance}" montantCumuleEcheance="{!v.montantCumuleEcheance}" 
-    libelleFactureEnLigne="{!v.libelleFactureEnLigne}" factureEnLigne="{!v.factureEnLigne}"  eDocument="{!v.eDocument}" 
-    tableDataMens="{!v.tableDataMens}" showCumule="{!v.showCumule}" isGaz="{!v.isGaz}" isElec="{!v.isElec}"
-    isService1="{!v.isService1}" isService2="{!v.isService2}"   montantGlobal="{!v.montantGlobal}" montantPaye="{!v.montantPaye}"
-    idPlanDePaiement="{!v.idPlanDePaiement}" montantGlobalOriginal="{!v.montantGlobalOriginal}" categorie="{!v.categorie}"
-    listOrderedAdresses="{!v.listOrderedAdresses}" idPackElec="{!v.idPackElec}" idPackGaz="{!v.idPackGaz}" EnqSat="{!v.EnqSat}"
-    idOfferElec="{!v.idOfferElec}" idOfferGaz="{!v.idOfferGaz}" effectiveDateElec="{!v.effectiveDateElec}" effectiveDateGaz="{!v.effectiveDateGaz}" isPlanMensValid="{!v.isPlanMensValid}">
-
-
-  </c:sM_ModePaiement>
+   <lightning:workspaceAPI aura:id="workspace" />
+    <aura:handler value="{!this}" name="init" action="{!c.init}"/>
+    <aura:attribute name="recordId" type="String" default="{!v.pageReference.state.c__recordId}"></aura:attribute>
+    <aura:attribute name="libelleVoie" type="String" default="{!v.pageReference.state.c__libelleVoie}"></aura:attribute>
+    <aura:attribute name="ville" type="String" default="{!v.pageReference.state.c__ville}"></aura:attribute>
+    <aura:attribute name="complementAdresse" type="String" default="{!v.pageReference.state.c__complementAdresse}"></aura:attribute>
+    <aura:attribute name="numeroVoie" type="String" default="{!v.pageReference.state.c__numeroVoie}"></aura:attribute>
+    <aura:attribute name="codePostal" type="String" default="{!v.pageReference.state.c__codePostal}"></aura:attribute>
+    <aura:attribute name="NoCompteContrat" type="String" default="{!v.pageReference.state.c__NoCompteContrat}"></aura:attribute>
+    <aura:attribute name="NoCompteContratMaj" type="String" default="{!v.pageReference.state.c__NoCompteContratMaj}"></aura:attribute>
+    <aura:attribute name="isPrelevee" type="Boolean" default="{!v.pageReference.state.c__isPrelevee}"></aura:attribute>
+    <aura:attribute name="isNonPrelevee" type="Boolean" default="{!v.pageReference.state.c__isNonPrelevee}"></aura:attribute>
+    <aura:attribute name="isMensualisee" type="Boolean" default="{!v.pageReference.state.c__isMensualisee}"></aura:attribute>
+    <aura:attribute name="conditionPaiement" type="String" default="{!v.pageReference.state.c__conditionPaiement}"></aura:attribute>
+    <aura:attribute name="idCoordonneeBancaire" type="String" default="{!v.pageReference.state.c__idCoordonneeBancaire}"></aura:attribute>
+    <aura:attribute name="iBAN" type="String" default="{!v.pageReference.state.c__iBAN}"></aura:attribute>
+    <aura:attribute name="nomInstitutBancaire" type="String" default="{!v.pageReference.state.c__nomInstitutBancaire}"></aura:attribute>
+    <aura:attribute name="titulaireCompte" type="String" default="{!v.pageReference.state.c__titulaireCompte}"></aura:attribute>
+    <aura:attribute name="codeStatutMandat" type="String" default="{!v.pageReference.state.c__codeStatutMandat}"></aura:attribute>
+    <aura:attribute name="libelleStatutMandat" type="String" default="{!v.pageReference.state.c__libelleStatutMandat}"></aura:attribute>
+    <aura:attribute name="bp" type="String" default="{!v.pageReference.state.c__IdBusinessPartner}" />
+    <aura:attribute name="isResilie" type="Boolean" default="{!v.pageReference.state.c__isResilie}" />
+    <aura:attribute name="listAddress" type="String" default="{!v.pageReference.state.c__listAdresses}" />
+    <aura:attribute name="isMensualisation" type="Boolean" default="{!v.pageReference.state.c__isMensualisation}" />
+    <aura:attribute name="solde" type="String" default="{!v.pageReference.state.c__solde}" />
+    <aura:attribute name="pce" type="String" default="{!v.pageReference.state.c__pce}" />
+    <aura:attribute name="pdl" type="String" default="{!v.pageReference.state.c__pdl}" />
+    <aura:attribute name="idContratGaz" type="String" default="{!v.pageReference.state.c__idContratGaz}" />
+    <aura:attribute name="idContratElec" type="String" default="{!v.pageReference.state.c__idContratElec}" />
+    <aura:attribute name="codeINSEE" type="String" default="{!v.pageReference.state.c__codeINSEE}" />
+    <aura:attribute name="numeroMandat" type="String" default="{!v.pageReference.state.c__numeroMandat}" />
+    <aura:attribute name="idLocal" type="String" default="{!v.pageReference.state.c__idLocal}" />
+    <c:sM_ModePaiement recordId="{!v.recordId}" libelleVoie="{!v.libelleVoie}" ville="{!v.ville}" complementAdresse="{!v.complementAdresse}"
+                    numeroVoie="{!v.numeroVoie}" codePostal="{!v.codePostal}" NoCompteContrat="{!v.NoCompteContrat}" isPrelevee="{!v.isPrelevee}" 
+                    isNonPrelevee="{!v.isNonPrelevee}" conditionPaiement="{!v.conditionPaiement}" idCoordonneeBancaire="{!v.idCoordonneeBancaire}" codeINSEE="{!v.codeINSEE}"
+                    iBAN="{!v.iBAN}" nomInstitutBancaire="{!v.nomInstitutBancaire}" titulaireCompte="{!v.titulaireCompte}" codeStatutMandat="{!v.codeStatutMandat}" numeroMandat="{!v.numeroMandat}"
+                    libelleStatutMandat="{!v.libelleStatutMandat}" isMensualisee="{!v.isMensualisee}" onopenprel="{!c.openPrelevement}" onopenMens="{!c.openMensualisation}" bp="{!v.bp}" NoCompteContratMaj="{!v.NoCompteContratMaj}"
+                    isResilie= "{!v.isResilie}" idLocal="{!v.idLocal}" listAddress="{!v.listAddress}" isMensualisation="{!v.isMensualisation}" solde="{!v.solde}" pce="{!v.pce}" pdl="{!v.pdl}" idContratGaz="{!v.idContratGaz}" idContratElec="{!v.idContratElec}">
+   </c:sM_ModePaiement>	
 </aura:component>

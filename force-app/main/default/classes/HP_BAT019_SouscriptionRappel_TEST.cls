@@ -63,7 +63,7 @@ public class HP_BAT019_SouscriptionRappel_TEST {
 
     @isTest static void HP_BAT019_SouscriptionRappel_TEST_Schedule() {
         Test.startTest();
-        final String jobName = 'HP_BAT019_SouscriptionRappel'+String.valueOf(Integer.valueof((Math.random() * 100)));
+        final String jobName = 'HP_BAT019_SouscriptionRappel';
         final String cronExp = '0 0 4 ? * * *';
         HP_BAT019_SouscriptionRappel.launchNewScheduler(cronExp,jobName);
         Test.stopTest();

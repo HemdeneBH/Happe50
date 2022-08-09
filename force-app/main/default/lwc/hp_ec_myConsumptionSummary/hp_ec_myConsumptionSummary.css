@@ -127,3 +127,74 @@
     }
 
 }
+
+
+
+.hp-releve {
+    padding: 30px 40px;
+    margin: 15px;
+    min-height: 270px;
+  }
+  
+  .hp-bigTitle {
+    padding: 0 0 15px 0;
+  }
+
+.hp-releveTitle {
+    color: var(--text-color);
+    font-family: var(--font-bold);
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+  }
+
+  .blue {
+    color: var(--blue);
+  }
+
+ /* Add '.rose' css class for color Rose */
+
+  .purple {
+    color: var(--primary-colour);
+  }
+  @media (max-width: 1280px) {
+    /* 1280px screen and all screens smaller */
+  
+  }
+  
+  @media (max-width: 1024px) {
+  
+    /* Ipad and tablets */
+    .hp-releve  {
+      margin: 10px 0;
+      min-height: auto;
+      padding: 30px 20px;
+    }
+    .hp-releveTitle {
+      font-size: 14px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    /* mobiles */
+  
+  }
+  
+  @media (max-width: 576px) {
+  
+    /* mobiles */
+    .hp-date {
+      display: block;
+    }
+
+  }
+  @media (max-width: 374px) {
+  
+    /* mobiles */
+  
+    .hp-releve {
+      min-height: auto;
+      padding: 25px 20px;
+    }
+ 
+  }

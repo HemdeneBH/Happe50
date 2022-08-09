@@ -1,19 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ListView xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>All</fullName>
-    <columns>NAME</columns>
-    <columns>OffrePousse__c</columns>
-    <columns>OffrePousseLinky__c</columns>
-    <columns>offreRepli__c</columns>
-    <columns>Energie__c</columns>
-    <columns>Actif__c</columns>
-    <columns>Contexte_de_souscription__c</columns>
-    <columns>LAST_UPDATE</columns>
     <filterScope>Everything</filterScope>
-    <filters>
-        <field>Actif__c</field>
-        <operation>equals</operation>
-        <value>1</value>
-    </filters>
-    <label>Tout</label>
+    <label>All</label>
 </ListView>

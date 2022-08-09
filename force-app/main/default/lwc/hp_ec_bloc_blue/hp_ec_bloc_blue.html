@@ -2,7 +2,7 @@
   @description       : 
   @author            : Hemdene Ben Hammouda
   @group             : 
-  @last modified on  : 04-14-2022
+  @last modified on  : 08-01-2022
   @last modified by  : Badr Eddine Belkarchi
 -->
 <template>
@@ -10,12 +10,17 @@
         <div class="c-blocConfirm blue">
             <div class="c-blocConfirm-icon blue">
                 <div class="c-blocConfirm-innerCircle">
-                    <img class="c-blocConfirm-img" src={iconConfirm} alt="confirm icon" />
+                    <template if:true={showIconLampBlocBleue}>
+                        <img class="c-blocConfirm-img" src={iconLamp} alt="confirm icon" />
+                    </template>
+                    <template if:true={showIconConfirmBlocBleue}>
+                        <img class="c-blocConfirm-img" src={iconConfirm} alt="confirm icon" />
+                    </template>
                 </div>
             </div>
             <div class="c-blocConfirm__text-wrapper">
                 <div class="c-blocConfirm__text">
-                    <p>Vous avez bien effectué votre relève le {confirmationdate}</p>
+                    <p>{textBlocBleue} {confirmationdate}</p>
                     <p class="blue">Merci !</p>
                 </div>
             </div>

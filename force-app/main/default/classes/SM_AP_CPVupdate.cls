@@ -1,120 +1,107 @@
 /****************************************************
 * @Project: Smile
 * @Created by: Hamza EL HARRAOUI
-* @LastModified : Hayfa GARBOUT
-* @CreatedDate: 22/02/2021
+* @LastModified : Hamza EL HARRAOUI
+* @CreatedDate: 10/01/2019
 * @Description: Rest Service for CPV Notifications from Octopus to Update CPVs
 ****************************************************/
 
 
 @RestResource(urlMapping='/updateListCPV')
-global class SM_AP_CPVupdate {
-    
-    private static String yesValue = 'Oui';
-    Map<Id, List<Order>> mapCaseOrdersCPV;
-    Map<Order, CPVinfo> mapOrderCPVInfo;
+    global class SM_AP_CPVupdate {
 
-    @HttpPost
-    global static String updateTheCPVs(list<CPVinfo> CPVinfos) {
-        try{
-            Map<String, CPVinfo> mapPcIdPCV = getPCIDS(CPVinfos);
-            if(mapPcIdPCV.keySet().size() > 0){
-                List<Case> casesList = getListCases(mapPcIdPCV.keySet());
-                updateCasesAndOrdersByPC(casesList,mapPcIdPCV);
-            }
-            return 'ok';
+        private static String OUI = 'Oui';
+
+        @HttpPost
+        global static String updateTheCPVs(list<CPVinfo> CPVinfos) {
+                try{
+                    List<String> pcIDsRequest = getPCIDS(CPVinfos);
+                    List<Order> listOrders = findOrdersByListPCID(pcIDsRequest);
+                    List<Case> casesToUpdate = findCasesByOrderNumbers(listOrders);
+                    updateCases(casesToUpdate,CPVinfos,listOrders);
+                    return 'ok';
+                }
+                catch(CPVException ex){
+                    if(!Test.isRunningTest()){
+                    	RestContext.response.statusCode = 500;
+                    }
+                    return ex.getMessage();
+                }
         }
-        catch(CPVException ex){
-            if(!Test.isRunningTest()){
-                RestContext.response.statusCode = 500;
-            }
-            return ex.getMessage();
-        }
-    }
-
-    global class CPVinfo {
-        global String pcId;
-        //(ID ORDER)
-        global String bpId;
-        //(Référence client)
-        global String dateSignature;
-        global String urlPdf;
-        global String canal;
-    }
-
-    private static Map<String, CPVinfo> getPCIDS(list<CPVinfo> cpvInfos){
         
-        Map<String, CPVinfo> mapPcIdPCV = new Map<String, CPVinfo>();
-
-        for(CPVinfo cpv : cpvInfos){
-            if(!String.isBlank(cpv.pcID)){
-                mapPcIdPCV.put(cpv.pcID, cpv);
-            }
+        global class CPVinfo {
+            global String pcId;
+            //(ID ORDER)
+            global String bpId;
+            //(Référence client)
+            global String dateSignature;
+            global String urlPdf;
+            global String canal;
         }
-        return mapPcIdPCV;
-    }
+        
 
-    private static List<Case> getListCases(Set<String> pcIds){
-        return SM_DM003_Case.retrieveCasesByPcIds(pcIds);
-    }
+        private static List<String> getPCIDS(list<CPVinfo> CPVinfos){
+            List<String> listPCIDS = new List<String>();
+            for(CPVinfo cpv : CPVinfos){
+                listPCIDS.add(cpv.pcID);
+            }
+            return listPCIDS;
+        }
+        private static List<String> getOrderNumbers(list<Order> orders){
+            List<String> orderNumbers = new List<String>();
+            for(Order orderItem : orders){
+                orderNumbers.add(orderItem.OrderNumber);
+            }
+            return orderNumbers;
+        }
+        private static List<Order>  findOrdersByListPCID(List<String> pcIDs){
+            List<Order> orders = [SELECT Id,type__c,OrderNumber FROM ORDER WHERE Numero_PC__c IN :pcIDs];
+            return orders;
+        }
 
-    private static void updateCasesAndOrdersByPC(List<Case> casesList, Map<String, CPVinfo> mapPcIdPCV){
+        private static List<Case>  findCasesByOrderNumbers(List<Order> orders){
+            List<String> orderNumbers = getOrderNumbers(orders);
+            List<Case> casesToUpdate = [SELECT id FROM Case WHERE Order_Number__c IN :orderNumbers];
+            if(casesToUpdate.size()!= orders.size()){
+                throw new CPVException('Unexcpected exception : No case found for a given pcID');
+            }
+            return casesToUpdate;
+        }
 
-        List<Case> casesToUpdate = new List<Case>();
-        List<Order> ordersToUpdate = new List<Order>();
+        private static void updateCases(List<Case> listCases, List<CPVinfo> CPVinfo, List<Order> listOrders){
+            for(Integer i=0; i< listCases.size();  i++){
+                updateCaseData(listCases.get(i),CPVinfo.get(i), listOrders.get(i));
+            }
+            update listCases;
+        }
 
-        for(Case caseToUpdate : casesList) {
-            CPVinfo cpvInfo;
-            List<Order> ordersCPV = caseToUpdate.Orders__r;
-            //Le cas Parcours Options seules,les informations CPV sont portées par l'objet Order
-            if (caseToUpdate.Subject == 'Options') {
-                for (Order orderToUpdate : ordersCPV) {
-                    cpvInfo = mapPcIdPCV.get(orderToUpdate.Numero_PC__c);
-                    orderToUpdate.CPV_canal_envoi__c = cpvInfo.canal;
-                    orderToUpdate.Lien_CPV__c = cpvInfo.urlPdf;
-                    orderToUpdate.CPV_Envoyee__c = yesValue;
-                    ordersToUpdate.add(orderToUpdate);
+        private static void updateCaseData(Case caseToUpdate, CPVinfo CPVinfo, Order order){
+            if('Elec'.equals(order.type__c) || 'Gaz'.equals(order.type__c) || 'Duo'.equals(order.type__c)){
+                caseToUpdate.CPV_E_Canal_d_envoi__c = CPVinfo.canal;
+                caseToUpdate.CPV_E_Lien_CPV__c = CPVinfo.urlPdf;
+                if(!String.isBlank(CPVinfo.dateSignature)){
+                    caseToUpdate.CPV_E_Date_de_signature__c = Date.parse(CPVinfo.dateSignature);
+                    caseToUpdate.CPV_E_Signee__c = OUI;
                 }
-            } else {// Le Cas aquisition, les informations CPV sont portées par le Case
-                cpvInfo = mapPcIdPCV.get(caseToUpdate.Orders__r[0].Numero_PC__c);
-                caseToUpdate.CPV_E_Canal_d_envoi__c = cpvInfo.canal;
-                caseToUpdate.CPV_E_Lien_CPV__c = cpvInfo.urlPdf;
-                caseToUpdate.CPV_E_Envoyee__c = yesValue;
+                
+                caseToUpdate.CPV_E_Envoyee__c = OUI;                
             }
-            if(!String.isBlank(cpvInfo.dateSignature)){
-                caseToUpdate.CPV_E_Date_de_signature__c = Date.parse(cpvInfo.dateSignature);
-                caseToUpdate.CPV_E_Signee__c = yesValue;
-                // On a ajouté un update diffèrent pour les cases smile
-                // Ajout d'un update different pour les cases Hramonica + Identification des cases smile selon RT et Origin
-                // Case Smile
-                if (caseToUpdate.RecordType.DeveloperName == 'Acquisition' ||
-                (caseToUpdate.RecordType.DeveloperName == 'Service' && (caseToUpdate.Origin == 'Phone' ||caseToUpdate.Origin == 'Téléphone'))){
-                        caseToUpdate.Status = System.Label.SM_CL21_Case_status_PreCloturee;
-                        caseToUpdate.Sous_statut__c = System.Label.SM_CL21_CaseSubStatusConforme;
-                    }
-                // Case Harmonica
-                else if (caseToUpdate.RecordType.DeveloperName == 'Acquisition_Harmonica' ||(caseToUpdate.RecordType.DeveloperName == 'Service' && caseToUpdate.Origin == 'Tunnel en ligne')){
-                        caseToUpdate.Status = System.Label.SM_CL45_Case_status_ATraiter;
-                        caseToUpdate.Sous_statut__c = System.Label.SM_CL45_CaseSubStatusSign;
-                    }
-                // Other Case
-                else {
-                    caseToUpdate.Status = System.Label.SM_CL20_CaseStatusToBeProcessed;
-                    caseToUpdate.Sous_statut__c = System.Label.SM_CL21_CaseSubStatusCustomerFeedback;
+            else{
+                caseToUpdate.CPV_SA_Canal_d_envoi__c = CPVinfo.canal;
+                caseToUpdate.CPV_SA_Lien_CPV__c = CPVinfo.urlPdf;
+                if(!String.isBlank(CPVinfo.dateSignature)){
+                    caseToUpdate.CPV_SA_Date_de_signature__c = Date.parse(CPVinfo.dateSignature);
+                    caseToUpdate.CPV_SA_Signee__c = OUI;
                 }
+                caseToUpdate.CPV_SA_Envoyee__c = OUI;
             }
-            casesToUpdate.add(caseToUpdate);
-        }
 
-        Savepoint sp = Database.setSavepoint();
-        try{
-            update casesToUpdate;
-            update ordersToUpdate;
+            if(!String.isBlank(CPVinfo.dateSignature)){
+                caseToUpdate.Status = System.Label.SM_CL20_CaseStatusToBeProcessed;
+                caseToUpdate.Sous_statut__c = System.Label.SM_CL21_CaseSubStatusCustomerFeedback;
+            }
+           
+
         }
-        catch(exception ex){
-            Database.rollback(sp);
-        }
-    }
-    
-    private class CPVException extends Exception {}
+        private class CPVException extends Exception {}
 }

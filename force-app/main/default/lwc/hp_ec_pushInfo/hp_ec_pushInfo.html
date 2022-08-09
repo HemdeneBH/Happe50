@@ -1,0 +1,18 @@
+<template>
+    <div class="pushInfo">
+        <button class="pushInfo__btn">
+            <span style={iconTooltipStyle}></span>
+        </button>
+        
+        <div class="pushInfo__content">
+            <div class="pushInfo__title">
+                <lightning-formatted-rich-text value={title}>
+                </lightning-formatted-rich-text>
+            </div>
+            <div class="content">
+                <lightning-formatted-rich-text value={content}>
+                </lightning-formatted-rich-text>
+            </div>
+        </div>
+    </div>
+</template>

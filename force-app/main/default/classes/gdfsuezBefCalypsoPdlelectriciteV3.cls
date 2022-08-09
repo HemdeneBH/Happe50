@@ -4,7 +4,7 @@
  * @Author             : Vincent Albiser
  * @Group              : 
  * @Last Modified By   : Vincent Albiser
- * @Last Modified On   : 24/06/2020 à 11:30:19
+ * @Last Modified On   : 03/04/2020 à 04:35:03
  * @Modification Log   : 
  * Ver       Date            Author      		    Modification
  * 1.0    03/04/2020   Vincent Albiser     Initial Version
@@ -172,8 +172,8 @@ public class gdfsuezBefCalypsoPdlelectriciteV3 {
 					      'gdfsuezBefCalypsoPdlelectriciteV3.lirePDLElectriciteResponse_element'}
 				);
 			response_x = response_map_x.get('response_x');
-			//System.debug('Response === '+response_x);
-			//System.debug(response_map_x.keySet());
+			System.debug('Response === '+response_x);
+			System.debug(response_map_x.keySet());
 			if(HP_Constantes.IS_HAPPE_PROFILE){
 				HttpRequest req = new HttpRequest();
 				req.setEndpoint(endpoint_x);

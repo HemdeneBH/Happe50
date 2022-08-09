@@ -38,10 +38,10 @@ public with sharing class HP_HDL002_Contact {
 			for(Contact cont : contactList) {
 				cont.AccountId = accountMap.get(cont.firstName + ' ' + cont.LastName).Id;
 			}
+			
 		}
 		
-		if(Trigger.isUpdate && Trigger.isBefore) {
-			
+		if(Trigger.isUpdate && Trigger.isBefore) {	
 			for(SObject obj : Trigger.new) {
 				Contact cont = (Contact)obj;
 				if(!isHappe(cont)) {
@@ -67,9 +67,9 @@ public with sharing class HP_HDL002_Contact {
 				};
 				if(isChanged(obj, Trigger.oldMap.get(cont.id), fieldsToCompare)){
 				cont.HP_IsChanged__c = true;
+				}
 			}
 		}
-	}
 	}
 
 	private static Boolean isHappe(final Contact aContact) {

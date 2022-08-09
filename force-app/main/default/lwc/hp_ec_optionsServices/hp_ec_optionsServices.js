@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : Hemdene Ben Hammouda
  * @group             : 
- * @last modified on  : 07-13-2022
- * @last modified by  : Hemdene Ben Hammouda
+ * @last modified on  : 08-03-2022
+ * @last modified by  : Badr Eddine Belkarchi
 **/
 import { LightningElement, api, track, wire } from 'lwc';
 import {switchTheme, loadUserTheme} from 'c/hp_ec_utl_styleManager';
@@ -25,6 +25,8 @@ import { publishMC, subscribeMC, unsubscribeMC, getCurrentMessageValue } from 'c
 import { MessageContext } from 'lightning/messageService';
 
 export default class Hp_ec_optionsServices extends NavigationMixin(LightningElement) {
+
+    @track iconClassCss = 'hp-checked_icon';
 
     @api titleText;
     @api optionVertElecLabel;
@@ -108,6 +110,7 @@ export default class Hp_ec_optionsServices extends NavigationMixin(LightningElem
     }
 
     async populateContractInfo(){
+        this.iconClassCss = 'hp-checked_icon';
         let contractCount = 0;
         let optionText = '';
         if(!this.contractInfo){
@@ -164,6 +167,7 @@ export default class Hp_ec_optionsServices extends NavigationMixin(LightningElem
                             console.log('Error getContractTranquility : ' + error);
                         });
                         if(this.contractInfo._data[i].energie === 'Electricité'){
+                            this.iconClassCss = 'hp-checked_icon';
                             this.isElec = true;
                             const optionVerteResponse = await this.hasOptionVerte(this.contractInfo._data[i].id);
                             if(optionVerteResponse.output && optionVerteResponse.output[0] && optionVerteResponse.output[0].option && optionVerteResponse.output[0].option.vert == true){
@@ -172,6 +176,7 @@ export default class Hp_ec_optionsServices extends NavigationMixin(LightningElem
                                 this.optionVertElecStatus = 'Inactif';
                             }                       
                         }else{
+                            this.iconClassCss = 'hp-checked_icon gaz';
                             this.isElec = false;  
                         }
                     }

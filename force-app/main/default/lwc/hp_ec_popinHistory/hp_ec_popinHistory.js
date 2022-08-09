@@ -22,6 +22,7 @@ export default class Hp_ec_popinHistory extends LightningElement {
      @api containPlansApurement
      @api modePaiementIsAnuel 
      @api downloadUrl
+     @api toolTipTitle;
 
     iconClose = HP_EC_close_icon_light;
     styleIconFile = "-webkit-mask-image: url(" + HP_EC_icon_file + ");";

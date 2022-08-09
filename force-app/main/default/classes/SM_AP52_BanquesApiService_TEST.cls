@@ -27,9 +27,6 @@ private class SM_AP52_BanquesApiService_TEST {
 		mock.setHeader('Content-Type', 'application/json');
 		// Set the mock callout mode
 		Test.setMock(HttpCalloutMock.class, mock);
-		HttpRequest request = new HttpRequest();
-		HttpResponse response = new Http().send(request);
-		system.debug(response.getBody());
 		service.invokeMethod('getInstitutBanqueByIBAN',inputMap,outputMap,null);
 		System.assertEquals('FR7610206024319837747102224',inputMap.get('IbanNumber'));
 		System.assertEquals('CREDIT LYONNAIS',outputMap.get('nomInstitutBancaire'));

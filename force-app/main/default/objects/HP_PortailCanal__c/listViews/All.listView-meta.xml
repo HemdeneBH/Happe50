@@ -15,7 +15,7 @@
     <columns>HP_Paiement_prlvt__c</columns>
     <columns>Visu_docs_s2__c</columns>
     <columns>HP_Liens_SF__c</columns>
-    <columns>HP_Unshort_Lien__c</columns>
+    <columns>HP_Vente_Stay__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
 </ListView>

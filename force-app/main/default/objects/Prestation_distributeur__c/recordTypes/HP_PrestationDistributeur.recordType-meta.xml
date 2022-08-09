@@ -94,6 +94,36 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>HP_Origine_Retablissement__c</picklist>
+        <values>
+            <fullName>HP_Client</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HP_happe</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>HP_Type_de_prestation__c</picklist>
+        <values>
+            <fullName>Coupure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ReductionDePuissance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Retablissement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Souscription</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Niveau_d_ouverture_aux_services__c</picklist>
         <values>
             <fullName>Inconnu</fullName>
@@ -150,6 +180,14 @@
         </values>
         <values>
             <fullName>Emménagement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HP_Coupure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HP_Reduction_de_puissance</fullName>
             <default>false</default>
         </values>
     </picklistValues>

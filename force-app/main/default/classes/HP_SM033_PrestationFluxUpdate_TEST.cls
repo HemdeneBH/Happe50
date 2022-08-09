@@ -95,9 +95,6 @@ public with sharing class HP_SM033_PrestationFluxUpdate_TEST {
 		req.httpMethod = 'POST';
 		req.requestBody = Blob.valueof(JSON.serializePretty(new Map<String, Object>{'OPSinfos' => OPSinfosList}));
         RestContext.request = req;
-        
-        RestResponse res = new RestResponse();
-    	RestContext.response = res;
 
         CMN_OPSUpdate.handleOpsInfos();
         Test.stopTest();

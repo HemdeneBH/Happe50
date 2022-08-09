@@ -3,7 +3,9 @@
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
 
+
  * @last modified on  : 05-18-2021
+
 
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
  * Modifications Log 
@@ -12,6 +14,8 @@
 **/
 
 public with sharing class HP_SM61_ArchiveContactLog {
+
+
 
     public   static void archiveContact(List<case> cases, Id contactId) {
         List<Contact> cont = [select id,AccountId, name from contact where name ='Tel Sans Contact Diabolocom'];
@@ -24,6 +28,8 @@ public with sharing class HP_SM61_ArchiveContactLog {
         System.debug('contactId******* :'+ contactId);
             for (Case cas : cases) {
                 cas.ContactId = contactId;
+
+
                 caseToUpsert.add(cas);
                 System.debug('cas******* :'+ cas);
 
@@ -31,6 +37,8 @@ public with sharing class HP_SM61_ArchiveContactLog {
             System.debug('caseToUpsert size'+ caseToUpsert.size());
 
         if(caseToUpsert.size() > 0) Database.update(caseToUpsert, true);
+
+
         //return con.Id;
 
 }

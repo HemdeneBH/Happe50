@@ -16,20 +16,18 @@ global with sharing class SM_AP67_SmileHeader implements vlocity_cmt.VlocityOpen
 
 		List<Object> resultList = new List<Object>();
 		String IdBusinessPartner;
-        Boolean IsArchiveCNIL;
 		Map<String, Object> resultTemp; 
 		String contactId;
 
 		if(inputMap != null && (contactId = (String)inputMap.get('Id'))!= null){
 
 			List<AccountContactRelation> accountContactList = [Select AccountId, Account.ID_Batiment__c, Account.ID_Local__c, Account.ID_Porte_feuille_contrat__c, Account.No_Compte_contrat__c, Contact.Identifiant_Buisness_Partener__c, Account.RecordType.DeveloperName, Contact.RecordType.DeveloperName  from AccountContactRelation where ContactId=:contactId and Account.RecordType.DeveloperName = 'Consumer' and Account.ID_Local__c != NULL ];
-			List<Contact> contactList = [Select Id, Identifiant_Buisness_Partener__c, SM_isArchive__c, Contact.RecordType.DeveloperName from Contact where Id=:contactId and Identifiant_Buisness_Partener__c != '' and RecordType.DeveloperName = 'Contact_Smile'];
+			List<Contact> contactList = [Select Id, Identifiant_Buisness_Partener__c, Contact.RecordType.DeveloperName from Contact where Id=:contactId and Identifiant_Buisness_Partener__c != '' and RecordType.DeveloperName = 'Contact_Smile'];
 			//List<Contact> contactList = [Select Id, Identifiant_Buisness_Partener__c, Contact.RecordType.DeveloperName from Contact where Id=:contactId and Identifiant_Buisness_Partener__c != ''];
 			if(contactList.size() == 1){
 
 				IdBusinessPartner = (String)contactList.get(0).Identifiant_Buisness_Partener__c;
-				IsArchiveCNIL = contactList.get(0).SM_isArchive__c;
-                outputMap.put('IsArchiveCNIL', IsArchiveCNIL);
+			
 			}            
 			for(AccountContactRelation accConRel : accountContactList){
 
@@ -73,28 +71,27 @@ global with sharing class SM_AP67_SmileHeader implements vlocity_cmt.VlocityOpen
 			outputMap.put('Result', resultList.get(0));
 
 		}
+
 	}
 	
 	@AuraEnabled(cacheable=false)
 	public static Map < String, Object > callSmileHeaderLigthning(Map<String,Object> inputMap) {
-		System.debug('callSmileHeaderLigthning');
+		// System.debug('callSmileHeaderLigthning');
 		Map < String, Object > outputMap  = new Map<String, Object>();
 		List<Object> resultList = new List<Object>();
 		String IdBusinessPartner;
-        Boolean IsArchiveCNIL;
 		Map<String, Object> resultTemp; 
 		String contactId;
 
 		if(inputMap != null && (contactId = (String)inputMap.get('Id'))!= null){
 
-			List<AccountContactRelation> accountContactList = [Select AccountId, Account.ID_Batiment__c, Account.ID_Local__c, Account.ID_Porte_feuille_contrat__c, Account.No_Compte_contrat__c, Account.Tech_CreationContratEnCours__c, Contact.Identifiant_Buisness_Partener__c, Account.RecordType.DeveloperName, Contact.RecordType.DeveloperName  from AccountContactRelation where ContactId=:contactId and Account.RecordType.DeveloperName = 'Consumer' and Account.ID_Local__c != NULL ];
-			List<Contact> contactList = [Select Id, Identifiant_Buisness_Partener__c, SM_isArchive__c, Contact.RecordType.DeveloperName from Contact where Id=:contactId and Identifiant_Buisness_Partener__c != '' and RecordType.DeveloperName = 'Contact_Smile'];
+			List<AccountContactRelation> accountContactList = [Select AccountId, Account.ID_Batiment__c, Account.ID_Local__c, Account.ID_Porte_feuille_contrat__c, Account.No_Compte_contrat__c, Contact.Identifiant_Buisness_Partener__c, Account.RecordType.DeveloperName, Contact.RecordType.DeveloperName  from AccountContactRelation where ContactId=:contactId and Account.RecordType.DeveloperName = 'Consumer' and Account.ID_Local__c != NULL ];
+			List<Contact> contactList = [Select Id, Identifiant_Buisness_Partener__c, Contact.RecordType.DeveloperName from Contact where Id=:contactId and Identifiant_Buisness_Partener__c != '' and RecordType.DeveloperName = 'Contact_Smile'];
 			//List<Contact> contactList = [Select Id, Identifiant_Buisness_Partener__c, Contact.RecordType.DeveloperName from Contact where Id=:contactId and Identifiant_Buisness_Partener__c != ''];
 			if(contactList.size() == 1){
 
 				IdBusinessPartner = (String)contactList.get(0).Identifiant_Buisness_Partener__c;
-				IsArchiveCNIL = contactList.get(0).SM_isArchive__c;
-                outputMap.put('IsArchiveCNIL', IsArchiveCNIL);
+			
 			}            
 			for(AccountContactRelation accConRel : accountContactList){
 
@@ -107,12 +104,11 @@ global with sharing class SM_AP67_SmileHeader implements vlocity_cmt.VlocityOpen
 					addValue(resultTemp, 'IdLocal', accConRel.Account.ID_Local__c);
 					addValue(resultTemp, 'IdPortefeuilleContrat', accConRel.Account.ID_Porte_feuille_contrat__c);
 					addValue(resultTemp, 'NoCompteContrat', accConRel.Account.No_Compte_contrat__c);
-					addValue(resultTemp, 'FlagCreationContratEnCours', accConRel.Account.Tech_CreationContratEnCours__c);
 				
 				}
 
 				addValue(resultTemp, 'IdBusinessPartner', IdBusinessPartner);
-
+				
 				if(resultTemp.size()>0){
 
 					resultList.add(resultTemp);

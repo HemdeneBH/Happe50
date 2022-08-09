@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : Badr Eddine Belkarchi
  * @group             : 
- * @last modified on  : 11-23-2021
- * @last modified by  : Badr Eddine Belkarchi
+ * @last modified on  : 03-15-2022
+ * @last modified by  : Hemdene Ben Hammouda
 **/
 @isTest
 public with sharing class HP_SM027_DistCreatePrestationElec_TEST {
@@ -174,6 +174,160 @@ public with sharing class HP_SM027_DistCreatePrestationElec_TEST {
         HP_EnergyContractRequest energyContractRequest = HP_EM023_Contrat.energyContractRequestBuilder(contact, souscription, contrat_elec);
 
         HP_EnergyContractResponse energyContractResponse = HP_SM027_DistCreatePrestationElec.sendRequest(energyContractRequest, 'SWITCH_SUPLIER', energyResponse, null);
+        Test.stopTest();
+
+        System.assert(energyContractResponse!=null, 'Test OK, Object Non NUll');
+
+    }
+
+    @istest
+    static void sendRequestCoupure(){
+
+        Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> bodyResponseMap = new Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> {
+            'ES-PDLElec_v3' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(201, 
+			'HP_ES_PDLElec_v3_Mock',
+            new Map<String, String> {'Content-Type' => 'application/xml'}),
+            'ES-PrestationServiceElec_v3' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(201, 
+			'HP_PrestaElecMock',
+            new Map<String, String> {'Content-Type' => 'application/xml'})
+            };
+
+        Contact contact = [SELECT Id_Tiers__c,Salutation,lastName,firstName,email,mobilePhone,
+        Phone,No_Voie__c,MailingStreet,MailingPostalCode,Complement_adresse__c,MailingCity 
+        FROM Contact LIMIT 1];
+
+        HP_Souscription__c souscription = [SELECT HP_Canal_de_vente__c,HP_Contact__c,HP_Classe_de_la_consommation_Gaz__c,HP_Code_Gaz_Produit__c,
+        HP_Code_Electrique_Produit__c,HP_Code_postal__c,HP_code_Postal_Insee__c,HP_Date_de_Contractualisation__c,HP_Date_Origine__c,
+        HP_Energie_Verte__c,HP_Estimation_Consommation_electrique__c,HP_Estimation_Consommation_gaz__c,HP_Jour_de_facturation__c,HP_Lien_enregistrement__c,
+        HP_Methode_de_paiement__c,HP_Montant_de_la_facturation_electrique__c,HP_Montant_de_la_facturation_gaz__c,HP_Predecesseur__c,HP_Nom_de_rue__c,
+        HP_Nom_de_ville__c,HP_Numero_de_voie__c,HP_Periode_de_facturation__c,HP_Plan_de_Prix_electrique__c,HP_Puissance_Compteur_electrique__c,
+        HP_Souscription_Digital_Id__c,HP_Type_Energie__c,HP_type_Souscription__c,HP_NumberPCE__c,HP_NumPDL__c,HP_Statut__c
+        FROM HP_Souscription__c LIMIT 1];
+
+        HP_Contrat__c contrat_elec = [SELECT HP_Numero_reference_du_Compteur__c,HP_Id_Compteur__c,HP_Compteur_Base_Plan_Index__c,HP_Compteur_Variable_Plan_prix_Index__c,HP_Compteur_Plan_Bottom_Price_Index__c,
+        HP_Contrat_XdataId__c,HP_Souscription_Digital_Id__c,HP_Proposition_Commerciale_XdataId__c,HP_Souscription__c,HP_Type_de_Compteur__c,HP_Index_de_Compteur__c 
+        FROM HP_Contrat__c LIMIT 1];
+
+
+        Test.startTest();
+        Test.setMock(WebServiceMock.class, new HP_UTIL_ResponseSoapMock());
+        Test.setMock(HttpCalloutMock.class, new HP_UTIL_ResponseRestMock(bodyResponseMap)); 
+
+        HP_EnergyRequest energyRequest = new HP_EnergyRequest(souscription.HP_type_Souscription__c, contrat_elec.HP_Id_Compteur__c,
+								     (Integer)(contrat_elec.HP_Type_de_Compteur__c == 'GAS' ? contrat_elec.HP_Index_de_Compteur__c :
+									       contrat_elec.HP_Compteur_Base_Plan_Index__c != null ?  contrat_elec.HP_Compteur_Base_Plan_Index__c :
+									       contrat_elec.HP_Compteur_Variable_Plan_prix_Index__c ));
+        HP_EnergyResponse energyResponse = HP_SM024_Case.precontratOCTOPUS(souscription, contrat_elec, energyRequest);
+
+        HP_EnergyContractRequest energyContractRequest = HP_EM023_Contrat.energyContractRequestBuilder(contact, souscription, contrat_elec);
+
+        HP_EnergyContractResponse energyContractResponse = HP_SM027_DistCreatePrestationElec.sendRequest(energyContractRequest, 'COUPURE', energyResponse, null);
+        Test.stopTest();
+
+        System.assert(energyContractResponse!=null, 'Test OK, Object Non NUll');
+
+    }
+
+    @istest
+    static void sendRequestReduction(){
+
+        Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> bodyResponseMap = new Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> {
+            'ES-PDLElec_v3' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(201, 
+			'HP_ES_PDLElec_v3_Mock',
+            new Map<String, String> {'Content-Type' => 'application/xml'}),
+            'ES-PrestationServiceElec_v3' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(201, 
+			'HP_PrestaElecMock',
+            new Map<String, String> {'Content-Type' => 'application/xml'})
+            };
+
+        Contact contact = [SELECT Id_Tiers__c,Salutation,lastName,firstName,email,mobilePhone,
+        Phone,No_Voie__c,MailingStreet,MailingPostalCode,Complement_adresse__c,MailingCity 
+        FROM Contact LIMIT 1];
+
+        HP_Souscription__c souscription = [SELECT HP_Canal_de_vente__c,HP_Contact__c,HP_Classe_de_la_consommation_Gaz__c,HP_Code_Gaz_Produit__c,
+        HP_Code_Electrique_Produit__c,HP_Code_postal__c,HP_code_Postal_Insee__c,HP_Date_de_Contractualisation__c,HP_Date_Origine__c,
+        HP_Energie_Verte__c,HP_Estimation_Consommation_electrique__c,HP_Estimation_Consommation_gaz__c,HP_Jour_de_facturation__c,HP_Lien_enregistrement__c,
+        HP_Methode_de_paiement__c,HP_Montant_de_la_facturation_electrique__c,HP_Montant_de_la_facturation_gaz__c,HP_Predecesseur__c,HP_Nom_de_rue__c,
+        HP_Nom_de_ville__c,HP_Numero_de_voie__c,HP_Periode_de_facturation__c,HP_Plan_de_Prix_electrique__c,HP_Puissance_Compteur_electrique__c,
+        HP_Souscription_Digital_Id__c,HP_Type_Energie__c,HP_type_Souscription__c,HP_NumberPCE__c,HP_NumPDL__c,HP_Statut__c
+        FROM HP_Souscription__c LIMIT 1];
+
+        HP_Contrat__c contrat_elec = [SELECT HP_Numero_reference_du_Compteur__c,HP_Id_Compteur__c,HP_Compteur_Base_Plan_Index__c,HP_Compteur_Variable_Plan_prix_Index__c,HP_Compteur_Plan_Bottom_Price_Index__c,
+        HP_Contrat_XdataId__c,HP_Souscription_Digital_Id__c,HP_Proposition_Commerciale_XdataId__c,HP_Souscription__c,HP_Type_de_Compteur__c,HP_Index_de_Compteur__c 
+        FROM HP_Contrat__c LIMIT 1];
+
+
+        Test.startTest();
+        Test.setMock(WebServiceMock.class, new HP_UTIL_ResponseSoapMock());
+        Test.setMock(HttpCalloutMock.class, new HP_UTIL_ResponseRestMock(bodyResponseMap)); 
+
+        HP_EnergyRequest energyRequest = new HP_EnergyRequest(souscription.HP_type_Souscription__c, contrat_elec.HP_Id_Compteur__c,
+								     (Integer)(contrat_elec.HP_Type_de_Compteur__c == 'GAS' ? contrat_elec.HP_Index_de_Compteur__c :
+									       contrat_elec.HP_Compteur_Base_Plan_Index__c != null ?  contrat_elec.HP_Compteur_Base_Plan_Index__c :
+									       contrat_elec.HP_Compteur_Variable_Plan_prix_Index__c ));
+        HP_EnergyResponse energyResponse = HP_SM024_Case.precontratOCTOPUS(souscription, contrat_elec, energyRequest);
+
+        HP_EnergyContractRequest energyContractRequest = HP_EM023_Contrat.energyContractRequestBuilder(contact, souscription, contrat_elec);
+
+        HP_EnergyContractResponse energyContractResponse = HP_SM027_DistCreatePrestationElec.sendRequest(energyContractRequest, 'REDUCTION', energyResponse, null);
+        Test.stopTest();
+
+        System.assert(energyContractResponse!=null, 'Test OK, Object Non NUll');
+
+    }
+
+    @istest
+    static void sendRequestRetablissement(){
+
+        Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> bodyResponseMap = new Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> {
+            'ES-PDLElec_v3' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(201, 
+			'HP_ES_PDLElec_v3_Mock',
+            new Map<String, String> {'Content-Type' => 'application/xml'}),
+            'ES-PrestationServiceElec_v3' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(201, 
+			'HP_PrestaElecMock',
+            new Map<String, String> {'Content-Type' => 'application/xml'})
+            };
+
+        Contact myContact = [SELECT Id_Tiers__c,Salutation,lastName,firstName,email,mobilePhone,
+        Phone,No_Voie__c,MailingStreet,MailingPostalCode,Complement_adresse__c,MailingCity 
+        FROM Contact LIMIT 1];
+
+        HP_Souscription__c mySouscription = [SELECT HP_Canal_de_vente__c,HP_Contact__c,HP_Classe_de_la_consommation_Gaz__c,HP_Code_Gaz_Produit__c,
+        HP_Code_Electrique_Produit__c,HP_Code_postal__c,HP_code_Postal_Insee__c,HP_Date_de_Contractualisation__c,HP_Date_Origine__c,
+        HP_Energie_Verte__c,HP_Estimation_Consommation_electrique__c,HP_Estimation_Consommation_gaz__c,HP_Jour_de_facturation__c,HP_Lien_enregistrement__c,
+        HP_Methode_de_paiement__c,HP_Montant_de_la_facturation_electrique__c,HP_Montant_de_la_facturation_gaz__c,HP_Predecesseur__c,HP_Nom_de_rue__c,
+        HP_Nom_de_ville__c,HP_Numero_de_voie__c,HP_Periode_de_facturation__c,HP_Plan_de_Prix_electrique__c,HP_Puissance_Compteur_electrique__c,
+        HP_Souscription_Digital_Id__c,HP_Type_Energie__c,HP_type_Souscription__c,HP_NumberPCE__c,HP_NumPDL__c,HP_Statut__c
+        FROM HP_Souscription__c LIMIT 1];
+
+        HP_Contrat__c contrat_elec = [SELECT HP_Numero_reference_du_Compteur__c,HP_Id_Compteur__c,HP_Compteur_Base_Plan_Index__c,HP_Compteur_Variable_Plan_prix_Index__c,HP_Compteur_Plan_Bottom_Price_Index__c,
+        HP_Contrat_XdataId__c,HP_Souscription_Digital_Id__c,HP_Proposition_Commerciale_XdataId__c,HP_Souscription__c,HP_Type_de_Compteur__c,HP_Index_de_Compteur__c 
+        FROM HP_Contrat__c LIMIT 1];
+        Case aCase = (Case) HP_UTIL_SmartFactory.createSObject('Case','HP_Facturation',new  Map<String, Object> {'Status' =>  HP_SLCT_Case.Status.NEW_CASE.name(),
+			'ContactId' => myContact.Id,
+			'HP_Energy__c' => 'Gas',
+            'HP_Type__c' =>'HP_Retablissement',
+            'Status' => 'NEW_CASE',
+            'HP_Client_Aide__c' => true,
+            'HP_Souscription__c' => mySouscription.Id,
+            'HP_Contrat__c' => contrat_elec.Id
+            ,'HP_PDL_PCE__c' => '21101817687620'
+			}, null,null,null);
+        insert aCase;
+
+        Test.startTest();
+        Test.setMock(WebServiceMock.class, new HP_UTIL_ResponseSoapMock());
+        Test.setMock(HttpCalloutMock.class, new HP_UTIL_ResponseRestMock(bodyResponseMap)); 
+
+        HP_EnergyRequest energyRequest = new HP_EnergyRequest(mySouscription.HP_type_Souscription__c, contrat_elec.HP_Id_Compteur__c,
+								     (Integer)(contrat_elec.HP_Type_de_Compteur__c == 'GAS' ? contrat_elec.HP_Index_de_Compteur__c :
+									       contrat_elec.HP_Compteur_Base_Plan_Index__c != null ?  contrat_elec.HP_Compteur_Base_Plan_Index__c :
+									       contrat_elec.HP_Compteur_Variable_Plan_prix_Index__c ));
+        HP_EnergyResponse energyResponse = HP_SM024_Case.precontratOCTOPUS(mySouscription, contrat_elec, energyRequest);
+
+        HP_EnergyContractRequest energyContractRequest = HP_EM054_CoupureReduction.energyContractRequestBuilder(aCase, myContact, energyResponse, contrat_elec, false);
+
+        HP_EnergyContractResponse energyContractResponse = HP_SM027_DistCreatePrestationElec.sendRequest(energyContractRequest, 'RETABLISSEMENT', energyResponse, null);
         Test.stopTest();
 
         System.assert(energyContractResponse!=null, 'Test OK, Object Non NUll');

@@ -1,89 +1,36 @@
-/**
- * @author Unknown
- * @date 14/04/2022 - Sutharsan Pushparajah : Enforce Unit Testing
- * @description Test class for SM_AP74_FacturationsPaiementsApiService
- */
 @isTest
-private class SM_AP74_FacturationsPaiements_TEST{
-
-    private static final String ID_PORTEFEUILLE_CONTRAT = '251760';
-
-    /**
-     * @author Sutharsan Pushparajah
-     * @date 14/04/2022
-     * @description Mocking callout in test context
-     */
-    public inherited sharing class TestingMockHttp implements HttpCalloutMock{
-		String payload = '{"_data": [{"idPortefeuilleContrat": 251760,"numeroPortefeuilleContrat": "000516675793","modeEncaissement": "P","conditionPaiement": "+14B","dateProchaineFacture": null,"idCoordonneeBancaire": "0312363915-0005","iBAN": "FR7620041000016339472729286","nomInstitutBancaire": "LA BANQUE POSTALE","codeBIC": "PSSTFRPPPAR","idMandat": 405795,"numeroMandat": "00S014580601","codeStatutMandat": "1","libelleStatutMandat": "Actif","idFacture": null,"numeroFacture": null,"dateComptable": null,"dateEcheance": null,"dateImpression": null,"montantTotal": null,"titulaireCompte": "TEST Raouaa SMS","codeMensualisation": "","libelleMensualisation": "n/a"}]}';
+private class SM_AP74_FacturationsPaiements_TEST
+{
+	/*
+	*	@description : Appel depuis la vue 360
+	*/
+	@isTest(SeeAllData = false)
+	public static void FacturationsPaiements_Vue360_LWC()
+    {
+        System.debug('*** FacturationsPaiementsVue360_LWC');
+        Map < String, Object > inputMap = new Map < String, Object >();		
+        Map < String, Object > outMap = new Map < String, Object >();
+        inputMap.put('idsPortefeuilleContrat','251760');
         
-        TestingMockHttp(){
-            this(false);
-        }
+        // SM_AP53_ContratWS contratWS = new SM_AP53_ContratWS();
+        MP_Generics_Endpoints__c endpoint = new MP_Generics_Endpoints__c();
+        endpoint.EndPoint__c = 'https://auth.ext.rec.api.engie.fr';
+        endpoint.Name = 'api_endpoint';
+        insert endpoint;
 
-        TestingMockHttp(Boolean isEmpty){
-            if (isEmpty){
-                payload = '{"_data":[]}';
-            }
-        }
+        MP_Xdata_credentials__c sm_api_version = new MP_Xdata_credentials__c();
+        sm_api_version.Value__c = '0.1';
+        sm_api_version.Name = 'sm_api_version';
+        insert sm_api_version;
 
-		public HttpResponse respond(HttpRequest req) {
-            HttpResponse res = new HttpResponse();
-            res.setStatus('OK');
-            res.setStatusCode(200);
-            res.setBody(payload);
-
-            return res;
-        }
-    }
-
-    /**
-     * @author Sutharsan Pushparajah
-     * @date 14/04/2022
-     * @description Testing the mock of FacturationsPaiements API
-     */
-    @isTest
-    private static void testCallFacturationsPaiements(){
-        MCK000_MultiRequestMock multiMockHttp = new MCK000_MultiRequestMock();
-        Test.setMock(HttpCalloutMock.class, multiMockHttp);
-        multiMockHttp.addRequestMock('FACTURATIONS_PAIEMENTS', new TestingMockHttp());
-
-        Test.startTest();
-
-        //1 - Testing null values
-        Map<String,Object> outputMap = new Map<String, Object>();
-        outputMap = SM_AP74_FacturationsPaiementsApiService.callFacturationsPaiements(null);
-        System.assertEquals(true, outputMap.containsKey('resultdata'));
-        System.assertEquals(0, ((List<Object>) outputMap.get('resultdata')).size());
-
-        //2 - Testing with no ID_PORTEFEUILLE_CONTRAT attribute
-        Map<String, Object> inputMap = new Map<String, Object>();
-        inputMap.put('Id', ID_PORTEFEUILLE_CONTRAT);
-        outputMap = SM_AP74_FacturationsPaiementsApiService.callFacturationsPaiements(inputMap);
-        System.assertEquals(true, outputMap.containsKey('resultdata'));
-        System.assertEquals(0, ((List<Object>) outputMap.get('resultdata')).size());
-
-        //3 - Testing with no ID_PORTEFEUILLE_CONTRAT value
-        inputMap = new Map<String, Object>();
-        inputMap.put('idsPortefeuilleContrat', null);
-        outputMap = SM_AP74_FacturationsPaiementsApiService.callFacturationsPaiements(inputMap);
-        System.assertEquals(true, outputMap.containsKey('resultdata'));
-        System.assertEquals(0, ((List<Object>) outputMap.get('resultdata')).size());
-
-        //4 - Testing with correct data
-        inputMap = new Map<String, Object>();
-        inputMap.put('idsPortefeuilleContrat', ID_PORTEFEUILLE_CONTRAT);
-        outputMap = SM_AP74_FacturationsPaiementsApiService.callFacturationsPaiements(inputMap);
-        System.assertEquals(true, outputMap.containsKey('resultdata'));
-        System.assertEquals(1, ((List<Object>) outputMap.get('resultdata')).size());
-
-        //5 - Empty payload
-        multiMockHttp.addRequestMock('FACTURATIONS_PAIEMENTS', new TestingMockHttp(true));
-        inputMap = new Map<String, Object>();
-        inputMap.put('idsPortefeuilleContrat', ID_PORTEFEUILLE_CONTRAT);
-        outputMap = SM_AP74_FacturationsPaiementsApiService.callFacturationsPaiements(inputMap);
-        System.assertEquals(true, outputMap.containsKey('resultdata'));
-        System.assertEquals(0, ((List<Object>) outputMap.get('resultdata')).size());
-
-        Test.stopTest();
+        MP_Xdata_credentials__c sm_api_key_INT = new MP_Xdata_credentials__c();
+        sm_api_key_INT.Value__c = 'l7xx914e96a9169640b2ab5afd09c6163829';
+        sm_api_key_INT.Name = 'sm_api_key_INT';
+        insert sm_api_key_INT;
+        
+        outMap = SM_AP74_FacturationsPaiementsApiService.callFacturationsPaiements(inputMap);
+        inputMap.put('idsPortefeuilleContrat',null);
+        outMap = SM_AP74_FacturationsPaiementsApiService.callFacturationsPaiements(inputMap);
+        // System.assertEquals(3, outMap.size());
     }
 }

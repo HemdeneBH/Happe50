@@ -2,7 +2,9 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
+
  * @last modified on  : 11-13-2020
+
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
  * Modifications Log 
  * Ver   Date         Author                               Modification
@@ -10,5 +12,7 @@
 **/
 
 public interface CMN_OPSProcessingInterface {
+
     void processing(List<CMN_OPSinfo> opsIdList);
+
 }

@@ -50,7 +50,7 @@ public without sharing class HP_SM001_Agilab {
         return HP_EM001_Agilab.setClientInfo(informationAide);
     }
 
-    @AuraEnabled
+    @AuraEnabled(cacheable=true)
     public static List<HP_WRP047_InformationsAideRelatedCases> getRelatedCases(String contactId){
         return HP_EM001_Agilab.getRelatedCases(contactId);
     }
@@ -127,7 +127,7 @@ public without sharing class HP_SM001_Agilab {
 
     /**
 	* @description 
-	* @author Badr Eddine Belkarchi | 18/02/2020 
+	* @author Badr Eddine Belkarchi | 13/03/2022
 	* @param idContratXdata 
 	* @return Object 
 	**/
@@ -136,4 +136,72 @@ public without sharing class HP_SM001_Agilab {
 		return (Object) JSON.deserializeUntyped(JSON.serialize(HP_EM001_Agilab.getPaiement(idContratXdata)));
 	}
 
+    @AuraEnabled(cacheable=true)
+	public static Object getPlansApurement(Integer idPorteFueilleContrat){
+		return (Object) JSON.deserializeUntyped(JSON.serialize(HP_EM001_Agilab.getPlansApurement(idPorteFueilleContrat)));
+	}
+
+    /**
+	* @description 
+	* @author Badr Eddine Belkarchi | 21/03/2022 
+	* @param idContratXdata 
+	* @return Object 
+	**/
+    @AuraEnabled(cacheable=true)
+	public static Object getAutoReleve(Integer idContratXdata){
+		return (Object) JSON.deserializeUntyped(JSON.serialize(HP_EM001_Agilab.getAutoReleve(idContratXdata)));
+	}
+
+    /**
+	* @description 
+	* @author Badr Eddine Belkarchi | 31/03/2022  
+	* @param idContratXdata 
+    * @param type_releve 
+    * @param indexhc 
+	* @return Object 
+	**/
+    @AuraEnabled(cacheable=true)
+	public static Object agilabEnvoiIndexBase(Integer idContratXdata, Integer type_releve, Integer indexhc){
+		return (Object) JSON.deserializeUntyped(JSON.serialize(HP_EM001_Agilab.agilabEnvoiIndexBase(idContratXdata,type_releve,indexhc)));
+	}
+
+    /**
+	* @description 
+	* @author Badr Eddine Belkarchi | 31/03/2022 
+	* @param idContratXdata
+    * @param type_releve 
+    * @param indexhc
+    * @param indexhp
+	* @return Object 
+	**/
+    @AuraEnabled(cacheable=true)
+	public static Object agilabEnvoiIndexHPHC(Integer idContratXdata, Integer type_releve, Integer indexhc, Integer indexhp){
+		return (Object) JSON.deserializeUntyped(JSON.serialize(HP_EM001_Agilab.agilabEnvoiIndexHPHC(idContratXdata,type_releve,indexhc,indexhp)));
+	}
+
+    /**
+	* @description récupère la liste des documents  dans Agilab par rapport à son ID XDATA
+	* @author Clément Bauny | 21-04-2022 
+	* @param String idXdataPersonne 
+	* @return Object
+	**/
+	public static Object getDocumentsAgilab(String idPortfolio) {
+		Object data = null;
+		HttpResponse response = HP_UTIL_HTTPUtils.calloutGet(HP_Constantes.AGILAB_DOCUMENTS, 'id_portefeuille_contrat_xdata=' + idPortfolio);
+		if (response.getStatusCode() == HP_HttpStatus.OK) {
+			data = (Object)JSON.deserializeUntyped(response.getBody());
+		}
+		return data;
+    }	
+
+    /**
+	* @description 
+	* @author Badr Eddine Belkarchi | 20/07/2022 
+	* @param id_client_xdata 
+	* @return Object 
+	**/
+    @AuraEnabled(cacheable=true)
+	public static Object getCoTitulaires(Integer id_client_xdata){
+		return (Object) JSON.deserializeUntyped(JSON.serialize(HP_EM001_Agilab.getCoTitulaires(id_client_xdata)));
+	}
 }

@@ -3,8 +3,8 @@
  * @Description        :
  * @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
  * @Group              :
- * @Last Modified By   : ChangeMeIn@UserSettingsUnder.SFDoc
- * @Last Modified On   : 11-02-2021
+ * @Last Modified By   : Badr Eddine Belkarchi
+ * @Last Modified On   : 01-20-2022
  * @Modification Log   :
  * Ver       Date            Author      		    Modification
  * 1.0    07/02/2020   ChangeMeIn@UserSettingsUnder.SFDoc     Initial Version
@@ -194,6 +194,9 @@ public without sharing class HP_SM021_SouscriptionSave2 {
          if(selfcare.estColoc != null) {
          	souscription.HP_EstColoc__c = selfcare.estColoc ? 'Oui' : 'Non';   
          }
+
+		if(selfcare.contractStartDate != null)
+            souscription.HP_Date_de_Contractualisation__c = selfcare.contractStartDate;
         
 		 /* */
         souscription.HP_Parrainage__c = selfcare.parrainage != null ? selfcare.parrainage : false;
@@ -228,12 +231,23 @@ public without sharing class HP_SM021_SouscriptionSave2 {
 		if(gazCont != null && apiResult.get('pcGazId') != null) {
 			gazCont.HP_Proposition_Commerciale_XdataId__c = apiResult.get('pcGazId');
 			gazCont.HP_Porte_Feuille_Contrat__c = ptf.Id;
+			if(selfcare.gasMeterIndex != null)
+				gazCont.HP_Index_de_Compteur__c = selfcare.gasMeterIndex;
+
 			contractList.add(gazCont);
 		}
 		HP_Contrat__c elecCont = getContractType(souscription,'ELEC');
 		if(elecCont != null && apiResult.get('pcElecId') != null) {
 			elecCont.HP_Proposition_Commerciale_XdataId__c = apiResult.get('pcElecId');
 			elecCont.HP_Porte_Feuille_Contrat__c = ptf.Id;
+
+			if(selfcare.electricityMeterBasePlanIndex != null)
+				elecCont.HP_Compteur_Base_Plan_Index__c = selfcare.electricityMeterBasePlanIndex;
+			if(selfcare.electricityMeterVariablePlanPeakPriceIndex != null)
+				elecCont.HP_Compteur_Variable_Plan_prix_Index__c = selfcare.electricityMeterVariablePlanPeakPriceIndex;
+			if(selfcare.electricityMeterVariablePlanBottomPriceIndex != null)
+				elecCont.HP_Compteur_Plan_Bottom_Price_Index__c = selfcare.electricityMeterVariablePlanBottomPriceIndex;
+				
 			contractList.add(elecCont);
 		}
 

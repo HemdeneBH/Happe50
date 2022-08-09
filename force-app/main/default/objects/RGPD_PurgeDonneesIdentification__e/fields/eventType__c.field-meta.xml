@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>eventType__c</fullName>
-    <description>Correspond au type de l&apos;événement du stream purge pouvant contenir les valeurs suivantes : PurgeDonneesFines, PurgeDonneesIdentification, PurgeConsoMensEtFacturation</description>
     <externalId>false</externalId>
     <isFilteringDisabled>false</isFilteringDisabled>
     <isNameField>false</isNameField>

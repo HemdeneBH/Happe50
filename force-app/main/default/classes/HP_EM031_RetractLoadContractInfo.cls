@@ -3,9 +3,7 @@
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
 
-
  * @last modified on  : 08-12-2020
-
 
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
  * Modifications Log 
@@ -29,12 +27,10 @@ global class HP_EM031_RetractLoadContractInfo {
              if(cont.HP_Type_de_Compteur__c == 'ELEC') {
                  result.statusElec = String.valueOf(contMap.get('codeStatutCrm'));
 
-
                  result.labelStatusElec = String.valueOf(contMap.get('libelleStatutCrm'));
              } else {
                  result.statusGaz = String.valueOf(contMap.get('codeStatutCrm'));
                  result.labelStatusGaz = String.valueOf(contMap.get('libelleStatutCrm'));
-
 
              }
          }
@@ -67,12 +63,10 @@ global class HP_EM031_RetractLoadContractInfo {
          global String statusGaz;
          @InvocableVariable
 
-
          global String labelStatusElec;
          @InvocableVariable
          global String labelStatusGaz;
          @InvocableVariable
-
 
          global Integer dayNumberSave3;
          @InvocableVariable

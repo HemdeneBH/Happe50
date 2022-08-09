@@ -2,16 +2,13 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 06-17-2022
- * @last modified by  : Badr Eddine Belkarchi
+ * @last modified on  : 01-25-2022
+ * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 **/
 public without sharing class HP_SM074_CheckWithinBusinessHours {
     
     @InvocableMethod(label = 'Within Business Hours Check')
     public static List<Boolean> CheckWithinBusinessHours(List<String> Name) {
-
-        System.debug('CheckWithinBusinessHours, Start!!');
-        System.debug('CheckWithinBusinessHours, @param Name : '+Name);
 
         String BHName= String.valueOf(+Name[0]);
         // Get Business hours based on name, input from bot
@@ -25,10 +22,7 @@ public without sharing class HP_SM074_CheckWithinBusinessHours {
         List<Holiday> hdList = [Select Id From Holiday where ActivityDate = :targetDate];
         Boolean isHoliday = hdList.size() > 0;
 
-        Boolean isWithin = (isBH && !isHoliday) ;
-
-        System.debug('CheckWithinBusinessHours, @return isWithin : '+isWithin);
-        System.debug('CheckWithinBusinessHours, Exist!!');
+        Boolean isWithin = (isBH || !isHoliday) ;
         return new List<Boolean>{isWithin};
 
     }

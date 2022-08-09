@@ -43,9 +43,7 @@
     
     padding-left: 5px;
   }
-  .loadSpinner { 
-    position: relative;
-  }
+
 .Date-de-reglement-pe {
     width: 366px;
     height: 19px;
@@ -73,21 +71,3 @@ a {
     letter-spacing: normal;
     color: var(--black);
   }
-.error-color{
-color: red;
-}
-/*.montantTitle{
-  font-family: Lato;
-  font-weight: 600;
-  font-style: normal;
-  font-size: 16px;
-}*/
-.montantEcheance{
-  font-weight: normal;
-  font-style: normal;
-  font-size: 13px;
-}
-.AjustMens{
-  background-color:#fda9a9;
-  color:#020202
-}

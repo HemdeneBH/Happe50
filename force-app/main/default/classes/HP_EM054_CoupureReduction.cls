@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : Hemdene Ben Hammouda
  * @group             : 
- * @last modified on  : 02-28-2022
- * @last modified by  : Hemdene Ben Hammouda
+ * @last modified on  : 03-16-2022
+ * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 **/
 public with sharing class HP_EM054_CoupureReduction {
     
@@ -21,8 +21,22 @@ public with sharing class HP_EM054_CoupureReduction {
     private static final String APUREMENT_PARAM = 'id_portefeuille_contrat_xdata=';
     private static final String ANNULER_STATUT = 'CANCELED';
     private static final String AIDE_PARAM = 'id_client_xdata=';
+    private static final String RETABLISSEMENT = 'RETABLISSEMENT';
+    private static final String CLIENT_ORIGIN = 'HP_Client';
+    private static final String HAPPE_ORIGIN = 'HP_happe';
+    private static final String FERME_STATUT = 'CLOSED';
     
-    @future(callout=true)
+    @TestVisible
+    public static String treveHivernale {
+        get{
+            if(treveHivernale == null){
+                treveHivernale = HP_UTIL_MetadataManager.getConfigByKey(TREVE_HIVERNALE);
+            }
+            return treveHivernale;
+        }
+        private set;
+    }
+    
     public static void processCoupureReduction(List<Id> caseIds){
         System.debug('HP_EM054_CoupureReduction.processCoupureReduction | Method Start');
         String commentaire;
@@ -67,10 +81,10 @@ public with sharing class HP_EM054_CoupureReduction {
 
 
     /* Récupérer la date de fin de la trève hivernalle depuis le custom metadata HP_Parameter */
+    @AuraEnabled(cacheable = true)
     public static Date getPeriodeHivernaleEndDate(){
         System.debug('HP_EM054_CoupureReduction.getPeriodeHivernaleEndDate | Method Start');
-        String treveHivernaleParam = HP_UTIL_MetadataManager.getConfigByKey(TREVE_HIVERNALE);
-        List<String> treveHivernaleDates = treveHivernaleParam.split('-');
+        List<String> treveHivernaleDates = treveHivernale.split('-');
         Integer month = Integer.valueOf(treveHivernaleDates[1].split('/')[1]);
         Date resultDate;
         if(Date.today().month()> Integer.valueOf(treveHivernaleDates[1].split('/')[1])){
@@ -84,8 +98,7 @@ public with sharing class HP_EM054_CoupureReduction {
 
     /* Déterminer si on est en période de trève hivernale ou pas selon les dates récupérées */
     public static Boolean withinTreveHivernale(){
-        String treveHivernaleParam = HP_UTIL_MetadataManager.getConfigByKey(TREVE_HIVERNALE);
-        List<String> treveHivernaleDates = treveHivernaleParam.split('-');
+        List<String> treveHivernaleDates = treveHivernale.split('-');
         Integer endMonth = Integer.valueOf(treveHivernaleDates[1].split('/')[1]);
         Integer endDay = Integer.valueOf(treveHivernaleDates[1].split('/')[0]);
         Integer startMonth = Integer.valueOf(treveHivernaleDates[0].split('/')[1]);
@@ -307,5 +320,179 @@ public with sharing class HP_EM054_CoupureReduction {
 
     private static String getCurrentDateFormatted(){
         return String.valueOf(Date.today().day()) + '/' + String.valueOf(Date.today().month()) + '/' + String.valueOf(Date.today().year());
+    }
+
+    public static String processRetablissement(String caseId, Boolean prestaUrgente, String origineDemande){
+        System.debug('HP_EM054_CoupureReduction.processRetablissement | Method Start');
+        List<Prestation_distributeur__c> listPrestation = new List<Prestation_distributeur__c>();
+        HP_EnergyContractRequest energyContractRequest;
+        HP_EnergyContractResponse energyContractResponse;
+        HP_EnergyResponse energyResponse;
+        HP_EnergyRequest energyRequest;
+        String koMessage = 'KO : création manuelle de la presta à réaliser';
+        String result;
+        Case myCase;
+        try {
+            myCase = retriveRetablissementCase(caseId);
+            HP_Contrat__c myContract = myCase.HP_Contrat__r;
+            Contact myContact = myCase.Contact;
+            energyRequest = new HP_EnergyRequest(RETABLISSEMENT, myCase.HP_PDL_PCE__c,
+                                    (Integer)(myContract.HP_Type_de_Compteur__c == 'GAS' ? myContract.HP_Index_de_Compteur__c :
+                                    myContract.HP_Compteur_Base_Plan_Index__c != null ?  myContract.HP_Compteur_Base_Plan_Index__c :
+                                    myContract.HP_Compteur_Variable_Plan_prix_Index__c ));
+            energyResponse = HP_SM024_Case.precontratOCTOPUS(null, myContract, energyRequest);
+            energyResponse.retablissementUrgent = prestaUrgente;
+            energyContractRequest =  energyContractRequestBuilder(myCase, myContact, energyResponse, myContract, prestaUrgente);
+            if(myCase.HP_Energy__c == GAS){
+                energyContractResponse = HP_SM026_DistCreatePrestationGaz.sendRequest(energyContractRequest, RETABLISSEMENT, energyResponse, energyRequest.energyMeterIndex != null);
+            }else{               
+                energyContractResponse = HP_SM027_DistCreatePrestationElec.sendRequest(energyContractRequest, RETABLISSEMENT, energyResponse, energyRequest.energyMeterIndex != null);
+            }
+            System.debug('HP_EM054_CoupureReduction energyContractResponse: '+energyContractResponse);
+            if(energyContractResponse != null){
+                if(energyContractResponse.isSuccess){
+                    closeCaseAndNotifyAgilab(myCase, prestaUrgente, origineDemande);
+                    listPrestation.add(createPrestation(myCase, myContact, myContract, energyContractResponse.prestationDistributorId, prestaUrgente, origineDemande));
+                    result = 'Prestation Crée avec Succès';
+                }else{
+                    result = koMessage;
+                }
+            }else{
+                result = koMessage;
+            }   
+        } catch (Exception ex) {
+            System.debug('HP_EM054_CoupureReduction.processRetablissement | Exception : '+ex.getMessage());
+            throw new AuraHandledException(KoMessage);
+        }
+        if(myCase != null && result != koMessage){
+            update myCase;
+        } 
+        if(!listPrestation.isEmpty()){
+            insert listPrestation;
+        }
+        System.debug('HP_EM054_CoupureReduction.processRetablissement | Method Exit');
+        return result;
+    }
+
+    public static void closeCaseAndNotifyAgilab(Case myCase, Boolean prestaUrgente, String origineDemande){
+        System.debug('HP_EM054_CoupureReduction.closeCaseAndNotifyAgilab | Method Start');
+        HP_Contrat__c myContract = myCase.HP_Contrat__r;
+        try {
+            if(!prestaUrgente){
+                myCase.Status = FERME_STATUT;
+                myCase.HP_Origine_Retablissement__c = origineDemande;
+                myCase.Description = getCurrentDateFormatted() +' : Rétablissement non urgent demandé au distributeur';
+            }else{
+                if(origineDemande == CLIENT_ORIGIN){
+                    myCase.Status = FERME_STATUT;
+                    myCase.HP_Origine_Retablissement__c = origineDemande;
+                    myCase.Description = getCurrentDateFormatted() +' : Rétablissement urgent demandé au distributeur';
+                }else{
+                    myCase.Status = FERME_STATUT;
+                    myCase.HP_Origine_Retablissement__c = origineDemande;
+                    myCase.Description = getCurrentDateFormatted() +' : Rétablissement urgent demandé au distributeur';
+                    Map<String, String> paramMap = new Map<String, String>{'id_contrat_xdata' => String.valueOf(myContract.HP_Contrat_XdataId__c), 'retablissement' => '1'};
+                    HTTPResponse res = HP_UTIL_HTTPUtils.calloutGet(HP_Constantes.AGILAB_PROPOSITION_MODIFIER, paramMap);
+                }
+            }
+        } catch (Exception ex) {
+            System.debug('HP_EM054_CoupureReduction.processReduction | Exception : '+ex.getMessage());
+            throw new AuraHandledException(ex.getMessage());
+        }
+        System.debug('HP_EM054_CoupureReduction.closeCaseAndNotifyAgilab | Method Exit');
+    }
+
+    public static Prestation_distributeur__c createPrestation(Case aCase, Contact myContact, HP_Contrat__c myContract, String businessNumber,  Boolean prestaUrgente, String origineDemande){
+        Prestation_distributeur__c p = new Prestation_distributeur__c(
+			RecordTypeId =  Schema.SObjectType.Prestation_distributeur__c.getRecordTypeInfosByDeveloperName().get('HP_PrestationDistributeur').getRecordTypeId(),
+			Date_de_prestation__c = prestaUrgente == false ? Date.Today().addDays(1) : Date.Today(),
+			Statut__c = 'En cours',
+			Type_OPS__c= 'Online',
+			Secteur_activite__c = aCase.HP_Energy__c == GAS ? 'Gaz' : 'Elec',
+            HP_Type_de_prestation__c ='Retablissement',
+			Numero_PDL_PCE__c = aCase.HP_PDL_PCE__c,
+			Contact__c = myContact.Id,
+			HP_Contrat__c = myContract.Id,
+			Numero_affaire_distributeur__c = businessNumber,
+			Name = businessNumber,
+			Case__c = aCase.Id,
+            HP_Prestation_GRD_Urgente__c = prestaUrgente,
+            HP_Origine_Retablissement__c = origineDemande
+			);
+		return p;
+    }
+
+    public static HP_EnergyContractRequest energyContractRequestBuilder(Case myCase, Contact myContact, HP_EnergyResponse energyResponse, HP_Contrat__c myContract, Boolean prestaUrgente) {
+		HP_EnergyContractRequest c = new HP_EnergyContractRequest();
+		c.personId = String.valueOf(myContact.Id_Tiers__c);
+		c.salutation = myContact.salutation;
+		c.customerLastName = myContact.lastName;
+		c.customerFirstName = myContact.firstName;
+		c.contractStartDate = prestaUrgente == false ? Date.today().addDays(1) : Date.today();
+		c.customerMainPhone =  myContact.mobilePhone != null ? myContact.mobilePhone : myContact.Phone;
+		c.electricityPowerRatingKiloVoltAmpere = energyResponse.electricityPowerRatingKiloVoltAmpere;
+		c.electricityPricingPlan = null;
+		c.energyMeterId = myCase.HP_PDL_PCE__c;
+		c.deliveryPointStreetName = energyResponse.deliveryPointStreetName;
+		c.deliveryPointStreetNumber= energyResponse.deliveryPointStreetNumber;
+		c.deliveryPointCity = energyResponse.deliveryPointCity;
+		c.deliveryPointPostalCode = energyResponse.deliveryPointPostalCode;
+		c.deliveryPointCountryISO2Code = 'FR';
+		c.electricityMeterBasePlanIndex = myContract.HP_Compteur_Base_Plan_Index__c != null ?  Integer.valueOf(myContract.HP_Compteur_Base_Plan_Index__c) : null;
+		c.electricityMeterVariablePlanPeakPriceIndex =myContract.HP_Compteur_Variable_Plan_prix_Index__c != null ?
+							       Integer.valueOf(myContract.HP_Compteur_Variable_Plan_prix_Index__c) : null;
+		c.electricityMeterVariablePlanBottomPriceIndex = myContract.HP_Compteur_Plan_Bottom_Price_Index__c != null ?
+								 Integer.valueOf(myContract.HP_Compteur_Plan_Bottom_Price_Index__c) : null;
+		c.estimatedConsumption = null;
+		c.gasMeterIndex = null;
+
+		return c;
+	}
+
+    /* Récupérer le case de rétablissement à partir de l'Id*/
+    private static Case retriveRetablissementCase(String caseId){
+        return [SELECT  Id,
+                        HP_Contrat__r.HP_Porte_Feuille_Contrat__r.HP_Souscription_Digital_Id__c,
+                        HP_Contrat__r.HP_Porte_Feuille_Contrat__r.Xdata_Id__c,
+                        HP_Contrat__r.Id ,
+                        HP_Contrat__r.HP_Porte_Feuille_Contrat__c,
+                        HP_Contrat__r.HP_Id_Compteur__c ,
+                        HP_Contrat__r.HP_Contrat_XdataId__c,
+                        HP_Contrat__r.HP_Numero_reference_du_Compteur__c ,
+                        HP_Contrat__r.HP_Proposition_Commerciale_XdataId__c ,
+                        HP_Contrat__r.HP_Souscription_Digital_Id__c ,
+                        HP_Contrat__r.HP_Type_de_Compteur__c ,
+                        HP_Contrat__r.HP_Index_de_Compteur__c,
+                        Contact.Id_Tiers__c,
+                        Contact.Adresse_Mail_Principale__c,
+                        Contact.Email,
+                        Contact.Id,
+                        Contact.Salutation,
+                        Contact.MailingStreet,
+                        Contact.lastName,
+                        Contact.No_Voie__c,
+                        Contact.firstName,
+                        Contact.MobilePhone,
+                        Contact.Phone,
+                        Contact.Complement_adresse__c,
+                        Contact.MailingPostalCode,
+                        Contact.MailingCity,
+                        Contact.HP_Shared_URL__c,
+                        HP_Contrat__r.HP_Compteur_Base_Plan_Index__c,
+                        HP_Contrat__r.HP_Compteur_Variable_Plan_prix_Index__c,
+                        HP_Contrat__r.HP_Compteur_Plan_Bottom_Price_Index__c,
+                        Status,
+                        OwnerId,
+                        HP_Type__c, 
+                        HP_Client_Aide__c, 
+                        HP_TreatmentDate__c, 
+                        HP_Energy__c, 
+                        HP_Sous_type__c, 
+                        HP_Xdata_Contrat__c,
+                        HP_PDL_PCE__c,
+                        ContactId,
+                        HP_Type_compteur_electricite__c,
+                        HP_Origine_Retablissement__c
+                        FROM Case Where Id = :caseId LIMIT 1];
     }
 }

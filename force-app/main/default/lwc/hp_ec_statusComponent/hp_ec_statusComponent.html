@@ -2,14 +2,16 @@
   @description       : 
   @author            : Badr Eddine Belkarchi
   @group             : 
-  @last modified on  : 05-24-2022
+  @last modified on  : 08-04-2022
   @last modified by  : Badr Eddine Belkarchi
 -->
 <template>
     <div data-id='pageContent' class={theme}>
         <div class="hp-status c-content-bg slds-col">
             <div class="hp-bigTitle">{title}</div>
-
+            <template if:true={actifContract}>
+                <div class={statusContractClass}>{actifContract.libelleStatutCrm}</div>
+            </template>
             <template if:true={isStatusAJourPaiement}>
                 <div class={statusClass}>À jour de paiement</div>
             </template>
@@ -18,16 +20,16 @@
             </template>
 
             <template if:true={dateDebutValidite}>
-                <div class={infoClass} data-id="date1">Date du contrat : <span class="text-style">{dateDebutValidite}</span></div>
+                <div class={infoClass} data-id="date1">Date du contrat :<span class="text-style">{dateDebutValidite}</span></div>
             </template>
             <template if:true={dateReconduction}>
-                <div class={infoClass} data-id="date2">Renouvellement le : <span class="text-style">{dateReconduction}</span></div>
+                <div class={infoClass} data-id="date2">Renouvellement le :<span class="text-style">{dateReconduction}</span></div>
             </template>
             <template if:true={dateProchaineFacture}>
-                <div class={infoClass} data-id="date3">Prochaine facture le : <span class="text-style">{dateProchaineFacture}</span></div>
+                <div class={infoClass} data-id="date3">Prochaine facture le :<span class="text-style">{dateProchaineFacture}</span></div>
             </template>
             <template if:true={jourPrelevement}>
-                <div class={infoClass}  data-id="date4">Jour de prélèvement le : <span class="text-style">{jourPrelevement}</span></div>
+                <div class={infoClass}  data-id="date4">Jour de prélèvement le :<span class="text-style">{jourPrelevement}</span></div>
             </template>
         </div>
     </div>

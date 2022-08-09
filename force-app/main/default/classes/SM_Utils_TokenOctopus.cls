@@ -17,6 +17,8 @@ global class SM_Utils_TokenOctopus {
         if(usecache){
            // token = (String) sessPart.get('tokenSAP');
             if (token != null && token != '') {
+                system.debug('Octopus token already exist in salesforce cache...');
+                system.debug('token'+token);
 /*
                 //TODO: valider d'utiliser le cache sans refresh
                 gdfsuezComBefChpCalypsoSessionV1New.verifySessionInputDt verifySessionInput = new gdfsuezComBefChpCalypsoSessionV1New.verifySessionInputDt();
@@ -31,6 +33,7 @@ global class SM_Utils_TokenOctopus {
         }
 
         try{
+            system.debug('getting token from octopus');
             SM_OCTOPUS__c octopusCS = SM_OCTOPUS__c.getOrgDefaults();       
             gdfsuezComBefChpCommunV2New.system_element systemValue = new gdfsuezComBefChpCommunV2New.system_element();
             systemValue.systemId = 'SMILE';
@@ -53,16 +56,22 @@ global class SM_Utils_TokenOctopus {
             gdfsuezComBefChpCalypsoSessionV1New.openSessionInputDt openSessionInput = new gdfsuezComBefChpCalypsoSessionV1New.openSessionInputDt();            
             openSessionInput.userId = '{!$Credential.UserName}';
             openSessionInput.password = '{!$Credential.Password}';
+            system.debug('userId'+openSessionInput.userId );
+            system.debug('password'+openSessionInput.password);
             openSessionInput.population = 'Conseillers';
                 
             if(Test.isRunningTest()){
                 token = '1234567890';
                 coderetour = 'OCTOPUS_OpenSession_01';
             }else{
+                //System.debug('response token:'+response.openSessionOutput.sessionToken);
+                //System.debug('response messageRetours'+response.messageRetours);
+                //system.debug('response token life:'+response.openSessionOutput.tokenExpiration);
                 response = dependancy.OpenSession(openSessionInput,ctxDT);
                 coderetour  = response.messageretours.messageRetour[0].code;
                 token = response.openSessionOutput.sessionToken;
             }
+            system.debug('msg retour : ' + coderetour);
             if(coderetour == 'OCTOPUS_OpenSession_01'){
                 output.put('token', token) ;
                 cacheManager.setOctopusToken_SAP(output,null);               
@@ -72,12 +81,14 @@ global class SM_Utils_TokenOctopus {
             }
             return token;
         }catch(Exception e){
+            system.debug(e);
             return null;
         }
     }
 
 
     global static boolean addOcTokenToSOAPReq(Dom.XmlNode headernode){
+        system.debug('start addOcTokenToSOAPReq ' );
         String octoken = getOctopusToken(true);
         if(octoken == null || octoken == ''){
             return false;

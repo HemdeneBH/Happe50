@@ -17,23 +17,25 @@ public with sharing class HP_BAT009_SynchroXdataCodeOffre_TEST {
         HP_APIHourGetOffres_MOCK
 	}
 
+
 	@istest
 	static void testBatch(){
-			Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> bodyResponseMap = new Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> {
-				'auth/oauth/v2/token' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(200,
-													  StaticResource.HP_APIHourAccessTokenResponse_MOCK.name(),
-													  new Map<String, String> {'Content-Type' => 'application/json'}),
-	
-			   'offres' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(200,
-													 StaticResource.HP_APIHourGetOffres_MOCK.name(),
-													 new Map<String, String> { 'Content-Type' => 'application/json;charset=UTF-8'})
-		   };
-   
-		   Test.startTest();
-			   Database.BatchableContext batchableContext;
-			   Test.setMock(HttpCalloutMock.class,new HP_UTIL_ResponseRestMock(bodyResponseMap));
-			   HP_BAT009_SynchroXdataCodeOffre.execute();
-		   Test.stopTest();
-		   System.assert([Select count() From HP_Offre__c ] > 0 , 'Custom setting Offre inserted in SF');
+
+		Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> bodyResponseMap = new Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> {
+			 'auth/oauth/v2/token' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(200,
+												   StaticResource.HP_APIHourAccessTokenResponse_MOCK.name(),
+												   new Map<String, String> {'Content-Type' => 'application/json'}),
+ 
+			'offres' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(200,
+												  StaticResource.HP_APIHourGetOffres_MOCK.name(),
+												  new Map<String, String> { 'Content-Type' => 'application/json;charset=UTF-8'})
+		};
+
+		Test.startTest();
+			Database.BatchableContext batchableContext;
+			Test.setMock(HttpCalloutMock.class,new HP_UTIL_ResponseRestMock(bodyResponseMap));
+			HP_BAT009_SynchroXdataCodeOffre.execute();
+		Test.stopTest();
+		System.assert([Select count() From HP_Offre__c ] > 0 , 'Custom setting Offre inserted in SF');
 	}
 }

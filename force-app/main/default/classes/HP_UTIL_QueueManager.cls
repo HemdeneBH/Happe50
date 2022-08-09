@@ -55,6 +55,7 @@ public with sharing class HP_UTIL_QueueManager {
     * @param String queueName 
     * @return Id 
     **/
+    @AuraEnabled(cacheable = true)
     public static Id getQueueIdByName(String queueName) {
         if(queueMapByName == null) {
             queueMapByName = getQueueMapByName();

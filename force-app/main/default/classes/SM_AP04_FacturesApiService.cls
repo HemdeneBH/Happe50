@@ -12,45 +12,9 @@ global class SM_AP04_FacturesApiService implements vlocity_cmt.VlocityOpenInterf
             }
         }
         
-        //methode CallFacture pour récuperer la liste des factures au niveau LWC (Vlocity)
-        if (methodName.equals('callFactureLWC')) {
-            try {
-                outMap.put('result',callFactureLWC(inputMap));
-                return true;
-                // your implementation, use outMap to send response back to OmniScript
-            } catch (Exception e) {
-                system.debug(e);
-                return false;
-            }
-        }
-
-        //methode CallFacture pour récuperer la liste des factures au niveau LWC (Vlocity)
-        if (methodName.equals('callFactureWithIdLWC')) {
-            try {
-                outMap.put('result',callFactureWithIdLWC(inputMap));
-                return true;
-                // your implementation, use outMap to send response back to OmniScript
-            } catch (Exception e) {
-                system.debug(e);
-                return false;
-            }
-        }
-        
         if (methodName.equals('sendDuplicata')) {
             try {
                 sendDuplicata(inputMap, outMap, options);
-                // your implementation, use outMap to send response back to OmniScript
-            } catch (Exception e) {
-                system.debug(e);
-                return false;
-            }
-        }
-
-        //methode DocumentApiService pour récuperer l'url vers une facture au niveau LWC (Vlocity)
-        if (methodName.equals('callFactureLinkLWC')) {
-            try {
-                outMap.put('result',SM_AP36_DocumentApiService.callFactureLWC(inputMap));
-                return true;
                 // your implementation, use outMap to send response back to OmniScript
             } catch (Exception e) {
                 system.debug(e);
@@ -78,6 +42,18 @@ global class SM_AP04_FacturesApiService implements vlocity_cmt.VlocityOpenInterf
             system.debug('IdPortefeuilleContrat not found ...');
             return outMap;
         }
+        String token;
+        if(!Test.isRunningTest()){
+            token = SM_MP_AP04_GetTokenService.getTokenFromSmile();
+        }else{
+            token = 'test';
+        }
+
+        if (token == null) {
+            system.debug('Token not found ...');
+            return outMap;
+        }
+
         //vérification taille
         //author MHA
         String idPC = String.valueOf(inputMap.get('IdPortefeuilleContrat'));
@@ -97,9 +73,9 @@ global class SM_AP04_FacturesApiService implements vlocity_cmt.VlocityOpenInterf
             mock.setHeader('Content-Type', 'application/json');
             // Set the mock callout mode
             Test.setMock(HttpCalloutMock.class, mock);
-            httpResponse = getResponse(idBP, idPC, '');
+            httpResponse = getResponse(token, idBP,idPC);
         }else{
-            httpResponse = getResponse((String)idBP, idPC, '');
+            httpResponse = getResponse(token, (String)idBP,idPC);
         }
         if(httpResponse != null){
             Map < String, Object > resultAsMap = ( Map < String, Object > ) JSON.deserializeUntyped(httpResponse.getBody());
@@ -115,11 +91,8 @@ global class SM_AP04_FacturesApiService implements vlocity_cmt.VlocityOpenInterf
                     Integer i = 0;
                     while (i < listFacture.size())
                     {
-                        
                         Map < String, Object > factMap = ( Map< String, Object > ) listFacture.get(i);
-                        system.debug('referenceAnnulation------>'+ String.valueOf(factMap.get('referenceAnnulation')));
-                        system.debug('numeroFacture------>'+ String.valueOf(factMap.get('numeroFacture')));
-                        if(billTypeToExclude.contains( (String) factMap.get('codeTypeCalcul')) || String.valueOf(factMap.get('referenceAnnulation')).length() > 1 )
+                        if(billTypeToExclude.contains( (String) factMap.get('codeTypeCalcul')) || String.isNotBlank((String)factMap.get('referenceAnnulation')))
                         {
                             listFacture.remove(i);
                         }else
@@ -139,57 +112,24 @@ global class SM_AP04_FacturesApiService implements vlocity_cmt.VlocityOpenInterf
         //  system.debug('@@ outMap' +outMap);
     }
 
-    // Le paramètre "excludeSomeBillsType" permet d'exclure les factures portant le code type contenu dans la variable "billTypeToExclude"
-	@AuraEnabled(cacheable=false)
-    public static Map < String, Object > callFactureWithIdLWC(Map < String, Object > inputMap) {
-        Map < String, Object > outMap  = new Map<String, Object>();
-        Map<String, Object> transformedData;
-        // '05', '07', '08'
-        List<String> billTypeToExclude = System.Label.SM_CL39_CodeTypeToExclude.split(',');
-            
-		System.debug('*** inputMap : ' + inputMap);
-        if (inputMap.get('IdFacture') == null || String.valueOf(inputMap.get('IdFacture')).length() == 0) {
-            system.debug('IdFacture not found ...');
-            return outMap;
-        }
-        //vérification taille
-        //author MHA
-        String IdFacture = String.valueOf(inputMap.get('IdFacture'));
-        HttpResponse httpResponse = new HttpResponse();
-        if(Test.isRunningTest()){
-            StaticResourceCalloutMock mock = new StaticResourceCalloutMock();
-            mock.setStaticResource('SM_MockTestFacture');
-            mock.setStatusCode(200);
-            mock.setHeader('Content-Type', 'application/json');
-            // Set the mock callout mode
-            Test.setMock(HttpCalloutMock.class, mock);
-            httpResponse = getResponse('', '', IdFacture);
-        }else{
-            httpResponse = getResponse('', '', IdFacture);
-        }
-        if(httpResponse != null){
-            Map < String, Object > resultAsMap = ( Map < String, Object > ) JSON.deserializeUntyped(httpResponse.getBody());
-            List < Object > listFacture = (List < Object > ) resultAsMap.get('_data');
-	
-            if (listFacture.Size() == 0) {
-                system.debug('No data to get the buisness partner ' + IdFacture);
-                return outMap;
-            }
-            // methode qui transforme les données retournées par l'api , qui extrait les champ qu'on a besoin au niveau de l'omniscript
-                                    
-            outMap.put('data', listFacture);
-            System.debug('*** output : ' + outMap);
-        }
-		return outMap;
-        //  system.debug('@@ outMap' +outMap);
-    }
-
 	public static void callFacture(Map < String, Object > inputMap, Map < String, Object > outMap, Map < String, Object > options) {
         System.debug('*** inputMap : ' + inputMap);
         if (inputMap.get('IdBusinessPartner') == null || String.valueOf(inputMap.get('IdBusinessPartner')).length() == 0) {
             system.debug('id buisness partner not found ...');
             return;
         }
+        String token;
+        if(!Test.isRunningTest()){
+            token = SM_MP_AP04_GetTokenService.getTokenFromSmile();
+        }else{
+            token = 'test';
+        }
+
+        if (token == null) {
+            system.debug('Token not found ...');
+            return;
+        }
+
         //vérification taille
         //author MHA
         Integer size = String.valueOf(inputMap.get('IdBusinessPartner')).length();
@@ -208,9 +148,9 @@ global class SM_AP04_FacturesApiService implements vlocity_cmt.VlocityOpenInterf
             mock.setHeader('Content-Type', 'application/json');
             // Set the mock callout mode
             Test.setMock(HttpCalloutMock.class, mock);
-            httpResponse = getResponse(idBP,'', '');
+            httpResponse = getResponse(token, idBP,'');
         }else{
-            httpResponse = getResponse((String)idBP,'', '');
+            httpResponse = getResponse(token, (String)idBP,'' );
         }
         if(httpResponse!= null){
             Map < String, Object > resultAsMap = (Map < String, Object > ) JSON.deserializeUntyped(httpResponse.getBody());
@@ -281,25 +221,54 @@ global class SM_AP04_FacturesApiService implements vlocity_cmt.VlocityOpenInterf
     }
 
 
-    public static String buildRequestParams(String idBuisnessPartner,String idPortefeuilleContrat, string IdFacture) {
-        String endpointParameters = '';
-        if(!String.isBlank(idPortefeuilleContrat) ){
-            endpointParameters += '?size=100&idBusinessPartner=' + idBuisnessPartner 
-            +'&idPortefeuilleContrat='+idPortefeuilleContrat +'&sort=dateComptable,desc';
-        } else if (!String.isBlank(IdFacture)) {
-            endpointParameters += '?numeroFacture=' + IdFacture;
-        } else{
-            endpointParameters += '?size=100&idBusinessPartner=' + idBuisnessPartner 
-            +'&sort=dateComptable,desc';
+    public static HttpRequest buildHttpRequestHeaders(String token, String idBuisnessPartner,String idPortefeuilleContrat) {
+        HttpRequest req = new HttpRequest();
+        req.setMethod('GET');
+        String endpointURL = '';
+        if (!Test.isRunningTest()) {
+            SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'Factures' limit 1];
+            endpointURL = 'callout:AuthAPIHour' +suffixs.suffix__c;
         }
-        return endpointParameters;
+
+        if(!String.isBlank(idPortefeuilleContrat) ){
+            req.setEndpoint(endpointURL + '?size=100&idBusinessPartner=' + idBuisnessPartner 
+            +'&idPortefeuilleContrat='+idPortefeuilleContrat +'&sort=dateComptable,desc');
+        }
+        else{
+            req.setEndpoint(endpointURL + '?size=100&idBusinessPartner=' + idBuisnessPartner 
+            +'&sort=dateComptable,desc');
+        }
+        req.setEndpoint(endpointURL + '?size=100&idBusinessPartner=' + idBuisnessPartner 
+        +'&idPortefeuilleContrat='+idPortefeuilleContrat +'&sort=dateComptable,desc');
+        req.setHeader('X-Correlation-Id', MP_AP13_GuidUtil.NewGuid());
+        req.setHeader('api_key', MP_Xdata_credentials__c.getInstance('sm_api_key_INT').Value__c);
+        req.setHeader('Authorization', 'Bearer ' + token);
+        req.setHeader('Content-Type', 'application/json');
+        return req;
     }
 
-    public static HttpResponse getResponse(String idBuisnessPartner,string idPortefeuilleContrat, string IdFacture) {
+    public static HttpResponse sendData(HttpRequest request) {
+        Http http = new Http();
+        HttpResponse res;
+        try {
+            res = http.send(request);
 
-        String endpointParams = buildRequestParams(idBuisnessPartner, idPortefeuilleContrat, IdFacture);
-        HttpResponse httpResp = CalloutManager.sendRequest('Factures', endpointParams, 'GET', CalloutManager.Scope.READ,null,null);
-        if (CalloutManager.httpResponseFailureDetected(httpResp)) {
+        } catch (Exception e) {
+            system.debug('## [Factures] failed to send data ##');
+            return null;
+        }
+        return res;
+    }
+
+    private static Boolean httpResponseFailureDetected(HttpResponse response) {
+        return (response == null || (response.getStatusCode() != 201 && response.getStatusCode() != 200 && response.getStatusCode() != 206));
+    }
+
+    public static HttpResponse getResponse(String token, String idBuisnessPartner,string idPortefeuilleContrat) {
+
+        HttpRequest httpReq = buildHttpRequestHeaders(token, idBuisnessPartner,idPortefeuilleContrat);
+        HttpResponse httpResp = sendData(httpReq);
+        if (httpResponseFailureDetected(httpResp)) {
             // should abort next step's
             system.debug('## [ factures] error occured when sending data ##');
             system.debug(httpResp != null ? httpResp.getBody() : 'http response is null');

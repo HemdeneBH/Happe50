@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : Clément Bauny
  * @group             : 
- * @last modified on  : 06-20-2022
- * @last modified by  : Hemdene Ben Hammouda
+ * @last modified on  : 08-03-2022
+ * @last modified by  : Badr Eddine Belkarchi
 **/
 import { api, LightningElement, track, wire } from 'lwc';
 import { switchTheme, loadUserTheme } from 'c/hp_ec_utl_styleManager';
@@ -49,6 +49,7 @@ export default class Hp_ec_statusComponent extends LightningElement {
 
     @track infoClass = 'rose info_date';
     @track statusClass = 'status_contract_rose';
+    @track statusContractClass = '';
 
     @wire(getContactData)
     wiredContactData({ data, error }) {
@@ -93,6 +94,7 @@ export default class Hp_ec_statusComponent extends LightningElement {
         this.isStatusPaiementEnRetard = false;
 
         this.todayDate = new Date();
+        this.statusContractClass = '';
     }
 
     async populateContractInfo() {
@@ -112,17 +114,28 @@ export default class Hp_ec_statusComponent extends LightningElement {
                 let diffTime = Math.abs(today - dateFinValidite);
                 let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
                 let isOldContract = (diffDays > 365) && (today > dateFinValidite) ;
+
                 if (this.currentEnergy == 'Electricité' && (c.energie == 'Electricité' && c.idPortefeuilleContrat == this.idPortefeuilleContrat && (c.codeStatutCrm == 'H0105' || c.codeStatutCrm == 'H0101' ||
-                c.codeStatutCrm == 'H0102' || c.codeStatutCrm == 'E0004' || c.codeStatutCrm == 'E0007' || ((c.codeStatutCrm == 'E0009' && isOldContract) || (c.codeStatutCrm == 'H0103' && isOldContract))))) {
+                c.codeStatutCrm == 'H0102' || c.codeStatutCrm == 'E0004' || c.codeStatutCrm == 'E0007' || ((c.codeStatutCrm == 'E0009' && !isOldContract) || (c.codeStatutCrm == 'H0103' && !isOldContract))))) {
                     this.actifContract = c;
                     this.infoClass = 'purple info_date';
                 }
                 if (this.currentEnergy == 'Gaz Naturel' && (c.energie == 'Gaz Naturel' && c.idPortefeuilleContrat == this.idPortefeuilleContrat && (c.codeStatutCrm == 'H0105' || c.codeStatutCrm == 'H0101' ||
-                c.codeStatutCrm == 'H0102' || c.codeStatutCrm == 'E0004' || c.codeStatutCrm == 'E0007' || ((c.codeStatutCrm == 'E0009' && isOldContract) || (c.codeStatutCrm == 'H0103' && isOldContract))))) {
+                c.codeStatutCrm == 'H0102' || c.codeStatutCrm == 'E0004' || c.codeStatutCrm == 'E0007' || ((c.codeStatutCrm == 'E0009' && !isOldContract) || (c.codeStatutCrm == 'H0103' && !isOldContract))))) {
                     this.actifContract = c;
                     this.infoClass = 'blue info_date';
                 }
             });
+
+            console.log('HP EC STATUS : codeStatutCrm'+ this.actifContract.codeStatutCrm);
+            
+            if(this.actifContract.codeStatutCrm == 'E0004') {
+                this.statusContractClass = 'secondary'
+            } else if(this.actifContract.codeStatutCrm == 'H0105' || this.actifContract.codeStatutCrm == 'H0101' || this.actifContract.codeStatutCrm == 'E0007') {
+                this.statusContractClass = 'orange'
+            } else if(this.actifContract.codeStatutCrm == 'E0009' || this.actifContract.codeStatutCrm == 'H0103' || this.actifContract.codeStatutCrm == 'H0104') {
+                this.statusContractClass = 'yellow'
+            }
 
             if (this.actifContract) {
                 if (!this.soldeData) {
@@ -217,12 +230,12 @@ export default class Hp_ec_statusComponent extends LightningElement {
                         let currentDate = new Date(ECHEANCES.output[key].date_decheance);
                         if (minEch == null && currentDate >= today) {
                             minEch = currentDate;
-                            this.jourPrelevement = ('0' + minEch.getDate()).slice(-2) + ' du mois';
+                            this.jourPrelevement = ('0' + minEch.getDate()).slice(-2);
                             continue;
                         }
                         if (minEch != null && currentDate >= today && minEch > currentDate) {
                             minEch = currentDate;
-                            this.jourPrelevement = ('0' + minEch.getDate()).slice(-2) + ' du mois';
+                            this.jourPrelevement = ('0' + minEch.getDate()).slice(-2);
                         }
                     }
                     // console.log('this.jourPrelevement: ' + this.jourPrelevement);

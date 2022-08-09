@@ -3,13 +3,8 @@ public class Prestation_distributeur_Trigger_Test {
 	@isTest
     static void preclotureTest() {
         Case myCase = new Case();
-        myCase.subject = 'test';
-        myCase.RecordTypeId	= Schema.SObjectType.Case.getRecordTypeInfosByName().get('Service').getRecordTypeId();
         insert myCase;
-
-
-        Prestation_distributeur__c ops = new Prestation_distributeur__c(Case__c = myCase.Id, Numero_affaire_distributeur__c = '12345678');
-
+        Prestation_distributeur__c ops = new Prestation_distributeur__c(Case__c = myCase.Id);
         insert ops;
         
         //Test.startTest();

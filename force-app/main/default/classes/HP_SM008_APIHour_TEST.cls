@@ -3,8 +3,8 @@
  * @Description        : 
  * @Author             : Mouhamadoune Coulibaly
  * @Group              : 
- * @Last Modified By   : Mouhamadoune Coulibaly
- * @Last Modified On   : 28/04/2020 à 12:41:18
+ * @Last Modified By   : Badr Eddine Belkarchi
+ * @Last Modified On   : 03-18-2022
  * @Modification Log   : 
  * Ver       Date            Author      		    Modification
  * 1.0    03/02/2020   Mouhamadoune Coulibaly     Initial Version
@@ -261,6 +261,22 @@ public with sharing class HP_SM008_APIHour_TEST {
 		System.assert (String.valueOf(result.get('numeroPointDeLivraison')) == '1231546','Les données sont validées');
     }
 
+	@isTest
+    static void getPorteFeuilleContratXdata_TEST() {
+        Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> bodyResponseMap = new Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> {
+			'auth/oauth/v2/token' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(200,
+												   StaticResource.HP_APIHourAccessTokenResponse_MOCK.name(),
+												   new Map<String, String> {'Content-Type' => 'application/json'}),
 
+			'apiset/0.3/portefeuilles-contrats' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(200,
+                	null,'{"idPortefeuilleContrat":"123"}',
+                	new Map<String, String> {'Content-Type' => 'application/json'})
+		};
+        
+        Test.startTest();
+		Test.setMock(HttpCalloutMock.class, new HP_UTIL_ResponseRestMock(bodyResponseMap));
+		Object result = HP_SM008_APIHour.getPorteFeuilleContratXdata('123');
+		Test.stopTest();
+    }
 
 }

@@ -2,13 +2,13 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 11-03-2020
+ * @last modified on  : 10-22-2020
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
  * Modifications Log 
  * Ver   Date         Author                               Modification
  * 1.0   10-22-2020   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
 **/
-global class HP_SCH008_EmailErrorNotification implements Schedulable, HP_UTIL_BatchInterface {
+global class HP_SCH008_EmailErrorNotification implements Schedulable {
    global void execute(SchedulableContext SC) {
         
        EmailTemplate et=[Select id from EmailTemplate where name = 'HP_Email_ErrorNotification' limit 1];
@@ -22,8 +22,4 @@ global class HP_SCH008_EmailErrorNotification implements Schedulable, HP_UTIL_Ba
   	   Messaging.SendEmailResult[] results = Messaging.sendEmail(messages);
 
    }
-
-   global static void launchNewScheduler(String schedule, String jobName){
-		System.schedule(jobName, schedule, new HP_SCH008_EmailErrorNotification());
-	}
 }

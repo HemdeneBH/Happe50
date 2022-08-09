@@ -10,7 +10,7 @@
  * 1.0    17/03/2020   Vincent Albiser     Initial Version
 **/
 @RestResource(urlMapping='/v1/case/*')
-global with sharing class HP_WS010_Case {
+global  class HP_WS010_Case {
 
     @HttpPost
 	global static void caseCreation() {

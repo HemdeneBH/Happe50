@@ -33,7 +33,7 @@ public class HP_BAT020_CaseReaffectation_TEST {
 
     @isTest static void HP_BAT020_CaseReaffectation_Schedule() {
         Test.startTest();
-        final String jobName = 'HP_BAT020_CaseReaffectation'+System.Math.random()*1000;
+        final String jobName = 'HP_BAT020_CaseReaffectation';
         final String cronExp = '0 0 4 ? * * *';
         HP_BAT020_CaseReaffectation.launchNewScheduler(cronExp,jobName);
         Test.stopTest();

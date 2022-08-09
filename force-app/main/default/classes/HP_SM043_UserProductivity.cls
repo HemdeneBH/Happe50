@@ -94,7 +94,9 @@ public without sharing class HP_SM043_UserProductivity{
                         
                         String today = getDayName(selectedDate);
 
+
                         Time startHour = getDayStartEndTime(today,true,bh);
+
     
                         Time caseTime = caseHistory.HP_DateChangementStatut__c.time();
                         

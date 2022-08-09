@@ -2,7 +2,9 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>HP_DureeTraitementBase60__c</fullName>
     <externalId>false</externalId>
-    <formula>LPAD(TEXT(FLOOR( HP_DureeTraitement__c )),2) +&quot;,&quot;+ LPAD(TEXT(ROUND((HP_DureeTraitement__c - FLOOR(HP_DureeTraitement__c))*60,0)),2,&apos;0&apos;)</formula>
+    <formula>LPAD(TEXT(FLOOR( HP_DureeTraitement__c )),2)
++&quot;,&quot;+
+LPAD(TEXT(ROUND((HP_DureeTraitement__c - FLOOR(HP_DureeTraitement__c))*60,0)),2,&apos;0&apos;)</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>Durée de traitement (base60)</label>
     <required>false</required>

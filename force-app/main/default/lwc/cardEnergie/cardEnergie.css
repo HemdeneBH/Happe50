@@ -56,39 +56,13 @@
 }
 
 .container-card .value {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
   color: black;
-  margin-bottom: 5px;
-  margin-top: 5px;
-}
-
-.container-card .value-active {
-  font-size: 14px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #19a546;
-  margin-bottom: 5px;
-  margin-top: 5px;
-}
-
-.container-card .value-en-cours {
-  font-size: 14px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #ff7f1d;
-  margin-bottom: 5px;
-  margin-top: 5px;
 }
 
 .display-block {
@@ -223,12 +197,10 @@
   letter-spacing: normal;
   color: #007fff;
   margin-left:45%;
+  .slds-icon {
+      fill: #007fff;
+  }
 }
-
-.slds-icon {
-  fill: #007fff;
-}
-
 .consoZone{
   border-radius: 10px;
   border-color: #007fff;
@@ -237,11 +209,11 @@
   border-style: solid;
 }
 .consoHeader::after{
-  content: " ";
-  display: block; 
-  height: 0; 
-  clear: both;
-}
+   content: " ";
+   display: block; 
+   height: 0; 
+   clear: both;
+      }
 .consoHeaderRight{
   float:right; 
   text-align: right;
@@ -249,9 +221,6 @@
 .consoHeaderLeft{
   float:left; 
   text-align: left;
-}
-.consoBody {
-  margin-top: 10px;
 }
 .clearfix {
 overflow: auto;

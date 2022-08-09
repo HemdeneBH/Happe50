@@ -334,20 +334,9 @@ public class gdfsuezComBefCalypsoComptecltV6 {
 			idCompteClientNode.addTextNode((this.idCompteClient == null) ? '' : this.idCompteClient);
 
             gdfsuezComBefCalypsoCoordonneesbanc.CoordonneesBancairesAbstract coordonneeBancaireObj = this.coordonneeBancaire;
+			Dom.XmlNode coordonneeBancaireNode = outerNode.addChildElement('coordonneeBancaire', '', '');
 			if(coordonneeBancaireObj != null){
-				Dom.XmlNode coordonneeBancaireNode = outerNode.addChildElement('coordonneeBancaire', '', '');
 				coordonneeBancaireObj.populateXmlNode(coordonneeBancaireNode);
-			}
-
-			gdfsuezComBefCalypsoComptecltV6.CompteClient_serviceSouscrit_element[] serviceSouscritObj = this.serviceSouscrit;
-			if(serviceSouscritObj != null){
-				
-				for(gdfsuezComBefCalypsoComptecltV6.CompteClient_serviceSouscrit_element element: serviceSouscritObj){
-					if(element!=null){	
-					Dom.XmlNode serviceSouscritNode = outerNode.addChildElement('serviceSouscrit', '', '');									
-					element.populateXmlNode(serviceSouscritNode);
-					}
-				}
 			}
 
             if(true)
@@ -634,20 +623,20 @@ public class gdfsuezComBefCalypsoComptecltV6 {
 		public void populateXmlNode(Dom.XmlNode outerNode){
 
 			gdfsuezComBefChpPivotCompteClient.listeValeursDt serviceGestionObj = this.serviceGestion;
-			Dom.XmlNode serviceGestionNode = outerNode.addChildElement('serviceGestion', '', '');
+			Dom.XmlNode serviceGestionNode = outerNode.addChildElement('serviceGestion', 'http://gdfsuez.com/bef/calypso/compteclient', '');
 			if(serviceGestionObj != null){
 				serviceGestionObj.populateXmlNode(serviceGestionNode);
 			}
 
 			gdfsuezComBefChpPivotCompteClient.listeValeursDt typeGestionObj = this.typeGestion;
-			Dom.XmlNode typeGestionNode = outerNode.addChildElement('typeGestion', '', '');
+			Dom.XmlNode typeGestionNode = outerNode.addChildElement('typeGestion', 'http://gdfsuez.com/bef/calypso/compteclient', '');
 			if(typeGestionObj != null){
 				typeGestionObj.populateXmlNode(typeGestionNode);
 			}
 
 			gdfsuezComBefChpPivotCompteClient.listeValeursDt statutServiceObj = this.statutService;
+			Dom.XmlNode statutServiceNode = outerNode.addChildElement('statutService', 'http://gdfsuez.com/bef/calypso/compteclient', '');
 			if(statutServiceObj != null){
-				Dom.XmlNode statutServiceNode = outerNode.addChildElement('statutService', '', '');			
 				statutServiceObj.populateXmlNode(statutServiceNode);
 			}
 		}

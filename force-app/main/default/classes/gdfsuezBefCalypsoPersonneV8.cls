@@ -225,8 +225,7 @@ public class gdfsuezBefCalypsoPersonneV8 {
             //System.assertEquals('LirePersonne', outerNode.getName());
             
             gdfsuezBefCalypsoPersonneV8.lirePersonneInputDt lirePersonneInputObj = this.lirePersonneInput;
-            //Dom.XmlNode lirePersonneInputNode = outerNode.addChildElement('lirePersonneInput', 'http://gdfsuez/bef/calypso/personne/v8', '');
-            Dom.XmlNode lirePersonneInputNode = outerNode.addChildElement('lirePersonneInput', null, null);
+            Dom.XmlNode lirePersonneInputNode = outerNode.addChildElement('lirePersonneInput', 'http://gdfsuez/bef/calypso/personne/v8', '');
             if(lirePersonneInputObj != null){
                 lirePersonneInputObj.populateXmlNode(lirePersonneInputNode);
             }
@@ -268,7 +267,7 @@ public class gdfsuezBefCalypsoPersonneV8 {
             gdfsuezComBefCalypsoPersonneV8.PersonneAbstract[] personneObj = this.personne;
             if(personneObj != null){
                 for(gdfsuezComBefCalypsoPersonneV8.PersonneAbstract element: personneObj){
-                    Dom.XmlNode personneNode = outerNode.addChildElement('personne', null, null);
+                    Dom.XmlNode personneNode = outerNode.addChildElement('personne', 'http://gdfsuez/bef/calypso/personne/v8', '');
                     element.populateXmlNode(personneNode);
                 }
             }           
@@ -322,8 +321,7 @@ public class gdfsuezBefCalypsoPersonneV8 {
         public lirePersonneResponse_element(DOM.XmlNode responseNode){
             Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
             //System.assertEquals('LirePersonneResponse', responseNode.getName());
-            //DOM.XmlNode lirePersonneOutputNode = responseNode.getChildElement('lirePersonneOutput', 'http://gdfsuez/bef/calypso/personne/v8');
-            DOM.XmlNode lirePersonneOutputNode = responseNode.getChildElement('lirePersonneOutput', null);
+            DOM.XmlNode lirePersonneOutputNode = responseNode.getChildElement('lirePersonneOutput', 'http://gdfsuez/bef/calypso/personne/v8');
             if(lirePersonneOutputNode == null){
                 this.lirePersonneOutput = null;
             } else{
@@ -331,8 +329,8 @@ public class gdfsuezBefCalypsoPersonneV8 {
                 nodesParsed.add(lirePersonneOutputNode);
                 this.lirePersonneOutput = lirePersonneOutputObj;
             }
-            //DOM.XmlNode messageRetoursNode = responseNode.getChildElement('messageRetours', 'http://gdfsuez/bef/calypso/personne/v8');
-            DOM.XmlNode messageRetoursNode = responseNode.getChildElement('messageRetours', null);
+            //System.debug(this.lirePersonneOutput);            
+            DOM.XmlNode messageRetoursNode = responseNode.getChildElement('messageRetours', 'http://gdfsuez/bef/calypso/personne/v8');
             if(messageRetoursNode == null){
                 this.messageRetours = null;
             } else{
@@ -677,29 +675,27 @@ public class gdfsuezBefCalypsoPersonneV8 {
         public gdfsuezBefCalypsoPersonneV8.lirePersonneResponse_element LirePersonne_Http(gdfsuezBefCalypsoPersonneV8.lirePersonneInputDt lirePersonneInput,gdfsuezComBefChpPivotV8.contextDt context) {
             DOM.Document doc = new DOM.Document();
             DOM.XmlNode body = populateDoc(doc);
-            DOM.XmlNode methodNode = body.addChildElement('v8:lirePersonne', null, null);            
+            DOM.XmlNode methodNode = body.addChildElement('LirePersonne', 'http://gdfsuez/bef/calypso/personne/v8', '');            
             gdfsuezBefCalypsoPersonneV8.lirePersonne_element request_x = new gdfsuezBefCalypsoPersonneV8.lirePersonne_element(lirePersonneInput,context);
             request_x.populateXmlNode(methodNode);
+            
             HttpRequest req = new HttpRequest();
             req.setEndpoint(endpoint_x);
-            req.setClientCertificateName(SM_OCTOPUS__c.getOrgDefaults().certName__c); // FT4-185 new line added
             req.setMethod('POST');
             req.setHeader('Content-Type', 'text/xml; charset=UTF-8');
             req.setHeader('SOAPAction', 'tns:LirePersonne');
             req.setBodyDocument(doc);
+            //System.debug(req.getBody());
             Http http = new Http();
-            try{
-                HTTPResponse res = http.send(req);
-                Dom.Document responseDoc = res.getBodyDocument();
-                Dom.XmlNode rootNode = responseDoc.getRootElement();
-                Dom.XmlNode bodyNode = rootNode.getChildElement('Body','http://schemas.xmlsoap.org/soap/envelope/');
-                Dom.XmlNode lirePersonneResponseNode = bodyNode.getChildElement('lirePersonneResponse', 'http://gdfsuez/bef/calypso/personne/v8');
-                gdfsuezBefCalypsoPersonneV8.lirePersonneResponse_element response_x = new gdfsuezBefCalypsoPersonneV8.lirePersonneResponse_element(lirePersonneResponseNode);
-                return response_x;
-            } catch(Exception e){
-                system.debug(LoggingLevel.ERROR, '## >> ERROR [gdfsuezBefCalypsoPersonneV8][LirePersonne_Http][Message erreur]:'+ e.getMessage() + '\n' + e.getStackTraceString());
-            }
-            return null;
+            HTTPResponse res = http.send(req);
+            //System.debug(res.getBody());
+            Dom.Document responseDoc = res.getBodyDocument();
+            Dom.XmlNode rootNode = responseDoc.getRootElement();
+            Dom.XmlNode bodyNode = rootNode.getChildElement('Body','http://schemas.xmlsoap.org/soap/envelope/');
+            Dom.XmlNode lirePersonneResponseNode = bodyNode.getChildElement('lirePersonneResponse', 'http://gdfsuez/bef/calypso/personne/v8');
+                        
+            gdfsuezBefCalypsoPersonneV8.lirePersonneResponse_element response_x = new gdfsuezBefCalypsoPersonneV8.lirePersonneResponse_element(lirePersonneResponseNode);
+            return response_x;
         }
  
         public gdfsuezComBefChpPivotV8.retourTraitementMessagesDt MajOptin_Http(gdfsuezBefCalypsoPersonneV8.majOptinInputDt majOptinInput,gdfsuezComBefChpPivotV8.contextDt context) {
@@ -745,6 +741,7 @@ public class gdfsuezBefCalypsoPersonneV8 {
             system.debug('request => '+doc.toXmlString());
             Http http = new Http();
             HTTPResponse res = http.send(req);
+            System.debug(res.getBody());
             Dom.Document responseDoc = res.getBodyDocument();
             Dom.XmlNode rootNode = responseDoc.getRootElement();
             Dom.XmlNode bodyNode = rootNode.getChildElement('Body','http://schemas.xmlsoap.org/soap/envelope/');

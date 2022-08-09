@@ -9,13 +9,6 @@
     <columns>idAffaire__c</columns>
     <columns>Statut__c</columns>
     <columns>Statut_prestation__c</columns>
-    <columns>CREATED_DATE</columns>
-    <columns>TypeEnergie__c</columns>
     <filterScope>Everything</filterScope>
-    <filters>
-        <field>idAffaire__c</field>
-        <operation>equals</operation>
-        <value>A05YYBCM</value>
-    </filters>
     <label>All</label>
 </ListView>

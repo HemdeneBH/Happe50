@@ -3,8 +3,8 @@
  * @Description        : 
  * @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
  * @Group              : 
- * @Last Modified By   : ChangeMeIn@UserSettingsUnder.SFDoc
- * @Last Modified On   : 26/03/2020 à 14:46:40
+ * @Last Modified By   : Hemdene Ben Hammouda
+ * @Last Modified On   : 03-14-2022
  * @Modification Log   : 
  * Ver       Date            Author      		    Modification
  * 1.0    24/03/2020   ChangeMeIn@UserSettingsUnder.SFDoc     Initial Version
@@ -65,8 +65,9 @@ public with sharing class HP_SM026_DistCreatePrestationGaz {//FIXME rename
 		//TODO MAp of listeValeursDt
 		gdfsuezComBefChpPivotPrestaGaz.listeValeursDt frequenceReleve = new gdfsuezComBefChpPivotPrestaGaz.listeValeursDt();
 		gdfsuezComBefChpPivotPrestaGaz.listeValeursDt tarifAcheminement = new gdfsuezComBefChpPivotPrestaGaz.listeValeursDt();
+		gdfsuezBefCalypsoPrestaGaz.creerPrestationServiceGazInputDt_retablissement_element retablissement = new gdfsuezBefCalypsoPrestaGaz.creerPrestationServiceGazInputDt_retablissement_element();
 		action1.code = CREATE;
-		natureDemande.code = enrolmentType == 'SWITCH_SUPLIER' ? 'CHF' : 'MES';//req.codeNatureDemande;
+		natureDemande.code = enrolmentType == 'SWITCH_SUPLIER' ? 'CHF' : enrolmentType == 'SWITCH_SUPLIER' ? 'MES' : 'RETB';//req.codeNatureDemande;
 		donneesGenerales.codePrestation = codePrestation;
 		codePrestation.code = OCTOPUS_GAS_PRESTATION_CODE;//req.codePrestation;
 		optionPrestation.code = (
@@ -149,13 +150,22 @@ public with sharing class HP_SM026_DistCreatePrestationGaz {//FIXME rename
 				miseEnService.indexClient = indexClient;
 			}
 			inputDt.miseEnService = miseEnService;
+		}else if(enrolmentType == 'RETABLISSEMENT') {
+			inputDt.retablissement = new gdfsuezBefCalypsoPrestaGaz.creerPrestationServiceGazInputDt_retablissement_element();
+			inputDt.retablissement.optionExpress = energyResponse.retablissementUrgent;
+			inputDt.retablissement.intervention = new gdfsuezComBefChpPivotPrestaGaz.listeValeursDt();
+			inputDt.retablissement.intervention.code = 'W5';
 		}
+		// if(enrolmentType == 'RETABLISSEMENT'){
+			
+		// }
 		inputDt.utilisateurFinal = utilisateurFinal;
 		inputDt.action = action1;
 		inputDt.donneesGenerales = donneesGenerales;
 		inputDt.dateRdv = rdv;
 		inputDt.contactCourrier = contactCourrier;
 		inputDt.contactIntervention = contactIntervention;
+		
 		gdfsuezBefCalypsoPrestaGaz.creerPrestationServiceGazResponse_element response = port.CreerPrestationServiceGaz_Http(inputDt, context);
 		System.debug(JSON.serializePretty(response, true));
 		List<gdfsuezComBefChpPivot.retourTraitementMessageDt> msgList = response.messageRetours.retourTraitementMessage;

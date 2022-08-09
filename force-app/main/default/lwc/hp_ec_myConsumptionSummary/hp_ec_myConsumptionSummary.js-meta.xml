@@ -16,6 +16,31 @@
 
             <property name="lienSpecifique" label="Le lien menant vers la page des consommations" type="String" default="/ma-consommation"/>
             <property name="libelleDuLien" label="Libellé du lien menant vers la page des consommations" type="String" default="Ma consommation en détail"/>
+
+
+            <property name="titreSecondTab" label="Titre deuxième onglet" type="String" default="Ma relève"></property>
+
+            <property type="String" name="textProchainePeriodeGaz"  default="Date de la prochaine relève gaz :"/>
+            <property type="String" name="textProchainePeriodeElec" default="Date de la prochaine relève élec :"/>
+            <property type="String" name="textPeriodeEnCoursGaz"    default="Relève gaz à effectuer avant le :"/>
+            <property type="String" name="textPeriodeEnCoursElec"   default="Relève élec à effectuer avant le :"/>
+            <property type="String" name="textPeriodeEnCoursResiliation"  default="Relève résiliation à effectuer avant le :"/>
+
+            <property type="String" name="textBlocRose" label="Texte d’alerte bloc rose" default="Vous êtes en période de relève! Pensez à saisir vos données "/>
+            <property type="Boolean" name="showIconLampBlocRose" label="afficher l'icon Lamp Rose" default="true" />
+            <property type="Boolean" name="showIconConfirmBlocRose" label="afficher l'icon Confirm Bleu" default="false" />
+
+            <property type="String" name="textBlocBleue" label="Texte d’alerte bloc bleue" default="Vous avez bien effectué votre relève le"/>
+            <property type="Boolean" name="showIconLampBlocBleue" label="afficher l'icon Lamp Rose" default="false" />
+            <property type="Boolean" name="showIconConfirmBlocBleue" label="afficher l'icon Confirm Bleu" default="true" />
+
+
+            <property name="titlePopinReleve" label="Titre de la popin relève" type="String" default="Ma Relève"></property>
+            <property name="messageIndexError" label="Message erreur si index inférieur à la précédente relève" type="String" default="Index saisi est inférieur au relevé précédent."></property>
+            <property name="messageIndexNoValidError" label="Message erreur si la forme d'index saise est erronée." type="String" default="La forme d'index saise est erronée."></property>
+            <property name="customUrlPopinReleve" label="Lien customisable de la popin relève" type="String" default="http://google.com"></property>
+            <property name="customUrlLabelPopinReleve" label="Label lien customisable de la popin relève" type="String" default="Où trouver ces informations?"></property>
+
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

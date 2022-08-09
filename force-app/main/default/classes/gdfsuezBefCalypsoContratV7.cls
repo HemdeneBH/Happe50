@@ -3,8 +3,7 @@
 //Methods Excluded: LireContrat, MajContrat
 // Primary Port Class Name: Dependency  
 public class gdfsuezBefCalypsoContratV7 {
-    public class Dependency implements ITF006_SoapRequestMock{
-        private String serviceId;
+    public class Dependency {
         public String endpoint_x = 'http://localhost:8080/services/Contrat/v6';
         public Map<String,String> inputHttpHeaders_x;
         public Map<String,String> outputHttpHeaders_x;
@@ -14,14 +13,6 @@ public class gdfsuezBefCalypsoContratV7 {
         public Integer timeout_x;
         private String[] ns_map_type_info = new String[]{'http://gdfsuez.com/bef/chp/pivot','gdfsuezComBefChpPivotContrat','http://gdfsuez.com/bef/calypso/contrat','gdfsuezComBefCalypsoContrat'};
 
-        public String getServiceId(){
-            return serviceId;
-        }
-        
-        public void setServiceId(String serviceId){
-            this.serviceId = serviceId;
-        }
-
         public gdfsuezBefCalypsoContratV7.rechercherContratResponse_element RechercherContrat(gdfsuezBefCalypsoContratV7.rechercherContratInputDt rechercherContratInput,gdfsuezComBefChpPivotContrat.contextDt context) {
             gdfsuezBefCalypsoContratV7.rechercherContrat_element request_x = new gdfsuezBefCalypsoContratV7.rechercherContrat_element();
             gdfsuezBefCalypsoContratV7.rechercherContratResponse_element response_x;
@@ -29,11 +20,10 @@ public class gdfsuezBefCalypsoContratV7 {
             request_x.context = context;
             Map<String, gdfsuezBefCalypsoContratV7.rechercherContratResponse_element> response_map_x = new Map<String, gdfsuezBefCalypsoContratV7.rechercherContratResponse_element>();
             response_map_x.put('response_x', response_x);
-
-            SM_WS100_Contrat.search(
-                this, 
-                request_x, 
-                response_map_x, 
+            WebServiceCallout.invoke(
+                this,
+                request_x,
+                response_map_x,
                 new String[]{endpoint_x,
                 'tns:RechercherContrat',
                 'http://gdfsuez/bef/calypso/contrat/v7',
@@ -42,13 +32,10 @@ public class gdfsuezBefCalypsoContratV7 {
                 'rechercherContratResponse',
                 'gdfsuezBefCalypsoContratV7.rechercherContratResponse_element'}
             );
-
             response_x = response_map_x.get('response_x');
-            
             return response_x;
         }
         
-        @testVisible
         private DOM.XmlNode populateDoc(DOM.Document doc){
             String env = 'http://schemas.xmlsoap.org/soap/envelope/';
             String xsi = 'http://www.w3.org/2001/XMLSchema-instance';
@@ -73,11 +60,26 @@ public class gdfsuezBefCalypsoContratV7 {
             DOM.XmlNode methodNode = body.addChildElement('v7:rechercherContrat',null, null);            
             gdfsuezBefCalypsoContratV7.rechercherContrat_element request_x = new gdfsuezBefCalypsoContratV7.rechercherContrat_element(rechercherContratInput,context);
             request_x.populateXmlNode(methodNode);
-            gdfsuezBefCalypsoContratV7.rechercherContratResponse_element response_x;
             
-            Dom.XmlNode rechercherContratResponseNode = SM_WS100_Contrat.search('POST', doc, 'Body', 'http://schemas.xmlsoap.org/soap/envelope/', 'rechercherContratResponse', 'http://gdfsuez/bef/calypso/contrat/v7');   
-            response_x = new gdfsuezBefCalypsoContratV7.rechercherContratResponse_element(rechercherContratResponseNode);
-        
+            HttpRequest req = new HttpRequest();
+            req.setEndpoint(endpoint_x);
+            req.setMethod('POST');
+            if(!Test.isRunningTest()){
+                req.setClientCertificateName(SM_OCTOPUS__c.getOrgDefaults().certName__c);
+            }
+            req.setHeader('Content-Type', 'text/xml; charset=UTF-8');
+            req.setHeader('SOAPAction', 'tns:RechercherContrat');
+            req.setBodyDocument(doc);
+            system.debug('request => '+doc.toXmlString());
+            Http http = new Http();
+            HTTPResponse res = http.send(req);
+            System.debug(res.getBody());
+            Dom.Document responseDoc = res.getBodyDocument();
+            Dom.XmlNode rootNode = responseDoc.getRootElement();
+            Dom.XmlNode bodyNode = rootNode.getChildElement('Body','http://schemas.xmlsoap.org/soap/envelope/');
+            Dom.XmlNode rechercherContratResponseNode = bodyNode.getChildElement('rechercherContratResponse', 'http://gdfsuez/bef/calypso/contrat/v7');
+                        
+            gdfsuezBefCalypsoContratV7.rechercherContratResponse_element response_x = new gdfsuezBefCalypsoContratV7.rechercherContratResponse_element(rechercherContratResponseNode);
             return response_x;
         }
     }
@@ -235,7 +237,6 @@ public class gdfsuezBefCalypsoContratV7 {
             nodesParsed.add(idCompteClientNode);
             //System.debug(this.idCompteClient);            
             DOM.XmlNode statutComposanteNode = responseNode.getChildElement('statutComposante', null);
-
             if(statutComposanteNode == null){
                 this.statutComposante = null;
             } else{

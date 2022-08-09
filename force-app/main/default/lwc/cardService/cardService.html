@@ -1,19 +1,9 @@
-<!--
-  @description       : 
-  @author            : Mohamed Aamer
-  @group             : 
-  @last modified on  : 02-24-2022
-  @last modified by  : Mohamed Aamer
-  @last modified on  : 25/07/2022
-  @last modified by  : Nourelimane SMOUNI
--->
 <template>
     <div class="container-card">
         <lightning-card >
-            <h2 class="service-Title">{selecteditem.titreService}</h2>
-            <div class="icon-Info"><img src={information_Icone}  title={servicePrioritaire} onmousemove={handleServicePrioritaire} /></div>  
+            <h2 class="title-service">{selecteditem.titreService}</h2>
             <div slot="actions">
-                <lightning-icon icon-name="utility:vide" size="small" if:true={nothing}></lightning-icon>
+                <lightning-icon icon-name="utility:survey" size="small" if:true={nothing}></lightning-icon>
                 <lightning-button-icon icon-name="utility:chevronright" variant="bare" if:true={isServicesClose}
                     alternative-text="Ouvrir les services" onclick={handleOpenRecordClick}>
                 </lightning-button-icon>
@@ -21,84 +11,32 @@
                     alternative-text="Fermer les services" onclick={handleOpenRecordClick}>
                 </lightning-button-icon>
             </div>
-            <div class="slds-m-around_medium bloc-card engie-card-contrat-body slds-card__body via-slds-card__body slds-theme--default slds-grid" 
-                if:true={selecteditem.errorContratWs}>
-                <h2 class="message-error">information indisponible pour le moment.</h2>
-
-
-                        </div>
-            <div class="slds-m-around_medium bloc-card engie-card-contrat-body slds-card__body via-slds-card__body slds-theme--default">
-            <div if:false={selecteditem.errorContratWs} class="slds-grid">
-                <div class="slds-size--1-of-2 slds-p-right_xx-small"></div>
+            <div class="slds-m-around_medium bloc-card engie-card-contrat-body slds-card__body via-slds-card__body slds-theme--default slds-grid">
                 <div class="slds-size--1-of-2 slds-p-right_xx-small">
-                    <lightning-button  variant="base" label="Ajouter un service payant"
+                    <template for:each={selecteditem.listServicesCard} for:item="service">
+                        <div key={service.idContrat} class="service-text">
+                            <b if:true={service.actif} class="statut-text">{service.libOffreMaj}</b>
+                            <b if:false={service.actif} class="resilie-label statut-text">{service.libOffreMaj}</b>
+                            <div if:true={service.actif} class="date-service date-text">{service.dateEffetMaj}</div>
+                            <div class="resilie-label date-text" if:false={service.actif}>du {service.dateEffetMaj} au {service.dateResiliationMaj}</div>
+                        </div>
+                    </template>
+                </div>
+                <div class="slds-size--1-of-2 slds-p-right_xx-small">
+                    <lightning-button  variant="base" label="Ajouter un service"
                         title="Ajouter un service" icon-name="utility:add"
-                        onclick={handleServicesPayants}
-                        ></lightning-button>
-                        <div if:true={isFelEncours}>
-                            <span class="slds-float--right">
-                                <img src={imgfelencours}  alt="FEL en cours"/><br>
-                                <lightning-button  variant="base" label="Modifier le service"
-                                title="Modifier le service" onclick={handleOpenFreeServices}
-                                ></lightning-button>
-                            </span>
-                        </div>
-                        <div if:true={isFelActive}>
-                                <img src={imgfelactive}  alt="FEL active"/><br>
-                                <lightning-button  variant="base" label="Modifier le service"
-                                title="Modifier le service" onclick={handleOpenFreeServices}
-                                ></lightning-button>
-                        </div>
-                        <div if:true={isFelDesactive} class="slds-clearfix">
-                            <lightning-button class="slds-float--right" variant="base" label="Activer la Facture en ligne"
-                                title="Activer la Facture en ligne" onclick={handleOpenFreeServices}
-                            ></lightning-button>
-                        </div>
-                        <div>
-                            <lightning-button class="slds-float--right" variant="base" label="Ajouter une option" 
-                            title="Ajouter une option" icon-name="utility:add" onclick={handleOpenOptions}></lightning-button>
-                            {getTitle}
-                        </div>
-                        <div if:true={hasServices}>
-                            <lightning-button class="slds-float--right" variant="base" label="Services et options" title="Successful action" onclick={handleNavigate}>
-                              
-                            </lightning-button>
-                          
-                        </div>
+                        class="slds-m-left_x-small"></lightning-button>
                 </div>
                 <div class="exampleHolder" if:false={showSpinner}>
                     <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
                 </div>
             </div>     
-            <!--div if:false={selecteditem.errorContratWs} class="slds-grid slds-gutters">
-                <div class="slds-col">
-                    <div if:true={isFelEncours}>
-                        <span class="slds-float--right">
-                            <img src={imgfelencours}  alt="FEL en cours"/><br>
-                            <lightning-button  variant="base" label="Modifier le service"
-                            title="Modifier le service" 
-                            ></lightning-button>
-                        </span>
-                    </div>
-                    <div if:true={isFelActive}>
-                        <span class="slds-float--right">
-                            <img src={imgfelactive}  alt="FEL active"/><br>
-                            <lightning-button  variant="base" label="Modifier le service"
-                            title="Modifier le service" 
-                            ></lightning-button>
-                        </span>
-                    </div>
-                    <div if:true={isFelDesactive} class="slds-clearfix">
-                        <lightning-button class="slds-float--right" variant="base" label="Activer la Facture en ligne"
-                            title="Activer la Facture en ligne" 
-                        ></lightning-button>
-                    </div>
-                </div>
-            </div-->  
-        </div>
         </lightning-card>
+
+
         <section if:true={selecteditem.closeservice} aria-describedby="dialog-body-id-77" aria-labelledby="dialog-heading-id-81"
             class="slds-popover slds-nubbin_top-right popup-card slds-p-around_x-large" role="dialog">
+            <lightning-icon icon-name="utility:close" onclick={handleOpenRecordClick} size="x-small" class="close-icon"></lightning-icon>
             <table >
                 <thead>
                     <tr class="header-table">
@@ -129,9 +67,6 @@
                     </template>
                 </tbody>
             </table>
-            
         </section>
-       
-    
     </div>
 </template>

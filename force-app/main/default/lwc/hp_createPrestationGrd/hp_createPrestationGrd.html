@@ -3,9 +3,9 @@
   @author            : Hemdene Ben Hammouda
   @group             : 
 
-  @last modified on  : 10-07-2021
+  @last modified on  : 03-09-2022
 
-  @last modified by  : Hemdene Ben Hammouda
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 -->
 <template>
   <template if:true={isPrestationAuto}>
@@ -57,7 +57,16 @@
                   </lightning-input-field>
                   <lightning-input-field field-name="HP_Effective_Date__c" onchange={handleDateChange}>
                   </lightning-input-field>
-                  <lightning-input type="checkbox" label="Prestation GRD Urgente" onchange={handleCheckboxChange}>
+                  <lightning-combobox
+                    name="Type de prestation"
+                    label="Type de prestation"
+                    value={typePresta}
+                    options={types}
+                    onchange={handleTypePresta}
+                    placeholder=""
+                    required={typeprestaRequired} >
+                  </lightning-combobox>
+                  <lightning-input type="checkbox" label="Prestation GRD Urgente" onchange={handleCheckboxChange} >
                   </lightning-input>
                 </div>
                 <div style="float:right">

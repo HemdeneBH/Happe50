@@ -14,7 +14,9 @@ public with sharing class HP_SM059_SouscriptionRappel {
         Id recordTypeId = HP_UTIL_RecordType.getRecordTypeId('Case','HP_Telephone');
         
         for(HP_Souscription__c souscription : souscriptionList) {
+
             Case newCase = HP_EM010_Case.createRappelCaseForSouscription(recordTypeId, souscription.Id, souscription.HP_Contact__c);
+
             caseToCreate.add(newCase);
         }
 

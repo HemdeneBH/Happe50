@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 02-24-2022
+ * @last modified on  : 02-25-2022
  * @last modified by  : Hemdene Ben Hammouda
  * Modifications Log 
  * Ver   Date         Author                               Modification
@@ -103,7 +103,7 @@ public with sharing class HP_SM040_CaseHandler {
          HP_EM035_Reclamation.notifyAgilabReclamation(caseIdList, contactIdList, '1');
         }
     }
-    
+
     public static void processCoupureReduction(List<Case> newList, String rtFactureId){
         if(newList == null){
             return;
@@ -116,7 +116,7 @@ public with sharing class HP_SM040_CaseHandler {
             }
         }
         if(!caseIds.isEmpty()){
-            HP_SM075_CoupureReduction.processCoupureReduction(caseIds);
+        HP_SM075_CoupureReduction.processCoupureReduction(caseIds);
         }
     }
     /**
@@ -164,32 +164,39 @@ public with sharing class HP_SM040_CaseHandler {
             List<HP_Souscription__c> sousList = [select Id,HP_type_Souscription__c,
             (select Id, HP_Contrat_XdataId__c,HP_Type_de_Compteur__c, HP_Proposition_Commerciale_XdataId__c from HP_Contrats__r)
             from HP_Souscription__c where Id in :souscriptionCaseMap.keySet()];
-
+            for(Case acase : newList) {
+                if(acase.HP_Souscription__c != null && acase.RecordtypeId == rtPrestationId){
+                    for(HP_Souscription__c sous : sousList){
+                        if(acase.HP_Souscription__c == sous.Id){
+                            if(sous.HP_type_Souscription__c == 'MOVING_IN'){
+                                acase.HP_TypePrestation__c = 'MES';
+                            }
+                            if(sous.HP_type_Souscription__c == 'SWITCH_SUPLIER'){
+                                acase.HP_TypePrestation__c = 'CHF';
+                            }
+                        }
+                    }
+                }
+            }
             for(HP_Souscription__c sous : sousList) {
                 Case acase = souscriptionCaseMap.get(sous.Id);
                 if(acase == null) {
                     continue;
                 }
-                    for(HP_Contrat__c cont : sous.HP_Contrats__r) {
-                        if((cont.HP_Type_de_Compteur__c == 'GAS' && acase.HP_Energy__c == 'Gas')
-                        || (cont.HP_Type_de_Compteur__c == 'ELEC' && acase.HP_Energy__c == 'Electricity')) {
-                            if(acase.HP_Contrat__c == null) {
-                            acase.HP_Contrat__c = cont.Id;
-                            }
-                            if(acase.HP_TECH_ExternalId__c == null && acase.RecordtypeId == rtResiliationId) {
-                                acase.HP_TECH_ExternalId__c = 'CONTRACT_CANCELATION/' + cont.HP_Contrat_XdataId__c;
-                            }
-                            if(acase.HP_TECH_ExternalId__c == null && acase.RecordtypeId == rtPrestationId) {
-                                acase.HP_TECH_ExternalId__c = cont.HP_Proposition_Commerciale_XdataId__c+'HP_PrestationDistributeur' + cont.HP_Type_de_Compteur__c;
-                                if(sous.HP_type_Souscription__c == 'MOVING_IN'){
-                                    acase.HP_TypePrestation__c = 'MES';
-                                }
-                                if(sous.HP_type_Souscription__c == 'SWITCH_SUPLIER'){
-                                    acase.HP_TypePrestation__c = 'CHF';
-                                }
-                            }
-                    }
+                for(HP_Contrat__c cont : sous.HP_Contrats__r) {
+                    if((cont.HP_Type_de_Compteur__c == 'GAS' && acase.HP_Energy__c == 'Gas')
+                    || (cont.HP_Type_de_Compteur__c == 'ELEC' && acase.HP_Energy__c == 'Electricity')) {
+                        if(acase.HP_Contrat__c == null) {
+                        acase.HP_Contrat__c = cont.Id;
+                        }
+                        if(acase.HP_TECH_ExternalId__c == null && acase.RecordtypeId == rtResiliationId) {
+                            acase.HP_TECH_ExternalId__c = 'CONTRACT_CANCELATION/' + cont.HP_Contrat_XdataId__c;
+                        }
+                        if(acase.RecordtypeId == rtPrestationId && acase.HP_TECH_ExternalId__c == null) {
+                            acase.HP_TECH_ExternalId__c = cont.HP_Proposition_Commerciale_XdataId__c+'HP_PrestationDistributeur' + cont.HP_Type_de_Compteur__c;    
+                        }
                 }
+            }   
             }
         }
     }

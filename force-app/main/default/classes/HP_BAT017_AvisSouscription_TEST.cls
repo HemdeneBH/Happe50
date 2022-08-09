@@ -23,7 +23,7 @@ public with sharing class HP_BAT017_AvisSouscription_TEST {
     
             Test.startTest();
             Test.setMock(HttpCalloutMock.class, new HP_UTIL_ResponseRestMock(bodyResponseMap));
-            final String jobName = 'HP_BAT017_AvisSouscription'+Integer.valueof((math.random() * 10));
+            final String jobName = 'HP_BAT017_AvisSouscription';
             final String cronExp = '0 0 4 ? * * *';
             HP_BAT017_AvisSouscription.launchNewScheduler(cronExp,jobName);
             Test.stopTest();

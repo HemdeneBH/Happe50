@@ -2,7 +2,11 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
+
+
  * @last modified on  : 03-03-2021
+
+
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
  * Modifications Log 
  * Ver   Date         Author                               Modification
@@ -38,11 +42,19 @@ global with sharing class HP_WRP039_Devis {
 		}
 
 
+
+
+
+
     }
     
     global class souscriptionInfos {
 
         public final String digitalSouscriptionId;
+
+
+
+
 		public final String name;
         public final String typeSouscription;
         public final String typeEnergy;
@@ -52,6 +64,10 @@ global with sharing class HP_WRP039_Devis {
 
 		global souscriptionInfos(HP_Souscription__c souscription){
 			this.digitalSouscriptionId  = souscription.HP_Souscription_Digital_Id__c;
+
+
+
+
             this.typeSouscription = souscription.HP_type_Souscription__c;
             this.typeEnergy = souscription.HP_Type_Energie__c;
             this.pdl = souscription.HP_NumPDL__c;

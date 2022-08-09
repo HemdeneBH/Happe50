@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Badr Eddine Belkarchi
  * @group             : 
- * @last modified on  : 12-20-2021
+ * @last modified on  : 12-07-2021
  * @last modified by  : Hemdene Ben Hammouda
 **/
 import {NavigationMixin} from "lightning/navigation";
@@ -89,14 +89,12 @@ export default class Hp_containerView extends NavigationMixin(LightningElement) 
     }
 
     opendossieraide(event){
-        let eventDetail = event.detail;
-        console.log('Details : '+eventDetail);
-        if(eventDetail == true) {
+        if(event.detail == true) {
             this.modeTab = true;
             this.classComp = '';
             this.compLabel = 'Dossier d\'aide';
             this.displayCompAide();
-        } else if(eventDetail == false) {
+        } else if(event.detail == false) {
             this.modeTab = false;
             this.diplayDossierAide = false;
             this.showComp = false;

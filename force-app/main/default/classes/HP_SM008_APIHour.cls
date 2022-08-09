@@ -3,8 +3,8 @@
  * @Description        :  Service Manager spécifique aux échanges avec APIHour
  * @Author             : Sara El-Hannaoui
  * @Group              :
- * @Last Modified By   : Mouhamadoune Coulibaly
- * @Last Modified On   : 11/03/2020 à 10:08:58
+ * @Last Modified By   : Badr Eddine Belkarchi
+ * @Last Modified On   : 03-14-2022
  * @Modification Log   :
  * Ver       Date            Author      		    Modification
  * 1.0    08/01/2020   Sara El-Hannaoui     Initial Version
@@ -142,5 +142,16 @@ public with sharing class HP_SM008_APIHour {
 	**/
 	public static Map<String, Object> getPDL(String idPDL, Boolean elec) {
 		return HP_CALL001_XDATA.getPDL(idPDL, elec);
+	}
+
+	/**
+	* @description 
+	* @author Badr Eddine Belkarchi | 14/03/2022
+	* @param String contractPortfolioXdataId 
+	* @return Object 
+	**/
+	@AuraEnabled(cacheable=true)
+	public static Object getPorteFeuilleContratXdata(String contractPortfolioXdataId){
+		return HP_CALL001_XDATA.getPorteFeuilleContratXdata(contractPortfolioXdataId);
 	}
 }

@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : Hemdene Ben Hammouda
  * @group             : 
- * @last modified on  : 06-21-2021
- * @last modified by  : Hemdene Ben Hammouda
+ * @last modified on  : 04-19-2022
+ * @last modified by  : Badr Eddine Belkarchi
  * Modifications Log 
  * Ver   Date         Author                 Modification
  * 1.0   06-21-2021   Hemdene Ben Hammouda   Initial Version
@@ -136,5 +136,43 @@ public class HP_SM062_ConsommationManagerTest {
         }
         Test.stopTest();
         System.assertEquals(0, resultsList.size()); 
+    }
+
+    @isTest
+    static void testGetConsommationELEC_VersionEC(){
+        Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> bodyResponseMap = new Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> {
+            'auth/oauth/v2/token' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(200,
+                                                   'HP_APIHourAccessTokenResponse_MOCK',
+                                                   new Map<String, String> {'Content-Type' => 'application/json'}),
+
+            'api/v1/personnes/afficher_consommation' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(200,
+                                                  'HP_HisotiqueConsommationELEC_OK',
+                                                  new Map<String, String> { 'Content-Type' => 'application/json'}
+                                                  )
+        };
+        Test.startTest();
+        Test.setMock(HttpCalloutMock.class, new HP_UTIL_ResponseRestMock(bodyResponseMap)); 
+        String resultBody= HP_SM062_ConsommationManager.getConsommationELEC_VersionEC(1853207,'16426338583401');
+        Test.stopTest();
+        System.assert(resultBody != null, 'body elec returned success'); 
+    }
+
+    @isTest
+    static void testGetConsommationGAZ_VersionEC(){
+        Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> bodyResponseMap = new Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> {
+            'auth/oauth/v2/token' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(200,
+                                                   'HP_APIHourAccessTokenResponse_MOCK',
+                                                   new Map<String, String> {'Content-Type' => 'application/json'}),
+
+            'api/v1/personnes/afficher_consommation' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(200,
+                                                  'HP_HisotiqueConsommationGAZ_OK',
+                                                  new Map<String, String> { 'Content-Type' => 'application/json'}
+                                                  )
+        };
+        Test.startTest();
+        Test.setMock(HttpCalloutMock.class, new HP_UTIL_ResponseRestMock(bodyResponseMap)); 
+        String resultBody= HP_SM062_ConsommationManager.getConsommationGAZ_VersionEC(1853207,'21101817244517');
+        Test.stopTest();
+        System.assert(resultBody != null, 'body gaz returned success'); 
     }
 }

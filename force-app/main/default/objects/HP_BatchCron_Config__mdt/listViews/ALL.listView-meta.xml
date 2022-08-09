@@ -4,7 +4,6 @@
     <columns>BatchClassName__c</columns>
     <columns>CronExpression__c</columns>
     <columns>DeveloperName</columns>
-    <columns>MasterLabel</columns>
     <filterScope>Everything</filterScope>
     <label>ALL</label>
     <language>en_US</language>

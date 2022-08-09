@@ -12,7 +12,6 @@
     <columns>HP_Porte_Feuille_Contrat__c</columns>
     <columns>HP_Souscription_Digital_Id__c</columns>
     <columns>HP_Statut__c</columns>
-    <columns>HP_DigitalLogin__c</columns>
     <filterScope>Everything</filterScope>
     <filters>
         <field>HP_Statut__c</field>

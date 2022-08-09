@@ -1,13 +1,3 @@
-<!--
-  @description       : 
-  @author            : Slimene Belhaj Ali
-  @group             : 
-  @last modified on  : 03-03-2021
-  @last modified by  : Slimene Belhaj Ali
-  Modifications Log 
-  Ver   Date         Author               Modification
-  1.0   02-17-2021   Slimene Belhaj Ali   Initial Version
--->
 <template>
     <lightning-card>
         <span style="font-size: 1.2rem; font-weight: bold;margin-left:1rem">MODIFIER LE RENDEZ-VOUS DISTRIBUTEUR</span>
@@ -129,14 +119,14 @@
         <div style="text-align: end;padding-right: 0.5rem;">
             <lightning-button label="Fermer" onclick={closeOpsCancel} class="slds-m-left_x-small"></lightning-button>
     
-            <lightning-button variant="brand" label="Valider" onclick={validCreneau2Step} class="slds-m-left_x-small"></lightning-button>
+            <lightning-button variant="brand" label="Valider" onclick={validCreneau1Step} class="slds-m-left_x-small"></lightning-button>
        
         </div>
     </div>
  <div if:true={showSuccess}>
     <!--<div >-->
-        <center style="color:Green; font-weight: bold;font-size: 1rem;">Nouvelle date validée!</center>
-        <center style="color:red; font-weight: bold;font-size: 1rem;" if:true={successMessage}>{successMessage}</center>
+        <center style="color:Green; font-weight: bold;font-size: 1rem;">Nouvelle date valideée!</center>
+        
         <center style="font-weight: bold;font-size: 1rem;margin-top: 0.5rem;">RDV le {dateFormat} {creneauLabel}</center>
     
         <div style="text-align: end;padding-right: 0.5rem;margin-top:2.5rem;padding-left: 0.5rem;">

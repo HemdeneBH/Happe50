@@ -240,7 +240,7 @@ public with sharing class HP_EM008_APIHour  {
 	* @return Integer 
 	**/
 	public static Integer updateContract(String id, String codeStatutCRM, String statut) {
-		String bodyString = System.JSON.serialize(new HP_ContractToUpdate(codeStatutCRM, statut));
+		String bodyString = System.JSON.serialize(new HP_ContractToUpdate(codeStatutCRM, statut, null, null, null));
 		HTTPResponse response = HP_UTIL_HTTPUtils.calloutPut(HP_Constantes.XDATA_CONTRATS, bodyString, '/' + id);
 		return response.getStatusCode();
 	}

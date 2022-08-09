@@ -1,49 +1,19 @@
-<!--
-  @description       : 
-  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
-  @group             : 
-
-  @last modified on  : 06-07-2022
-  @last modified by  : Mohamed Aamer
-  Modifications Log 
-  Ver   Date         Author                               Modification
-  1.0   01-19-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
-
--->
 <template>
     <div class="slds-grid slds-wrap footer-container" if:true={showFooter}>
-        <div class="slds-size_1-of-5 slds-align_absolute-center footer-item" data-key={dataTransmission} data-event="opentransmissionindex" onclick={handleAction}>
+        <div class="slds-size_1-of-5 footer-item" data-key={dataTransmission} data-event="opentransmissionindex" onclick={handleAction}>
             Transmission d'index
         </div>
-        <div class="slds-size_1-of-5 slds-align_absolute-center footer-item" data-key={dataDuplicataDocument} data-event="openduplicatadocumentLWC" onclick={handleAction}>
-            Duplicata de document
-        </div> 
-        <div class="slds-size_1-of-5 slds-align_absolute-center footer-item" onclick={navigateToSituationCompte}>
+        <div class="slds-size_1-of-5 footer-item" data-event="openduplicatadocument" onclick={handleAction}>
+            Duplicata de document 
+        </div>
+        <div class="slds-size_1-of-5 footer-item">
             Situation de compte
         </div>
-        <div class="slds-size_1-of-5 slds-align_absolute-center footer-item" onclick={navigateToInoConso}>
+        <div class="slds-size_1-of-5 footer-item">
             Historique conso
         </div>
-        <div class="slds-size_1-of-5 slds-align_absolute-center footer-item" data-key={dataDetectionProject} data-event="opendetectionproject" onclick={handleAction}>
-            Détection de projets
-        </div>
-        <!--A savoir : on ne peut pas avoir plus de 5 boutons dans une ligne-->
-        <!--Si vous voulez ajouter des nouveaux boutons, merci de mettre slds-size_1-of-x, x ayant la valeur de 1 à 5-->
-        <div class="slds-size_1-of-5 slds-align_absolute-center footer-item" data-key={dataResiliation} data-event="openresiliation" onclick={handleAction}>
+        <div class="slds-size_1-of-5 footer-item" data-key={dataResiliation} data-event="openresiliation" onclick={handleAction}>
             Résiliation
-        </div>
-        <!-- Parcours Résiliation LWC non finalisé -->
-        <div class="slds-size_1-of-5 slds-align_absolute-center footer-item" data-key={dataResiliation} data-event="openresiliationlwc" onclick={handleAction}>
-            Résil. (LWC TEST)
-        </div>
-        <div class="slds-size_1-of-5 slds-align_absolute-center footer-item" data-key={dataTransmissionLWC} data-event="opentransmissionindexLWC" onclick={handleAction}>
-            Transmission d'index (LWC)
-        </div>
-        <div class="slds-size_1-of-5 slds-align_absolute-center footer-item" data-key={dataOutilEstimation} data-event="openOutilEstimation" onclick={handleAction}>
-            Outil d'estimation
-        </div>
-        <div class="slds-size_1-of-5 slds-align_absolute-center footer-item" data-event="openHistoriqueSymphonie" onclick={handleActionHistorique}>
-            Historique Symphonie
         </div>
     </div>
 </template>

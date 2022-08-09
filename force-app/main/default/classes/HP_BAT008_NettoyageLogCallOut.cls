@@ -15,11 +15,15 @@ global  class HP_BAT008_NettoyageLogCallOut implements Database.batchable<HP_LOG
     final Integer cyclepurge = (Integer)param.Cycle_Purge_Log__c;
     final DateTime periode = nowDateTime.addDays(- cyclepurge);
     List<HP_LOG_CALLOUT__b> listToDelete = null;
-       
+    
+
+
     global HP_BAT008_NettoyageLogCallOut() {
         listToDelete =[select Status__c, Date__c, Key_Row__c,User_Id__c from HP_LOG_CALLOUT__b where Date__c <= :periode LIMIT 40000];
     }
    
+
+
     global List<HP_LOG_CALLOUT__b> start(Database.batchableContext info){
         return  listToDelete;
     }    
@@ -30,7 +34,9 @@ global  class HP_BAT008_NettoyageLogCallOut implements Database.batchable<HP_LOG
     global void finish(Database.batchableContext info){  
         List<HP_LOG_CALLOUT__b> newListToDelete =[select Id from HP_LOG_CALLOUT__b where Date__c <= :periode LIMIT 1];
         if(newListToDelete.size() > 0) {
+
             Database.executeBatch(new HP_BAT008_NettoyageLogCallOut());
+
         }
     }
  }

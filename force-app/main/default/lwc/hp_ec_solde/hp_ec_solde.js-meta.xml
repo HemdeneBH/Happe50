@@ -20,9 +20,15 @@
             <property type="String" name="lien" default="https://www.google.com/"/>
             <property type="Boolean" name="usePathInFirstButton" default="false"/>
 
-
-
+            <property type="String" name="listPaymentsTitle" default="Mes paiements"/>
+            <property type="String" name="textRappel" default="Rappel de votre solde :"/>
+            <property type="String" name="messageListPayement" default="Suite à ce paiement, votre solde sera de"/>
+            <property type="String" name="boutonListPaymentLabel" default="Payer"/>
             <property name="titreV1" label="Titre V1" type="String" default="Mes modes de paiement"></property>
+
+
+
+            
             <property name="titreV2" label="Titre V2" type="String" default="Mon mode de paiement"></property>
             <property name="labelMoyenPaiement1" label="Label Moyen de paiement 1" type="String" default="Carte bancaire"></property>
             <property name="labelMoyenPaiement2" label="Label Moyen de paiement 2" type="String" default="Paylib"></property>

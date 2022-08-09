@@ -1,4 +1,6 @@
-public without sharing class SM_AP46_XdataImportAccount {
+@RestResource(urlMapping='/account/*')
+
+global without sharing class SM_AP46_XdataImportAccount {
 
 	static final Schema.SObjectField accExtId = Account.Fields.No_Compte_contrat__c;
 	static SM_AP45_XdataImportUtils xiu = new SM_AP45_XdataImportUtils('xdata','Account');
@@ -7,7 +9,10 @@ public without sharing class SM_AP46_XdataImportAccount {
     // TODO: socle, quel record type pour smile et happe ?
     // TODO: socle rechercher les account selon les identifiants externes smile et happe
     // TODO: socle, Map<Double, Account> upAccs = new Map<Double, Account>();
-	public static string importAccounts(List<Map<String,String>> accounts) {
+
+
+	@HttpPost
+	global static string importAccounts(List<Map<String,String>> accounts) {
 		// TODO: lire le numéro de version de l'url – adapter le traitement à la version de code, la table de correspondance
 		
 		Set<String> allnocomptec = new Set<String>();
@@ -26,38 +31,33 @@ public without sharing class SM_AP46_XdataImportAccount {
 				continue;
 			}
             String idLocalstr = ac.get('idLocal');
-            system.debug('idLocalstr:'+idLocalstr);
-            
             if(idLocalstr == null || idLocalstr == '' || Double.valueOf(idLocalstr) == 0){
 				xiu.logImportError('Pas de idLocal correct',null, JSON.serialize(ac));
 				continue;
 			}
-			
             accounts2.add(ac);
 			allnocomptec.add(nocomptec);
 		}
 
 		System.debug(logginglevel.INFO,'1 - check input account done');
 
-		// 2 : check which account already exists
-		//AB : new fields added to the query 
-		for(Account existac: [select Name,Id, No_Compte_contrat__c,ID_Porte_feuille_contrat__c,ID_Batiment__c,ID_Local__c,LB_Portefeuille_contrat__c,FoyerId__c,FoyerLabel__c,StartDate__c,EndDate__c from Account where No_Compte_contrat__c in :allnocomptec]){
+		// 2: check which account already exists
+		for(Account existac: [select Name,Id, No_Compte_contrat__c,ID_Porte_feuille_contrat__c,ID_Batiment__c,ID_Local__c,LB_Portefeuille_contrat__c from Account where No_Compte_contrat__c in :allnocomptec]){
 			upAccs.put(existac.No_Compte_contrat__c, existac);
 		}
 
 		System.debug(logginglevel.INFO,'2 - read existing account - number : ' + upAccs.keySet().size());
 
-		// 3 Insert or update the account
+		// 3: Insert or update the account
         for(Map<String,String> ac : accounts2){
 			String nocomptec = ac.get('noCompteContrat');
 			if(upAccs.containsKey(nocomptec)){ // update
 				try{
 					Account anAccount = upAccs.get(nocomptec);
-                    system.debug('anAccount:'+anAccount);
 					fillAccount(anAccount, ac);
 					//upAccs.put(nocomptec, anAccount);
 				}catch(Exception e){
-					xiu.logImportError('mapping: '+e.getMessage(), null, JSON.serialize(ac));
+					xiu.logImportError('mapping', null, JSON.serialize(ac));
 				}
 			}else{ // insert
 				try{
@@ -68,7 +68,7 @@ public without sharing class SM_AP46_XdataImportAccount {
 					}
 					fillAccount(anAccount, ac);
 				}catch(Exception e){
-					xiu.logImportError('mapping: '+e.getMessage(), null, JSON.serialize(ac));
+					xiu.logImportError('mapping', null, JSON.serialize(ac));
 				}
 				
 			}
@@ -102,7 +102,7 @@ public without sharing class SM_AP46_XdataImportAccount {
 
 
 
-		public static void fillAccount(Account acc, Map<String,String> acdats) {
+		global static void fillAccount(Account acc, Map<String,String> acdats) {
 		List<String> allkeys = new List<String>(acdats.keySet());
 		integer numkeys = allkeys.size();
 		//String fieldName;
@@ -111,24 +111,20 @@ public without sharing class SM_AP46_XdataImportAccount {
 			final string fieldName = allkeys[pos];
 			final string fieldVal = acdats.get(fieldName);
 
-			if(fieldVal==null) continue; 
+			if(fieldVal==null) continue;
 
 			switch on fieldName{
-				when 'name' {if(acc.Name != fieldVal) { acc.Name = fieldVal;} }
-				when 'noCompteContrat' { acc.No_Compte_contrat__c = fieldVal; }
+				when 'name' {if(acc.Name != fieldVal) acc.Name = fieldVal; }
+				when 'noCompteContrat' { acc.No_Compte_contrat__c = fieldVal;}
 				when 'idPortefeuilleContrat' { acc.ID_Porte_feuille_contrat__c = Double.valueOf(fieldVal); }
 				when 'idBatiment' { acc.ID_Batiment__c = Double.valueOf(fieldVal); }
 				when 'idLocal' { acc.ID_Local__c = Double.valueOf(fieldVal); }
 				when 'lbPortefeuilleContrat' { acc.LB_Portefeuille_contrat__c = fieldVal; }
-				// AB: 4 New code lines added here 
-				when 'idFoyer' {acc.FoyerId__c = String.isEmpty(fieldVal)?acc.FoyerId__c:Double.valueOf(fieldVal); }
-				when 'lbFoyer' {acc.FoyerLabel__c = String.isEmpty(fieldVal)?acc.FoyerLabel__c:fieldVal; }
-				when 'dateDebut' {acc.StartDate__c = String.isEmpty(fieldVal)?acc.StartDate__c:Date.valueOf(fieldVal); }
-				when 'dateFin' {acc.EndDate__c = String.isEmpty(fieldVal)?acc.EndDate__c:Date.valueOf(fieldVal); }
-                when else { System.debug('input field not managed: ' + fieldName + ' with value: ' + fieldVal);
+				when else { System.debug('input field not managed: ' + fieldName + ' with value: ' + fieldVal);
 				}
 			}
             
 		}
 	}
+
 }

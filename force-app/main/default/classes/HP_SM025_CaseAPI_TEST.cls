@@ -3,8 +3,8 @@
  * @Description        : 
  * @Author             : Antoine Latour
  * @Group              : 
- * @Last Modified By   : Badr Eddine Belkarchi
- * @Last Modified On   : 02-19-2022
+ * @Last Modified By   : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @Last Modified On   : 03-14-2022
  * @Modification Log   : 
  * Ver       Date            Author      		    Modification
  * 1.0    19/08/2020   Antoine Latour     Initial Version
@@ -261,5 +261,185 @@ public with sharing class HP_SM025_CaseAPI_TEST {
         HP_SM025_CaseAPI.caseCreation(req, response);
         Test.stopTest();
         System.assertEquals('SM025-14', response.errors[0].code);
+    }
+    @isTest static void caseCreationRetablissement() {
+        HP_WRP034_Case.Request req = new HP_WRP034_Case.Request();
+        HP_WRP022_SFResponse response = new HP_WRP022_SFResponse (HP_HttpStatus.OK);
+        req.context = 'Retablissement';
+        req.porteFeuilleContratXdataId = 1222;
+        req.contratXdataId = 282713;
+        req.energie = 'Electricity';
+        req.pdl = '25461794460830';
+        req.contactInfo = new HP_WRP034_Case.ContactInfo();
+        req.contactInfo.xdataId = 1313;
+        req.contactInfo.clientAide = false;
+        req.montant_paiement =123;
+
+        Test.startTest();
+        HP_SM025_CaseAPI.caseCreation(req, response);
+        Test.stopTest();
+        System.assertEquals('SM025-1', response.infos[0].code);
+    }
+    @isTest static void caseCreationRetablissementPortefeuilleContratManquant() {
+        HP_WRP034_Case.Request req = new HP_WRP034_Case.Request();
+        HP_WRP022_SFResponse response = new HP_WRP022_SFResponse (HP_HttpStatus.OK);
+        req.context = 'Retablissement';
+        // req.porteFeuilleContratXdataId = 1222;
+        req.contratXdataId = 282713;
+        req.energie = 'Electricity';
+        req.pdl = '25461794460830';
+        req.contactInfo = new HP_WRP034_Case.ContactInfo();
+        req.contactInfo.xdataId = 1313;
+        req.contactInfo.clientAide = false;
+        req.montant_paiement =123;
+
+        Test.startTest();
+        HP_SM025_CaseAPI.caseCreation(req, response);
+        Test.stopTest();
+        System.assertEquals('SM025-14', response.errors[0].code);
+    }
+    @isTest static void caseCreationRetablissementContratXDataIdManquant() {
+        HP_WRP034_Case.Request req = new HP_WRP034_Case.Request();
+        HP_WRP022_SFResponse response = new HP_WRP022_SFResponse (HP_HttpStatus.OK);
+        req.context = 'Retablissement';
+        req.porteFeuilleContratXdataId = 1222;
+        // req.contratXdataId = 282713;
+        req.energie = 'Electricity';
+        req.pdl = '25461794460830';
+        req.contactInfo = new HP_WRP034_Case.ContactInfo();
+        req.contactInfo.xdataId = 1313;
+        req.contactInfo.clientAide = false;
+        req.montant_paiement =123;
+
+        Test.startTest();
+        HP_SM025_CaseAPI.caseCreation(req, response);
+        Test.stopTest();
+        System.assertEquals('SM025-15', response.errors[0].code);
+    }
+    @isTest static void caseCreationRetablissementEnergieManquant() {
+        HP_WRP034_Case.Request req = new HP_WRP034_Case.Request();
+        HP_WRP022_SFResponse response = new HP_WRP022_SFResponse (HP_HttpStatus.OK);
+        req.context = 'Retablissement';
+        req.porteFeuilleContratXdataId = 1222;
+        req.contratXdataId = 282713;
+        // req.energie = 'Electricity';
+        req.pdl = '25461794460830';
+        req.contactInfo = new HP_WRP034_Case.ContactInfo();
+        req.contactInfo.xdataId = 1313;
+        req.contactInfo.clientAide = false;
+        req.montant_paiement =123;
+
+        Test.startTest();
+        HP_SM025_CaseAPI.caseCreation(req, response);
+        Test.stopTest();
+        System.assertEquals('SM025-16', response.errors[0].code);
+    }
+    @isTest static void caseCreationRetablissementEnergieNonBon() {
+        HP_WRP034_Case.Request req = new HP_WRP034_Case.Request();
+        HP_WRP022_SFResponse response = new HP_WRP022_SFResponse (HP_HttpStatus.OK);
+        req.context = 'Retablissement';
+        req.porteFeuilleContratXdataId = 1222;
+        req.contratXdataId = 282713;
+        req.energie = 'Electricité';
+        req.pdl = '25461794460830';
+        req.contactInfo = new HP_WRP034_Case.ContactInfo();
+        req.contactInfo.xdataId = 1313;
+        req.contactInfo.clientAide = false;
+        req.montant_paiement =123;
+
+        Test.startTest();
+        HP_SM025_CaseAPI.caseCreation(req, response);
+        Test.stopTest();
+        System.assertEquals('SM025-16', response.errors[0].code);
+    }
+    @isTest static void caseCreationRetablissementPDLManquant() {
+        HP_WRP034_Case.Request req = new HP_WRP034_Case.Request();
+        HP_WRP022_SFResponse response = new HP_WRP022_SFResponse (HP_HttpStatus.OK);
+        req.context = 'Retablissement';
+        req.porteFeuilleContratXdataId = 1222;
+        req.contratXdataId = 282713;
+        req.energie = 'Electricity';
+        // req.pdl = '25461794460830';
+        req.contactInfo = new HP_WRP034_Case.ContactInfo();
+        req.contactInfo.xdataId = 1313;
+        req.contactInfo.clientAide = false;
+        req.montant_paiement =123;
+
+        Test.startTest();
+        HP_SM025_CaseAPI.caseCreation(req, response);
+        Test.stopTest();
+        System.assertEquals('SM025-17', response.errors[0].code);
+    }
+    @isTest static void caseCreationRetablissementContactInfoManquant() {
+        HP_WRP034_Case.Request req = new HP_WRP034_Case.Request();
+        HP_WRP022_SFResponse response = new HP_WRP022_SFResponse (HP_HttpStatus.OK);
+        req.context = 'Retablissement';
+        req.porteFeuilleContratXdataId = 1222;
+        req.contratXdataId = 282713;
+        req.energie = 'Electricity';
+        req.pdl = '25461794460830';
+        // req.contactInfo = new HP_WRP034_Case.ContactInfo();
+        // req.contactInfo.xdataId = 1313;
+        // req.contactInfo.clientAide = false;
+        req.montant_paiement =123;
+
+        Test.startTest();
+        HP_SM025_CaseAPI.caseCreation(req, response);
+        Test.stopTest();
+        System.assertEquals('SM025-4', response.errors[0].code);
+    }
+    @isTest static void caseCreationRetablissementContactInfoXdataIdManquant() {
+        HP_WRP034_Case.Request req = new HP_WRP034_Case.Request();
+        HP_WRP022_SFResponse response = new HP_WRP022_SFResponse (HP_HttpStatus.OK);
+        req.context = 'Retablissement';
+        req.porteFeuilleContratXdataId = 1222;
+        req.contratXdataId = 282713;
+        req.energie = 'Electricity';
+        req.pdl = '25461794460830';
+        req.contactInfo = new HP_WRP034_Case.ContactInfo();
+        // req.contactInfo.xdataId = 1313;
+        req.contactInfo.clientAide = false;
+        req.montant_paiement =123;
+
+        Test.startTest();
+        HP_SM025_CaseAPI.caseCreation(req, response);
+        Test.stopTest();
+        System.assertEquals('SM025-8', response.errors[0].code);
+    }
+    @isTest static void caseCreationRetablissementContactInfoClientAideManquant() {
+        HP_WRP034_Case.Request req = new HP_WRP034_Case.Request();
+        HP_WRP022_SFResponse response = new HP_WRP022_SFResponse (HP_HttpStatus.OK);
+        req.context = 'Retablissement';
+        req.porteFeuilleContratXdataId = 1222;
+        req.contratXdataId = 282713;
+        req.energie = 'Electricity';
+        req.pdl = '25461794460830';
+        req.contactInfo = new HP_WRP034_Case.ContactInfo();
+        req.contactInfo.xdataId = 1313;
+        // req.contactInfo.clientAide = false;
+        req.montant_paiement =123;
+
+        Test.startTest();
+        HP_SM025_CaseAPI.caseCreation(req, response);
+        Test.stopTest();
+        System.assertEquals('SM025-18', response.errors[0].code);
+    }
+    @isTest static void caseCreationRetablissementMontantPaimentManquant() {
+        HP_WRP034_Case.Request req = new HP_WRP034_Case.Request();
+        HP_WRP022_SFResponse response = new HP_WRP022_SFResponse (HP_HttpStatus.OK);
+        req.context = 'Retablissement';
+        req.porteFeuilleContratXdataId = 1222;
+        req.contratXdataId = 282713;
+        req.energie = 'Electricity';
+        req.pdl = '25461794460830';
+        req.contactInfo = new HP_WRP034_Case.ContactInfo();
+        req.contactInfo.xdataId = 1313;
+        req.contactInfo.clientAide = false;
+        // req.montant_paiement =123;
+
+        Test.startTest();
+        HP_SM025_CaseAPI.caseCreation(req, response);
+        Test.stopTest();
+        System.assertEquals('SM025-26', response.errors[0].code);
     }
 }

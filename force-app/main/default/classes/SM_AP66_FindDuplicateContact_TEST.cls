@@ -29,15 +29,15 @@ private class SM_AP66_FindDuplicateContact_TEST {
             RecordTypeId=Schema.SObjectType.Contact.getRecordTypeInfosByName().get('Contact Smile').getRecordTypeId());        
         insert contactCheck;      
         inputMap.put('ContactInfo',new Map<String,Object>{
-                'CivilityBlock' =>  new Map<String,Object>{
-                    'LastName' =>  contactCheck.LastName
-                } ,                
+                'CivilityBlock' => new Map<String,Object>{
+                    'LastName' => contactCheck.LastName
+                },                
                 'Complement_adresse__c' => contactCheck.Complement_adresse__c,                
                 'Address'=>new Map<String,Object>{                                  
-                    'StreetFormula'=>  contactCheck.MailingStreet,
-                        'PC'=>  contactCheck.MailingPostalCode,
-                        'CityFormula'=>  contactCheck.MailingCity,
-                        'Country'=>  contactCheck.MailingCountry
+                    'Street'=> contactCheck.MailingStreet,
+                        'PC'=> contactCheck.MailingPostalCode,
+                        'City'=> contactCheck.MailingCity,
+                        'Country'=> contactCheck.MailingCountry
                         
                         },     
                             'Email'=>new Map<String,Object>{

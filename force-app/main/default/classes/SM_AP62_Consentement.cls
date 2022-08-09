@@ -22,8 +22,7 @@ global class  SM_AP62_Consentement implements vlocity_cmt.VlocityOpenInterface {
     public Void sendConsentement (Map<String, Object> input, Map<String, Object> output){
         Map < String, Object > retourWS=(Map < String, Object >) input.get('CreerCorrespondance');
         if(retourWS!=null){
-            String idPersonne= (String) retourWS.get('idPersonne');
-            System.debug('@@ idPersonne '+(String) retourWS.get('idPersonne'));
+            String idPersonne= (String) retourWS.get('idPersonne');      
             system.debug('@@ idBP venant detre cree : '+input);
             List<object> answersMap =(List<object>) input.get('answerModified');           
             
@@ -33,20 +32,13 @@ global class  SM_AP62_Consentement implements vlocity_cmt.VlocityOpenInterface {
                     Map<String,Object> Consentement =(Map<String,Object>) answersMap[i];
                     system.debug('@@consent map : '+Consentement.get('idQuestion'));
                     if(Consentement!=null){
-                        Boolean newConsent;
-                        String tempNewConsent = (String) Consentement.get('consent');
-                        if(tempNewConsent != null && tempNewConsent.equals('true')) {
-                            newConsent = true;
-                        } else if(tempNewConsent != null && tempNewConsent.equals('false')) {
-                            newConsent = false;
-                        }
                         System.debug('@@ consentement '+Consentement);
                         System.debug('@@ idQuestionnaire '+Consentement.get('idQuestionnaire'));
                         Map<String,Object> mapInput=new Map<String,Object>();
                         mapInput.put('idBusinessPartner',idPersonne);
                         mapInput.put('idQuestionnaire',Consentement.get('idQuestionnaire'));   
                         mapInput.put('idQuestion',Consentement.get('idQuestion')); 
-                        mapInput.put('consent',newConsent);  
+                        mapInput.put('consent',Consentement.get('consent'));  
                         mapInput.put('canal','Telephone');   
                         mapInput.put('application','SMILE'); 
                         System.debug('@@ mapInput for IP ' +mapInput);                                        
@@ -91,6 +83,12 @@ global class  SM_AP62_Consentement implements vlocity_cmt.VlocityOpenInterface {
         List<object> answersMap =(List<object>) input.get('answerModified');
         System.debug(' @@ answersMap ' +answersMap);
         if(answersMap!=null){
+            String token;
+            if (Test.isRunningTest()) {
+                token = 'wadfkoa1234';
+            } else {
+                token = SM_MP_AP04_GetTokenService.getTokenFromSmile();
+            } 
             List<Object> listRetourAPIPostconsentement=new List<Object> ();
             for (Integer i = 0; i < answersMap.size(); i++) {
                 Map<String,Object> ConsentementOS =(Map<String,Object>) answersMap[i];  
@@ -117,7 +115,7 @@ global class  SM_AP62_Consentement implements vlocity_cmt.VlocityOpenInterface {
                         /* le PUT a besoin de l'ID consentement dans le path, 
                         lIP vlocity ne semble pas pouvoir prendre un id path dynamique en entree de lIP
                         c'est pour cela que cette partie se fait en code*/                                                                                             
-                        HttpResponse retour= getResponse(ipInput, idConsentToUpdate);
+                        HttpResponse retour= buildHttpRequestHeadersPUT(token,ipInput, idConsentToUpdate);
                         //System.debug('@@ retour '+retour);
                         listRetourAPIPostconsentement.add(retour);
                     } else if (String.isBlank(idConsentToUpdate)){
@@ -142,12 +140,42 @@ global class  SM_AP62_Consentement implements vlocity_cmt.VlocityOpenInterface {
             System.debug('@@ output '+output);
         }
         
+        
     }
     
-    public static HttpResponse getResponse(Map<String, Object> bodyRequest, String idAnswer) {
+    public static HttpResponse buildHttpRequestHeadersPUT(String token,Map<String, Object> bodyRequest, String idAnswer) {
         
-        HttpResponse httpResp = CalloutManager.sendRequest('Consentements', '/' + idAnswer , 'PUT', CalloutManager.Scope.READWRITE, JSON.serialize(bodyRequest),null);
-        return httpResp;
-    }    
+        HttpRequest req = new HttpRequest();
+        req.setMethod('PUT');
+        String endpointURL = '';       
+        SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'Consentements' limit 1];
+        if(suffixs!=null){
+            endpointURL = 'callout:AuthAPIHour' +suffixs.suffix__c;
+        }      
+        System.debug('@@ endpointURL idAnswer '+endpointURL + '/' + idAnswer);
+        req.setEndpoint(endpointURL + '/' + idAnswer);
+        req.setHeader('X-Correlation-Id', MP_AP13_GuidUtil.NewGuid());
+        req.setHeader('api_key', MP_Xdata_credentials__c.getInstance('sm_api_key_INT').Value__c);       
+        req.setHeader('Authorization', 'Bearer ' + token);
+        req.setHeader('Content-Type', 'application/json');
+        req.setBody(JSON.serialize(bodyRequest));
+        HttpResponse httpResp = sendData(req);
+        return httpResp ;
+    }
+    
+    public static HttpResponse sendData(HttpRequest request) {
+        Http http = new Http();
+        HttpResponse res;
+        try {
+            res = http.send(request);
+            
+        } catch (Exception e) {
+            system.debug('@@ [consenstement] failed to send data ##');
+            return null;
+        }
+        return res;
+        
+    }
+    
     
 }

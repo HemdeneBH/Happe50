@@ -148,33 +148,11 @@ public with sharing class gdfsuezBefCalypsoContratV7_TEST {
 		Obj47.populateXmlNode(mockNode);
 		gdfsuezComBefChpPivotContrat.sortDt_field_element Obj48 = new gdfsuezComBefChpPivotContrat.sortDt_field_element();
 		Obj48.populateXmlNode(mockNode);
-        
-        new gdfsuezBefCalypsoContratV7.rechercherContratInputDt(mockNode);
 	}
 
 	@isTest static void coverCodeForRechercherContrat(){
 		Test.setMock(WebServiceMock.class, new gdfsuezBefCalypsoContratV7MockImpl());
 		gdfsuezBefCalypsoContratV7.Dependency testObject = new gdfsuezBefCalypsoContratV7.Dependency();
 		testObject.RechercherContrat(null, null);
-        testObject.populateDoc(new DOM.Document());
-        
-        try{
-        	testObject.RechercherContrat_Http(null, null);
-        } catch (Exception exp){
-            System.assert(true);
-        }
-        
-        DOM.Document doc = new DOM.Document();
-        DOM.XmlNode mockNode = doc.createRootElement('Envelope', 'http://schemas.xmlsoap.org/soap/envelope/', 'env');
-        
-        mockNode.addChildElement('searchControlRequest', null, null);
-        gdfsuezBefCalypsoContratV7.rechercherContratInputDt testObject2 = new gdfsuezBefCalypsoContratV7.rechercherContratInputDt(mockNode);
-       	testObject2.populateXmlNode(mockNode);
-        
-        DOM.Document doc2 = new DOM.Document();
-        DOM.XmlNode mockNode2 = doc2.createRootElement('Envelope', 'http://schemas.xmlsoap.org/soap/envelope/', 'env');
-        mockNode2.addChildElement('statutComposante', null, null);
-        testObject2 = new gdfsuezBefCalypsoContratV7.rechercherContratInputDt(mockNode2);
-       	testObject2.populateXmlNode(mockNode2);
 	}
 }

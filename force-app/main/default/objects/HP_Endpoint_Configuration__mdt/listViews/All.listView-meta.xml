@@ -3,8 +3,8 @@
     <fullName>All</fullName>
     <columns>MasterLabel</columns>
     <columns>DeveloperName</columns>
-    <columns>SaveLog__c</columns>
     <columns>Value__c</columns>
+    <columns>ExpectedResponseCode__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
     <language>en_US</language>

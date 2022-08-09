@@ -5,7 +5,7 @@ public class SM_AP08_TestLib {
         SM_OCTOPUS__c CS_Setting = new SM_OCTOPUS__c();
         CS_Setting.appName__c = 'Smile';
         CS_Setting.certName__c = 'smilecert';
-        CS_Setting.endpoint__c = 'https://octopus-rec-api.clip-noprod.engie.com:56130/ws/';        
+        CS_Setting.endpoint__c = 'https://octopus.ws-ines-rct.engie.com:50001/smile-noprod-gdc/ws/';        
         insert CS_Setting;      
     }
     

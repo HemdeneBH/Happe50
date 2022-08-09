@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ListView xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>published_articles</fullName>
-    <columns>ARTICLE_CREATED_DATE</columns>
     <columns>ASSIGNEDBY_USER</columns>
     <columns>ASSIGNEDTO_USER</columns>
     <columns>TITLE</columns>
-    <columns>LAST_PUBLISHED_DATE</columns>
     <columns>Categorie_Consigne__c</columns>
     <columns>Etape_de_l_omniscript__c</columns>
     <columns>Consigne__c</columns>
@@ -13,5 +11,20 @@
     <columns>RECORDTYPE</columns>
     <columns>LAST_UPDATE</columns>
     <filterScope>Everything</filterScope>
+    <filters>
+        <field>PUBLISH_STATUS</field>
+        <operation>equals</operation>
+        <value>2</value>
+    </filters>
+    <filters>
+        <field>Categorie_Consigne__c</field>
+        <operation>equals</operation>
+        <value>Acquisition</value>
+    </filters>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Knowledge__kav.Insert_Omniscript</value>
+    </filters>
     <label>Published Articles</label>
 </ListView>

@@ -2,7 +2,7 @@
   @description       : 
   @author            : Badr Eddine Belkarchi
   @group             : 
-  @last modified on  : 07-08-2022
+  @last modified on  : 08-01-2022
   @last modified by  : Badr Eddine Belkarchi
 -->
 <template>
@@ -12,49 +12,52 @@
                 <a class="consumption-tab__link consumption-tab__link--summary hp-bigTitle">{titreFirstTab}</a>
             </div>
             <!-- <div class="consumption-tab" if:false={communicatingMeter}> -->
-            <div class={releveTabClass} onclick={switchToReleveTab}>
-                <a class="consumption-tab__link consumption-tab__link--reading hp-bigTitle">Ma relève</a>
-            </div>
+            <template if:true={showReleveComponent}>
+                <div class={releveTabClass} onclick={switchToReleveTab}>
+                    <a class="consumption-tab__link consumption-tab__link--reading hp-bigTitle">{titreSecondTab}</a>
+                </div>
+            </template>
             <!-- <div class="consumption-tab" if:true={communicatingMeter}>
                 <a class="consumption-tab__link consumption-tab__link--alert hp-bigTitle">Mon alerte <span>!</span></a>
             </div> -->
         </div>
-        <template if:false={showTextPasDeConsommations}>
-            <ul class="consumption-graph" if:true={showGas}>
-                <template for:each={gasConsumptions} for:item="consumption">
-                    <li key={consumption.date}>
-                        <c-hp_ec_consumption-bar 
-                            consumption={consumption}
-                            type="gas"
-                            alert-treshold={alertTreshold}
-                            max-value={maxGasValue}
-                            max-price={maxGasPrice}
-                            show-value={showValue}
-                            show-price={showPrice}
-                            display-details={displayDetails}
-                        >
-                        </c-hp_ec_consumption-bar>
-                    </li>
-                </template>
-            </ul>
-            <ul class="consumption-graph" if:true={showElec}>
-                <template for:each={elecConsumptions} for:item="consumption">
-                    <li key={consumption.date}>
-                        <c-hp_ec_consumption-bar 
-                            consumption={consumption}
-                            type="elec"
-                            alert-treshold={alertTreshold}
-                            max-value={maxElecValue}
-                            max-price={maxElecPrice}
-                            show-value={showValue}
-                            show-price={showPrice}
-                            display-details={displayDetails}
-                        >
-                        </c-hp_ec_consumption-bar>
-                    </li>
-                </template>
-            </ul>
-        </template>
+        
+        <template if:true={onConsumptionTab}>
+        <ul class="consumption-graph" if:true={showGas}>
+            <template for:each={gasConsumptions} for:item="consumption">
+                <li key={consumption.date}>
+                    <c-hp_ec_consumption-bar 
+                        consumption={consumption}
+                        type="gas"
+                        alert-treshold={alertTreshold}
+                        max-value={maxGasValue}
+                        max-price={maxGasPrice}
+                        show-value={showValue}
+                        show-price={showPrice}
+                        display-details={displayDetails}
+                    >
+                    </c-hp_ec_consumption-bar>
+                </li>
+            </template>
+        </ul>
+        <ul class="consumption-graph" if:true={showElec}>
+            <template for:each={elecConsumptions} for:item="consumption">
+                <li key={consumption.date}>
+                    <c-hp_ec_consumption-bar 
+                        consumption={consumption}
+                        type="elec"
+                        alert-treshold={alertTreshold}
+                        max-value={maxElecValue}
+                        max-price={maxElecPrice}
+                        show-value={showValue}
+                        show-price={showPrice}
+                        display-details={displayDetails}
+                    >
+                    </c-hp_ec_consumption-bar>
+                </li>
+            </template>
+        </ul>
+            
         <template if:true={showTextPasDeConsommations}>
             <div>
                 <h1>Merci d'avoir rejoint Happ-e!</h1>
@@ -64,7 +67,7 @@
         </template>
 
         <div class="consumption-footer">
-            <template if:false={showTextPasDeConsommations}>
+            <template if:true={showSwitchEnergy}>
                 <div class="switch-button">
                     <c-hp_ec_switch-button
                         name="typeSwitch"
@@ -81,5 +84,81 @@
                 </a>
             </div>
         </div>
+        </template>
+
+        <template if:true={onReleveTab}>
+            <div class="hp-releve slds-col">
+            <!-- <template if:true={showReleveComponent}> -->
+                    <template if:true={isProcessFinished}>
+                        <template if:true={dateProchainePeriodeGaz}>
+                            <div class="hp-releveTitle">
+                                {textProchainePeriodeGaz}
+                                <span class="blue hp-date">{dateProchainePeriodeGaz}</span>
+                            </div>
+                        </template>
+                        <template if:true={dateProchainePeriodeElec}>
+                            <div class="hp-releveTitle">
+                                {textProchainePeriodeElec}
+                                <span class="purple hp-date">{dateProchainePeriodeElec}</span>
+                            </div>
+                        </template>
+        
+                        <template if:true={showPeriodeEnCoursGaz}>
+                            <div class="hp-releveTitle">
+                                {textPeriodeEnCoursGaz}
+                                <span class="rose hp-date">{datePeriodeEnCoursGaz}</span>
+                            </div>
+                        </template>
+                        <template if:true={showPeriodeEnCoursElec}>
+                            <div class="hp-releveTitle">
+                                {textPeriodeEnCoursElec}
+                                <span class="rose hp-date">{datePeriodeEnCoursElec}</span>
+                            </div>
+                        </template>
+                        <template if:true={datePeriodeEnCoursResiliation}>
+                            <div class="hp-releveTitle">
+                                {textPeriodeEnCoursResiliation}
+                                <span class="rose hp-date">{datePeriodeEnCoursResiliation}</span>
+                            </div>
+                        </template>
+        
+                        <template if:true={showConfirmationIndex}>
+                            <c-hp_ec_bloc_blue 
+                                text-bloc-bleue={textBlocBleue}
+                                show-icon-lamp-bloc-bleue={showIconLampBlocBleue}
+                                show-icon-confirm-bloc-bleue={showIconConfirmBlocBleue}
+                                confirmationdate={confirmation_date}>
+                            </c-hp_ec_bloc_blue>
+                        </template>
+        
+                        <template if:true={isPeriodeAR}>
+                            <c-hp_ec_bloc_rose 
+                                idclient={idClient} 
+                                isperiodeargaz={isPeriodeAR_Gaz}
+                                isperiodearelec={isPeriodeAR_Elec} 
+                                contractgaz={contractGaz} 
+                                contractelec={contractElec}
+                                typecomptage={typeComptage} 
+                                pdl={currentPdl} 
+                                pce={currentPce} 
+                                lastestindexelec={latest_index_elec}
+                                lastestindexhpelec={latest_indexhp_elec}
+                                latestindexgaz={latest_index_gaz}
+                                text-bloc-rose={textBlocRose}
+                                show-icon-lamp-bloc-rose={showIconLampBlocRose}
+                                show-icon-confirm-bloc-rose={showIconConfirmBlocRose}
+                                title-popin-releve={titlePopinReleve}
+                                message-index-error={messageIndexError}
+                                message-index-no-valid-error={messageIndexNoValidError}
+                                custom-url-popin-releve={customUrlPopinReleve}
+                                custom-url-label-popin-releve={customUrlLabelPopinReleve} 
+                                onenvoieindexevent={hanldeEnvoieIndexEvent}>
+                            </c-hp_ec_bloc_rose>
+                        </template>
+                    </template>
+            <!-- </template> -->
+            </div>
+        </template>
+        
     </div>
 </template>

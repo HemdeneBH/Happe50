@@ -4,7 +4,7 @@
  * @Author             : Mohamed Aamer
  * @Group              : 
  * @Last Modified By   : Hemdene Ben Hammouda
- * @Last Modified On   : 11-22-2021
+ * @Last Modified On   : 03-17-2022
  * @Modification Log   : 
  * Ver       Date            Author      		    Modification
  * 1.0    13/12/2019   Mohamed Aamer     Initial Version
@@ -81,7 +81,9 @@ public with sharing class HP_PersonneService{
 
         final HTTPResponse response = HP_UTIL_HTTPUtils.calloutGet(HP_Constantes.AGILAB_PERSONNE_XDATA_ID	,  '?email='+email);
         System.System.debug('@@ response.getBody() ' + response.getBody());
-        boolean hasNoIdXdata = response.getBody().contains(str);
+        System.System.debug('@@ response.getBody() Stringify ' + JSON.deserializeUntyped(response.getBody()));
+        String bodyResponse = (String) JSON.deserializeUntyped(response.getBody());
+        boolean hasNoIdXdata = bodyResponse.contains(str);
         if(hasNoIdXdata){
             Map<String, Object> mapContains  =   (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
             result.add(mapContains);

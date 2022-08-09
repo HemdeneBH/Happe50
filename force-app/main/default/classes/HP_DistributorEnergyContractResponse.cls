@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 09-17-2020
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 03-07-2022
+ * @last modified by  : Hemdene Ben Hammouda
  * Modifications Log 
  * Ver   Date         Author                               Modification
  * 1.0   09-17-2020   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
@@ -21,7 +21,7 @@ public class HP_DistributorEnergyContractResponse implements HP_ConversionUtils.
 
 	public HP_EnergyContractResponse toCoreType() {
 		final Boolean isSuccess = (this.code == OCT_MESSAGE_OUT1_ELEC && this.prestationServiceDistributeurCree == true);
-		return new HP_EnergyContractResponse(this.idPrestationServiceDistributeur, this.dateEffetPrevue, isSuccess);
+		return new HP_EnergyContractResponse(this.idPrestationServiceDistributeur, this.dateEffetPrevue, isSuccess, this.libelle);
 	}
 
 }

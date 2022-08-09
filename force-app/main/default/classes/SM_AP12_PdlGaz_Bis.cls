@@ -16,7 +16,7 @@ global class SM_AP12_PdlGaz_Bis implements vlocity_cmt.VlocityOpenInterface {
 							lirePdl(inputMap, outMap, options);
 					}
 					catch (Exception e) {
-							system.debug('Error'+e.getMessage() +e.getStackTraceString());
+							system.debug(e.getStackTraceString());
 							return false;
 					}
 			}
@@ -53,8 +53,7 @@ global class SM_AP12_PdlGaz_Bis implements vlocity_cmt.VlocityOpenInterface {
 			gdfsuezBefCalypsoPdlgazV2.Dependency port = new gdfsuezBefCalypsoPdlgazV2.Dependency();
 			SM_OCTOPUS__c octopusCS = SM_OCTOPUS__c.getOrgDefaults();
 			port.clientCertName_x = octopusCS.certName__c;
-			SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'PDLGaz' limit 1];
-			port.endpoint_x =  octopusCS.endpoint__c+suffixs.suffix__c;
+			port.endpoint_x =  octopusCS.endpoint__c+'ES-PDLGaz_v2';
 			//  port.endpoint_x = 'https://octopus.ws-ines-rct.engie.com:50001/smile-noprod-gdc/ws/ES-PDLGaz_v2';
 			port.inputHttpHeaders_x = new Map<String, String> {'Content-Type' => 'text/xml;charset=utf-8'};
 
@@ -102,7 +101,7 @@ global class SM_AP12_PdlGaz_Bis implements vlocity_cmt.VlocityOpenInterface {
 			DateTime dateDerniereReleve  = null;
 			double dernierIndex ;
 		   String natureIndex;
-			if(derniersreleve != null && derniersreleve.releve6M_1M != null && !derniersreleve.releve6M_1M.isEmpty()) {
+			if(derniersreleve != null) {
 					listOfreleves = new List<Object>();
 					gdfsuezBefCalypsoPdlgazV2.releve6M_1MDt[] listofReleve = derniersreleve.releve6M_1M;
 
@@ -201,12 +200,6 @@ global class SM_AP12_PdlGaz_Bis implements vlocity_cmt.VlocityOpenInterface {
 										 infoPdl.dernierIndex = dernierIndex == null ?  null: String.valueOf(dernierIndex) ;
 										 // US FT2-225
 										 infoPdl.situationCompteur = (installation != null && installation.compteur != null && installation.compteur.situation != null) ? installation.compteur.situation.libelleCourt.toLowerCase('fr') : null;
-										 infoPdl.plageDeConso = (response.lirePDLGazOutput.donneesPDL[0] != null &&  response.lirePDLGazOutput.donneesPDL[0].CAR != null && response.lirePDLGazOutput.donneesPDL[0].CAR.CAR_Actuelle != null  &&
-										 
-										 response.lirePDLGazOutput.donneesPDL[0].CAR.CAR_Actuelle.profilCAR  != null) ?  String.valueOf(response.lirePDLGazOutput.donneesPDL[0].CAR.CAR_Actuelle.profilCAR.libelleCourt) : null;
-										 // RJM US FT2-841
-										 infoPdl.dateDerniereModificationTA = response.lirePDLGazOutput.donneesPDL[0].dateDerniereModificationFormuleTarifaireAcheminement;
-
 
 			if(listOfreleves != null) {
 					outMap.put('mesuresReleve',listOfreleves);
@@ -242,9 +235,7 @@ global class SM_AP12_PdlGaz_Bis implements vlocity_cmt.VlocityOpenInterface {
 		public String natureIndex;
 		public String ftaLibelle;
 		public String dernierIndex;
-		public String situationCompteur;
-		public String plageDeConso;   //donneesPDL . installation . compteur . situation . libelleCourt
-		public DateTime dateDerniereModificationTA;                 
+		public String situationCompteur;                   //donneesPDL . installation . compteur . situation . libelleCourt
 
 		public PdlInfo(String accessReleve,String statutContractuel,Datetime dateMiseHorsService,String etatTechnique,String matricule,String idPdl,
 					   string pdlType,Datetime dateDerniereReleve,String dgi,String fta,String typeCompteur,Datetime dateRefusTelereleve,Boolean miseHorsServiceEnCours,

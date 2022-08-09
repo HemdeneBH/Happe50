@@ -1,11 +1,9 @@
 .active {
     color: #19a546;
 }
-  
 .enCours {
     color: #ff7f1d;
 }
-  
 .prevContract {
     color: #c1c0c0;
     line-height: 1;
@@ -15,65 +13,27 @@
     width: 100%;
     padding-right: 30px;
 }
-  
-.bloc-card  {
-    min-height:  200px;
+.bloc-card {
+    height: 200px;
 }
-
-  
 .position-right {
     right: 0;
 }
-  
 .close-popover:hover {
     cursor: pointer;   
 }
-  
 .container-card {
     position: relative;
 }
-  
 .popover-260 {
     height: 270px;
 }
-  
 .container-card .popup-card {
-    position: absolute;
-    top: 277px;
-    left: 0px;
-    background-color: #e0f5ff;
-    width: 100%;
-}
-
-.close-icon {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-}
-
-.close-icon:hover {
-    cursor: pointer;    
-}
-
-.right-align {
-    text-align: right;
-}
-
-.points {
-    border-bottom: 1px dotted gray;
-    position: relative;
-    top: -5px;
-    width: calc( 100% - 200px);
-    left: 125px;
-}
-  
- /* .popup-card {
     position: absolute;
     top: 0;
     right: calc(-100% - 12px);
     background-color: #e0f5ff;
-} */
-  
+}
 .container-card .label {
     font-size: 10px;
     font-weight: 600;
@@ -83,7 +43,6 @@
     letter-spacing: normal;
     color: #767676;
 }
-  
 .container-card .value {
     font-size: 16px;
     font-weight: normal;
@@ -93,7 +52,6 @@
     letter-spacing: normal;
     color: black;
 }
-
 .facturation-middle-frame {
     height: 80px;
     border: solid 1px #979797;
@@ -105,88 +63,51 @@
     margin-top: 10px;
     text-align: center;
 }
-
 .center {
   text-align: center;
 }
-
 .icon-action {
     margin-left: 10px;
 }
-
 .icon-action:hover {
     cursor: pointer;
 }
-
 .partiel-spinner{
     position: relative;
     top: 40px;
 }
-
 .bloc-line {
     word-wrap: break-word;
 }
-/* CSS MEP 25/10/2020 */
 .title-paiement {
     position: absolute;
     top: 10px;
     left: 15px;
     font-size: 1.2em;
-    font-weight: 500;
-}
-
-.text-type {
-    font-size: 10px;
-}
-
-.text-title {
-    font-size: 17px ! important;
-}
-
-.container-icon-reject {
-    border: 1px solid rgb(112, 110, 107);
-    display: inline-block;
-    border-radius: 10px;
-    padding: 0 2px;
-}
-
-.padding-td {
-    padding: 5px 0;
-}
-
-.red-reject {
-    color: #c23934;
-}
-
-.red-reject-bold {
-    color: #c23934;
     font-weight: 600;
 }
-
 .disabled-color{
     color: #706e6b;
 }
-
 .margin-top-15 {
     margin-top: 15px;
 }
-
 .padding-img {
     padding: 0 20px;
 }
-
 .points.small-widh{
     width: calc( 100% - 260px);
 }
-
 .th-service {
     text-align: right;
     padding-right: 15px;
 }
 
+
 .margin-left-10 {
     margin-left: 10px;
 }
+
 
 .text-color {
     color: #4e606b;

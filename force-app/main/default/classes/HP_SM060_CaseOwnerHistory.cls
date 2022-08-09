@@ -39,6 +39,7 @@ public with sharing class HP_SM060_CaseOwnerHistory {
             }
             return profileName;
         } else if(mapQueueById.get(userId) != null) {
+
             final String queueDeveloperName = mapQueueById.get(userId).DeveloperName;
             return mapQueueTouserProfiles(queueDeveloperName);
         } else {
@@ -57,7 +58,9 @@ public with sharing class HP_SM060_CaseOwnerHistory {
             return 'HP_Conseiller Niveau 3';
         }
         else {
+
             return 'Queue indéfinie';
+
         }
     }
 
@@ -101,12 +104,17 @@ public with sharing class HP_SM060_CaseOwnerHistory {
         Set<Id> userNames = new Set<Id>();
         for(CaseHistory ch : caseHistoryList) {
 
+
+
             final Boolean oldValueId = ch.oldValue != null && String.valueOf(ch.oldValue).startsWith('005');
             final Boolean newValueId = ch.newValue != null && String.valueOf(ch.newValue).startsWith('005');
 
             if(ch.Field.equals('Owner')){
                 if(oldValueId) userNames.add(Id.valueOf(String.valueOf(ch.OldValue)));
                 if(newValueId) userNames.add(Id.valueOf(String.valueOf(ch.NewValue)));
+
+
+
             }
             
             List<CaseHistory> tempList;

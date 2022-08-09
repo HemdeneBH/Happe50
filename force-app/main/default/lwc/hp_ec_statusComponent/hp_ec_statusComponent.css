@@ -31,6 +31,22 @@
   font-family: var(--font-bold);
 }
 
+.secondary {
+  color: var(--secondary-colour);
+  font-weight: bold;
+  font-family: var(--font-bold);
+}
+.orange {
+  color: var(--orange);
+  font-weight: bold;
+  font-family: var(--font-bold);
+}
+.yellow {
+  color: var(--yellow);
+  font-weight: bold;
+  font-family: var(--font-bold);
+}
+
 .status_contract_purple {
   font-family: var(--font-bold);
   font-size: 16px;

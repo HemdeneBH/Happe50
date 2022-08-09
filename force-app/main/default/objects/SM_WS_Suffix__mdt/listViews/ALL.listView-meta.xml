@@ -7,7 +7,6 @@
     <columns>Version__c</columns>
     <columns>Description__c</columns>
     <columns>type__c</columns>
-    <columns>activate_Apihour__c</columns>
     <filterScope>Everything</filterScope>
     <label>ALL</label>
     <language>en_US</language>

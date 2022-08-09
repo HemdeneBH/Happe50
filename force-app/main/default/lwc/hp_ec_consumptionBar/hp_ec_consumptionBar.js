@@ -36,7 +36,8 @@ export default class Hp_ec_consumptionBar extends LightningElement {
     }
 
     get priceRatio () {
-        return this.consumption.conso / this.maxPrice * 100;
+        // return this.consumption.conso / this.maxPrice * 100;
+        return this.consumption.priceValue / this.maxPrice * 100;
     }
 
     get subscriptionRatio () {

@@ -4,15 +4,15 @@
     <active>true</active>
     <description>Interdire le changement de statut des Souscriptions Happe pour les conseillers N1 ou N2.</description>
     <errorConditionFormula>AND( !$Setup.ByPassSettings__c.ValidationRule__c, ISCHANGED(HP_Statut__c),
-OR($UserRole.DeveloperName =
-&quot;HP_Conseiller_Niveau_1&quot;,$UserRole.DeveloperName =
-&quot;HP_Conseiller_Niveau_2&quot;, $UserRole.DeveloperName =
-&quot;HP_Conseiller_Niveau_1_TAD&quot;, $UserRole.DeveloperName =
+ OR($UserRole.DeveloperName = 
+&quot;HP_Conseiller_Niveau_1&quot;,$UserRole.DeveloperName = 
+&quot;HP_Conseiller_Niveau_2&quot;, $UserRole.DeveloperName = 
+&quot;HP_Conseiller_Niveau_1_TAD&quot;, $UserRole.DeveloperName = 
 &quot;HP_Conseiller_Niveau_2_TAD&quot;),
 OR(ISPICKVAL( HP_Statut__c, &quot;SAVE_3&quot;),
 ISPICKVAL( HP_Statut__c, &quot;SAVE_2&quot;),
 ISPICKVAL( HP_Statut__c, &quot;SAVE_2_CONFIRMED&quot;)
-)
+) 
 )</errorConditionFormula>
     <errorMessage>Ce statut n&apos;est pas autorisé</errorMessage>
 </ValidationRule>

@@ -5,4 +5,9 @@
     <confirmationTokenRequired>false</confirmationTokenRequired>
     <description>Visualforce liée à l&apos;OS duplicata qui permet de gérer les profils</description>
     <label>Duplicata</label>
+    <packageVersions>
+        <majorNumber>900</majorNumber>
+        <minorNumber>289</minorNumber>
+        <namespace>vlocity_cmt</namespace>
+    </packageVersions>
 </ApexPage>

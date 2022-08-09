@@ -49,16 +49,12 @@ global class SM_AP07_AdressesApiService implements vlocity_cmt.VlocityOpenInterf
 	public static String getIdBanIfSameAddr(String addrComplete) {
 		System.debug('@MHA Addr =>' + addrComplete);
 		String IdBAN;
-		String endpointURL = '';
 		HttpRequest req = new HttpRequest();
 		//addrComplete = addrComplete.replace(' ', '+');
 		//utiliser urlEncode pour gerer les accents 
 		//sinon la recherche dadresse ne ramene pas de resultats
 		addrComplete = EncodingUtil.URLENCODE(addrComplete,'UTF-8');
-		String api = 'SearchAdresse';
-        SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername =: api limit 1];
-        endpointURL = 'callout:APIAdresseGouv' + suffixs.suffix__c;
-        req.setEndpoint(endpointURL + addrComplete);
+		req.setEndpoint('https://api-adresse.data.gouv.fr/search/?q=' + addrComplete);
 		req.setMethod('GET');
 		req.setHeader('Content-Type', 'application/json; charset=utf-8');
 		Http http = new Http();
@@ -193,6 +189,17 @@ global class SM_AP07_AdressesApiService implements vlocity_cmt.VlocityOpenInterf
 			return ;
 		}
 		
+		String token;
+		
+		if (Test.isRunningTest()) {
+			token = 'wadfkoa1234';
+		} else {
+			token = SM_MP_AP04_GetTokenService.getTokenFromSmile();
+		}
+		if (token == null) {
+			system.debug('@@ Token not found ...');
+			return;
+		}
 		HttpResponse httpResponse = new HttpResponse();
 		Map < String, Object > resultAsMap = new Map<String,Object>();
 		List < Object > listAdresses = new List<Object>();
@@ -205,7 +212,7 @@ global class SM_AP07_AdressesApiService implements vlocity_cmt.VlocityOpenInterf
 			Integer page = 0;
 			do{
 				if(!Test.isRunningTest()) {
-					httpResponse = getResponse(reqParams+'&page='+page);
+					httpResponse = getResponse(token, reqParams+'&page='+page);
 				}
 				else if(Test.isRunningTest()){
 					StaticResourceCalloutMock mock = new StaticResourceCalloutMock();
@@ -214,7 +221,7 @@ global class SM_AP07_AdressesApiService implements vlocity_cmt.VlocityOpenInterf
 					mock.setHeader('Content-Type', 'application/json');
 					// Set the mock callout mode
 					Test.setMock(HttpCalloutMock.class, mock);
-					httpResponse = getResponse('?idBAN=ADRNIVX_0000000331881839');
+					httpResponse = getResponse(token, '?idBAN=ADRNIVX_0000000331881839');
 				}
 				system.debug('response' + httpResponse );
 				if(httpResponse != null ){ 
@@ -243,7 +250,7 @@ global class SM_AP07_AdressesApiService implements vlocity_cmt.VlocityOpenInterf
 		}
 		else{
 			if(!Test.isRunningTest()) {
-				httpResponse = getResponse(reqParams);
+				httpResponse = getResponse(token, reqParams);
 			}
 			else if(Test.isRunningTest()){
 				StaticResourceCalloutMock mock = new StaticResourceCalloutMock();
@@ -252,7 +259,7 @@ global class SM_AP07_AdressesApiService implements vlocity_cmt.VlocityOpenInterf
 				mock.setHeader('Content-Type', 'application/json');
 				// Set the mock callout mode
 				Test.setMock(HttpCalloutMock.class, mock);
-				httpResponse = getResponse('?idBAN=ADRNIVX_0000000331881839');
+				httpResponse = getResponse(token, '?idBAN=ADRNIVX_0000000331881839');
 			}
 		}
 
@@ -409,9 +416,10 @@ global class SM_AP07_AdressesApiService implements vlocity_cmt.VlocityOpenInterf
 *createdDate: 26/07/2018
 *LastModified MHA 07/12/2018
 */
-	public static HttpResponse getResponse( String reqParams) {
-		HttpResponse httpResp = CalloutManager.sendRequest('Adresses', reqParams, 'GET', CalloutManager.Scope.READ,null,null);
-		if (CalloutManager.httpResponseFailureDetected(httpResp)) {
+	public static HttpResponse getResponse(String token, String reqParams) {
+		HttpRequest httpReq = buildHttpRequestHeaders(token, reqParams);
+		HttpResponse httpResp = sendData(httpReq);
+		if (httpResponseFailureDetected(httpResp)) {
 			// should abort next step's
 			system.debug('## [getAdresse] error occured when sending data ##');
 			system.debug(httpResp != null ? httpResp.getBody() : 'http response is null');
@@ -422,7 +430,67 @@ global class SM_AP07_AdressesApiService implements vlocity_cmt.VlocityOpenInterf
 		return httpResp;
 		
 	}
-
+	
+	/*author: RWA
+*Description: construction du header
+*createdDate: 26/07/2018
+*LastModified HEL 19/02/2019
+*/
+	public static HttpRequest buildHttpRequestHeaders(String token, String reqParams) {
+		
+		
+		HttpRequest req = new HttpRequest();
+		req.setMethod('GET');
+		String endpointURL = '';
+		if (!Test.isRunningTest()) {
+			SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'Adresses' limit 1];
+			endpointURL = 'callout:AuthAPIHour' +suffixs.suffix__c+ reqParams;
+		}
+		
+		System.debug('@@ request URL is ' + endpointURL);
+		req.setEndpoint(endpointURL);
+		req.setHeader('X-Correlation-Id', MP_AP13_GuidUtil.NewGuid());
+		req.setHeader('api_key', MP_Xdata_credentials__c.getInstance('sm_api_key_INT').Value__c);
+		//req.setHeader('api_key', MP_Xdata_credentials__c.getInstance('sm_api_key').Value__c);
+		req.setHeader('Authorization', 'Bearer ' + token);
+		req.setHeader('Content-Type', 'application/json');
+		return req;
+	}
+	
+	
+	/*author: RWA
+*Description: appel HTTP
+*createdDate: 26/07/2018
+*LastModified MHA 07/12/2018
+*/
+	public static HttpResponse sendData(HttpRequest request) {
+		Http http = new Http();
+		HttpResponse res;
+		try {
+			res = http.send(request);
+			
+		} catch (Exception e) {
+			system.debug('## sendData failed ' + e.getMessage());
+			return null;
+		}
+		return res;
+		
+	}
+	
+	
+	/*author: RWA
+*Description: vérification de la réussite de l'appel
+*createdDate: 26/07/2018
+*LastModified MHA 07/12/2018
+*/
+	private static Boolean httpResponseFailureDetected(HttpResponse response) {
+		system.debug('@@ response.getStatusCode() ' + response.getStatusCode());
+		system.debug('@@ response.getBody() ' + response.getBody());
+		return (response == null || (response.getStatusCode() != 201 && response.getStatusCode() != 200 && response.getStatusCode() != 206));
+		
+	}
+	
+	
 	private static void  searchAddressById(Map < String, Object > inputMap, Map < String, Object > outMap, Map < String, Object > options) {
 		system.debug('**** ' + inputMap);
 		String idLogement = (String)inputMap.get('idLogement') ;
@@ -431,6 +499,15 @@ global class SM_AP07_AdressesApiService implements vlocity_cmt.VlocityOpenInterf
 			system.debug('error occured when getting idLogement ..');
 			return ;
 		}
+		String   token ;
+		
+		
+		if (Test.isRunningTest()) {
+			token = 'wadfkoa1234';
+		} else {
+			token = SM_MP_AP04_GetTokenService.getTokenFromSmile();
+		}
+		
 		
 		HttpResponse httpResponse = new HttpResponse();
 		String reqParams = '?idBAN=' + idLogement;
@@ -440,7 +517,7 @@ global class SM_AP07_AdressesApiService implements vlocity_cmt.VlocityOpenInterf
 		}
 		
 		if (!Test.isRunningTest()) {
-			httpResponse = getResponse(reqParams);
+			httpResponse = getResponse(token, reqParams);
 		} else {
 			StaticResourceCalloutMock mock = new StaticResourceCalloutMock();
 			mock.setStaticResource('SM_MockResponseGetAddr');
@@ -448,7 +525,7 @@ global class SM_AP07_AdressesApiService implements vlocity_cmt.VlocityOpenInterf
 			mock.setHeader('Content-Type', 'application/json');
 			// Set the mock callout mode
 			Test.setMock(HttpCalloutMock.class, mock);
-			httpResponse = getResponse('?idBAN=ADRNIVX_0000000331881839');
+			httpResponse = getResponse(token, '?idBAN=ADRNIVX_0000000331881839');
 		}
 		
 		
@@ -499,12 +576,21 @@ global class SM_AP07_AdressesApiService implements vlocity_cmt.VlocityOpenInterf
 			system.debug('error occured when getting idAddress ..');
 			return ;
 		}
+		String   token ;
+		
+		
+		if (Test.isRunningTest()) {
+			token = 'wadfkoa1234';
+		} else {
+			token = SM_MP_AP04_GetTokenService.getTokenFromSmile();
+		}
+		
 		
 		HttpResponse httpResponse = new HttpResponse();
 		String reqParams = '/' + idAddress;
 		
 		if (!Test.isRunningTest()) {
-			httpResponse = getResponse(reqParams);
+			httpResponse = getResponse(token, reqParams);
 		} else {
 			StaticResourceCalloutMock mock = new StaticResourceCalloutMock();
 			mock.setStaticResource('SM_MockResponseGetAddr');
@@ -512,7 +598,7 @@ global class SM_AP07_AdressesApiService implements vlocity_cmt.VlocityOpenInterf
 			mock.setHeader('Content-Type', 'application/json');
 			// Set the mock callout mode
 			Test.setMock(HttpCalloutMock.class, mock);
-			httpResponse = getResponse('/51');
+			httpResponse = getResponse(token, '/51');
 		}
 		
 		system.debug('adresse httpResponse ' + httpResponse);
@@ -648,7 +734,7 @@ global class SM_AP07_AdressesApiService implements vlocity_cmt.VlocityOpenInterf
 		System.debug('**** OUT searchAddressSelfcare');
 	}
     
-	public static Boolean checkIfpdlExist(List<Object> outAddr, String energy,String numPdlPce){
+    public static Boolean checkIfpdlExist(List<Object> outAddr, String energy,String numPdlPce){
         
         String pdl;
         String pce;
@@ -669,7 +755,7 @@ global class SM_AP07_AdressesApiService implements vlocity_cmt.VlocityOpenInterf
         
         return false;
     }
-
-
-
+	
+	
+	
 }

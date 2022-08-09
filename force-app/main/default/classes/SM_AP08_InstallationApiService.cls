@@ -6,6 +6,7 @@ global class SM_AP08_InstallationApiService implements vlocity_cmt.VlocityOpenIn
 				callInstallations(inputMap, outMap, options);
 				// your implementation, use outMap to send response back to OmniScript
 			} catch (Exception e) {
+				system.debug(e);
 				return false;
 			}
 		}
@@ -13,6 +14,7 @@ global class SM_AP08_InstallationApiService implements vlocity_cmt.VlocityOpenIn
 			try {
 				verifyExistencePDLOrPCE(inputMap, outMap, options);
 			} catch (Exception e) {
+				system.debug(e);
 				return false;
 			}
 		}
@@ -20,6 +22,7 @@ global class SM_AP08_InstallationApiService implements vlocity_cmt.VlocityOpenIn
 			try {
 				getInstallationData(inputMap, outMap, options);
 			} catch (Exception e) {
+				system.debug(e);
 				return false;
 			}
 		}
@@ -27,6 +30,7 @@ global class SM_AP08_InstallationApiService implements vlocity_cmt.VlocityOpenIn
 			try {
 				verifyExistentInstallations(inputMap, outMap, options);
 			} catch (Exception e) {
+				system.debug(e);
 				return false;
 			}
 		}
@@ -38,7 +42,9 @@ global class SM_AP08_InstallationApiService implements vlocity_cmt.VlocityOpenIn
 		Map<String, Object> insideMap = (Map<String, Object>)inputMap.get('ChoixElements1');
 		Object valueNumeroPDL;
 		Object valueNumeroPCE;
+		System.debug('***MHA2' + insideMap.get('selectedPDLValFormula'));
 		if ((insideMap.get('selectedPDLValFormula') == null || String.valueOf(insideMap.get('selectedPDLValFormula')).length() == 0) && (insideMap.get('selectedPCEValFormula') == null || String.valueOf(insideMap.get('selectedPCEValFormula')).length() == 0)) {
+			system.debug('NumeroPointDeLivraison is not found ...');
 			return;
 		}
 
@@ -48,21 +54,34 @@ global class SM_AP08_InstallationApiService implements vlocity_cmt.VlocityOpenIn
 		if (insideMap.get('selectedPCEValFormula') != null && String.valueOf(insideMap.get('selectedPCEValFormula')).length() != 0) {
 			valueNumeroPCE = String.valueOf(insideMap.get('selectedPCEValFormula'));
 		}
+		System.debug('test:' + valueNumeroPDL);
 
+		String token;
+		if (Test.isRunningTest()) {
+			token = 'wadfkoa1234';
+		} else {
+			token = SM_MP_AP04_GetTokenService.getTokenFromSmile();
+		}
+
+		if (token == null) {
+			system.debug('Token not found ...');
+			return;
+		}
 		HttpResponse httpResponse = new HttpResponse();
 		Map<String,String> listParameters = new Map<String,String>();
 		listParameters.put('numeroPointDeLivraison',String.valueOf(valueNumeroPDL));
 		if (!Test.isRunningTest()) {
-			httpResponse = getResponse(listParameters);
+			httpResponse = getResponse(token, listParameters);
 		} else {
 			// Set the mock callout mode
-			httpResponse = getResponse(listParameters);
+			httpResponse = getResponse(token, listParameters);
 		}
 
 		Map < String, Object > resultAsMap = (Map < String, Object > ) JSON.deserializeUntyped(httpResponse.getBody());
 		List < Object > clientAccounts = (List < Object > ) resultAsMap.get('_data');
 
 		if (clientAccounts.Size() == 0) {
+			system.debug('No data to get the NumeroPointDeLivraison ' + valueNumeroPDL);
 		}else{
 			Map<String, Object> transformedData = (Map<String, Object>)transformDatatoOmniscript(clientAccounts) ;
 			List<Object> installs = (List<Object>)transformedData.get('resultdata1');
@@ -77,13 +96,15 @@ global class SM_AP08_InstallationApiService implements vlocity_cmt.VlocityOpenIn
 		/*HttpResponse httpResponse1 = new HttpResponse();*/
 		if (!Test.isRunningTest()) {
 			listParameters.put('numeroPointDeLivraison',  String.valueOf(valueNumeroPCE));
-			httpResponse = getResponse(listParameters);
+			httpResponse = getResponse(token, listParameters);
+			System.debug('OK');
 		}
 
 		Map < String, Object > resultAsMap1 = (Map < String, Object > ) JSON.deserializeUntyped(httpResponse.getBody());
 		List < Object > clientAccounts1 = (List < Object > ) resultAsMap1.get('_data');
 
 		if (clientAccounts1.Size() == 0) {
+			system.debug('No data to get the NumeroPointDeLivraison ' + valueNumeroPCE);
 			return;
 		}else{
 			Map<String, Object> transformedData1 =  transformDatatoOmniscript(clientAccounts1) ;
@@ -102,15 +123,40 @@ global class SM_AP08_InstallationApiService implements vlocity_cmt.VlocityOpenIn
 			return;
 		}*/
 
+		system.debug('MHA id Local:'+outMap.get('data1')+','+outMap.get('data2'));
+	}
+
+	public static String generateToken(){
+		String token;
+		if (Test.isRunningTest()) {
+			token = 'wadfkoa1234';
+		} else {
+			token = SM_MP_AP04_GetTokenService.getTokenFromSmile();
+		}
+
+		return token;
 	}
 
 	public static void  getInstallationData (Map<String,Object> inputMap, Map<String,Object> outMap, Map<String,Object> options) {
 		if (inputMap.get('idLocal') == null || String.valueOf(inputMap.get('idLocal')).length() == 0) {
+			System.debug('idLocal is not found ...');
 			return;
 		}
 		String idLocal = String.valueOf(inputMap.get('idLocal'));
 
-		HttpResponse httpResponse = getResponse(new Map<String,String> {'idLocal' => idLocal});
+		String token;
+		if (Test.isRunningTest()) {
+			token = 'wadfkoa5678';
+		} else {
+			token = SM_MP_AP04_GetTokenService.getTokenFromSmile();
+		}
+
+		if (token == null) {
+			system.debug('Token not found ...');
+			return;
+		}
+
+		HttpResponse httpResponse = getResponse(token, new Map<String,String> {'idLocal' => idLocal});
 		Map<String,Object> resultAsMap = (Map<String,Object>) JSON.deserializeUntyped(httpResponse.getBody());
 
 		if (resultAsMap.Size() == 0) {
@@ -119,6 +165,7 @@ global class SM_AP08_InstallationApiService implements vlocity_cmt.VlocityOpenIn
 	   else {
 			outMap.put('resultdata', resultAsMap);
 		}
+		System.debug('### MGH :: getInstallationData :: ' + outMap);
 	}
 
 	public static void verifyExistencePDLOrPCE(Map < String, Object > inputMap, Map < String, Object > outMap, Map < String, Object > options) {
@@ -128,26 +175,36 @@ global class SM_AP08_InstallationApiService implements vlocity_cmt.VlocityOpenIn
 		String numeroPointDeLivraison;
 
 		if(String.isBlank(String.valueOf(inputMap.get('typeEnergieDemandee')))){
+			system.debug('typeEnergieDemandee is not found ...');
 			return;
 		}
 		if(String.isBlank(String.valueOf(inputMap.get('idLocal')))){
+			system.debug('idLocal is not found ...');
 			return;
 		}
 		idLocal =  String.valueOf(inputMap.get('idLocal'));
 		typeEnergieDemandee = String.valueOf(inputMap.get('typeEnergieDemandee'));
 
+		String token = generateToken();
+		if(String.isBlank(token)){
+			system.debug('Token not found ...');
+			return;
+		}
+
+		system.debug('verifyExistencePDLOrPCE : idLocal : '+idLocal+' typeEnergieDemandee : '+typeEnergieDemandee + ' token : '+token);
 
 
 		HttpResponse httpResponse = new HttpResponse();
 		Map<String,String> listParameters = new Map<String,String>();
 		listParameters.put('idLocal',idLocal);
 		if (!Test.isRunningTest()) {
-			httpResponse = getResponse(listParameters);
+			httpResponse = getResponse(token, listParameters);
 		}
 		else{
-			httpResponse = getResponse(listParameters);
+			httpResponse = getResponse(token, listParameters);
 		}
 
+		system.debug('verifyExistencePDLOrPCE : httpResponse : '+httpResponse);
 
 		Map < String, Object > resultAsMap = (Map < String, Object > ) JSON.deserializeUntyped(httpResponse.getBody());
 		List < Object > listInstallationAPI = (List < Object > ) resultAsMap.get('_data');
@@ -155,7 +212,10 @@ global class SM_AP08_InstallationApiService implements vlocity_cmt.VlocityOpenIn
 		List<InstallationsModel> listInstallations = transformDatatoListInstallation(listInstallationAPI);
 
 		String energyTypeAPIDemandee = transformDataSmileToAPIInstallation(typeEnergieDemandee);
-		
+		if(listInstallations.size()==0){
+			system.debug('No installations founded for the local ' + idLocal);
+		}
+
 		InstallationsModel installation = filterInstallationToCheck(listInstallations, energyTypeAPIDemandee);
 
 		if(installation==null){
@@ -164,6 +224,7 @@ global class SM_AP08_InstallationApiService implements vlocity_cmt.VlocityOpenIn
 			if (!Test.isRunningTest()) {
 				Map<String, Object> insideMap = (Map<String, Object>)inputMap.get('ChoixElements1');
 				if(String.isBlank(String.valueOf(insideMap.get('selectedPDLValFormula'))) && String.isBlank(String.valueOf(insideMap.get('selectedPCEValFormula')))){
+					system.debug('verifyExistencePDLOrPCE -- Aucun PDL ou PCE séletcionné');
 					return;
 				}
 				if(typeEnergieDemandee.equals('GAZ')){
@@ -177,9 +238,11 @@ global class SM_AP08_InstallationApiService implements vlocity_cmt.VlocityOpenIn
 
 		} else{
 			// l'installation demandee existe - on poursuit le parcours
+			system.debug('Installation exist : '+installation.idLocal+' - secteurActivite : '+installation.secteurActivite+' - numero du pdl/pce : '+installation.NumeroPointDeLivraison);
 			outMap.put('isPDLOrPCEExistInSAP', true);
 		}
 
+		system.debug('outMap ' +outMap );
 	}
 	
 	public static void verifyExistentInstallations(Map < String, Object > inputMap, Map < String, Object > outMap, Map < String, Object > options) {
@@ -192,9 +255,11 @@ global class SM_AP08_InstallationApiService implements vlocity_cmt.VlocityOpenIn
 		Map < String, Object > etapeLogementMap = (Map < String, Object >) inputMap.get('ChoixElements1');
 		
 		if(String.isBlank(String.valueOf(etapeContexteMap.get('EnergyTypeOptions')))){
+			system.debug('[SM_AP08_InstallationApiService]:[verifyExistentInstallations]: energy type not found');
 			return;
 		}
 		if(String.isBlank(String.valueOf(etapeLogementMap.get('selectedPDLValFormula'))) && String.isBlank(String.valueOf(etapeLogementMap.get('selectedPCEValFormula')))){
+			system.debug('[SM_AP08_InstallationApiService]:[verifyExistentInstallations]: selectedPDLValFormula & selectedPCEValFormula not found');
 			return;
 		}
 		
@@ -204,6 +269,13 @@ global class SM_AP08_InstallationApiService implements vlocity_cmt.VlocityOpenIn
 		numeroPCE = !String.isBlank(String.valueOf(etapeLogementMap.get('selectedPCEValFormula'))) ? String.valueOf(etapeLogementMap.get('selectedPCEValFormula')) : String.valueOf(etapeLogementMap.get('associatedPCEVal'));
 		numeroPDL = !String.isBlank(String.valueOf(etapeLogementMap.get('selectedPDLValFormula'))) ? String.valueOf(etapeLogementMap.get('selectedPDLValFormula')) : String.valueOf(etapeLogementMap.get('associatedPDLVal'));
 
+		String token = generateToken();
+		if(String.isBlank(token)){
+			system.debug('Token not found ...');
+			return;
+		}
+
+		system.debug('[SM_AP08_InstallationApiService]:[verifyExistentInstallations]: PDL:'+numeroPDL+' PCE:'+numeroPCE+' Energy :'+typeOffreASouscrire);
 
 		InfoPDLPCEToBeCreated infoPDLPCEToBeCreated;
 		String idLocalPDLInstallation;
@@ -402,15 +474,25 @@ global class SM_AP08_InstallationApiService implements vlocity_cmt.VlocityOpenIn
 	*               Sinon on retourne null
 	*/
 	public static String isPointLivraisonPossedeInstallation(String numeroPointLivraison){
-		
+		String token;
+		if (Test.isRunningTest()) {
+			token = 'wadfkoa1234';
+		} else {
+			token = SM_MP_AP04_GetTokenService.getTokenFromSmile();
+		}
+
+		if (token == null) {
+			system.debug('Token not found ...');
+			throw new TokenException('Unexcpected exception : Token not found ...');
+		}
 		HttpResponse httpResponse = new HttpResponse();
 		Map<String,String> listParameters = new Map<String,String>();
 		listParameters.put('numeroPointDeLivraison', numeroPointLivraison);
 		if (!Test.isRunningTest()) {
-			httpResponse = getResponse(listParameters);
+			httpResponse = getResponse(token, listParameters);
 		} else {
 			// Set the mock callout mode
-			httpResponse = getResponse(listParameters);
+			httpResponse = getResponse(token, listParameters);
 		}
 
 		Map < String, Object > resultAsMap = (Map < String, Object > ) JSON.deserializeUntyped(httpResponse.getBody());
@@ -423,30 +505,89 @@ global class SM_AP08_InstallationApiService implements vlocity_cmt.VlocityOpenIn
 		if(String.isBlank(installation.numeroInstallation)){
 			return null;
 		}
-		 return installation.idLocal;
+		return installation.idLocal;
 		
 	}
 
-	public static String buildRequestParams(Map<String,String> listParameters){
-		String endpointParams = '';
-		if(listParameters.size()>0){
-			endpointParams +='?';
-			Set<String> queryParamsKeys = listParameters.keySet();
-			for(String key : queryParamsKeys){
-				endpointParams+=key+'='+listParameters.get(key)+'&';
-			}
-			endpointParams = endpointParams.substring(0, endpointParams.length()-1);
-
+	public static HttpRequest buildHttpRequestHeaders(String token, Map<String,String> listParameters) {
+		HttpRequest req = new HttpRequest();
+		req.setMethod('GET');
+		req.setEndpoint(buildEndPoint(listParameters));
+		req.setHeader('X-Correlation-Id', MP_AP13_GuidUtil.NewGuid());
+		if (!Test.isRunningTest()) {
+			req.setHeader('api_key', MP_Xdata_credentials__c.getInstance('sm_api_key_INT').Value__c);
 		}
-		return endpointParams;
+		req.setHeader('Authorization', 'Bearer ' + token);
+		req.setHeader('Content-Type', 'application/json');
+		return req;
 	}
 
-	public static HttpResponse getResponse(Map<String,String> listParameters) {
+	public static String buildEndPoint(Map<String,String> listParameters){
+		
+		String endPoint = '';
+		if (!Test.isRunningTest()) {
+			SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'Installations' limit 1];
+			endPoint = 'callout:AuthAPIHour' +suffixs.suffix__c;
+		}
 
-		String endpointParams = buildRequestParams(listParameters);
-		HttpResponse httpResp = CalloutManager.sendRequest('Installations', endpointParams, 'GET', CalloutManager.Scope.READ,null,null);
-		if (CalloutManager.httpResponseFailureDetected(httpResp)) {
+		if(listParameters.size()>0){
+			endPoint = endPoint +'?';
+			Set<String> queryParamsKeys = listParameters.keySet();
+			for(String key : queryParamsKeys){
+				endPoint=endPoint+key+'='+listParameters.get(key)+'&';
+			}
+			endPoint = endPoint.substring(0, endPoint.length()-1);
+
+		}
+		system.debug('[buildEndPoint]' + endPoint);
+		return endPoint;
+	}
+
+	public static HttpResponse sendData(HttpRequest request) {
+		Http http = new Http();
+		HttpResponse res;
+		try {
+			if (!Test.isRunningTest()) {
+				res = http.send(request);
+			} else {
+				StaticResourceCalloutMock mock = new StaticResourceCalloutMock();
+				mock.setStaticResource('SM_MockResponseApiInstallations');
+				mock.setStatusCode(200);
+				mock.setHeader('Content-Type', 'application/json');
+				// Set the mock callout mode
+				system.debug('sendData mock : '+mock);
+				Test.setMock(HttpCalloutMock.class, mock);
+				res = http.send(request);
+			}
+
+		} catch (Exception e) {
+			system.debug('## [Installations] failed to send data ##'+e);
+			return null;
+		}
+		return res;
+
+	}
+
+
+	private static Boolean httpResponseFailureDetected(HttpResponse response) {
+		system.debug(response);
+		return (response == null || (response.getStatusCode() != 201 && response.getStatusCode() != 200 && response.getStatusCode() != 206));
+
+	}
+
+
+
+
+
+	public static HttpResponse getResponse(String token, Map<String,String> listParameters) {
+
+
+		HttpRequest httpReq = buildHttpRequestHeaders(token, listParameters);
+		HttpResponse httpResp = sendData(httpReq);
+		if (httpResponseFailureDetected(httpResp)) {
 			// should abort next step's
+			system.debug('## [ Installations] error occured when sending data ##');
+			system.debug(httpResp != null ? httpResp.getBody() : 'http response is null');
 			return null;
 		}
 

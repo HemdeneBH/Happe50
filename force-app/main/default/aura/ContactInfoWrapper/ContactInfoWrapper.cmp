@@ -1,13 +1,5 @@
 <aura:component implements="force:appHostable,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
 	<lightning:workspaceAPI aura:id="workspace" />
     <aura:attribute name="recordId" type="Id"/>
-
-
-    <c:contactview360 
-    recordId="{#v.recordId}"
-    onopencoordinates="{!c.openCoords}"
-    onopenedittitulaire="{!c.openEditTitulaire}"
-    onopenfreeservices="{!c.openFreeServices}"/>
-
-
+    <c:contactview360  recordId="{#v.recordId}" onopencoordinates="{!c.openCoords}"/>
 </aura:component>

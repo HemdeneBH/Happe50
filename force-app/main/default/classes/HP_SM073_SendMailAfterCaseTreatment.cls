@@ -40,7 +40,7 @@ public with sharing class HP_SM073_SendMailAfterCaseTreatment {
         HP_Souscription__c souscription = HP_EM005_Souscription.loadSouscription(selfcareId);
         String gasContractXdataId = '';
         String electricityContractXdataId = '';
-
+        
         for(HP_Contrat__c acontrat : contractList) {
 			if(acontrat.HP_Type_de_Compteur__c == 'GAS') {
 				gasContractXdataId = String.valueOf(acontrat.HP_Contrat_XdataId__c);

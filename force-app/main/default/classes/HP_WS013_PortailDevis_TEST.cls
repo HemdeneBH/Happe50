@@ -2,7 +2,9 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
+
  * @last modified on  : 03-08-2021
+
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
  * Modifications Log 
  * Ver   Date         Author                               Modification
@@ -62,7 +64,9 @@ global with sharing class HP_WS013_PortailDevis_TEST {
             'HP_Periode_de_facturation__c' =>'BIMONTHLY',
             'HP_Plan_de_Prix_electrique__c' =>'BASE',
             'HP_Puissance_Compteur_electrique__c' =>6,
+
             'HP_Souscription_Digital_Id__c' =>'1234567891234',
+
             'HP_Type_Energie__c' =>'COMBINED_GAS_AND_ELECTRICITY',
             'HP_type_Souscription__c' =>'MOVING_IN',
             'HP_NumberPCE__c' =>'31431211214068',
@@ -72,7 +76,9 @@ global with sharing class HP_WS013_PortailDevis_TEST {
         }, null);
         insert enrolment;
 
+
         HP_WRP039_Devis.Request req = new HP_WRP039_Devis.Request('1234567891234');
+
     
         RestRequest reqHttp = new RestRequest();
         RestResponse resHttp = new RestResponse();

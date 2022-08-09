@@ -8,7 +8,7 @@
 
 
 
- * @Last Modified On   : 02-02-2022
+ * @Last Modified On   : 03-10-2022
 
 
 
@@ -481,6 +481,7 @@ public without sharing class HP_UTIL_HTTPUtils {
            TokenWrapper tokenConf =  getTokenWrapperMap().get(tok);
            result.put(tokenConf.headerKey, BEARER + tokenConf.getToken());
         }
+        System.debug('@@@ headers : '+result);
         return result;
     }
 	@TestVisible
@@ -494,7 +495,7 @@ public without sharing class HP_UTIL_HTTPUtils {
                 result.put(key, headers.get(key));
             }
         }
-
+        
         return result;
     }
 

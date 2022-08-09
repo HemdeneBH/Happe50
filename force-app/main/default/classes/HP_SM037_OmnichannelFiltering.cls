@@ -8,7 +8,7 @@
  * Ver   Date         Author             Modification
  * 1.0   07-17-2020   Sara El-Hannaoui   Initial Version
 **/
-global without sharing class HP_SM037_OmnichannelFiltering {
+public without sharing class HP_SM037_OmnichannelFiltering {
 
     @InvocableMethod
     public static void deletePSR(List<String> casesId){
@@ -23,7 +23,7 @@ global without sharing class HP_SM037_OmnichannelFiltering {
         System.Debug('************** case fermés '+ closedCaseList.keyset());
          // Extraction PSR de case fermés  
         delete [SELECT Id, WorkItemId FROM PendingServiceRouting WHERE WorkItemId IN : closedCaseList.keyset()];
-       // delete [SELECT id FROM AgentWork WHERE WorkItemId IN :closedCaseList.keyset()];
+        delete [SELECT id FROM AgentWork WHERE WorkItemId IN :closedCaseList.keyset()];
     
     }
 }

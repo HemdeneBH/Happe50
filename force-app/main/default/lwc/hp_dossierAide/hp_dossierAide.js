@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Hemdene Ben Hammouda
  * @group             : 
- * @last modified on  : 12-20-2021
+ * @last modified on  : 12-16-2021
  * @last modified by  : Hemdene Ben Hammouda
 **/
 import { LightningElement, track, api } from 'lwc';
@@ -140,6 +140,7 @@ export default class Hp_dossierAide extends NavigationMixin(LightningElement) {
         if(value == null) {
             return;
         }
+        console.log('Secondary Data : '+JSON.stringify(value));
         this._secondarydata =JSON.parse(JSON.stringify(value));
         this.findCurrentPftc();
         this.findCurrentSolde();
@@ -330,7 +331,7 @@ export default class Hp_dossierAide extends NavigationMixin(LightningElement) {
     }
 
     processData(){
-        console.log('Start of processData()');
+        
         this.findCurrentPfcInfo();
         this.findCurrentContracts();
     }
@@ -449,6 +450,7 @@ export default class Hp_dossierAide extends NavigationMixin(LightningElement) {
 
     handleRowAction(event){
         let row = event.detail.row;
+        console.log('Current Case : '+JSON.stringify(row));
         this[NavigationMixin.Navigate]({
             type: 'standard__recordPage',
             attributes: {
@@ -503,7 +505,6 @@ export default class Hp_dossierAide extends NavigationMixin(LightningElement) {
     }
 
     findCurrentPfcInfo(){
-        console.log('Start of findCurrentPfcInfo()');
         if(this?._masterdata && this?._pfcdata && this?._selectedpfcid){
             if(this._masterdata != null && this._masterdata.contratInfoList != null
                 && this._masterdata.contratInfoList.pfcInfoList != null  && this._masterdata.contratInfoList.pfcInfoList.locauxContratInfoList != null
@@ -540,7 +541,6 @@ export default class Hp_dossierAide extends NavigationMixin(LightningElement) {
     }
 
     findCurrentContracts() {
-        console.log('Start of findCurrentContracts()');
         this.contrats = {};
         if(this._selectedpfcid == null || this._masterdata == null || this._masterdata.contratInfoList == null ||this._masterdata.contratInfoList.data == null 
             || this._masterdata.contratInfoList.data._data == null) {

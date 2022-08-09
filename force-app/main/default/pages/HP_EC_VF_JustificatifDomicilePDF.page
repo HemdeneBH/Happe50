@@ -1,0 +1,180 @@
+<!--
+  @description       : 
+  @author            : Badr Eddine Belkarchi
+  @group             : 
+  @last modified on  : 08-08-2022
+  @last modified by  : Badr Eddine Belkarchi
+-->
+<apex:page controller="HP_EC_VF_JustificatifDomicilePDF_CTRL" renderAs="pdf" applyHtmlTag="false" showHeader="false" cache="true"
+    readOnly="true" standardStylesheets="false">
+    <html>
+    <head>
+        <title>AgiLab</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="Content-Style-Type" content="text/css;charset=utf-8" />
+        <meta http-equiv="Content-Script-Type" content="text/javascript;charset=utf-8" />
+        <meta name="pdfkit-page_size" content="A4" />
+        <style type="text/css">
+            div.bloc {
+                margin: 0px;
+            }
+            div.bloc_bleu {
+                background-color: #dff0fe;
+                position: relative;
+                padding: 10px 15px;
+                text-align: left;
+            }
+              div.bloc_bleu p{
+                padding-bottom: 5px !important;
+                margin: 0 !important;
+                line-height: 14px;
+            }
+            div.bloc .titre {
+                color: #2b97f6;
+                font-weight: bold;
+                font-size: 17px;
+                padding-top: 0px;
+                margin-top: 0px;
+                margin-bottom: 10px !important;
+                text-transform: uppercase;
+            }
+        </style>
+    </head>
+    <body style="padding-bottom: 0px; font-family: 'Open Sans', sans-serif; font-size: 13px;">
+        <div id="content" style="padding-bottom: 0px;">
+            <div style="position: absolute;left: 0;top: 0px;">
+                <apex:image url="{!$Resource.HP_EC_Logo_Happe2019}" alt="happ-e" width="180" />
+            </div>
+            <div style="font-family: 'Open Sans', sans-serif; text-transform: uppercase; position: absolute; left: 420px;top: 150px; 
+                            font-size: 13px;line-height: 17px;">
+                <apex:outputText value="{!civilite_titulaire}" escape="false"></apex:outputText>&nbsp;
+                <apex:outputText value="{!nom_titulaire}" escape="false"></apex:outputText>&nbsp;
+                <apex:outputText value="{!prenom_titulaire}" escape="false"></apex:outputText>&nbsp;
+                <br />
+                <apex:outputText value="{!civilite_cotitulaire}" escape="false"></apex:outputText>&nbsp;
+                <apex:outputText value="{!nom_cotitulaire}" escape="false"></apex:outputText>&nbsp;
+                <apex:outputText value="{!prenom_cotitulaire}" escape="false"></apex:outputText>&nbsp;
+                <br />
+                <apex:outputText value="{!adresse_factu1}" escape="false"></apex:outputText>&nbsp;
+                <br />
+                <apex:outputText value="{!adresse_factu2}" escape="false"></apex:outputText>
+                 <br />
+                 <br />
+                <div style="text-align: right; text-transform: capitalize;">
+                    Le &nbsp; <apex:outputText value="{!date_du_jour}" escape="false"></apex:outputText>
+                </div>
+            </div>
+            <table style="position: absolute;top: 280px;left: 0px;">
+                <tbody>
+                    <tr>
+                        <td style="width: 300px; padding-top: 30px;">
+                            <div class="bloc">
+                                <h3 class="titre">
+                                    <span>Vos Informations</span>
+                                </h3>
+                                <div class="bloc_bleu">
+                                    <p>
+                                        <span style="font-size:13px;">
+                                            <b>R&eacute;f&eacute;rence client :</b>&nbsp;
+                                            <apex:outputText value="{!ref_client}" escape="false"></apex:outputText>
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span style="font-size:13px;">
+                                            <b>Lieu de consommation :</b>&nbsp;
+                                            <apex:outputText value="{!adresse_local}" escape="false"></apex:outputText>
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span style="font-size:13px;">
+                                            <b>R&eacute;f&eacute;rence contrat :</b>&nbsp;
+                                            <apex:outputText value="{!ref_contrat}" escape="false"></apex:outputText>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="bloc" style="margin-top: 20px;">
+                                <h3 class="titre">
+                                    <span>Une question ?</span>
+                                </h3>
+                                <div class="bloc_bleu">
+                                    <div style="position: relative; padding-left: 30px;">
+                                        <apex:image url="{!$Resource.HP_EC_personne}" style="position: absolute; color:#2b97f6; top: 5px;left: 0;" alt="happ-e" width="22"
+                                        />
+                                        <p style="margin-bottom: 0;font-size: 13px;"><b>Rendez-vous sur votre espace client 24h/24</b></p>
+                                        <p style="font-family: 'Open Sans', sans-serif; font-weight: bold; margin-top: 0;">
+                                            <span style="font-size: 13px;">Site internet : </span>
+                                            <span style="color: #6647eb; font-weight: bold; text-decoration: underline;font-size: 13px;">happ-e.fr/contact</span>
+                                        </p>
+                                    </div>
+                                    <div style="position: relative; padding-left: 30px;">
+                                        <apex:image url="{!$Resource.HP_EC_chat}" style="position: absolute; color: #2b97f6; top: 5px; left: 0;" alt="happ-e" width="22"
+                                        />
+                                        <p style="margin-bottom: 0;font-size: 13px;"><b>Téléphone et chat ouverts du lundi au vendredi de 9h à 18h et le samedi de 9h à 17h</b></p>
+                                    </div>
+                                    <div style="position: relative; text-align: left; margin: 0 0 4px 30px;">
+                                        <apex:image url="{!$Resource.HP_EC_num_cristal}" style="width: 200px; top: 0; z-index: 1;" alt="happ-e" width="22" />
+                                    </div>
+                                    <div style="position: relative; padding-left: 30px;">
+                                        <apex:image url="{!$Resource.HP_EC_courrier}" style="position: absolute; color: #2b97f6; top: 5px; left: 0;" alt="happ-e" width="22"
+                                        />
+                                        <p style="font-size: 13px; text-align: left;"><b>Courrier à ENGIE Service happ-e</b>
+                                            <br />&nbsp;
+                                            <b><apex:outputText value="{!service_client_agilab}" escape="false">
+                                            </apex:outputText></b>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bloc" style="margin-top: 20px;">
+                                <h3 class="titre">
+                                    <span>Dépannage</span>
+                                </h3>
+                                <div class="bloc_bleu">
+                                    <p style="font-size: 13px;">
+                                        <b><apex:outputText value="{!depannage_elec}" escape="false"></apex:outputText></b>
+                                        <br />
+                                        <b><apex:outputText value="{!depannage_gaz}" escape="false"></apex:outputText></b>
+                                    </p>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="padding: 0 20px; vertical-align: top;">
+                            <div class="bloc" style="margin-top: 10px; padding-top: 20px;">
+                                <h3 class="titre">
+                                    <span>ATTESTATION DE TITULAIRE DE CONTRAT</span>
+                                    <hr style=" width: 100%;
+                                        margin-top: 0;
+                                        margin-bottom: 10px;
+                                        border: none;
+                                        border-bottom: 2px solid #dff0fe;" />
+                                </h3>
+                                <div style="padding-top: 5px;">
+                                    <p>
+                                        <span style="font-size: 13px;">
+                                            <apex:outputText value="{!bodyParagraph}" escape="false"></apex:outputText>
+                                            <br />
+                                            <br /> Pour servir et valoir ce que de droit.
+                                        </span>
+                                    </p>
+                                    <p>&nbsp;</p>
+                                    <p style="text-align: right;">
+                                        <span style="font-size: 13px;">
+                                            Votre conseiller Happ-e
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="position: absolute; top: 905px; text-align: center;display: block; font-size: 11px;">ENGIE, S.A. au capital de&nbsp;
+                <apex:outputText value="{!capital_GDF_SUEZ}" escape="false"></apex:outputText>, ayant son siège social &nbsp;
+                <apex:outputText value="{!adr_gdfsuez_siege}" escape="false">
+                </apex:outputText>, immatriculée au Registre du Commerce et des Sociétés de Naterre sous le numéro &nbsp;
+                <apex:outputText value="{!numero_tva_gdf_suez}" escape="false"></apex:outputText>.</p>
+        </div>
+    </body>
+    </html>
+</apex:page>

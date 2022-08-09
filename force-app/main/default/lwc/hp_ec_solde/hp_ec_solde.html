@@ -2,8 +2,8 @@
   @description       : 
   @author            : ZAATOUCHE Younes
   @group             : 
-  @last modified on  : 05-31-2022
-  @last modified by  : Badr Eddine Belkarchi
+  @last modified on  : 07-20-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 -->
 <template>
   <div data-id='profileContent' class="hp-solde c-content-bg slds-col">
@@ -27,19 +27,17 @@
           {secondButton}
           <!-- <button >MA DERNIERE FACTURE</button> -->
         </div>
-        <template if:false={usePathInFirstButton}>
-          <div class="hp-firstButton" onclick={openPopin}>
-            {firstButton}
-            <!-- <button >PAYER PAR CARTE</button> -->
-            </div>
-        </template>
-        <template if:true={usePathInFirstButton}>
-          <!-- <a href='' data-id="lien"> -->
-            <div class="hp-firstButton" onclick={actionFirstButton}>
+        <template if:false={prelevement}>
+          <template if:false={usePathInFirstButton}>
+            <div class="hp-firstButton" onclick={openPopin}>
               {firstButton}
-              <!-- <button >PAYER PAR CARTE</button> -->
-            </div>
-          <!-- </a> -->
+              </div>
+          </template>
+          <template if:true={usePathInFirstButton}>
+              <div class="hp-firstButton" onclick={actionFirstButton}>
+                {firstButton}
+              </div>
+          </template>
         </template>
       
       </div>
@@ -56,20 +54,18 @@
           {secondButton}
           <!-- <button >MA DERNIERE FACTURE</button> -->
         </div>
-        <template if:false={usePathInFirstButton}>
-          <div class="hp-firstButton" onclick={openPopin}>
-            {firstButton}
-            <!-- <button >PAYER PAR CARTE</button> -->
-            </div>
-        </template>
-        <template if:true={usePathInFirstButton}>
-          <a href='' data-id="lien">
-            <div class="hp-firstButton" onclick={actionFirstButton}>
+        <!-- <template if:true={prelevement}> -->
+          <template if:false={usePathInFirstButton}>
+            <div class="hp-firstButton" onclick={openPopin}>
               {firstButton}
-              <!-- <button >PAYER PAR CARTE</button> -->
-            </div>
-          </a>
-        </template>
+              </div>
+          </template>
+          <template if:true={usePathInFirstButton}>
+              <div class="hp-firstButton" onclick={actionFirstButton}>
+                {firstButton}
+              </div>
+          </template>
+        <!-- </template> -->
       </div>
     </template>
     <template if:true={conditionsOfCas3}>
@@ -116,7 +112,7 @@
 
   </div>
     <template if:true={paymentPopin}>
-      <c-hp_ec_popin-payments
+      <!-- <c-hp_ec_popin-payments
           id-portefeuille-contrat={idPortefeuilleContrat} 
           amount={amount}
           echeanceid={echeanceId}
@@ -141,6 +137,25 @@
           text-date-prelevement-part1={textDatePrelevementPart1}
           text-date-prelevement-part2={textDatePrelevementPart2}
           onclosepopin={closePopin}>
-      </c-hp_ec_popin-payments>
-  </template>
+      </c-hp_ec_popin-payments> -->
+      <c-hp_ec_popin-paiements-echeance
+            list-payements={listFctEch}
+            list-payments-title={listPaymentsTitle}
+            text-rappel={textRappel}
+            message-list-payement={messageListPayement}
+            bouton-list-payment-label={boutonListPaymentLabel}
+            sold-to-display={montantToDisplay}
+            amount={payementAmountToDisplay}
+            montant-to-paye={montantToPaye}
+            show-list-payement={showListPayement}
+            echeanceid={echeancIdToPaye}
+            is-etat-inactif={isEtatInactif}
+            contact={contact}
+            payement-mode-title={titreV1}
+            is-show={showListPayementComponent}
+            onclosepopin={closePopin}
+            >
+
+            </c-hp_ec_popin-paiements-echeance>
+    </template>
 </template>

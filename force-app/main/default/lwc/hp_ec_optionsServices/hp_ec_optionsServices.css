@@ -4,7 +4,6 @@
   margin: 15px;
   min-height: 320px;
 }
-
 .hp-bigTitle {
   padding: 0 0 15px 0;
 }
@@ -45,6 +44,9 @@
   width: 25px;
   height: auto;
   position: absolute ;
+}
+.hp-checked_icon.gaz {
+  filter: var(--check-icon-gaz);
 }
 .option-item {
   padding: 0 0 0 40px;
@@ -184,12 +186,9 @@
       .hp-linkBox>a {
         font-size: 14px;
       }
-    
   }
   @media (max-width: 374px) {
-  
     .hp-optionsServices{
       padding: 25px 20px;
     }
-    
   }

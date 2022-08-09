@@ -70,7 +70,7 @@ public class SM_AP14_GestionPrelevement_Test {
             ServicesGestionBlock.put('EditBlock1',new List<Object> {ServicesGestion});
             inputMap.put('ServicesGestion', ServicesGestionBlock);
             gestionPrelevement.invokeMethod('demanderPrelevement',inputMap,outMap,null);
-           //System.assertEquals('l\'idCompteClient est manquant',String.valueOf(outMap.get('error')));
+           System.assertEquals('l\'idCompteClient est manquant',String.valueOf(outMap.get('error')));
         Test.stopTest();
     }
 }

@@ -114,6 +114,32 @@ global class SM_AP27_ConsentementAPI_TEST {
 
 		service.invokeMethod('methodenotCovered', inputMap,  outputMap, null) ;
 		service.invokeMethod('callUpsertConsentement', inputMap,  outputMap, null);
+
+
+		Map<String, Object> bodyRequest = new Map<String, Object>();
+		bodyRequest.put('idPersonne', Integer.valueOf('15001'));
+		bodyRequest.put('idQuestionnaire', Integer.valueOf('3'));
+		bodyRequest.put('idBusinessPartner', '0202010066');
+		bodyRequest.put('idQuestion', Integer.valueOf('1'));
+		bodyRequest.put('consent', Boolean.valueOf('true'));
+		bodyRequest.put('canal', 'WEB');
+		bodyRequest.put('application', 'SMILE');
+
+		Map<String, Object> bodyRequest2 = new Map<String, Object>();
+		bodyRequest2.put('idPersonne', Integer.valueOf('15001'));
+		bodyRequest2.put('idQuestionnaire', Integer.valueOf('3'));
+		bodyRequest2.put('idBusinessPartner', '0202010066');
+		bodyRequest2.put('idQuestion', Integer.valueOf('2'));
+		bodyRequest2.put('consent', Boolean.valueOf('true'));
+		bodyRequest2.put('canal', 'WEB');
+		bodyRequest2.put('application', 'SMILE');
+
+		HttpRequest request =  SM_AP27_ConsentementAPI.buildHttpRequestHeadersPost('tokentest',bodyRequest );
+
+		SM_AP27_ConsentementAPI.sendData(request ) ;
+
+		SM_AP27_ConsentementAPI.getResponseWrite('tokentest', bodyRequest);
+		SM_AP27_ConsentementAPI.getResponseWrite('tokentest', bodyRequest2);
 	}
 
 	/*@Author: MHA
@@ -195,6 +221,31 @@ global class SM_AP27_ConsentementAPI_TEST {
 
 		service.invokeMethod('methodenotCovered', inputMap,  outputMap, null) ;
 		service.invokeMethod('callUpsertConsentement', inputMap,  outputMap, null);
+		Map<String, Object> bodyRequest = new Map<String, Object>();
+		bodyRequest.put('idPersonne', Integer.valueOf('15001'));
+		bodyRequest.put('idQuestionnaire', Integer.valueOf('3'));
+		bodyRequest.put('idBusinessPartner', '0202010066');
+		bodyRequest.put('idQuestion', Integer.valueOf('1'));
+		bodyRequest.put('consent', Boolean.valueOf('true'));
+		bodyRequest.put('canal', 'WEB');
+		bodyRequest.put('application', 'SMILE');
+
+		Map<String, Object> bodyRequest2 = new Map<String, Object>();
+		bodyRequest2.put('idPersonne', Integer.valueOf('15001'));
+		bodyRequest2.put('idQuestionnaire', Integer.valueOf('3'));
+		bodyRequest2.put('idBusinessPartner', '0202010066');
+		bodyRequest2.put('idQuestion', Integer.valueOf('2'));
+		bodyRequest2.put('consent', Boolean.valueOf('true'));
+		bodyRequest2.put('canal', 'WEB');
+		bodyRequest2.put('application', 'SMILE');
+
+
+		HttpRequest request =  SM_AP27_ConsentementAPI.buildHttpRequestHeadersPUT('tokentest',bodyRequest, 'test' );
+
+		SM_AP27_ConsentementAPI.sendData(request ) ;
+
+		SM_AP27_ConsentementAPI.getResponseUpdate('tokentest', bodyRequest,'test');
+		SM_AP27_ConsentementAPI.getResponseUpdate('tokentest', bodyRequest2,'test');
 	}
 
 }

@@ -38,12 +38,14 @@ global class SM_AP26_QuestionConsentementAPI_TEST {
 
 
 		SM_AP26_QuestionConsentementAPI.transformDatatoOmniscript(listQuestions) ;
+		HttpRequest request =  SM_AP26_QuestionConsentementAPI.buildHttpRequestHeaders('tokentest') ;
+		SM_AP26_QuestionConsentementAPI.sendData(request ) ;
 
 		String json = '{"test":"test"}';
 		//      JSONParser parser = JSON.createParser(json);
 		// SM_AP26_QuestionConsentementAPI.getJsonFieldAsString(parser , 'test');
 
-		SM_AP26_QuestionConsentementAPI.getResponse() ;
+		SM_AP26_QuestionConsentementAPI.getResponse('tokentest') ;
 
 		SM_AP26_QuestionConsentementAPI.QuestionConsentementModel QuestionConsentementModel = new  SM_AP26_QuestionConsentementAPI.QuestionConsentementModel(null,null,null,null,null) ;
 	}

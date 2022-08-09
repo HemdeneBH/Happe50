@@ -2,17 +2,23 @@
   @description       : 
   @author            : Hemdene Ben Hammouda
   @group             : 
-  @last modified on  : 02-04-2022
-  @last modified by  : Hemdene Ben Hammouda
+  @last modified on  : 08-03-2022
+  @last modified by  : Badr Eddine Belkarchi
 -->
 <template>
     <div data-id="container" class="hp-monContrat c-content-bg slds-col">
         <div data-id="title" class="hp-bigTitle">{titleText}</div>
-        <div class="hp-contractTitle">{titleContrat}</div>
+        <div class={titleContratClassCss}>{titleContrat}&nbsp;
+            <template if:true={showOptionVert}>
+                <span class="vert">Option Vertélec+ happ-e</span>
+            </template>
+        </div>
+        
+        
         <div if:true={contractList}>
             <template for:each={contractList} for:item="contract" >
                 <div key={contract.id} >
-                    <span class="hp-contractInfo">{contract.idXdata}</span>
+                    <span class="hp-contractInfo">N°{contract.idXdata}</span>
                 </div>
             </template>
         </div>
@@ -21,7 +27,7 @@
             <div class="hp-firstButton" onclick={handleVoirContract}>
                 {voirContractButtonLabel}
             </div>
-            <div class="hp-secondButton" onclick={handleJustificatif}>
+            <div class="hp-secondButton" onclick={downloadJustificatifDomicile}>
                 {justificatifButtonLabel}
             </div>
         </div>

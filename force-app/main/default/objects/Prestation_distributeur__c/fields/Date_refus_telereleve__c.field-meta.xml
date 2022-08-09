@@ -6,7 +6,6 @@ Date permettant de déterminer si on est dans le cas d&apos;un PDL non Gazpar av
     <externalId>false</externalId>
     <label>Date refus telereleve</label>
     <required>false</required>
-    <trackFeedHistory>false</trackFeedHistory>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
     <type>Date</type>

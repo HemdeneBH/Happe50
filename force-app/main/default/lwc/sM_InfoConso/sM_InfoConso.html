@@ -1,89 +1,73 @@
-<!--
-  @description       : 
-  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
-  @group             : 
-  @last modified on  : 04-27-2021
-  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
-  Modifications Log 
-  Ver   Date         Author                               Modification
-  1.0   04-26-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
--->
 <template>
     <lightning-card>
         <div class="slds-card__body slds-card__body_inner">
-            <h2 class="pageTitle">HISTORIQUE DES CONSOMMATIONS</h2>
+            <h2 class="pageTitle">HISTORIQUE DES CONSOMMATIONS</h2>				                        
         </div>
         <div class="slds-p-around_large">
             <h6 class="addressTitle">ADRESSE DU LOGEMENT</h6>
-            <div class="slds-grid slds-wrap">
-                <div>
-                    <lightning-icon icon-name="utility:home" size="x-small" alternative-text="Home">
-                    </lightning-icon> &nbsp;&nbsp;
-                </div>
+            <div class="slds-grid slds-wrap"> 
+                    <div>
+                       <lightning-icon
+                    icon-name="utility:home"
+                    size="x-small"
+                    alternative-text="Home">
+            </lightning-icon> &nbsp;&nbsp;</div>
                 <div>
                     <p>{numeroVoie}&nbsp;{libelleVoie} </p>
                     <p>{complementAdresse}</p>
                     <p>{codePostal}&nbsp;{ville}</p>
                     <p if:true={NoCompteContratMaj}>({NoCompteContratMaj})</p>
                 </div>
-            </div>
+            </div>		 			 
         </div>
         <div class="container-tabs">
             <div if:false={isNotPDLPCE}>
                 <div class="icon-energie" if:true={pce}>
-                    <img src="/resource/EngieCustomResources/images/picto-gaz-naturel.svg" />
+                    <img src="/resource/EngieCustomResources/images/picto-gaz-naturel.svg"/>  
                 </div>
                 <div class="icon-energie icon-energie-elec" if:true={isPDLPCE}>
-                    <img src="/resource/EngieCustomResources/images/picto-electricite.svg" />
+                    <img src="/resource/EngieCustomResources/images/picto-electricite.svg"/>  
                 </div>
                 <div class="icon-energie" if:true={isonlyPDL}>
-                    <img src="/resource/EngieCustomResources/images/picto-electricite.svg" />
+                    <img src="/resource/EngieCustomResources/images/picto-electricite.svg"/>  
                 </div>
                 <lightning-tabset>
-                    <lightning-tab label="GAZ" icon-name="utility:vide" if:true={pce} onactive={loadPLGaz}>
+                    <lightning-tab label="GAZ" icon-name="utility:survey" if:true={pce} onactive={loadPLGaz}>
                         <div class="slds-m-around_medium">
-                            <div if:true={plGaz}
-                                class="slds-grid slds-m-vertical_x-large slds-p-around_x-large container-info-point-livraison">
+                            <div if:true={plGaz} class="slds-grid slds-m-vertical_x-large slds-p-around_x-large container-info-point-livraison">
                                 <div class="slds-col slds-size_1-of-6">
                                     <div class="label-info-point-livraison slds-p-bottom_x-small">N° PCE</div>
                                     <div class="value-info-point-livraison">{pce}</div>
                                 </div>
                                 <div class="slds-col slds-size_1-of-6">
                                     <div class="label-info-point-livraison slds-p-bottom_x-small">UNITÉ DE RELÈVE</div>
-                                    <div class="value-info-point-livraison" if:true={uniteReleveGaz}>{uniteReleveGaz}
-                                    </div>
+                                    <div class="value-info-point-livraison" if:true={uniteReleveGaz}>{uniteReleveGaz}</div>
                                     <div class="value-info-point-livraison" if:false={uniteReleveGaz}>-</div>
                                 </div>
                                 <div class="slds-col slds-size_1-of-6">
-                                    <div class="label-info-point-livraison slds-p-bottom_x-small">DATE THÉORIQUE DE
-                                        PROCHAINE RELÈVE</div>
+                                    <div class="label-info-point-livraison slds-p-bottom_x-small">DATE THÉORIQUE DE PROCHAINE RELÈVE</div>
                                     <div class="value-info-point-livraison">{getdateTheoriqueReleve}</div>
                                 </div>
                                 <div class="slds-col slds-size_1-of-6">
-                                    <div class="label-info-point-livraison slds-p-bottom_x-small">DATE DE PROCHAINE
-                                        FACTURE</div>
+                                    <div class="label-info-point-livraison slds-p-bottom_x-small">DATE DE PROCHAINE FACTURE</div>
                                     <div class="value-info-point-livraison">{getdateProchaineFactureTechnique}</div>
                                 </div>
                                 <div class="slds-col slds-size_1-of-6">
                                     <div class="label-info-point-livraison slds-p-bottom_x-small">CAR</div>
-                                    <div class="value-info-point-livraison" if:true={isCRA}>{plGaz.ConsommationAnnuelle}
-                                        KWh</div>
+                                    <div class="value-info-point-livraison" if:true={isCRA}>{plGaz.ConsommationAnnuelle} KWh</div>
                                     <div class="value-info-point-livraison" if:false={isCRA}>-</div>
 
                                 </div>
                                 <div class="slds-col slds-size_1-of-6">
-                                    <div class="label-info-point-livraison slds-p-bottom_x-small">TARIF D'ACHEMINEMENT
-                                    </div>
+                                    <div class="label-info-point-livraison slds-p-bottom_x-small">TARIF D'ACHEMINEMENT</div>
                                     <div class="value-info-point-livraison" if:true={plGaz.TA}>{plGaz.TA}</div>
                                     <div class="value-info-point-livraison" if:false={plGaz.TA}>-</div>
                                 </div>
                             </div>
-                            <div if:false={pce}
-                                class="slds-grid slds-m-vertical_x-large slds-p-around_x-large container-info-point-livraison slds-align_absolute-center">
+                            <div if:false={pce} class="slds-grid slds-m-vertical_x-large slds-p-around_x-large container-info-point-livraison slds-align_absolute-center">
                                 Informations indisponibles pour le moment.
                             </div>
                         </div>
-                        <!-- Mis en commentaire après le ticket JIRA FT3-963
                         <div class="slds-p-left_large slds-p-right_large">
                             <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_warning" role="alert" if:true={showMessage}>
                                 <span class="slds-assistive-text">warning</span>
@@ -95,416 +79,129 @@
                                 <h2 class="slds-text-title_bold">Votre facture du {getdateProchaineFactureReelle} vous sera bientôt envoyée.</h2>
                             </div>
                         </div>
-                        -->
                         <div class="slds-p-around_large slds-clearfix">
-                            <div if:false={isTradeOffGaz} class="slds-p-around_large slds-clearfix">
-                                <table class="tab-gaz">
-                                    <thead>
-                                        <tr class="tableListPa">
-                                            <th scope="col">DATE DE RELEVÉ</th>
-                                            <th scope="col">N° DE FACTURE</th>
-                                            <th scope="col">LIBELLÉ CONSOMMATION</th>
-                                            <th scope="col">INDEX DE DÉBUT</th>
-                                            <th scope="col">INDEX DE FIN</th>
-                                            <th scope="col">CONSO EN M3</th>
-                                            <th scope="col">COÉF. DE CONVERSION</th>
-                                            <th scope="col">CONSO EN KWH</th>
-                                            <th scope="col" class="container-th">
-                                                <span>CATÉGORIE</span>
-                                                <span class="container-filter" if:false={noDataGaz}>
-                                                    <lightning-icon icon-name="utility:filterList" variant="inverse"
-                                                        size="xx-small" alternative-text="Filtre"
-                                                        data-filtre="CategorieGaz" data-type="Gaz"
-                                                        onclick={toggleFilter}></lightning-icon>
-                                                </span>
-                                                <section if:true={showHideFilterCategorieGaz}
-                                                    aria-describedby="dialog-body-id-78"
-                                                    aria-labelledby="dialog-heading-id-81"
-                                                    class="slds-popover slds-nubbin_left-top popup-card-cat slds-size--1-of-1 slds-m-right_xx-small"
-                                                    role="dialog">
-                                                    <div class="slds-popover__body" id="dialog-body-id-78">
-                                                        <lightning-checkbox-group name="Checkbox Group"
-                                                            options={filtreCategorieGaz} value={valueCategorieGaz}
-                                                            onchange={handleChange}></lightning-checkbox-group>
-                                                        <lightning-icon data-type="Gaz" data-filtre="CategorieGaz"
-                                                            icon-name="utility:close" onclick={toggleFilter}
-                                                            size="x-small" class="close-icon"></lightning-icon>
-                                                    </div>
-                                                </section>
-                                            </th>
-                                            <th scope="col" class="container-th">
-                                                <span>MOTIF DE RELEVÉ</span>
-                                                <span class="container-filter" if:false={noDataGaz}>
-                                                    <lightning-icon icon-name="utility:filterList" variant="inverse"
-                                                        size="xx-small" alternative-text="Filtre" data-filtre="MotifGaz"
-                                                        data-type="Gaz" onclick={toggleFilter}></lightning-icon>
-                                                </span>
-                                                <section if:true={showHideFilterMotifGaz}
-                                                    aria-describedby="dialog-body-id-77"
-                                                    aria-labelledby="dialog-heading-id-81"
-                                                    class="slds-popover slds-nubbin_left-top popup-card-motif slds-size--1-of-1 slds-m-right_xx-small"
-                                                    role="dialog">
-                                                    <div class="slds-popover__body" id="dialog-body-id-77">
-                                                        <lightning-checkbox-group name="Checkbox Group"
-                                                            options={filtreMotifGaz} value={valueMotifGaz}
-                                                            onchange={handleChange}></lightning-checkbox-group>
-                                                        <lightning-icon data-type="Gaz" data-filtre="MotifGaz"
-                                                            icon-name="utility:close" onclick={toggleFilter}
-                                                            size="x-small" class="close-icon"></lightning-icon>
-                                                    </div>
-                                                </section>
-                                            </th>
-                                            <th scope="col" class="td-95-width"> </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr if:true={noDataGaz}>
-                                            <td colspan="10" style="text-align: center;">
-                                                Aucune consommation n'est disponible pour le moment.
+                            <table class="tab-gaz">
+                                <thead>
+                                    <tr class="tableListPa">
+                                        <th scope="col">DATE DE RELEVÉ</th>
+                                        <th scope="col">N° DE FACTURE</th>
+                                        <th scope="col">INDEX DE DÉBUT</th>
+                                        <th scope="col">INDEX DE FIN</th>
+                                        <th scope="col">CONSO EN M3</th>
+                                        <th scope="col">COÉF. DE CONVERSION</th>
+                                        <th scope="col">CONSO EN KWH</th>
+                                        <th scope="col" class="container-th">
+                                            <span>CATÉGORIE</span> 
+                                            <span class="container-filter" if:false={noDataGaz}><lightning-icon icon-name="utility:filterList" variant="inverse" size="xx-small" alternative-text="Filtre" data-filtre="CategorieGaz" data-type="Gaz" onclick={toggleFilter}></lightning-icon></span>
+                                            <section if:true={showHideFilterCategorieGaz} aria-describedby="dialog-body-id-78" aria-labelledby="dialog-heading-id-81"
+                                                class="slds-popover slds-nubbin_left-top popup-card-cat slds-size--1-of-1 slds-m-right_xx-small" role="dialog">
+                                                <div class="slds-popover__body" id="dialog-body-id-78">
+                                                    <lightning-checkbox-group name="Checkbox Group"
+                                                                            options={filtreCategorieGaz}
+                                                                            value={valueCategorieGaz}
+                                                                            onchange={handleChange}></lightning-checkbox-group>
+                                                    <lightning-icon data-type="Gaz" data-filtre="CategorieGaz" icon-name="utility:close" onclick={toggleFilter} size="x-small" class="close-icon"></lightning-icon>
+                                                </div>
+                                            </section>
+                                        </th>
+                                        <th scope="col" class="container-th">
+                                            <span>MOTIF DE RELEVÉ</span>
+                                            <span class="container-filter" if:false={noDataGaz}><lightning-icon icon-name="utility:filterList" variant="inverse" size="xx-small" alternative-text="Filtre" data-filtre="MotifGaz"  data-type="Gaz" onclick={toggleFilter}></lightning-icon></span>
+                                            <section if:true={showHideFilterMotifGaz} aria-describedby="dialog-body-id-77" aria-labelledby="dialog-heading-id-81"
+                                                class="slds-popover slds-nubbin_left-top popup-card-motif slds-size--1-of-1 slds-m-right_xx-small" role="dialog">
+                                                <div class="slds-popover__body" id="dialog-body-id-77">
+                                                    <lightning-checkbox-group name="Checkbox Group"
+                                                                            options={filtreMotifGaz}
+                                                                            value={valueMotifGaz}
+                                                                            onchange={handleChange}></lightning-checkbox-group>
+                                                    <lightning-icon data-type="Gaz" data-filtre="MotifGaz" icon-name="utility:close" onclick={toggleFilter} size="x-small" class="close-icon"></lightning-icon>
+                                                </div>
+                                            </section>
+                                        </th>
+                                        <th scope="col" class="td-95-width"> </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr if:true={noDataGaz}>
+                                        <td colspan="10" style="text-align: center;">
+                                            Aucune consommation n'est disponible pour le moment.
+                                        </td>
+                                    </tr>
+                                    <tr if:true={error}>
+                                        <td colspan="10" style="text-align: center;">
+                                            <span class="error-msg">En raison d'un problème technique, le service est temporairement inaccessible.</span>
+                                        </td>
+                                    </tr>
+                                    <template for:each={dataGazWithPagination} for:item="consoGaz" for:index="index">
+                                        <tr key={consoGaz.idFacture} class="tableListPaTr">
+                                            <td data-label="DATE DE RELEVÉ">
+                                                {consoGaz.dateFinConsommation}
+                                            </td>
+                                            <td data-label="N° DE FACTURE ASSOCIÉE">
+                                                <span if:false={consoGaz.simulationFlag}>{consoGaz.idFacture}</span>
+                                            </td>
+                                            <td data-label="INDEX DE DÉBUT">
+                                                {consoGaz.indexDebut}
+                                            </td>
+                                            <td data-label="INDEX DE FIN">
+                                                {consoGaz.indexFin}
+                                            </td>
+                                            
+                                            <td data-label="CONSO EN M3">
+                                                {consoGaz.quantiteM3}
+                                            </td>
+                                            <td data-label="COÉF. DE CONVERSION">
+                                                {consoGaz.kPCS}
+                                            </td>
+                                            <td data-label="CONSO EN KWH">
+                                                {consoGaz.quantiteKWh}
+                                            </td>
+                                            <td data-label="CATÉGORIE">
+                                                {consoGaz.categorieReleve.libelleCourt}
+                                            </td>
+                                            <td data-label="MOTIF DE RELEVÉ">
+                                                {consoGaz.motifReleve.libelleCourt}
+                                            </td>
+                                            <td data-label="CONTESTATION">
+                                                <div if:true={consoGaz.contestation}><a data-idfacture={consoGaz.idFacture} data-type="Gaz" onclick={contesterIndex}>Contester l'index</a></div>
                                             </td>
                                         </tr>
-                                        <tr if:true={error}>
-                                            <td colspan="10" style="text-align: center;">
-                                                <span class="error-msg">En raison d'un problème technique, le service
-                                                    est
-                                                    temporairement inaccessible.</span>
-                                            </td>
-                                        </tr>
-                                        <template for:each={dataGazWithPagination} for:item="consoGaz"
-                                            for:index="index">
-                                            <tr key={consoGaz.idFacture} class="tableListPaTr">
-                                                <td data-label="DATE DE RELEVÉ">
-                                                    {consoGaz.dateReleve}
-                                                </td>
-                                                <td data-label="N° DE FACTURE ASSOCIÉE">
-                                                    {consoGaz.idFacture}
-                                                </td>
-                                                <td data-label="LIBELLÉ CONSOMMATION"></td>
-                                                <td data-label="INDEX DE DÉBUT">
-                                                    {consoGaz.indexDebut}
-                                                </td>
-                                                <td data-label="INDEX DE FIN">
-                                                    {consoGaz.indexFin}
-                                                </td>
-                                                <td data-label="CONSO EN M3">
-                                                    {consoGaz.quantiteM3}
-                                                </td>
-                                                <td data-label="COÉF. DE CONVERSION">
-                                                    {consoGaz.KPCS}
-                                                </td>
-                                                <td data-label="CONSO EN KWH">
-                                                    {consoGaz.consommationKwh}
-                                                </td>
-                                                <td data-label="CATÉGORIE">
-                                                    {consoGaz.categorieReleve.libelleCourt}
-                                                </td>
-                                                <td data-label="MOTIF DE RELEVÉ">
-                                                    {consoGaz.motifReleve.libelleCourt}
-                                                </td>
-                                                <td data-label="CONTESTATION">
-                                                    <div if:true={consoGaz.contestation}><a
-                                                            data-idfacture={consoGaz.idFacture} data-type="Gaz"
-                                                            onclick={contesterIndex}>Contester l'index</a></div>
-                                                </td>
-                                            </tr>
-                                        </template>
-                                    </tbody>
-                                </table>
-                                <div class="slds-text-align_center slds-m-top_small">
-                                    <template for:each={paginationGaz} for:item="pageElement" for:index="index">
-                                        <div key={pageElement.number} class="pagination selected-page" data-page={index}
-                                            data-type="Gaz" onclick={pagination} if:true={pageElement.selected}>
-                                            {pageElement.number}</div>
-                                        <div key={pageElement.number} class="pagination" data-page={index}
-                                            data-type="Gaz" onclick={pagination} if:false={pageElement.selected}>
-                                            {pageElement.number}</div>
                                     </template>
-                                </div>
+                                </tbody>
+                            </table>
+                            <div class="slds-text-align_center slds-m-top_small">
+                                <template for:each={paginationGaz} for:item="pageElement" for:index="index">
+                                    <div key={pageElement.number} class="pagination selected-page" data-page={index} data-type="Gaz" onclick={pagination} if:true={pageElement.selected}>{pageElement.number}</div>
+                                    <div key={pageElement.number} class="pagination" data-page={index} data-type="Gaz" onclick={pagination} if:false={pageElement.selected}>{pageElement.number}</div>
+                                </template>
                             </div>
-
-                            <div if:true={isTradeOffGaz} class="slds-p-around_large slds-clearfix">
-                                <table>
-                                    <thead>
-                                        <tr class="tableListPa">
-                                            <th scope="col" class="slds-text-align--center">DATE DE RELEVÉ</th>
-                                            <th scope="col" class="slds-text-align--center">N° DE FACTURE</th>
-                                            <th scope="col" class="container-thTradeoff">
-                                                <span>LIBELLÉ CONSOMMATION</span>
-                                                <span class="container-filter" if:false={noDataGaz}>
-                                                    <lightning-icon icon-name="utility:filterList" variant="inverse"
-                                                        size="xx-small" alternative-text="Filtre"
-                                                        data-filtre="LibelleConsoGaz" data-type="Gaz"
-                                                        onclick={toggleFilter}></lightning-icon>
-                                                </span>
-                                                <section if:true={showHideFilterLibelleConsoGaz}
-                                                    aria-describedby="dialog-body-id-78"
-                                                    aria-labelledby="dialog-heading-id-81"
-                                                    class="slds-popover slds-nubbin_left-top popup-card-cat slds-size--1-of-1 slds-m-right_xx-small"
-                                                    role="dialog">
-                                                    <div class="slds-popover__body" id="dialog-body-id-89">
-                                                        <lightning-checkbox-group name="Checkbox Group"
-                                                            options={filtreLibelleConsoGaz} value={valueLibelleConsoGaz}
-                                                            onchange={handleChangeTradeOffGaz}>
-                                                        </lightning-checkbox-group>
-                                                        <lightning-icon data-type="Gaz" data-filtre="LibelleConsoGaz"
-                                                            icon-name="utility:close" onclick={toggleFilter}
-                                                            size="x-small" class="close-icon"></lightning-icon>
-                                                    </div>
-                                                </section>
-                                            </th>
-                                            <th scope="col" class="slds-text-align--center">INDEX DE DÉBUT</th>
-                                            <th scope="col" class="slds-text-align--center">INDEX DE FIN</th>
-                                            <th scope="col" class="slds-text-align--center">CONSO EN M3</th>
-                                            <th scope="col" class="slds-text-align--center">COÉF. DE CONVERSION</th>
-                                            <th scope="col" class="slds-text-align--center">CONSO EN KWH</th>
-                                            <th scope="col" class="container-thTradeoff">
-                                                <span>CATÉGORIE</span>
-                                                <span class="container-filter" if:false={noDataGaz}>
-                                                    <lightning-icon icon-name="utility:filterList" variant="inverse"
-                                                        size="xx-small" alternative-text="Filtre"
-                                                        data-filtre="CategorieGaz" data-type="Gaz"
-                                                        onclick={toggleFilter}></lightning-icon>
-                                                </span>
-                                                <section if:true={showHideFilterCategorieGaz}
-                                                    aria-describedby="dialog-body-id-78"
-                                                    aria-labelledby="dialog-heading-id-81"
-                                                    class="slds-popover slds-nubbin_left-top popup-card-cat slds-size--1-of-1 slds-m-right_xx-small"
-                                                    role="dialog">
-                                                    <div class="slds-popover__body" id="dialog-body-id-71">
-                                                        <lightning-checkbox-group name="Checkbox Group"
-                                                            options={filtreCategorieGaz} value={valueCategorieGaz}
-                                                            onchange={handleChangeTradeOffGaz}>
-                                                        </lightning-checkbox-group>
-                                                        <lightning-icon data-type="Gaz" data-filtre="CategorieGaz"
-                                                            icon-name="utility:close" onclick={toggleFilter}
-                                                            size="x-small" class="close-icon"></lightning-icon>
-                                                    </div>
-                                                </section>
-                                            </th>
-                                            <th scope="col" class="container-thTradeoff">
-                                                <span>MOTIF DE RELEVÉ</span>
-                                                <span class="container-filter" if:false={noDataGaz}>
-                                                    <lightning-icon icon-name="utility:filterList" variant="inverse"
-                                                        size="xx-small" alternative-text="Filtre" data-filtre="MotifGaz"
-                                                        data-type="Gaz" onclick={toggleFilter}></lightning-icon>
-                                                </span>
-                                                <section if:true={showHideFilterMotifGaz}
-                                                    aria-describedby="dialog-body-id-77"
-                                                    aria-labelledby="dialog-heading-id-81"
-                                                    class="slds-popover slds-nubbin_left-top popup-card-motif slds-size--1-of-1 slds-m-right_xx-small"
-                                                    role="dialog">
-                                                    <div class="slds-popover__body" id="dialog-body-id-70">
-                                                        <lightning-checkbox-group name="Checkbox Group"
-                                                            options={filtreMotifGaz} value={valueMotifGaz}
-                                                            onchange={handleChangeTradeOffGaz}>
-                                                        </lightning-checkbox-group>
-                                                        <lightning-icon data-type="Gaz" data-filtre="MotifGaz"
-                                                            icon-name="utility:close" onclick={toggleFilter}
-                                                            size="x-small" class="close-icon"></lightning-icon>
-                                                    </div>
-                                                </section>
-                                            </th>
-                                            <th scope="col" class="td-95-width slds-text-align--center"> </th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-                                        <tr if:true={noDataGaz}>
-                                            <td colspan="10" style="text-align: center;">
-                                                Aucune consommation n'est disponible pour le moment.
-                                            </td>
-                                        </tr>
-                                        <tr if:true={error}>
-                                            <td colspan="10" style="text-align: center;">
-                                                <span class="error-msg">En raison d'un problème technique, le service
-                                                    est
-                                                    temporairement inaccessible.</span>
-                                            </td>
-                                        </tr>
-                                        <template for:each={dataTrafeOffGazWithPagination} for:item="familyFournGaz">
-
-
-                                            <tr if:true={familyFournGaz.showHideFournGaz}
-                                                key={familyFournGaz.dateReleve} class={familyFournGaz.style}>
-                                                <td rowspan={familyFournGaz.rowspan} class="slds-text-align--center">
-                                                    {familyFournGaz.dateReleve}</td>
-                                                <td rowspan={familyFournGaz.rowspan} class="slds-text-align--center">
-                                                    <!--template for:each={familyFournGaz.gazproducts}
-                                                    for:item="gazproduct"-->
-                                                    {familyFournGaz.idFacture}
-                                                    <!--/template-->
-                                                </td>
-                                                <td rowspan={familyFournGaz.rowspan} class="slds-text-align--center">
-                                                    Consommation Fourniture</td>
-
-
-
-                                            </tr>
-                                            <template if:true={familyFournGaz.showHideFournGaz}
-                                                for:each={familyFournGaz.gazproducts} for:item="gazproduct">
-
-                                                <tr key={gazproduct} class={familyFournGaz.style}>
-                                                    <td data-label="INDEX DE DÉBUT" class="slds-text-align--center">
-                                                        {gazproduct.indexDebut}
-                                                    </td>
-                                                    <td data-label="INDEX DE FIN" class="slds-text-align--center">
-                                                        {gazproduct.indexFin}
-                                                    </td>
-                                                    <td data-label="CONSO EN M3" class="slds-text-align--center">
-                                                        {gazproduct.quantiteM3}
-                                                    </td>
-                                                    <td data-label="COÉF. DE CONVERSION"
-                                                        class="slds-text-align--center">
-                                                        {gazproduct.KPCS}
-                                                    </td>
-                                                    <td data-label="CONSO EN KWH" class="slds-text-align--center">
-                                                        {gazproduct.consommationKwh}
-                                                    </td>
-                                                    <td data-label="CATÉGORIE" class="slds-text-align--center">
-                                                        {gazproduct.categorieReleve.libelleCourt}
-                                                    </td>
-                                                    <td data-label="MOTIF DE RELEVÉ" class="slds-text-align--center">
-                                                        {gazproduct.motifReleve.libelleCourt}
-                                                    </td>
-                                                    <td data-label="CONTESTATION" class="slds-text-align--center">
-                                                        <div if:true={gazproduct.contestation}><a
-                                                                data-idfacture={gazproduct.idFacture} data-type="Gaz"
-                                                                onclick={contesterIndexTradeoff}>Contester
-                                                                l'index</a></div>
-                                                    </td>
-                                                </tr>
-                                            </template>
-
-                                            <tr if:true={familyFournGaz.showHideRowSommeGaz}
-                                                key={familyFournGaz.dateReleve} class={familyFournGaz.styleP}>
-                                                <td if:false={familyFournGaz.showHideDateId}></td>
-                                                <td if:true={familyFournGaz.showHideDateId}
-                                                    class="slds-text-align--center">
-                                                    {familyFournGaz.dateReleve}</td>
-                                                <td if:false={familyFournGaz.showHideDateId}></td>
-                                                <td if:true={familyFournGaz.showHideDateId}
-                                                    class="slds-text-align--center">
-                                                    {familyFournGaz.idFacture}
-                                                </td>
-                                                <td data-label="LIBELLÉ CONSOMMATION">
-                                                    <button name="viewDetails" title="View Details" type="button"
-                                                        data-date={familyFournGaz.dateReleve} class="slds-button"
-                                                        onclick={toggle}>&#8595; Consommation Acheminement</button>
-                                                </td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td data-label="CONSO EN KWH" class="slds-text-align--center">
-                                                    {familyFournGaz.sommeConso}
-                                                </td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-
-                                            </tr>
-
-                                            <tr if:true={familyFournGaz.showHideRowDelailsGaz}
-                                                key={familyFournGaz.dateReleve} class={familyFournGaz.styleP}>
-                                                <td if:false={familyFournGaz.showHideDateId}
-                                                    rowspan={familyFournGaz.rowspan}></td>
-                                                <td if:true={familyFournGaz.showHideDateId}
-                                                    rowspan={familyFournGaz.rowspan} class="slds-text-align--center">
-                                                    {familyFournGaz.dateReleve}</td>
-                                                <td if:false={familyFournGaz.showHideDateId}
-                                                    rowspan={familyFournGaz.rowspan}></td>
-                                                <td if:true={familyFournGaz.showHideDateId}
-                                                    rowspan={familyFournGaz.rowspan} class="slds-text-align--center">
-                                                    {familyFournGaz.idFacture}
-                                                </td>
-                                                <td rowspan={familyFournGaz.rowspan} data-label="LIBELLÉ CONSOMMATION">
-                                                    <button name="viewDetails" title="View Details" type="button"
-                                                        data-date={familyFournGaz.dateReleve} class="slds-button"
-                                                        onclick={toggle}>&#8593; Consommation Acheminement</button>
-                                                </td>
-
-                                            </tr>
-                                            <template if:true={familyFournGaz.showHideRowDelailsGaz}
-                                                for:each={familyFournGaz.gazproducts} for:item="gazproduct"
-                                                class="slds-text-align--center">
-
-                                                <tr key={gazproduct} class={familyFournGaz.styleP}>
-                                                    <td data-label="INDEX DE DÉBUT" class="slds-text-align--center">
-                                                        {gazproduct.indexDebut}
-                                                    </td>
-                                                    <td data-label="INDEX DE FIN" class="slds-text-align--center">
-                                                        {gazproduct.indexFin}
-                                                    </td>
-                                                    <td data-label="CONSO EN M3" class="slds-text-align--center">
-                                                        {gazproduct.quantiteM3}
-                                                    </td>
-                                                    <td data-label="COÉF. DE CONVERSION"
-                                                        class="slds-text-align--center">
-                                                        {gazproduct.KPCS}
-                                                    </td>
-                                                    <td data-label="CONSO EN KWH" class="slds-text-align--center">
-                                                        {gazproduct.consommationKwh}
-                                                    </td>
-                                                    <td data-label="CATÉGORIE" class="slds-text-align--center">
-                                                        {gazproduct.categorieReleve.libelleCourt}
-                                                    </td>
-                                                    <td data-label="MOTIF DE RELEVÉ" class="slds-text-align--center">
-                                                        {gazproduct.motifReleve.libelleCourt}
-                                                    </td>
-                                                    <td data-label="CONTESTATION" class="slds-text-align--center">
-
-                                                    </td>
-                                                </tr>
-                                            </template>
-
-                                        </template>
-
-                                    </tbody>
-                                </table>
-                                <div class="slds-text-align_center slds-m-top_small">
-                                    <template for:each={paginationGaz} for:item="pageElement" for:index="index">
-                                        <div key={pageElement.number} class="pagination selected-page" data-page={index}
-                                            data-type="Gaz" onclick={pagination} if:true={pageElement.selected}>
-                                            {pageElement.number}</div>
-                                        <div key={pageElement.number} class="pagination" data-page={index}
-                                            data-type="Gaz" onclick={pagination} if:false={pageElement.selected}>
-                                            {pageElement.number}</div>
-                                    </template>
-                                </div>
-                            </div>
-
+                            
                         </div>
-
-
+                            
+                        
                     </lightning-tab>
-
-                    <lightning-tab label="ELECTRICITE" icon-name="utility:vide" if:true={pdl} onactive={loadPLElec}>
+                    <lightning-tab label="ELECTRICITE" icon-name="utility:survey" if:true={pdl} onactive={loadPLElec}>
                         <div class="slds-m-around_medium">
-                            <div if:true={plElec}
-                                class="slds-grid slds-m-vertical_x-large slds-p-around_x-large container-info-point-livraison">
+                            <div if:true={plElec} class="slds-grid slds-m-vertical_x-large slds-p-around_x-large container-info-point-livraison">
                                 <div class="slds-col slds-size_1-of-6">
                                     <div class="label-info-point-livraison slds-p-bottom_x-small">N° PDL</div>
                                     <div class="value-info-point-livraison">{pdl}</div>
                                 </div>
                                 <div class="slds-col slds-size_1-of-6">
                                     <div class="label-info-point-livraison slds-p-bottom_x-small">UNITÉ DE RELÈVE</div>
-                                    <div class="value-info-point-livraison" if:true={uniteReleveElec}>{uniteReleveElec}
-                                    </div>
+                                    <div class="value-info-point-livraison" if:true={uniteReleveElec}>{uniteReleveElec}</div>
                                     <div class="value-info-point-livraison" if:false={uniteReleveElec}>-</div>
                                 </div>
                                 <div class="slds-col slds-size_1-of-6">
-                                    <div class="label-info-point-livraison slds-p-bottom_x-small">DATE THÉORIQUE DE
-                                        PROCHAINE RELÈVE</div>
+                                    <div class="label-info-point-livraison slds-p-bottom_x-small">DATE THÉORIQUE DE PROCHAINE RELÈVE</div>
                                     <div class="value-info-point-livraison">{getdateTheoriqueReleveElec}</div>
                                 </div>
                                 <div class="slds-col slds-size_1-of-6">
-                                    <div class="label-info-point-livraison slds-p-bottom_x-small">DATE DE PROCHAINE
-                                        FACTURE</div>
+                                    <div class="label-info-point-livraison slds-p-bottom_x-small">DATE DE PROCHAINE FACTURE</div>
                                     <div class="value-info-point-livraison">{getdateProchaineFactureTechnique}</div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Mis en commentaire après le ticket JIRA FT3-963
                         <div class="slds-p-left_large slds-p-right_large">
                             <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_warning" role="alert" if:true={showMessage}>
                                 <span class="slds-assistive-text">warning</span>
@@ -516,60 +213,41 @@
                                 <h2 class="slds-text-title_bold">Votre facture du {getdateProchaineFactureReelle} vous sera bientôt envoyée.</h2>
                             </div>
                         </div>
-                        -->
-                        <div if:false={isTradeOffElec} class="slds-p-around_large slds-clearfix">
+                        <div class="slds-p-around_large slds-clearfix">
                             <table class="tab-elec">
                                 <thead>
                                     <tr class="tableListPa">
                                         <th scope="col">DATE DE RELEVÉ</th>
                                         <th scope="col">N° DE FACTURE</th>
-                                        <th scope="col">LIBELLÉ CONSOMMATION</th>
                                         <th scope="col">LIBELLÉ CADRAN</th>
                                         <th scope="col">INDEX DE DÉBUT</th>
                                         <th scope="col">INDEX DE FIN</th>
                                         <th scope="col">CONSO EN KWH</th>
                                         <th scope="col" class="container-th">
-                                            <span>CATÉGORIE</span>
-                                            <span class="container-filter" if:false={noDataElec}>
-                                                <lightning-icon icon-name="utility:filterList" variant="inverse"
-                                                    size="xx-small" alternative-text="Filtre"
-                                                    data-filtre="CategorieElec" data-type="Elec" onclick={toggleFilter}>
-                                                </lightning-icon>
-                                            </span>
-                                            <section if:true={showHideFilterCategorieElec}
-                                                aria-describedby="dialog-body-id-79"
-                                                aria-labelledby="dialog-heading-id-81"
-                                                class="slds-popover slds-nubbin_left-top popup-card-cat slds-size--1-of-1 slds-m-right_xx-small"
-                                                role="dialog">
+                                            <span>CATÉGORIE</span> 
+                                            <span class="container-filter" if:false={noDataElec}><lightning-icon icon-name="utility:filterList" variant="inverse" size="xx-small" alternative-text="Filtre" data-filtre="CategorieElec" data-type="Elec" onclick={toggleFilter}></lightning-icon></span>
+                                            <section if:true={showHideFilterCategorieElec} aria-describedby="dialog-body-id-79" aria-labelledby="dialog-heading-id-81"
+                                                class="slds-popover slds-nubbin_left-top popup-card-cat slds-size--1-of-1 slds-m-right_xx-small" role="dialog">
                                                 <div class="slds-popover__body" id="dialog-body-id-79">
                                                     <lightning-checkbox-group name="Checkbox Group"
-                                                        options={filtreCategorieElec} value={valueCategorieElec}
-                                                        onchange={handleChange}></lightning-checkbox-group>
-                                                    <lightning-icon data-type="Elec" data-filtre="CategorieElec"
-                                                        icon-name="utility:close" onclick={toggleFilter} size="x-small"
-                                                        class="close-icon"></lightning-icon>
+                                                                            options={filtreCategorieElec}
+                                                                            value={valueCategorieElec}
+                                                                            onchange={handleChange}></lightning-checkbox-group>
+                                                    <lightning-icon data-type="Elec" data-filtre="CategorieElec" icon-name="utility:close" onclick={toggleFilter} size="x-small" class="close-icon"></lightning-icon>
                                                 </div>
                                             </section>
                                         </th>
                                         <th scope="col" class="container-th">
                                             <span>MOTIF DE RELEVÉ</span>
-                                            <span class="container-filter" if:false={noDataElec}>
-                                                <lightning-icon icon-name="utility:filterList" variant="inverse"
-                                                    size="xx-small" alternative-text="Filtre" data-filtre="MotifElec"
-                                                    data-type="Elec" onclick={toggleFilter}></lightning-icon>
-                                            </span>
-                                            <section if:true={showHideFilterMotifElec}
-                                                aria-describedby="dialog-body-id-80"
-                                                aria-labelledby="dialog-heading-id-81"
-                                                class="slds-popover slds-nubbin_left-top popup-card-motif slds-size--1-of-1 slds-m-right_xx-small"
-                                                role="dialog">
+                                            <span class="container-filter" if:false={noDataElec}><lightning-icon icon-name="utility:filterList" variant="inverse" size="xx-small" alternative-text="Filtre" data-filtre="MotifElec"  data-type="Elec" onclick={toggleFilter}></lightning-icon></span>
+                                            <section if:true={showHideFilterMotifElec} aria-describedby="dialog-body-id-80" aria-labelledby="dialog-heading-id-81"
+                                                class="slds-popover slds-nubbin_left-top popup-card-motif slds-size--1-of-1 slds-m-right_xx-small" role="dialog">
                                                 <div class="slds-popover__body" id="dialog-body-id-80">
                                                     <lightning-checkbox-group name="Checkbox Group"
-                                                        options={filtreMotifElec} value={valueMotifElec}
-                                                        onchange={handleChange}></lightning-checkbox-group>
-                                                    <lightning-icon data-type="Elec" data-filtre="MotifElec"
-                                                        icon-name="utility:close" onclick={toggleFilter} size="x-small"
-                                                        class="close-icon"></lightning-icon>
+                                                                            options={filtreMotifElec}
+                                                                            value={valueMotifElec}
+                                                                            onchange={handleChange}></lightning-checkbox-group>
+                                                    <lightning-icon data-type="Elec" data-filtre="MotifElec" icon-name="utility:close" onclick={toggleFilter} size="x-small" class="close-icon"></lightning-icon>
                                                 </div>
                                             </section>
                                         </th>
@@ -584,422 +262,62 @@
                                     </tr>
                                     <tr if:true={error}>
                                         <td colspan="9" style="text-align: center;">
-                                            <span class="error-msg">En raison d'un problème technique, le service est
-                                                temporairement inaccessible.</span>
+                                            <span class="error-msg">En raison d'un problème technique, le service est temporairement inaccessible.</span>
                                         </td>
                                     </tr>
-
-
-
                                     <template for:each={dataElecWithPagination} for:item="consoElec" for:index="index">
                                         <tr key={consoElec.idFacture} class="tableListPaTr">
                                             <td data-label="DATE DE RELEVÉ" class="alignement-top">
-                                                {consoElec.dateReleve}
+                                                {consoElec.dateFinConsommation}
                                             </td>
                                             <td data-label="N° DE FACTURE ASSOCIÉE" class="alignement-top">
-                                                {consoElec.idFacture}
-                                            </td>
-                                            <td data-label="LIBELLÉ CONSOMMATION" class="alignement-top">
-
+                                                <span if:false={consoElec.simulationFlag}>{consoElec.idFacture}</span>
                                             </td>
                                             <td data-label="LIBELLÉ CADRAN">
-                                                <template if:true={consoElec.cadran}>
-                                                    {consoElec.cadran.libelleLong}
+                                                <template for:each={consoElec.cadran} for:item="cadran" for:index="indexCadron">
+                                                    <div key={index}>{cadran.code}</div>
                                                 </template>
                                             </td>
                                             <td data-label="INDEX DE DÉBUT">
-                                                {consoElec.indexDebut}
+                                                <template for:each={consoElec.cadran} for:item="cadran" for:index="indexCadron">
+                                                    <div key={index}>{cadran.indexDebut}</div>
+                                                </template>
                                             </td>
                                             <td data-label="INDEX DE FIN">
-                                                {consoElec.indexFin}
+                                                <template for:each={consoElec.cadran} for:item="cadran" for:index="indexCadron">
+                                                    <div key={index}>{cadran.indexFin}</div>
+                                                </template>
                                             </td>
+                                            
                                             <td data-label="CONSO EN KWH">
-                                                {consoElec.consommationKwh}
+                                                <template for:each={consoElec.cadran} for:item="cadran" for:index="indexCadron">
+                                                    <div key={index}>{cadran.quantite}</div>
+                                                </template>
                                             </td>
                                             <td data-label="CATÉGORIE" class="alignement-top">
-                                                <template if:true={consoElec.categorieReleve}>
-                                                    {consoElec.categorieReleve.libelleCourt}
-                                                </template>
+                                                {consoElec.categorieReleve.libelleCourt}
                                             </td>
                                             <td data-label="MOTIF DE RELEVÉ" class="alignement-top">
-                                                <template if:true={consoElec.motifReleve}>
-                                                    {consoElec.motifReleve.libelleCourt}
-                                                </template>
+                                                {consoElec.motifReleve.libelleCourt}
                                             </td>
                                             <td data-label="CONTESTATION">
-                                                <div if:true={consoElec.contestation}><a
-                                                        data-idfacture={consoElec.idFacture} data-type="Elec"
-                                                        onclick={contesterIndex}>Contester l'index</a></div>
+                                                <div if:true={consoElec.contestation}><a data-idfacture={consoElec.idFacture} data-type="Elec" onclick={contesterIndex}>Contester l'index</a></div>
                                             </td>
                                         </tr>
                                     </template>
                                 </tbody>
                             </table>
-
-
-
                             <div class="slds-text-align_center slds-m-top_small">
                                 <template for:each={paginationElec} for:item="pageElement" for:index="index">
-                                    <div key={pageElement.number} class="pagination selected-page" data-page={index}
-                                        data-type="Elec" onclick={pagination} if:true={pageElement.selected}>
-                                        {pageElement.number}</div>
-                                    <div key={pageElement.number} class="pagination" data-page={index} data-type="Elec"
-                                        onclick={pagination} if:false={pageElement.selected}>{pageElement.number}</div>
+                                    <div key={pageElement.number} class="pagination selected-page" data-page={index} data-type="Elec" onclick={pagination} if:true={pageElement.selected}>{pageElement.number}</div>
+                                    <div key={pageElement.number} class="pagination" data-page={index} data-type="Elec" onclick={pagination} if:false={pageElement.selected}>{pageElement.number}</div>
                                 </template>
                             </div>
                         </div>
-
-
-
-                        <div if:true={isTradeOffElec} class="slds-p-around_large slds-clearfix">
-                            <table>
-                                <thead>
-                                    <tr class="tableListPa">
-                                        <th scope="col" class="slds-text-align--center">DATE DE RELEVÉ</th>
-
-                                        <th scope="col" class="slds-text-align--center">N° DE FACTURE</th>
-                                        <th scope="col" class="container-thTradeoff">
-                                            <span>LIBELLÉ CONSOMMATION</span>
-                                            <span class="container-filter" if:false={noDataElec}>
-                                                <lightning-icon icon-name="utility:filterList" variant="inverse"
-                                                    size="xx-small" alternative-text="Filtre"
-                                                    data-filtre="LibelleConsoElec" data-type="Elec"
-                                                    onclick={toggleFilter}></lightning-icon>
-                                            </span>
-                                            <section if:true={showHideFilterLibelleConsoElec}
-                                                aria-describedby="dialog-body-id-78"
-                                                aria-labelledby="dialog-heading-id-81"
-                                                class="slds-popover slds-nubbin_left-top popup-card-cat slds-size--1-of-1 slds-m-right_xx-small"
-                                                role="dialog">
-                                                <div class="slds-popover__body" id="dialog-body-id-88">
-                                                    <lightning-checkbox-group name="Checkbox Group"
-                                                        options={filtreLibelleConsoElec} value={valueLibelleConsoElec}
-                                                        onchange={handleChangeTradeOffElec}>
-                                                    </lightning-checkbox-group>
-                                                    <lightning-icon data-type="Elec" data-filtre="LibelleConsoElec"
-                                                        icon-name="utility:close" onclick={toggleFilter} size="x-small"
-                                                        class="close-icon"></lightning-icon>
-                                                </div>
-                                            </section>
-                                        </th>
-                                        <th scope="col" class="slds-text-align--center">LIBELLÉ CADRAN</th>
-                                        <th scope="col" class="slds-text-align--center">INDEX DE DÉBUT</th>
-                                        <th scope="col" class="slds-text-align--center">INDEX DE FIN</th>
-                                        <th scope="col" class="slds-text-align--center">CONSO EN KWH</th>
-                                        <th scope="col" class="container-thTradeoff">
-                                            <span>CATÉGORIE</span>
-                                            <span class="container-filter" if:false={noDataElec}>
-                                                <lightning-icon icon-name="utility:filterList" variant="inverse"
-                                                    size="xx-small" alternative-text="Filtre"
-                                                    data-filtre="CategorieElec" data-type="Elec" onclick={toggleFilter}>
-                                                </lightning-icon>
-                                            </span>
-                                            <section if:true={showHideFilterCategorieElec}
-                                                aria-describedby="dialog-body-id-79"
-                                                aria-labelledby="dialog-heading-id-81"
-                                                class="slds-popover slds-nubbin_left-top popup-card-cat slds-size--1-of-1 slds-m-right_xx-small"
-                                                role="dialog">
-                                                <div class="slds-popover__body" id="dialog-body-id-791">
-                                                    <lightning-checkbox-group name="Checkbox Group"
-                                                        options={filtreCategorieElec} value={valueCategorieElec}
-                                                        onchange={handleChangeTradeOffElec}></lightning-checkbox-group>
-                                                    <lightning-icon data-type="Elec" data-filtre="CategorieElec"
-                                                        icon-name="utility:close" onclick={toggleFilter} size="x-small"
-                                                        class="close-icon"></lightning-icon>
-                                                </div>
-                                            </section>
-                                        </th>
-                                        <th scope="col" class="container-thTradeoff">
-                                            <span>MOTIF DE RELEVÉ</span>
-                                            <span class="container-filter" if:false={noDataElec}>
-                                                <lightning-icon icon-name="utility:filterList" variant="inverse"
-                                                    size="xx-small" alternative-text="Filtre" data-filtre="MotifElec"
-                                                    data-type="Elec" onclick={toggleFilter}>
-                                                </lightning-icon>
-                                            </span>
-                                            <section if:true={showHideFilterMotifElec}
-                                                aria-describedby="dialog-body-id-80"
-                                                aria-labelledby="dialog-heading-id-81"
-                                                class="slds-popover slds-nubbin_left-top popup-card-motif slds-size--1-of-1 slds-m-right_xx-small"
-                                                role="dialog">
-                                                <div class="slds-popover__body" id="dialog-body-id-801">
-                                                    <lightning-checkbox-group name="Checkbox Group"
-                                                        options={filtreMotifElec} value={valueMotifElec}
-                                                        onchange={handleChangeTradeOffElec}></lightning-checkbox-group>
-                                                    <lightning-icon data-type="Elec" data-filtre="MotifElec"
-                                                        icon-name="utility:close" onclick={toggleFilter} size="x-small"
-                                                        class="close-icon"></lightning-icon>
-                                                </div>
-                                            </section>
-                                        </th>
-                                        <th scope="col" class="td-95-width"> </th>
-                                    </tr>
-                                </thead>
-
-
-                                <tbody>
-                                    <template for:each={dataTrafeOffElecWithPagination} for:item="family">
-
-
-                                        <tr if:true={family.showHideFournElec} key={family.dateReleve}
-                                            class={family.style}>
-                                            <td rowspan={family.rowspan} class="slds-text-align--center">
-                                                {family.dateReleve}</td>
-                                            <td rowspan={family.rowspan} class="slds-text-align--center">
-                                                {family.idFacture}</td>
-                                            <td rowspan={family.rowspan} class="slds-text-align--center">Consommation
-                                                Fourniture</td>
-
-
-
-                                        </tr>
-
-                                        <template if:true={family.showHideFournElec} for:each={family.products}
-                                            for:item="product">
-
-
-
-
-                                            <tr key={product} class={family.style}>
-
-                                                <td data-label="LIBELLÉ CADRAN" class="slds-text-align--center">
-                                                    <template if:true={product.cadran}>
-                                                        {product.cadran.libelleLong}
-
-                                                    </template>
-                                                </td>
-                                                <td data-label="INDEX DE DÉBUT" class="slds-text-align--center">
-                                                    {product.indexDebut}
-                                                </td>
-                                                <td data-label="INDEX DE FIN" class="slds-text-align--center">
-                                                    {product.indexFin}
-                                                </td>
-                                                <td data-label="CONSO EN KWH" class="slds-text-align--center">
-                                                    {product.consommationKwh}
-                                                </td>
-                                                <td key={product} data-label="CATÉGORIE"
-                                                    class="slds-text-align--center">
-                                                    <template if:true={product.categorieReleve}>
-                                                        {product.categorieReleve.libelleCourt}
-                                                    </template>
-                                                </td>
-                                                <td data-label="MOTIF DE RELEVÉ" class="slds-text-align--center">
-                                                    <template if:true={product.motifReleve}>
-                                                        {product.motifReleve.libelleCourt}
-                                                    </template>
-                                                </td>
-                                                <td data-label="CONTESTATION" class="slds-text-align--center">
-                                                    <div if:true={product.contestation}><a
-                                                            data-idfacture={product.numeroFacture} data-type="Elec"
-                                                            onclick={contesterIndexTradeoff}>Contester l'index</a></div>
-                                                </td>
-                                                <!--/tr-->
-                                            </tr>
-                                        </template>
-
-                                        <tr if:true={family.showHideRowSommeElec} key={family.dateReleve}
-                                            class={family.styleP}>
-                                            <td if:false={family.showHideDateIdElec}></td>
-                                            <td if:true={family.showHideDateIdElec} class="slds-text-align--center">
-                                                {family.dateReleve}</td>
-                                            <td if:false={family.showHideDateIdElec}></td>
-                                            <td if:true={family.showHideDateIdElec} class="slds-text-align--center">
-                                                {family.idFacture}
-                                            </td>
-                                            <td if:true={family.isAcheminement} data-label="LIBELLÉ CONSOMMATION">
-                                                <button name="viewDetails" title="View Details" type="button"
-                                                    data-date={family.dateReleve} class="slds-button"
-                                                    onclick={toggle}>&#8595; Consommation Acheminement </button>
-                                            </td>
-                                            <td if:false={family.isAcheminement} data-label="LIBELLÉ CONSOMMATION">
-                                                <button name="viewDetails" title="View Details" type="button"
-                                                    data-date={family.dateReleve} class="slds-button"
-                                                    onclick={toggle}>&#8595; Consommation Acheminement*</button>
-                                            </td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td if:false={family.isAcheminement} data-label="CONSO EN KWH"
-                                                class="slds-text-align--center">
-                                                {family.sommeConso}
-                                            </td>
-                                            <td if:true={family.isAcheminement} data-label="CONSO EN KWH"
-                                                class="slds-text-align--center">
-                                                {family.sommeConsoAch}
-                                            </td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-
-                                        </tr>
-
-                                        <template if:true={family.isAcheminement}>
-                                            <tr if:true={family.showHideRowDelailsElec} key={family.dateReleve}
-                                                class={family.styleP}>
-                                                <td if:false={family.showHideDateIdElec} rowspan={family.rowspanAch}>
-                                                </td>
-                                                <td if:true={family.showHideDateIdElec} rowspan={family.rowspanAch}
-                                                    class="slds-text-align--center">
-                                                    {family.dateReleve}</td>
-                                                <td if:false={family.showHideDateIdElec} rowspan={family.rowspanAch}>
-                                                </td>
-                                                <td if:true={family.showHideDateIdElec} rowspan={family.rowspanAch}
-                                                    class="slds-text-align--center">
-                                                    {family.idFacture}
-                                                </td>
-                                                <td rowspan={family.rowspanAch}><button name="viewDetails"
-                                                        title="View Details" type="button" data-date={family.dateReleve}
-                                                        class="slds-button" onclick={toggle}>&#8593; Consommation
-                                                        Acheminement </button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                        </template>
-
-                                        <template if:false={family.isAcheminement}>
-                                            <tr if:true={family.showHideRowDelailsElec} key={family.dateReleve}
-                                                class={family.styleP}>
-                                                <td if:false={family.showHideDateIdElec} rowspan={family.rowspan}></td>
-                                                <td if:true={family.showHideDateIdElec} rowspan={family.rowspan}
-                                                    class="slds-text-align--center">
-                                                    {family.dateReleve}</td>
-                                                <td if:false={family.showHideDateIdElec} rowspan={family.rowspan}></td>
-                                                <td if:true={family.showHideDateIdElec} rowspan={family.rowspan}
-                                                    class="slds-text-align--center">
-                                                    {family.idFacture}
-                                                </td>
-                                                <td rowspan={family.rowspan}><button name="viewDetails"
-                                                        title="View Details" type="button" data-date={family.dateReleve}
-                                                        class="slds-button" onclick={toggle}>&#8593; Consommation
-                                                        Acheminement*</button></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td rowspan={family.rowspan}>
-                                                    <div class="slds-text-color_error">*</div> index acheminement non
-                                                    issu du portail distributeur
-                                                </td>
-                                                <td></td>
-                                            </tr>
-                                        </template>
-
-                                        <template if:true={family.isAcheminement}>
-                                            <template if:true={family.showHideRowDelailsElec}
-                                                for:each={family.productsAch} for:item="product"
-                                                class="slds-text-align--center">
-
-                                                <tr if:true={family.showHideRowDelailsElec} key={product}
-                                                    class={family.styleP}>
-
-                                                    <td data-label="LIBELLÉ CADRAN" class="slds-text-align--center">
-                                                        <template if:true={product.cadran}>
-                                                            {product.cadran.libelleLong}
-
-                                                        </template>
-                                                    </td>
-                                                    <td data-label="INDEX DE DÉBUT" class="slds-text-align--center">
-                                                        {product.indexDebut}
-                                                    </td>
-                                                    <td data-label="INDEX DE FIN" class="slds-text-align--center">
-                                                        {product.indexFin}
-                                                    </td>
-                                                    <td data-label="CONSO EN KWH" class="slds-text-align--center">
-                                                        {product.consommationKwh}
-                                                    </td>
-                                                    <td key={product} data-label="CATÉGORIE"
-                                                        class="alignement-top slds-text-align--center">
-                                                        <template if:true={product.categorieReleve}>
-                                                            {product.categorieReleve.libelleCourt}
-                                                        </template>
-                                                    </td>
-                                                    <td data-label="MOTIF DE RELEVÉ"
-                                                        class="alignement-top slds-text-align--center">
-                                                        <template if:true={product.motifReleve}>
-                                                            {product.motifReleve.libelleCourt}
-                                                        </template>
-                                                    </td>
-                                                    <td data-label="CONTESTATION">
-
-                                                    </td>
-                                                </tr>
-                                            </template>
-                                        </template>
-
-                                        <template if:false={family.isAcheminement}>
-                                            <template if:true={family.showHideRowDelailsElec} for:each={family.products}
-                                                for:item="product" class="slds-text-align--center">
-
-                                                <tr key={product} class={family.styleP}>
-
-                                                    <td data-label="LIBELLÉ CADRAN" class="slds-text-align--center">
-                                                        <template if:true={product.cadran}>
-                                                            {product.cadran.libelleLong}
-
-                                                        </template>
-                                                    </td>
-                                                    <td data-label="INDEX DE DÉBUT" class="slds-text-align--center">
-                                                        {product.indexDebut}
-                                                    </td>
-                                                    <td data-label="INDEX DE FIN" class="slds-text-align--center">
-                                                        {product.indexFin}
-                                                    </td>
-                                                    <td data-label="CONSO EN KWH" class="slds-text-align--center">
-                                                        {product.consommationKwh}
-                                                    </td>
-                                                    <td key={product} data-label="CATÉGORIE"
-                                                        class="alignement-top slds-text-align--center">
-
-                                                    </td>
-
-
-                                                    <td data-label="CONTESTATION" class="slds-text-align--center">
-
-                                                    </td>
-                                                </tr>
-                                            </template>
-                                        </template>
-
-
-                                    </template>
-
-                                </tbody>
-
-
-
-
-
-
-
-
-
-
-                            </table>
-
-
-
-                            <div class="slds-text-align_center slds-m-top_small">
-                                <template for:each={paginationElec} for:item="pageElement" for:index="index">
-                                    <div key={pageElement.number} class="pagination selected-page" data-page={index}
-                                        data-type="Elec" onclick={pagination} if:true={pageElement.selected}>
-                                        {pageElement.number}</div>
-                                    <div key={pageElement.number} class="pagination" data-page={index} data-type="Elec"
-                                        onclick={pagination} if:false={pageElement.selected}>{pageElement.number}</div>
-                                </template>
-                            </div>
-                        </div>
-
                     </lightning-tab>
                 </lightning-tabset>
             </div>
-            <div if:true={isNotPDLPCE}
-                class="slds-align_absolute-center slds-text-title_bold slds-m-top_x-large slds-m-bottom_x-large">
+            <div if:true={isNotPDLPCE} class="slds-align_absolute-center slds-text-title_bold slds-m-top_x-large slds-m-bottom_x-large">
                 Le client n’a pas d’historique de consommation.
             </div>
             <div class="slds-grid slds-wrap slds-p-around_large" style="margin-bottom:40px">
@@ -1030,18 +348,15 @@
                     </div>
                 </div>
                 <div class="slds-col slds-size_1-of-1 slds-m-top_x-small">
-                    <lightning-button label="Voir l'historique de Facture" title="Non-primary action"
-                        onclick={navigateToHistoriqueFacture}></lightning-button>
+                    <lightning-button label="Voir l'historique de Facture" title="Non-primary action" onclick={navigateToHistoriqueFacture}></lightning-button>
                 </div>
                 <div class="slds-col slds-size_1-of-1 slds-m-top_x-small" if:true={isinternaute}>
-                    <lightning-button label="Voir le suivi conso sur l'EC du client" icon-name="action:web_link"
-                        onclick={navigateToEC}></lightning-button>
+                    <lightning-button label="Voir le suivi conso sur l'EC du client" icon-name="action:web_link"  onclick={navigateToEC}></lightning-button>
                 </div>
                 <div class="slds-col slds-size_1-of-2 slds-m-top_x-small">
                     <div class=" slds-float_left slds-m-top_small">
                         <lightning-button variant="brand" label="Fermer" title="Fermer" onclick={closeTab}
-                            class="slds-float_left">
-                        </lightning-button>
+                            class="slds-float_left"></lightning-button>
                     </div>
                 </div>
                 <div class="slds-col slds-size_1-of-2 slds-m-top_x-small">
@@ -1052,7 +367,7 @@
                 </div>
             </div>
         </div>
-
-        <lightning-spinner if:false={showSpinner} alternative-text="Loading" size="medium"></lightning-spinner>
+        
+        <lightning-spinner if:false={showSpinner} alternative-text="Loading" size="medium"></lightning-spinner>                     
     </lightning-card>
 </template>

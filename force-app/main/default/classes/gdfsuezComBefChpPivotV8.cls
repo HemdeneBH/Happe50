@@ -263,12 +263,11 @@ public class gdfsuezComBefChpPivotV8 {
 			//System.debug(this.flag);			
 		}
 		public void populateXmlNode(Dom.XmlNode outerNode){
-			/*Dom.XmlNode dateDerniereMAJNode = outerNode.addChildElement('dateDerniereMAJ', 'http://gdfsuez.com/bef/chp/pivot', '');
-			dateDerniereMAJNode.addTextNode((this.dateDerniereMAJ == null) ? '' : String.valueOf(this.dateDerniereMAJ));*/
+			Dom.XmlNode dateDerniereMAJNode = outerNode.addChildElement('dateDerniereMAJ', 'http://gdfsuez.com/bef/chp/pivot', '');
+			dateDerniereMAJNode.addTextNode((this.dateDerniereMAJ == null) ? '' : String.valueOf(this.dateDerniereMAJ));
 			
 			gdfsuezComBefChpPivotV8.listeValeursDt flagObj = this.flag;
-			/*Dom.XmlNode flagNode = outerNode.addChildElement('flag', 'http://gdfsuez.com/bef/chp/pivot', '');*/
-			Dom.XmlNode flagNode = outerNode.addChildElement('flag', '', '');
+			Dom.XmlNode flagNode = outerNode.addChildElement('flag', 'http://gdfsuez.com/bef/chp/pivot', '');
 			if(flagObj != null){
 				flagObj.populateXmlNode(flagNode);
 			}
@@ -382,9 +381,7 @@ public class gdfsuezComBefChpPivotV8 {
 			this.order = (orderNode == null) ? null : orderNode.getText();
 			nodesParsed.add(orderNode);
 			//System.debug(this.order);			
-			//FT4-185 remplacement du namespace de 'libelleCourt' par null
-			//DOM.XmlNode libelleCourtNode = responseNode.getChildElement('libelleCourt', 'http://gdfsuez.com/bef/chp/pivot');
-			DOM.XmlNode libelleCourtNode = responseNode.getChildElement('libelleCourt', null);
+			DOM.XmlNode libelleCourtNode = responseNode.getChildElement('libelleCourt', 'http://gdfsuez.com/bef/chp/pivot');
 			this.libelleCourt = (libelleCourtNode == null) ? null : libelleCourtNode.getText();
 			nodesParsed.add(libelleCourtNode);
 			//System.debug(this.libelleCourt);			
@@ -399,10 +396,8 @@ public class gdfsuezComBefChpPivotV8 {
 			DOM.XmlNode langueNode = responseNode.getChildElement('langue', 'http://gdfsuez.com/bef/chp/pivot');
 			this.langue = (langueNode == null) ? null : langueNode.getText();
 			nodesParsed.add(langueNode);
-			//System.debug(this.langue);
-			//FT4-185 remplacement du namespace de'code' par null			
-			//DOM.XmlNode codeNode = responseNode.getChildElement('code', 'http://gdfsuez.com/bef/chp/pivot');
-			DOM.XmlNode codeNode = responseNode.getChildElement('code', null);
+			//System.debug(this.langue);			
+			DOM.XmlNode codeNode = responseNode.getChildElement('code', 'http://gdfsuez.com/bef/chp/pivot');
 			this.code = (codeNode == null) ? null : codeNode.getText();
 			nodesParsed.add(codeNode);
 			//System.debug(this.code);			

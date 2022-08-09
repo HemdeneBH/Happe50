@@ -2,7 +2,7 @@
   @description       : 
   @author            : Badr Eddine Belkarchi
   @group             : 
-  @last modified on  : 06-29-2022
+  @last modified on  : 07-13-2022
   @last modified by  : Badr Eddine Belkarchi
 -->
 <template>
@@ -60,6 +60,15 @@
                 </li>
             </template>
         </ul>
+
+        <template if:true={showTextPasDeConsommations}>
+            <div style="flex-grow: 1;flex-shrink: 1;overflow: auto;width: calc(100% - 220px);margin-top: 30px;">
+                <h1>Merci d'avoir rejoint Happ-e!</h1>
+                <p>{textPasDeConsommations}</p>
+                <h1>Repassez nous voir bientôt!</h1>
+            </div>
+        </template>
+        
         <div class="consumption-filters">
             <h3 class="consumption-filters__header">Vue</h3>
             <div class="consumption-filters__switcher">

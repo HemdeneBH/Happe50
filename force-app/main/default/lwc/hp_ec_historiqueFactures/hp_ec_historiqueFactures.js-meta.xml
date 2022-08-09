@@ -17,11 +17,12 @@
             <property type="String" name="planApurementLabel" default="Mon plan d’apurement"/>
             <property type="String" name="lienTarif" default="Info Tarif "/>
             <property type="String" name="tarifURL" default="https://www.google.com "/>
-            <property type="String" name="contenuToolTip" default="Le saviez-vous? 
+            <property type="String" name="contenuToolTip" default="
                                 Vous recevez un email à chaque fois qu’une nouvelle facture happe-e est disponible dans votre espace client.
                                 Vos factures sont disponibles sur votre Espace Client happ-e pendant 10 ans.
                                 Nous vous conseillons donc d’enregistrer vos factures régulièrement sur votre ordinateur."/>
             <property type="String" name="urlHelp" default="https://www.google.com/" />
+            <property type="String" name="toolTipTitle" default="Le saviez-vous?" />
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

@@ -4,9 +4,7 @@
  * @group             : 
 
 
-
  * @last modified on  : 06-07-2021
-
 
 
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
@@ -60,8 +58,6 @@ public with sharing class HP_SM60_SouscriptionClientHappe {
         MailingCity,MailingPostalCode, HP_isHappe__c from contact where ID_Tiers__c = :idTiers];
         System.debug('********contact*****' +contact);
         List<contact> contactToUpdate = new List<contact>();
-
-
 
 
 

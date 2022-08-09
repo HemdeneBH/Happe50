@@ -19,7 +19,14 @@ global class SM_AP26_QuestionConsentementAPI implements vlocity_cmt.VlocityOpenI
             system.debug('idBusinessPartner is not found ...');
             return;
         }*/
-        HttpResponse httpResponse = getResponse();
+
+        String token = SM_MP_AP04_GetTokenService.getTokenFromSmile();
+        if (token == null) {
+            system.debug('Token not found ...');
+            return;
+        }
+        HttpResponse httpResponse = getResponse(token);
+
         Map < String, Object > resultAsMap = (Map < String, Object > ) JSON.deserializeUntyped(httpResponse.getBody());
         List < Object > clientAccounts = (List < Object > ) resultAsMap.get('_data');
 
@@ -67,17 +74,54 @@ global class SM_AP26_QuestionConsentementAPI implements vlocity_cmt.VlocityOpenI
         return transformeDataStructure ;
     }
 
-    public static HttpResponse getResponse() {
-        HttpResponse httpResp;
-        if(!Test.isRunningTest()) {
-        httpResp = CalloutManager.sendRequest('Questions_Consentement', null, 'GET', CalloutManager.Scope.READ,null,null);
-        if (CalloutManager.httpResponseFailureDetected(httpResp)) {
+    public static HttpRequest buildHttpRequestHeaders(String token) {
+        HttpRequest req = new HttpRequest();
+        req.setMethod('GET');
+        String endpointURL = '';
+        
+        SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'Questions_Consentement' limit 1];
+        endpointURL = 'callout:AuthAPIHour' +suffixs.suffix__c;
+        
+        req.setEndpoint(endpointURL);
+        req.setHeader('X-Correlation-Id', MP_AP13_GuidUtil.NewGuid());
+        req.setHeader('api_key', MP_Xdata_credentials__c.getInstance('sm_api_key_INT').Value__c);
+        req.setHeader('Authorization', 'Bearer ' + token);
+        req.setHeader('Content-Type', 'application/json');
+        return req;
+    }
+
+
+    public static HttpResponse sendData(HttpRequest request) {
+        Http http = new Http();
+        HttpResponse res;
+        try {
+            res = http.send(request);
+
+        } catch (Exception e) {
+            system.debug('## [question] failed to send data ##');
+            return null;
+        }
+        return res;
+
+    }
+
+    private static Boolean httpResponseFailureDetected(HttpResponse response) {
+        return (response == null || (response.getStatusCode() != 201 && response.getStatusCode() != 200 && response.getStatusCode() != 206));
+
+    }
+
+    public static HttpResponse getResponse(String token) {
+
+
+        HttpRequest httpReq = buildHttpRequestHeaders(token);
+        HttpResponse httpResp = sendData(httpReq);
+        if (httpResponseFailureDetected(httpResp)) {
             // should abort next step's
             system.debug('## [ question] error occured when sending data ##');
             system.debug(httpResp != null ? httpResp.getBody() : 'http response is null');
             return null;
         }
-    }
+
         return httpResp;
 
     }

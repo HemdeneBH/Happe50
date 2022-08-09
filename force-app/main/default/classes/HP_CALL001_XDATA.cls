@@ -116,6 +116,8 @@ public with sharing class HP_CALL001_XDATA  {
 		for (HP_WRP031_APIHourConsentements.HP_Consentements consent : consentList) {
 			System.debug('+=========>>'+ new HP_WRP031_APIHourConsentements(consent));
 			HTTPResponse resp = HP_UTIL_HTTPUtils.calloutPost(HP_Constantes.XDATA_CONSENTEMENTS, JSON.serialize(new HP_WRP031_APIHourConsentements(consent)));
+			System.debug('@@@ consent response code : '+resp.getStatusCode());
+			System.debug('@@@ consent response body : '+resp.getBody());
 			if(resp.getStatusCode()!=200 && resp.getStatusCode()!=201 && resp.getStatusCode()!=204 ){
 				throw new CalloutException ('Consentement appel infructueu');
 			}
@@ -133,7 +135,9 @@ public with sharing class HP_CALL001_XDATA  {
 				System.debug('Service consentId: '+consent.id);
 				System.debug('consent: '+consent);
 				System.debug('new HP_WRP031_APIHourConsentements(consent): '+new HP_WRP031_APIHourConsentements(consent));
+				System.debug('@@@@ parameters : '+ JSON.serialize(new HP_WRP031_APIHourConsentements(consent))+ '/' + consent.id);
 				HTTPResponse resp = HP_UTIL_HTTPUtils.calloutPut(HP_Constantes.XDATA_CONSENTEMENTS, JSON.serialize(new HP_WRP031_APIHourConsentements(consent)), '/' + consent.id);
+				System.debug('@@@@ response Body : '+resp.getBody());
 				if(resp.getStatusCode()!=200 && resp.getStatusCode()!=201 && resp.getStatusCode()!=204){
 					throw new CalloutException ('Consentement appel infructueu');
 				}
@@ -142,6 +146,7 @@ public with sharing class HP_CALL001_XDATA  {
 				System.debug('consent: '+consent);
 				System.debug('new HP_WRP033_APIHourConsentementsPost(consent): '+new HP_WRP033_APIHourConsentementsPost(consent));
 				HTTPResponse resp = HP_UTIL_HTTPUtils.calloutPost(HP_Constantes.XDATA_CONSENTEMENTS, JSON.serialize(new HP_WRP033_APIHourConsentementsPost(consent)));
+				System.debug('@@@@ response Body 2  : '+resp.getBody());
 				if(resp.getStatusCode()!=200 && resp.getStatusCode()!=201 && resp.getStatusCode()!=204 ){
 					throw new CalloutException ('Consentement appel infructueu');
 				}
@@ -277,5 +282,21 @@ public with sharing class HP_CALL001_XDATA  {
 			return (Map <String, Object> ) JSON.deserializeUntyped(HP_UTIL_HTTPUtils.calloutGet(HP_Constantes.XDATA_GAZ_PDL, '/' + idPDL).getBody());
 		}
 	}
+
+	/**
+	* @description récupère un PorteFeuille  dans XDATA par rapport à son ID XDATA
+	* @author Badr Eddine Belkarchi | 14-03-2022 
+	* @param String contractPortfolioXdataId 
+	* @return Object
+	**/
+	public static Object getPorteFeuilleContratXdata(String contractPortfolioXdataId) {
+        HttpResponse response = HP_UTIL_HTTPUtils.calloutGet(HP_Constantes.XDATA_PORTEFEUILLES_CONTRATS, '/' + contractPortfolioXdataId);
+		System.debug('httpResponse: '+response);
+		System.debug('data: '+ response.getBody());
+        if (response.getStatusCode() == HP_HttpStatus.OK) {
+            return (Object)JSON.deserializeUntyped(response.getBody());
+        }
+        return null;
+    }
 
 }

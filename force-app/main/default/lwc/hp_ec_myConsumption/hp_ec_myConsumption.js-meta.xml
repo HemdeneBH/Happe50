@@ -6,4 +6,11 @@
         <target>lightningCommunity__Page</target>
         <target>lightningCommunity__Default</target>
     </targets>
+
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+           <property name="textPasDeConsommations" label="RichText qui remplace le graphique si pas de consommations" type="String" 
+                        default="En tant que nouveau client, vous n'avez pas encore de données disponibles. Patience, vous trouverez bientôt un aperçu de votre consommation ici-même et une vue détaillée dans votre page 'Ma consommation'"></property>
+        </targetConfig>
+    </targetConfigs>
 </LightningComponentBundle>

@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : Clément Bauny
  * @group             : 
- * @last modified on  : 07-11-2022
- * @last modified by  : Hemdene Ben Hammouda
+ * @last modified on  : 07-27-2022
+ * @last modified by  : Badr Eddine Belkarchi
 **/
 public with sharing class HP_EC_LoadCustomerData {
 
@@ -801,4 +801,29 @@ public static List<Map<String, Object>> getComplementsDQE(String input) {
         }
     return data;
 }
+
+    @AuraEnabled(cacheable=true)
+    public static Object getCoTitulaires(Integer id_client_xdata){
+        Object data;
+        String exceptionMessage;
+        try {
+            if (HP_EC_UTL_CacheManager.cacheContains('CoTitulairesData'+id_client_xdata)) {
+                data = HP_EC_UTL_CacheManager.getCacheData('CoTitulairesData'+id_client_xdata);
+                return data;
+            }
+            else {
+                data = HP_SM001_Agilab.getCoTitulaires(id_client_xdata);
+                System.debug('getCoTitulaires, data : '+data);
+            } 
+        } catch (Exception e) {
+            System.debug('ERROR HP EC getCoTitulaires : ' + e.getMessage() + ' ' + e.getStackTraceString());
+            exceptionMessage = Label.HP_EC_InternalError; //No data exception
+            HP_EC_UTL_PortalExceptionManager.throwPortalException(HP_EC_UTL_PortalExceptionManager.ExceptionType.NODATA, exceptionMessage);
+        }
+        if (data != null) {
+            data = buildJson('CoTitulairesData', JSON.serialize(data));
+            HP_EC_UTL_CacheManager.putCacheData('CoTitulairesData'+id_client_xdata, data);
+        }
+        return data;
+    }
 }

@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Hemdene Ben Hammouda
  * @group             : 
- * @last modified on  : 02-22-2022
+ * @last modified on  : 05-17-2022
  * @last modified by  : Hemdene Ben Hammouda
 **/
 public with sharing class HP_EM053_Okta_Users_Manager {
@@ -83,6 +83,8 @@ public with sharing class HP_EM053_Okta_Users_Manager {
                 String body = '{"credentials": { "password": {"value":"'+newPassword+'"}}}';
                 HttpResponse response = HP_UTIL_HTTPUtils.callout(HP_Constantes.HP_OKTA_USER, HP_UTIL_HTTPUtils.PUT, body, param ,  null);
                 Integer statusCode = response.getStatusCode();
+                System.debug('Code : ' + response.getStatusCode());
+                System.debug('Response : ' + response.getBody());
             if(statusCode == 200){
                 user.HP_Okta_Status__c = 'OK';
                 user.HP_Okta_Erreur__c = '';
@@ -93,7 +95,7 @@ public with sharing class HP_EM053_Okta_Users_Manager {
                 user.HP_Okta_Erreur__c = responseFailure.errorSummary;
             }
             } catch (Exception ex) {
-                System.debug('HP_EM053_Okta_Users_Manager.updatePassword() | Exception : '+ ex.getMessage());
+                System.debug('HP_EM053_Okta_Users_Manager.updatePassword() | Exception : '+ ex.getMessage() + ' Line : '+ex.getLineNumber() + ' Stack : '+ ex.getStackTraceString());
             }
         }
         update user;        

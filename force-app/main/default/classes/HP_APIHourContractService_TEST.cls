@@ -120,48 +120,48 @@ public with sharing class HP_APIHourContractService_TEST {
 	 static void updateContractAsync(){
         HP_UTIL_SmartFactory.insertUserHP();
 		System.runAs(HP_UTIL_SmartFactory.runAsUserHP()){
-		Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> bodyResponseMap = new Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> {
-			'auth/oauth/v2/token' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(200,
-												   'HP_APIHourAccessTokenResponse_MOCK',
-												   new Map<String, String> {'Content-Type' => 'application/json'}),
-
-			'contrats' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(204,
-												  null,
-												  new Map<String, String> { 'Content-Type' => 'application/json'})
-		};
-
-		Test.startTest();
-		Test.setMock(HttpCalloutMock.class, new HP_UTIL_ResponseRestMock(bodyResponseMap)); 
-        HP_APIHourContractService.updateContractAsync('282713','E0004','Actif', null);
-        Integer callouts =Limits.getAsyncCalls();
-        Test.stopTest();
-        System.System.assertEquals(1, callouts, 'A callout should be made');
-		} 
+            Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> bodyResponseMap = new Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> {
+                'auth/oauth/v2/token' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(200,
+                                                       'HP_APIHourAccessTokenResponse_MOCK',
+                                                       new Map<String, String> {'Content-Type' => 'application/json'}),
+    
+                'contrats' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(204,
+                                                      null,
+                                                      new Map<String, String> { 'Content-Type' => 'application/json'})
+            };
+    
+            Test.startTest();
+            Test.setMock(HttpCalloutMock.class, new HP_UTIL_ResponseRestMock(bodyResponseMap)); 
+            HP_APIHourContractService.updateContractAsync('282713','E0004','Actif', null);
+            Integer callouts =Limits.getAsyncCalls();
+            Test.stopTest();
+            System.System.assertEquals(1, callouts, 'A callout should be made');
+            } 
 	}
 
 	@isTest
 	 static void updateContractInvokable(){
         HP_UTIL_SmartFactory.insertUserHP();
-		System.runAs(HP_UTIL_SmartFactory.runAsUserHP()){
-		Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> bodyResponseMap = new Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> {
-			'auth/oauth/v2/token' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(200,
-												   'HP_APIHourAccessTokenResponse_MOCK',
-												   new Map<String, String> {'Content-Type' => 'application/json'}),
+        System.runAs(HP_UTIL_SmartFactory.runAsUserHP()){
+            Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> bodyResponseMap = new Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> {
+                'auth/oauth/v2/token' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(200,
+                                                    'HP_APIHourAccessTokenResponse_MOCK',
+                                                    new Map<String, String> {'Content-Type' => 'application/json'}),
 
-			'contrats' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(204,
-												  null,
-												  new Map<String, String> { 'Content-Type' => 'application/json'})
-		};
+                'contrats' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(204,
+                                                    null,
+                                                    new Map<String, String> { 'Content-Type' => 'application/json'})
+            };
 
-		Test.startTest();
-		Test.setMock(HttpCalloutMock.class, new HP_UTIL_ResponseRestMock(bodyResponseMap)); 
-		List<Integer> listIds = new List<Integer>();
-		listIds.add(282713);
-        HP_APIHourContractService.updateContractStatusAwaitingDistributor(listIds);
-        Integer callouts =Limits.getAsyncCalls();
-        Test.stopTest();
-        System.System.assertEquals(1, callouts, 'A callout should be made');
-		} 
+            Test.startTest();
+            Test.setMock(HttpCalloutMock.class, new HP_UTIL_ResponseRestMock(bodyResponseMap)); 
+            List<Integer> listIds = new List<Integer>();
+            listIds.add(282713);
+            HP_APIHourContractService.updateContractStatusAwaitingDistributor(listIds);
+            Integer callouts =Limits.getAsyncCalls();
+            Test.stopTest();
+            System.System.assertEquals(1, callouts, 'A callout should be made'); 
+        }
 		 
 	}
 

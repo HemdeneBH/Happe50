@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>HP_Desactivate_Config__c</fullName>
     <defaultValue>false</defaultValue>
+    <description>si cette option est cochée, cette metadata est désactivée</description>
     <externalId>false</externalId>
     <fieldManageability>DeveloperControlled</fieldManageability>
     <label>HP Desactivate Config</label>

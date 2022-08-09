@@ -11,7 +11,9 @@ global with sharing class HP_BAT019_SouscriptionRappel implements  Database.Batc
 
     final String fields = 'Id, HP_Contact__c';
 
+
     final String whereCondition = 'HP_DigitalDateSave2__c = YESTERDAY AND HP_Statut__c = \'SAVE_2_CONFIRMED\' AND HP_Canal_de_vente__c != \'TELEVENTE\'' ;
+
     global String query = 'select ' + fields + ' from HP_Souscription__c where ' + whereCondition;  
 
     global Database.QueryLocator start(Database.BatchableContext bc) {

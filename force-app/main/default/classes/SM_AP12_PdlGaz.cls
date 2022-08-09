@@ -75,8 +75,7 @@ global class SM_AP12_PdlGaz implements vlocity_cmt.VlocityOpenInterface {
             gdfsuezBefCalypsoPdlgazV2.Dependency port = new gdfsuezBefCalypsoPdlgazV2.Dependency();
             SM_OCTOPUS__c octopusCS = SM_OCTOPUS__c.getOrgDefaults();
             port.clientCertName_x = octopusCS.certName__c;
-            SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'PDLGaz' limit 1];
-            port.endpoint_x =  octopusCS.endpoint__c+suffixs.suffix__c;
+            port.endpoint_x =  octopusCS.endpoint__c+'ES-PDLGaz_v2';
             //  port.endpoint_x = 'https://octopus.ws-ines-rct.engie.com:50001/smile-noprod-gdc/ws/ES-PDLGaz_v2';
             port.inputHttpHeaders_x = new Map<String, String> {'Content-Type' => 'text/xml;charset=utf-8'};
 
@@ -124,7 +123,7 @@ global class SM_AP12_PdlGaz implements vlocity_cmt.VlocityOpenInterface {
             DateTime dateDerniereReleve  = null;
             double dernierIndex ;
            String natureIndex;
-            if(derniersreleve != null) {
+            if(derniersreleve != null && derniersreleve.releve6M_1M != null && !derniersreleve.releve6M_1M.isEmpty()) {
                     listOfreleves = new List<Object>();
                     gdfsuezBefCalypsoPdlgazV2.releve6M_1MDt[] listofReleve = derniersreleve.releve6M_1M;
 
@@ -221,6 +220,8 @@ global class SM_AP12_PdlGaz implements vlocity_cmt.VlocityOpenInterface {
                                           ftaLibelle
                                           );
                                          infoPdl.dernierIndex = dernierIndex == null ?  null: String.valueOf(dernierIndex) ;
+        								// US FT2-225
+										 infoPdl.situationCompteur = (installation != null && installation.compteur != null && installation.compteur.situation != null) ? installation.compteur.situation.libelleCourt.toLowerCase('fr') : null;
 
             if(listOfreleves != null) {
                     outMap.put('mesuresReleve',listOfreleves);
@@ -256,6 +257,7 @@ global class SM_AP12_PdlGaz implements vlocity_cmt.VlocityOpenInterface {
         public String natureIndex;
         public String ftaLibelle;
         public String dernierIndex;
+        public String situationCompteur;                   //donneesPDL . installation . compteur . situation . libelleCourt
 
         public PdlInfo(String accessReleve,String statutContractuel,Datetime dateMiseHorsService,String etatTechnique,String matricule,String idPdl,
                        string pdlType,Datetime dateDerniereReleve,String dgi,String fta,String typeCompteur,Datetime dateRefusTelereleve,Boolean miseHorsServiceEnCours,

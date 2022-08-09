@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : Hemdene Ben Hammouda
  * @group             : 
- * @last modified on  : 02-28-2022
- * @last modified by  : Hemdene Ben Hammouda
+ * @last modified on  : 04-04-2022
+ * @last modified by  : Clément Bauny
 **/
 import {
     LightningElement,
@@ -50,7 +50,7 @@ import ADERNIER_SCORE_FIELD from '@salesforce/schema/Contact.HP_Dernier_score__c
 import getIsClientOffline from '@salesforce/apex/HP_SM001_Agilab.getClienOffline';
 import getURLImpersonationForContact from '@salesforce/apex/SM_AP21_GestionImpersonation.getURLImpersonationForContact';
 import loadContact from "@salesforce/apex/HP_EM020_Contact.loadContact";
-import getAgilabEspaceClientURL from "@salesforce/apex/HP_SM003_MetadataManager.getAgilabEspaceClientURL";
+import getEspaceClientURL from "@salesforce/apex/HP_SM003_MetadataManager.getEspaceClientURL";
 import loadReclamationCase from "@salesforce/apex/HP_EM035_Reclamation.loadReclamationCase";
 import { refreshApex } from '@salesforce/apex';
 import { getObjectInfo } from 'lightning/uiObjectInfoApi';
@@ -66,7 +66,7 @@ import openEditNameClient from "@salesforce/messageChannel/hp_openEditNameClient
 import { publish, MessageContext } from 'lightning/messageService';
 
 
-const FIELDS = [GLOBAL_MOY_SCORE_FIELD,ADERNIER_SCORE_FIELD,AGILABID_FIELD, SALUT_FIELD, FIRSTNAME_FIELD, LASTNAME_FIELD, RECORDTYPE_FIELD, REFCLI_FIELD, REFCLI_FIELD_HAPPE, ISHAPPE_FIELD, EMAILPR_FIELD, EMAIL_FIELD, PHONE_FIELD, MOBPR_FIELD, MOBILE_PHONE_FIELD, FIXPR_FIELD, INTST_FIELD, REQUALIF_FIELD, SEGMKT_FIELD, NOVOIE_FIELD, MAILST_FIELD, MAILCI_FIELD, MAILPO_FIELD, CPLTAD_FIELD,NUMETRANGER_FIELD];
+const FIELDS = [GLOBAL_MOY_SCORE_FIELD,ADERNIER_SCORE_FIELD, SALUT_FIELD, FIRSTNAME_FIELD, LASTNAME_FIELD, RECORDTYPE_FIELD, REFCLI_FIELD, REFCLI_FIELD_HAPPE, ISHAPPE_FIELD, EMAILPR_FIELD, EMAIL_FIELD, PHONE_FIELD, MOBPR_FIELD, MOBILE_PHONE_FIELD, FIXPR_FIELD, INTST_FIELD, REQUALIF_FIELD, SEGMKT_FIELD, NOVOIE_FIELD, MAILST_FIELD, MAILCI_FIELD, MAILPO_FIELD, CPLTAD_FIELD,NUMETRANGER_FIELD];
 export default class Contactview360 extends NavigationMixin(LightningElement) {
     @wire(getObjectInfo, { objectApiName: CASE_OBJECT })
     objectInfo;
@@ -323,26 +323,16 @@ export default class Contactview360 extends NavigationMixin(LightningElement) {
     //     });
     //     this.dispatchEvent(event);
     // }
-    openAgilabSpace() {
-        let agilabId = getFieldValue(this.contact.data, AGILABID_FIELD);
-        getAgilabEspaceClientURL()
+    openClientSpace() {
+        getEspaceClientURL({contactId : this.recordId})
             .then(result => {
-                console.log('@@@@ custommetadata ' + result);
-                if (agilabId != null) {
-                    this[NavigationMixin.Navigate]({
-                        type: 'standard__webPage',
-                        attributes: {
-                            url: result + "personnes/public/" + agilabId.toString()
-                        }
-                    });
-                } else {
-                    this[NavigationMixin.Navigate]({
-                        type: 'standard__webPage',
-                        attributes: {
-                            url: result
-                        }
-                    });
-                }
+              console.log('@@@@ custommetadata ' + result);
+              window.open(result, "_blank");
+            })
+            .catch(error => {
+                console.log('got error ', error);
+                this.error = error;
+                this.urlec = undefined;
             });
     }
     updateCoords() {

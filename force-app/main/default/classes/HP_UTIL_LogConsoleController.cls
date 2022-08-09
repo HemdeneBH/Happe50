@@ -67,13 +67,17 @@ global without sharing class HP_UTIL_LogConsoleController {
         for(LogConsoleWrapper log : data) {
             if(validateCondition(log, username, endPoint, method, status, transactionList)) {
                 if(result.size() < LIMITE_NOMBRE_LOGS) {
-                    result.add(log);
-                }
+                result.add(log);
+            }
                 else {
                     break;
+
+
                 }
+
             }
         }
+
 
         return result;
     }

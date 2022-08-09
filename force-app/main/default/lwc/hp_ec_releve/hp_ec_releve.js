@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Clément Bauny
  * @group             : 
- * @last modified on  : 07-05-2022
+ * @last modified on  : 08-01-2022
  * @last modified by  : Badr Eddine Belkarchi
 **/
 import { api, LightningElement, track, wire } from 'lwc';
@@ -32,6 +32,14 @@ export default class Hp_ec_releve extends LightningElement {
     @api textPeriodeEnCoursGaz;
     @api textPeriodeEnCoursElec;
     @api textPeriodeEnCoursResiliation;
+
+    @api textBlocRose;
+    @api showIconLampBlocRose;
+    @api showIconConfirmBlocRose;
+
+    @api textBlocBleue;
+    @api showIconLampBlocBleue;
+    @api showIconConfirmBlocBleue;
 
     @api titlePopinReleve;
     @api messageIndexError;
@@ -88,6 +96,7 @@ export default class Hp_ec_releve extends LightningElement {
 
     get showReleveComponent() {
         if(this.isProcessFinished && this.retourStatutAutoReleve && (!this.isCommunicantGaz || !this.isCommunicantElec))
+        // if(this.isProcessFinished && (!this.isCommunicantGaz || !this.isCommunicantElec))
             return true;
         return false;
     }
@@ -138,7 +147,7 @@ export default class Hp_ec_releve extends LightningElement {
                         }
                     });
 
-            if(this.contractGaz) {
+            if(this.contractGaz && this.currentEnergy == 'Gaz Naturel') {
                 console.log('this.contractGaz.id : ' + this.contractGaz.id);
 
                 // check if compteur gaz communicant  //
@@ -209,7 +218,7 @@ export default class Hp_ec_releve extends LightningElement {
                 this.isCommunicantGaz = true;
             }
 
-            if (this.contractElec) {
+            if (this.contractElec && this.currentEnergy == 'Electricité') {
                 console.log('this.contractElec.id : ' + this.contractElec.id);
                 
                 // Part 2: Get numéro PDL
@@ -244,6 +253,7 @@ export default class Hp_ec_releve extends LightningElement {
                         console.log('latest_index_elec : ' + this.latest_index_elec);
                     }
                 }
+                // const IS_COMPTEUR_COMMUNICANT_ELEC = await this.isCompteurCommunicantElec('25461794460830', this.latest_index_elec);
                 const IS_COMPTEUR_COMMUNICANT_ELEC = await this.isCompteurCommunicantElec(this.pdl, this.latest_index_elec);
                 this.isCommunicantElec = JSON.parse(IS_COMPTEUR_COMMUNICANT_ELEC)?.data;
                 console.log('isCommunicantElec : '+this.isCommunicantElec);
@@ -465,6 +475,16 @@ export default class Hp_ec_releve extends LightningElement {
         if (message.messageType == 'SelectedPortfolio') {
             self.idPortefeuilleContrat = message.messageData.message;
             self.populateContractInfo();
+        }
+        if (message.messageType == 'SelectedEnergy') {
+            if (message.messageData && message.messageData.message == 'Electricité') {
+                self.currentEnergy = message.messageData.message;
+                self.populateContractInfo();
+            }
+            if (message.messageData && message.messageData.message == 'Gaz Naturel') {
+                self.currentEnergy = message.messageData.message;
+                self.populateContractInfo();
+            }
         }
     }
 

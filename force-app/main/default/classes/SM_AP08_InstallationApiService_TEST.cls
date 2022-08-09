@@ -27,10 +27,6 @@ global class SM_AP08_InstallationApiService_TEST {
         mock.setHeader('Content-Type', 'application/json');
         // Set the mock callout mode
         Test.setMock(HttpCalloutMock.class, mock);
-        HttpRequest request = new HttpRequest();
-        Http http= new http();
-        HttpResponse response= http.send(request);
-        system.debug(response.getBody());
         // WHEN
         service.invokeMethod('callInstallations', inputMap, outputMap, null) ;
 

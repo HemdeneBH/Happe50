@@ -32,6 +32,17 @@ global class SM_AP06_MandatsApiService implements vlocity_cmt.VlocityOpenInterfa
             system.debug('id buisness partner not found ...');
             return;
         }
+        String token;
+        if(!Test.isRunningTest()){
+            token = SM_MP_AP04_GetTokenService.getTokenFromSmile();
+        }else{
+            token = 'test';
+        }
+
+        if (token == null) {
+            system.debug('Token not found ...');
+            return;
+        }
         //vérification taille
         //author MHA
         Integer size = String.valueOf(inputMap.get('IdBusinessPartner')).length();
@@ -50,9 +61,9 @@ global class SM_AP06_MandatsApiService implements vlocity_cmt.VlocityOpenInterfa
             mock.setHeader('Content-Type', 'application/json');
             // Set the mock callout mode
             Test.setMock(HttpCalloutMock.class, mock);
-            httpResponse = getResponse(idBP);
+            httpResponse = getResponse(token, idBP);
         }else{
-            httpResponse = getResponse((String)idBP);
+            httpResponse = getResponse(token, (String)idBP);
         }
 
         System.debug('inputMap :IdBusinessPartner = '+ (String)idBP);
@@ -123,15 +134,59 @@ global class SM_AP06_MandatsApiService implements vlocity_cmt.VlocityOpenInterfa
 }
 
 
-    public static String buildRequestParams(String idBuisnessPartner) {
-        return '?idBusinessPartner=' + (String)idBuisnessPartner + '&sort=dateSignature,desc';
-    }
+    public static HttpRequest buildHttpRequestHeaders(String token, String idBuisnessPartner) {
 
-    public static HttpResponse getResponse(String idBuisnessPartner) {
+        HttpRequest req = new HttpRequest();
+        req.setMethod('GET');
+        String endpointURL = '';
+        if (!Test.isRunningTest()) {
+            SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'Mandats' limit 1];
+            endpointURL = 'callout:AuthAPIHour' +suffixs.suffix__c;
+        }
+        req.setEndpoint(endpointURL + '?idBusinessPartner=' + (String)idBuisnessPartner + '&sort=dateSignature,desc');
+        req.setHeader('X-Correlation-Id', MP_AP13_GuidUtil.NewGuid());
+        req.setHeader('api_key', MP_Xdata_credentials__c.getInstance('sm_api_key_INT').Value__c);
+        req.setHeader('Authorization', 'Bearer ' + token);
+        req.setHeader('Content-Type', 'application/json');
+        return req;
 
-        String endpointParams = buildRequestParams(idBuisnessPartner);
-        HttpResponse httpResp = CalloutManager.sendRequest('Mandats', endpointParams, 'GET', CalloutManager.Scope.READ,null,null);
-        if (CalloutManager.httpResponseFailureDetected(httpResp)) {
+}
+
+
+    public static HttpResponse sendData(HttpRequest request) {
+
+        Http http = new Http();
+        HttpResponse res;
+        try {
+            res = http.send(request);
+
+        } catch (Exception e) {
+            system.debug('## [Mandat] failed to send data ##');
+            return null;
+        }
+        return res;
+
+}
+
+
+    private static Boolean httpResponseFailureDetected(HttpResponse response) {
+
+
+
+        return (response == null || (response.getStatusCode() != 201 && response.getStatusCode() != 200 && response.getStatusCode() != 206));
+
+}
+
+
+
+
+
+
+    public static HttpResponse getResponse(String token, String idBuisnessPartner) {
+
+        HttpRequest httpReq = buildHttpRequestHeaders(token, idBuisnessPartner);
+        HttpResponse httpResp = sendData(httpReq);
+        if (httpResponseFailureDetected(httpResp)) {
             // should abort next step's
             system.debug('## [ mandats] error occured when sending data ##');
             system.debug(httpResp != null ? httpResp.getBody() : 'http response is null');
@@ -139,7 +194,8 @@ global class SM_AP06_MandatsApiService implements vlocity_cmt.VlocityOpenInterfa
         }
 
         return httpResp;
-    }
+
+}
     
     
     

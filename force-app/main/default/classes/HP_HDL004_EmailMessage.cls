@@ -39,5 +39,6 @@ public with sharing class HP_HDL004_EmailMessage  extends TriggerHandler {
     
     public override void afterInsert() {
         HP_SM041_EmailMessageHandler.updateEmailMessageRelation(newList);
+        HP_SM041_EmailMessageHandler.createCaseClosedEmailSent(newList);
     }
 }

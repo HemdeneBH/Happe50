@@ -1,11 +1,15 @@
 <template>                                   
         <lightning-card class="slds-m-bottom_large">
-            <div class="slds-m-left_large slds-text-heading_medium slds-text-title_bold">  {headerText}</div><br/>			                        
+          	
+            <div class="slds-m-left_large slds-text-heading_medium slds-text-title_bold">  {headerText}</div>			                        
             <div class="slds-p-around_large" if:true={showAdress}>
                       ADRESSE DU LOGEMENT
                 <div class="slds-grid slds-wrap"> 
                         <div>
-                    <lightning-icon icon-name="utility:home" size="small" alternative-text="Home">
+                <lightning-icon
+                        icon-name="utility:home"
+                        size="small"
+                        alternative-text="Home">
                 </lightning-icon> &nbsp;&nbsp;
                         </div>
                 <div>
@@ -14,12 +18,10 @@
                     <p>{codePostal}&nbsp;{ville}</p>                    
                 </div>                
                 </div>		 			 
-            </div>    
-            <template if:false={isDpCreated}>      
-                <div class="slds-p-around_large">
-                        <article class="slds-card"> 
-            <div>
-            <template if:true={showtableDP}>
+            </div>          
+                    <div class="slds-p-around_large">
+                            <article class="slds-card"> 
+                <div>
                     <template if:true={showHeaderTableSimulation}> 
                     <table  class="tableListPa">
                         <tr class="tableListPaTr">
@@ -32,19 +34,21 @@
                            <th scope="col" >MOTIF DE DÉSACTIVATION</th>
                            <th scope="col" >RESTANT DÛ</th>
                        </tr>
+
                     </table>
                 </template>
                 <template if:false={showDelaiPaimentSimulation}>           
                      <template if:true={noData}>                                        
                         <footer class="slds-card__footer" >
                         Aucun délai de paiement pour ce client
+
                      </footer>                                                       
                      </template>   
                 </template>     
-            </template> 
+
+
             <template if:true={showTablePa}>
-                        <lightning-accordion class="example-accordion slds-m-bottom_x-large"
-                            allow-multiple-sections-open=true>
+                <lightning-accordion class="example-accordion slds-m-bottom_x-large" allow-multiple-sections-open=true  >
                     <template for:each={listPA} for:item='item'>
                             <table  class="customTabStyle" key={item.IdPA}>
                             <tr style="width: 129px;" >
@@ -58,12 +62,10 @@
                                <th scope="col" >{item.montantRestantDu}</th>
                            </tr>
                            </table>
-                                <lightning-accordion-section label="Détail du délai de paiement"
-                                    key={item.firstEcheance} name={item.firstEcheance}>
+                        <lightning-accordion-section  label="Détail du délai de paiement" key={item.firstEcheance}  name={item.firstEcheance}>
                             <br/>                           
                             <template if:true={item.echeance}>
-                                        <table key={item.echeance}
-                                            class="slds-table slds-table_cell-buffer slds-table_bordered slds-no-row-hover">
+                                <table key={item.echeance}   class="slds-table slds-table_cell-buffer slds-table_bordered slds-no-row-hover">
                                     <thead>
                                         <tr class="slds-line-height_reset">
                                             <th  scope="col" class="grayBackground">
@@ -94,13 +96,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                       <template for:each={item.echeance} for:item='child' >
-                                                    <tr key={child.dateEcheance}
-                                                        class="grayBackground">
+                                   
+                                       <template for:each={item.echeance} for:item='child'>
+                                            <tr key={child.dateEcheance} class="grayBackground slds- hint-parent">
                                                 <td data-label="N°">
                                                     {child.numDP}
                                                 </td>
-
                                                 <td data-label="DATE D’ÉCHÉANCE">
                                                     {child.dateEcheance}
                                                 </td>
@@ -108,6 +109,7 @@
                                                     {child.montantEcheance}
                                                 </td>
                                                 <td data-label="STATUT">                                                                                                             
+                                               
                                                         <template if:true={child.cercle}>
                                                                 <div class="circle"></div>
                                                         </template>
@@ -141,238 +143,129 @@
                     </template>
                 </lightning-accordion>
             </template>
-                    <template if:true={messageInegibilite}>
-                        <!--div class="slds-m-left_large slds-grid slds-gutters"-->
-                        <div class="slds-col slds-size_2-of-3">
-                            <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_warning divErrorPA"
-                                role="alert">
-                                <h2> <b>Préréquis KO</b> : {messageInegibilite}, {suffixIneligibilitedp}</h2>
-                            </div>
+            
+            <template if:true={showDelaiPaimentSimulation}>
+                
+               <div class="slds-grid slds-wrap"> 
+               <div class="slds-size_1-of-3">
+                <!--lightning-card title="CREATION"-->
+
+                    <div class="slds-grid slds-grid_pull-padded-medium">
+                        <div class="slds-col slds-p-horizontal_medium">
+                            <span style="font-weight: bold;">Montant total</span>
                         </div>
-                        <!--/div-->
-                    </template><br />
-                    <template if:true={showDelaiPaimentSimulation}>
-                    <div class="slds-grid slds-gutters">
-                        <div class="slds-col slds-size_2-of-3">
-                            <template if:true={dpcreationerrormsg}>
-                                <div class="slds-grid slds-gutters">
-                                    <!--div class="slds-col slds-size_2-of-3"-->
-                                                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_warning divErrorPA"
-                                                    role="alert">
-                                            <h2>{dpcreationerrormsg}</h2>
-                                        </div>
-                                    <!--/div-->
-                                </div>
-                            </template>  
-                            <br/> 
-                           <div class="slds-grid slds-wrap">   
-                           <div class="slds-size_2-of-3">
-                                <div class="slds-grid slds-grid_pull-padded-medium">
-                                    <div class="slds-col slds-p-horizontal_medium">
-                                        <span style="font-weight: bold;">Montant total</span>
-                                    </div>
-                                    <div class="slds-col slds-p-horizontal_medium">
-                                                    <span>
-                                                        <lightning-formatted-number value={solde} format-style="decimal"
-                                                            minimum-fraction-digits="2"></lightning-formatted-number> €
-                                                    </span>
-                                    </div>
-                                </div>
-                                <div class="slds-grid slds-grid_pull-padded-medium">
-                                    <div class="slds-col slds-p-horizontal_medium">
-                                        <span style="font-weight: bold;">Catégorie</span>
-                                    </div>
-                                    <div class="slds-col slds-p-horizontal_medium">
-                                        <span>Z1 - ENGIE</span>
-                                    </div>
-                                </div><br>
-                                <h2 class="header">Echéances</h2>
-                                <div class="slds-grid slds-gutters">
-                                    <div class="slds-col">
-                                        <span>
-                                            <label class="slds-form-element__label">Nombre</label>  
-                                                        <select class="slds-select" name="nombreEcheance" title="Nombre"
-                                                            onchange={handleChange}>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
-                                                <option value="9">9</option>
-                                                <option value="10">10</option>
-                                            </select> 
-                                        </span>
-                                    </div>
-                                    <div class="slds-col">
-                                        <span>
-                                            <lightning-input class="dateReferenceId"  type="date" name="dateReference" max={maxDate}  min={minDate} value={dateEcheanceSimuler} label="Première échéance"  onchange={handleChange}></lightning-input>
-                                        </span>
-                                    </div>       
-                                </div><br>
-                                <template if:true={dateNumberGt3}>
-                                    <div class="slds-grid slds-gutters">
-                                        <div class="slds-col slds-size_3-of-3">
-                                            <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_warning" role="alert">
-                                                <h2>ATTENTION : Au-delà de 3 échéances, vous devez demander l’accord à votre responsable.</h2>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br>  
-                                </template>  
-                                <template if:true={showWorningIneligibilityContext4}>
-                                    <div class="slds-grid slds-gutters">
-                                        <div class="slds-col slds-size_3-of-3">
-                                            <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_warning" role="alert">
-                                                <h2>ATTENTION : Pour une dette supérieure à 500€, vous devez demander l’accord à votre responsable.</h2>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br>  
-                                </template>  
-                                <template if:true={dateDneligibilityContext4}>
-                                    <div class="slds-grid slds-gutters">
-                                        <div class="slds-col slds-size_3-of-3">
-                                            <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_warning" role="alert">
-                                                <h2>ATTENTION : Pour une dette supérieure à 500€ et au-delà de 3 échéances, vous devez demander l’accord à votre responsable.</h2>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br>  
-                                </template>
-                                <template if:true={errorTotalAmount}>
-                                    <div class="slds-grid slds-gutters">
-                                        <div class="slds-col slds-size_3-of-3">
-                                            <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="error">
-                                                <h2>ERREUR : Le total des échéances doit correspondre au Montant total.</h2>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br>  
-                                </template>
-                            <div class="slds-clearfix">
-                                <div class="slds-float_right">
-                                                    <button class="slds-button slds-button_success" name="simulate" type="submit"
-                                                        onclick={simulatePlanApurement}>Lancer la simulation
-                                    </button>
-                                </div>
-                            </div>
-                            <template if:true={showListEcheanceDp}>
-                                <br>
-                                <div class="slds-hint-parent slds-grid slds-wrap">
-                                    <div class="slds-large-size_2-of-3">
-                                        <span style="font-weight: bold;">Délai de paiement estimé</span>
-                                    </div>
-                                    <div class="slds-large-size_1-of-3">
-                                        <span><lightning-formatted-number value={totalEcheanceDP} format-style="decimal" minimum-fraction-digits="2"></lightning-formatted-number> €</span>
-                                    </div>
-                                </div>  
-                                <br>            
-                                <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-no-row-hover">
-                                    <tbody>
-                                        <template for:each={listEcheanceDp} for:item="echeance" for:index="index">
-                                                <tr class="slds-hint-parent slds-grid slds-wrap" key={echeance} >
-                                                    <td class="slds-large-size_1-of-6"><span></span></td>
-                                                    <td data-label="Date echéance" class="slds-large-size_3-of-6" >                                       
-                                                        <span>{echeance.dateEcheance}</span>                                  
-                                                    </td>
-                                                    <td data-label="Montant échéance" class="slds-large-size_2-of-6" >                                          
-                                                    <span><lightning-input  type="number" message-when-bad-input="montant invalide." message-when-pattern-mismatch="montant invalide."  message-when-step-mismatch="montant invalide." message-when-value-missing="montant invalide." variant="label-hidden" onchange={countTotalPlanApurement} data-index={index} value={echeance.montantEcheance} formatter="currency" step="0.01" required></lightning-input></span>  
-                                                    </td>
-                                                </tr>
-                                        </template>
-                                    </tbody>   
-                                </table>
-                            </template>   
-                            <br>                
-                                    </div>
-                                    </div> 
-                            <div class="slds-grid slds-gutters" if:true={showErrorPA}>
-                                <div class="slds-col slds-size_1-of-3"></div>
-                                <div class="slds-col slds-size_1-of-3"></div>
-                                <div class="slds-col slds-size_1-of-3">
-                                    <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
-                                        <h2>ERREUR : Cliquez sur « Lancer la simulation » avant de cliquer sur « Suivant »</h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slds-col slds-size_1-of-3">
-                            <span><img src={imagefilariane}  alt="FIL ARIANNE" class="filarianeRight"/></span>
+                        <div class="slds-col slds-p-horizontal_medium">
+                            <span><lightning-formatted-number value={solde} format-style="decimal" minimum-fraction-digits="2"></lightning-formatted-number> €</span>
                         </div>
                     </div>
-                    </template>
-                </div><br/>
-                <template if:true={displayTraceInteraction}>
+                    <div class="slds-grid slds-grid_pull-padded-medium">
+                        <div class="slds-col slds-p-horizontal_medium">
+                            <span style="font-weight: bold;">Catégorie</span>
+                        </div>
+                        <div class="slds-col slds-p-horizontal_medium">
+                            <span>Z1 - ENGIE</span>
+                        </div>
+                    </div><br>
+
+                    <h2 class="header">Echéances</h2>
                     <div class="slds-grid slds-gutters">
                         <div class="slds-col">
                             <span>
-                                <lightning-input type="checkbox" label="Appel interrompu - Tracer
-                                l'interaction" name="inputAppelInterrompu" onchange={handlePause}
-                                    disabled={disableInteraction}></lightning-input>
+                                <!--<lightning-input type="number"  name="nombreEcheance"  min="0" max="3" label="Nombre" onchange={handleChange}></lightning-input>-->
+                                <label class="slds-form-element__label">Nombre</label>  
+                                <select class="slds-select" name = "nombreEcheance"   title="Nombre" onchange={handleChange} >
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select> 
                             </span>
+                           
                         </div>
-                        <template if:false={showDelaiPaimentSimulation}>
-                            <div class="slds-col">
-                                <span>
-                                    <lightning-input class="slds-float_right" type="checkbox" label="J'ai répondu à la demande du
-                                            client" name="inputReponduDemande" onchange={handleInteraction}
-                                        disabled={disableInteraction}></lightning-input>
-                                </span>
-                            </div>
+                        <div class="slds-col">
+                            <span>
+                                <lightning-input class="dateReferenceId"  type="date" name="dateReference"  min={minDate} value={dateEcheanceSimuler} label="Première échéance"  onchange={handleChange}></lightning-input>
+                            </span>
+                            
+
+
+                        </div>       
+                    </div><br>
+                <div class="slds-clearfix">
+                    <div class="slds-float_right">
+                        <button class="slds-button slds-button_success"  name="simulate" type="submit" onclick={simulatePlanApurement}>Lancer la simulation
+                        </button>
+                    </div>
+                </div>
+                <!--div class="slds-align_absolute-center">
+                    <button class="slds-button slds-button_success"  name="simulate" type="submit" onclick={simulatePlanApurement}>Lancer la simulation</button>
+                </div-->
+                <br>      
+            <template if:true={showListEcheanceDp}>
+                <div style="font-weight: bold;">Délai de paiement estimé</div><br>
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                    <tbody>
+                        <template for:each={listEcheanceDp} for:item="echeance">
+                                <tr class="slds-hint-parent" key={echeance}>
+                                    <td></td>
+                                    <td data-label="Date echéance">
+                                        <div class="slds-truncate">
+                                           {echeance.dateEcheance}
+                                        </div>
+                                    </td>
+                                    <td data-label="Montant échéance">
+                                        <div class="slds-truncate">
+                                                <lightning-formatted-number value={echeance.montantEcheance} format-style="decimal" minimum-fraction-digits="2"></lightning-formatted-number> €
+                                        </div>
+                                    </td>
+                                </tr>
                         </template>
-                    </div>
-                </template><br />
-                <template if:true={showDelaiPaimentSimulation}>
-                    <div class="slds-clearfix">
-                        <div class="slds-float_right">
-                            <button class="slds-button slds-button_success" name="SUIVANT" type="submit"
-                                    onclick={suivantAction}>SUIVANT
-                            </button>
+                    </tbody>   
+                </table>
+            </template>                  
+                <!--<div class="slds-grid slds-gutters">
+                    <template for:each={listEcheanceDp} for:item="echeance">
+                        <div class="slds-col" key={echeance.dateEcheance}>
+                            <span><lightning-formatted-date-time value={echeance.dateEcheance}></lightning-formatted-date-time></span>
                         </div>
-                    </div>
-                </template> 
-           <div class="buttonContainer" if:true={showButtonsDP}>
+                        <div class="slds-col" key={echeance.dateEcheance}>
+                            <span>{echeance.montantEcheance}</span>
+                        </div> 
+                    </template>
+                </div> -->
+               <!--/lightning-card-->
+
+               </div>
+               </div>
+               <div class="slds-clearfix">
+                <div class="slds-float_right">
+                    <button class="slds-button slds-button_success"  name="SUIVANT" type="submit" >SUIVANT
+                    </button>
+                </div>
+               </div>
+            </template> 
+
+           </div>
+           <div  class="buttonContainer" if:true={showButtonsDP}>
                 <template if:true={showSpinner}> 
                     <template if:false={showCreateDPButton}> 
-                            <div class="slds-button slds-button_neutral divInfo">POUR INFO: Impossible de créer un
-                                nouveau délai de paiement car il y a déjà un délai de paiement de catégorie Z1 en cours
-                            </div>
+                        <div class="slds-button slds-button_neutral divInfo">POUR INFO: Impossible de créer un nouveau délai de paiement car il y a déjà un délai de paiement de catégorie Z1 en cours</div>
                         <br/>  
                     </template>
-                        <button class="slds-button slds-button_neutral closeButton" onclick={closeDPTab}>Fermer la
-                            page</button>
-                    <lightning-button variant="brand" label="Suivant" title="Suivant" onclick={caseNavigate}
-                             disabled={nextDisabled}></lightning-button>&nbsp;
-                    <template if:true={showCreateDPButton}>
+                    <button class="slds-button slds-button_neutral closeButton" onclick={closeDPTab}>Fermer la page</button>                         
+                    <template if:true={showCreateDPButton}>  
                         <!--si profil utilisateur n'est pas autorisé a creer de s DP--> 
-                        <template if:true={displayCreateDpButtonConditions}>
-                                <lightning-button variant="brand" label="Créer un délai de paiement"
-                                    title="Créer un délai de paiement" onclick={VerifierEligibilitePlanApurement}>
-                                </lightning-button>
-                            <!--button class="slds-button slds-button_brand" onclick={VerifierEligibilitePlanApurement} >Créer un délai de paiement</button-->
-                        </template>   
+                        <template if:true={wirecheckACDP.data}>  
+                            <button class="slds-button slds-button_brand" onclick={VerifierEligibilitePlanApurement} >Créer un délai de paiement</button>
+                    </template>   
                 </template> 
                 </template>
             </div>
            </article>
            </div>
-        </template>
+           
            <div class="exampleHolder" if:false={showSpinner}>
             <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
-        </div>
-        <template if:true={isDpCreated}>
-            <c-sm_-d-p_ecran_recap montanttotal={solde} montantpremiereecheance={firstEcheanceMontant}
-                datepremiereecheance={firstDateEcheance} nombreecheance={listEcheanceDp.length} caseid={DRId_Case}
-                articlekbrecap={articlerecap}></c-sm_-d-p_ecran_recap>
-            <div class="slds-clearfix slds-m-right_large slds-m-bottom_xx-large">
-                <div class="slds-float_right">
-                    <lightning-button variant="brand" label=" OK " title="Terminer la création de DP"
-                        onclick={finishDP}></lightning-button>
-                </div>
-            </div>
-        </template>
+        </div>        
+                                          
     </lightning-card>
 </template>

@@ -3,8 +3,8 @@
  * @Description        : 
  * @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
  * @Group              : 
- * @Last Modified By   : ChangeMeIn@UserSettingsUnder.SFDoc
- * @Last Modified On   : 03-26-2021
+ * @Last Modified By   : Hemdene Ben Hammouda
+ * @Last Modified On   : 03-14-2022
  * @Modification Log   : 
  * Ver       Date            Author      		    Modification
  * 1.0    24/03/2020   ChangeMeIn@UserSettingsUnder.SFDoc     Initial Version
@@ -20,6 +20,10 @@ public with sharing class HP_SM029_DistGetPdlGaz implements HP_PreContractServic
 		private final String enrolmentType;
 		private String contractualState;
 		private Integer gazAnnualConsumption;
+		private String deliveryPointStreetName;
+		private String deliveryPointStreetNumber;
+		private String deliveryPointCity;
+		private String deliveryPointPostalCode;
 
 		public HP_EnergyResponse toCoreType() {
 			return new HP_EnergyResponse(
@@ -27,7 +31,11 @@ public with sharing class HP_SM029_DistGetPdlGaz implements HP_PreContractServic
 				this.isSmartMeter(),
 				this.contractualState,
 				this.gazAnnualConsumption,
-				this.meterType()
+				this.meterType(),
+				this.deliveryPointStreetName,
+				this.deliveryPointStreetNumber,
+				this.deliveryPointCity,
+				this.deliveryPointPostalCode
 				);
 		}
 		public HP_GasDistributorDeliveryPointResponse(final gdfsuezBefCalypsoPdlgazV2.lirePDLGazResponse_element response, final String enrolmentType) {
@@ -40,6 +48,12 @@ public with sharing class HP_SM029_DistGetPdlGaz implements HP_PreContractServic
 				}
 				if (this.deliveryPoint.CAR != null && this.deliveryPoint.CAR.CAR_Actuelle != null) {
 					this.gazAnnualConsumption = this.deliveryPoint.CAR.CAR_Actuelle.valeurCAR;
+				}
+				if(this.deliveryPoint.adresse != null){
+					this.deliveryPointStreetName = this.deliveryPoint.adresse.libelleVoie;
+					this.deliveryPointStreetNumber = this.deliveryPoint.adresse.nVoie;
+					this.deliveryPointCity = this.deliveryPoint.adresse.ville;
+					this.deliveryPointPostalCode = this.deliveryPoint.adresse.cP;
 				}
 			}
 		}

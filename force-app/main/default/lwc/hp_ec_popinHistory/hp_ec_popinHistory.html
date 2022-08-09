@@ -2,7 +2,7 @@
   @description       : 
   @author            : ZAATOUCHE Younes
   @group             : 
-    @last modified on  : 07-12-2022
+    @last modified on  : 08-03-2022
   @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 -->
 <template>
@@ -94,7 +94,7 @@
                                             <span class="payment__icon" style={styleIconEuro}></span>
                                             <div class="payment__content">
                                                 <p class="payment__info">
-                                                    <strong class="payment__name">{payment.type}-{payment.enrg}</strong>
+                                                    <strong class="invoice__type">{payment.type} - {payment.enrg}</strong>
                                                     <span class="payment__description">{payment.ref_paiement} du {payment.date_paiement}</span>
                                                 </p>
                                                 <p class="payment__price">{payment.montant_ttc}€</p>
@@ -145,9 +145,10 @@
                                     </template>
                                 </ul>
                             </div>
-                            <c-hp_ec_tooltip
-                            content={contenuToolTip}
-                            ></c-hp_ec_tooltip>
+                            <c-hp_ec_push-info
+                                title={toolTipTitle}
+                                content={contenuToolTip}
+                            ></c-hp_ec_push-info>
                         </div>
                     </div>
                     <div class="hp-footer">

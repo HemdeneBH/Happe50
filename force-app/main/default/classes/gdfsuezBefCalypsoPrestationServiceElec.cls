@@ -2199,7 +2199,7 @@ public class gdfsuezBefCalypsoPrestationServiceElec {
         public String clientCertPasswd_x;
         public Integer timeout_x;
         private String[] ns_map_type_info = new String[]{'http://gdfsuez.com/bef/chp/communadresse','gdfsuezComBefChpPSECommunadresse','http://gdfsuez.com/bef/chp/distributeurelectricite','gdfsuezComBefChpPSEDistributeurelec','http://gdfsuez.com/bef/chp/pivot','gdfsuezComBefChpPSEPivot'};
-		
+
         public String getServiceId(){
             return serviceId;
         }
@@ -2215,7 +2215,7 @@ public class gdfsuezBefCalypsoPrestationServiceElec {
             request_x.context = context;
             Map<String, gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectriciteResponse_element> response_map_x = new Map<String, gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectriciteResponse_element>();
             response_map_x.put('response_x', response_x);
-            SM_WS101_PrestaServiceElec.createOnline(
+            WebServiceCallout.invoke(
                 this,
                 request_x,
                 response_map_x,
@@ -2238,7 +2238,7 @@ public class gdfsuezBefCalypsoPrestationServiceElec {
             request_x.context = context;
             Map<String, gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectriciteOfflineResponse_element> response_map_x = new Map<String, gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectriciteOfflineResponse_element>();
             response_map_x.put('response_x', response_x);
-            SM_WS101_PrestaServiceElec.createOffline(
+            SM_WS101_PrestaServiceElec.create(
                 this,
                 request_x,
                 response_map_x,
@@ -2249,7 +2249,7 @@ public class gdfsuezBefCalypsoPrestationServiceElec {
                 'http://gdfsuez/bef/calypso/prestationserviceelectricite/v3',
                 'creerPrestationServiceElectriciteOfflineResponse',
                 'gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectriciteOfflineResponse_element'}
-            );     
+            );
             response_x = response_map_x.get('response_x');
             return response_x;
         }
@@ -2349,7 +2349,7 @@ public class gdfsuezBefCalypsoPrestationServiceElec {
 
         public gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectriciteResponse_element CreerPrestationServiceElectricite_Http(gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectriciteInputDt creerPrestationServiceElectriciteInput,gdfsuezComBefChpPSEPivot.contextDt context) {
 		   
-	    	DOM.Document doc = new DOM.Document();
+			DOM.Document doc = new DOM.Document();
             DOM.XmlNode body = populateDoc(doc);
             DOM.XmlNode methodNode = body.addChildElement('v3:creerPrestationServiceElectricite', null,null);
             gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectricite_element request_x = new gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectricite_element(creerPrestationServiceElectriciteInput,context);
@@ -2358,20 +2358,20 @@ public class gdfsuezBefCalypsoPrestationServiceElec {
             gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectriciteResponse_element response_x;
             
             if(HP_Constantes.IS_HAPPE_PROFILE){
-          
-			 HttpRequest req = new HttpRequest();
-             req.setTimeout(100000);
-             req.setEndpoint(endpoint_x);
-			 req.setMethod('POST');
-             req.setHeader('Content-Type', 'text/xml; charset=UTF-8');
-             req.setHeader('SOAPAction', 'tns:CreerPrestationServiceElectricite');
-             req.setBodyDocument(doc);
-             system.debug('request => '+doc.toXmlString());
-			 Http http = new Http();
-			 Datetime startCall = Datetime.now();
-             HTTPResponse res = http.send(req);
-             System.debug(res.getBody());
-             // debut LOG SMILE
+
+            HttpRequest req = new HttpRequest();
+            req.setTimeout(100000);
+            req.setEndpoint(endpoint_x);
+			req.setMethod('POST');
+            req.setHeader('Content-Type', 'text/xml; charset=UTF-8');
+            req.setHeader('SOAPAction', 'tns:CreerPrestationServiceElectricite');
+            req.setBodyDocument(doc);
+            system.debug('request => '+doc.toXmlString());
+			Http http = new Http();
+			Datetime startCall = Datetime.now();
+            HTTPResponse res = http.send(req);
+            System.debug(res.getBody());
+            // debut LOG SMILE
 				String data = 'input : \n '+ doc.toXmlString() + '\n  output : \n' +res.getBody() ;
 				//data=  SM_Utilities.buildLog(data,'DEBUG','creerPrestationElecOnline') ;
                 //SM_Utilities.traceLog(data) ;
@@ -2387,12 +2387,12 @@ public class gdfsuezBefCalypsoPrestationServiceElec {
 			}
             else{
            
-            Dom.XmlNode creerPrestationServiceElectriciteResponseNode = SM_WS101_PrestaServiceElec.createOnline('POST', doc, 'Body', 'http://schemas.xmlsoap.org/soap/envelope/', 'creerPrestationServiceElectriciteResponse', 'http://gdfsuez/bef/calypso/prestationserviceelectricite/v3');   
+            Dom.XmlNode creerPrestationServiceElectriciteResponseNode = SM_WS101_PrestaServiceElec.create('POST', doc, 'Body', 'http://schemas.xmlsoap.org/soap/envelope/', 'creerPrestationServiceElectriciteResponse', 'http://gdfsuez/bef/calypso/prestationserviceelectricite/v3');   
             response_x = new gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectriciteResponse_element(creerPrestationServiceElectriciteResponseNode);    
             
             }
 
-		    return response_x;
+            return response_x;
         }
 
         public gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectriciteOfflineResponse_element CreerPrestationServiceElectriciteOffline_Http(gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectriciteOfflineInputDt creerPrestationServiceElectriciteOfflineInput,gdfsuezComBefChpPSEPivot.contextDt context) {
@@ -2401,10 +2401,10 @@ public class gdfsuezBefCalypsoPrestationServiceElec {
             DOM.XmlNode methodNode = body.addChildElement('v3:creerPrestationServiceElectriciteOffline', null,null);
             gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectriciteOffline_element request_x = new gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectriciteOffline_element(creerPrestationServiceElectriciteOfflineInput,context);
             request_x.populateXmlNode(methodNode);
-             
+
             gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectriciteOfflineResponse_element response_x ;
 
-            Dom.XmlNode creerPrestationServiceElectriciteOfflineResponseNode = SM_WS101_PrestaServiceElec.createOffline('POST', doc, 'Body','http://schemas.xmlsoap.org/soap/envelope/','creerPrestationServiceElectriciteOfflineResponse','http://gdfsuez/bef/calypso/prestationserviceelectricite/v3');
+            Dom.XmlNode creerPrestationServiceElectriciteOfflineResponseNode = SM_WS101_PrestaServiceElec.create('POST', doc, 'Body','http://schemas.xmlsoap.org/soap/envelope/','creerPrestationServiceElectriciteOfflineResponse','http://gdfsuez/bef/calypso/prestationserviceelectricite/v3');
             response_x = new gdfsuezBefCalypsoPrestationServiceElec.creerPrestationServiceElectriciteOfflineResponse_element(creerPrestationServiceElectriciteOfflineResponseNode);
             return response_x;
             
@@ -2418,10 +2418,10 @@ public class gdfsuezBefCalypsoPrestationServiceElec {
             request_x.populateXmlNode(methodNode);
 
             gdfsuezBefCalypsoPrestationServiceElec.lirePrestationServiceElectriciteResponse_element response_x;
-           
+
             Dom.XmlNode lirePrestationServiceElectriciteResponseNode = SM_WS101_PrestaServiceElec.search('POST', doc, 'Body', 'http://schemas.xmlsoap.org/soap/envelope/', 'lirePrestationServiceElectriciteResponse', 'http://gdfsuez/bef/calypso/prestationserviceelectricite/v3');   
             response_x = new gdfsuezBefCalypsoPrestationServiceElec.lirePrestationServiceElectriciteResponse_element(lirePrestationServiceElectriciteResponseNode);
-			return response_x;
+            return response_x;
         }
 
         public gdfsuezBefCalypsoPrestationServiceElec.rechercherPrestationServiceElectriciteResponse_element RechercherPrestationServiceElectricite_Http(gdfsuezBefCalypsoPrestationServiceElec.rechercherPrestationServiceElectriciteInputDt rechercherPrestationServiceElectriciteInput,gdfsuezComBefChpPSEPivot.contextDt context) {

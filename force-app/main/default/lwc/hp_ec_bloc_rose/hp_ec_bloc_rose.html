@@ -2,7 +2,7 @@
   @description       : 
   @author            : Hemdene Ben Hammouda
   @group             : 
-  @last modified on  : 07-05-2022
+  @last modified on  : 08-01-2022
   @last modified by  : Badr Eddine Belkarchi
 -->
 <template>
@@ -10,15 +10,17 @@
         <div class="c-blocConfirm rose">
             <div class="c-blocConfirm-icon rose">
                 <div class="c-blocConfirm-innerCircle">
-                    <img class="c-blocConfirm-img" src={iconLamp} alt="confirm icon" />
+                    <template if:true={showIconLampBlocRose}>
+                        <img class="c-blocConfirm-img" src={iconLamp} alt="confirm icon" />
+                    </template>
+                    <template if:true={showIconConfirmBlocRose}>
+                        <img class="c-blocConfirm-img" src={iconConfirm} alt="confirm icon" />
+                    </template>
                 </div>
             </div>
             <div class="c-blocConfirm__text-wrapper">
                 <div class="c-blocConfirm__text">
-                    <p>Vous êtes en période de relève!
-                    </p>
-                    <p>Pensez à saisir vos données 
-                    </p>
+                    <p>{textBlocRose}</p>
                 </div>
                 <div class="hp-firstButton desktop" onclick={openRelevePopin}>
                     Saisir ma relève

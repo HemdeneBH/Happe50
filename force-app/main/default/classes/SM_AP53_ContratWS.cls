@@ -5,7 +5,6 @@
 */
 
 global with sharing class SM_AP53_ContratWS implements vlocity_cmt.VlocityOpenInterface {
-    private static SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'ContratWS' limit 1];
     global Boolean invokeMethod(String methodName, Map < String, Object > inputMap, Map < String, Object > outMap, Map < String, Object > options) {
 
         if (methodName.equals('rechercherContrat')) {
@@ -48,18 +47,7 @@ global with sharing class SM_AP53_ContratWS implements vlocity_cmt.VlocityOpenIn
        
         system.debug('idBp ' +inputMap.get('idBp'));
         if(String.isBlank(idBp)){
-            outMap.put('errorLibelle', 'L\'id BP est obligatoire');
-            return ;
-        }
-        
-         if(String.isBlank(typeEnergie) && origineAppel == 'Vue360'){
-            outMap.put('errorLibelle', 'Le type d\'énergie est obligatoire');
-            return ;
-        }
-        
-         if(String.isBlank(idPortefeuilleContrat) && origineAppel == 'Vue360'){
-              System.debug('**** Erreur idPortf');
-            outMap.put('errorLibelle', 'L\'id PorteFeuille Contrat est obligatoire');
+            System.debug('*** idBp is mandatory');
             return ;
         }
 
@@ -68,7 +56,7 @@ global with sharing class SM_AP53_ContratWS implements vlocity_cmt.VlocityOpenIn
         gdfsuezBefCalypsoContratV7.Dependency port = new gdfsuezBefCalypsoContratV7.Dependency() ;  
         SM_OCTOPUS__c octopusCS = SM_OCTOPUS__c.getOrgDefaults();   
         port.clientCertName_x = octopusCS.certName__c;
-        port.endpoint_x =  octopusCS.endpoint__c+suffixs.suffix__c;
+        port.endpoint_x =  octopusCS.endpoint__c+'ES-Contrat_v7';
         System.debug('*** endpoint : ' + port.endpoint_x);
         port.inputHttpHeaders_x = new Map<String, String>{'Content-Type' => 'text/xml;charset=utf-8'}; 
 
@@ -77,7 +65,7 @@ global with sharing class SM_AP53_ContratWS implements vlocity_cmt.VlocityOpenIn
 
         input.searchControlRequest = new gdfsuezComBefChpPivotContrat.searchControlRequestHeaderDt();
         input.searchControlRequest.pagination = new gdfsuezComBefChpPivotContrat.searchControlRequestDt();
-        input.searchControlRequest.pagination.offset = '30';
+        input.searchControlRequest.pagination.offset = '999';
         input.searchControlRequest.pagination.from_x = '0';
 
         gdfsuezBefCalypsoContratV7.rechercherContratResponse_element response ; 
@@ -94,22 +82,12 @@ global with sharing class SM_AP53_ContratWS implements vlocity_cmt.VlocityOpenIn
         
         if(response != null && response.rechercherContratOutput != null && response.rechercherContratOutput.contrat != null){
             if(!String.isBlank(origineAppel) && origineAppel == 'Vue360'){
-                List<Object> transformedData = transformDataVue360( response.rechercherContratOutput.contrat, typeEnergie, idPortefeuilleContrat, false );
-                outMap.put('resultdata', transformedData);
-                outMap.put('nombreRythmeFacturation',transformedData.size() == 1 ? 'OK' :'NOK' ) ;
-            } else if (!String.isBlank(origineAppel) && origineAppel == 'Movein') {
-                List<Object> transformedData = new list<Object>();
-                transformedData = transformDataVue360( response.rechercherContratOutput.contrat, null, idPortefeuilleContrat, true );
+                List<Object> transformedData = transformDataVue360(response.rechercherContratOutput.contrat, typeEnergie, idPortefeuilleContrat, false);
                 outMap.put('resultdata', transformedData);
                 outMap.put('nombreRythmeFacturation',transformedData.size() == 1 ? 'OK' :'NOK' ) ;
             } else{
                 outMap.putAll(transformDataSelfcare(response.rechercherContratOutput.contrat));
             }
-        }
-        // Ajouté par Amar
-        else{
-             outMap.put('errorLibelle', 'Erreur lors de la recherche des contrats actifs');
-            return;
         }
 
         if(response != null && response.messageRetours != null && response.messageRetours.retourTraitementMessage != null && response.messageRetours.retourTraitementMessage[0] != null){
@@ -132,9 +110,6 @@ global with sharing class SM_AP53_ContratWS implements vlocity_cmt.VlocityOpenIn
        
         system.debug('idBp ' +inputMap.get('idBp'));
         if(String.isBlank(idBp)){
-            // Ajouté par Amar
-            outMap.put('errorLibelle', 'IdBp est obligaoire');
-               // Ajouté par Amar
             System.debug('*** idBp is mandatory');
             return null;
         }
@@ -142,7 +117,7 @@ global with sharing class SM_AP53_ContratWS implements vlocity_cmt.VlocityOpenIn
         gdfsuezBefCalypsoContratV7.Dependency port = new gdfsuezBefCalypsoContratV7.Dependency() ;  
         SM_OCTOPUS__c octopusCS = SM_OCTOPUS__c.getOrgDefaults();   
         port.clientCertName_x = octopusCS.certName__c;
-        port.endpoint_x =  octopusCS.endpoint__c+suffixs.suffix__c;
+        port.endpoint_x =  octopusCS.endpoint__c+'ES-Contrat_v7';
         System.debug('*** endpoint : ' + port.endpoint_x);
         port.inputHttpHeaders_x = new Map<String, String>{'Content-Type' => 'text/xml;charset=utf-8'}; 
         gdfsuezBefCalypsoContratV7.rechercherContratInputDt input = new gdfsuezBefCalypsoContratV7.rechercherContratInputDt();
@@ -174,11 +149,6 @@ global with sharing class SM_AP53_ContratWS implements vlocity_cmt.VlocityOpenIn
                 outMap.putAll(transformDataSelfcare(response.rechercherContratOutput.contrat));
             }
         }
-         // Ajouté par Amar
-        else{
-             outMap.put('errorLibelle', 'Erreur lors du recherche des contrats');
-        }
-           // Ajouté par Amar
         if(response != null && response.messageRetours != null && response.messageRetours.retourTraitementMessage != null && response.messageRetours.retourTraitementMessage[0] != null){
             outMap.put('rechercheContratRet', response.messageRetours.retourTraitementMessage[0].code);
         }
@@ -194,11 +164,11 @@ global with sharing class SM_AP53_ContratWS implements vlocity_cmt.VlocityOpenIn
     /*
     *    @description : Cette méthode est destinée à la transformation du retour du WS pour utilisation sur le selfcare
     */
-    public static Map<String, Object> transformDataSelfcare(List<gdfsuezComBefCalypsoContrat.Contrat> contrats) {
+    public static Map<String, Set<String>> transformDataSelfcare(List<gdfsuezComBefCalypsoContrat.Contrat> contrats) {
         System.debug('*** IN : transformDataSelfcare');
-        Map<String, Object> results = new Map<String, Object>();
-        List<Object> gaz = new List<Object>();
-        List<Object> elec = new List<Object>();
+        Map<String, Set<String>> results = new Map<String, Set<String>>();
+        Set<String> gaz = new Set<String>();
+        Set<String> elec = new Set<String>();
         
         for (gdfsuezComBefCalypsoContrat.Contrat contrat : contrats) {
             for(gdfsuezComBefCalypsoContrat.Contrat_composanteContrat_element comp : contrat.composanteContrat){
@@ -213,7 +183,6 @@ global with sharing class SM_AP53_ContratWS implements vlocity_cmt.VlocityOpenIn
             }    
         }
         
-                
         results.put('gaz', gaz);
         results.put('elec', elec);
         
@@ -242,7 +211,7 @@ global with sharing class SM_AP53_ContratWS implements vlocity_cmt.VlocityOpenIn
         Boolean bFoundG = false;
 
         for(gdfsuezComBefCalypsoContrat.Contrat aContrat : contrats){
-            String idOffre, idCompteClient, statut, statutCard, typeEnergie, numPoint, numContrat, idContrat, uniteReleve, statutLibelle, idpack;
+            String idOffre, idCompteClient, statut, statutCard, typeEnergie, numPoint, numContrat, idContrat, uniteReleve, statutLibelle;
             Datetime dateDebut, dateFin, dateDemenagementSouhaitee;
             Integer diffAujEtDateFin=999999999;
             
@@ -250,10 +219,6 @@ global with sharing class SM_AP53_ContratWS implements vlocity_cmt.VlocityOpenIn
             dateDemenagementSouhaitee = aContrat.dateDemenagementSouhaitee;
             if(aContrat.compteClient != null){
                 idCompteClient = aContrat.compteClient[0].idCompteClient;
-            }
-
-            if(aContrat.pack != null) {
-                idpack = aContrat.pack.idPack;
             }
 
             if(aContrat.composanteContrat != null){
@@ -303,11 +268,8 @@ global with sharing class SM_AP53_ContratWS implements vlocity_cmt.VlocityOpenIn
                     System.debug(typeEnergieCard + ' - ' + typeEnergie);
                     System.debug(statut);
                     System.debug('*** idCompteClient : ' + idCompteClient + '/' + idPortefeuilleContrat); 
-                    if((idPortefeuilleContrat == idCompteClient || AllContrat)
-                       && (String.isBlank(typeEnergieCard ) || typeEnergieCard == typeEnergie)
-                       && (statut == 'E0001' || statut == 'E0002' || statut == 'E0003' || statut == 'E0004' || statut == 'E0005' || statut == 'E0006' || statut == 'E0007' || statut == 'E0008' || statut == 'E0009')){
-                        System.debug('### aka debug entered');
-                        SM_AP10_ContratsApiService.ContratModel contratObj = new SM_AP10_ContratsApiService.ContratModel(Integer.valueOf(idCompteClient), productsCodes.get(idOffre), typeEnergie, uniteReleve, statutLibelle, String.valueOfGmt(dateDebut), String.valueOfGmt(dateFin),statutCard,idContrat,false, numPoint, idOffre, String.valueOfGmt(dateDemenagementSouhaitee),idpack );
+                    if((idPortefeuilleContrat == idCompteClient || AllContrat) && (String.isBlank(typeEnergieCard ) || typeEnergieCard == typeEnergie) && (statut == 'E0001' || statut == 'E0003' || statut == 'E0004' || statut == 'E0005' || statut == 'E0006' || statut == 'E0007' || statut == 'E0008' || statut == 'E0009')){
+                        SM_AP10_ContratsApiService.ContratModel contratObj = new SM_AP10_ContratsApiService.ContratModel(Integer.valueOf(idCompteClient), productsCodes.get(idOffre), typeEnergie, uniteReleve, statutLibelle, String.valueOfGmt(dateDebut), String.valueOfGmt(dateFin),statutCard,idContrat,false, numPoint, idOffre, String.valueOfGmt(dateDemenagementSouhaitee) );
                         System.debug('idOffre');                        
                         System.debug(idOffre);
                         System.debug(productsCodes.get(idOffre));
@@ -315,11 +277,11 @@ global with sharing class SM_AP53_ContratWS implements vlocity_cmt.VlocityOpenIn
                         contratObj.statutCode = statut;
                      
                         // On ne peut avoir qu'un contrat non résilié retourné par le WS par energie
-                        if(statut != 'E0002' && statut != 'E0009' && (!bFoundE || AllContrat) && typeEnergie=='E'){
+                        if(statut != 'E0009' && (!bFoundE || AllContrat) && typeEnergie=='E'){
                             System.debug('*** Ajout non résilié : ' + contratObj);
                             results.add(contratObj);
                             bFoundE = true;
-                        }else if(statut != 'E0002' && statut != 'E0009' && (!bFoundG || AllContrat) && typeEnergie=='GN'){
+                        }else if(statut != 'E0009' && (!bFoundG || AllContrat) && typeEnergie=='GN'){
                             System.debug('*** Ajout non résilié : ' + contratObj);
                             results.add(contratObj);
                             bFoundG = true;
@@ -329,7 +291,7 @@ global with sharing class SM_AP53_ContratWS implements vlocity_cmt.VlocityOpenIn
                         } else if (statut == 'E0009' && typeEnergie=='GN') {
                             System.debug('*** Ajout résilié gaz: ' + contratObj);
                             resultsResilMapGaz.put(diffAujEtDateFin,contratObj);
-                        } else if (AllContrat && typeEnergie =='S') {
+                        } else if (AllContrat && typeEnergie =='S' && (statut == 'E0004' || statut == 'E0009')) {
                             results.add(contratObj);                            
                         }
                     }
@@ -338,8 +300,6 @@ global with sharing class SM_AP53_ContratWS implements vlocity_cmt.VlocityOpenIn
             }
             
         }
-        System.debug('### aka resultsResilMapElec ' + resultsResilMapElec);
-        System.debug('### aka resultsResilMapGaz ' + resultsResilMapGaz);
         List<SM_AP10_ContratsApiService.ContratModel> resilElecs=sortContratResilie(resultsResilMapElec);
         List<SM_AP10_ContratsApiService.ContratModel> resilGazs=sortContratResilie(resultsResilMapGaz);
         results.addAll(resilElecs);

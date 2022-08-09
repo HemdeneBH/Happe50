@@ -5,4 +5,9 @@
     <confirmationTokenRequired>false</confirmationTokenRequired>
     <description>SMIL-1177 AKA_20181227: VF for Saved OS - in Case context</description>
     <label>OmniScriptInstanceCasePage</label>
+    <packageVersions>
+        <majorNumber>900</majorNumber>
+        <minorNumber>178</minorNumber>
+        <namespace>vlocity_cmt</namespace>
+    </packageVersions>
 </ApexPage>

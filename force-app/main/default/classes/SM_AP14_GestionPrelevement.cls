@@ -87,8 +87,7 @@ global class SM_AP14_GestionPrelevement implements vlocity_cmt.VlocityOpenInterf
         //gdfsuezComBefChpCalypsoGestionprele.GestionPrelevementPort
         gdfsuezComBefChpCalypsoGestionprele.GestionPrelevementPort port = new gdfsuezComBefChpCalypsoGestionprele.GestionPrelevementPort();
         port.clientCertName_x = octopusCS.certName__c;
-        SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'GestionPrelevement' limit 1];
-        port.endpoint_x =    octopusCS.endpoint__c + suffixs.suffix__c;
+        port.endpoint_x =    octopusCS.endpoint__c + 'ES-GestionPrelevement_v1';
         port.inputHttpHeaders_x = new Map < String, String > {
             'Content-Type' => 'text/xml;charset=utf-8'
         };

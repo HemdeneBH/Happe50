@@ -59,7 +59,7 @@ global class SM_AP72_EspaceClientService_Test {
         String response  = SM_AP72_EspaceClientService.creerEspaceClient(espaceClientACreer);
         Test.stopTest();
         //THEN
-        //System.assertEquals('Une erreur technique est survenue. L’Espace Client n’a pas été créé. Inviter le Client à contacter le Webmaster directement depuis le site de ENGIE particuliers.', response);
+        System.assertEquals('Un Espace Client existe déjà avec cet email de connexion. Inviter le client à récupérer son mot de passe directement depuis le site ENGIE Particuliers (https://particuliers.engie.fr).', response);
     }
     @isTest
     global static void testGetMessagefromErrorCodeOK(){

@@ -5,9 +5,15 @@ export default class Hp_ec_popinPayments extends LightningElement {
     titleText = "Mes modes de paiement";
     iconClose = HP_EC_close_icon_light;
 
-    @api idPortefeuilleContrat;
-    @api amount;
     @api echeanceid;
+    @api amount;
+    @api contact;
+    @api titleText;
+    @api isEtatInactif;
+
+    @api idPortefeuilleContrat;
+    // @api amount;
+    // @api echeanceid;
 
     // Champs contribuables pour hp_ec_paymentModes : START //
     @api titreV1;

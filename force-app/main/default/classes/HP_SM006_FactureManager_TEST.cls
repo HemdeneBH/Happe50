@@ -53,7 +53,7 @@ public with sharing class HP_SM006_FactureManager_TEST {
 
         Test.startTest();
         Test.setMock(HttpCalloutMock.class, new HP_UTIL_ResponseRestMock(bodyResponseMap)); 
-        HP_SM006_FactureManager.updateEnergieVert('123', '1');
+        HP_SM006_FactureManager.updateEnergieVert('123', '1', '1');
         Test.stopTest();
         }
     }

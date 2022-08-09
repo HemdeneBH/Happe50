@@ -2,7 +2,9 @@
  * @description       : 
  * @author            : Slimene Belhaj Ali
  * @group             : 
+
  * @last modified on  : 04-08-2021
+
  * @last modified by  : Slimene Belhaj Ali
  * Modifications Log 
  * Ver   Date         Author               Modification
@@ -64,7 +66,7 @@ public with sharing class HP_SM058_EditNameClient_TEST {
                 new Map<String, String> ()
             )
                 };
-                Contact contact = (Contact)HP_UTIL_SmartFactory.createSObject('Contact', 'HP_Contact', new Map<String, Object> {
+                Contact contact = (Contact)HP_UTIL_SmartFactory.createSObject('Contact', null, new Map<String, Object> {
 				'LastName' => 'Contact Test',
 				'Email' => 'test@gmail.com',
                     'mobilePhone' => '0121212',
@@ -75,7 +77,9 @@ public with sharing class HP_SM058_EditNameClient_TEST {
         Test.setMock(HttpCalloutMock.class, new HP_UTIL_ResponseRestMock(bodyResponseMap));
         String contactId = [select id from contact limit 1].Id;
         HP_SM058_EditNameClient.notificationClient(contactId, true, true, false, false, null);
+
         HP_SM058_EditNameClient.sendJustificatif(contactId, 'E', 'C', '');
+
         Test.stopTest();
     }
 }

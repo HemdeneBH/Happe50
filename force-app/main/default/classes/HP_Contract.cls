@@ -36,21 +36,4 @@ public enum Status { //TODO add to opportunity stage ?
 // Résilié débiteur	H0103
 // Contrat créée	H0105
 	}
-    
-    public HP_Contract(Integer id, Integer installationId, String energyType, Integer personId, String contractNumberCRM,String codeStatutCrm,String status,String dateDebutContrat,String dateFinContrat,Integer idPropositionCommerciale,Integer idPortefeuilleContrat,String offre,String libelleStatutCrm,String idOffre) {
-        this.id = id;
-        this.installationId = installationId;
-        this.energyType = energyType;
-		this.personId = personId;
-		this.contractNumberCRM = contractNumberCRM;
-        this.codeStatutCrm = codeStatutCrm;
-        this.status = status;
-        this.dateDebutContrat = dateDebutContrat;
-        this.dateFinContrat = dateFinContrat;
-        this.idPropositionCommerciale = idPropositionCommerciale;
-        this.idPortefeuilleContrat = idPortefeuilleContrat;
-        this.offre = offre;
-        this.libelleStatutCrm = libelleStatutCrm;
-        this.idOffre = idOffre;
-    }
 }

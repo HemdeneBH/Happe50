@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : Hemdene Ben Hammouda
  * @group             : 
- * @last modified on  : 11-04-2021
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 03-25-2022
+ * @last modified by  : Hemdene Ben Hammouda
 **/
 import { LightningElement, track,wire, api} from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
@@ -131,6 +131,7 @@ export default class Hp_createModifyContact extends NavigationMixin(LightningEle
                     }
                     this.consentementList[i].id = resp.id;
                     this.consentementList[i].response = (resp.consent ? 'oui' : 'non');
+                    console.log('this.consentementList[i] : '+JSON.stringify(this.consentementList[i]));
                 }
             }).catch(errorResponses => {
                 console.log('errorResponses: ',errorResponses);
@@ -178,6 +179,8 @@ export default class Hp_createModifyContact extends NavigationMixin(LightningEle
     }
     handleEmail(event) {
         this.emailChanged = false;
+        console.log('*** this.email : '+this.email);
+        console.log('**** event.target.value : '+ event.target.value);
         if(this.email !==  event.target.value ) {
             this.emailChanged = true;
         } else {
@@ -191,7 +194,7 @@ export default class Hp_createModifyContact extends NavigationMixin(LightningEle
 
        
         console.log('***********emailChanged ',this.emailChanged);
-
+        // if( this.emailChanged ) this.emailValidation(event);
 
         //this.emailValidation(event);
         this.activateEmailSMSCheckbox();
@@ -200,7 +203,7 @@ export default class Hp_createModifyContact extends NavigationMixin(LightningEle
     handleBlurEmail(event){
         console.log('***********bluuuuuuuuuuuuur ',event.target.value);
         console.log('***********email ',this.email);
-
+        console.log('***********blur email changed' + this.emailChanged);
 
 
         if( this.emailChanged ) this.emailValidation(event);
@@ -212,29 +215,27 @@ export default class Hp_createModifyContact extends NavigationMixin(LightningEle
         let isEmailValid = ( String(event.target.value).endsWith('.fr') || String(event.target.value).endsWith('.com')) && String(event.target.value).includes('@') ;
         console.log('***********isEmailValid ',isEmailValid);
         if (isEmailValid) {
-            getEmailValidation({ email: String(event.target.value) }).then(result => {
-                console.log('getTelephoneValidation ', JSON.stringify(result));
-                if (result.IdError !== "00") {
-                    this.displayToast('Info', "L'email presente des erreurs " + this.email, 'info');
-                }
+            // getEmailValidation({ email: String(event.target.value) }).then(result => {
+            //     console.log('getTelephoneValidation ', JSON.stringify(result));
+            //     if (result.IdError !== "00") {
+            //         this.displayToast('Info', "L'email presente des erreurs " + this.email, 'info');
+            //     }
                 
-                console.log('this.idClient ', JSON.stringify(this.idClient));
-            }).catch(error => {
-                console.log('error',JSON.stringify(error));
-           
+            //     console.log('this.idClient ', JSON.stringify(this.idClient));
+            // }).catch(error => {
+            //     console.log('error',JSON.stringify(error));
 
-
-
-
-            })
+            // });
 
         this.loading = true;
+        console.log('I am here !!!');
         getPersonneXdataId({email: String(this.email) }).then(result =>{
             console.log('resultat ', JSON.stringify(result));
             this.loading = false;                 
 
 
-
+            console.log('Error : '+result[0].error);
+            console.log('XdataOk : '+this.isXdataIdOk);
             if(this.isCreation){
                 if (result && result[0] &&  result[0].error === "Cet email n'est pas associé à un id xdata dans la base agilab.") {
                     this.isXdataIdOk = true;
@@ -277,6 +278,7 @@ export default class Hp_createModifyContact extends NavigationMixin(LightningEle
            
         }
             ).catch(error => {
+                console.log('Erreure getPersonneXdataId : '+JSON.stringify(error));
                 this.loading = false
             })
 

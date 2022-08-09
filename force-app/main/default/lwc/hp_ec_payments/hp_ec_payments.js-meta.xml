@@ -18,13 +18,6 @@
             <property name="labelMoyenPaiement4" label="Label Moyen de paiement 4" type="String" default="Paiement à plusieurs"></property>
             <property name="labelMoyenPaiement5" label="Label Moyen de paiement 5" type="String" default="Coupon chèque"></property>
 
-            <property name="labelBoutonPaiement1" label="Label Bouton de paiement 1" type="String" default="Payer par"></property>
-            <property name="labelBoutonPaiement2" label="Label Bouton de paiement 2" type="String" default="Pay"></property>
-            <property name="labelBoutonPaiement3" label="Label Bouton de paiement 3" type="String" default="Amazon Pay"></property>
-            <property name="labelBoutonPaiement4" label="Label Bouton de paiement 4" type="String" default="Payer à plusieurs"></property>
-            <property name="labelBoutonPaiement5" label="Label Bouton de paiement 5" type="String" default="Télécharger"></property>
-
-
             <property name="lienEnSavoirPlusPaiement1" label="Lien En Savoir+ paiement 1" type="String" default=""></property>
             <property name="showLienEnSavoirPlusPaiement1" label="Afficher En Savoir+ paiement 1" type="Boolean" default="true"></property>
 
@@ -43,6 +36,11 @@
             <property name="textModePaiement" label="Texte Mode de paiement V1" type="String" default="Mon mode de paiement"></property>
             <property name="textDatePrelevementPart1" label="text Date Prélèvement Part1" type="String" default="Vous avez adhéré au prélèvement automatique chaque"></property>
             <property name="textDatePrelevementPart2" label="text Date Prélèvement Part 2" type="String" default="du mois"></property>
+
+            <property type="String" name="listPaymentsTitle" default="Mes paiements"/>
+            <property type="String" name="textRappel" default="Rappel de votre solde :"/>
+            <property type="String" name="messageListPayement" default="Suite à ce paiement, votre solde sera de"/>
+            <property type="String" name="boutonListPaymentLabel" default="Payer"/>
 
         </targetConfig>
     </targetConfigs>

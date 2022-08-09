@@ -3,8 +3,8 @@
  * @Description        : 
  * @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
  * @Group              : 
- * @Last Modified By   : Vincent Albiser
- * @Last Modified On   : 28/04/2020 à 06:05:14
+ * @Last Modified By   : Hemdene Ben Hammouda
+ * @Last Modified On   : 03-07-2022
  * @Modification Log   : 
  * Ver       Date            Author      		    Modification
  * 1.0    24/03/2020   ChangeMeIn@UserSettingsUnder.SFDoc     Initial Version
@@ -22,7 +22,7 @@ public with sharing class HP_SM028_DistGetPdlElec implements HP_PreContractServi
 		};
 		gdfsuezBefCalypsoPdlelectriciteV3.lirePDLElectriciteInputDt lirePDLElecinput = buildInputParameters(energyrequest);
 		final gdfsuezBefCalypsoPdlelectriciteV3.lirePDLElectriciteResponse_element response = port.LirePDLElectricite(lirePDLElecinput, octx);
-		System.debug(JSON.serializePretty(response, true));
+		System.debug('@@@@retrieveEnergyMeterInformations : '+JSON.serializePretty(response, true));
 		if ((response.lirePDLElectriciteOutput != null) && (response.lirePDLElectriciteOutput.donneesPDL != null)) {
 			return (new HP_DistributorEnergyResponse(response.lirePDLElectriciteOutput.donneesPDL).toCoreType());
 		}

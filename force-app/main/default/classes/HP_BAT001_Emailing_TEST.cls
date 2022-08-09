@@ -53,7 +53,7 @@ public with sharing class HP_BAT001_Emailing_TEST {
 			   HP_BAT001_Emailing emailingBatch = new HP_BAT001_Emailing();
 			   HP_BAT001_Emailing.execute(1, null, null);
 		   Test.stopTest();
-		   //System.assert([Select count() From EmailMessage ] > 0 , 'EmailMessage created in SF');
+		   System.assert([Select count() From EmailMessage ] > 0 , 'EmailMessage created in SF');
 	}
 
 }

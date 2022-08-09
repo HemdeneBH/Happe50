@@ -2,7 +2,7 @@
   @description       : 
   @author            : Badr Eddine Belkarchi
   @group             : 
-  @last modified on  : 06-09-2022
+  @last modified on  : 08-01-2022
   @last modified by  : Badr Eddine Belkarchi
 -->
 <template>
@@ -45,7 +45,12 @@
                 </template>
 
                 <template if:true={showConfirmationIndex}>
-                    <c-hp_ec_bloc_blue confirmationdate={confirmation_date}></c-hp_ec_bloc_blue>
+                    <c-hp_ec_bloc_blue 
+                        text-bloc-bleue={textBlocBleue}
+                        show-icon-lamp-bloc-bleue={showIconLampBlocBleue}
+                        show-icon-confirm-bloc-bleue={showIconConfirmBlocBleue}
+                        confirmationdate={confirmation_date}>
+                    </c-hp_ec_bloc_blue>
                 </template>
 
                 <template if:true={isPeriodeAR}>
@@ -61,8 +66,12 @@
                         lastestindexelec={latest_index_elec}
                         lastestindexhpelec={latest_indexhp_elec}
                         latestindexgaz={latest_index_gaz} 
+                        text-bloc-rose={textBlocRose}
+                        show-icon-lamp-bloc-rose={showIconLampBlocRose}
+                        show-icon-confirm-bloc-rose={showIconConfirmBlocRose}
                         title-popin-releve={titlePopinReleve}
                         message-index-error={messageIndexError}
+                        message-index-no-valid-error={messageIndexNoValidError}
                         custom-url-popin-releve={customUrlPopinReleve}
                         custom-url-label-popin-releve={customUrlLabelPopinReleve} 
                         onenvoieindexevent={hanldeEnvoieIndexEvent}>

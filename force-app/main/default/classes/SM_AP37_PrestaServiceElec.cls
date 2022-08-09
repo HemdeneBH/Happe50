@@ -7,42 +7,6 @@ global with sharing class SM_AP37_PrestaServiceElec implements vlocity_cmt.Vloci
     
     public static SM_UTIL_Cache_Management service = new SM_UTIL_Cache_Management();
  	
-    private static Map<String, String> frenchDays = new Map<String, String>();
-    private static Map<Integer, String> frenchDates = new Map<Integer, String>();
-
-    static {
-        initialiseFrenchDates();
-		initialiseFrenchDays();
-    }
-
-
-    public static void initialiseFrenchDates(){
-		
-		frenchDates.put(1, 'Janvier');
-		frenchDates.put(2, 'Février');
-		frenchDates.put(3, 'Mars');
-		frenchDates.put(4, 'Avril');
-		frenchDates.put(5, 'Mai');
-		frenchDates.put(6, 'Juin');
-		frenchDates.put(7, 'Juillet');
-		frenchDates.put(8, 'Aout');
-		frenchDates.put(9, 'Septembre');
-		frenchDates.put(10, 'Octobre');
-		frenchDates.put(11, 'Novembre');
-		frenchDates.put(12, 'Décembre');
-		
-	}
-    
-    public static void initialiseFrenchDays(){
-		frenchDays.put('Monday', 'Lundi');
-		frenchDays.put('Tuesday', 'Mardi');
-		frenchDays.put('Wednesday', 'Mercredi');
-		frenchDays.put('Thursday', 'Jeudi');
-		frenchDays.put('Friday', 'Vendredi');
-		frenchDays.put('Saturday', 'Samedi');
-		frenchDays.put('Sunday', 'Dimanche');
-	}
- 	
     
     /*
     * @Author: 
@@ -106,14 +70,6 @@ global with sharing class SM_AP37_PrestaServiceElec implements vlocity_cmt.Vloci
                 return false;
             }
         }
-        else if (methodName.equals('lirePrestationElecOfflineList')) {
-            try {
-                lirePrestationElecOfflineList(inputMap, outMap, options);
-              } catch (Exception e) {
-                system.debug(e.getStackTraceString());
-                return false;
-            }
-        }
         return true;
     }
 
@@ -164,8 +120,7 @@ global with sharing class SM_AP37_PrestaServiceElec implements vlocity_cmt.Vloci
         gdfsuezBefCalypsoPrestationServiceElec.Dependency port = new gdfsuezBefCalypsoPrestationServiceElec.Dependency() ;  
         SM_OCTOPUS__c octopusCS = SM_OCTOPUS__c.getOrgDefaults();   
         port.clientCertName_x = octopusCS.certName__c;
-        SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'PrestationServiceElec' limit 1];
-        port.endpoint_x =  octopusCS.endpoint__c+suffixs.suffix__c;
+        port.endpoint_x =  octopusCS.endpoint__c+'ES-PrestationServiceElec_v3';
         //port.endpoint_x =  'callout:AuthOctopus/ES-PrestationServiceElec_v3';
         System.debug('*** endpoint : ' + port.endpoint_x);
         port.inputHttpHeaders_x = new Map<String, String>{'Content-Type' => 'text/xml;charset=utf-8'}; 
@@ -215,6 +170,7 @@ global with sharing class SM_AP37_PrestaServiceElec implements vlocity_cmt.Vloci
         outMap.put('code_retour_ops', response.messageRetours.retourTraitementMessage[0].code);
         
         if (response != null && response.lirePrestationServiceElectriciteOutput != null && response.lirePrestationServiceElectriciteOutput.prestationServiceLire.size() > 0) {
+            
            outMap.putAll(transformData(inputMap, response.lirePrestationServiceElectriciteOutput.prestationServiceLire[0]));
         }
         outMap.putAll(inputMap);
@@ -265,7 +221,11 @@ global with sharing class SM_AP37_PrestaServiceElec implements vlocity_cmt.Vloci
             
             //newOutputMap.put('datePrevue', String.valueOf(datetimePrevue));
             newOutputMap.put('datePrevue',String.valueOf(datetimePrevue.year()+'/'+datetimePrevue.month()+'/'+datetimePrevue.day()));
-
+            system.debug('datePrevue'+ String.valueOf(datetimePrevue.year()+'/'+datetimePrevue.month()+'/'+datetimePrevue.day()));
+            newOutputMap.put('noIntervention',false);
+        }
+        else{
+            newOutputMap.put('noIntervention',true);
         }
         
         //modif Om 19/02
@@ -306,6 +266,7 @@ global with sharing class SM_AP37_PrestaServiceElec implements vlocity_cmt.Vloci
                     month = '0' + month;
                 }
                 newOutputMap.put('disponibilite', day + '/' + month + '/' + year); 
+                 system.debug('disponibilite' + day + '/' + month + '/' + year); 
             }
         }        
         
@@ -315,14 +276,15 @@ global with sharing class SM_AP37_PrestaServiceElec implements vlocity_cmt.Vloci
         String comments = '';
         String commentsClient = '';
         String codeLibelle = '';
-        system.debug('response.demande.donneesGeneralesDemande' + response.demande.donneesGeneralesDemande);
+        system.debug('response.demande.donneesGeneralesDemande ' + response.demande.donneesGeneralesDemande);
         if(response.demande.donneesGeneralesDemande != null){   
             commentsClient = response.demande.donneesGeneralesDemande.commentaire;
             system.debug('commentaire' + comments);
-            if(response.demande.donneesGeneralesDemande.typePrestationService.fiche != null){
-                codeLibelle = response.demande.donneesGeneralesDemande.typePrestationService.fiche.code;
-                system.debug('codeLibelle' + codeLibelle);      
-                
+            if(response.demande.donneesGeneralesDemande.typePrestationService != null 
+               && response.demande.donneesGeneralesDemande.typePrestationService.fiche != null
+               && response.demande.donneesGeneralesDemande.typePrestationService.fiche.code != null){
+                   codeLibelle = response.demande.donneesGeneralesDemande.typePrestationService.fiche.code;
+                   system.debug('codeLibelle' + codeLibelle);      
             }
         }
         
@@ -362,6 +324,8 @@ global with sharing class SM_AP37_PrestaServiceElec implements vlocity_cmt.Vloci
         
         newOutputMap.put('refExterne', response.idPrestationServiceDistributeur);
         newOutputMap.put('refInterne', response.idPrestationServiceFournisseur);
+        newOutputMap.put('idContrat' , response.donneesGenerales.idContrat);
+
         
         /*String g1g2 = (String) input.get('G1G2');
         if(!String.isBlank(g1g2) && g1g2 == 'O'){
@@ -371,6 +335,7 @@ global with sharing class SM_AP37_PrestaServiceElec implements vlocity_cmt.Vloci
         }*/
         //newOutputMap.put('montant', (String) input.get('montantPrevisionnel'));
         
+      
         System.debug('*** Return map : ' + newOutputMap);
         return newOutputMap;
     }
@@ -428,8 +393,7 @@ global with sharing class SM_AP37_PrestaServiceElec implements vlocity_cmt.Vloci
         gdfsuezBefCalypsoPrestationServiceElec.Dependency port = new gdfsuezBefCalypsoPrestationServiceElec.Dependency() ;  
         SM_OCTOPUS__c octopusCS = SM_OCTOPUS__c.getOrgDefaults();   
         port.clientCertName_x = octopusCS.certName__c;
-        SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'PrestationServiceElec' limit 1];
-        port.endpoint_x =  octopusCS.endpoint__c+suffixs.suffix__c;
+        port.endpoint_x =  octopusCS.endpoint__c+'ES-PrestationServiceElec_v3';
         System.debug('*** endpoint : ' + port.endpoint_x);
         port.inputHttpHeaders_x = new Map<String, String>{'Content-Type' => 'text/xml;charset=utf-8'}; 
 
@@ -471,7 +435,7 @@ global with sharing class SM_AP37_PrestaServiceElec implements vlocity_cmt.Vloci
             input.disponibilite.dateInterventionSouhaitee = input.dateEffetSouhaitee;
         } */ 
 
-         // system.debug('dateEffetSouhaitee '+ input.dateEffetSouhaitee );
+          system.debug('dateEffetSouhaitee '+ input.dateEffetSouhaitee );
         if(!String.isBlank(datePrevue)){            
             Integer TimeZoneValue = Integer.valueOf(datePrevue.substringBetween('T', ':'));
             input.dateEffetSouhaitee = Datetime.newInstanceGmt(Integer.valueOf(datePrevue.substring(0,4)), Integer.valueOf(datePrevue.substring(5,7)), Integer.valueOf(datePrevue.substring(8,10)),TimeZoneValue,0,0);    
@@ -486,7 +450,7 @@ global with sharing class SM_AP37_PrestaServiceElec implements vlocity_cmt.Vloci
         input.interlocuteurIntervention.personnePhysique.civilite = new gdfsuezComBefChpPSEPivot.listeValeursDt();
         input.interlocuteurIntervention.personnePhysique.civilite.code = civilite;               
         input.interlocuteurIntervention.coordonneesContact = new gdfsuezBefCalypsoPrestationServiceElec.coordonneesContactDt();
-        input.interlocuteurIntervention.coordonneesContact.telephone = new String[]{tel.replace(' ','')}; 
+        input.interlocuteurIntervention.coordonneesContact.telephone = new String[]{tel}; 
         
         system.debug('all data set');
                    
@@ -504,7 +468,7 @@ global with sharing class SM_AP37_PrestaServiceElec implements vlocity_cmt.Vloci
         }
          
          //system.debug('response'+response);
-        //system.debug('tableau de charge '+ response.replanifierRDVPrestationServiceElectriciteOutput.tableauDeCharge);
+        system.debug('tableau de charge '+ response.replanifierRDVPrestationServiceElectriciteOutput.tableauDeCharge);
         system.debug('code' + response.messageRetours.retourTraitementMessage[0].code ) ;
         if(response.replanifierRDVPrestationServiceElectriciteOutput.tableauDeCharge != null){
             outMap.put('tableauDeCharge',getTableauDeCharge(response.replanifierRDVPrestationServiceElectriciteOutput.tableauDeCharge));
@@ -585,8 +549,7 @@ global with sharing class SM_AP37_PrestaServiceElec implements vlocity_cmt.Vloci
       gdfsuezBefCalypsoPrestationServiceElec.Dependency port = new gdfsuezBefCalypsoPrestationServiceElec.Dependency() ;  
       SM_OCTOPUS__c octopusCS = SM_OCTOPUS__c.getOrgDefaults();   
       port.clientCertName_x = octopusCS.certName__c;
-      SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'PrestationServiceElec' limit 1];
-      port.endpoint_x =  octopusCS.endpoint__c+suffixs.suffix__c;
+      port.endpoint_x =  octopusCS.endpoint__c+'ES-PrestationServiceElec_v3';
       System.debug('*** endpoint : ' + port.endpoint_x);
       port.inputHttpHeaders_x = new Map<String, String>{'Content-Type' => 'text/xml;charset=utf-8'}; 
 
@@ -649,21 +612,19 @@ global with sharing class SM_AP37_PrestaServiceElec implements vlocity_cmt.Vloci
             Map<String, Object> ops = (Map<String, Object>) opsList.get(elecPdl);
             system.debug('ops'+ops);
             system.debug('elecPdl'+elecPdl);
-            String idDistrib = (String) ops.get('idPrestationServiceDistrib');
-            inputElec.put('idPrestationDistributeur', idDistrib);
-            String idFournisseur= (String) ops.get('idPrestationServiceFournisseur');
-            inputElec.put('idPrestationFournisseur', idFournisseur);
-            String libelle= (String) ops.get('libellePrestation');
-            inputElec.put('libellePrestation', libelle);
-          
+            inputElec.put('idPrestationDistributeur', String.valueOf(ops.get('idPrestationServiceDistrib')));
+            inputElec.put('idPrestationFournisseur', String.valueOf(ops.get('idPrestationServiceFournisseur')));
+            inputElec.put('libellePrestation', String.valueOf(ops.get('libellePrestation')));
+            
+            
             Map<String, Object> elecOutput = new Map<String, Object>();
-
+            
             lirePrestationElecOffline(inputElec, elecOutput, options);
             inputElec.put('commentaires', elecOutput.get('commentaires'));
             lirePrestationElecOnline(inputElec, elecOutput, options);
-          
+            
             opsOut.put(elecPdl, elecOutput);
-
+            
             System.debug('*** elecOutput : ' + elecOutput);
         }
 
@@ -727,42 +688,10 @@ global with sharing class SM_AP37_PrestaServiceElec implements vlocity_cmt.Vloci
         System.debug('**** IN rechercherPrestationElec');
         System.debug('*** Params : ' + inputMap);
         
-
-
+        String idBp = String.valueOf(inputMap.get('idBp'));
         Map<String, Object> contratIn = (Map<String, Object>) inputMap.get('WSContrat');
-        System.debug('contratIn :'+contratIn );
-       /* Object value = contratIn.get('elec') ;
-
-        System.debug('value :'+ value + '>>>>>');        
-        if(value != null ){
-            if( value instanceof String) System.debug( 'String :' + ((String) value));
-            
-
-        }*/
-
         Set<String> elec = (Set<String>) contratIn.get('elec');
-
-    
-        
-      /*  for(Object i : (List<Object>) contratIn.get('elec')){
-            elec.add((String) i);
-        }
-        
-        
-        /*try{
-			 elec = (List<String>) contratIn.get('elec');
-		}
-		catch(System.TypeException te){
-
-			String message = te.getMessage().substringAfter('Invalid conversion from runtime type ');
-            String result = message.substringBefore(' to List<String>');
-            System.debug(message);
-            System.debug(result);
-		}*/
-        
-        
-        
-        
+        System.debug('*** elec : ' + elec);
         Map<String, Object> opsOut = new Map<String, Object>();
         // Il faut appeler l'IP existante pour chaque PDL présent en entrée
         map<string, object> inputElec = new map<string, object>();
@@ -774,6 +703,7 @@ global with sharing class SM_AP37_PrestaServiceElec implements vlocity_cmt.Vloci
             for(String elecPdl : elec){
                 
                 inputElec.put('PDLELECIdentifier', elecPdl);
+                inputElec.put('PersonneELECIdentifier',idBp);
                 inputElec.put('origineSelfcare', fromSelfcare);
                 if(!Test.isRunningTest()){
                     ipOutput = (Map<String,Object>)vlocity_cmt.IntegrationProcedureService.runIntegrationService('IP_SM_RecherchePrestationElectricite_SOAP', inputElec, options);  
@@ -799,250 +729,6 @@ global with sharing class SM_AP37_PrestaServiceElec implements vlocity_cmt.Vloci
         
         System.debug('**** OUT rechercherPrestationElec');
     }
-
-    /*
-* @Author: RJM
-* @Date: 03/07/2020
-* @Description: vlocity invoking method lirePrestationElecOfflineList
-*/
-
-public void lirePrestationElecOfflineList(Map < String, Object > inputMap, Map < String, Object > outMap, Map < String, Object > options) {
-    System.debug('**** IN lirePrestationElecOfflineList');
-    
-    System.debug('*** Params');
-    
-    for (String aKey: inputMap.keyset()) {
-        System.debug(aKey + ' : ' + inputMap.get(aKey));
-    }
-    
-    //String idPrestationDistributeurEnCoursList = String.valueOf(inputMap.get('idPrestationDistributeurEnCours'));
-    String idPrestationFournisseurEnCoursList = String.valueOf(inputMap.get('idPrestationServiceFournisseurEnCours'));
-    //String idPrestationDistributeurTermineesList = String.valueOf(inputMap.get('idPrestationDistributeurTerminees'));
-    //String idPrestationFournisseurTermineesList = String.valueOf(inputMap.get('idPrestationServiceFournisseurTerminees'));
-    //idPrestationDistributeur = 'W00005B7';
-    String typeCard = String.valueOf(inputMap.get('TypeCard'));
-    String typeUser= String.valueOf(inputMap.get('TypeUser'));
-    
-    
-   
-    //system.debug('@SM AP30 : idPrestationDistributeurTermineesList : ' + idPrestationDistributeurTermineesList);
-    system.debug('@SM AP30 : TypeCard : ' + typeCard);
-    
-    if (String.isBlank(idPrestationFournisseurEnCoursList) || typeCard != 'ELEC' ) {
-        System.debug('*** 1 or more fields required empty');
-        return;
-    }
-    
-    gdfsuezComBefChpPSEPivot.contextDt octx = initContext('Smile', '2.0');
-    
-    gdfsuezBefCalypsoPrestationServiceElec.Dependency port = new gdfsuezBefCalypsoPrestationServiceElec.Dependency();
-    SM_OCTOPUS__c octopusCS = SM_OCTOPUS__c.getOrgDefaults();
-    port.clientCertName_x = octopusCS.certName__c;
-    SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'PrestationServiceElec' limit 1];
-    port.endpoint_x = octopusCS.endpoint__c + suffixs.suffix__c;
-    //port.endpoint_x = 'callout:AuthOctopus/ES-PrestationServiceGaz_v2';
-    System.debug('*** endpoint : ' + port.endpoint_x);
-    port.inputHttpHeaders_x = new Map < String, String > {
-        'Content-Type' => 'text/xml;charset=utf-8'
-            };
-                
-            gdfsuezBefCalypsoPrestationServiceElec.lirePrestationServiceElectriciteInputDt input = new  gdfsuezBefCalypsoPrestationServiceElec.lirePrestationServiceElectriciteInputDt();
-    
-    input.online = false;
-    
-    List<String> idPrestationFournisseurListEnCoursElements = idPrestationFournisseurEnCoursList.split(',');
-    //List<String> idPrestationFournisseurListTermineesElements = idPrestationFournisseurTermineesList.split(',');
-    // Donnees générales
-    input.prestationServiceElectricite  = new gdfsuezBefCalypsoPrestationServiceElec.lirePrestationServiceElectriciteInputDt_prestationServiceElectricite_element[idPrestationFournisseurListEnCoursElements.size()];
-    //input.prestationServiceGaz[0] = new gdfsuezBefCalypsoPrestaGaz.lirePrestationServiceGazInputDt_prestationServiceGaz_element();
-    //input.prestationServiceGaz[1] = new gdfsuezBefCalypsoPrestaGaz.lirePrestationServiceGazInputDt_prestationServiceGaz_element();
-    input.loginUtilisateur = service.getIdentifiantDistribFromApex();
-    system.debug('input'+input);
-    
-
-    
-    
-    
-    
-    input.typeOffre = new gdfsuezComBefChpPSEPivot.listeValeursDt();
-        input.typeOffre.code = 'INDUSTRIELLE';
-
-    for(integer i=0 ; i< idPrestationFournisseurListEnCoursElements.size() ; i++){
-        input.prestationServiceElectricite[i] = new gdfsuezBefCalypsoPrestationServiceElec.lirePrestationServiceElectriciteInputDt_prestationServiceElectricite_element();
-        input.prestationServiceElectricite[i].idPrestationServiceFournisseur = idPrestationFournisseurListEnCoursElements[i].replace('(','').replace(')','').replace(' ','');
-        System.debug('En cours :'+ input.prestationServiceElectricite[i].idPrestationServiceFournisseur);
-    }
-
-    /*for(integer i=idPrestationFournisseurListEnCoursElements.size() ; i< idPrestationFournisseurListTermineesElements.size() ; i++){
-        input.prestationServiceGaz[i] = new gdfsuezBefCalypsoPrestaGaz.lirePrestationServiceGazInputDt_prestationServiceGaz_element();
-        input.prestationServiceGaz[i].idPrestationServiceFournisseur = idPrestationFournisseurListTermineesElements[i].replace('(','').replace(')','').replace(' ','');
-        System.debug('Terminé :' +input.prestationServiceGaz[i].idPrestationServiceFournisseur);
-    }*/
-
-    System.debug(input.prestationServiceElectricite.size());
-
-    //input.prestationServiceGaz[0].idPrestationServiceFournisseur = idPrestationFournisseurListElements[0];
-    //input.prestationServiceGaz[1].idPrestationServiceFournisseur = idPrestationFournisseurListElements[1];
-        
-    
-    system.debug('input'+input);
-
-    gdfsuezBefCalypsoPrestationServiceElec.lirePrestationServiceElectriciteResponse_element response;
-    
-    if (!Test.isRunningTest()) {
-        response = port.LirePrestationServiceElectricite_Http(input, octx);
-    } 
-    else {
-        Test.setMock(HttpCalloutMock.class, new gdfsuezBefCalypsoPSEcHttpMock());
-        gdfsuezBefCalypsoPrestationServiceElec.Dependency porttest = new gdfsuezBefCalypsoPrestationServiceElec.Dependency();
-        system.debug('@@ start of mock');
-        response = porttest.LirePrestationServiceElectricite_Http(input, octx);
-        system.debug('@@ end of mock');
-    }
-    
-    System.debug('**** response : ' + response);
-    //System.debug('**** response code : ' + response.messageRetours.retourTraitementMessage[0].code);
-    
-    //outMap.put('code_retour_ops1', response.messageRetours.retourTraitementMessage[0].code);
-    //outMap.put('code_retour_ops2', response.messageRetours.retourTraitementMessage[1].code);
-    
-    if (response != null && response.lirePrestationServiceElectriciteOutput != null && response.lirePrestationServiceElectriciteOutput.prestationServiceLire.size() > 0) {
-        outMap.putAll(transformDataFromReadOfflineDuo(response.lirePrestationServiceElectriciteOutput.prestationServiceLire));
-    }
-    //outMap.putAll(inputMap);
-    
-    System.debug('**** OUT lirePrestationElecOfflineList');
-    
-}
-
-/* @Author: RJM
-* @Date: 03/07/2020
-* @Description: transformDataFromReadOfflineDuo
-*/
-public static Map < String, Object > transformDataFromReadOfflineDuo(gdfsuezBefCalypsoPrestationServiceElec.lirePrestationServiceElectriciteOutputDt_prestationServiceLire_element[] responseList) {
-	Map < String, Object > newOutputMap = new Map < String, Object > ();
-	
-	
-	List<OPSDetails> opsDetailsEnCoursList = new List<OPSDetails>();
-	
-	
-	for(integer i =0 ; i<responseList.size() ; i++){
-		OPSDetails ops = new OPSDetails();
-		ops.Id = i;
-	
-		
-        
-		
-		ops.nom = responseList[i].donneesGenerales != null && responseList[i].donneesGenerales.typePrestationService != null ?  responseList[i].donneesGenerales.typePrestationService.libelleCourt : '';
-        
-        if(responseList[i].demande != null && responseList[i].demande.donneesGeneralesDemande != null){
-            gdfsuezBefCalypsoPrestationServiceElec.lirePrestationServiceElectriciteOutputDt_prestationServiceLire_demande_element demandeNode = responseList[i].demande;
-            gdfsuezBefCalypsoPrestationServiceElec.lirePrestationServiceElectriciteOutputDt_prestationServiceLire_demande_donneesGeneralesDemande_element donneesGeneralesNode = demandeNode.donneesGeneralesDemande;
-            System.debug(donneesGeneralesNode);
-            ops.commentaire = donneesGeneralesNode.commentaire;
-        
-            System.debug('commentaire :'+ ops.commentaire);
-            gdfsuezBefCalypsoPrestationServiceElec.lirePrestationServiceElectriciteOutputDt_prestationServiceLire_demande_donneesGeneralesDemande_solde_element soldeNode = donneesGeneralesNode.solde;
-            System.debug('soldeNode :'+soldeNode);
-            ops.prix = soldeNode.montantPrevisionnelPrestation;
-        }
-        
-        
-       
-        System.debug('prix :'+ ops.prix);
-
-        if (!String.isBlank(ops.commentaire ) && ops.commentaire.contains('PNO')) {
-			ops.presence = 'PRESENCE NON OBLIGATOIRE';
-		}
-		else if (!String.isBlank(ops.commentaire ) && ops.commentaire.contains('PO')) {
-			ops.presence = 'PRESENCE OBLIGATOIRE';
-		}
-		else if (!String.isBlank(ops.commentaire ) && ops.commentaire.contains('WSKO')) {
-			ops.presence = ' ';
-		}
-
-		ops.idDistrib = responseList[i].idPrestationServiceDistributeur;
-	    ops.idFournisseur = responseList[i].idPrestationServiceFournisseur;
-		
-		
-        if(responseList[i].interventions != null && responseList[i].interventions.intervention != null && responseList[i].interventions.intervention.planifications != null  && responseList[i].interventions.intervention.planifications.planification.size()>0 && responseList[i].interventions.intervention.planifications.planification[0] != null) {
-            gdfsuezBefCalypsoPrestationServiceElec.planificationDt planificationNode = responseList[i].interventions.intervention.planifications.planification[0];
-            Datetime datetimePrevue1 = planificationNode.datePrevue;
-            ops.dateRDV = frenchDays.get(datetimePrevue1.format('EEEE'))+' '+datetimePrevue1.day()+' '+frenchDates.get(datetimePrevue1.month())+' '+datetimePrevue1.year();
-        
-            gdfsuezBefCalypsoPrestationServiceElec.planificationDt_surSite_element surSiteNode =   planificationNode.surSite;      
-        
-            String heureDebut1  = surSiteNode.heureDebutPrevue;
-            String heureFin1  = surSiteNode.heureFinPrevue;
-
-
-            ops.datePrevue =  datetimePrevue1;
-
-			ops.heureDebut = heureDebut1;
-
-            ops.heureFin = heureFin1;
-            
-            if(heureFin1 != null && heureDebut1 != null){
-                String heureDebutFormatted = heureDebut1.substring(0,4);
-                String heureFinFormatted = heureFin1.substring(0,4);
-            ops.creneau = heureDebutFormatted.substring(0,2) + ':' + heureDebutFormatted.substring(2,4) +' - ' + heureFinFormatted.substring(0,2) + ':' + heureFinFormatted.substring(2,4);
-            }
-            else if (heureDebut1 != null){
-                String heureDebutFormatted = heureDebut1.substring(0,4);
-                ops.creneau = heureDebutFormatted.substring(0,2) + ':' + heureDebutFormatted.substring(2,4);
-            }
-
-            if (Date.today().addDays(2) >= dateTimePrevue1 && dateTimePrevue1 >= Date.today()) {
-				ops.moins48h = '1';
-			}
-			else{
-				ops.moins48h = '0';
-            } 
-        }
-        
-        
-			
- 
-            
-            if(responseList[i].demande != null && responseList[i].demande.interlocuteurIntervention != null){
-                if(responseList[i].demande.interlocuteurIntervention.personnePhysique != null){
-                    ops.nomClient = responseList[i].demande.interlocuteurIntervention.personnePhysique.nom;
-                    ops.prenomClient = responseList[i].demande.interlocuteurIntervention.personnePhysique.prenom;
-                    
-                    if(responseList[i].demande.interlocuteurIntervention.personnePhysique.civilite != null){
-                        ops.civiliteClient = responseList[i].demande.interlocuteurIntervention.personnePhysique.civilite.code;
-                    }
-                }
-                
-                if(responseList[i].demande.interlocuteurIntervention.coordonneesContact!= null && responseList[i].demande.interlocuteurIntervention.coordonneesContact.telephone != null && responseList[i].demande.interlocuteurIntervention.coordonneesContact.telephone.size() > 0){ //coordonneesContactDt 
-                    ops.telClient =responseList[i].demande.interlocuteurIntervention.coordonneesContact.telephone[0];
-                }
-    
-            }
-
-		
-		
-
-	
-			opsDetailsEnCoursList.add(ops);
-	
-
-		
-
-
-
-		
-	}
-
-	System.debug('opsDetailsEnCoursList : ' +opsDetailsEnCoursList);
-	
-	newOutputMap.put('opsDetailsEnCoursList', opsDetailsEnCoursList);
-
-
-
-	
-	return newOutputMap;
-}
 
     /*
     * @Author: 
@@ -1077,32 +763,6 @@ public static Map < String, Object > transformDataFromReadOfflineDuo(gdfsuezBefC
         public String index ; // TODO base hp hc
 
     }    
-
-    public class OPSDetails {
-        public Integer Id;
-        public String nom;
-        public Double prix;
-        public String dateRDV;
-        public String creneau;
-        public String presence;
-        public String contactName;
-        public String contactNum;
-        public String commentaire;
-        public String idDistrib;
-        public String idFournisseur;
-        public String moins48h;
-        public String nomClient;
-        public String prenomclient;
-        public String civiliteClient;
-        public String telClient;
-        public DateTime datePrevue;
-			public String heureDebut;
-			public String heureFin;
-			public String creneauRetenu;
-			public String creneauRetenuCode;
-    
-    
-}
 
     public class IOException extends Exception {
     }    

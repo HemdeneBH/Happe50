@@ -56,6 +56,7 @@ public with sharing class HP_UTIL_ProfileManager {
     public static String getOwnerProfile(String idOwner) {
         User userOwner = [SELECT Profile.Name FROM User WHERE Id = :idOwner];
         return userOwner.Profile.Name;
+
     }
 
     /**
@@ -65,6 +66,8 @@ public with sharing class HP_UTIL_ProfileManager {
     * @return Map<Id, User> 
     **/
     public static Map<Id, User> getUsersProfiles(Set<Id> usersId) {
+
         return new Map<Id, User>([ Select Id, Name, ProfileId, Profile.Name From User where Id IN: usersId ]);
+
     }
 }

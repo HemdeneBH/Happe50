@@ -17,7 +17,7 @@
 }
 
 .bloc-card {
-  height: 184px;
+  height: 200px;
 }
 
 .position-right {
@@ -64,13 +64,18 @@
 }
 
 .solde-card {
+  position: absolute;
+  right: 15px;
   font-weight: 500;
-  font-size: 25px;
+  line-height: normal;
+  font-size: 32px;
+  top: 3px;
 }
 
 .negatif-solde {
   color: #1E90FF;
 }
+
 .null-solde {
   color: #000000;
 }
@@ -89,16 +94,10 @@
   color: #c10e24;
   margin-left: 10px;
 }
-
 .title-solde {
+  position: absolute;
+  top: 10px;
+  left: 15px;
   font-size: 1.2em;
   font-weight: 600;
-}
-
-.icon-action {
-    margin-left: 10px;
-}
-
-.icon-action:hover {
-    cursor: pointer;
 }

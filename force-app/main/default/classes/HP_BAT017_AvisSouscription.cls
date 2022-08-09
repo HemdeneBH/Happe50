@@ -81,31 +81,42 @@ global  with sharing class HP_BAT017_AvisSouscription implements Database.batcha
 
        for (Object item : scope) {
 
-            Map<String,Object> data = (Map<String,Object>)item;
-            String idReview = String.valueOf(data.get('id_review'));    
+        Map<String,Object> data = (Map<String,Object>)item;
+        String idReview = String.valueOf(data.get('id_review'));      
             String orderRef = String.valueOf(data.get('order_ref'));
 
-            //si la note existe déja => pas d'insertion 
+        //si la note existe déja => pas d'insertion 
             Boolean alreadyExiste = idReviewSet.contains(idReview) || orderRefSet.contains(orderRef) ;
 
             if( alreadyExiste == false){
-                System.debug('im in************: ');
-                HP_NoteDeSatisfaction__c noteSatisfaction = new HP_NoteDeSatisfaction__c();
+            System.debug('im in************: ');
+            HP_NoteDeSatisfaction__c noteSatisfaction = new HP_NoteDeSatisfaction__c();
 
-                // prepare data
-                String reviewDdate = String.valueOf(data.get('review_date'));
-                String orderDate = String.valueOf(data.get('order_date'));
-                Datetime dt = Datetime.valueOf(orderDate);         
-                String rate =  String.valueOf(data.get('rate'));
-                String nps = String.valueOf(data.get('nps'));
-                String review = String.valueOf( data.get('review'));
-                String lastName = String.valueOf(data.get('lastname'));
-                String firstName = String.valueOf(data.get('firstname'));
-                String moderation = String.valueOf(data.get('moderation'));
+            // prepare data
+
+
+
+
+
+        String reviewDdate = String.valueOf(data.get('review_date'));
+        String orderDate = String.valueOf(data.get('order_date'));
+        Datetime dt = Datetime.valueOf(orderDate);
+        String rate =  String.valueOf(data.get('rate'));
+        String nps = String.valueOf(data.get('nps'));
+
+
+
+
+
+
+        String review = String.valueOf( data.get('review'));
+        String lastName = String.valueOf(data.get('lastname'));
+        String firstName = String.valueOf(data.get('firstname'));
+        String moderation = String.valueOf(data.get('moderation'));
                 Id contactId = souscriptionContactMap.get(orderRef);
                 Id souscriptionId =  idMap.get(orderRef);
-                noteSatisfaction = HP_EM041_NoteSatisfaction.noteSatisfactionFromAvis( rate,nps,idReview,orderRef,souscriptionId,contactId,reviewDdate,dt,review,lastname,firstname,moderation );
-                listNoteSatisfaction.add(noteSatisfaction);
+            noteSatisfaction = HP_EM041_NoteSatisfaction.noteSatisfactionFromAvis( rate,nps,idReview,orderRef,souscriptionId,contactId,reviewDdate,dt,review,lastname,firstname,moderation );
+            listNoteSatisfaction.add(noteSatisfaction);
         }
         System.debug('listNoteSatisfaction.size()************: '+listNoteSatisfaction.size());
     }

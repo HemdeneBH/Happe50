@@ -102,7 +102,6 @@ public with sharing class HP_EmailMessageHandler_TEST {
 
     @isTest 
     public static void inserEmailMessageTest() {
-    HP_EmailMessageHandler cls = new HP_EmailMessageHandler();
         Account acc = [select Id from Account limit 1]; 
         Contact cont = [select Id from Contact limit 1]; 
          Case cas = [select Id from Case limit 1 ];

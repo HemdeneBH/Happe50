@@ -1,22 +1,54 @@
-/**
- * @author Unknown
- * @date 06/04/2022 - Refactoring by Sutharsan Pushparajah
- * @description SM_AP29_PersonnesAPI - Controller class to access the Personnes API
- */
-global with sharing class SM_AP29_PersonnesAPI implements vlocity_cmt.VlocityOpenInterface {
-	
-	/**
-     * @author Sutharsan Pushparajah
-     * @date 06/04/2022
-     * @description PersonnesException - Custom Exception to fire message for Personnes API
-     */
-	public class PersonnesException extends Exception{}
+global class SM_AP29_PersonnesAPI implements vlocity_cmt.VlocityOpenInterface {
+	global Boolean invokeMethod(String methodName, Map < String, Object > inputMap, Map < String, Object > outMap, Map < String, Object > options) {
 
-	/**
-     * @author Unknown
-     * @date DD/MM/YYYY
-     * @description PersonneModel - Wrapper class to store response from Personnes API
-     */
+		if (methodName.equals('callPersonne')) {
+			try {
+				callPersonne(inputMap, outMap, options);
+				// your implementation, use outMap to send response back to OmniScriC:\Users\HN5803\Documents\Smile\src\SM_AP32_PersonnesLocauxAPI.apxcpt
+			} catch (Exception e) {
+				system.debug(e);
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	public static void callPersonne(Map < String, Object > inputMap, Map < String, Object > outMap, Map < String, Object > options) {
+		String idBusinessPartner = String.valueOf(inputMap.get('refClientIdBP'));
+		Integer size = idBusinessPartner.length();
+        String idBP = idBusinessPartner;
+        if(size <10){
+            Integer difference = 10 -size;
+            for(Integer i = 0; i<difference; i++ ){
+                idBP = '0'+idBP;
+            }
+        }
+		if (idBusinessPartner == null || idBP.length() == 0) {
+			system.debug('idBusinessPartner is not found ...');
+			return;
+		}
+
+		String token = SM_MP_AP04_GetTokenService.getTokenFromSmile();
+		if (token == null) {
+			system.debug('Token not found ...');
+			return;
+		}
+		HttpResponse httpResponse = getResponse(token, idBP);
+
+		Map < String, Object > resultAsMap = (Map < String, Object > ) JSON.deserializeUntyped(httpResponse.getBody());
+		List < Object > clientAccounts = (List < Object > ) resultAsMap.get('_data');
+
+		if (clientAccounts.Size() == 0) {
+			system.debug('No data to get the idBusinessPartner ' + idBP);
+			return;
+		}
+		// methode qui transform les données retournées par l'api , qui extrait les champ qu'on a besoin au niveau de l'omniscript
+		Map<String, Object> transformedData =  transformDatatoOmniscript(clientAccounts) ;
+
+		outMap.put('personnes', transformedData);
+	}
+
 	public class PersonneModel {
 		public String id;
 		public String idPersonneUnifie;
@@ -27,135 +59,73 @@ global with sharing class SM_AP29_PersonnesAPI implements vlocity_cmt.VlocityOpe
 			this.idPersonneUnifie = idPersonneUnifie;
 			this.idBusinessPartner = idBusinessPartner;
 		}
-	}
-	
-	/**
-     * @author Unknown
-     * @date 06/04/2022
-     * @description Expose Personnes API to IP
-     * @param methodName the name of the method to call
-     * @param inputMap Input parameters
-	 * @param outMap results from API call
-	 * @param options options parameters from IP
-     * @return Boolean true if the call succeeds
-     */
-	global Boolean invokeMethod(String methodName, Map <String, Object> inputMap, Map <String, Object> outMap, Map <String, Object> options){
 
-		try{
-			if (methodName.equals('callPersonne')) {
-				callPersonne(inputMap, outMap, options);
-			} else if (methodName.equals('callPersonneApi')) {
-				callPersonneApi(inputMap);
-			}
-		} catch (Exception exp) {
-			APU000_Logger.log(LoggingLevel.ERROR, 'SM_AP29_PersonnesAPI', 'callPersonneApi', exp.getMessage());
-			return false;
-		}
 
-		return true;
 	}
 
-	/**
-     * @author Unknown
-     * @date 06/04/2022
-     * @description Parse & format the identifiant business partner field 
-     * @param idBusinessPartner the id of the personne
-     * @return String formatted value of the input field
-     */
-	@TestVisible
-	private static String formatIdentifiantBusinessPartner(String idBusinessPartner){
-		
-		Integer size;
+	public static  Map<String, Object> transformDatatoOmniscript(List < Object > apiData) {
 
-		if (String.isEmpty(idBusinessPartner)) {
-			throw new PersonnesException('idBusinessPartner is not found');
-		}
-		
-		size = idBusinessPartner.length();
-
-        if(size <10){
-            Integer difference = 10 -size;
-
-            for(Integer i = 0; i<difference; i++ ){
-                idBusinessPartner = '0'+idBusinessPartner;
-            }
-        }
-
-		return idBusinessPartner;
-	}
-
-	/**
-     * @author Unknown
-     * @date 06/04/2022
-     * @description Search Personnes API V1
-     * @param inputMap Input parameters
-     * @return Map<String, Object> results from the Personnes API call
-     */
-	@AuraEnabled(cacheable=false)
-    public static Map<String, Object> callPersonneApi(Map<String, Object> inputMap){
-        
-		try {
-			String idContact = String.valueOf(inputMap.get('idContact'));
-			//If no contact then it will go into the exception and return null
-			Contact contact = SM_EM100_Contact.getByIds('Id, Identifiant_Buisness_Partener__c', new List<Id>{idContact}).get(0);
-			
-			String idBusinessPartner = formatIdentifiantBusinessPartner(contact.Identifiant_Buisness_Partener__c);
-			
-			List <Object> clientAccounts = SM_WS102_Personne.getPersonnes(idBusinessPartner, 'V1');
-
-			return (clientAccounts.size() == 0) ? null : (Map <String, Object>) clientAccounts[0];
-		} catch (Exception exp){
-			APU000_Logger.log(LoggingLevel.ERROR, 'SM_AP29_PersonnesAPI', 'callPersonneApi', exp.getMessage());
-		}
-
-		return null;
-	}
-
-	/**
-     * @author Unknown
-     * @date 06/04/2022
-     * @description Search Personnes API V0
-     * @param inputMap Input parameters
-     * @return N/A
-     */
-	public static void callPersonne(Map<String, Object> inputMap, Map<String, Object> outMap, Map<String, Object> options){
-		
-		try {
-			String idBusinessPartner = formatIdentifiantBusinessPartner(String.valueOf(inputMap.get('refClientIdBP')));
-
-			List <Object> clientAccounts = SM_WS102_Personne.getPersonnes(idBusinessPartner, 'V0');
-
-			if (clientAccounts.size() == 0) {
-				throw new PersonnesException('No data to get the idBusinessPartner ' + idBusinessPartner);
-			}
-			// methode qui transform les données retournées par l'api , qui extrait les champ qu'on a besoin au niveau de l'omniscript
-			Map<String, Object> transformedData =  transformDatatoOmniscript(clientAccounts) ;
-			outMap.put('personnes', transformedData);
-		} catch (Exception exp){
-			APU000_Logger.log(LoggingLevel.ERROR, 'SM_AP29_PersonnesAPI', 'callPersonneApi', exp.getMessage());
-		}
-	}
-
-	/**
-     * @author Unknown
-     * @date 06/04/2022
-     * @description Transform results from Personnes API into Custom PersonneModel wrapper 
-     * @param apiData List of Personnes API call result
-     * @return Map<String, Object> All Personne records returned by the Personnes API call into Custom PersonneModel wrapper 
-     */
-	public static Map<String, Object> transformDatatoOmniscript(List<Object> apiData){
-
-		Map<String, Object> transformeDataStructure = new Map <String, Object>();
-		List <Object> listTemp = new List<Object>();
+		Map < String, Object > transformeDataStructure = new Map < String, Object > ();
+		List < Object > listTemp = new List < Object > ();
 		Integer i = 1;
-
 		for (Object obj : apiData) {
-			Map<String, Object> objectX = (Map<String, Object>) obj;
+			Map < String, Object > objectX = (Map < String, Object > ) obj;
 			PersonneModel personneValue = new PersonneModel(String.valueOf(objectX.get('id')), String.valueOf(objectX.get('idPersonneUnifiee')), String.valueOf(objectX.get('idBusinessPartner')));
 			transformeDataStructure.put('personne'+i, personneValue);
 			i++;
 		}
-		
+		/*transformeDataStructure.put('personne', listTemp);*/
 		return transformeDataStructure ;
+	}
+
+	public static HttpRequest buildHttpRequestHeaders(String token, String idBusinessPartner) {
+		HttpRequest req = new HttpRequest();
+		req.setMethod('GET');
+		String endpointURL = '';
+		if (!Test.isRunningTest()) {
+			SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'Personnes' limit 1];
+			endpointURL = 'callout:AuthAPIHour' +suffixs.suffix__c;
+		}
+		req.setEndpoint(endpointURL+'?idBusinessPartner=' + idBusinessPartner);
+		req.setHeader('X-Correlation-Id', MP_AP13_GuidUtil.NewGuid());
+		req.setHeader('api_key', MP_Xdata_credentials__c.getInstance('sm_api_key_INT').Value__c);
+		req.setHeader('Authorization', 'Bearer ' + token);
+		req.setHeader('Content-Type', 'application/json');
+		return req;
+	}
+
+
+	public static HttpResponse sendData(HttpRequest request) {
+		Http http = new Http();
+		HttpResponse res;
+		try {
+			res = http.send(request);
+
+		} catch (Exception e) {
+			system.debug('## [PortefeuillesContrats] failed to send data ##');
+			return null;
+		}
+		return res;
+
+	}
+
+	private static Boolean httpResponseFailureDetected(HttpResponse response) {
+		return (response == null || (response.getStatusCode() != 201 && response.getStatusCode() != 200 && response.getStatusCode() != 206));
+	}
+
+	public static HttpResponse getResponse(String token, String idBusinessPartner) {
+
+
+		HttpRequest httpReq = buildHttpRequestHeaders(token, idBusinessPartner);
+		HttpResponse httpResp = sendData(httpReq);
+		if (httpResponseFailureDetected(httpResp)) {
+			// should abort next step's
+			system.debug('## [ PortefeuillesContrats] error occured when sending data ##');
+			system.debug(httpResp != null ? httpResp.getBody() : 'http response is null');
+			return null;
+		}
+
+		return httpResp;
+
 	}
 }

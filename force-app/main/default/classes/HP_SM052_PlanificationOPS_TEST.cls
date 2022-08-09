@@ -36,7 +36,7 @@ public class HP_SM052_PlanificationOPS_TEST {
     public static void lireOPSGazTest() {
           SM_OCTOPUS__c CS_Setting = new SM_OCTOPUS__c();
         CS_Setting.appName__c = 'Smile';
-        CS_Setting.certName__c = 'smile';
+        CS_Setting.certName__c = 'smile_noprod';
         CS_Setting.endpoint__c = 'https://octopus-rec-api.clip-noprod.engie.com:56130/ws/';        
         insert CS_Setting;
         Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> bodyResponseMap = new Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> {
@@ -78,10 +78,10 @@ public class HP_SM052_PlanificationOPS_TEST {
                 new Map<String, String> ()
             )
                 };
-                Contact contact = (Contact)HP_UTIL_SmartFactory.createSObject('Contact', 'HP_Contact', new Map<String, Object> {
+                Contact contact = (Contact)HP_UTIL_SmartFactory.createSObject('Contact', null, new Map<String, Object> {
 				'LastName' => 'Contact Test',
 				'Email' => 'test@gmail.com',
-                    'mobilePhone' => '+33600000000',
+                    'mobilePhone' => '0121212',
 				'Id_Tiers__c' => 1313
 			}, null, null,null);
 			insert contact;    

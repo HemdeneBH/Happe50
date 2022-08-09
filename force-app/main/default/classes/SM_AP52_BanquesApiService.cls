@@ -51,8 +51,20 @@ global class SM_AP52_BanquesApiService implements vlocity_cmt.VlocityOpenInterfa
     		/*listParameters.put('iBAN', iBan);*/
     	}
 
+    	String token;
+        if (!Test.isRunningTest()) {
+            token = SM_MP_AP04_GetTokenService.getTokenFromSmile();
+        } else {
+            token = 'test';
+        }
+
+        if (token == null) {
+            system.debug('Token not found ...');
+            return;
+        }
+
         HttpResponse httpResponse = new HttpResponse();
-        httpResponse = getResponse(listParameters);
+        httpResponse = getResponse(token, listParameters);
         if (httpResponse != null) {
             Map < String, Object > resultAsMap = (Map < String, Object > ) JSON.deserializeUntyped(httpResponse.getBody());
             List < Object > listResult = (List < Object > ) resultAsMap.get('_data');
@@ -72,12 +84,36 @@ global class SM_AP52_BanquesApiService implements vlocity_cmt.VlocityOpenInterfa
     }
 
 	/*@Auhtor: MHA
+    *@Description: construction du header de la requête
+    *@CreatedDate: 02/01/2019
+    *@LastModified: MHA 02/01/2019
+	*/
+	public static HttpRequest buildHttpRequestHeaders(String token, Map<String, String> listParameters) {
+		HttpRequest req = new HttpRequest();
+		req.setMethod('GET');
+		req.setEndpoint(buildEndPoint(listParameters));
+		req.setHeader('X-Correlation-Id', MP_AP13_GuidUtil.NewGuid());
+        if(!Test.isRunningTest()){
+            req.setHeader('api_key', MP_Xdata_credentials__c.getInstance('sm_api_key_INT').Value__c);
+        }
+		req.setHeader('Authorization', 'Bearer ' + token);
+		req.setHeader('Content-Type', 'application/json');
+        System.debug('Request =>'+req);
+		return req;
+	}
+
+	/*@Auhtor: MHA
     *@Description: construction de l'adresse d'appel
     *@CreatedDate: 02/01/2019
     *@LastModified: MHA 02/01/2019
 	*/
-	public static String buildRequestParams(Map<String, String> listParameters) {
+	public static String buildEndPoint(Map<String, String> listParameters) {
         String endPoint = '';
+        if (!Test.isRunningTest()) {
+            SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'Banques' limit 1];
+            endPoint = 'callout:AuthAPIHour' +suffixs.suffix__c;
+        }
+
         if (listParameters.size() > 0) {
             endPoint = endPoint + '?';
             Set<String> queryParamsKeys = listParameters.keySet();
@@ -92,15 +128,39 @@ global class SM_AP52_BanquesApiService implements vlocity_cmt.VlocityOpenInterfa
     }
 
 	/*@Auhtor: MHA
+    *@Description: appel de l'api en HTTP
+    *@CreatedDate: 02/01/2019
+    *@LastModified: MHA 02/01/2019
+	*/
+	public static HttpResponse sendData(HttpRequest request) {
+		Http http = new Http();
+		HttpResponse res;
+		try {
+			res = http.send(request);
+
+		} catch (Exception e) {
+			system.debug('## [banque] failed to send data ##');
+			return null;
+		}
+		return res;
+
+	}
+
+	private static Boolean httpResponseFailureDetected(HttpResponse response) {
+		return (response == null || (response.getStatusCode() != 201 && response.getStatusCode() != 200 && response.getStatusCode() != 206));
+	}
+
+	/*@Auhtor: MHA
     *@Description: appel de l'api
     *@CreatedDate: 02/01/2019
     *@LastModified: MHA 02/01/2019
 	*/
-	public static HttpResponse getResponse(Map<String, String> listParameters) {
+	public static HttpResponse getResponse(String token, Map<String, String> listParameters) {
 
-		String endpointParams = buildRequestParams(listParameters);
-		HttpResponse httpResp = CalloutManager.sendRequest('Banques', endpointParams, 'GET', CalloutManager.Scope.READ, null,null);
-		if (CalloutManager.httpResponseFailureDetected(httpResp)) {
+
+		HttpRequest httpReq = buildHttpRequestHeaders(token, listParameters);
+		HttpResponse httpResp = sendData(httpReq);
+		if (httpResponseFailureDetected(httpResp)) {
 			// should abort next step's
 			system.debug('## [ banque] error occured when sending data ##');
 			system.debug(httpResp != null ? httpResp.getBody() : 'http response is null');

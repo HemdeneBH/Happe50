@@ -92,7 +92,7 @@ public class HP_SendMailContratualizationService {
 									 mailParametres.put('rue', sender.street);
 									 
 									 if(!String.isBlank(sender.addressComp)) {
-									 	mailParametres.put('adressecomp1', sender.addressComp);
+									 mailParametres.put('adressecomp1', sender.addressComp);
 									 }
 
 									 mailParametres.put('adresseCP', sender.addressCp);
@@ -167,7 +167,7 @@ public class HP_SendMailContratualizationService {
 								 mailParametres.put('typecomptage', princingPlanValue);
 								 mailParametres.put('rue', streetValue);
 								 if(!String.isBlank(addressCompValue)) {
-									 	mailParametres.put('adressecomp1', addressCompValue);
+								 mailParametres.put('adressecomp1', addressCompValue);
 								 }
 
 								 mailParametres.put('adresseCP', addressCpValue);

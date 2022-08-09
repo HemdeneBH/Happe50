@@ -249,16 +249,4 @@ public class SM_AP37_PrestaServiceElec_TEST {
       
         lireOfflineElec.invokeMethod('lirePrestationElecOffline',inputMap,outMap,null);
     }
-    
-    static testMethod void lirePrestationElecOfflineListTest(){
-         SM_AP37_PrestaServiceElec lirePrestationElecOfflineList = new SM_AP37_PrestaServiceElec();
-
-            Map < String, Object > outMap = new Map < String, Object > ();
-         Map < String, Object > inputMap = new Map < String, Object >();
-        
-            inputMap.put('TypeCard','ELEC');
-        	inputMap.put('idPrestationServiceFournisseurEnCours', '123456789');
-            lirePrestationElecOfflineList.invokeMethod('lirePrestationElecOfflineList',inputMap,outMap,null);
-        
-    }
 }

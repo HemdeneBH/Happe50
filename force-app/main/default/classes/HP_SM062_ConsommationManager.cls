@@ -3,11 +3,9 @@
  * @author            : Hemdene Ben Hammouda
  * @group             : 
 
+ * @last modified on  : 04-19-2022
 
- * @last modified on  : 07-07-2021
-
-
- * @last modified by  : Hemdene Ben Hammouda
+ * @last modified by  : Badr Eddine Belkarchi
  * Modifications Log 
  * Ver   Date         Author                  Modification
  * 1.0   06-09-2021   Hemdene Ben Hammouda   Initial Version
@@ -125,6 +123,38 @@ public with sharing class HP_SM062_ConsommationManager {
         return listWrpGAZ;
     }
 
+    @AuraEnabled(cacheable=true)
+    public static String getConsommationELEC_VersionEC(Integer idClientXdata, String pdl) {
+        System.debug('HP_SM062_ConsommationManager.getConsommationELEC_VersionEC | Method Start');
+        paramsMap = new Map<String,String>{
+            'id_client_xdata' => String.valueOf(idClientXdata),
+            'pdl' => pdl
+            };
+
+        HttpResponse response = HP_UTIL_HTTPUtils.calloutGet(HP_Constantes.AGILAB_PERSONNE_CONSOMMATION, paramsMap);
+        System.debug('@@Response : '+response);
+        System.debug('@@Response Body : '+response.getBody());
+
+        System.debug('HP_SM062_ConsommationManager.getConsommationELEC_VersionEC | Method Exit');
+        return response.getBody(); 
+    }
+
+    @AuraEnabled(cacheable=true)
+    public static String getConsommationGAZ_VersionEC(Integer idClientXdata, String pce) {
+        System.debug('HP_SM062_ConsommationManager.getConsommationGAZ_VersionEC | Method Start');
+        paramsMap = new Map<String,String>{
+            'id_client_xdata' => String.valueOf(idClientXdata),
+            'pce' => pce
+            };
+
+        HttpResponse response = HP_UTIL_HTTPUtils.calloutGet(HP_Constantes.AGILAB_PERSONNE_CONSOMMATION, paramsMap);
+        System.debug('@@Response : '+response);
+        System.debug('@@Response Body : '+response.getBody());
+
+        System.debug('HP_SM062_ConsommationManager.getConsommationGAZ_VersionEC | Method Exit');
+        return response.getBody(); 
+    }
+
 public class HP_WRP040_ConsommationManagerELEC {
     @AuraEnabled
     public String idFacture {get;set;}
@@ -138,9 +168,7 @@ public class HP_WRP040_ConsommationManagerELEC {
     public String typeComptage {get;set;}
     @AuraEnabled
 
-
     public Date dateReleve {get;set;}
-
 
     @AuraEnabled
     public String dateDebut {get;set;}
@@ -170,9 +198,7 @@ public class HP_WRP040_ConsommationManagerELEC {
         this.categorie = !String.isEmpty(String.valueOf(outputMap.get('categorie'))) ? String.valueOf(outputMap.get('categorie')) : '--';
         this.typeComptage = !String.isEmpty(String.valueOf(outputMap.get('type_comptage'))) ? String.valueOf(outputMap.get('type_comptage')) : '--';
 
-
         this.dateReleve = !String.isEmpty(String.valueOf(outputMap.get('date_releve'))) ? Date.parse(String.valueOf(outputMap.get('date_releve'))) : null;
-
 
         this.dateDebut = !String.isEmpty(String.valueOf(outputMap.get('date_debut'))) ? convertDateFormat(String.valueOf(outputMap.get('date_debut'))) : '--';
         this.dateFin = !String.isEmpty(String.valueOf(outputMap.get('date_fin'))) ? convertDateFormat(String.valueOf(outputMap.get('date_fin'))) :'--';

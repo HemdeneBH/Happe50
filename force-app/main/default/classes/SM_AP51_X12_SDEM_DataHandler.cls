@@ -1,7 +1,6 @@
 /**
 * Classe construite  dans le cadre de developpement de l'US  SMIL-1264
-* @last modified on  : 05-05-2022
-* @last modified by  : Ahmed LAAMIRI
+
 * @see         
 */
 
@@ -233,26 +232,19 @@ global class SM_AP51_X12_SDEM_DataHandler  implements CMN_OPSProcessingInterface
         
     }
 
-//* @last modified on  : 05-05-2022
-//* @last modified by  : Ahmed LAAMIRI
-//* @Description : No need to update the date if date de prestation IsBlank        
     static void  updateOPSElecFields(CMN_OPSinfo opsInfo , Prestation_distributeur__c acc){
         acc.Civilite_interlocuteur_intervention__c = opsInfo.civiliteIntervenant;
-        if (String.isNotBlank(opsInfo.datePrestation)){acc.Date_de_prestation__c =  Date.valueOf(opsInfo.datePrestation.substring(0, 10));}     
-        //acc.Date_de_prestation__c = String.isBlank(opsInfo.datePrestation) ? null : Date.valueOf(opsInfo.datePrestation.substring(0, 10));
+        acc.Date_de_prestation__c = String.isBlank(opsInfo.datePrestation) ? null : Date.valueOf(opsInfo.datePrestation.substring(0, 10));
         acc.Numero_dernier_jalon__c = opsInfo.numDernierJalon;
         acc.Statut__c = String.isBlank(opsInfo.statutPrestation) ? null :  statutElec.get(opsInfo.statutPrestation);
         acc.Statut_dernier_jalon__c = opsInfo.statutDernierJalon;
         
     }
     
-//* @last modified on  : 05-05-2022
-//* @last modified by  : Ahmed LAAMIRI
-//* @Description : No need to update the date if date de prestation IsBlank    
+    
     static void  updateOPSGazFields(CMN_OPSinfo opsInfo , Prestation_distributeur__c acc){
         acc.Civilite_interlocuteur_intervention__c =  String.isBlank(opsInfo.civiliteIntervenant) ? null :  mapCiviliteGaz.get(String.valueOf(opsInfo.civiliteIntervenant)) == null ? 'AUTRE' : mapCiviliteGaz.get(String.valueOf(opsInfo.civiliteIntervenant));
-        if (String.isNotBlank(opsInfo.datePrestation)){acc.Date_de_prestation__c =  Date.valueOf(opsInfo.datePrestation.substring(0, 10));}     
-        //acc.Date_de_prestation__c = String.isBlank(opsInfo.datePrestation) ? null : Date.valueOf(opsInfo.datePrestation.substring(0, 10));
+        acc.Date_de_prestation__c = String.isBlank(opsInfo.datePrestation) ? null : Date.valueOf(opsInfo.datePrestation.substring(0, 10));
         acc.Numero_dernier_jalon__c = opsInfo.numDernierJalon;
         acc.Statut__c =  String.isBlank(opsInfo.statutPrestation) ? null :   statutGaz.get(opsInfo.statutPrestation);
         acc.Date_statut_prestation__c = String.isBlank(opsInfo.datePrestation) ? null :   Date.valueOf(opsInfo.datePrestation.substring(0, 10));

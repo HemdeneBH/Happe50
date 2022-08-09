@@ -18,13 +18,13 @@ public with sharing class HP_CALL007_DQE_TEST {
     
             Test.startTest();
             Test.setMock(HttpCalloutMock.class, new HP_UTIL_ResponseRestMock(bodyResponseMap));
-            HP_WRP035_APIGouv result = HP_CALL007_DQE.getSuggestions('46+boulevard+de+la+libération+67500+Haguenau');
+            HP_WRP035_APIGouv result = HP_APIGouv.getSuggestions('46+boulevard+de+la+libération+67500+Haguenau');
             System.debug(result.features[4].properties.postcode);
             System.assert(result.features[4].properties.postcode == '67500', 'Validé');
             Test.stopTest();
         } 
     }
-
+    
     @IsTest
     static void getSuggestionsDQE(){
         System.runAs(HP_UTIL_SmartFactory.runAsUserHP()){

@@ -61,8 +61,7 @@ global class SM_AP19_ConfirmerSignature implements vlocity_cmt.VlocityOpenInterf
         //Port
         gdfsuezBefCalypsoMandatV1.MandatPort port = new gdfsuezBefCalypsoMandatV1.MandatPort();
         port.clientCertName_x = octopusCS.certName__c;
-        SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'MandatWS' limit 1];
-        port.endpoint_x = octopusCS.endpoint__c + suffixs.suffix__c;
+        port.endpoint_x = octopusCS.endpoint__c + 'ES-Mandat_v1';
         port.inputHttpHeaders_x = new Map < String, String > {
             'Content-Type' => 'text/xml;charset=utf-8'
         };

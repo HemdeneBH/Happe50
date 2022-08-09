@@ -5,31 +5,31 @@
 *LastModified: MHA 08/03/2019
 */
 global class SM_AP18_CreateCommercialProposalMock implements HttpCalloutMock {
-	global HTTPResponse respond(HTTPRequest req) {
-		HttpResponse res = new HttpResponse();
-		res.setHeader('Content-Type', 'application/json');
-		DOM.Document responseDoc = new DOM.Document();
-		DOM.Document reqDoc = req.getBodyDocument();
-		DOM.XmlNode rootNode = reqDoc.getRootElement();
-		DOM.XmlNode reqBodyNode = rootNode.getChildElement('Body', 'http://schemas.xmlsoap.org/soap/envelope/');
-		DOM.XmlNode[] methodNode = reqBodyNode.getChildElements();
-		System.debug('@MHA method '+methodNode[0].getName());
-		String expectedResult = '';
-		if(methodNode[0].getName() == 'creerPropositionCommerciale'){
-			expectedResult = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"><soapenv:Body><tns:creerPropositionCommercialeResponse xmlns:tns="http://gdfsuez/bef/calypso/propositioncommerciale/v5"><creerPropositionCommercialeOutput><propositionCommerciale><idPropositionCommerciale>0123456789</idPropositionCommerciale></propositionCommerciale><idContactCPVEnvoi><idDemande>1325005747</idDemande></idContactCPVEnvoi></creerPropositionCommercialeOutput><messageRetours><retourTraitementMessage><id>214f70ce-6ea3-418f-9bca-d798c8678fc0</id><source>Middleware Octopus</source><libelle>Traitement effectué sans erreur</libelle><classe>Fonctionnelle</classe><type>Information</type><code>OCTOPUS_creerPropositionCommerciale_01</code><timestamp>2019-03-07T18:56:26+01:00</timestamp></retourTraitementMessage></messageRetours></tns:creerPropositionCommercialeResponse></soapenv:Body></soapenv:Envelope>';
-		}else if(methodNode[0].getName() == 'transformerPropositionCommerciale'){
-			expectedResult = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"><soapenv:Body><tns:transformerPropositionCommercialeResponse xmlns:tns="http://gdfsuez/bef/calypso/propositioncommerciale/v5"><transformerPropositionCommercialeOutput><objetsMAJ><propositionCommerciale><idPropositionCommerciale>7022910472</idPropositionCommerciale></propositionCommerciale></objetsMAJ><objetsCrees><contrat><idContrat>0123456789</idContrat><typeContrat>Energie</typeContrat></contrat></objetsCrees></transformerPropositionCommercialeOutput><messageRetours><retourTraitementMessage><id>c924e1c7-8ccf-4240-82bd-8b35f093b584</id><source>Middleware Octopus</source><libelle>Traitement effectué sans erreur</libelle><classe>Fonctionnelle</classe><type>Information</type><code>OCTOPUS_transformerPropositionCommerciale_01</code><timestamp>2017-03-28T11:29:38+01:00</timestamp></retourTraitementMessage></messageRetours></tns:transformerPropositionCommercialeResponse></soapenv:Body></soapenv:Envelope>';
-		}else{
-			expectedResult = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"><soapenv:Body><tns:majPropositionCommercialeResponse xmlns:tns="http://gdfsuez/bef/calypso/propositioncommerciale/v5"><messageRetours><retourTraitementMessage><id>b2b1ad7b-3a3f-486f-9949-8665674deda6</id><source>Middleware Octopus</source><libelle>Traitement effectué sans erreur</libelle><classe>Fonctionnelle</classe><type>Information</type><code>OCTOPUS_MAJPropositionCommerciale_01</code><timestamp>2017-03-28T11:27:58+01:00</timestamp></retourTraitementMessage></messageRetours></tns:majPropositionCommercialeResponse></soapenv:Body></soapenv:Envelope>';
-		}
+    global HTTPResponse respond(HTTPRequest req) {
+        HttpResponse res = new HttpResponse();
+        res.setHeader('Content-Type', 'application/json');
+        DOM.Document responseDoc = new DOM.Document();
+        DOM.Document reqDoc = req.getBodyDocument();
+        DOM.XmlNode rootNode = reqDoc.getRootElement();
+        DOM.XmlNode reqBodyNode = rootNode.getChildElement('Body', 'http://schemas.xmlsoap.org/soap/envelope/');
+        DOM.XmlNode[] methodNode = reqBodyNode.getChildElements();
+        System.debug('@MHA method '+methodNode[0].getName());
+        String expectedResult = '';
+        if(methodNode[0].getName() == 'creerPropositionCommerciale'){
+            expectedResult = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"><soapenv:Body><tns:creerPropositionCommercialeResponse xmlns:tns="http://gdfsuez/bef/calypso/propositioncommerciale/v3"><creerPropositionCommercialeOutput><propositionCommerciale><idPropositionCommerciale>0123456789</idPropositionCommerciale></propositionCommerciale><idContactCPVEnvoi><idDemande>1325005747</idDemande></idContactCPVEnvoi></creerPropositionCommercialeOutput><messageRetours><retourTraitementMessage><id>214f70ce-6ea3-418f-9bca-d798c8678fc0</id><source>Middleware Octopus</source><libelle>Traitement effectué sans erreur</libelle><classe>Fonctionnelle</classe><type>Information</type><code>OCTOPUS_creerPropositionCommerciale_01</code><timestamp>2019-03-07T18:56:26+01:00</timestamp></retourTraitementMessage></messageRetours></tns:creerPropositionCommercialeResponse></soapenv:Body></soapenv:Envelope>';
+        }else if(methodNode[0].getName() == 'transformerPropositionCommerciale'){
+            expectedResult = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"><soapenv:Body><tns:transformerPropositionCommercialeResponse xmlns:tns="http://gdfsuez/bef/calypso/propositioncommerciale/v3"><transformerPropositionCommercialeOutput><objetsMAJ><propositionCommerciale><idPropositionCommerciale>7022910472</idPropositionCommerciale></propositionCommerciale></objetsMAJ><objetsCrees><contrat><idContrat>0123456789</idContrat></contrat></objetsCrees></transformerPropositionCommercialeOutput><messageRetours><retourTraitementMessage><id>c924e1c7-8ccf-4240-82bd-8b35f093b584</id><source>Middleware Octopus</source><libelle>Traitement effectué sans erreur</libelle><classe>Fonctionnelle</classe><type>Information</type><code>OCTOPUS_transformerPropositionCommerciale_01</code><timestamp>2017-03-28T11:29:38+01:00</timestamp></retourTraitementMessage></messageRetours></tns:transformerPropositionCommercialeResponse></soapenv:Body></soapenv:Envelope>';
+        }else{
+            expectedResult = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"><soapenv:Body><tns:majPropositionCommercialeResponse xmlns:tns="http://gdfsuez/bef/calypso/propositioncommerciale/v3"><messageRetours><retourTraitementMessage><id>b2b1ad7b-3a3f-486f-9949-8665674deda6</id><source>Middleware Octopus</source><libelle>Traitement effectué sans erreur</libelle><classe>Fonctionnelle</classe><type>Information</type><code>OCTOPUS_MAJPropositionCommerciale_01</code><timestamp>2017-03-28T11:27:58+01:00</timestamp></retourTraitementMessage></messageRetours></tns:majPropositionCommercialeResponse></soapenv:Body></soapenv:Envelope>';
+        }
 
-		responseDoc.load(expectedResult);
-		res.setBody(responseDoc.toXmlString());
-		res.setStatusCode(200);
-		return res;
-		// Create response element from the autogenerated class.
-		// Populate response element.
-		// Add response element to the response parameter, as follows:
-		//response.put('response_x', responseElement);
-	}
+        responseDoc.load(expectedResult);
+        res.setBody(responseDoc.toXmlString());
+        res.setStatusCode(200);
+        return res;
+        // Create response element from the autogenerated class.
+        // Populate response element.
+        // Add response element to the response parameter, as follows:
+        //response.put('response_x', responseElement);
+    }
 }

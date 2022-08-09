@@ -11,49 +11,80 @@ import getInfoContractData from '@salesforce/apex/HP_EC_LoadCustomerData.getInfo
 import getGrilleTarifaire from '@salesforce/apex/HP_EC_LoadCustomerData.getGrilleTarifaire';
 import isCompteurCommunicantElec from '@salesforce/apex/HP_EC_LoadCustomerData.isCompteurCommunicantElec';
 import isCompteurCommunicantGaz from '@salesforce/apex/HP_EC_LoadCustomerData.isCompteurCommunicantGaz';
+import getAutoReleveData from '@salesforce/apex/HP_EC_LoadCustomerData.getAutoReleveData';
 
-import { publishMC, subscribeMC, unsubscribeMC } from 'c/hp_ec_utl_lightningMessageManager';
+import { publishMC, subscribeMC, unsubscribeMC, getCurrentMessageValue } from 'c/hp_ec_utl_lightningMessageManager';
 
-export default class Hp_ec_myConsumption extends NavigationMixin(LightningElement) {
+export default class hp_ec_myConsumptionSummary extends NavigationMixin(LightningElement) {
 
     @wire(MessageContext) messageContext;
 
     @api titreFirstTab;
-
     @api textPasDeConsommations;
     @api lienSpecifique;
     @api libelleDuLien;
-    @track showTextPasDeConsommations = false;
+
+    @track onConsumptionTab = true;
+    @track onReleveTab = false;
+    @track consumptionTabClass = 'consumption-tab active';
+    @track releveTabClass = 'consumption-tab';
 
     @track idPortefeuilleContrat;
     @track contractInfo;
-
     @track idClient;
     @track contractElec;
     @track contractGaz;
-
     @track currentPdl;
     @track currentPce;
-    
     @track isCommunicantGaz;
     @track isCommunicantElec;
 
+    @track showTextPasDeConsommations_Gaz = false;
+    @track showTextPasDeConsommations_Elec = false;
     @track gasConsumptions = [];
     @track elecConsumptions = [];
-
     // Set to false to see estimated values
-    communicatingMeter = true;
+    @track communicatingMeter = true;
+    @track showValue = true;
+    @track showPrice = false;
+    @track showDetails = false;
+    @track displayDetails = false;
+    @track showGas = true;
+    @track showElec = false;
+    @track isDual = false;
 
-    showValue = true;
-    showPrice = false;
-    showDetails = false;
-    displayDetails = false;
+    // ReleveTab Properties //
+    @api titreSecondTab;
+    @api textProchainePeriodeGaz;
+    @api textProchainePeriodeElec;
+    @api textPeriodeEnCoursGaz;
+    @api textPeriodeEnCoursElec;
+    @api textPeriodeEnCoursResiliation;
 
-    showGas = true;
-    showElec = false;
+    @api titlePopinReleve;
+    @api messageIndexError;
+    @api messageIndexNoValidError;
+    @api customUrlPopinReleve;
+    @api customUrlLabelPopinReleve;
 
-    @track consumptionTabClass = 'consumption-tab active';
-    @track releveTabClass = 'consumption-tab';
+    @api textBlocRose;
+    @api showIconLampBlocRose;
+    @api showIconConfirmBlocRose;
+
+    @api textBlocBleue;
+    @api showIconLampBlocBleue;
+    @api showIconConfirmBlocBleue;
+
+    @track dateProchainePeriodeGaz;
+    @track dateProchainePeriodeElec;
+    @track datePeriodeEnCoursGaz;
+    @track datePeriodeEnCoursElec;
+    @track datePeriodeEnCoursResiliation;
+
+    @track confirmation_date;
+    //////////////////////////
+
+    @track isProcessFinished = false;
 
     date = new Date();
     endDate = new Date();                                                           // Today
@@ -90,6 +121,47 @@ export default class Hp_ec_myConsumption extends NavigationMixin(LightningElemen
         return Math.max(...this.elecConsumptions.map(cons => cons.priceValue), 0) * 1.1;
     }
 
+    get showSwitchEnergy () {
+        return this.isDual;
+    }
+
+    get showTextPasDeConsommations() {
+        if((this.showGas && this.showTextPasDeConsommations_Gaz && this.isProcessFinished) || (this.showElec && this.showTextPasDeConsommations_Elec && this.isProcessFinished))
+            return true;
+        return false;
+    }
+
+    get isPeriodeAR() {
+        if ((this.isPeriodeAR_Gaz || this.isPeriodeAR_Elec) && !this.showConfirmationIndex)
+            return true;
+        return false;
+    }
+
+    get showPeriodeEnCoursElec() {
+        if(this.datePeriodeEnCoursElec && !this.datePeriodeEnCoursResiliation)
+            return true;
+        return false;
+    }
+
+    get showPeriodeEnCoursGaz() {
+        if(this.datePeriodeEnCoursGaz && !this.datePeriodeEnCoursResiliation)
+            return true;
+        return false;
+    }
+
+    get showReleveComponent() {
+        if(this.isProcessFinished && this.retourStatutAutoReleve && (!this.isCommunicantGaz || !this.isCommunicantElec))
+        // if(this.isProcessFinished && (!this.isCommunicantGaz || !this.isCommunicantElec))
+            return true;
+        return false;
+    }
+    
+    get retourStatutAutoReleve() {
+        if(this.retourStatusAutoReleve_gaz || this.retourStatusAutoReleve_elec)
+            return true;
+        return false;
+    }
+
     @wire(getContactData)
     wiredContact({ error, data }) {
         if (data) {
@@ -111,6 +183,8 @@ export default class Hp_ec_myConsumption extends NavigationMixin(LightningElemen
 
     connectedCallback() {
         this.handleSubscription();
+        this.idPortefeuilleContrat = getCurrentMessageValue('SelectedPortfolio');
+        this.getCurrentData();
     }
 
     handleSubscription() {
@@ -120,7 +194,6 @@ export default class Hp_ec_myConsumption extends NavigationMixin(LightningElemen
     } 
 
     handleLightningMessage(self, subscription, message) {
-        console.log('HP EC myConsumption || Message received:', message);
         if (message.messageType == 'SelectedPortfolio') {
             self.idPortefeuilleContrat = message.messageData.message;
             self.getCurrentData();
@@ -128,17 +201,43 @@ export default class Hp_ec_myConsumption extends NavigationMixin(LightningElemen
     }
 
     initializeComponantProperties() {
-        this.showTextPasDeConsommations = false;
-        this.gasConsumptions = [];
-        this.elecConsumptions = [];
+        // this.onConsumptionTab = true;
+        // this.onReleveTab = false;
 
+        this.consoGazResult = null;
+        this.consoElecResult = null;
+
+        this.contractGaz = null;
+        this.contractElec = null;
         this.currentPce = null;
         this.currentPdl = null;
-        this.contractElec = null;
-        this.contractGaz = null;
-        this.typeComptage = null;
+
+        this.isProcessFinished = false;
         this.isCommunicantGaz = null;
         this.isCommunicantElec = null;
+        this.typeComptage = null;
+
+        // ----------Initialize Releve Tab Properties-------- //
+        this.datePeriodeEnCoursGaz = null;
+        this.datePeriodeEnCoursElec = null;
+        this.datePeriodeEnCoursResiliation = null;
+        this.dateProchainePeriodeGaz = null;
+        this.dateProchainePeriodeElec = null;
+
+        this.isPeriodeAR_Elec = false;
+        this.isPeriodeAR_Gaz = false;
+        this.showConfirmationIndex = false;
+
+        this.latest_index_elec = null;
+        this.latest_indexhp_elec = null;
+        this.latest_index_gaz = null;
+        
+        this.retourStatusAutoReleve_gaz = false;
+        this.retourStatusAutoReleve_elec = false;
+
+        // ------Initialize Consumption Tab Properties------ //
+        this.gasConsumptions = [];
+        this.elecConsumptions = [];
 
         this.GAZ_consoTtc = null;
         this.GAZ_consoHtt = null;
@@ -154,6 +253,10 @@ export default class Hp_ec_myConsumption extends NavigationMixin(LightningElemen
         this.ELEC_aboTtc = null;
         this.ELEC_aboHtt = null;
 
+        this.showGas = true;
+        this.showElec = false;
+        this.showTextPasDeConsommations_Gaz = false;
+        this.showTextPasDeConsommations_Elec = false;
     }
 
     async getCurrentData() {
@@ -162,32 +265,202 @@ export default class Hp_ec_myConsumption extends NavigationMixin(LightningElemen
             const contractJson = await this.getContractdata();
             this.contractInfo = JSON.parse(contractJson);
         }
-        // console.log('HP_EC_myConsumption || this.contractInfo :' + this.contractInfo);
+        // console.log('HP_EC_hp_ec_myConsumptionSummary || this.contractInfo :' + this.contractInfo);
 
         if(this.contractInfo) {
+            let contractCount = 0;
             this.contractInfo._data.forEach(c => {
                 if (c.idPortefeuilleContrat == this.idPortefeuilleContrat && (c.codeStatutCrm == 'H0105' || c.codeStatutCrm == 'H0101' ||
                     c.codeStatutCrm == 'H0102' || c.codeStatutCrm == 'E0004' || c.codeStatutCrm == 'E0007')) {
-                        c.energie == 'Electricité' ? this.contractElec = c : this.contractGaz = c;
+                        if(c.energie == 'Electricité') {
+                            this.contractElec = c;
+                            contractCount++;
+                        } else if(c.energie == 'Gaz Naturel') {
+                            this.contractGaz = c;
+                            contractCount++;
+                        }
                 }
             });
+            contractCount == 2 ? this.isDual = true : this.isDual = false;                
         }
 
         if(this.contractGaz) {
-            // return;
-            console.log('HP_EC_myConsumption || this.contractGaz.id : ' + this.contractGaz.id);
-            // Step 1 : Get numéro PCE
+            console.log('Contract Gaz : '+this.contractGaz.id);
+
             const INFO_CONTRACT_RESULT = await this.getInfoContractData(this.contractGaz.id.toString());
             const PARSED_INFO_CONTRACT_RESULT = JSON.parse(INFO_CONTRACT_RESULT);
             this.currentPce = PARSED_INFO_CONTRACT_RESULT.output.pdl;
-            console.log('HP_EC_myConsumption || this.currentPce :' + this.currentPce);
 
-            // Step 2 : Get typeComptage, prix htt, prix ttc
+            if (this.currentPce) {
+                const CONSO_GAZ_RESULT = await this.getConsoGaz(this.idClient, this.currentPce);
+                const PARSED_CONSO_GAZ_RESULT = JSON.parse(CONSO_GAZ_RESULT);
+                if (PARSED_CONSO_GAZ_RESULT.status === 'SUCCESS') {
+                    this.consoGazResult = PARSED_CONSO_GAZ_RESULT.output;
+                    let latest_date_fin = new Date(1970, 1, 1);
+                    let latest_index_fin = 0;
+                    PARSED_CONSO_GAZ_RESULT.output.forEach(elem => {
+                        const myArray = elem.date_releve.split("/");
+                        const newFormat = myArray[2] + '-' + myArray[1] + '-' + myArray[0];
+                        const date_releve = new Date(newFormat);
+                        if ((elem.id_facture != null) && (date_releve > latest_date_fin)) {
+                            latest_date_fin = date_releve;
+                            latest_index_fin = elem.index_fin;
+                        }
+                    });
+                    this.latest_index_gaz = latest_index_fin;
+                }
+                const IS_COMPTEUR_COMMUNICANT_GAZ = await this.isCompteurCommunicantGaz(this.currentPce, this.latest_index_gaz);
+                console.log('IS_COMPTEUR_COMMUNICANT_GAZ : '+JSON.stringify(IS_COMPTEUR_COMMUNICANT_GAZ));
+                if(IS_COMPTEUR_COMMUNICANT_GAZ.status == 200) {
+                    this.isCommunicantGaz = IS_COMPTEUR_COMMUNICANT_GAZ.data;
+                }
+                console.log('isCommunicantGaz new : '+this.isCommunicantGaz);
+                
+            }
+        }
+
+        if (this.contractElec) {
+            console.log('Contract Elec : '+this.contractElec.id);
+
+            const INFO_CONTRACT_RESULT = await this.getInfoContractData(this.contractElec.id.toString());
+            const PARSED_INFO_CONTRACT_RESULT = JSON.parse(INFO_CONTRACT_RESULT);
+            this.currentPdl = PARSED_INFO_CONTRACT_RESULT.output.pdl;
+
+            if (this.currentPdl) {
+                const CONSO_ELEC_RESULT = await this.getConsoElec(this.idClient, this.currentPdl);
+                const PARSED_CONSO_ELEC_RESULT = JSON.parse(CONSO_ELEC_RESULT);
+                if (PARSED_CONSO_ELEC_RESULT.status === 'SUCCESS') {
+                    this.consoElecResult = PARSED_CONSO_ELEC_RESULT.output;
+                    let latest_date_fin = new Date(1970, 1, 1);
+                    let latest_date_fin_indexhp = new Date(1970, 1, 1);
+                    let latest_index_fin = 0;
+                    let latest_indexhp_fin = 0;
+                    PARSED_CONSO_ELEC_RESULT.output.forEach(elem => {
+                        const myArray = elem.date_releve.split("/");
+                        const newFormat = myArray[2] + '-' + myArray[1] + '-' + myArray[0];
+                        const date_releve = new Date(newFormat);
+                        if ((elem.id_facture != null) && (date_releve > latest_date_fin) && (elem.rang_cadran == 1)) {
+                            latest_date_fin = date_releve;
+                            latest_index_fin = elem.index_fin;
+                        }
+                        if ((elem.id_facture != null) && (date_releve > latest_date_fin_indexhp) && (elem.rang_cadran == 2)) {
+                            latest_date_fin_indexhp = date_releve;
+                            latest_indexhp_fin = elem.index_fin;
+                        }
+                    });
+                    this.latest_index_elec = latest_index_fin;
+                }
+
+                const IS_COMPTEUR_COMMUNICANT_ELEC = await this.isCompteurCommunicantElec(this.currentPdl, this.latest_index_elec);
+                console.log('IS_COMPTEUR_COMMUNICANT_ELEC : '+JSON.stringify(IS_COMPTEUR_COMMUNICANT_ELEC));
+
+                if(IS_COMPTEUR_COMMUNICANT_ELEC.status == 200) {
+                    this.isCommunicantElec = IS_COMPTEUR_COMMUNICANT_ELEC.data;
+                }
+                console.log('isCommunicantElec new : '+this.isCommunicantElec);
+                
+            }
+        }
+        
+        await this.releveTabProcess();
+        await this.consumptionTabProcess();
+        
+        this.isProcessFinished = true;
+        console.log('Show Releve Tab : '+this.showReleveComponent);
+    }
+
+    async releveTabProcess() {
+        // if(this.onReleveTab ==  false)
+        //     return;
+
+        if(this.contractGaz) {
+            // Get Période AR infos
+            const gazAutoReleveDataResult = await this.getAutoReleveData(this.contractGaz.id);
+            const gazAutoReleveDataResult_parsed = JSON.parse(gazAutoReleveDataResult);
+
+            if (gazAutoReleveDataResult_parsed.status == 'SUCCESS') {
+                this.retourStatusAutoReleve_gaz = true;
+                if (gazAutoReleveDataResult_parsed.output.statut_ar) {
+                    console.log('Gaz, Période AR ouverte !');
+                    const DATE_FIN_PERIODE = formatDateToString(new Date(gazAutoReleveDataResult_parsed.output.date_fin_periode));
+                    if(this.contractGaz.codeStatutCrm == 'E0007' || this.contractGaz.codeStatutCrm == 'E0009') {
+                        this.datePeriodeEnCoursResiliation = DATE_FIN_PERIODE; // date 5
+                    } else {
+                        this.datePeriodeEnCoursGaz = DATE_FIN_PERIODE; // date 3
+                    }
+                    this.isPeriodeAR_Gaz = true;
+                } else {
+                    console.log('Gaz, Période AR non ouverte !');
+                    const DATE_DEBUT_PROCHAINE_RELEVE = formatDateToString(new Date(gazAutoReleveDataResult_parsed.output.date_debut_prochaine_releve));
+                    const DATE_FIN_PROCHAINE_RELEVE = formatDateToString(new Date(gazAutoReleveDataResult_parsed.output.date_fin_prochaine_releve));
+                    // date 1
+                    this.dateProchainePeriodeGaz = DATE_DEBUT_PROCHAINE_RELEVE + ' au ' + DATE_FIN_PROCHAINE_RELEVE;
+                }
+            }
+            if(gazAutoReleveDataResult_parsed.status == 'FAILED') {
+                console.log("Prestation d'auto-relève non activée sur ce contrat gaz. "+this.contractGaz.id);
+            }
+        } else {
+            this.isCommunicantGaz = true;
+        }
+
+        if (this.contractElec) {        
+            // Main Part : Get Période AR infos
+            const elecAutoReleveDataResult = await this.getAutoReleveData(this.contractElec.id);
+            const elecAutoReleveDataResult_parsed = JSON.parse(elecAutoReleveDataResult);
+
+            if (elecAutoReleveDataResult_parsed.status == 'SUCCESS') { 
+                this.retourStatusAutoReleve_elec = true;
+                if (elecAutoReleveDataResult_parsed.output.statut_ar) {
+                    console.log('Elec, Période AR ouverte !');
+                    const DATE_FIN_PERIODE = formatDateToString(new Date(elecAutoReleveDataResult_parsed.output.date_fin_periode))
+                    
+                    if(this.contractElec.codeStatutCrm == 'E0007' || this.contractElec.codeStatutCrm == 'E0009') {
+                        if(this.datePeriodeEnCoursResiliation < DATE_FIN_PERIODE) 
+                            this.datePeriodeEnCoursResiliation = DATE_FIN_PERIODE; // date 5
+                    } else {
+                        this.datePeriodeEnCoursElec = DATE_FIN_PERIODE; // date 4
+                    }
+
+                    // Get type comptage
+                    const dateDebutValiditeUs = new Date(this.contractElec.dateDebutValidite);
+                    const dateDebutValiditeFr = ("0" + dateDebutValiditeUs.getDate()).slice(-2) + "/" + ("0" + (dateDebutValiditeUs.getMonth() + 1)).slice(-2) + "/" + dateDebutValiditeUs.getFullYear();
+                    const grilleTarifaireResult = await this.getGrilleTarifaire(this.contractElec.id.toString(), dateDebutValiditeFr);
+                    const grilleTarifaireResult_parsed = JSON.parse(grilleTarifaireResult);
+                    // console.log('grilleTarifaireResult : '+grilleTarifaireResult);
+                    if (grilleTarifaireResult_parsed?.status == 'SUCCESS') {
+                        this.typeComptage = grilleTarifaireResult_parsed.elecTypeComptage;
+                        // console.log('this.typeComptage : ' + this.typeComptage);
+                    }
+                    this.isPeriodeAR_Elec = true;
+
+                } else {
+                    console.log('Elec, Période AR non ouverte !');
+                    const DATE_DEBUT_PROCHAINE_RELEVE = formatDateToString(new Date(elecAutoReleveDataResult_parsed.output.date_debut_prochaine_releve));
+                    const DATE_FIN_PROCHAINE_RELEVE = formatDateToString(new Date(elecAutoReleveDataResult_parsed.output.date_fin_prochaine_releve));
+                    // date 2
+                    this.dateProchainePeriodeElec = DATE_DEBUT_PROCHAINE_RELEVE + ' au ' + DATE_FIN_PROCHAINE_RELEVE;
+                }
+            }
+            if (elecAutoReleveDataResult_parsed.status == 'FAILED') {
+                console.log("Prestation d'auto-relève non activée sur ce contrat elec. " + this.contractElec.id);
+            }
+        } else {
+            this.isCommunicantElec = true;
+        }
+    }
+
+    async consumptionTabProcess() {
+        // if(this.onConsumptionTab ==  false)
+        // return;
+
+        if(this.contractGaz) {
+            // Step 1 : Get typeComptage, prix htt, prix ttc
             const dateDebutValiditeUs = new Date(this.contractGaz.dateDebutValidite);
             const dateDebutValiditeFr = ("0" + dateDebutValiditeUs.getDate()).slice(-2) + "/" + ("0" + (dateDebutValiditeUs.getMonth() + 1)).slice(-2) + "/" + dateDebutValiditeUs.getFullYear();
             const grilleTarifaireResult = await this.getGrilleTarifaire(this.contractGaz.id.toString(), dateDebutValiditeFr);
             const grilleTarifaireResult_parsed = JSON.parse(grilleTarifaireResult);
-            console.log('HP_EC_myConsumption || grilleTarifaireResult Gaz: '+grilleTarifaireResult);
+            // console.log('HP_EC_hp_ec_myConsumptionSummary || grilleTarifaireResult Gaz: '+grilleTarifaireResult_parsed.status);
             if (grilleTarifaireResult_parsed?.status == 'SUCCESS') {
                 grilleTarifaireResult_parsed.consos.forEach(conso => {
                     if(conso.typeConso == 'index conso gaz') {
@@ -199,59 +472,22 @@ export default class Hp_ec_myConsumption extends NavigationMixin(LightningElemen
                 this.GAZ_aboHtt = grilleTarifaireResult_parsed.aboHt;
             }
 
-            // Step 3 : Get consommations gaz
-            if (this.currentPce) {
-                console.log('this.idClient : '+this.idClient);
-                console.log('this.currentPce : '+this.currentPce);
-                const CONSO_GAZ_RESULT = await this.getConsoGaz(this.idClient, this.currentPce);
-                const PARSED_CONSO_GAZ_RESULT = JSON.parse(CONSO_GAZ_RESULT);
-                console.log('HP_EC_myConsumption || CONSO_GAZ :', JSON.stringify(PARSED_CONSO_GAZ_RESULT));
-                if (PARSED_CONSO_GAZ_RESULT.status == "SUCCESS") {
-                    console.log('HP_EC_myConsumption || PARSED_CONSO_GAZ_RESULT status success');
-                    this.consoGazResult = PARSED_CONSO_GAZ_RESULT.output;
+            // Step 2 : Generate Gaz Consumptions Data Per Conso
+            this.gasConsumptions = this.generateGazConsumptionsPerConso();
+            this.gasConsumptions?.splice(12,this.gasConsumptions.length - 12);
+            console.log('HP_EC_hp_ec_myConsumptionSummary || this.gasConsumptions : '+JSON.stringify(this.gasConsumptions));
 
-                    // START OF: check if compteur gaz communicant //
-                    let latest_date_fin = new Date(1970, 1, 1);
-                    let latest_index_fin = 0;
-                    PARSED_CONSO_GAZ_RESULT.output.forEach(elem => {
-                        const DATE_RELEVE = getDate(elem.date_releve);
-                        if ((elem.id_facture != null) && (DATE_RELEVE > latest_date_fin)) {
-                            latest_date_fin = DATE_RELEVE;
-                            latest_index_fin = elem.index_fin;
-                        }
-                    });
-                    const LATEST_INDEX_GAZ = latest_index_fin;
-                    console.log('LATEST_INDEX_GAZ : ' + LATEST_INDEX_GAZ);
-
-                    const IS_COMPTEUR_COMMUNICANT_GAZ = await this.isCompteurCommunicantGaz(this.currentPce, LATEST_INDEX_GAZ);
-                    this.isCommunicantGaz = JSON.parse(IS_COMPTEUR_COMMUNICANT_GAZ)?.data;
-                    console.log('isCommunicantGaz : '+this.isCommunicantGaz);
-                    // END OF: check if compteur gaz communicant  //
-
-                    this.gasConsumptions = this.generateGazConsumptionsPerConso();
-                    this.gasConsumptions.splice(12,this.gasConsumptions.length - 12);
-                    console.log('HP_EC_myConsumption || this.gasConsumptions : '+JSON.stringify(this.gasConsumptions));
-                }                
-            }
             // Final step: Après organization Data, afficher le gaz et masquer l'elec
-            this.showGas = true;
-            this.showElec = false;
+            this.handleType({detail: 'gas'});
         }
 
         if(this.contractElec) {
-            console.log('HP_EC_myConsumption || this.contractElec.id : ' + this.contractElec.id);
-            // Step 1 : Get numéro PDL
-            const INFO_CONTRACT_RESULT = await this.getInfoContractData(this.contractElec.id.toString());
-            const PARSED_INFO_CONTRACT_RESULT = JSON.parse(INFO_CONTRACT_RESULT);
-            this.currentPdl = PARSED_INFO_CONTRACT_RESULT.output.pdl;
-            console.log('HP_EC_myConsumption || this.currentPdl :' + this.currentPdl);
-
-            // Step 2 : Get typeComptage, prix htt, prix ttc
+            // Step 1 : Get typeComptage, prix htt, prix ttc
             const dateDebutValiditeUs = new Date(this.contractElec.dateDebutValidite);
             const dateDebutValiditeFr = ("0" + dateDebutValiditeUs.getDate()).slice(-2) + "/" + ("0" + (dateDebutValiditeUs.getMonth() + 1)).slice(-2) + "/" + dateDebutValiditeUs.getFullYear();
             const grilleTarifaireResult = await this.getGrilleTarifaire(this.contractElec.id.toString(), dateDebutValiditeFr);
             const grilleTarifaireResult_parsed = JSON.parse(grilleTarifaireResult);
-            // console.log('HP_EC_myConsumption || grilleTarifaireResult elec: '+grilleTarifaireResult);
+            // console.log('HP_EC_hp_ec_myConsumptionSummary || grilleTarifaireResult elec: '+grilleTarifaireResult);
             if (grilleTarifaireResult_parsed?.status == 'SUCCESS') {
                 this.typeComptage = grilleTarifaireResult_parsed.elecTypeComptage;
                 if(this.typeComptage == 'Comptage simple') {
@@ -273,40 +509,37 @@ export default class Hp_ec_myConsumption extends NavigationMixin(LightningElemen
                 this.ELEC_aboHtt = grilleTarifaireResult_parsed.aboHt;
             }
 
-            // Step 3 : Get consommations elec
-            if (this.currentPdl) {
-                console.log('this.idClient : '+this.idClient)
-                console.log('this.currentPdl : '+this.currentPdl)
-                const CONSO_ELEC_RESULT = await this.getConsoElec(this.idClient, this.currentPdl);
-                const PARSED_CONSO_ELEC_RESULT = JSON.parse(CONSO_ELEC_RESULT);
-                console.log('HP_EC_myConsumption || elecData:', CONSO_ELEC_RESULT);
-                if(PARSED_CONSO_ELEC_RESULT.status == "SUCCESS") {
-                    this.consoElecResult = PARSED_CONSO_ELEC_RESULT.output;
-                    this.elecConsumptions = this.generateElecConsumptionsPerConso();
-                    console.log('HP_EC_myConsumption || this.elecConsumptions :' + JSON.stringify(this.elecConsumptions));
-                }
-    
-                console.log('HP_EC_myConsumption || this.elecConsumptions :' + JSON.stringify(this.elecConsumptions));
-                // Final step: Après organization Data, afficher le gaz et masquer l'elec 
-                if(this.gasConsumptions?.length == 0) { 
-                    this.handleType({detail: 'elec'});
-                }
-            }
+            // Step 2 : Generate Elec Consumptions Data Per Conso
+            this.elecConsumptions = this.generateElecConsumptionsPerConso();
+            console.log('HP_EC_hp_ec_myConsumptionSummary || this.elecConsumptions :' + JSON.stringify(this.elecConsumptions));
 
+            // Final step: Après organization Data, afficher l'elec
+            if(!this.contractGaz) {
+                this.handleType({detail: 'elec'});
+            }
+                
         }
 
-        (this.gasConsumptions?.length == 0 && this.elecConsumptions?.length == 0) ? this.showTextPasDeConsommations = true: this.showTextPasDeConsommations = false;
+        this.gasConsumptions?.length == 0 ? this.showTextPasDeConsommations_Gaz = true: this.showTextPasDeConsommations_Gaz = false;
+        this.elecConsumptions?.length == 0 ? this.showTextPasDeConsommations_Elec = true: this.showTextPasDeConsommations_Elec = false;
     }
 
     switchToConsumptionTab() {
         this.consumptionTabClass = 'consumption-tab active';
         this.releveTabClass = 'consumption-tab';
-        
+        this.onConsumptionTab = true;
+        this.onReleveTab = false;
+
+        // this.getCurrentData();
     }
 
     switchToReleveTab() {
         this.releveTabClass = 'consumption-tab active';
         this.consumptionTabClass = 'consumption-tab';
+        this.onConsumptionTab = false;
+        this.onReleveTab = true;
+
+        // this.getCurrentData();
     }
 
     handleType(event) {
@@ -331,9 +564,28 @@ export default class Hp_ec_myConsumption extends NavigationMixin(LightningElemen
         this[NavigationMixin.Navigate](config);
     }
 
+    hanldeEnvoieIndexEvent(event) {
+        console.log('event.detail in hp_ec_releve  .. : '+ JSON.stringify(event.detail));
+
+        this.confirmation_date = formatDateToString(new Date(Date.now()));
+        console.log('this.confirmation_date : '+this.confirmation_date);
+
+      if(event.detail.isGaz && event.detail.status == 'SUCCESS') {
+        this.datePeriodeEnCoursGaz = null;
+        this.dateProchainePeriodeGaz = event.detail.prochaine_releve_debut;
+        this.showConfirmationIndex = true;
+      }
+
+      if(event.detail.isElec && event.detail.status == 'SUCCESS') {
+        this.datePeriodeEnCoursElec = null;
+        this.dateProchainePeriodeElec = event.detail.prochaine_releve_debut;
+        this.showConfirmationIndex = true;
+      }
+    }
+
     generateGazConsumptionsPerConso() {
         if(!this.consoGazResult)
-            return null;
+            return [];
 
         var gasConsumptionsArray = [];
         this.consoGazResult.forEach(item => {
@@ -363,7 +615,7 @@ export default class Hp_ec_myConsumption extends NavigationMixin(LightningElemen
 
     generateElecConsumptionsPerConso() {
         if(!this.consoElecResult)
-            return null;
+            return [];
 
         var elecConsumptionsArray = [];
         this.consoElecResult.forEach(item => {
@@ -460,10 +712,13 @@ export default class Hp_ec_myConsumption extends NavigationMixin(LightningElemen
         return new Promise(async (resolve, reject) => {
             var result = await isCompteurCommunicantElec({ pdl: pdl, index: index})
                 .then(response => {
+                    response = JSON.parse(response);
+                    response.status = 200;
                     return response;
                 }).catch(error => {
                     console.log('***Error isCompteurCommunicantElec : ' + JSON.stringify(error));
                     return error;
+                    // return {"key":"isCompteurCommunicantElec","data":null,"status":"FAILED"};
                 });
             resolve(result);
         })
@@ -473,9 +728,24 @@ export default class Hp_ec_myConsumption extends NavigationMixin(LightningElemen
         return new Promise(async (resolve, reject) => {
             var result = await isCompteurCommunicantGaz({ pce: pce, index: index})
                 .then(response => {
+                    response = JSON.parse(response);
+                    response.status = 200;
                     return response;
                 }).catch(error => {
                     console.log('***Error isCompteurCommunicantGaz : ' + JSON.stringify(error));
+                    return error;
+                });
+            resolve(result);
+        })
+    }
+
+    async getAutoReleveData(contractId) {
+        return new Promise(async (resolve, reject) => {
+            var result = await getAutoReleveData({ id_contrat_xdata: contractId })
+                .then(response => {
+                    return response;
+                }).catch(error => {
+                    console.log('***Error getAutoReleveData : ' + JSON.stringify(error));
                     return error;
                 });
             resolve(result);

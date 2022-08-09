@@ -13,7 +13,7 @@ global class SM_AP62_Consentement_Test {
 		Test.startTest();     
 		Map<String, Object> outputMap = new Map<String, Object>();
 		Map<String, Object> inputMap = new Map<String, Object>();     
-		List<Object> listConsentement= SM_AP62_MockConsentement.generateConsentementString() ;
+		List<Object> listConsentement= SM_AP62_MockConsentement.generateConsentement() ;
 		Map<String, Object> infosDR = new Map<String, Object>();
 		infosDR.put('idPersonne', '49131');        
 		inputMap.put('CreerCorrespondance',infosDR); // remplace DRResponse  

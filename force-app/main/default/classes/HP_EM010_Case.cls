@@ -3,12 +3,12 @@
  * @Description        :
  * @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
  * @Group              :
- * @Last Modified By   : Badr Eddine Belkarchi
+ * @Last Modified By   : ChangeMeIn@UserSettingsUnder.SFDoc
 
 
 
 
- * @Last Modified On   : 02-17-2022
+ * @Last Modified On   : 03-14-2022
 
 
 
@@ -23,7 +23,7 @@
 public with sharing class HP_EM010_Case {
 
 	public static Case createCaseFromAPI(Id contactId, String context, String description, String firstname, String lastname, String email, Id souscription, 
-							Id portefeuilleContratId, Id contratId, String pdl, String energie, Boolean clientAide){
+							Id portefeuilleContratId, Id contratId, String pdl, String energie, Boolean clientAide, Double montant_paiement){
 
 		Case c = new Case();
 		c.ContactId = contactId;
@@ -74,6 +74,21 @@ public with sharing class HP_EM010_Case {
 				c.OwnerId = HP_UTIL_QueueManager.getQueueIdByName('HP_Niveau_1');
 				c.HP_Energy__c = energie;
 				c.Priority = 'High';
+				c.HP_Client_Aide__c = clientAide;
+				insert c;
+			}
+			when 'Retablissement' {
+				c.ContactId = contactId;
+				c.Portefeuille_Contrat_Happe__c = portefeuilleContratId;
+				c.HP_Contrat__c = contratId;
+				c.HP_PDL_PCE__c = pdl;
+				c.RecordTypeId = HP_UTIL_RecordType.getRecordTypeId('Case','HP_Facturation');
+				c.HP_Type__c = 'HP_Retablissement';
+				c.Status = 'TO_DO';
+				c.OwnerId = HP_UTIL_QueueManager.getQueueIdByName('HP_Niveau_1');
+				c.HP_Energy__c = energie;
+				c.Priority = 'High';
+				c.HP_MontantPaiementRecu__c = montant_paiement;
 				c.HP_Client_Aide__c = clientAide;
 				insert c;
 			}
@@ -129,7 +144,8 @@ public with sharing class HP_EM010_Case {
 	* @return List<Case> 
 	**/
 	public static List<Case> loadCase(Id caseId){
-		return [select Id,OwnerId,IsClosed, HP_DateReponseEmailConseiller__c, HP_isHappe__c, HP_TECH_ExternalId__c , HP_Energy__c, Description, ContactId, HP_Souscription__r.HP_Souscription_Digital_Id__c, Etat_du_Case__c from case where Id = : caseId];
+		return [select Id,OwnerId,IsClosed, HP_DateReponseEmailConseiller__c, HP_isHappe__c, HP_TECH_ExternalId__c , HP_Energy__c, Description, ContactId, HP_Souscription__r.HP_Souscription_Digital_Id__c, Etat_du_Case__c, 
+						Status, HP_Type__c, HP_Sous_type__c, HP_Comment__c  from case where Id = : caseId];
 	}
 
 

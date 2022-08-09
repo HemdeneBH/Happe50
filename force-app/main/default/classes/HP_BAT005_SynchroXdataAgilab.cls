@@ -22,7 +22,6 @@ global class HP_BAT005_SynchroXdataAgilab implements Database.Batchable<sObject>
     
 
 
-
     global static void launchNewScheduler(String schedule, String jobName){
 		System.schedule(jobName, schedule, new HP_BAT005_SynchroXdataAgilab());
     }
@@ -31,7 +30,6 @@ global class HP_BAT005_SynchroXdataAgilab implements Database.Batchable<sObject>
 		execute();
 	}
     
-
 
 
     global static void execute(){
@@ -80,7 +78,7 @@ global class HP_BAT005_SynchroXdataAgilab implements Database.Batchable<sObject>
         }
         if(pfcList.size() > 0) {
             upsert pfcList Xdata_Id__c;
-           }
+        }
         if(contList.size() > 0) {
             upsert contList HP_Contrat_XdataId__c;
         }

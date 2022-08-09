@@ -16,27 +16,36 @@ public class HP_SM032_OmnichannelSkillsRoutage_TEST {
 
         Case c1 = (Case) HP_UTIL_SmartFactory.createSObject('Case','HP_PrestationDistributeur', new Map<String, Object> {
             'Status' => 'NEW_CASE',
+
             'Priority' => 'Low',
             'Origin' => 'Contact distributeur',
+
             'HP_Type__c' => 'HP_MANUAL_PROCESS',
+
             'OwnerId' => queuesMap.get(queueDeveloperName.get(0)).Id
             }, null,null,null);
         caseList.add(c1);
 
         Case c2 = (Case) HP_UTIL_SmartFactory.createSObject('Case','HP_PrestationDistributeur', new Map<String, Object> {
             'Status' => 'NEW_CASE',
+
             'Priority' => 'Low',
             'Origin' => 'Contact distributeur',
+
             'HP_Type__c' => 'HP_MANUAL_PROCESS',
+
             'OwnerId' => queuesMap.get(queueDeveloperName.get(1)).Id
             }, null,null,null);
         caseList.add(c2);
 
         Case c3 = (Case) HP_UTIL_SmartFactory.createSObject('Case','HP_PrestationDistributeur', new Map<String, Object> {
             'Status' => 'NEW_CASE',
+
             'Priority' => 'Low',
             'Origin' => 'Contact distributeur',
+
             'HP_Type__c' => 'HP_MANUAL_PROCESS',
+
             'OwnerId' => queuesMap.get(queueDeveloperName.get(2)).Id
             }, null,null,null);
         caseList.add(c3);
@@ -54,10 +63,10 @@ public class HP_SM032_OmnichannelSkillsRoutage_TEST {
         Test.startTest();
         HP_SM032_OmnichannelSkillsRoutage.routeUsingSkills(casesId);
         Test.stopTest();        
-        /*
+        
        	cases = [SELECT Id, Priority FROM Case];
         for(Case c : cases) {
             System.assert(c.Priority == 'Medium');
-        }*/
+        }
     }
 }

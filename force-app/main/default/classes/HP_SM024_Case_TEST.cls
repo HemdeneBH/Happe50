@@ -826,7 +826,7 @@ public with sharing class HP_SM024_Case_TEST {
         
 
     }
-    
+
     @istest
     static void reaffectCase(){
          Case caseN1 = (Case) HP_UTIL_SmartFactory.createSObject('Case','HP_Chat', new Map<String, Object> {

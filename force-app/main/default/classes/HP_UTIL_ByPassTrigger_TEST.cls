@@ -14,22 +14,17 @@ public with sharing class HP_UTIL_ByPassTrigger_TEST {
 
 	@TestSetup
 	static void makeData(){
-		System.runAs(HP_UTIL_SmartFactory.insertUserHP()){    
-			ByPassSettings__c oTriggerByPass = (ByPassSettings__c)HP_UTIL_SmartFactory.createSObject('ByPassSettings__c',new Map<String, Object> {
-				'HP_ContactTrigger__c' => false
-			},null);
-			insert oTriggerByPass;      
-        }
+		ByPassSettings__c oTriggerByPass = (ByPassSettings__c)HP_UTIL_SmartFactory.createSObject('ByPassSettings__c',new Map<String, Object> {
+			'HP_ContactTrigger__c' => false
+		},null);
+		insert oTriggerByPass;
 	}
 
 	@isTest
 	static void isByPassTrigger(){
-		System.runAs(HP_UTIL_SmartFactory.runAsUserHP()){
-			Test.startTest();
-			Boolean bool = HP_UTIL_ByPassTrigger.isByPassTrigger('HP_ContactTrigger__c');
-			Test.stopTest();
-			System.assert (bool == false, 'ByPassrule on Contact');
-		}
-		
+		Test.startTest();
+		Boolean bool = HP_UTIL_ByPassTrigger.isByPassTrigger('HP_ContactTrigger__c');
+		Test.stopTest();
+		System.assert (bool == false, 'ByPassrule on Contact');
 	}
 }

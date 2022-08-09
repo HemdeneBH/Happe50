@@ -23,8 +23,7 @@ global class SM_EspaceClientResendActivatonEmail implements vlocity_cmt.VlocityO
         String ibBpStr = (String)idbp;
         String IbpTruncate = ibBpStr.removeStart('0');
         Map < String, Object > contactInfos = (map<String,Object>)inputMap.get('ContactInfo');
-        //Object contactEmail = contactInfos.get('email');
-        Object contactEmail = contactInfos.get('EmailPrincipale');
+        Object contactEmail = contactInfos.get('email');
         mailActivationMap.put('numeroBP',IbpTruncate);
         mailActivationMap.put('email',contactEmail);
         String resendEmailResp = SM_AP72_EspaceClientService.renvoyerMailActivation(mailActivationMap);

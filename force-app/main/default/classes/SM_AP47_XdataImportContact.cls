@@ -1,4 +1,6 @@
-public with sharing class SM_AP47_XdataImportContact {
+@RestResource(urlMapping='/contact/*')
+
+global with sharing class SM_AP47_XdataImportContact {
 
 
 	static final Schema.SObjectField acExtNo = Account.Fields.No_Compte_contrat__c;
@@ -10,14 +12,14 @@ public with sharing class SM_AP47_XdataImportContact {
 	static Id ctRectid = SM_AP45_XdataImportUtils.getRecTypeId(Contact.sObjectType,'Contact_Smile');
 	static Id acRectid = SM_AP45_XdataImportUtils.getRecTypeId(Account.sObjectType, 'Consumer');
 
-	/*	
-	// liste des champs pour le suivi de fraicheur des coordonnees client
+/*	// liste des champs pour le suivi de fraicheur des coordonnees client
 	static String[] mapEltsad = new List<String> {'derniereModificationAdressePostale','mailingStreet','mailingStreetNumber','complementAdresse','mailingPostCode','mailingCity'};
 	static String[] mapEltstel = new List<String> {'derniereModificationFixePrincipal','telFixePrincipal','telFixe1','telFixe2','telFixe3'};
 	static String[] mapEltsmob = new List<String> {'derniereModificationMobilePrincipal','mobilePrincipal','mobile1','mobile2','mobile3'};
 	static String[] mapEltsmail = new List<String> {'derniereModificationMailPrincipal','adresseMailPrincipale','adresseMail1','adresseMail2','adresseMail3'};
-	*/
-	public static String importContacts(List<Map<String,String>> contacts) {
+*/
+	@HttpPost
+	global static String importContacts(List<Map<String,String>> contacts) {
 
 		// TODO: lire le numéro de version de l'url – adapter le traitement à la version de code, la table de correspondance
 
@@ -67,14 +69,12 @@ public with sharing class SM_AP47_XdataImportContact {
 			//System.debug('updating contact: ' +  JSON.serialize(ct));
 
 			try{
-				/*				
-				if(ctInDb != null){
+/*				if(ctInDb != null){
 					manageUpdateIfNewer(ct, 'derniereModificationAdressePostale', ctInDb.Date_de_derniere_modification_codePostal__c, mapEltsad);
 					manageUpdateIfNewer(ct, 'derniereModificationFixePrincipal', ctInDb.Date_de_derniere_modification_phone__c, mapEltstel);
 					manageUpdateIfNewer(ct, 'derniereModificationMobilePrincipal', ctInDb.Date_de_derniere_modification_mobile__c, mapEltsmob);
 					manageUpdateIfNewer(ct, 'derniereModificationMailPrincipal', ctInDb.Date_de_derniere_modification_email__c, mapEltsmail);
-				} 
-				*/
+				} */
 
 				Contact ct1 = ctsAll.get(ctno1);
 				if(ct1==null){
@@ -154,28 +154,10 @@ public with sharing class SM_AP47_XdataImportContact {
 		// 4- enregistrement en base des contacts
 		if(! ctsAll.isEmpty()){
             List<Contact> listContacts = ctsAll.values();
-            for(Integer i = 0; i< listContacts.size(); i++){
-                Contact myContact = listContacts[i];
+            for(Contact myContact : listContacts){
                 if(myContact.Account != null && myContact.accountId != null){
                     // résolution du bug "Cannot specify both an external ID reference and a salesforce id"
-                    // on supprime le champ AccountId quand Account est renseigné
-					
-					/* 
-					if (myContact.Email == null && Adresse_Mail_2__c == null && myContact.Adresse_Mail_3__c == null && myContact.Adresse_Mail_Principale__c != null) {
-						myContact.Adresse_Mail_Principale__c = null;
-					}
-					if (myContact.Phone == null && Tel_Fixe_2__c == null && myContact.Tel_Fixe_3__c == null && myContact.Tel_Fixe_Principal__c != null) {
-						myContact.Tel_Fixe_Principal__c = null;
-					}
-					if (myContact.MobilePhone == null && Mobile_2__c == null && myContact.Mobile_3__c == null && myContact.Mobile_Principal__c != null) {
-						myContact.Mobile_Principal__c = null;
-					}
-					*/
-
-                    Map<String, Object> myContactMap = new Map<String, Object>(myContact.getPopulatedFieldsAsMap() );
-                    myContactMap.remove('AccountId'); // Attention : case sensitive
-                    listcontacts[i] = (Contact) JSON.deserialize(JSON.serialize(myContactMap), Contact.class);
-                    
+                    myContact.accountId = null;
                 }
             }
 			Database.UpsertResult[] srList = Database.upsert(listContacts,ctExtNo, false);
@@ -185,7 +167,7 @@ public with sharing class SM_AP47_XdataImportContact {
 		return 'ok' ;
 	}
 
-	/*	
+/*	
 	static void manageUpdateIfNewer(Map<String,String> inputmap, String mapk, Datetime sobjdate, List<String> mapkeys){
 		// garder les données si on recoit une date
 		// et si la date est plus récente que en base
@@ -200,8 +182,7 @@ public with sharing class SM_AP47_XdataImportContact {
 		for(String k : mapkeys)
 			inputmap.remove(k);
 	}
-	*/
-
+*/
 	// methode pour vérifier si le format de l'email est valide oun non
     public static Boolean emailAddressIsValid(String email) {
 		if (String.isEmpty(email)) return true;
@@ -219,12 +200,10 @@ public with sharing class SM_AP47_XdataImportContact {
 	}
     
     
-	public static Contact fillContact(Contact cont, Map<String,String> ct) {
+	global static Contact fillContact(Contact cont, Map<String,String> ct) {
 		for(String fieldName : ct.keySet()){
 			String fieldVal = ct.get(fieldName);
-			//if(fieldVal==null) continue;
-			String [] principalContactFields = new String[]{'telFixePrincipal', 'adresseMailPrincipale', 'mobilePrincipal'};
-			if (!principalContactFields.contains(fieldName) && fieldVal==null) continue;
+			if(fieldVal==null) continue;
 
 			switch on fieldName{
 				when 'referenceClient' { cont.Identifiant_Buisness_Partener__c = fieldVal; }
@@ -277,13 +256,10 @@ public with sharing class SM_AP47_XdataImportContact {
 										 }
 				when 'statutInternaute' { cont.Statut_Internaute__c = fieldVal; }
 				when 'segmentMarketing' { cont.Segment_Marketing__c = fieldVal; }
-				when 'flArchive' {cont.SM_isArchive__c = Boolean.valueOf(fieldVal); }
-				
 				when else { System.debug('input field not managed: ' + fieldName + ' with value: ' + fieldVal);
 				}
 			}
 		}
 		return cont;
 	}
-	
 }

@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>HP_Is_List__c</fullName>
     <defaultValue>false</defaultValue>
+    <description>s’il s’agit d’une liste ou non</description>
     <externalId>false</externalId>
     <fieldManageability>DeveloperControlled</fieldManageability>
     <label>HP Is List</label>

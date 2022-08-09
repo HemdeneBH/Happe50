@@ -7,7 +7,7 @@
             </div>
             <h2 class="title-compteur">{getType} : {numeroContrat}</h2>
             <div slot="actions">
-                <lightning-icon if:false={numeroContrat} icon-name="utility:vide" size="small"></lightning-icon>
+                <lightning-icon if:false={numeroContrat} icon-name="utility:survey" size="small"></lightning-icon>
                 <div if:true={numeroContrat}>
                     <span onclick={copyPCEPDL} class="copy-number">
                         <span style="display:none">{numeroContrat}</span>

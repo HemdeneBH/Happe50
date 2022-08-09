@@ -9,18 +9,10 @@
     <columns>HP_Type_Energie__c</columns>
     <columns>HP_NumPDL__c</columns>
     <columns>HP_NumberPCE__c</columns>
-    <columns>HP_Energie_Verte__c</columns>
+    <columns>HP_Porte_Feuille_Contrat__c</columns>
     <columns>HP_Souscription_Digital_Id__c</columns>
     <columns>HP_Statut__c</columns>
-    <columns>HP_DigitalLogin__c</columns>
-    <columns>HP_Plan_de_Prix_electrique__c</columns>
-    <columns>HP_TECH_DedupOrder__c</columns>
     <filterScope>Everything</filterScope>
-    <filters>
-        <field>HP_Statut__c</field>
-        <operation>equals</operation>
-        <value>SAVE_3</value>
-    </filters>
     <label>Toutes les souscriptions</label>
     <sharedTo>
         <roleAndSubordinatesInternal>HP_HAPPE</roleAndSubordinatesInternal>

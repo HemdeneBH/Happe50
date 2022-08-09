@@ -264,14 +264,12 @@ public class gdfsuezComBefChpPivot {
         public messageRetoursDt(){
         }
         public messageRetoursDt(DOM.XmlNode responseNode){
-          
           Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
           Dom.XmlNode[] messageRetourChildren = responseNode.getChildElements();
           gdfsuezComBefChpPivot.messageRetoursDt_messageRetour_element[] messageRetourList = new List<gdfsuezComBefChpPivot.messageRetoursDt_messageRetour_element>();
           if(messageRetourChildren == null || messageRetourChildren.size() == 0){
             this.messageRetour = null;
           } else{
-             
             for(DOM.XmlNode childNode : messageRetourChildren){
               if(childNode.GetName() == 'messageRetour'){
                 gdfsuezComBefChpPivot.messageRetoursDt_messageRetour_element Obj = new gdfsuezComBefChpPivot.messageRetoursDt_messageRetour_element(childNode);
@@ -281,7 +279,7 @@ public class gdfsuezComBefChpPivot {
             }
             this.messageRetour = messageRetourList;
           }
-          
+          //System.debug(this.messageRetour);
         }
         public void populateXmlNode(Dom.XmlNode outerNode){
     
@@ -324,7 +322,7 @@ public class gdfsuezComBefChpPivot {
       gdfsuezComBefChpPivot.system_element[] system_xObj = this.system_x;
       if(system_xObj != null){
         for(gdfsuezComBefChpPivot.system_element element: system_xObj){
-          Dom.XmlNode system_xNode = outerNode.addChildElement('system', null, null);
+          Dom.XmlNode system_xNode = outerNode.addChildElement('system', '', '');
           element.populateXmlNode(system_xNode);
         }
       }      
@@ -415,19 +413,19 @@ public class gdfsuezComBefChpPivot {
         
           public listeValeursDt(DOM.XmlNode responseNode){
       Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
-      DOM.XmlNode idValeurNode = responseNode.getChildElement('idValeur', 'http://gdfsuez.com/bef/chp/pivot');
+      DOM.XmlNode idValeurNode = responseNode.getChildElement('idValeur', null);
       this.idValeur = (idValeurNode == null) ? null : idValeurNode.getText();
       nodesParsed.add(idValeurNode);
       //System.debug(this.idValeur);      
-      DOM.XmlNode descriptionNode = responseNode.getChildElement('description', 'http://gdfsuez.com/bef/chp/pivot');
+      DOM.XmlNode descriptionNode = responseNode.getChildElement('description', null);
       this.description = (descriptionNode == null) ? null : descriptionNode.getText();
       nodesParsed.add(descriptionNode);
       //System.debug(this.description);      
-      DOM.XmlNode categorieNode = responseNode.getChildElement('categorie', 'http://gdfsuez.com/bef/chp/pivot');
+      DOM.XmlNode categorieNode = responseNode.getChildElement('categorie', null);
       this.categorie = (categorieNode == null) ? null : categorieNode.getText();
       nodesParsed.add(categorieNode);
       //System.debug(this.categorie);      
-      DOM.XmlNode orderNode = responseNode.getChildElement('order', 'http://gdfsuez.com/bef/chp/pivot');
+      DOM.XmlNode orderNode = responseNode.getChildElement('order', null);
       this.order = (orderNode == null) ? null : orderNode.getText();
       nodesParsed.add(orderNode);
       //System.debug(this.order);      
@@ -435,15 +433,15 @@ public class gdfsuezComBefChpPivot {
       this.libelleCourt = (libelleCourtNode == null) ? null : libelleCourtNode.getText();
       nodesParsed.add(libelleCourtNode);
       //System.debug(this.libelleCourt);      
-      DOM.XmlNode libelleLongNode = responseNode.getChildElement('libelleLong', 'http://gdfsuez.com/bef/chp/pivot');
+      DOM.XmlNode libelleLongNode = responseNode.getChildElement('libelleLong', null);
       this.libelleLong = (libelleLongNode == null) ? null : libelleLongNode.getText();
       nodesParsed.add(libelleLongNode);
       //System.debug(this.libelleLong);      
-      DOM.XmlNode actifNode = responseNode.getChildElement('actif', 'http://gdfsuez.com/bef/chp/pivot');
+      DOM.XmlNode actifNode = responseNode.getChildElement('actif', null);
       this.actif = (actifNode == null) ? null : actifNode.getText();
       nodesParsed.add(actifNode);
       //System.debug(this.actif);      
-      DOM.XmlNode langueNode = responseNode.getChildElement('langue', 'http://gdfsuez.com/bef/chp/pivot');
+      DOM.XmlNode langueNode = responseNode.getChildElement('langue', null);
       this.langue = (langueNode == null) ? null : langueNode.getText();
       nodesParsed.add(langueNode);
       //System.debug(this.langue);      
@@ -470,7 +468,7 @@ public class gdfsuezComBefChpPivot {
       orderNode.addTextNode((this.order == null) ? '' : this.order);
                }
              if(this.libelleCourt != null){
-      Dom.XmlNode libelleCourtNode = outerNode.addChildElement('libelleCourt', null, null);
+      Dom.XmlNode libelleCourtNode = outerNode.addChildElement('libelleCourt', '', '');
       libelleCourtNode.addTextNode((this.libelleCourt == null) ? '' : this.libelleCourt);
              }
             if(this.libelleLong != null){
@@ -486,7 +484,7 @@ public class gdfsuezComBefChpPivot {
       langueNode.addTextNode((this.langue == null) ? '' : this.langue);
             }
             if(this.code != null){
-      Dom.XmlNode codeNode = outerNode.addChildElement('code', null, null);
+      Dom.XmlNode codeNode = outerNode.addChildElement('code', '', '');
       codeNode.addTextNode((this.code == null) ? '' : this.code);
             }
     }
@@ -506,11 +504,11 @@ public class gdfsuezComBefChpPivot {
     }
     public contextDt(DOM.XmlNode responseNode){
       Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
-      DOM.XmlNode versionNode = responseNode.getChildElement('version', null);
+      DOM.XmlNode versionNode = responseNode.getChildElement('version', 'http://gdfsuez.com/bef/chp/pivot');
       this.version = (versionNode == null) ? null : versionNode.getText();
       nodesParsed.add(versionNode);
       //System.debug(this.version);      
-      DOM.XmlNode systemPathNode = responseNode.getChildElement('systemPath', null);
+      DOM.XmlNode systemPathNode = responseNode.getChildElement('systemPath', 'http://gdfsuez.com/bef/chp/pivot');
       if(systemPathNode == null){
         this.systemPath = null;
       } else{
@@ -519,24 +517,24 @@ public class gdfsuezComBefChpPivot {
         this.systemPath = systemPathObj;
       }
       //System.debug(this.systemPath);      
-      DOM.XmlNode allowCacheNode = responseNode.getChildElement('allowCache', null);
+      DOM.XmlNode allowCacheNode = responseNode.getChildElement('allowCache', 'http://gdfsuez.com/bef/chp/pivot');
       this.allowCache = (allowCacheNode == null) ? null : Boolean.valueOf(allowCacheNode.getText());
       nodesParsed.add(allowCacheNode);
       //System.debug(this.allowCache);      
     }
     public void populateXmlNode(Dom.XmlNode outerNode){
-      Dom.XmlNode versionNode = outerNode.addChildElement('version', null, null);
+      Dom.XmlNode versionNode = outerNode.addChildElement('version', '', '');
       if(this.version != null){
         versionNode.addTextNode(this.version);
       }
       
       gdfsuezComBefChpPivot.systemPath_element systemPathObj = this.systemPath;
-      Dom.XmlNode systemPathNode = outerNode.addChildElement('systemPath', null, null);
+      Dom.XmlNode systemPathNode = outerNode.addChildElement('systemPath', '', '');
       if(systemPathObj != null){
         systemPathObj.populateXmlNode(systemPathNode);
       }
             if(this.allowCache != null){
-      Dom.XmlNode allowCacheNode = outerNode.addChildElement('allowCache', null, null);
+      Dom.XmlNode allowCacheNode = outerNode.addChildElement('allowCache', '', '');
       allowCacheNode.addTextNode((this.allowCache == null) ? '' : String.valueOf(this.allowCache));
             }
     } 
@@ -745,13 +743,12 @@ public class gdfsuezComBefChpPivot {
     public messageRetoursDt_messageRetour_element(){
     }
     public messageRetoursDt_messageRetour_element(DOM.XmlNode responseNode){
-       
       Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
       DOM.XmlNode idNode = responseNode.getChildElement('id', 'http://gdfsuez.com/bef/chp/pivot');
       this.id = (idNode == null) ? null : idNode.getText();
       nodesParsed.add(idNode);
       //System.debug(this.id);      
-      DOM.XmlNode codeNode = responseNode.getChildElement('code', null);
+      DOM.XmlNode codeNode = responseNode.getChildElement('code', 'http://gdfsuez.com/bef/chp/pivot');
       this.code = (codeNode == null) ? null : codeNode.getText();
       nodesParsed.add(codeNode);
       //System.debug(this.code);      

@@ -24,24 +24,26 @@ public with sharing class EmailMessageHandler extends TriggerHandler {
         this.newMap = (Map<Id, EmailMessage>) Trigger.newMap;
         this.oldList = (List<EmailMessage>) Trigger.Old;
         this.newList = (List<EmailMessage>) Trigger.New;
+
     }
     
     public override void afterInsert(){
         if (SM_Utilities.getUserProfileName().startsWith('SM_') || Test.isRunningTest()) {
-            SM_EmailMessageProcess.updateCaseOnTask(newList,null);
+           SM_EmailMessageProcess.updateCaseOnTask(newList,null);
         }
     }
     
     public override void afterUpdate(){
         if (SM_Utilities.getUserProfileName().startsWith('SM_') || Test.isRunningTest()) {
-            SM_EmailMessageProcess.updateCaseOnTask(newList,oldMap);
+           SM_EmailMessageProcess.updateCaseOnTask(newList,oldMap);
         }
     }
 
     public override void beforeInsert(){
-     // if (SM_Utilities.getUserProfileName().startsWith('SM_') || Test.isRunningTest()) {
+        if (SM_Utilities.getUserProfileName().startsWith('SM_') || Test.isRunningTest()) {
             SM_EmailMessageProcess.checkEmailsHeaders(newList);
-     //  }
+        }
     }
+
 
 }

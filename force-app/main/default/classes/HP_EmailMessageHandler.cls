@@ -3,9 +3,13 @@
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
 
+
+
+
  * @last modified on  : 02-18-2021
 
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+
  * Modifications Log 
  * Ver   Date         Author                               Modification
  * 1.0   09-02-2020   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
@@ -20,6 +24,10 @@ public with sharing class HP_EmailMessageHandler  extends TriggerHandler {
         this.newList = (List<EmailMessage>) Trigger.New;
         this.newMap = (Map<Id,EmailMessage>) Trigger.newMap;
         this.oldMap = (Map<Id,EmailMessage>) Trigger.oldMap;
+
+
+
+
 
 
 
@@ -69,6 +77,10 @@ public with sharing class HP_EmailMessageHandler  extends TriggerHandler {
 
 
 
+
+
+
+
         for(EmailMessage item : newList) {
             if(AccountIdList.contains(item.RelatedToId)) {
 
@@ -99,23 +111,30 @@ public with sharing class HP_EmailMessageHandler  extends TriggerHandler {
 
 
 
+
         
+
+
+
 
 
 
         // MAJ de la date du case lors de la premiere réponse.
-         List<Case>  caseList = HP_EM010_Case.loadCase(newList[0].ParentId);
-         System.debug('caseList: '+caseList);
-         List<Case>  caseListToPersiste = new List<Case>();
-         for(Case cas : caseList){
-             case c = new Case();
-             c.Id = cas.Id;
-             if(cas.HP_DateReponseEmailConseiller__c == null){
+        List<Case>  caseList = HP_EM010_Case.loadCase(newList[0].ParentId);
+        System.debug('caseList: '+caseList);
+        List<Case>  caseListToPersiste = new List<Case>();
+        for(Case cas : caseList){
+            case c = new Case();
+            c.Id = cas.Id;
+            if(cas.HP_DateReponseEmailConseiller__c == null){
                 c.HP_DateReponseEmailConseiller__c = DateTime.now();
                 caseListToPersiste.add(c);
-             }
-         }
+            }
+        }
         
+
+
+
          if(caseListToPersiste.size() > 0) Database.update(caseListToPersiste);
          // ALIMENTER le CaseHistory lors de la réponse à un mail.
 
@@ -125,27 +144,33 @@ public with sharing class HP_EmailMessageHandler  extends TriggerHandler {
 
 
 
-         BusinessHours bh = [SELECT Id FROM BusinessHours WHERE name ='HP'];
-         
-         List<HP_CaseHistory__c> listHistories = HP_EM036_CaseHistory.getCaseHistory(caseList[0].OwnerId, caseList[0].Id);
-         List<HP_CaseHistory__c> listHistoriesTopersiste = new List<HP_CaseHistory__c>();
-         boolean isQqueue =  string.valueOf(caseList[0].OwnerId).startsWith('00G');
-         for(HP_CaseHistory__c caseHistory : listHistories){
-             
-             if( caseList[0].HP_isHappe__c && caseList[0].IsClosed == false && !isQqueue && caseHistory.HP_DateReponse__c == null) {
+
+
+
+            BusinessHours bh = [SELECT Id FROM BusinessHours WHERE name ='HP'];
+            
+            List<HP_CaseHistory__c> listHistories = HP_EM036_CaseHistory.getCaseHistory(caseList[0].OwnerId, caseList[0].Id);
+            List<HP_CaseHistory__c> listHistoriesTopersiste = new List<HP_CaseHistory__c>();
+            boolean isQqueue =  string.valueOf(caseList[0].OwnerId).startsWith('00G');
+            for(HP_CaseHistory__c caseHistory : listHistories){
                 
-                caseHistory.HP_DateReponse__c = DateTime.now();
-                
-				if (bh != null && caseHistory.HP_DateAttribution__c != null){
-                    Decimal result = BusinessHours.diff(bh.Id, caseHistory.HP_DateAttribution__c,caseHistory.HP_DateReponse__c );
-                    // milliseconds au minute
-                    Decimal resultingHours = result/(60*1000);
-                    caseHistory.HP_DureeTraitement__c = resultingHours;
+                if( caseList[0].HP_isHappe__c && caseList[0].IsClosed == false && !isQqueue && caseHistory.HP_DateReponse__c == null) {
+                    
+                    caseHistory.HP_DateReponse__c = DateTime.now();
+                    
+                    if (bh != null && caseHistory.HP_DateAttribution__c != null){
+                        Decimal result = BusinessHours.diff(bh.Id, caseHistory.HP_DateAttribution__c,caseHistory.HP_DateReponse__c );
+                        // milliseconds au minute
+                        Decimal resultingHours = result/(60*1000);
+                        caseHistory.HP_DureeTraitement__c = resultingHours;
+                    }
+                    
+                    listHistoriesTopersiste.add(caseHistory);
                 }
-				
-                 listHistoriesTopersiste.add(caseHistory);
-             }
-         }
+            }
+
+
+
         if(listHistoriesTopersiste.size() > 0) Database.update(listHistoriesTopersiste);
 
 
@@ -153,11 +178,14 @@ public with sharing class HP_EmailMessageHandler  extends TriggerHandler {
         }
 
 
+
+
+
         List<String> accountIdList = new List<String>();
         List<String> activityIdList = new List<String>();
         Map<String, String> activityMap = new Map<String, String>();
 
-      List<EmailMessage> emailMessageList = new List<EmailMessage>();
+        List<EmailMessage> emailMessageList = new List<EmailMessage>();
         for(EmailMessage item : newList) {
 
 
@@ -206,11 +234,15 @@ public with sharing class HP_EmailMessageHandler  extends TriggerHandler {
             EmailMessageRelation emr = new EmailMessageRelation();
             emr.emailMessageId = item.id;
             emr.relationId = contactAccountMap.get(item.HP_TECH_Account_Id__c); 
-           emr.relationType = 'OtherAddress';
-           emailMessageRelationList.add(emr);
-           if(item.ActivityId != null) {
+            emr.relationType = 'OtherAddress';
+            emailMessageRelationList.add(emr);
+            if(item.ActivityId != null) {
                 tsk.add(new Task(Id = item.ActivityId, WhoId = contactAccountMap.get(item.HP_TECH_Account_Id__c)));
-           }
+            }
+
+
+
+
 
 
 
@@ -241,6 +273,9 @@ public with sharing class HP_EmailMessageHandler  extends TriggerHandler {
 
 
 
+
+
+
         System.debug('@@@ emailMessageList ' + emailMessageList);
         if(emailMessageList.size() > 0) {
             update emailMessageList;
@@ -260,6 +295,9 @@ public with sharing class HP_EmailMessageHandler  extends TriggerHandler {
             update tsk;
         }
         
+
+
+
 
 
 

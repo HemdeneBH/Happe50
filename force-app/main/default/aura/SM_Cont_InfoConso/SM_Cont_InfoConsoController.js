@@ -32,16 +32,14 @@
         var workspaceAPI = component.find("workspace");
         workspaceAPI.getFocusedTabInfo().then(function(response) {
             var focusedTabId = response.tabId;
-            if (response.closeable) {
-                workspaceAPI.closeTab({tabId: focusedTabId});
-            } else {
             workspaceAPI.disableTabClose({
                 tabId: focusedTabId,
-                    disabled: false})
-                .then(function(res){
+                disabled: false
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
             workspaceAPI.closeTab({tabId: focusedTabId});
-        })
-            }
         })
         .catch(function(error) {
             console.log(error);
@@ -58,8 +56,7 @@
             + '&StepNameOS=' + (event.getParam("StepNameOS") || '')
             + '&refClientIdBP=' + (event.getParam("refClientIdBP") || '')
             + '&isLWC=' + (event.getParam("isLWC") || '')
-            + '&ContextId=' + component.get("v.recordId")
-            +'&EnqSat='+ component.get('v.EnqSat');
+            + '&ContextId=' + component.get("v.recordId");
             workspaceAPI.openSubtab({
                 parentTabId: tabId,
                 url: urlOmni,
@@ -79,52 +76,24 @@
         console.log("contestation index");
         var workspaceAPI = component.find("workspace");
         workspaceAPI.getEnclosingTabId().then(function(tabId) {             
-
-            // var urlOmni = '/apex/SM_VFP_ContestationIndex?id='+component.get("v.recordId")
-            var urlOmni = '/lightning/cmp/vlocity_cmt__vlocityLWCOmniWrapper?c__target=c:smContactContestationIndexFrench&c__layout=lightning&c__tabLabel=Contestation d\'index&c__tabIcon=custom:custom18&c__id='+component.get("v.recordId")
-            + '&c__ContextId=' + component.get("v.recordId")
-            + '&c__type=' + (event.getParam('type') || '')
-            + '&c__contestGaz=' + (event.getParam('contestGaz') || '')
-            + '&c__donneesDerniersIndexReelGaz=' + (event.getParam('donneesDerniersIndexReelGaz') || '')
-            + '&c__contestElec=' + (event.getParam('contestElec') || '')
-            + '&c__nombreRoue=' + event.getParam('nombreRoue')
-            + '&c__idBusinessPartner=' + event.getParam('idBusinessPartner')
-            + '&c__pce=' + event.getParam('pce')
-            + '&c__pdlCommunicantGaz=' + event.getParam('pdlCommunicantGaz')
-            + '&c__factureEnLigne=' + event.getParam('factureEnLigne')
-            + '&c__isClientMens=' + event.getParam('isClientMens')
-            + '&c__idContratGaz=' + event.getParam('idContratGaz')
-            + '&c__IdPortefeuilleContrat=' + event.getParam('IdPortefeuilleContrat')
-            + '&c__NoCompteContrat=' + event.getParam('NoCompteContrat')
-            + '&c__dateBlocage=' + event.getParam('dateBlocage')
-            + '&c__ModePrelevement=' + event.getParam('ModePrelevement')
-
-
-
-            + '&c__DLP=' + event.getParam('DLP')
-
-            + '&c__numeroVoie=' + event.getParam('numeroVoie')
-            + '&c__ville=' + event.getParam('ville')
-            + '&c__libelleVoie=' + event.getParam('libelleVoie')
-            + '&c__complementAdresse=' + event.getParam('complementAdresse')
-
-            + '&c__codePostal=' + event.getParam('codePostal')
-
-            + '&c__AccountId=' + event.getParam('AccountId')
-            +'&EnqSat='+ component.get('v.EnqSat');
-
-            // + '&c__isSoldePositif=' + event.getParam('isSoldePositif');
-
-
+            var urlOmni = '/apex/SM_VFP_ContestationIndex?id='+component.get("v.recordId")
+            + '&ContextId=' + component.get("v.recordId")
+            + '&type=' + (event.getParam('type') || '')
+            + '&contestGaz=' + (event.getParam('contestGaz') || '')
+            + '&donneesDerniersIndexReelGaz=' + (event.getParam('donneesDerniersIndexReelGaz') || '')
+            + '&contestElec=' + (event.getParam('contestElec') || '')
+            + '&nombreRoue=' + event.getParam('nombreRoue')
+            + '&idBusinessPartner=' + event.getParam('idBusinessPartner')
+            + '&pce=' + event.getParam('pce')
+            + '&pdlCommunicantGaz=' + event.getParam('pdlCommunicantGaz')
+            + '&factureEnLigne=' + event.getParam('factureEnLigne')
+            + '&uniteReleveGaz=' + event.getParam('uniteReleveGaz');
             // + '&isDual=' + (event.getParam('isDual') || '');
             workspaceAPI.openSubtab({
                 parentTabId: tabId,
                 url: urlOmni,
                 focus: true
             }).then(function(subtabId) {
-                workspaceAPI.disableTabClose({
-                    tabId: subtabId, disabled: true
-                })
             	workspaceAPI.setTabLabel({
                 	tabId: subtabId,
                 	label: "contest. index"});

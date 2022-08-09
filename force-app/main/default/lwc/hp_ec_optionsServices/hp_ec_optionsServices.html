@@ -2,8 +2,8 @@
   @description       : 
   @author            : Hemdene Ben Hammouda
   @group             : 
-  @last modified on  : 07-12-2022
-  @last modified by  : Hemdene Ben Hammouda
+  @last modified on  : 08-03-2022
+  @last modified by  : Badr Eddine Belkarchi
 -->
 <template>
     <div class="hp-optionsServices c-content-bg slds-col">
@@ -13,7 +13,7 @@
             <div if:true={isElec} class="hp-option-item">
                 <div class="left">
                     <span if:true={showCheckOptionVertElec} class="iconChecked">
-                        <img class="hp-checked_icon" src ={iconChecked} alt="checked icon"/>
+                        <img class={iconClassCss} src ={iconChecked} alt="checked icon"/>
                     </span>
                     <span class="option-item">
                         {optionVertElecLabel}
@@ -28,7 +28,7 @@
                 
                 <div class="left">
                     <span if:true={showCheckFactureEnLigne} class="iconChecked">
-                        <img class="hp-checked_icon" src ={iconChecked} alt="checked icon"/>
+                        <img class={iconClassCss} src ={iconChecked} alt="checked icon"/>
                     </span>
                     <span class="option-item">
                         {factureEnLigneLabel}
@@ -42,7 +42,7 @@
             <div class="hp-option-item">
                 <div class="left">
                     <span if:true={showCheckDRP} class="iconChecked">
-                        <img class="hp-checked_icon" src ={iconChecked} alt="checked icon"/>
+                        <img class={iconClassCss} src ={iconChecked} alt="checked icon"/>
                     </span>
                     <span class="option-item">
                         {dateReglementPersonnaliseLabel}
@@ -56,7 +56,7 @@
             <div class="hp-option-item">
                 <div class="left">
                     <span class="iconChecked">
-                        <img class="hp-checked_icon" src ={iconChecked} alt="checked icon"/>
+                        <img class={iconClassCss} src ={iconChecked} alt="checked icon"/>
                     </span>
                     <span class="option-item">
                         {modePaiementLabel}
@@ -66,7 +66,7 @@
             <div class="hp-option-item">
                 <div class="left">
                     <span if:true={hasDepanExpress} class="iconChecked">
-                        <img class="hp-checked_icon" src ={iconChecked} alt="checked icon"/>
+                        <img class={iconClassCss} src ={iconChecked} alt="checked icon"/>
                     </span>
                     <span class="option-item">
                         {depanExpressLabel}

@@ -45,8 +45,20 @@ global class SM_AP44_ZoneDistributionApiService implements vlocity_cmt.VlocityOp
             listParameters.put('postcode', postcode);
         }
 
+        String token;
+        if (!Test.isRunningTest()) {
+            token = SM_MP_AP04_GetTokenService.getTokenFromSmile();
+        } else {
+            token = 'test';
+        }
+
+        if (token == null) {
+            system.debug('Token not found ...');
+            return;
+        }
+
         HttpResponse httpResponse = new HttpResponse();
-        httpResponse = getResponse(listParameters);
+        httpResponse = getResponse(token, listParameters);
         if (httpResponse != null) {
             Map < String, Object > resultAsMap = (Map < String, Object > ) JSON.deserializeUntyped(httpResponse.getBody());
             List < Object > listResult = (List < Object > ) resultAsMap.get('_data');
@@ -95,13 +107,36 @@ global class SM_AP44_ZoneDistributionApiService implements vlocity_cmt.VlocityOp
         }
     }
 
+    /*author: MHA
+    *description: construction du header
+    *CreatedDate: 14/12/2018
+    *LastModified MHA 14/12/2018
+    */
+    public static HttpRequest buildHttpRequestHeaders(String token, Map<String, String> listParameters) {
+        HttpRequest req = new HttpRequest();
+        req.setMethod('GET');
+        req.setEndpoint(buildEndPoint(listParameters));
+        req.setHeader('X-Correlation-Id', MP_AP13_GuidUtil.NewGuid());
+        if (!Test.isRunningTest()) {
+            req.setHeader('api_key', MP_Xdata_credentials__c.getInstance('sm_api_key_INT').Value__c);
+        }
+        req.setHeader('Authorization', 'Bearer ' + token);
+        req.setHeader('Content-Type', 'application/json');
+        return req;
+    }
     /*author:  HEL
     *description: Contruction du endPoint
     *CreatedDate: 14/12/2018
     *LastModified MHA 21/02/2019
     */
-    public static String buildRequestParams(Map<String, String> listParameters) {
+    public static String buildEndPoint(Map<String, String> listParameters) {
         String endPoint = '';
+        if (!Test.isRunningTest()) {
+            SM_WS_Suffix__mdt suffixes = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'Zones_Distribution' limit 1];
+            endPoint = 'callout:AuthAPIHour' + suffixes.suffix__c;
+            System.debug('@@ request URL is ' + endPoint);
+        }
+
         if (listParameters.size() > 0) {
             endPoint = endPoint + '?';
             Set<String> queryParamsKeys = listParameters.keySet();
@@ -116,15 +151,56 @@ global class SM_AP44_ZoneDistributionApiService implements vlocity_cmt.VlocityOp
     }
 
     /*author: MHA
+    *description: appel Http
+    *CreatedDate: 14/12/2018
+    *LastModified MHA 14/12/2018
+    */
+    public static HttpResponse sendData(HttpRequest request) {
+        Http http = new Http();
+        HttpResponse res;
+        try {
+            if (!Test.isRunningTest()) {
+                res = http.send(request);
+            } else {
+                StaticResourceCalloutMock mock = new StaticResourceCalloutMock();
+                mock.setStaticResource('SM_MockTestZoneDistributeur');
+                mock.setStatusCode(200);
+                mock.setHeader('Content-Type', 'application/json');
+                // Set the mock callout mode
+                system.debug('sendData mock : ' + mock);
+                Test.setMock(HttpCalloutMock.class, mock);
+                res = http.send(request);
+                System.debug('res' + res);
+            }
+        } catch (Exception e) {
+            system.debug('## [zone distributeur] failed to send data ##');
+            return null;
+        }
+        return res;
+
+    }
+
+    /*author: MHA
+    *description: retour de l'échec de l'appel
+    *CreatedDate: 14/12/2018
+    *LastModified MHA 14/12/2018
+    */
+    private static Boolean httpResponseFailureDetected(HttpResponse response) {
+        return (response == null || (response.getStatusCode() != 201 && response.getStatusCode() != 200 && response.getStatusCode() != 206));
+
+    }
+
+    /*author: MHA
     *description: contruction de l'appel du webService
     *CreatedDate: 14/12/2018
     *LastModified MHA 14/12/2018
     */
-    public static HttpResponse getResponse(Map<String, String> listParameters) {
+    public static HttpResponse getResponse(String token, Map<String, String> listParameters) {
 
-        String endpointParams = buildRequestParams(listParameters);
-        HttpResponse httpResp = CalloutManager.sendRequest('Zones_Distribution', endpointParams, 'GET', CalloutManager.Scope.READ, null,null);
-        if (CalloutManager.httpResponseFailureDetected(httpResp)) {
+
+        HttpRequest httpReq = buildHttpRequestHeaders(token, listParameters);
+        HttpResponse httpResp = sendData(httpReq);
+        if (httpResponseFailureDetected(httpResp)) {
             // should abort next step's
             system.debug('## [ zone de distribution] error occured when sending data ##');
             system.debug(httpResp != null ? httpResp.getBody() : 'http response is null');

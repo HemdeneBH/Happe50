@@ -5,4 +5,9 @@
     <confirmationTokenRequired>false</confirmationTokenRequired>
     <description>VFP de lancement de l&apos;OS MoveIn permettant de gérer les habiliations</description>
     <label>EM-CHF</label>
+    <packageVersions>
+        <majorNumber>900</majorNumber>
+        <minorNumber>289</minorNumber>
+        <namespace>vlocity_cmt</namespace>
+    </packageVersions>
 </ApexPage>

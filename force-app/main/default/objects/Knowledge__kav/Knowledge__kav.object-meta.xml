@@ -22,10 +22,8 @@
     <deploymentStatus>Deployed</deploymentStatus>
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
-    <externalSharingModel>Private</externalSharingModel>
     <gender>Feminine</gender>
-    <label>Base de connaissance</label>
-    <pluralLabel>Base de connaissance</pluralLabel>
+    <label>Knowledge</label>
+    <pluralLabel>Knowledge</pluralLabel>
     <searchLayouts></searchLayouts>
-    <sharingModel>Private</sharingModel>
 </CustomObject>

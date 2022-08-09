@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Clément Bauny
  * @group             : 
- * @last modified on  : 07-05-2022
+ * @last modified on  : 07-18-2022
  * @last modified by  : Badr Eddine Belkarchi
 **/
 import { LightningElement, api, wire, track } from 'lwc';
@@ -18,12 +18,11 @@ import getGrilleTarifaire from '@salesforce/apex/HP_EC_LoadCustomerData.getGrill
 import isCompteurCommunicantElec from '@salesforce/apex/HP_EC_LoadCustomerData.isCompteurCommunicantElec';
 import isCompteurCommunicantGaz from '@salesforce/apex/HP_EC_LoadCustomerData.isCompteurCommunicantGaz';
 
-import { publishMC, subscribeMC, unsubscribeMC } from 'c/hp_ec_utl_lightningMessageManager';
-
-import getFakeGasData from './gas-data';
-import getFakeElecData from './elec-data';
+import { publishMC, subscribeMC, unsubscribeMC, getCurrentMessageValue } from 'c/hp_ec_utl_lightningMessageManager';
 
 export default class Hp_ec_myConsumption extends LightningElement {
+
+    @api textPasDeConsommations;
 
     @track idClient;
     @track contractElec;
@@ -52,12 +51,22 @@ export default class Hp_ec_myConsumption extends LightningElement {
     @track gasConsumptions = [];
     @track elecConsumptions = [];
 
+    @track showTextPasDeConsommations_Gaz = false;
+    @track showTextPasDeConsommations_Elec = false;
+    @track isProcessFinished = false;
+
     gasData;
     elecData;
 
     date = new Date();
     endDate = new Date();                                                       // Today
     startDate = new Date(new Date().setFullYear(new Date().getFullYear() - 1));   // Last year, same date
+
+    get showTextPasDeConsommations() {
+        if((this.showGas && this.showTextPasDeConsommations_Gaz && this.isProcessFinished) || (this.showElec && this.showTextPasDeConsommations_Elec && this.isProcessFinished))
+            return true;
+        return false;
+    }
 
     get startDateLocaleString () {
         return this.startDate.toLocaleDateString();
@@ -80,7 +89,7 @@ export default class Hp_ec_myConsumption extends LightningElement {
     }
 
     get maxGasPrice() {
-        return Math.max(...this.gasConsumptions.map(cons => cons.conso), 0) * 1.1;
+        return Math.max(...this.gasConsumptions.map(cons => cons.priceValue), 0) * 1.1;
     }
 
     get maxElecValue () {
@@ -88,7 +97,7 @@ export default class Hp_ec_myConsumption extends LightningElement {
     }
 
     get maxElecPrice() {
-        return Math.max(...this.elecConsumptions.map(cons => cons.conso), 0) * 1.1;
+        return Math.max(...this.elecConsumptions.map(cons => cons.priceValue), 0) * 1.1;
     }
 
     get displayDetails () {
@@ -130,12 +139,12 @@ export default class Hp_ec_myConsumption extends LightningElement {
         {
             value: 'conso',
             label: "Conso",
-            checked: false
+            checked: true
         },
         {
             value: 'month',
             label: "Mois",
-            checked: true
+            checked: false
         },
         {
             value: 'year',
@@ -167,6 +176,8 @@ export default class Hp_ec_myConsumption extends LightningElement {
 
     connectedCallback() {
         this.handleSubscription();
+        this.idPortefeuilleContrat = getCurrentMessageValue('SelectedPortfolio');
+        this.getCurrentData();
     }
 
     handleSubscription() {
@@ -196,6 +207,9 @@ export default class Hp_ec_myConsumption extends LightningElement {
     }
 
     initializeComponantProperties() {
+        this.showTextPasDeConsommations_Gaz = false;
+        this.showTextPasDeConsommations_Elec = false;
+        
         this.gasConsumptions = [];
         this.elecConsumptions = [];
 
@@ -220,7 +234,6 @@ export default class Hp_ec_myConsumption extends LightningElement {
         this.GAZ_aboHtt = null;
         this.ELEC_aboTtc = null;
         this.ELEC_aboHtt = null;
-
     }
 
     async getCurrentData() {
@@ -241,7 +254,7 @@ export default class Hp_ec_myConsumption extends LightningElement {
         }
 
         if(this.contractGaz) {
-            console.log('HP_EC_myConsumption || this.contractGaz.id : ' + this.contractGaz.id);
+            // console.log('HP_EC_myConsumption || this.contractGaz.id : ' + this.contractGaz.id);
             // Step 1 : Get numéro PCE
             const INFO_CONTRACT_RESULT = await this.getInfoContractData(this.contractGaz.id.toString());
             const PARSED_INFO_CONTRACT_RESULT = JSON.parse(INFO_CONTRACT_RESULT);
@@ -298,29 +311,29 @@ export default class Hp_ec_myConsumption extends LightningElement {
                     // END OF: check if compteur gaz communicant  //
 
                     this.gasConsumptions = this.generateGazConsumptionsPerConso();
-                    this.gasConsumptions.splice(12,this.gasConsumptions.length - 12);
-                    // console.log('HP_EC_myConsumption || this.gasConsumptions : '+JSON.stringify(this.gasConsumptions));
+                    this.gasConsumptions?.splice(12,this.gasConsumptions.length - 12);
                 }                
             }
-            // Final step: Après organization Data, afficher le gaz et masquer l'elec 
-            this.showGas = true;
-            this.showElec = false;
+            console.log('HP_EC_myConsumption || this.gasConsumptions : '+JSON.stringify(this.gasConsumptions));
+            
+            // Final step: Après organization Data, afficher le gaz et masquer l'elec
+            // this.handleType({detail: 'gas'});
         }
-
+        
         if(this.contractElec) {
             console.log('HP_EC_myConsumption || this.contractElec.id : ' + this.contractElec.id);
             // Step 1 : Get numéro PDL
             const INFO_CONTRACT_RESULT = await this.getInfoContractData(this.contractElec.id.toString());
             const PARSED_INFO_CONTRACT_RESULT = JSON.parse(INFO_CONTRACT_RESULT);
             this.currentPdl = PARSED_INFO_CONTRACT_RESULT.output.pdl;
-            console.log('HP_EC_myConsumption || this.currentPdl :' + this.currentPdl);
+            // console.log('HP_EC_myConsumption || this.currentPdl :' + this.currentPdl);
 
             // Step 2 : Get typeComptage, prix htt, prix ttc
             const dateDebutValiditeUs = new Date(this.contractElec.dateDebutValidite);
             const dateDebutValiditeFr = ("0" + dateDebutValiditeUs.getDate()).slice(-2) + "/" + ("0" + (dateDebutValiditeUs.getMonth() + 1)).slice(-2) + "/" + dateDebutValiditeUs.getFullYear();
             const grilleTarifaireResult = await this.getGrilleTarifaire(this.contractElec.id.toString(), dateDebutValiditeFr);
             const grilleTarifaireResult_parsed = JSON.parse(grilleTarifaireResult);
-            console.log('HP_EC_myConsumption || grilleTarifaireResult elec: '+grilleTarifaireResult);
+            // console.log('HP_EC_myConsumption || grilleTarifaireResult elec: '+grilleTarifaireResult);
             if (grilleTarifaireResult_parsed?.status == 'SUCCESS') {
                 this.typeComptage = grilleTarifaireResult_parsed.elecTypeComptage;
                 if(this.typeComptage == 'Comptage simple') {
@@ -340,12 +353,16 @@ export default class Hp_ec_myConsumption extends LightningElement {
                 }
                 this.ELEC_aboTtc = grilleTarifaireResult_parsed.aboTtc;
                 this.ELEC_aboHtt = grilleTarifaireResult_parsed.aboHt;
+
+                console.log('ELEC_consoTtc : '+this.ELEC_consoTtc);
+                console.log('ELEC_consoHtt : '+this.ELEC_consoHtt);
+
+                console.log('ELEC_aboTtc : '+this.ELEC_aboTtc);
+                console.log('ELEC_aboHtt : '+this.ELEC_aboHtt);
             }
 
             // Step 3 : Get consommations elec
             if (this.currentPdl) {
-                console.log('this.idClient : '+this.idClient)
-                console.log('this.currentPdl : '+this.currentPdl)
                 const CONSO_ELEC_RESULT = await this.getConsoElec(this.idClient, this.currentPdl);
                 const PARSED_CONSO_ELEC_RESULT = JSON.parse(CONSO_ELEC_RESULT);
                 console.log('HP_EC_myConsumption || elecData:', CONSO_ELEC_RESULT);
@@ -353,14 +370,14 @@ export default class Hp_ec_myConsumption extends LightningElement {
                     this.consoElecResult = PARSED_CONSO_ELEC_RESULT.output;
                     this.elecConsumptions = this.generateElecConsumptionsPerConso();
                 }
-                console.log('HP_EC_myConsumption || this.elecConsumptions :' + JSON.stringify(this.elecConsumptions));
-
-                // Final step: Après organization Data, afficher le gaz et masquer l'elec 
-                this.showGas = false;
-                this.showElec = true;
             }
-
+            console.log('HP_EC_myConsumption || this.elecConsumptions :' + JSON.stringify(this.elecConsumptions));
         }
+
+        this.gasConsumptions?.length == 0 ? this.showTextPasDeConsommations_Gaz = true: this.showTextPasDeConsommations_Gaz = false;
+        this.elecConsumptions?.length == 0 ? this.showTextPasDeConsommations_Elec = true: this.showTextPasDeConsommations_Elec = false;
+
+        this.isProcessFinished = true;
     }
 
     handleShowValuePrice (event) {
@@ -392,11 +409,11 @@ export default class Hp_ec_myConsumption extends LightningElement {
             case 'conso':
                 if(this.currentEnergy == 'Gaz Naturel') {
                     this.gasConsumptions = this.generateGazConsumptionsPerConso();
-                    this.gasConsumptions.splice(12,this.gasConsumptions.length - 12);
+                    this.gasConsumptions?.splice(12,this.gasConsumptions.length - 12);
                 }
                 else if(this.currentEnergy == 'Electricité') {
                     this.elecConsumptions = this.generateElecConsumptionsPerConso();
-                    this.elecConsumptions.splice(12,this.elecConsumptions.length - 12);
+                    this.elecConsumptions?.splice(12,this.elecConsumptions.length - 12);
                 }
                 break;
             case 'month':
@@ -545,14 +562,19 @@ export default class Hp_ec_myConsumption extends LightningElement {
             const CONSO_KWH     = item.conso_cadran;                                    // Convert gas volume to kwh(item.volume_brut_gaz * item.kpcs)
             const ACTIVE        = (DATE_RELEVE.getYear() === new Date().getYear());     // Active = true if current year
 
-            const SUBSCRIPTION      = Math.ceil(this.GAZ_aboTtc) / 12;                  // abonnement
+            const SUBSCRIPTION      = this.GAZ_aboTtc / 12;                  // abonnement
             const CONSOMMAITON_TTC  = CONSO_KWH * this.GAZ_consoTtc;                    // consommation
             const COMPTAGE_TAX      =  CONSO_KWH * (this.GAZ_consoTtc - this.GAZ_consoHtt);  //comptage et taxe
 
             const PRICE = (CONSO_KWH * this.GAZ_consoTtc) + (SUBSCRIPTION * getMonthDifference(START_DATE, END_DATE));
             const PRICE_UNITS = 'EUR';
             
-            console.log('getMonthDifference(START_DATE, END_DATE) : '+ getMonthDifference(START_DATE, END_DATE));
+            // console.log('(CONSO_KWH * this.GAZ_consoTtc) : '+(CONSO_KWH * this.GAZ_consoTtc));
+            // console.log('COMPTAGE_TAX : '+COMPTAGE_TAX);
+            // console.log('(this.GAZ_consoTtc - this.GAZ_consoHtt) : '+(this.GAZ_consoTtc - this.GAZ_consoHtt));
+            // console.log('CONSO_KWH : '+CONSO_KWH);
+            // console.log('CONSOMMAITON_TTC : '+CONSOMMAITON_TTC);
+            // console.log('getMonthDifference(START_DATE, END_DATE) : '+ getMonthDifference(START_DATE, END_DATE));
     
             const cons = {
                 startDate: START_DATE,
@@ -562,11 +584,11 @@ export default class Hp_ec_myConsumption extends LightningElement {
                 units : 'kWh',
                 communicatingMeter: METER,
                 active: ACTIVE,
-                conso: CONSOMMAITON_TTC,
+                conso: CONSOMMAITON_TTC.toFixed(2),
                 priceValue: PRICE.toFixed(2),
                 priceUnits: PRICE_UNITS,
-                subscription: SUBSCRIPTION,
-                tax: COMPTAGE_TAX
+                subscription: SUBSCRIPTION.toFixed(2),
+                tax: COMPTAGE_TAX.toFixed(2)
             };
 
             if (cons.startDate <= this.endDate && cons.endDate >= this.startDate && gasConsumptionsArray.length < 12) {
@@ -598,19 +620,24 @@ export default class Hp_ec_myConsumption extends LightningElement {
             });
 
             const ACTIVE = ((m.getFullYear() == new Date().getFullYear()) && (m.getMonth() == new Date().getMonth())); 
-            const SUBSCRIPTION      = Math.ceil(this.GAZ_aboTtc) / 12;                              // abonnement
+            const SUBSCRIPTION      = conso_value_kwh == 0 ? 0 : this.GAZ_aboTtc / 12;                                         // abonnement
             const CONSOMMAITON_TTC  = conso_value_kwh * this.GAZ_consoTtc;                          // consommation
             const COMPTAGE_TAX      =  conso_value_kwh * (this.GAZ_consoTtc - this.GAZ_consoHtt);   //comptage et taxe
 
             const PRICE = conso_value_kwh == 0 ? 0 : (conso_value_kwh * this.GAZ_consoTtc) + (SUBSCRIPTION * 1);
             const PRICE_UNITS = 'EUR';
 
+            // console.log('month : '+formatDateToString(m));
+            // console.log('conso_value_kwh : '+conso_value_kwh);
+            // console.log('COMPTAGE_TAX : '+COMPTAGE_TAX);
+            // console.log('SUBSCRIPTION : '+SUBSCRIPTION);
+
             const cons = {
                 month: m,
                 value: conso_value_kwh,
                 units : 'kWh',
                 active: ACTIVE,
-                conso: CONSOMMAITON_TTC,
+                conso: CONSOMMAITON_TTC.toFixed(2),
                 priceValue: PRICE.toFixed(2),
                 priceUnits: PRICE_UNITS,
                 subscription: SUBSCRIPTION.toFixed(2),
@@ -624,6 +651,7 @@ export default class Hp_ec_myConsumption extends LightningElement {
             gasConsumptionsPerMonths.sort((a, b) => a.month - b.month);  /* Date Sorting */
         });
         
+        console.log('gasConsumptionsPerMonths : '+JSON.stringify(gasConsumptionsPerMonths));
         return gasConsumptionsPerMonths;
     }
 
@@ -651,14 +679,15 @@ export default class Hp_ec_myConsumption extends LightningElement {
                     });
                 }
             });
-            console.log('months in year '+i+' : '+months);
+            // console.log('months in year '+i+' : '+months);
+            console.log('months in year '+i+' : '+months.length);
 
             const ACTIVE = (i == YEAR); 
-            const SUBSCRIPTION      = Math.ceil(this.GAZ_aboTtc) / 12;        // abonnement
+            const SUBSCRIPTION      = (this.GAZ_aboTtc / 12) * months.length;        // abonnement
             const CONSOMMAITON_TTC  = conso_value_kwh * this.GAZ_consoTtc;           // consommation
             const COMPTAGE_TAX      =  conso_value_kwh * (this.GAZ_consoTtc - this.GAZ_consoHtt);  //comptage et taxe
 
-            const PRICE = (conso_value_kwh * this.GAZ_consoTtc) + (SUBSCRIPTION * months.length);
+            const PRICE = (conso_value_kwh * this.GAZ_consoTtc) + SUBSCRIPTION;
             const PRICE_UNITS = 'EUR';
 
             const cons = {
@@ -666,7 +695,7 @@ export default class Hp_ec_myConsumption extends LightningElement {
                 value: conso_value_kwh,
                 units : 'kWh',
                 active: ACTIVE,
-                conso: CONSOMMAITON_TTC,
+                conso: CONSOMMAITON_TTC.toFixed(2),
                 priceValue: PRICE.toFixed(2),
                 priceUnits: PRICE_UNITS,
                 subscription: SUBSCRIPTION.toFixed(2),
@@ -677,6 +706,7 @@ export default class Hp_ec_myConsumption extends LightningElement {
             }
         }
         
+        console.log('gasConsumptionsPerYear : '+JSON.stringify(gasConsumptionsPerYear));
         return gasConsumptionsPerYear;
     }
 
@@ -695,11 +725,10 @@ export default class Hp_ec_myConsumption extends LightningElement {
             const ACTIVE        = (DATE_RELEVE.getYear() === new Date().getYear());     // Active = true if current year
             const PRICE_UNITS   = 'EUR';
             
-            const SUBSCRIPTION  = Math.ceil(this.ELEC_aboTtc) / 12;                  // abonnement
+            const SUBSCRIPTION  = this.ELEC_aboTtc / 12;                  // abonnement
             var CONSOMMAITON_TTC= 0;
             var COMPTAGE_TAX    = 0;
             var PRICE           = 0;
-
 
             // console.log('getMonthDifference('+formatDateToString(START_DATE)+', '+formatDateToString(END_DATE)+' : '+getMonthDifference(START_DATE, END_DATE));
 
@@ -727,11 +756,11 @@ export default class Hp_ec_myConsumption extends LightningElement {
                 units: 'kWh',
                 communicatingMeter: METER,
                 active: ACTIVE,
-                conso: CONSOMMAITON_TTC,
+                conso: CONSOMMAITON_TTC.toFixed(2),
                 priceValue: PRICE.toFixed(2),
                 priceUnits: PRICE_UNITS,
                 subscription: SUBSCRIPTION.toFixed(2),
-                tax: COMPTAGE_TAX
+                tax: COMPTAGE_TAX.toFixed(2)
             };
 
             if (cons.startDate <= this.endDate && cons.endDate >= this.startDate) {
@@ -759,7 +788,7 @@ export default class Hp_ec_myConsumption extends LightningElement {
             const ACTIVE = ((m.getFullYear() == new Date().getFullYear()) && (m.getMonth() == new Date().getMonth()));
             const PRICE_UNITS   = 'EUR';
             
-            const SUBSCRIPTION  = Math.ceil(this.ELEC_aboTtc) / 12;                  // abonnement
+            const SUBSCRIPTION  = this.ELEC_aboTtc / 12;                  // abonnement
             var CONSO_KWH       = 0;
             var CONSOMMAITON_TTC= 0;
             var COMPTAGE_TAX    = 0;
@@ -833,7 +862,7 @@ export default class Hp_ec_myConsumption extends LightningElement {
 
             const ACTIVE = (i == YEAR); 
             const PRICE_UNITS   = 'EUR';
-            const SUBSCRIPTION  = Math.ceil(this.ELEC_aboTtc) / 12;
+            const SUBSCRIPTION  = (this.ELEC_aboTtc / 12) * months.length;
             var CONSO_KWH       = 0;
             var CONSOMMAITON_TTC= 0;
             var COMPTAGE_TAX    = 0;
@@ -847,27 +876,29 @@ export default class Hp_ec_myConsumption extends LightningElement {
                     if(this.typeComptage == 'Comptage simple') {
                         CONSOMMAITON_TTC += item.conso_cadran *  this.ELEC_consoTtc; 
                         COMPTAGE_TAX += item.conso_cadran * (this.ELEC_consoTtc - this.ELEC_consoHtt);
-                        PRICE += item.conso_cadran == 0 ? 0 :(item.conso_cadran * this.ELEC_consoTtc) + (SUBSCRIPTION * months.length);
+                        PRICE += item.conso_cadran == 0 ? 0 :(item.conso_cadran * this.ELEC_consoTtc) ;
                     } else if(this.typeComptage == 'Comptage HPHC') {
                         if(item.rang_cadran == 1) {
                             CONSOMMAITON_TTC += item.conso_cadran *  this.ELEC_HC_consoTtc;
                             COMPTAGE_TAX += item.conso_cadran * (this.ELEC_HC_consoTtc - this.ELEC_HC_consoHtt);
-                            PRICE += item.conso_cadran == 0 ? 0 :(item.conso_cadran * this.ELEC_HC_consoTtc) + (SUBSCRIPTION * months.length);
+                            PRICE += item.conso_cadran == 0 ? 0 :(item.conso_cadran * this.ELEC_HC_consoTtc);
                         } else if (item.rang_cadran == 2) {
                             CONSOMMAITON_TTC += item.conso_cadran *  this.ELEC_HP_consoTtc;
                             COMPTAGE_TAX += item.conso_cadran * (this.ELEC_HP_consoTtc - this.ELEC_HP_consoHtt);
-                            PRICE += item.conso_cadran == 0 ? 0 :(item.conso_cadran * this.ELEC_HP_consoTtc) + (SUBSCRIPTION * months.length);
+                            PRICE += item.conso_cadran == 0 ? 0 :(item.conso_cadran * this.ELEC_HP_consoTtc);
                         }
                     }
                 }
             });
+
+            PRICE = (PRICE == 0) ? 0 : PRICE + SUBSCRIPTION;
 
             const cons = {
                 year: i,
                 value: CONSO_KWH,
                 units : 'kWh',
                 active: ACTIVE,
-                conso: CONSOMMAITON_TTC,
+                conso: CONSOMMAITON_TTC.toFixed(2),
                 priceValue: PRICE.toFixed(2),
                 priceUnits: PRICE_UNITS,
                 subscription: SUBSCRIPTION.toFixed(2),
@@ -901,11 +932,13 @@ function getDate(string) {
 }
 
 function getMonthDifference(startDate, endDate) {
-    return (
-        endDate.getMonth() -
-        startDate.getMonth() +
-        12 * (endDate.getFullYear() - startDate.getFullYear())
-    );
+    const diffMonths = (endDate.getMonth() - startDate.getMonth() + 12 * (endDate.getFullYear() - startDate.getFullYear()));
+    
+    // When statDate & endDate are in the same month
+    if(diffMonths == 0)
+        return 1;
+
+    return diffMonths;
 }
 
 function getMonthsIndex(startDate, endDate) {

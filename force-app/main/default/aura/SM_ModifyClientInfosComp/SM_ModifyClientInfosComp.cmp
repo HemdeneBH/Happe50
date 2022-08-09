@@ -1,9 +1,8 @@
 <aura:component implements="lightning:isUrlAddressable,lightning:availableForFlowScreens" access="global">
-        <aura:handler value="{!this}" name="init" action="{!c.init}"/>
-        <lightning:workspaceAPI aura:id="workspace"/>
+	<aura:handler value="{!this}" name="init" action="{!c.init}"/>
+	<lightning:workspaceAPI aura:id="workspace"/>
 	<aura:attribute name="recordId" type="String" default="{!v.pageReference.state.c__recordId}"></aura:attribute>
-	<aura:attribute name="npaiFlag" type="String" default="{!v.pageReference.state.c__npaiFlag}"></aura:attribute>
-	<c:sM_ModifyClientInfos oncloseclicked="{!c.handleFilterChange}" recordId="{!v.recordId}" npaiFlag="{!v.npaiFlag}"/>
+	<c:sM_ModifyClientInfos oncloseclicked="{!c.handleFilterChange}" recordId="{!v.recordId}"/>
 	<!-- Div permettant que l'utility bar ne cache pas le bouton Save -->
-         <div style="height: 1%;"></div>
-        </aura:component>
+	<div style="height: 1%;"></div>
+</aura:component>

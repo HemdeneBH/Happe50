@@ -400,42 +400,24 @@ public class gdfsuezComBefChpPivotCompteClient {
 			//System.debug(this.code);			
 		}
 		public void populateXmlNode(Dom.XmlNode outerNode){
-			if(this.idValeur != null){
 			Dom.XmlNode idValeurNode = outerNode.addChildElement('idValeur', 'http://gdfsuez.com/bef/chp/pivot', '');
 			idValeurNode.addTextNode((this.idValeur == null) ? '' : this.idValeur);
-			}
-			if(this.description != null){
 			Dom.XmlNode descriptionNode = outerNode.addChildElement('description', 'http://gdfsuez.com/bef/chp/pivot', '');
 			descriptionNode.addTextNode((this.description == null) ? '' : this.description);
-			}
-			if(this.categorie != null){
 			Dom.XmlNode categorieNode = outerNode.addChildElement('categorie', 'http://gdfsuez.com/bef/chp/pivot', '');
 			categorieNode.addTextNode((this.categorie == null) ? '' : this.categorie);
-			}
-			if(this.order != null){
 			Dom.XmlNode orderNode = outerNode.addChildElement('order', 'http://gdfsuez.com/bef/chp/pivot', '');
 			orderNode.addTextNode((this.order == null) ? '' : this.order);
-			}
-			if(this.libelleCourt != null){
 			Dom.XmlNode libelleCourtNode = outerNode.addChildElement('libelleCourt', 'http://gdfsuez.com/bef/chp/pivot', '');
 			libelleCourtNode.addTextNode((this.libelleCourt == null) ? '' : this.libelleCourt);
-			}
-			if(this.libelleLong != null){
 			Dom.XmlNode libelleLongNode = outerNode.addChildElement('libelleLong', 'http://gdfsuez.com/bef/chp/pivot', '');
 			libelleLongNode.addTextNode((this.libelleLong == null) ? '' : this.libelleLong);
-			}
-			if(this.actif != null){
 			Dom.XmlNode actifNode = outerNode.addChildElement('actif', 'http://gdfsuez.com/bef/chp/pivot', '');
 			actifNode.addTextNode((this.actif == null) ? '' : this.actif);
-			}
-			if(this.langue != null){
 			Dom.XmlNode langueNode = outerNode.addChildElement('langue', 'http://gdfsuez.com/bef/chp/pivot', '');
 			langueNode.addTextNode((this.langue == null) ? '' : this.langue);
-			}
-			if(this.code != null){
-			Dom.XmlNode codeNode = outerNode.addChildElement('code', '', '');
+			Dom.XmlNode codeNode = outerNode.addChildElement('code', 'http://gdfsuez.com/bef/chp/pivot', '');
 			codeNode.addTextNode((this.code == null) ? '' : this.code);
-			}
 		}
 	}
 	public class listeValeursParticulieresDt {
@@ -527,7 +509,6 @@ public class gdfsuezComBefChpPivotCompteClient {
 		public messageRetoursDt_messageRetour_element(){
 		}
 		public messageRetoursDt_messageRetour_element(DOM.XmlNode responseNode){
-			System.debug('messageRetoursDt_messageRetour_element'+responseNode);
 			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
 			DOM.XmlNode idNode = responseNode.getChildElement('id', 'http://gdfsuez.com/bef/chp/pivot');
 			this.id = (idNode == null) ? null : idNode.getText();
@@ -540,7 +521,7 @@ public class gdfsuezComBefChpPivotCompteClient {
 			DOM.XmlNode libelleNode = responseNode.getChildElement('libelle', 'http://gdfsuez.com/bef/chp/pivot');
 			this.libelle = (libelleNode == null) ? null : libelleNode.getText();
 			nodesParsed.add(libelleNode);
-			System.debug('LibelleDebug'+this.libelle);			
+			//System.debug(this.libelle);			
 			DOM.XmlNode type_xNode = responseNode.getChildElement('type', 'http://gdfsuez.com/bef/chp/pivot');
 			this.type_x = (type_xNode == null) ? null : type_xNode.getText();
 			nodesParsed.add(type_xNode);
@@ -795,53 +776,44 @@ public class gdfsuezComBefChpPivotCompteClient {
 		public retourTraitementMessageDt(){
 		}
 		public retourTraitementMessageDt(DOM.XmlNode responseNode){
-
-
 			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
-//			Dom.XmlNode bodyNode = rootNode.getChildElement('Body','http://schemas.xmlsoap.org/soap/envelope/');
-
-	//		system.debug('responseNode802'+responseNode);
-	//		for ( Dom.XMLNode detailElement : responseNode.getChildElements() )  
-	//		system.debug( detailElement.getName() + '-' + detailElement.getText()+ '-' + detailElement.getNamespace());  
-			//DOM.XmlNode retourTraitementMessage = responseNode.getChildElement('retourTraitementMessage', 'http://gdfsuez.com/bef/chp/pivot');
-			//System.debug('retourTraitementMessage799'+ retourTraitementMessage);
-			DOM.XmlNode idNode = responseNode.getChildElement('id', null);
+			DOM.XmlNode idNode = responseNode.getChildElement('id', 'http://gdfsuez.com/bef/chp/pivot');
 			this.id = (idNode == null) ? null : idNode.getText();
 			nodesParsed.add(idNode);
 			//System.debug(this.id);			
-			DOM.XmlNode sourceNode = responseNode.getChildElement('source', null);
+			DOM.XmlNode sourceNode = responseNode.getChildElement('source', 'http://gdfsuez.com/bef/chp/pivot');
 			this.source = (sourceNode == null) ? null : sourceNode.getText();
 			nodesParsed.add(sourceNode);
 			//System.debug(this.source);			
-			DOM.XmlNode complementNode = responseNode.getChildElement('complement', null);
+			DOM.XmlNode complementNode = responseNode.getChildElement('complement', 'http://gdfsuez.com/bef/chp/pivot');
 			this.complement = (complementNode == null) ? null : complementNode.getText();
 			nodesParsed.add(complementNode);
 			//System.debug(this.complement);			
-			DOM.XmlNode libelleNode = responseNode.getChildElement('libelle', null);
+			DOM.XmlNode libelleNode = responseNode.getChildElement('libelle', 'http://gdfsuez.com/bef/chp/pivot');
 			this.libelle = (libelleNode == null) ? null : libelleNode.getText();
 			nodesParsed.add(libelleNode);
-			//System.debug('libelle814'+responseNode.getChildElement('libelle', ''));			
-			DOM.XmlNode afficheNode = responseNode.getChildElement('affiche', null);
+			//System.debug(this.libelle);			
+			DOM.XmlNode afficheNode = responseNode.getChildElement('affiche', 'http://gdfsuez.com/bef/chp/pivot');
 			this.affiche = (afficheNode == null) ? null : afficheNode.getText();
 			nodesParsed.add(afficheNode);
 			//System.debug(this.affiche);			
-			DOM.XmlNode classeNode = responseNode.getChildElement('classe', null);
+			DOM.XmlNode classeNode = responseNode.getChildElement('classe', 'http://gdfsuez.com/bef/chp/pivot');
 			this.classe = (classeNode == null) ? null : classeNode.getText();
 			nodesParsed.add(classeNode);
 			//System.debug(this.classe);			
-			DOM.XmlNode type_xNode = responseNode.getChildElement('type', null);
+			DOM.XmlNode type_xNode = responseNode.getChildElement('type', 'http://gdfsuez.com/bef/chp/pivot');
 			this.type_x = (type_xNode == null) ? null : type_xNode.getText();
 			nodesParsed.add(type_xNode);
 			//System.debug(this.type_x);			
-			DOM.XmlNode codeNode = responseNode.getChildElement('code', null);
+			DOM.XmlNode codeNode = responseNode.getChildElement('code', 'http://gdfsuez.com/bef/chp/pivot');
 			this.code = (codeNode == null) ? null : codeNode.getText();
 			nodesParsed.add(codeNode);
 			//System.debug(this.code);			
-			DOM.XmlNode timestampNode = responseNode.getChildElement('timestamp', null);
+			DOM.XmlNode timestampNode = responseNode.getChildElement('timestamp', 'http://gdfsuez.com/bef/chp/pivot');
 			this.timestamp = (timestampNode == null) ? null :  gdfsuezComBefChpPivotCompteClient.parseDateTime(timestampNode.getText());
 			nodesParsed.add(timestampNode);
 			//System.debug(this.timestamp);			
-			DOM.XmlNode causedByNode = responseNode.getChildElement('causedBy', null);
+			DOM.XmlNode causedByNode = responseNode.getChildElement('causedBy', 'http://gdfsuez.com/bef/chp/pivot');
 			if(causedByNode == null){
 				this.causedBy = null;
 			} else{

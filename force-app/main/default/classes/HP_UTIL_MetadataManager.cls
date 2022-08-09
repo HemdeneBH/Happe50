@@ -20,6 +20,7 @@ public with sharing class HP_UTIL_MetadataManager {
     * @description Methode permet de recuperer la configuration en fonction de clé
     * @param key, le clé de la config
     */
+    @AuraEnabled(cacheable=true)
     public static String getConfigByKey(String key) {
         try {
             HP_Parameter__mdt mdt = [SELECT DeveloperName, value__c, Is_Encrypted__c FROM HP_Parameter__mdt WHERE DeveloperName = :key LIMIT 1];
@@ -27,19 +28,17 @@ public with sharing class HP_UTIL_MetadataManager {
                 return mdt.Is_Encrypted__c? decrypt(mdt.Value__c) : mdt.Value__c;
             }else {
                 return null;
-                }  
+            }
         } catch (Exception ex) {
             System.debug('Exception : '+ex.getMessage());
             return null;
-            }
-        }
+        } 
+    }
 
     public static String decrypt(String value){
         return HP_UTIL_CryptoUtils.decryptData(String.valueOf(value));
         
     }
-
-   
        
        public static String getContryCode(String indicatif) {
         if(metadataMap == null) {

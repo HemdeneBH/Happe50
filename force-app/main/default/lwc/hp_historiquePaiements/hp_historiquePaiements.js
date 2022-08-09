@@ -369,7 +369,7 @@ export default class Hp_historiquePaiements extends LightningElement {
             }
             for(let detteKey in paiementsELEC_Output[key].dettes) {
                 let statutDette;
-
+                
                 if (paiementsELEC_Output[key].dettes[detteKey].ref_dette.startsWith('DET')) {
                     switch(paiementsELEC_Output[key].dettes[detteKey].statut_dette){
                         case '0' : 
@@ -402,26 +402,26 @@ export default class Hp_historiquePaiements extends LightningElement {
                     }
 
                 } else if (paiementsELEC_Output[key].dettes[detteKey].ref_dette.startsWith('ECH')) {
-                switch(paiementsELEC_Output[key].dettes[detteKey].statut_dette){
-                    case '0' : 
-                        statutDette = '';
-                        break; 
-                    case '1' : 
-                        statutDette = 'Annulée';
-                        break; 
-                    case '2' : 
-                        statutDette = 'Régularisée';
-                        break; 
-                    case '3' : 
-                        statutDette = 'Partiellement soldée';
-                        break;
-                    case '4' : 
-                        statutDette = 'Soldée';
-                        break; 
-                    case '5' : 
-                        statutDette = 'Non soldée';
-                        break; 
-                }
+                    switch(paiementsELEC_Output[key].dettes[detteKey].statut_dette){
+                        case '0' : 
+                            statutDette = '';
+                            break; 
+                        case '1' : 
+                            statutDette = 'Annulée';
+                            break; 
+                        case '2' : 
+                            statutDette = 'Régularisée';
+                            break; 
+                        case '3' : 
+                            statutDette = 'Partiellement soldée';
+                            break;
+                        case '4' : 
+                            statutDette = 'Soldée';
+                            break; 
+                        case '5' : 
+                            statutDette = 'Non soldée';
+                            break; 
+                    }
                 }
                 
                 let tempDette = {
@@ -569,26 +569,26 @@ export default class Hp_historiquePaiements extends LightningElement {
                     }
 
                 } else if (paiementsGAZ_Output[key].dettes[detteKey].ref_dette.startsWith('ECH')) {
-                switch(paiementsGAZ_Output[key].dettes[detteKey].statut_dette){
-                    case '0' : 
-                        statutDette = '';
-                        break; 
-                    case '1' : 
-                        statutDette = 'Annulée';
-                        break; 
-                    case '2' : 
-                        statutDette = 'Régularisée';
-                        break; 
-                    case '3' : 
-                        statutDette = 'Partiellement soldée';
-                        break;
-                    case '4' : 
-                        statutDette = 'Soldée';
-                        break; 
-                    case '5' : 
-                        statutDette = 'Non soldée';
-                        break; 
-                }
+                    switch(paiementsGAZ_Output[key].dettes[detteKey].statut_dette){
+                        case '0' : 
+                            statutDette = '';
+                            break; 
+                        case '1' : 
+                            statutDette = 'Annulée';
+                            break; 
+                        case '2' : 
+                            statutDette = 'Régularisée';
+                            break; 
+                        case '3' : 
+                            statutDette = 'Partiellement soldée';
+                            break;
+                        case '4' : 
+                            statutDette = 'Soldée';
+                            break; 
+                        case '5' : 
+                            statutDette = 'Non soldée';
+                            break; 
+                    }
                 }
 
                 let tempDette = {
@@ -649,12 +649,12 @@ export default class Hp_historiquePaiements extends LightningElement {
 
     getGazDettes() {
         if(!this.idContratGazNotRetrieved) {
-        this.paiementsGAZ.forEach(p => {
-            p.dettes.forEach(d => {
-                if (!this.gazDettes_ALL.filter(e => e.ref_dette === d.ref_dette).length > 0)
-                    this.gazDettes_ALL.push(d);
+            this.paiementsGAZ.forEach(p => {
+                p.dettes.forEach(d => {
+                    if (!this.gazDettes_ALL.filter(e => e.ref_dette === d.ref_dette).length > 0)
+                        this.gazDettes_ALL.push(d);
+                });
             });
-        });
 
             for(let key in this.gazDettes_ALL) {
                 this.gazDettes_ALL[key].id = key;
@@ -670,12 +670,12 @@ export default class Hp_historiquePaiements extends LightningElement {
 
     getElecDettes() {
         if(!this.idContratElecNotRetrieved) {
-        this.paiementsELEC.forEach(p => {
-            p.dettes.forEach(d => {
-                if (!this.elecDettes_ALL.filter(e => e.ref_dette === d.ref_dette).length > 0)
-                    this.elecDettes_ALL.push(d);
+            this.paiementsELEC.forEach(p => {
+                p.dettes.forEach(d => {
+                    if (!this.elecDettes_ALL.filter(e => e.ref_dette === d.ref_dette).length > 0)
+                        this.elecDettes_ALL.push(d);
+                });
             });
-        });
 
             for(let key in this.elecDettes_ALL) {
                 this.elecDettes_ALL[key].id = key;
@@ -1012,6 +1012,7 @@ export default class Hp_historiquePaiements extends LightningElement {
 
         } else if (actionName === 'all') {
             this.elecDettes = this.elecDettes_ALL;
+            for(let key in this.elecDettes) { this.elecDettes[key].id = key; }
         }
 
         this.updateDettesElecHeadersAction();
@@ -1044,6 +1045,7 @@ export default class Hp_historiquePaiements extends LightningElement {
 
         } else if (actionName === 'all') {
             this.gazDettes = this.gazDettes_ALL;
+            for(let key in this.gazDettes) { this.gazDettes[key].id = key; }
         }
 
         this.updateDettesGazHeadersAction();

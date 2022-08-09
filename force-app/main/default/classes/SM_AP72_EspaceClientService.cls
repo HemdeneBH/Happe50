@@ -6,13 +6,6 @@
 
 global class SM_AP72_EspaceClientService {
     
-    // addtional headers to add to the digital api request headers
-    public static Map<String, String> additionalHeaders = new Map<String, String>{
-        'X-Api-Key' => (!Test.isRunningTest())? MP_Xdata_credentials__c.getInstance('sm_api_key_digital_INT').Value__c :'',
-        'DIG_ID_CLIENT' => (!Test.isRunningTest())? MP_Xdata_credentials__c.getInstance('sm_digital_id_client').Value__c:'',
-        'DIG_SECRET_CLIENT' => (!Test.isRunningTest())? MP_Xdata_credentials__c.getInstance('sm_digital_secret_client').Value__c:''
-    };    
-
     @AuraEnabled(cacheable=false)
     public static String creerEspaceClient(Map < String, Object > espaceClientACreerMap){
         
@@ -23,9 +16,12 @@ global class SM_AP72_EspaceClientService {
         EspaceClientACreer espaceClient  = buildEspaceClientACreer(espaceClientACreerMap);
         
         
+        
+        String token = loadToken();
+        
         Map<String,Object> espaceClientACreerBody = buildEspaceClientACreerRequestBody(espaceClient);
-        System.debug('### aka espaceClientACreerBody ' + espaceClientACreerBody);
-        HttpResponse response = getResponse('EspacesPrives',espaceClientACreerBody);
+        
+        HttpResponse response = getHttpResponse(token,'EspacesPrives',espaceClientACreerBody);
         system.debug('response = '+response);
         Map<String,Object> resultAsMap = (Map<String,Object>) JSON.deserializeUntyped(response.getBody());
         
@@ -58,7 +54,9 @@ global class SM_AP72_EspaceClientService {
                 'idApplicatif'=>(String) mailActivationMap.get('numeroBP')
                 };
                     
-        HttpResponse response = getResponse('MailActivation',mailActivationRequest);
+                    String token = loadToken();
+        
+        HttpResponse response = getHttpResponse(token,'MailActivation',mailActivationRequest);
         Map<String,Object> resultAsMap = (Map<String,Object>) JSON.deserializeUntyped(response.getBody());
         
         String statutResponse = (String)resultAsMap.get('statut');
@@ -74,7 +72,22 @@ global class SM_AP72_EspaceClientService {
         }
     }
     
-    public static String majPersonneProfilMarketing(String numeroBP,String email){
+    private static String loadToken(){
+        String token;
+        if(!Test.isRunningTest()){
+            token = SM_MP_AP04_GetTokenService.getTokenFromSmile();
+        }
+        else{
+            token = 'wadfkoa5678';
+        }
+        if (token == null) {
+            system.debug('[SM_AP72_EspaceClientService : Token not found ...]');
+            throw new IOException('INVALID TOKEN API');
+        }
+        return token;
+    }
+    
+    private static String majPersonneProfilMarketing(String numeroBP,String email){
         Map<String,Object> inputMap = new Map<String,Object>{
             'numeroBP' => numeroBP,
                 'email'  => email
@@ -105,7 +118,6 @@ global class SM_AP72_EspaceClientService {
                     }
     
     public static EspaceClientACreer buildEspaceClientACreer(Map<String,Object> inputMap){
-        System.debug('### aka EMAIL ' + inputMap.get('email'));
         return new EspaceClientACreer(
             (String) inputMap.get('prenom'),
             (String) inputMap.get('nom'),
@@ -131,20 +143,72 @@ global class SM_AP72_EspaceClientService {
     }
     
     /*@Author: HEL
+*@Description : Build the HttpRequest for post method
+*@CreatedDate : 09/07/2018
+*/
+    public static HttpRequest buildHttpRequestHeadersPost(String token,String apiSuffix, Map<String, Object> bodyRequest) {
+        HttpRequest req = new HttpRequest();
+        req.setMethod('POST');
+        String endpointURL = '';
+        if (!Test.isRunningTest()) {
+            SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = :apiSuffix limit 1];
+            endpointURL = 'callout:AuthAPIHour' +suffixs.suffix__c;
+        }
+        req.setEndpoint(endpointURL);
+        req.setHeader('X-Correlation-Id', MP_AP13_GuidUtil.NewGuid());
+        if(!Test.isRunningTest()){
+            req.setHeader('X-Api-Key', MP_Xdata_credentials__c.getInstance('sm_api_key_digital_INT').Value__c);
+            req.setHeader('api_key', MP_Xdata_credentials__c.getInstance('sm_api_key_INT').Value__c);
+            req.setHeader('DIG_ID_CLIENT', MP_Xdata_credentials__c.getInstance('sm_digital_id_client').Value__c);
+            req.setHeader('DIG_SECRET_CLIENT', MP_Xdata_credentials__c.getInstance('sm_digital_secret_client').Value__c);
+        }
+        req.setHeader('Authorization', 'Bearer ' + token);
+        req.setHeader('Content-Type', 'application/json');
+        req.setBody(JSON.serialize(bodyRequest));
+        system.debug('trame:' + bodyRequest);
+        return req;
+    }
+    
+    /*@Author: HEL
 *@Description : Envoie de la requete POST
 *@CreatedDate : 09/07/2019
 */
-    public static HttpResponse getResponse(String apiSuffix, Map<String, Object> bodyRequest) {
-        system.debug(JSON.serialize(bodyRequest));
-        HttpResponse httpResp = CalloutManager.sendRequest(apiSuffix, null, 'POST', CalloutManager.Scope.WRITE, JSON.serialize(bodyRequest), additionalHeaders);
-        if (CalloutManager.httpResponseFailureDetected(httpResp)) {
+    public static HttpResponse getHttpResponse(String token,String apiSuffix, Map<String, Object> bodyRequest) {
+        HttpRequest httpReq = buildHttpRequestHeadersPost(token,apiSuffix, bodyRequest);
+        HttpResponse httpResp = sendData(httpReq);
+        if (httpResponseFailureDetected(httpResp)) {
             // should abort next step's
-            system.debug('[SM_AP72_EspaceClientService:getResponse] error when sending http request');
+            system.debug('[SM_AP72_EspaceClientService:getHttpResponse] error when sending http request');
             system.debug(httpResp != null ? httpResp.getBody() : 'http response is null');
         }
         
         return httpResp;
         
+    }
+    
+    /*@Author: HEL
+*@Description : Envoie de la requete POST
+*@CreatedDate : 09/07/2019
+*/
+    public static HttpResponse sendData(HttpRequest request) {
+        Http http = new Http();
+        HttpResponse res;
+        try {
+            res = http.send(request);
+            
+        } catch (Exception e) {
+            system.debug('[SM_AP72_EspaceClientService:sendData] error when sending http request');
+            return null;
+        }
+        return res;
+        
+    }
+    
+    /*@Author: HEL
+*@CreatedDate : 09/07/2019
+*/
+    private static Boolean httpResponseFailureDetected(HttpResponse response) {
+        return (response == null || (response.getStatusCode() != 201 && response.getStatusCode() != 200 && response.getStatusCode() != 206));
     }
     
     /*@Author: MERABTI IBRAHIM

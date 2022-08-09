@@ -7,6 +7,7 @@
 .slds-accordion__list-item{
     border-top:0px!important;
 }
+
 .grayBackground{
     background-color:#e6ebec}
 .tableListPa{
@@ -34,8 +35,10 @@ th {
     height: 30px;
     background: #36cfa0;
     border-radius: 50%
+    
   }
   .redCross {
+    
    /* color: #c10e24;
     font-family: cursive;
     font-size: 2em;
@@ -57,20 +60,22 @@ th {
     position: absolute;
     top: 11.25px;
     width: 30px;
+    
   }
 .redCrossDiv{
     transform: rotate(45deg);
     width: fit-content;
     margin-left: 11.25px;
 }
+
 table {
-
-
-    counter-reset: rowNumber-1;
+    counter-reset: rowNumber+1;
 }
+
 table tr {
     counter-increment: rowNumber;
 }
+
 table tr td:first-child::before {
     content: counter(rowNumber);
     min-width: 1em;
@@ -89,6 +94,7 @@ table tr td:first-child::before {
     text-align: right;
     width: 100%;
 }
+
 .slds-button {
     background-color: #059ce7;
     color: white;
@@ -110,20 +116,10 @@ table tr td:first-child::before {
 .btn-ok {
     width: 130px;
 }
+
 .grayBackground{font-size: 1.1em;}
 .customTabStyle{
     height: 45px;
     table-layout: fixed;
     font-size: 15px;
-}
-.divErrorPA {
-    background-color: rgba(193, 14, 36, 0.1)!important;
-    color: black!important;
-    border-color: rgba(193, 14, 36, 0.1)!important;
-   padding-top: 10px;
-   padding-bottom: 10px;
-}
-
-.filarianeRight{
-    float: right;
 }

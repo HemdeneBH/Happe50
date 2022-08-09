@@ -1,7 +1,4 @@
 global class SM_UTIL_Cache_Management implements vlocity_cmt.VlocityOpenInterface{
-    
-    public static boolean cacheOrg = false;
-    
     /**************************************************************************
     *@author: Alain KAMENI
     *@date: september 2018
@@ -42,15 +39,10 @@ global class SM_UTIL_Cache_Management implements vlocity_cmt.VlocityOpenInterfac
         }
     // Read data stored in Cache   
     public void getOctopusToken_SAP (Map<String, Object> input, Map<String, Object> output)
-    {       
-        if(Cache.Session.isAvailable() && !cacheOrg){
-            Cache.SessionPartition sessionPart = Cache.Session.getPartition('local.smileToken');
-            System.Debug('Token_Read:'+(String)sessionPart.get('tokenSAP'));
-            output.put('token',(String)sessionPart.get('tokenSAP'));
-        }else{
-            Cache.OrgPartition orgPart = Cache.Org.getPartition('local.smileToken');
-            output.put('token',(String)orgPart.get('tokenSAP'));
-        }
+    {           
+        Cache.SessionPartition sessionPart = Cache.Session.getPartition('local.smileToken');
+        System.Debug('Token_Read:'+(String)sessionPart.get('tokenSAP'));
+        output.put('token',(String)sessionPart.get('tokenSAP'));    
     } 
     public void getIdentifiantDistrib (Map<String, Object> input, Map<String, Object> output)
     {           
@@ -59,19 +51,12 @@ global class SM_UTIL_Cache_Management implements vlocity_cmt.VlocityOpenInterfac
     } 
     // Write data in Cache
     public void setOctopusToken_SAP (Map<String, Object> input, Map<String, Object> output)
-    {   
-        if(!String.isBlank((String)input.get('token'))){
-            if(Cache.Session.isAvailable() && !cacheOrg){
-              Cache.SessionPartition sessionPart = Cache.Session.getPartition('local.smileToken');
-                System.Debug('Token_SAP'+input.get('token'));
-                sessionPart.put('tokenSAP', input.get('token'), Integer.valueOf(Label.SM_CL40_Octopus_Token_TTL));//TTL en secondes 
-                System.Debug('Token_To_Write:'+input.get('token'));  
-            }else{
-                Cache.OrgPartition orgPart = Cache.Org.getPartition('local.smileToken');
-                orgPart.put('tokenSAP', input.get('token'), Integer.valueOf(Label.SM_CL40_Octopus_Token_TTL));
-            }
-            
-        }
+    {   if(!String.isBlank((String)input.get('token'))){     
+        Cache.SessionPartition sessionPart = Cache.Session.getPartition('local.smileToken');
+        System.Debug('Token_SAP'+input.get('token'));
+        sessionPart.put('tokenSAP', input.get('token'), Integer.valueOf(Label.SM_CL40_Octopus_Token_TTL));//TTL en secondes 
+        System.Debug('Token_To_Write:'+input.get('token'));
+    }
      
     } 
     public void setIdentifiantDistrib (Map<String, Object> input, Map<String, Object> output)
@@ -99,7 +84,7 @@ global class SM_UTIL_Cache_Management implements vlocity_cmt.VlocityOpenInterfac
                    sessionPart.put('IdentifiantDistrib', returnIdentifiantDistrib);
                 }                           
         }
-    return returnIdentifiantDistrib;      
+	return returnIdentifiantDistrib;      
        
     }
     
@@ -126,7 +111,7 @@ global class SM_UTIL_Cache_Management implements vlocity_cmt.VlocityOpenInterfac
                    sessionPart.put('IdentifiantSAP', getIdentifiantSap);
                 }                           
         }
-    return getIdentifiantSap;      
+	return getIdentifiantSap;      
        
     }
     

@@ -5,7 +5,7 @@
  * @Group              :
  * @Last Modified By   : Hemdene Ben Hammouda
 
- * @Last Modified On   : 09-20-2021
+ * @Last Modified On   : 01-24-2022
 
  * @Modification Log   :
  * Ver       Date            Author      		    Modification
@@ -113,7 +113,7 @@ public with sharing class HP_EM020_Contact {
 		return contactList;
 	}
 
-    @AuraEnabled(cacheable=false)
+    @AuraEnabled(cacheable=true)
 	public static Contact loadContact(Id contactId){
 
 

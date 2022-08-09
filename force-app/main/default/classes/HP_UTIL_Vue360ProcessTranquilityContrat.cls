@@ -3,8 +3,8 @@
  * @Description        : 
  * @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
  * @Group              : 
- * @Last Modified By   : ChangeMeIn@UserSettingsUnder.SFDoc
- * @Last Modified On   : 27/04/2020 à 09:32:47
+ * @Last Modified By   : Hemdene Ben Hammouda
+ * @Last Modified On   : 04-28-2022
  * @Modification Log   : 
  * Ver       Date            Author      		    Modification
  * 1.0    09/04/2020   ChangeMeIn@UserSettingsUnder.SFDoc     Initial Version
@@ -17,6 +17,7 @@ public with sharing class HP_UTIL_Vue360ProcessTranquilityContrat implements HP_
         System.debug('@@@ tranq param : ' +mapParam.get('output'));
 		mapParam = (Map<String, Object>)+mapParam.get('data');
 		mapParam = (Map<String, Object>)+mapParam.get('output');
+		System.debug('@@@ IDPersone before : ' +mapParam.get('id'));
 		String idPersonne = mapParam.get('id') != null ? String.valueOf(950000000 + Integer.valueOf(mapParam.get('id'))) : 'null';
 		System.debug('@@@ IDPersone : ' +idPersonne);
 		String body =  HP_ParseUtils.serialize(new HP_WRP0015_TranquilityContractInfo.TranquilityRequest(idPersonne,ID_CONSOMATEUR));

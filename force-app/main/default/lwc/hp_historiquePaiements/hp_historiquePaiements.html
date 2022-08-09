@@ -12,10 +12,10 @@
             <div class="slds-grid slds-gutters">
                 <div class="slds-col slds-size_1-of-3">
                     <template if:true={isAdressLoaded}>
-                    <div class="slds-m-left_small">
-                        <lightning-icon icon-name="utility:home" alternative-text="Adresse" title="Adresse" size="x-small"></lightning-icon>
-                        &nbsp;&nbsp;&nbsp;{_contratLocaux.numeroVoie}, {_contratLocaux.libelleVoie} {_contratLocaux.complementAdresse} {_contratLocaux.codePostal} {_contratLocaux.ville}
-                    </div>
+                        <div class="slds-m-left_small">
+                            <lightning-icon icon-name="utility:home" alternative-text="Adresse" title="Adresse" size="x-small"></lightning-icon>
+                            &nbsp;&nbsp;&nbsp;{_contratLocaux.numeroVoie}, {_contratLocaux.libelleVoie} {_contratLocaux.complementAdresse} {_contratLocaux.codePostal} {_contratLocaux.ville}
+                        </div>
                     </template>
                     <template if:false={isAdressLoaded}>
                         <div class="slds-m-left_small">

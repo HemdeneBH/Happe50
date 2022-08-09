@@ -8,6 +8,7 @@
     <columns>HP_Id_Compteur__c</columns>
     <columns>HP_Porte_Feuille_Contrat__c</columns>
     <columns>HP_Souscription__c</columns>
+    <columns>HP_Index_de_Compteur__c</columns>
     <filterScope>Everything</filterScope>
     <filters>
         <field>HP_Type_de_Compteur__c</field>

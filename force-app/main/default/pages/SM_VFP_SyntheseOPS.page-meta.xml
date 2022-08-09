@@ -5,4 +5,9 @@
     <confirmationTokenRequired>false</confirmationTokenRequired>
     <description>VFP d&apos;OS de synthèse OPS permettant de gérer les habilitations</description>
     <label>Infos OPS</label>
+    <packageVersions>
+        <majorNumber>900</majorNumber>
+        <minorNumber>289</minorNumber>
+        <namespace>vlocity_cmt</namespace>
+    </packageVersions>
 </ApexPage>

@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : Clément Bauny
  * @group             : 
- * @last modified on  : 06-20-2022
- * @last modified by  : Hemdene Ben Hammouda
+ * @last modified on  : 08-02-2022
+ * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
 **/
 import { LightningElement, api, track, wire } from 'lwc';
 import getContractData from '@salesforce/apex/HP_EC_LoadCustomerData.getContractData';
@@ -11,6 +11,8 @@ import getSoldeData from '@salesforce/apex/HP_EC_LoadCustomerData.getSoldeEffect
 import getFacture from '@salesforce/apex/HP_EC_LoadCustomerData.getFactureAgilabData';
 import getEcheance from '@salesforce/apex/HP_EC_LoadCustomerData.getEcheanceContractData';
 import getPorteFeuilleContrat from '@salesforce/apex/HP_EC_LoadCustomerData.getPorteFeuilleContratXdata';
+import getContactData from '@salesforce/apex/HP_EC_LoadCustomerData.getContactData';
+import getPlansApurement from '@salesforce/apex/HP_EC_LoadCustomerData.getPlansApurement';
 import { NavigationMixin } from 'lightning/navigation';
 
 import { publishMC, subscribeMC, unsubscribeMC, getCurrentMessageValue } from 'c/hp_ec_utl_lightningMessageManager';
@@ -33,6 +35,12 @@ export default class Hp_ec_solde extends NavigationMixin(LightningElement) {
     @api secondButton;
     @api lien;
     @api usePathInFirstButton;
+
+    //popin paiement echeance contribution
+    @api listPaymentsTitle;
+    @api textRappel;
+    @api messageListPayement;
+    @api boutonListPaymentLabel;
 
 
     @track idPortefeuilleContrat;
@@ -62,6 +70,16 @@ export default class Hp_ec_solde extends NavigationMixin(LightningElement) {
     @track inpaidEcheance;
     @track amount;
     @track echeanceId;
+    @track listFctEch = [];
+    @track conditionCas1;
+    @track conditionCas2;
+    @track isProcessFinished;
+    @track payementAmountToDisplay;
+    @track montantToPaye;
+    @track showListPayementComponent = false;
+    @track showListPayement;
+    @track echeancIdToPaye;
+    @track contact;
 
     // Champs contribuables pour hp_ec_popinPayments : START //
     @api titreV1;
@@ -91,8 +109,11 @@ export default class Hp_ec_solde extends NavigationMixin(LightningElement) {
     // Champs contribuables : END //
 
     paymentPopin = false;
+    prelevement = false;
+    pageReloaded = false;
 
     openPopin () {
+        
         this.paymentPopin = true;
     }
 
@@ -121,6 +142,7 @@ export default class Hp_ec_solde extends NavigationMixin(LightningElement) {
             this.conditionsOfCas1 = false
         }
     }
+
     @wire(getContractData)
      wiredContract({ error, data }) {
          if (data) {
@@ -130,8 +152,23 @@ export default class Hp_ec_solde extends NavigationMixin(LightningElement) {
             }
         }
 
+        @wire(getContactData)
+        wiredContact({error, data}){
+            if(data){
+                this.contact = JSON.parse(data);
+            }
+            else if (error) {
+                console.log(JSON.stringify(error));
+            }
+        }
+
     @wire(MessageContext) messageContext;
+    
     connectedCallback() {
+        if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+            console.info( "This page is reloaded" );
+            this.pageReloaded = true;
+          }
         this.idPortefeuilleContrat = getCurrentMessageValue('SelectedPortfolio');
         this.handleSubscription();
         this.populateContractInfo();
@@ -142,14 +179,21 @@ export default class Hp_ec_solde extends NavigationMixin(LightningElement) {
     }
 
     handleLightningMessage(self, subscription, message) {
-        if (message.messageType == 'SelectedPortfolio') {
+        if (message.messageType == 'SelectedPortfolio' && !self.pageReloaded) {
             self.idPortefeuilleContrat = message.messageData.message;
             self.populateContractInfo();
         }
+        self.pageReloaded = false;
     }
 
     handlePublish(message) {
         // publishMC(this.messageContext, message, 'SelectedEnergy');
+    }
+
+    get isEtatInactif() {
+        if(!(this.isProcessFinished && (this.montant <= 0) && (this.conditionCas1 || this.conditionCas2)))
+            return true;
+        return false;
     }
 
 
@@ -163,12 +207,48 @@ export default class Hp_ec_solde extends NavigationMixin(LightningElement) {
         if(!this.idPortefeuilleContrat){
             return;
         }
+        
         const factures = await this.getFacture();
+        const FACTURES = JSON.parse(factures);
         this.facturesData = JSON.parse(factures).output.factures;
         this.inpaidInvoice = this.findFirstInpaidInvoice(this.facturesData);
         this.facturesCondition =  await this.getConditionFacture(this.facturesData);
+        if(FACTURES.status == 'SUCCESS') {
+            let count = 0;
+            this.listFctEch = [];
+            this.listFctEch = this.listFctEchToShow(FACTURES, '');
+            FACTURES.output.factures.forEach(f => {
+                if((f.statut == '1' || f.statut == '2') && (new Date(f.date_limite_de_paiement) < new Date())) {
+                this.conditionCas2 = true;
+            }
+            if((f.statut == '1' || f.statut == '2') && (new Date(f.date_limite_de_paiement) > new Date())) {
+                count++;
+            }
+            });
+
+            if(count == FACTURES.output.factures.length) 
+                this.conditionCas1 = true;
+        }
+
+        const plansApurementList = await this.getPlansApurement();
+        
+        if (plansApurementList) {
+            const plansTab = JSON.parse(plansApurementList).output.plans_apurement; 
+            const filtredPlansTab = plansTab.filter(pla => pla?.statut == 3);
+            let echsPla = [];
+            if(filtredPlansTab.length != 0){
+                filtredPlansTab.forEach(c => {
+                    echsPla = echsPla.concat(c.echeances.filter(ech => ech?.statut == 1 || ech?.statut == 10));
+                });
+                const echsPlansApurement = await this.listEchPlaToShow(echsPla);
+                this.listFctEch = this.listFctEch.concat(echsPlansApurement);
+            }
+        }
         
         if(this?.contractData.length !=0){
+            const ACTIF_PORTEFEUILLE = await this.getPorteFeuilledata(this.idPortefeuilleContrat);
+            this.actifPRTF = JSON.parse(ACTIF_PORTEFEUILLE);
+            this.actifPRTF.codeModeEncaissement == '5' ? this.prelevement = true : this.prelevement = false;
             let today = new Date();
             this.contractData._data.forEach(c => {
                 let dateFinValidite = new Date(c.dateFinValidite);
@@ -186,28 +266,56 @@ export default class Hp_ec_solde extends NavigationMixin(LightningElement) {
 
            
             if(this.contractElec){
+                let count = 0;
                 const echeanceData = await this.getEcheanceData(this.contractElec);
+                const ECHEANCES = JSON.parse(echeanceData);
                 if(!(JSON.parse(echeanceData).status == "FAILED")){
+                    const tbEchElec = await this.listEcheanceToShow(ECHEANCES, 'Elec')
+                    this.listFctEch = this.listFctEch.concat(tbEchElec);
                     let keys = Object.keys(JSON.parse(echeanceData).output);
                     for (let key of keys) {
                         this.echeancesData.push(JSON.parse(echeanceData).output[key]);
+                        const ECHEANCE = ECHEANCES.output[key];
+                        if (new Date(ECHEANCE.date_decheance) < new Date() && !this.isEcheanceSolde(ECHEANCE.soldee_le)) {
+                            this.conditionCas2 = true;
+                        }
+                        if (new Date(ECHEANCE.date_decheance) < new Date() && this.isEcheanceSolde(ECHEANCE.soldee_le)) {
+                            count++;
+                        }
                     }
+                    if(count == ECHEANCES.output.length){
+                        this.conditionCas1 = true;
+                    }
+                            
                 }
                 
             }
             
             if(this.contractGaz){
+                let count = 0;
                 const echeanceData = await this.getEcheanceData(this.contractGaz);
+                const ECHEANCES = JSON.parse(echeanceData);
                 if(!(JSON.parse(echeanceData).status == "FAILED")){
+                    const tbEchGaz = await this.listEcheanceToShow(ECHEANCES, 'Gaz');
+                    this.listFctEch = this.listFctEch.concat(tbEchGaz);
                     let keys = Object.keys(JSON.parse(echeanceData).output);
                     for (let key of keys) {
                         this.echeancesData.push(JSON.parse(echeanceData).output[key]);
+                        const ECHEANCE = ECHEANCES.output[key];
+                        if (new Date(ECHEANCE.date_decheance) < new Date() && !this.isEcheanceSolde(ECHEANCE.soldee_le)) {
+                            this.conditionCas2 = true;
+                        }
+                        if (new Date(ECHEANCE.date_decheance) < new Date() && this.isEcheanceSolde(ECHEANCE.soldee_le)) {
+                            count++;
+                        }
+                    }
+                    if(count == ECHEANCES.output.length){
+                        this.conditionCas1 = true;
                     }
                 }
                 
             }
             
-
             if (this?.echeancesData && this.echeancesData.length > 0) {
                 this.inpaidEcheance = this.findFirstInpaidEcheance(this.echeancesData);
                 this.echeancesCondition = await this.getEcheanceCondition(this.echeancesData);
@@ -231,6 +339,9 @@ export default class Hp_ec_solde extends NavigationMixin(LightningElement) {
                         this.montantToDisplay = (Math.round(absMontant * 100) / 100).toFixed(2);
                     }
                 }
+                if(this.listFctEch.length != 0 && this.montant < 0){
+                    this.showListPayement = await this.sortListFctEch(this.listFctEch);
+                }
             }
             if (this.facturesCondition.length == 0 || this.echeancesCondition.length == 0) {
                 let contract = await this.getContractData();
@@ -238,7 +349,7 @@ export default class Hp_ec_solde extends NavigationMixin(LightningElement) {
                 this.amount = this.getAmount();
                 this.echeanceId = this.getEcheanceId();
             }
-            let lowerDate
+            let lowerDate;
             if (this.facturesCondition.length > 0 || this.echeancesCondition.length > 0) {
                 //Cas 1
                 if (this.montant < 0 && (this.facturesCondition[0] || this.echeancesCondition[0])) {
@@ -368,6 +479,7 @@ export default class Hp_ec_solde extends NavigationMixin(LightningElement) {
                 }
             }
         }
+        this.isProcessFinished = true;
     }
     initialiseGlobalVar(){
     this.soldeEffectifData = null;
@@ -391,6 +503,16 @@ export default class Hp_ec_solde extends NavigationMixin(LightningElement) {
     this.echeancesData = [];
     this.contractData = [];
     this.spinnerLoad = false;
+    this.prelevement = false;
+    this.listFctEch = [];
+    this.conditionCas1 = false;
+    this.conditionCas2 = false;
+    this.isProcessFinished = false;
+    this.payementAmountToDisplay = 0;
+    this.montantToPaye = null;
+    this.showListPayementComponent = false;
+    this.showListPayement = null;
+    this.echeancIdToPaye = null;
 
     }
 
@@ -402,6 +524,19 @@ export default class Hp_ec_solde extends NavigationMixin(LightningElement) {
                 console.log('***Error getSoldeData : ' + JSON.stringify(error));
                 return error;
             });
+            resolve(result);
+        })
+    }
+
+    async getPorteFeuilledata(portefeuilleId) {
+        return new Promise(async (resolve, reject) => {
+            var result = await getPorteFeuilleContrat({ contractPortfolioXdataId: portefeuilleId })
+                .then(response => {
+                    return response;
+                }).catch(error => {
+                    console.log('***Error getPorteFeuilleData : ' + JSON.stringify(error));
+                    return error;
+                });
             resolve(result);
         })
     }
@@ -444,6 +579,19 @@ export default class Hp_ec_solde extends NavigationMixin(LightningElement) {
             resolve(result);
         })
     }
+
+    async getPlansApurement() {
+        return new Promise(async (resolve, reject) => {
+            var result = await getPlansApurement({ idPorteFueilleContrat: this.idPortefeuilleContrat })
+                .then(data => {
+                    return data;
+                })
+                .catch(error => {
+                    console.log('error getPlansApurement: ' + JSON.stringify(error));
+                });
+            resolve(result);
+        })
+      }
 
     async getConditionFacture(factures) {
         return new Promise(async (resolve, reject) => {
@@ -496,7 +644,7 @@ export default class Hp_ec_solde extends NavigationMixin(LightningElement) {
         let tabDatesEcheances = [];
         let dateEchance;
         echeances.forEach(ech => {
-            let soldeEcheance = this.getSoldeEcheance(ech.soldee_le);
+            let soldeEcheance = this.isEcheanceSolde(ech.soldee_le);
             if (new Date(ech.date_decheance) < this.todayDate && (soldeEcheance && ech.annulee_le == null)) {
                 echeancesHasCodition1.push(ech);
                 tabDatesEcheances.push(new Date(ech.date_decheance));
@@ -524,17 +672,23 @@ export default class Hp_ec_solde extends NavigationMixin(LightningElement) {
         
     }
 
-    async getSoldeEcheance(solde) {
-            let isSoldee = false;
-        if(solde != null && solde !== ''){
-            let arraySolde = solde.split(" ");
-            arraySolde.forEach(sld => {
-                if (sld == "Total" || sld == "Partiel") {
-                    isSoldee = true;
-                }
-            })
+     async isEcheanceSolde(solde) {
+        let soldee = false
+        if(solde.includes('Total') || solde.includes('Partiel')){
+            soldee = true;
         }
-        return isSoldee;
+           
+        return soldee;
+        //     let isSoldee = false;
+        // if(solde != null && solde !== ''){
+        //     let arraySolde = solde.split(" ");
+        //     arraySolde.forEach(sld => {
+        //         if (sld == "Total" || sld == "Partiel") {
+        //             isSoldee = true;
+        //         }
+        //     })
+        // }
+        // return isSoldee;
         
     }
 
@@ -609,4 +763,119 @@ export default class Hp_ec_solde extends NavigationMixin(LightningElement) {
             return this.inpaidEcheance.reference;
         }
     }
+
+    listFctEchToShow(data, enrg){
+        if(data){
+            let listResult = [];
+            if(data.key == 'FactureAgilab'){
+                data.output.factures.forEach((elem,index) => {
+                    if(elem.statut == "1" || elem.statut == "2"){
+                        var dateObj = new Date(elem.date_limite_de_paiement);
+                        var month = dateObj.getUTCMonth() + 1; //months from 1-12
+                        var day = dateObj.getUTCDate();
+                        var year = dateObj.getUTCFullYear();
+                        var newdate = year + "-" + month + "-" + day;
+                        listResult.push({
+                            typeDoc : 'Facture',
+                            type : 'Facture',
+                            energie : elem.energie,
+                            ref : elem.ref_facture,
+                            montant : elem.montant_restant_du,
+                            dateExigible : newdate
+                        })
+                    }
+                    
+                });
+             }
+            return listResult;
+            
+        }
+    }
+
+    async listEcheanceToShow(data, enrg){
+        if(data){
+            let listResult;
+                    let keys = Object.keys(data.output);
+                    let echeances = []
+                    for (let key of keys) {
+                        echeances.push(data.output[key]);
+                    }
+                    const echeancesSoldee = echeances.filter(ech => ech.soldee_le?.includes('Total') || ech.soldee_le?.includes('Partiel'));
+                     if(echeancesSoldee){
+                        listResult = [];
+                        echeancesSoldee.forEach((elem,index) => {
+                                var dateObj = new Date(elem.date_decheance);
+                                var month = dateObj.getUTCMonth() + 1; //months from 1-12
+                                var day = dateObj.getUTCDate();
+                                var year = dateObj.getUTCFullYear();
+                                var newdate = year + "-" + month + "-" + day;
+                                listResult.push({
+                                    typeDoc : 'Echéance',
+                                    type : 'Echéance',
+                                    energie : enrg,
+                                    ref : elem.reference,
+                                    montant : elem.montant_restant_du,
+                                    dateExigible : newdate
+                                })
+                                
+                        });
+                    }
+                    return listResult;
+        }
+            
+            
+    }
+
+    async listEchPlaToShow(data){
+        if(data){
+            let listResult = [];
+            data.forEach((elem,index) => {
+                let newdate = '';
+                if(elem.date_decheance != null){
+                    var dateObj = new Date(elem.date_decheance);
+                    var month = dateObj.getUTCMonth() + 1; //months from 1-12
+                    var day = dateObj.getUTCDate();
+                    var year = dateObj.getUTCFullYear();
+                    newdate = year + "-" + month + "-" + day;
+                }
+                    
+                listResult.push({
+                    typeDoc : 'Echéance Plan d’apurement',
+                    type : 'Echéance',
+                    energie : '',
+                    ref : elem.ref_echeances,
+                    montant : elem.montant_restant_du,
+                    dateExigible : newdate
+                })
+                    
+            });
+            return listResult;
+        }
+            
+    }
+    
+
+    async sortListFctEch(listFctEch) {
+        return new Promise(async (resolve, reject) => {
+            var isShow;
+            if(listFctEch.length > 1){
+                this.listFctEch = listFctEch.sort(function(a, b) {
+                    return new Date(a.dateExigible) - new Date(b.dateExigible);
+                })
+                isShow = true;
+                this.showListPayementComponent = true;
+                this.payementAmountToDisplay = (this.montantToDisplay - parseFloat(this.listFctEch[0].montant)).toFixed(2);
+                this.montantToPaye = parseFloat(this.listFctEch[0].montant);
+                this.echeancIdToPaye = this.listFctEch[0].ref;
+            }
+            else{
+                isShow = false;
+                this.showListPayementComponent = true;
+                this.montantToPaye = parseFloat(this.listFctEch[0].montant);
+                this.echeancIdToPaye = this.listFctEch[0].ref;
+            }
+            resolve(isShow);
+        })
+    }
+
 }

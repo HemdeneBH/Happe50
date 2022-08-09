@@ -1,11 +1,13 @@
-public inherited sharing class SM_AP48_XdataImportRole {
+@RestResource(urlMapping='/role/*')
+
+global with sharing class SM_AP48_XdataImportRole {
 
 	static final Schema.SObjectField acExtNo = Account.Fields.No_Compte_contrat__c;
 	static final Schema.SObjectField ctExtNo = Contact.Fields.Identifiant_Buisness_Partener__c;
 	static final Schema.SObjectField rolExtNo = AccountContactRelation.Fields.rolekey__c;
 
-	public static string importRoles(List<Map<String,String>> roles) {
-        system.debug('****roles='+roles);
+	@HttpPost
+	global static string importRoles(List<Map<String,String>> roles) {
 		// TODO: lire le numéro de version de l'url – adapter le traitement à la version de code, la table de correspondance
 
 		SM_AP45_XdataImportUtils xiu = new SM_AP45_XdataImportUtils('xdata', 'AccountContactRelation');
@@ -27,26 +29,10 @@ public inherited sharing class SM_AP48_XdataImportRole {
 			String noac = rl.get('accountNo');
 			String noct = rl.get('contactNo');
 			String rlstr = rl.get('roles');
-			// AB :3 new code lines 
-			String flag =rl.get('fl_obsolete');
-            String stdate = rl.get('dt_debut');
-			String endate = rl.get('dt_fin');
-            system.debug('****noac='+noac);
-            system.debug('****noct='+noct);
-            system.debug('****rlstr='+rlstr);
-			// AB : 3 new code lines
-			system.debug('****stdate='+stdate);
-            system.debug('****endate='+endate);
-			system.debug('****flag='+flag);
-
-
 
 			// Erreur si on n'a pas d'id account ou contact ou pas de role
-			//AB :new variables added here : to validate
-			//if(noac == null || noac == '' || noct == null || noct == '' || rlstr == null || rlstr == '' || stdate == null ||stdate == '' || endate == 'null' || endate == ''){
-
 			if(noac == null || noac == '' || noct == null || noct == '' || rlstr == null || rlstr == ''){
-				xiu.logImportError('Pas accountno ou contactno ou role ou startDate ou endDate',null, JSON.serialize(rl));
+				xiu.logImportError('Pas accountno ou contactno ou role',null, JSON.serialize(rl));
 				continue;
 			}
 
@@ -60,15 +46,10 @@ public inherited sharing class SM_AP48_XdataImportRole {
 				aRole.Account = new Account(No_Compte_contrat__c = noac);
 				aRole.Contact = new Contact(Identifiant_Buisness_Partener__c=noct);
 				aRole.Roles = rlstr;
-				// AB : 3 New code lines
-				aRole.StartDate= String.isEmpty(stdate)?aRole.StartDate:Date.valueOf(stdate);
-				aRole.EndDate= String.isEmpty(endate)?aRole.EndDate:Date.valueOf(endate);
-                aRole.IsActive=Boolean.valueOf(flag);
 				allACRs.put(rolek, aRole);
 			}catch(Exception e){
-				xiu.logImportError('mapping '+e.getMessage(), null, JSON.serialize(rl));
+				xiu.logImportError('mapping', null, JSON.serialize(rl));
 			}
-		
 		}
 
 
@@ -89,11 +70,9 @@ public inherited sharing class SM_AP48_XdataImportRole {
 			String noac = rl.get('accountNo');
 			String noct = rl.get('contactNo');
 			String rlstr = rl.get('roles');
-            
-            //AB : new variables added here
-			if(noac == null || noac == '' || noct == null || noct == ''|| rlstr == null || rlstr == ''){
+
+			if(noac == null || noac == '' || noct == null || noct == ''|| rlstr == null || rlstr == '')
 				continue;
-			}
 
 			if((! existingAcNos.contains(noac)) && (!newAcs.containsKey(noac))){
 				Account anewac = new Account(Name='AC_TECHNIQUE',No_Compte_contrat__c=noac, recordtypeid=acRectid);

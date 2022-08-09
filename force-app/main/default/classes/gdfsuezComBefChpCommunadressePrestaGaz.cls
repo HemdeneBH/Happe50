@@ -148,120 +148,118 @@ public class gdfsuezComBefChpCommunadressePrestaGaz {
 	
 
 
-			if(!String.isBlank(appartement)){
+			if(appartement!=null){
 				Dom.XmlNode appartementNode = outerNode.addChildElement('appartement', null , null ) ;
 			appartementNode.addTextNode((this.appartement == null) ? '' : this.appartement);
-	        }	
+	}	
 			
 
-			if(!String.isBlank(autreVille)){
+			if(autreVille!=null){
 				Dom.XmlNode autreVilleNode = outerNode.addChildElement('autreVille', null , null ) ;
 			autreVilleNode.addTextNode((this.autreVille == null) ? '' : this.autreVille);
-	        }	
+	}	
 	
-			if(!String.isBlank(batiment)){
+			if(batiment!=null){
 			
 			Dom.XmlNode batimentNode = outerNode.addChildElement('batiment', null , null ) ;
 			batimentNode.addTextNode((this.batiment == null) ? '' : this.batiment);
-	        }	
+	}	
 			
 
-			if(!String.isBlank(boitePostale)){
+			if(boitePostale!=null){
 				Dom.XmlNode boitePostaleNode = outerNode.addChildElement('boitePostale', null , null ) ;
 			boitePostaleNode.addTextNode((this.boitePostale == null) ? '' : this.boitePostale);
-	        }	
+	}	
 	
-		    if(!String.isBlank(cP)){
-		
-		    Dom.XmlNode cPNode = outerNode.addChildElement('cP', null , null ) ;
-		    cPNode.addTextNode((this.cP == null) ? '' : this.cP);
-			}	
+			if(cP!=null){
+			
+			Dom.XmlNode cPNode = outerNode.addChildElement('cP', null , null ) ;
+			cPNode.addTextNode((this.cP == null) ? '' : this.cP);
+	}	
 			
 	
-			if(!String.isBlank(chez)){
+			if(chez!=null){
 			Dom.XmlNode chezNode = outerNode.addChildElement('chez', null , null ) ;
 			chezNode.addTextNode((this.chez == null) ? '' : this.chez);
-	        }	
+	}	
 			
-			if(!String.isBlank(codeBoitePostal)){
-		    Dom.XmlNode codeBoitePostalNode = outerNode.addChildElement('codeBoitePostal',null , null ) ;
+			if(codeBoitePostal!=null){
+		Dom.XmlNode codeBoitePostalNode = outerNode.addChildElement('codeBoitePostal',null , null ) ;
 			codeBoitePostalNode.addTextNode((this.codeBoitePostal == null) ? '' : this.codeBoitePostal);
 		
-	        }	
+	}	
 			
-			if(!String.isBlank(complementAdresse)){
+			if(complementAdresse!=null){
 	
 			Dom.XmlNode complementAdresseNode = outerNode.addChildElement('complementAdresse', null , null ) ;
 			complementAdresseNode.addTextNode((this.complementAdresse == null) ? '' : this.complementAdresse);
-	        }	
+	}	
 			gdfsuezComBefChpPivotPrestaGaz.listeValeursDt departementObj = this.departement;
 			
-			if(  departementObj != null){
+			if(departementObj != null){
 			Dom.XmlNode departementNode = outerNode.addChildElement('departement', null , null ) ;
 				departementObj.populateXmlNode(departementNode);
 			}
 			
 			
-					if(!String.isBlank(etage) ){
-		    Dom.XmlNode etageNode = outerNode.addChildElement('etage', null , null ) ;
+					if(etage!=null){
+		Dom.XmlNode etageNode = outerNode.addChildElement('etage', null , null ) ;
 			etageNode.addTextNode((this.etage == null) ? '' : this.etage);
 	
-	        }
+	}
 			
 			
-				if(!String.isBlank(iNSEE)){
+				if(iNSEE!=null){
 			Dom.XmlNode iNSEENode = outerNode.addChildElement('iNSEE',null , null ) ;
 			iNSEENode.addTextNode((this.iNSEE == null) ? '' : this.iNSEE);
 	
-	        }
+	}
 			
-				if(!String.isBlank(libelleVoie)){
-         	Dom.XmlNode libelleVoieNode = outerNode.addChildElement('libelleVoie', null , null ) ;
+				if(libelleVoie!=null){
+	Dom.XmlNode libelleVoieNode = outerNode.addChildElement('libelleVoie', null , null ) ;
 			libelleVoieNode.addTextNode((this.libelleVoie == null) ? '' : this.libelleVoie);
 			
-        	}
+	}
 			
-				if(!String.isBlank(lieuDit)){
-		    Dom.XmlNode lieuDitNode = outerNode.addChildElement('lieuDit', null , null ) ;
+				if(lieuDit!=null){
+		Dom.XmlNode lieuDitNode = outerNode.addChildElement('lieuDit', null , null ) ;
 			lieuDitNode.addTextNode((this.lieuDit == null) ? '' : this.lieuDit);
 		
-	        }
+	}
 		
-				if(!String.isBlank(nVoie)){
-	    	Dom.XmlNode nVoieNode = outerNode.addChildElement('nVoie', null , null ) ;
+				if(nVoie!=null){
+		Dom.XmlNode nVoieNode = outerNode.addChildElement('nVoie', null , null ) ;
 			nVoieNode.addTextNode((this.nVoie == null) ? '' : this.nVoie);
-	        }
+	}
 			gdfsuezComBefChpPivotPrestaGaz.listeValeursDt nonDistributionObj = this.nonDistribution;
 
 			if(nonDistributionObj != null){
-			Dom.XmlNode nonDistributionNode = outerNode.addChildElement('nonDistribution', null , null ) ;
-			nonDistributionObj.populateXmlNode(nonDistributionNode);
+						Dom.XmlNode nonDistributionNode = outerNode.addChildElement('nonDistribution', null , null ) ;
+				nonDistributionObj.populateXmlNode(nonDistributionNode);
 			}
 			
 			gdfsuezComBefChpPivotPrestaGaz.listeValeursDt paysObj = this.pays;
 		
 			if(paysObj != null){
-			Dom.XmlNode paysNode = outerNode.addChildElement('pays', null , null ) ;
-			paysObj.populateXmlNode(paysNode);
+				Dom.XmlNode paysNode = outerNode.addChildElement('pays', null , null ) ;
+				paysObj.populateXmlNode(paysNode);
 			}
 			
-			if(!String.isBlank(porte)){
+			if(porte!=null){
 			Dom.XmlNode porteNode = outerNode.addChildElement('porte', null , null ) ;
 			porteNode.addTextNode((this.porte == null) ? '' : this.porte);
 			}
 			
-			if(!String.isBlank(servicePostauxBP)){
+			if(servicePostauxBP!= null){
 			Dom.XmlNode servicePostauxBPNode = outerNode.addChildElement('servicePostauxBP', null , null ) ;
 			servicePostauxBPNode.addTextNode((this.servicePostauxBP == null) ? '' : this.servicePostauxBP);
 			}
-
-			
-			if(!String.isBlank(sigleBatiment)){
+			if(sigleBatiment!=null){
 			Dom.XmlNode sigleBatimentNode = outerNode.addChildElement('sigleBatiment',null , null ) ;
 			sigleBatimentNode.addTextNode((this.sigleBatiment == null) ? '' : this.sigleBatiment);
 			}
 			
-			if(!String.isBlank(ville)){
+			if(ville!=null){
 			Dom.XmlNode villeNode = outerNode.addChildElement('ville', null , null ) ;
 			villeNode.addTextNode((this.ville == null) ? '' : this.ville);
 			}

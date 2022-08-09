@@ -114,13 +114,6 @@ public class gdfsuezComBefCalypsoPropositioncomm {
 	}
 	public class PropositionCommerciale {
 		public String codeCampagne;
-		/***** OMH SMIL-2900  ajout des paramétres pour le WSDL v4****/
-		public String idVendeur;
-		public String codeLocalite;
-		public String codePromo;
-		public String contactLG09;
-		public String salesProcess;
-		/********************** */
 		public String duree;
 		public gdfsuezComBefChpPivotPC.listeValeursDt motifRefus;
 		public gdfsuezComBefChpPivotPC.listeValeursDt motifSouscription;
@@ -143,8 +136,7 @@ public class gdfsuezComBefCalypsoPropositioncomm {
 		public gdfsuezComBefCalypsoPropositioncomm.PropositionCommerciale_refPersonne_element[] refPersonne;
 		public gdfsuezComBefCalypsoPropositioncomm.datesDt[] datesPropositionCommerciale;
 		private String[] codeCampagne_type_info = new String[]{'codeCampagne','http://gdfsuez.com/bef/calypso/propositioncommerciale','string9','0','1','false'};
-		private String[] codePromo_type_info = new String[]{'codePromo','http://gdfsuez.com/bef/calypso/propositioncommerciale','string1024','0','1','false'};
-        private String[] duree_type_info = new String[]{'duree','http://gdfsuez.com/bef/calypso/propositioncommerciale','string13','0','1','false'};
+		private String[] duree_type_info = new String[]{'duree','http://gdfsuez.com/bef/calypso/propositioncommerciale','string13','0','1','false'};
 		private String[] motifRefus_type_info = new String[]{'motifRefus','http://gdfsuez.com/bef/calypso/propositioncommerciale','listeValeursDt','0','1','false'};
 		private String[] motifSouscription_type_info = new String[]{'motifSouscription','http://gdfsuez.com/bef/calypso/propositioncommerciale','listeValeursDt','0','1','false'};
 		private String[] nombreExemplaireCPV_type_info = new String[]{'nombreExemplaireCPV','http://gdfsuez.com/bef/calypso/propositioncommerciale','string1','0','1','false'};
@@ -166,9 +158,7 @@ public class gdfsuezComBefCalypsoPropositioncomm {
 		private String[] refPersonne_type_info = new String[]{'refPersonne','http://gdfsuez.com/bef/calypso/propositioncommerciale','','0','-1','false'};
 		private String[] datesPropositionCommerciale_type_info = new String[]{'datesPropositionCommerciale','http://gdfsuez.com/bef/calypso/propositioncommerciale','datesDt','0','-1','false'};
 		private String[] apex_schema_type_info = new String[]{'http://gdfsuez.com/bef/calypso/propositioncommerciale','true','false'};
-		
-		/***** OMH SMIL-2900  ajout des paramétres pour le WSDL v4****/
-		private String[] field_order_type_info = new String[]{'codeCampagne','idVendeur','codeLocalite','codePromo','contactLG09','salesProcess','duree','motifRefus','motifSouscription','nombreExemplaireCPV','rythmeFacturationSouhaite','compteClient','enseigne','typeEnseigne','description','canalEnvoiCPV','composantePropositionCommerciale','remiseOneShot','objetsLies','regionDonneurOrdre','signatureObligatoire','pack','local','idContactCPVEnvoi','statutPropositionCommerciale','refPersonne','datesPropositionCommerciale'};
+		private String[] field_order_type_info = new String[]{'codeCampagne','duree','motifRefus','motifSouscription','nombreExemplaireCPV','rythmeFacturationSouhaite','compteClient','enseigne','typeEnseigne','description','canalEnvoiCPV','composantePropositionCommerciale','remiseOneShot','objetsLies','regionDonneurOrdre','signatureObligatoire','pack','local','idContactCPVEnvoi','statutPropositionCommerciale','refPersonne','datesPropositionCommerciale'};
 		public PropositionCommerciale(){
 		}
 		public PropositionCommerciale(DOM.XmlNode responseNode){
@@ -177,23 +167,6 @@ public class gdfsuezComBefCalypsoPropositioncomm {
 			this.codeCampagne = (codeCampagneNode == null) ? null : codeCampagneNode.getText();
 			nodesParsed.add(codeCampagneNode);
 			//System.debug(this.codeCampagne);
-			
-			/***** OMH SMIL-2900  ajout des paramétres pour le WSDL v4****/
-			DOM.XmlNode idVendeurNode = responseNode.getChildElement('idVendeur', 'http://gdfsuez.com/bef/calypso/propositioncommerciale');
-			this.idVendeur = (idVendeurNode == null) ? null : idVendeurNode.getText();
-			nodesParsed.add(idVendeurNode);
-			DOM.XmlNode codeLocaliteNode = responseNode.getChildElement('codeLocalite', 'http://gdfsuez.com/bef/calypso/propositioncommerciale');
-			this.codeLocalite = (codeLocaliteNode == null) ? null : codeLocaliteNode.getText();
-			nodesParsed.add(codeLocaliteNode);
-			DOM.XmlNode codePromoNode = responseNode.getChildElement('codePromo', 'http://gdfsuez.com/bef/calypso/propositioncommerciale');
-			this.codePromo = (codePromoNode == null) ? null : codePromoNode.getText();
-			nodesParsed.add(codePromoNode);
-			DOM.XmlNode contactLG09Node = responseNode.getChildElement('contactLG09', 'http://gdfsuez.com/bef/calypso/propositioncommerciale');
-			this.contactLG09 = (contactLG09 == null) ? null : contactLG09Node.getText();
-			nodesParsed.add(contactLG09Node);
-			DOM.XmlNode salesProcessNode = responseNode.getChildElement('salesProcess', 'http://gdfsuez.com/bef/calypso/propositioncommerciale');
-			this.salesProcess = (salesProcessNode == null) ? null : salesProcessNode.getText();
-			nodesParsed.add(salesProcessNode);
 			DOM.XmlNode dureeNode = responseNode.getChildElement('duree', 'http://gdfsuez.com/bef/calypso/propositioncommerciale');
 			this.duree = (dureeNode == null) ? null : dureeNode.getText();
 			nodesParsed.add(dureeNode);
@@ -393,28 +366,6 @@ public class gdfsuezComBefCalypsoPropositioncomm {
 			if(this.codeCampagne != null){
 				Dom.XmlNode codeCampagneNode = outerNode.addChildElement('codeCampagne', '', '');
 				codeCampagneNode.addTextNode((this.codeCampagne == null) ? '' : this.codeCampagne);
-			}
-			
-			/***** OMH SMIL-2900  ajout des paramétres pour le WSDL v4****/
-			if(this.idVendeur != null){
-				Dom.XmlNode idVendeurNode = outerNode.addChildElement('idVendeur', '', '');
-				idVendeurNode.addTextNode((this.idVendeur == null) ? '' : this.idVendeur);
-			}
-			if(this.codeLocalite != null){
-				Dom.XmlNode codeLocaliteNode = outerNode.addChildElement('codeLocalite', '', '');
-				codeLocaliteNode.addTextNode((this.codeLocalite == null) ? '' : this.codeLocalite);
-			}
-			if(this.codePromo != null){
-				Dom.XmlNode codePromoNode = outerNode.addChildElement('codePromo', '', '');
-				codePromoNode.addTextNode((this.codePromo == null) ? '' : this.codePromo);
-			}
-			if(this.contactLG09 != null){
-				Dom.XmlNode contactLG09Node = outerNode.addChildElement('contactLG09', '', '');
-				contactLG09Node.addTextNode((this.contactLG09 == null) ? '' : this.contactLG09);
-			}
-			if(this.salesProcess != null){
-				Dom.XmlNode salesProcessNode = outerNode.addChildElement('salesProcess', '', '');
-				salesProcessNode.addTextNode((this.salesProcess == null) ? '' : this.salesProcess);
 			}
 			if(this.duree != null){
 				Dom.XmlNode dureeNode = outerNode.addChildElement('duree', '', '');

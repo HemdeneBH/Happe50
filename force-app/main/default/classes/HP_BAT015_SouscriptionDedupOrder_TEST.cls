@@ -61,9 +61,10 @@ global  class HP_BAT015_SouscriptionDedupOrder_TEST {
         }   
     }
 
+
      @isTest static void launch_TEST(){ 
         
-        final String jobName = 'HP_BAT015_SouscriptionDedupOrderTest';
+        final String jobName = 'HP_BAT015_SouscriptionDedupOrder';
         final String cronExp = '0 0 23 ? * * *';
         Test.startTest();
         HP_BAT015_SouscriptionDedupOrder.launchNewScheduler(cronExp,jobName);
@@ -76,6 +77,11 @@ global  class HP_BAT015_SouscriptionDedupOrder_TEST {
         HP_BAT015_SouscriptionDedupOrder.execute(Date.Today());
         Test.stopTest();   
     }
+
+
     
+
+
+
 
 }

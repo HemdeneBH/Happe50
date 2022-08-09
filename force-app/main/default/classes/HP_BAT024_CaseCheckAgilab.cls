@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 03-16-2022
+ * @last modified on  : 04-25-2022
  * @last modified by  : Hemdene Ben Hammouda
 **/
 global class HP_BAT024_CaseCheckAgilab implements Database.Batchable<sObject>, Database.AllowsCallouts, System.Schedulable, Database.RaisesPlatformEvents, HP_UTIL_BatchInterface{
@@ -209,6 +209,7 @@ global class HP_BAT024_CaseCheckAgilab implements Database.Batchable<sObject>, D
             caseResults.response = response;
             
             caseApiResultList.add(caseResults);
+            ID jobID = System.enqueueJob(new HP_EC_CommunityUserManagerAsync(cont.Id_Tiers__c));
       	}
         for(CaseApiResult item : caseApiResultList) {
             HP_SM022_SouscriptionSave3.updateDataProcessing(null, item.resultApi, item.souscription, item.cont, item.contractList, false, true, item.response);

@@ -20,8 +20,8 @@ public with sharing class HP_SM006_FactureManager {
     }
 
     @AuraEnabled
-    public static Map<String, Object> updateEnergieVert(String contractId, String energieVert){
-        return HP_EM006_FactureManager.updateEnergieVert(contractId, energieVert);
+    public static Map<String, Object> updateEnergieVert(String contractId, String energieVert, String profil){
+        return HP_EM006_FactureManager.updateEnergieVert(contractId, energieVert, profil);
     }
 
     @AuraEnabled

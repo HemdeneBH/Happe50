@@ -5,4 +5,9 @@
     <confirmationTokenRequired>false</confirmationTokenRequired>
     <description>VFP qui permet de lancer l&apos;OS de modif info perso et paramétrer l&apos;accès par profil</description>
     <label>Infos perso</label>
+    <packageVersions>
+        <majorNumber>900</majorNumber>
+        <minorNumber>289</minorNumber>
+        <namespace>vlocity_cmt</namespace>
+    </packageVersions>
 </ApexPage>

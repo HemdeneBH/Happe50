@@ -16,6 +16,9 @@ public with sharing class HP_SM059_SouscriptionRappel_TEST {
         },null,null, null);
         insert acc;
 
+
+
+
         Contact contact = (Contact)HP_UTIL_SmartFactory.createSObject('Contact','HP_Contact', new Map<String, Object>{
             'HP_IsHappe__c' => true,
             'Email'=>'test@email.com',
@@ -23,6 +26,9 @@ public with sharing class HP_SM059_SouscriptionRappel_TEST {
             'Id_Tiers__c' => 195464
         }, null, null, new List<String>{'AccountId'});
         insert contact;
+
+
+
 
         Case mailCase = (Case) HP_UTIL_SmartFactory.createSObject('Case', new Map<String, Object> {
             'Description' => 'Description Test',
@@ -56,7 +62,7 @@ public with sharing class HP_SM059_SouscriptionRappel_TEST {
     public static void createRappelCase() {
         List<HP_Souscription__c> souscriptions = new List<HP_Souscription__c>();
         Contact contactTest = [SELECT Id FROM Contact WHERE Id_Tiers__c = 195464];
-
+        
         HP_Souscription__c souscription1 = (HP_Souscription__c) HP_UTIL_SmartFactory.createSObject('HP_Souscription__c', new Map<String, Object> {
             'HP_Canal_de_vente__c'  => 'Vente Online',
             'HP_Classe_de_la_consommation_Gaz__c'  => 'B0',
@@ -87,7 +93,11 @@ public with sharing class HP_SM059_SouscriptionRappel_TEST {
             'HP_NumberPCE__c' =>'31431211214068',
             'HP_NumPDL__c' =>'31431211214170',
             'HP_Statut__c' => 'SAVE_2_CONFIRMED',
+
+
             'HP_Contact__c' => contactTest.Id,
+
+
             'HP_DigitalDateSave2__c' => Date.today().addDays(-1),
             'OwnerId' => UserInfo.getUserId()}, null);    
     

@@ -53,4 +53,22 @@ public with sharing class HP_APIGouv_TEST {
             Test.stopTest();
         } 
     }
+
+    @IsTest
+    static void getcomplementDQE(){
+        System.runAs(HP_UTIL_SmartFactory.runAsUserHP()){
+            Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> bodyResponseMap = new Map<String, HP_UTIL_ResponseRestMock.ParameterMockWrapper> {
+		
+                'V2' => new HP_UTIL_ResponseRestMock.ParameterMockWrapper(200,
+                                                      null,'{"1" : {"Batiment":"BATIMENTA"},"3" :{"Batiment":"BATIMENT C"},"iris":"5101"}',
+                                                      new Map<String, String> { 'Content-Type' => 'application/json'})
+            };
+    
+            Test.startTest();
+            Test.setMock(HttpCalloutMock.class, new HP_UTIL_ResponseRestMock(bodyResponseMap));
+            List<Map<String, Object>> result = HP_APIGouv.getComplementsDQE('8+rue+de+l+universite+26500+BOURG+LES+VALENCE');
+           
+            Test.stopTest();
+        } 
+    }
 }

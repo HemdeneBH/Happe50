@@ -161,13 +161,7 @@
         <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Choix Offres</pluralLabel>
-    <searchLayouts>
-        <searchResultsAdditionalFields>Contexte_de_souscription__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>OffrePousse__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>offreRepli__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Actif__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Energie__c</searchResultsAdditionalFields>
-    </searchLayouts>
+    <searchLayouts></searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

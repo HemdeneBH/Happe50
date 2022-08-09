@@ -220,6 +220,13 @@ public with sharing class HP_EM019_EmailMessage {
     }
 
 
+
+
+
+
+
+
+
     /**
     * @description 
     * @author Antoine Latour | 09-04-2021 
@@ -245,5 +252,12 @@ public with sharing class HP_EM019_EmailMessage {
 
         return mapEmailMessage;
     }
+
+
+
+
+
+
+
 
 }

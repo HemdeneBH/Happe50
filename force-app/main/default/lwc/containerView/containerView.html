@@ -1,32 +1,6 @@
-<!--
-  @description       : 
-  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
-  @group             : 
-  @last modified on  : 04-13-2022
-  @last modified by  : FT2-AE
-  Modifications Log 
-  Ver   Date         Author                               Modification
-  1.0   09-18-2020   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
--->
-<template>	
+<template>
         <div class="container-card">
-                 <!--Affichage du PopUp pour un client Retractation-->		
-	        <div if:true={isRetractation} class="retractationPopUp">
-	                <c-card-error class="slds-size--3-of-4"
-			              style="white-space: pre-wrap"
-			              error-message={retractationMessage}>
-		        </c-card-error>
-	        </div>
-                 <!--Affichage du PopUp pour un client VIP-->		
-	        <div if:true={isClientVip} class="clientVipPopUp">
-	                <c-card-error class="slds-size--3-of-4"
-			              style="white-space: pre-wrap"
-			              error-message={clientVIPMessage}>
-		        </c-card-error>
-	        </div>
                 
-                <!--<button onclick={handleOpenEmmenagementNew}>TEST Nouveau emmenagement</button>-->
-
                 <lightning-progress-bar value={progress}></lightning-progress-bar>
                 <div class="header-container-emmenagement-adresses" if:false={error}>
                         <div if:false={longList} class="header-container slds-tabs_default">
@@ -41,7 +15,6 @@
                                                                         {adress.complementAdresse}</div>
                                                                 <div>{adress.codePostal} {adress.ville} <span
                                                                                 if:true={adress.NoCompteContratMaj}>({adress.NoCompteContratMaj})</span>
-                                                                                <span class="slds-text-color_error" if:true={adress.irrecouvrable}> Irrécouvrable</span>
                                                                 </div>
                                                         </div>
                                                         <div id={adress.key} if:true={adress.selected} onclick={handleActive}
@@ -52,11 +25,10 @@
                                                                         {adress.complementAdresse}</div>
                                                                 <div>{adress.codePostal} {adress.ville} <span
                                                                                 if:true={adress.NoCompteContratMaj}>({adress.NoCompteContratMaj})</span>
-                                                                                <span class="slds-text-color_error" if:true={adress.irrecouvrable}> Irrécouvrable</span>
-                                                                                
                                                                 </div>
                                                         </div>
                                                 </div>
+
                                         </template>
                                 </div>
                         </div>
@@ -72,7 +44,6 @@
                                                                         {adress.complementAdresse}</div>
                                                                 <div>{adress.codePostal} {adress.ville} <span
                                                                                 if:true={adress.NoCompteContratMaj}> ({adress.NoCompteContratMaj})</span>
-                                                                                <span class="slds-text-color_error" if:true={adress.irrecouvrable}> Irrécouvrable</span>
                                                                 </div>
                                                         </div>
                                                         <div id={adress.key} if:true={adress.selected} onclick={handleActive}
@@ -83,10 +54,10 @@
                                                                         {adress.complementAdresse}</div>
                                                                 <div>{adress.codePostal} {adress.ville} <span
                                                                                 if:true={adress.NoCompteContratMaj}>({adress.NoCompteContratMaj})</span>
-                                                                                <span class="slds-text-color_error" if:true={adress.irrecouvrable}> Irrécouvrable</span>
                                                                 </div>
                                                         </div>
                                                 </div>
+
                                         </template>
                                 </div>
                         </div>
@@ -109,7 +80,6 @@
                                                         <div>
                                                                 {adress.codePostal} {adress.ville} <span
                                                                         if:true={adress.NoCompteContratMaj}>({adress.NoCompteContratMaj})</span>
-                                                                        <span class="slds-text-color_error" if:true={adress.irrecouvrable}> Irrécouvrable</span>
                                                         </div>
                                                 </div>
                                                 <div id={adress.key} if:true={adress.selected} onclick={handleActive}
@@ -119,10 +89,10 @@
                                                         <div if:true={adress.complementAdresse}>{adress.complementAdresse}</div>
                                                         <div>{adress.codePostal} {adress.ville} <span
                                                                         if:true={adress.NoCompteContratMaj}>({adress.NoCompteContratMaj})</span>
-                                                                        <span class="slds-text-color_error" if:true={adress.irrecouvrable}> Irrécouvrable</span>
                                                         </div>
                                                 </div>
                                         </div>
+
                                 </template>
                         </div>
                         <div class="header-container-emmenagement">
@@ -146,23 +116,20 @@
                                         information={selectedItem.typeResidence}></c-card-information-logement>
                                 <c-card-energie if:true={selectedItem} class="slds-size--1-of-3 slds-p-right_xx-small slds-m-bottom_x-small"
                                         listrecord={listRecord} contratactif={selectedItem.contratactifgazWS} selecteditem={selectedItem}
-                                        contratserviceelecvert={selectedItem.contratserviceelecvert} contratservicegazvert={selectedItem.contratservicegazvert}
                                         contratinactif={selectedItem.contratinactifgazWS} contratactifsecondaire={selectedItem.contratactifelecWS} title={selectedItem.titleWS} type="gaz"
                                         index={index} onpopupevent={popupEvent}></c-card-energie>
                                 <c-card-energie class="slds-size--1-of-3 slds-p-right_xx-small slds-m-bottom_x-small"
                                         listrecord={listRecord} contratactif={selectedItem.contratactifelecWS} contratactifsecondaire={selectedItem.contratactifgazWS} selecteditem={selectedItem}
-                                        contratserviceelecvert={selectedItem.contratserviceelecvert} contratservicegazvert={selectedItem.contratservicegazvert}
                                         contratinactif={selectedItem.contratinactifelecWS} title={selectedItem.titleElecWS}
                                         type="elec" index={index} onpopupevent={popupEvent}></c-card-energie>
                                 <c-card-service class="slds-size--1-of-3 slds-p-right_xx-small slds-m-bottom_x-small"
-                                        onpopupevent={popupEvent} selecteditem={selectedItem} recordid={recordId} contratactifelec={selectedItem.contratactifelecWS} contratactifgaz={selectedItem.contratactifgazWS} 
-                                        contratservicegazvert={selectedItem.contratservicegazvert} contratserviceelecvert={selectedItem.contratserviceelecvert}></c-card-service>
+                                        onpopupevent={popupEvent} selecteditem={selectedItem}></c-card-service>
                                 <c-card-solde if:true={selectedItem} class="slds-size--1-of-3 slds-p-right_xx-small slds-m-bottom_x-small"
                                         listrecord={listRecord} index={index} selecteditem={selectedItem} recordid={recordId}></c-card-solde>
-                                        <c-card-paiement-facturation if:true={selectedItem} onpopupevent={popupEvent} class="slds-size--2-of-3 slds-p-right_xx-small slds-m-bottom_x-small"
-                                        selecteditem={selectedItem} listrecord={listRecord} index={index} recordid={recordId}  dossierrecouvrement={DossierRecouvrement} 
-                                        idplanpaiement={idPlanPaiement} listorderedadresses={listOrderedAdresses}></c-card-paiement-facturation>
-                                <c-footer-view360 if:true={selectedItem} class="slds-size--1-of-1" selecteditem={selectedItem} listrecord={listRecord} listorderedadresses={listOrderedAdresses}
+                                <c-card-paiement-facturation if:true={selectedItem} onpopupevent={popupEvent}
+                                        class="slds-size--2-of-3 slds-p-right_xx-small slds-m-bottom_x-small"
+                                        selecteditem={selectedItem} listrecord={listRecord} index={index} recordid={recordId}></c-card-paiement-facturation>
+                                <c-footer-view360 if:true={selectedItem} class="slds-size--1-of-1" selecteditem={selectedItem} listrecord={listRecord}
                                         index={index} recordid={recordId}></c-footer-view360>
                         </div>
                         <div if:true={error} class="slds-grid slds-grid_vertical-align-center slds-grid_align-center error-container">
@@ -175,10 +142,6 @@
                                         error-message={errorMessage}>
                                 </c-card-error>
                         </div>
-                        <div if:true={isFlagCreationContratEnCours} class="slds-grid slds-grid_vertical-align-center slds-grid_align-center error-container">
-                                <c-card-contrat-en-cours class="slds-size--4-of-4"></c-card-contrat-en-cours>
-                        </div>
-                        
                 </div>
         </div>
 </template>

@@ -2,7 +2,9 @@
  * @description       : 
  * @author            : Slimene Belhaj Ali
  * @group             : 
+
  * @last modified on  : 04-13-2021
+
  * @last modified by  : Slimene Belhaj Ali
  * Modifications Log 
  * Ver   Date         Author               Modification
@@ -118,7 +120,9 @@ public with sharing class HP_SM058_EditNameClient {
         + (cont.Salutation != null ? cont.Salutation : 'Madame, Monsieur') + ' ' +cont.FirstName + ' ' +cont.LastName + ',<br/>'
         + 'Vous souhaitez modifier le ou les personnes titulaires d’un contrat d’énergie.<br/>'+
         'Afin de traiter votre demande au plus vite nous avons besoin des documents nécessaires à la modification demandée pour mettre à jour votre espace client et produire un avenant au contrat initial/futurs documents.<br/>'
+
         +'Veuillez nous faire parvenir en pièce jointe retour l’un des éléments suivants :'
+
         +'<ul><li>Certificat de mariage</li><li>Certificat de PACS</li><li>Certificat de divorce</li><li>Certificat de décès</li><li>Certificat de succession</li></ul><br/>'
         +'Dès réception de votre mail nous vous confirmerons la bonne exécution de votre demande sous un délai de 48h ouvrées.';
         Map<String, String> input = new Map<String, String>();

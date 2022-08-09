@@ -2,12 +2,6 @@ global class SM_AP77_EmailPhoneVerificationService implements vlocity_cmt.Vlocit
     private static Map<String,Object> outMapEmailLWC = new Map<String,Object>();
     private static Map<String,Object> outMapPhoneNumberLWC = new Map<String,Object>();
 
-    public static Map<String, String> additionalHeaders = new Map<String, String>{
-        'X-Api-Key' => MP_Xdata_credentials__c.getInstance('sm_api_key_digital_INT').Value__c,
-        'DIG_ID_CLIENT' => MP_Xdata_credentials__c.getInstance('sm_digital_id_client').Value__c,
-        'DIG_SECRET_CLIENT' => MP_Xdata_credentials__c.getInstance('sm_digital_secret_client').Value__c
-    };
-
     /* @Author: LIK
      * @Description: Permet de réaliser le traitement dans le cas d'un appel depuis un composant lightning sans changer la structure des autres méthodes
      * @CreatedDate: 19/11/2019
@@ -91,12 +85,9 @@ global class SM_AP77_EmailPhoneVerificationService implements vlocity_cmt.Vlocit
             }
         }
 
-        
-        String codeRetour;
+
         if(!String.isBlank(email1)){
-            codeRetour = verifyEmail(email1);
-            outMap.put('code1',codeRetour);
-            if('00'.equals(codeRetour) || '01'.equals(codeRetour) || '03'.equals(codeRetour) || '99'.equals(codeRetour)){
+            if('OK'.equals(verifyEmail(email1))){
                 outMap.put('email1','OK');
             }
             else{
@@ -104,9 +95,7 @@ global class SM_AP77_EmailPhoneVerificationService implements vlocity_cmt.Vlocit
             }
         }
         if(!String.isBlank(email2)){
-            codeRetour = verifyEmail(email2);
-            outMap.put('code2',codeRetour);
-            if('00'.equals(codeRetour) || '01'.equals(codeRetour) || '03'.equals(codeRetour) || '99'.equals(codeRetour)){
+            if('OK'.equals(verifyEmail(email2))){
                 outMap.put('email2','OK');
             }
             else{
@@ -114,9 +103,7 @@ global class SM_AP77_EmailPhoneVerificationService implements vlocity_cmt.Vlocit
             }
         }
         if(!String.isBlank(email3)){
-            codeRetour = verifyEmail(email3);
-            outMap.put('code3',codeRetour);
-            if('00'.equals(codeRetour) || '01'.equals(codeRetour) || '03'.equals(codeRetour) || '99'.equals(codeRetour)){
+            if('OK'.equals(verifyEmail(email3))){
                 outMap.put('email3','OK');
             }
             else{
@@ -225,14 +212,20 @@ global class SM_AP77_EmailPhoneVerificationService implements vlocity_cmt.Vlocit
             'Rectify' => '1'
         };
 
-        HttpResponse httpResponse =  getResponse('VerifyEmail', listParamsRequest);
+        String token = loadToken();
+
+        HttpResponse httpResponse =  getHttpResponse(token,'VerifyEmail', listParamsRequest);
         Map<String,Object> resultAsMap = (Map<String,Object>) JSON.deserializeUntyped(httpResponse.getBody());
 
 
         Map<String,Object> reponse = (Map<String,Object>) resultAsMap.get('reponse');
         Map<String,Object> retourFonctionnel = (Map<String,Object>) reponse.get('1');
-        String codeRetour = (String) retourFonctionnel.get('IdError');
-        return codeRetour;
+        if('00'.equals((String)retourFonctionnel.get('IdError'))){
+            return 'OK';
+        }
+        else{
+            return 'KO';
+        }
     }
 
 
@@ -243,6 +236,8 @@ global class SM_AP77_EmailPhoneVerificationService implements vlocity_cmt.Vlocit
             'Module'  =>'TEL',
             'Rectify' => '1'
         };
+
+        String token = loadToken();
 
         HttpResponse httpResponse =  new HttpResponse();
         Map<String,Object> resultAsMap = new Map<String,Object>();
@@ -256,6 +251,8 @@ global class SM_AP77_EmailPhoneVerificationService implements vlocity_cmt.Vlocit
             'Rectify' => '1'
         };
 
+        String token2 = loadToken();
+
         HttpResponse httpResponse2 =  new HttpResponse();
         Map<String,Object> resultAsMap2 = new Map<String,Object>();
 
@@ -268,6 +265,8 @@ global class SM_AP77_EmailPhoneVerificationService implements vlocity_cmt.Vlocit
             'Module'  =>'TEL',
             'Rectify' => '1'
         };
+
+        String token3 = loadToken();
 
         HttpResponse httpResponse3 =  new HttpResponse();
         Map<String,Object> resultAsMap3 = new Map<String,Object>();
@@ -295,7 +294,9 @@ global class SM_AP77_EmailPhoneVerificationService implements vlocity_cmt.Vlocit
             'pays'  => 'FRA'
         };
 
-        HttpResponse httpResponse =  getResponse('VerifyPhoneNumber', listParamsRequest);
+        String token = loadToken();
+
+        HttpResponse httpResponse =  getHttpResponse(token,'VerifyPhoneNumber', listParamsRequest);
         Map<String,Object> resultAsMap = (Map<String,Object>) JSON.deserializeUntyped(httpResponse.getBody());
 
 
@@ -313,9 +314,31 @@ global class SM_AP77_EmailPhoneVerificationService implements vlocity_cmt.Vlocit
     * @Description : Build the HttpRequest for post method
     * @CreatedDate : 09/07/2018
     */
-    public static String buildRequestParams(Map<String,String> listParameters){
+    public static HttpRequest buildHttpRequestHeaders(String token,String apiSuffix, Map<String, String> listParams) {
+        HttpRequest req = new HttpRequest();
+        req.setMethod('GET');
+        String endpointURL = buildEndPoint(apiSuffix,listParams);
+        req.setEndpoint(endpointURL);
+        req.setHeader('X-Correlation-Id', MP_AP13_GuidUtil.NewGuid());
+        if(!Test.isRunningTest()){
+            req.setHeader('X-Api-Key', MP_Xdata_credentials__c.getInstance('sm_api_key_digital_INT').Value__c);
+            req.setHeader('api_key', MP_Xdata_credentials__c.getInstance('sm_api_key_INT').Value__c);
+            req.setHeader('DIG_ID_CLIENT', MP_Xdata_credentials__c.getInstance('sm_digital_id_client').Value__c);
+            req.setHeader('DIG_SECRET_CLIENT', MP_Xdata_credentials__c.getInstance('sm_digital_secret_client').Value__c);
+        }
+        req.setHeader('Authorization', 'Bearer ' + token);
+        req.setHeader('Content-Type', 'application/json');
+        return req;
+    }
+
+    public static String buildEndPoint(String apiSuffix, Map<String,String> listParameters){
         
         String endPoint = '';
+        if (!Test.isRunningTest()) {
+            SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = :apiSuffix limit 1];
+            endPoint = 'callout:AuthAPIHour' +suffixs.suffix__c;
+        }
+
         if(listParameters.size()>0){
             endPoint = endPoint +'?';
             Set<String> queryParamsKeys = listParameters.keySet();
@@ -325,6 +348,7 @@ global class SM_AP77_EmailPhoneVerificationService implements vlocity_cmt.Vlocit
             endPoint = endPoint.substring(0, endPoint.length()-1);
 
         }
+        system.debug('[buildEndPoint]' + endPoint);
         return endPoint;
     }
 
@@ -332,12 +356,12 @@ global class SM_AP77_EmailPhoneVerificationService implements vlocity_cmt.Vlocit
     * @Description : Envoie de la requete POST
     * @CreatedDate : 03/10/2019
     */
-    public static HttpResponse getResponse(String apiSuffix, Map<String, String> listParams) {
-        String endpointParams = buildRequestParams(listParams);
-        HttpResponse httpResp = CalloutManager.sendRequest(apiSuffix, endpointParams, 'GET', CalloutManager.Scope.READ, null,additionalHeaders);
-        if (CalloutManager.httpResponseFailureDetected(httpResp)) {
+    public static HttpResponse getHttpResponse(String token,String apiSuffix, Map<String, String> listParams) {
+        HttpRequest httpReq = buildHttpRequestHeaders(token,apiSuffix, listParams);
+        HttpResponse httpResp = sendData(httpReq);
+        if (httpResponseFailureDetected(httpResp)) {
             // should abort next step's
-            system.debug('[SM_AP77_EmailPhoneVerificationService:getResponse] error when sending http request');
+            system.debug('[SM_AP77_EmailPhoneVerificationService:getHttpResponse] error when sending http request');
             system.debug(httpResp != null ? httpResp.getBody() : 'http response is null');
             throw new IOException('[SM_AP77_EmailPhoneVerificationService] : ERROR APPEL API');
         }
@@ -346,7 +370,50 @@ global class SM_AP77_EmailPhoneVerificationService implements vlocity_cmt.Vlocit
 
     }
 
+    /* @Author: HEL
+    * @Description : Envoie de la requete POST
+    * @CreatedDate : 03/10/2019
+    */
+    public static HttpResponse sendData(HttpRequest request) {
+        Http http = new Http();
+        HttpResponse res;
+        try {
+            res = http.send(request);
+
+        } catch (Exception e) {
+            system.debug('[SM_AP77_EmailPhoneVerificationService:sendData] error when sending http request');
+            return null;
+        }
+        return res;
+
+    }
+
+    /* @Author: HEL
+    * @CreatedDate : 03/10/2019
+    */
+    private static Boolean httpResponseFailureDetected(HttpResponse response) {
+        return (response == null || (response.getStatusCode() != 201 && response.getStatusCode() != 200 && response.getStatusCode() != 206));
+    }
+    
     public class IOException extends Exception {
+    }
+
+    /* @Author: HEL
+    * @CreatedDate : 03/10/2019
+    */
+    private static String loadToken(){
+        String token;
+        if(!Test.isRunningTest()){
+            token = SM_MP_AP04_GetTokenService.getTokenFromSmile();
+        }
+        else{
+            token = 'wadfkoa5678';
+        }
+        if (token == null) {
+            system.debug('[SM_AP77_EmailPhoneVerificationService : Token not found ...]');
+            throw new IOException('INVALID TOKEN API');
+        }
+        return token;
     }
 
 }

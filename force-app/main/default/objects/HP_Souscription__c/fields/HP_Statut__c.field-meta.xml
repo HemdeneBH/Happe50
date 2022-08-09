@@ -4,6 +4,7 @@
     <externalId>false</externalId>
     <label>Statut</label>
     <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
     <trackHistory>true</trackHistory>
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
@@ -45,6 +46,12 @@
                 <fullName>SAVE_3</fullName>
                 <default>false</default>
                 <label>CPV signées</label>
+            </value>
+            <value>
+                <fullName>CPV Périmées</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CPV Périmées</label>
             </value>
         </valueSetDefinition>
     </valueSet>

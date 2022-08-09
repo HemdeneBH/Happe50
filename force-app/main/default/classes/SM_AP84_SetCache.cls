@@ -15,11 +15,13 @@ global class SM_AP84_SetCache {
 
         // Get partition
         Cache.SessionPartition sessionPart = Cache.Session.getPartition('local.smileToken');
+        System.debug('*******' + sessionPart);
         // Add cache value to the partition. Usually, the value is obtained from a 
         // callout, but hardcoding it in this example for simplicity.
         sessionPart.put('createCase', '1');
         // Retrieve cache value from the partition
         String cachedRate = (String)sessionPart.get('createCase');
+        System.debug('cachedRate--->' + cachedRate);
         return true;
     }
     

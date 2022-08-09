@@ -29,6 +29,7 @@ public class SM_AP60_Debranchement_ServiceImpl {
         
         if(!Test.isRunningTest()) {
             contactIdBP= [SELECT Id,Identifiant_Buisness_Partener__c FROM Contact WHERE Id =: ContactIdValue].Identifiant_Buisness_Partener__c;
+            system.debug('contactIdBP' + contactIdBP);
         }
         else {
             contactIdBP = ContactIdValue;
@@ -53,6 +54,7 @@ public class SM_AP60_Debranchement_ServiceImpl {
                  res.setStatusCode(503);
             }
         }
+            system.debug(res.getStatusCode());
             if(res != null && res.getStatusCode() == 200){
                  String chaineCrypteeValue = res.getBody();
             	chaineCryptee = Label.SM_CL_Api_Debranchement_endpoint + '/modification-rdv-distributeur.html?token='+chaineCrypteeValue;
@@ -61,6 +63,7 @@ public class SM_AP60_Debranchement_ServiceImpl {
                 chaineCryptee='#';
             }
            
+        system.debug('chaineCryptee'+chaineCryptee);
 
         return chaineCryptee;     
     }

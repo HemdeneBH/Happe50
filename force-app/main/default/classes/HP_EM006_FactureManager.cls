@@ -23,8 +23,8 @@ public with sharing class HP_EM006_FactureManager {
 		return responseNoteMap;
 	}
 
-  public static Map<String, Object> updateEnergieVert(String contractId, String energieVert){
-		Map<String, String> paramMap = new Map<String, String>{'id_contrat_xdata' => contractId, 'option_vert' => energieVert};
+  public static Map<String, Object> updateEnergieVert(String contractId, String energieVert, String profil){
+		Map<String, String> paramMap = new Map<String, String>{'id_contrat_xdata' => contractId, 'option_vert' => energieVert, 'profil' => profil};
     HTTPResponse res = HP_UTIL_HTTPUtils.calloutGet(HP_Constantes.AGILAB_PROPOSITION_MODIFIER, paramMap);
     Map<String, Object> bodyMap = (Map<String, Object>)JSON.deserializeUntyped(res.getBody());
     Map<String, Object> result = new Map<String, Object>();

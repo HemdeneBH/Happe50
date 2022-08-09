@@ -20,7 +20,7 @@ public without sharing class HP_UTIL_HTTPUtils_TEST {
         HP_CONTRAT_XDATA_BY_PERSONNE_MOCK
     }
 
-    @testSetup static void dataSetup(){        
+    @testSetup static void dataSetup(){    
         HP_UTIL_SmartFactory.insertUserHP();
     }
 

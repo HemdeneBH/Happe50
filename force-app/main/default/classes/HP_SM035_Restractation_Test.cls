@@ -3,7 +3,9 @@
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
 
+
  * @last modified on  : 06-14-2021
+
 
  * @last modified by  : Hemdene Ben Hammouda
  * Modifications Log 
@@ -68,7 +70,7 @@ public with sharing class HP_SM035_Restractation_Test {
                 HP_Contrat__c = cont.Id,
                 OwnerId = UserInfo.getUserId(),
                 Statut__c = 'Annulé',
-                Numero_affaire_distributeur__c = ' 11111111',
+                    Numero_affaire_distributeur__c = ' 11111111',
                 Date_de_prestation__c = date.newinstance(contDate.year(), contDate.month(), contDate.day())
             );
 

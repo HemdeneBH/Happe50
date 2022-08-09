@@ -3,14 +3,14 @@
  * @Description        :
  * @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
  * @Group              :
- * @Last Modified By   : Hemdene Ben Hammouda
+ * @Last Modified By   : Badr Eddine Belkarchi
 
 
 
 
 
 
- * @Last Modified On   : 02-18-2022
+ * @Last Modified On   : 07-20-2022
 
 
 
@@ -92,11 +92,14 @@ public with sharing class HP_Constantes {
 	public static final String AGILAB_CREATE_NOTE_CREDIT =  'AGILAB_CREATE_NOTE_CREDIT';
 	public static final String AGILAB_CANCEL_NOTE_CREDIT =  'AGILAB_CANCEL_NOTE_CREDIT';
 	public static final String AGILAB_SOLDE_EFFECTIF =  'AGILAB_SOLDE_EFFECTIF';
+	public static final String AGILAB_MAJ_MENSUALITE =  'AGILAB_MAJ_MENSUALITE';
 	public static final String AGILAB_PORTFEUILLE_CONTRACT_FACTURE = 'AGILAB_PORTFEUILLE_CONTRACT_FACTURE';
 	public static final String AGILAB_AFFICHIER_INFORMATION_CONTRAT = 'AGILAB_AFFICHIER_INFORMATION_CONTRAT';
 	public static final String AGILAB_AFFICHER_ECHENACE_CONTRAT = 'AGILAB_AFFICHER_ECHENACE_CONTRAT';
+	public static final String AGILAB_AFFICHER_AUTO_RELEVE = 'AGILAB_AFFICHER_AUTO_RELEVE';
 	public static final String AGILAB_AFFICHIER_INFORMATION_AIDE = 'AGILAB_AFFICHIER_INFORMATION_AIDE';
 	public static final String AGILAB_MODIFIER_INFORMATION_AIDE = 'AGILAB_MODIFIER_INFORMATION_AIDE';
+	public static final String AGILAB_ENVOI_INDEXES = 'AGILAB_ENVOI_INDEXES';
 	public static final String AGILAB_AFFICHIER_PERSONNE = 'AGILAB_AFFICHIER_PERSONNE';
 	public static final String AGILAB_GRILLE_PRICINGS_GET = 'AGILAB_GRILLE_PRICINGS_GET';
 	public static final String AGILAB_MODIFIER_MODE_ENVOI_FACTURE = 'AGILAB_MODIFIER_MODE_ENVOI_FACTURE';
@@ -114,12 +117,14 @@ public with sharing class HP_Constantes {
 	public static final String HP_OKTA_CREATE_USER = 'HP_OKTA_CREATE_USER';
 	public static final String HP_OKTA_USER = 'HP_OKTA_USER';
 	public static final String AGILAB_VOIR_PLANS_APUREMENT = 'AGILAB_VOIR_PLANS_APUREMENT';
+	public static final String AGILAB_DOCUMENTS = 'AGILAB_DOCUMENTS';
 
 	
 	public static final String API_MARKETING_CLOUD =  'API_MARKETING_CLOUD';
-
+	public static final String SOGENACTIF =  'SOGENACTIF';
 
 	public static final String AGILAB_PERSONNE_CONSOMMATION =  'AGILAB_PERSONNE_CONSOMMATION';
+	public static final String AGILAB_CO_TITULAIRES = 'AGILAB_CO_TITULAIRES';
 
 
 	public static final String AGILAB_HAPPE_ENEGIE_VERT = 'AGILAB_HAPPE_ENEGIE_VERT';

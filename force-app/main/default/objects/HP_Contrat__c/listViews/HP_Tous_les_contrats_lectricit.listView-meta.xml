@@ -14,11 +14,6 @@
         <operation>equals</operation>
         <value>ELEC</value>
     </filters>
-    <filters>
-        <field>HP_PortefeuilleContratXdataId__c</field>
-        <operation>equals</operation>
-        <value>85766459</value>
-    </filters>
     <label>happ-e : Tous les contrats électricité</label>
     <sharedTo>
         <roleAndSubordinatesInternal>HP_HAPPE</roleAndSubordinatesInternal>

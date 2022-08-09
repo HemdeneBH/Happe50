@@ -19,7 +19,7 @@ global class SM_AP06_MandatsApiService_TEST {
 		insert sm_api_key_INT;
 
 		Map<String , object>inputMap = new Map<String, object>() ;
-		inputMap.put('IdBusinessPartner', '309981403') ;
+		inputMap.put('IdBusinessPartner', '0309981403') ;
 		Map<String , object>outputMap = new Map<String, object>() ;
 
 		SM_AP06_MandatsApiService service = new SM_AP06_MandatsApiService() ;
@@ -33,16 +33,16 @@ global class SM_AP06_MandatsApiService_TEST {
 		mandatsTest.put('dateSignature', '2019/01/01') ;
 		listMandats.add(mandatsTest) ;
 
-		//SM_AP06_MandatsApiService.callMandats(inputMap,outputMap,null);
+		SM_AP06_MandatsApiService.callMandats(inputMap,outputMap,null);
 		SM_AP06_MandatsApiService.transformDatatoOmniscript(listMandats) ;
-		String endpointParams =  SM_AP06_MandatsApiService.buildRequestParams('0309981403') ;
-		
+		HttpRequest request =  SM_AP06_MandatsApiService.buildHttpRequestHeaders('tokentest', '0309981403') ;
+		SM_AP06_MandatsApiService.sendData(request ) ;
 
 		String json = '{"test":"test"}';
 		//      JSONParser parser = JSON.createParser(json);
 		// SM_AP06_MandatsApiService.getJsonFieldAsString(parser , 'test');
 
-		//SM_AP06_MandatsApiService.getResponse('tokentest', '0309981403') ;
+		SM_AP06_MandatsApiService.getResponse('tokentest', '0309981403') ;
 
 		SM_AP06_MandatsApiService.MandatsModel MandatsModel = new  SM_AP06_MandatsApiService.MandatsModel('0309981403','2019/01/01','Valider', 'UrlTest') ;
 	}

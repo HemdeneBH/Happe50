@@ -4,4 +4,9 @@
     <availableInTouch>true</availableInTouch>
     <confirmationTokenRequired>false</confirmationTokenRequired>
     <label>OpportunityActionToolbar</label>
+    <packageVersions>
+        <majorNumber>900</majorNumber>
+        <minorNumber>202</minorNumber>
+        <namespace>vlocity_cmt</namespace>
+    </packageVersions>
 </ApexPage>

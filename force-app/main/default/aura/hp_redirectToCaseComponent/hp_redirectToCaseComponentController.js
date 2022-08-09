@@ -1,5 +1,7 @@
 ({
     onInit : function(component) {
+
+
         const empApi = component.find('empApi');
 
         empApi.onError($A.getCallback(error => {

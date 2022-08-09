@@ -4,11 +4,11 @@
     <externalId>false</externalId>
     <label>Type d&apos;OPS</label>
     <required>false</required>
-    <trackFeedHistory>true</trackFeedHistory>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
+        <restricted>true</restricted>
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
@@ -20,26 +20,6 @@
                 <fullName>Online</fullName>
                 <default>false</default>
                 <label>Online</label>
-            </value>
-            <value>
-                <fullName>Réduction de puissance</fullName>
-                <default>false</default>
-                <label>Réduction de puissance</label>
-            </value>
-            <value>
-                <fullName>Demande de coupure</fullName>
-                <default>false</default>
-                <label>Demande de coupure</label>
-            </value>
-            <value>
-                <fullName>Rétablissement</fullName>
-                <default>false</default>
-                <label>Rétablissement</label>
-            </value>
-            <value>
-                <fullName>Différé</fullName>
-                <default>false</default>
-                <label>Différé</label>
             </value>
         </valueSetDefinition>
     </valueSet>

@@ -1,35 +1,208 @@
-/*Temporary button, to be removed */
-button {
-    margin: 10px 0;
-    background-color: var(--bg-base);
-    border: 4px solid var(--secondary-colour);
-    color: var(--text-color);
-    font-family: var(--font-bold);
-    padding: 10px 20px;
-    text-transform: uppercase;
+.c-payments {
+    padding: 30px 20px 30px 40px;
+    margin: 15px;
 }
-button:hover { border-color: var(--text-color); }
-
 .hp-bigTitle {
     margin-bottom: 25px;
 }
-
-.c-payments {
-    margin: 15px;
-    padding: 32px 40px 25px;
+.hp-option-item {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    align-items: center;
 }
-
-p strong {
-    font-family: var(--font-bold);
-    color: var(--blue);
+.left {
+    justify-self: left;
+    font-size: 14px;
+    font-weight: 200;
+    text-align: left;
+    position: relative;
 }
-
-p span {
+.iconChecked {
     display: inline-block;
+    width: 22px;
+    height: auto;
+    position: absolute;
+    top: -3px;
 }
-
+.option-item {
+    padding: 0 0 0 40px;
+}
+.rightBloc {
+    justify-self: right;
+}
+.hp-option-item {
+    padding: 10px 0;
+}
+.hp-buttons {
+    width: 80px;
+    height: 30px;
+    margin: 0 0 0 10px;
+    padding: 7px 15px;
+    border-radius: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-family: var(--font-bold);
+    font-size: 12px;
+    min-width: 80px;
+    cursor: pointer;
+}
+.hp-status {
+    display: inline-flex;
+    font-family: var(--font-bold);
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    color: var(--primary-colour);
+    padding: 0 20px;
+}
+.visually-hidden {
+    clip: rect(0 0 0 0); 
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap; 
+    width: 1px;
+}
+li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+li > span {
+    flex-grow: 1;
+}
+li a {
+    color: var(--secondary-colour);
+    font-size: 12px;
+    line-height: 13px;
+    letter-spacing: 0.36px;
+    font-family: var(--font-bold);
+    text-decoration: underline;
+    margin: 0 12px;
+}
+li button {
+    min-width: 154px;
+    min-height: 34px;
+    padding: 5px 20px;
+    border-radius: 20px;
+    border: 2px solid var(--secondary-colour);
+    background: var(--bg-base);
+    color: var(--secondary-colour);
+    font-family: var(--font-bold);
+    font-size: 12px;
+    line-height: 13px;
+    letter-spacing: 0.36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+li button:not(:disabled, .disabled):hover {
+    border-color: var(--text-color);
+    color: var(--text-color);
+}
+li button:disabled,
+li button.disabled {
+    color: var(--white);
+    background-color:  var(--grey);
+    border-color:  var(--grey);
+}
+li button .icon {
+    display: block;
+    height: 18px;
+    color: var(--text-color);
+    background-color: currentColor;
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center center;
+}
+li button:disabled .icon,
+li button.disabled .icon {
+    color: var(--white);
+}
+li button .icon-cb {
+    width: 32px;
+}
+li button .icon-paylib {
+    width: 42px;
+}
+li button .icon-paypal {
+    width: 77px;
+    height: 28px;
+    margin: -10px 0;
+}
+p {
+    font-family: var(--font-bold);
+    color: var(--text-color);
+}
+.c-blocConfirm-icon {
+    background: var(--blue);
+    border: 7px solid var(--bg-blue);
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+}
+.c-blocConfirm-icon {
+    border-radius: 50%;
+    width: 65px;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    flex: 0 0 auto;
+    margin: 1rem;
+    align-items: center;
+    align-content: center;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+}
+.c-blocConfirm {
+    display: flex;
+    align-items: center;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    position: relative;
+    margin: 25px 0 0 40px;
+    padding: 0 20px;
+    background: var(--bg-blue);
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    color: var(--text-color);
+    max-width: 500px;
+}
+.c-blocConfirm__text {
+    font-family: var(--font-bold);
+    font-size: 14px;
+}
+.c-blocConfirm-innerCircle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+.c-blocConfirm-img {
+    width: 32px;
+    height: auto;
+}
 @media (max-width: 1024px) {
+    /* Ipad and tablets */
+    .c-blocConfirm__text {
+        justify-self: center;
+        padding: 20px 20px 20px 0;
+    }
     .c-payments {
         margin: 10px 0;
+    }
+}
+@media (max-width: 576px) {
+    li {
+        flex-wrap: wrap;
+    }
+    li button {
+        margin-top: 10px;
+        width: 100%;
+    }
+    .c-blocConfirm {
+        margin: 20px 0;
+        padding: 0;
+        max-width: none;
     }
 }

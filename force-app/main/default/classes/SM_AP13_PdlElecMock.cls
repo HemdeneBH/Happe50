@@ -127,10 +127,7 @@ global class SM_AP13_PdlElecMock implements WebServiceMock {
     gdfsuezComBefCalypsoPdlelectricite.cAEParCadran_element cae_cadran = new gdfsuezComBefCalypsoPdlelectricite.cAEParCadran_element();
     cae_cadran.cadran = cadrans;
     consommationValue.cAEParCadran = cae_cadran;
-        consommationValue.cAEGlobale = new gdfsuezComBefChpDistributeurelectric.quantiteSansDecimalDt();
-         consommationValue.cAEGlobale.valeur = 234;
     historiqueMesures1.consommations = consommationValue;
-        
     donnepdl.historiqueMesures = historiqueMesures1;
 
 

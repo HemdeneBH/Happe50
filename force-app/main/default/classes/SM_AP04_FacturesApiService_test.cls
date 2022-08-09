@@ -25,36 +25,35 @@ global class SM_AP04_FacturesApiService_test {
     inputMap.put('excludeSomeBillsType', true) ;
 	Map<String , object>outputMap = new Map<String, object>() ;
 
+    Test.startTest();
 	SM_AP04_FacturesApiService service = new SM_AP04_FacturesApiService() ;
 
 	service.invokeMethod('methodenotCovered', inputMap, outputMap, null) ;
 	service.invokeMethod('callFacture', inputMap,  outputMap, null) ;
     
-	//test for callFactureLWC(Vlocity)
-	service.invokeMethod('callFactureLWC', inputMap,  outputMap, null) ;
+    SM_AP04_FacturesApiService.callFactureLWC(inputMap) ;
       
 	SM_AP04_FacturesApiService.callFacture( inputMap, outputMap, null);
-
-	//test for callFactureLinkLWC(Vlocity)
-	inputMap = new Map<String, object>() ;
-	inputMap.put('idFacture', '202000001') ;
-	service.invokeMethod('callFactureLinkLWC', inputMap,  outputMap, null) ;
-	inputMap = new Map<String, object>() ;
-	inputMap.put('IdFacture', '202000001') ;
-	service.invokeMethod('callFactureWithIdLWC', inputMap,  outputMap, null) ;
 	Double value = 70;
 	List<Object> listFactures = new List<Object>();
 	Map<String, Object> factureTest = new Map<String, Object>() ;
 	facturetest.put('dateComptable', '2018-09-18T14:27:06.8410095+02:00') ;
 	facturetest.put('montantTotal',value);
 	listFactures.add(factureTest) ;
-	
+
 	SM_AP04_FacturesApiService.transformDatatoOmniscript(listFactures) ;
-	String endpointParams =  SM_AP04_FacturesApiService.buildRequestParams('0324566777', '4545', '') ;
+	HttpRequest request =  SM_AP04_FacturesApiService.buildHttpRequestHeaders('tokentest', '0324566777', '4545') ;
+	SM_AP04_FacturesApiService.sendData(request ) ;
+
+	//String json = '{"test":"test"}';
+	//      JSONParser parser = JSON.createParser(json);
+	// SM_AP04_FacturesApiService.getJsonFieldAsString(parser , 'test');
+
+	SM_AP04_FacturesApiService.getResponse('tokentest', '0324566777', '4545') ;
 
 	SM_AP04_FacturesApiService.FactureModel factureModel = new  SM_AP04_FacturesApiService.FactureModel('test','2018-09-18T14:27:06.8410095+02:00', String.valueOf(value), null) ;
 	  
-	 
+	Test.stopTest();
   }
 	
 	@isTest

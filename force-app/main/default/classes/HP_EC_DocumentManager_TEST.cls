@@ -2,8 +2,8 @@
  * @description       : 
  * @author            : Clément Bauny
  * @group             : 
- * @last modified on  : 07-04-2022
- * @last modified by  : Hemdene Ben Hammouda
+ * @last modified on  : 07-27-2022
+ * @last modified by  : Badr Eddine Belkarchi
 **/
 @isTest
 public with sharing class HP_EC_DocumentManager_TEST {
@@ -70,6 +70,8 @@ public with sharing class HP_EC_DocumentManager_TEST {
             Test.setMock(HttpCalloutMock.class, new HP_UTIL_ResponseRestMock(bodyResponseMap));
             HP_EC_DocumentManager.getContractDocumentsInfo('123');
             HP_EC_DocumentManager.getJustificatif('123');
+            HP_EC_DocumentManager.getJustificatifDeDomicileVariables();
+            HP_EC_DocumentManager.generateJustificatifDomicilePDF('{"date_du_jour":"date_du_jour","ref_client":"ref_client","adresse_factu1":"adresse_factu1","adresse_factu2":"adresse_factu2","adresse_local":"adresse_local","ref_contrat":"ref_contrat","civilite_titulaire":"civilite_titulaire","nom_titulaire":"nom_titulaire","prenom_titulaire":"prenom_titulaire","civilite_cotitulaire":"civilite_cotitulaire","nom_cotitulaire":"nom_cotitulaire","prenom_cotitulaire":"prenom_cotitulaire","bodyParagraph":"bodyParagraph","capital_GDF_SUEZ":"capital_GDF_SUEZ","adr_gdfsuez_siege":"adr_gdfsuez_siege","numero_tva_gdf_suez":"numero_tva_gdf_suez","service_client_agilab":"service_client_agilab","depannage_elec":"depannage_elec","depannage_gaz":"depannage_gaz"}');
             Test.stopTest();
         }
     }

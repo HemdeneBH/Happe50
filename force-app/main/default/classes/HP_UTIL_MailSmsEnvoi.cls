@@ -95,7 +95,9 @@ public with sharing class HP_UTIL_MailSmsEnvoi {
                 
                 //valeurs
                 coupleValueMap.put('EMAIL', inputMap.get('email'));
+
                 coupleValueMap.put('idclient', String.valueOf(Decimal.valueOf(inputMap.get('idClient')).intValue()));
+
                 coupleValueMap.put('NOM', inputMap.get('NOM'));
                 coupleValueMap.put('PRENOM', inputMap.get('PRENOM'));
                 coupleValueMap.put('CIVILITEHAPPE', inputMap.get('CIVILITEHAPPE'));

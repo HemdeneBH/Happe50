@@ -3,8 +3,8 @@
  * @Description        : 
  * @Author             : Antoine Latour
  * @Group              : 
- * @Last Modified By   : Badr Eddine Belkarchi
- * @Last Modified On   : 02-15-2022
+ * @Last Modified By   : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @Last Modified On   : 03-11-2022
  * @Modification Log   : 
  * Ver       Date            Author      		    Modification
  * 1.0    19/08/2020   Antoine Latour     Initial Version
@@ -150,7 +150,7 @@ public with sharing class HP_EM010_Case_TEST {
         Id selfcareId = null;
 
         Test.startTest();
-        Case caseCreated = HP_EM010_Case.createCaseFromAPI(contactId, context, description, firstname, lastname, email, selfcareId, null,null,null,null,null);
+        Case caseCreated = HP_EM010_Case.createCaseFromAPI(contactId, context, description, firstname, lastname, email, selfcareId, null,null,null,null,null,null);
         Test.stopTest();
         System.assertEquals('Chat indisponible', caseCreated.Subject);
     }
@@ -170,7 +170,7 @@ public with sharing class HP_EM010_Case_TEST {
         Id selfcareId = null;
 
         Test.startTest();
-        Case caseCreated = HP_EM010_Case.createCaseFromAPI(contactId, context, description, firstname, lastname, email, selfcareId, null,null,null,null,null);
+        Case caseCreated = HP_EM010_Case.createCaseFromAPI(contactId, context, description, firstname, lastname, email, selfcareId, null,null,null,null,null,null);
         Test.stopTest();
         System.assertEquals('Enregistrements consentements Xdata KO', caseCreated.Subject);
     }
@@ -195,7 +195,7 @@ public with sharing class HP_EM010_Case_TEST {
         Id selfcareId = enrolment.Id;
 
 		Test.startTest();
-        Case caseCreated = HP_EM010_Case.createCaseFromAPI(contactId, context, description, firstname, lastname, email, selfcareId, null,null,null,null,null);
+        Case caseCreated = HP_EM010_Case.createCaseFromAPI(contactId, context, description, firstname, lastname, email, selfcareId, null,null,null,null,null,null);
         Test.stopTest();
         enrolment = [SELECT Id, HP_Souscription_Digital_Id__c, HP_Statut__c 
                                         FROM HP_Souscription__c 
@@ -484,5 +484,4 @@ public with sharing class HP_EM010_Case_TEST {
         
         System.assertEquals(c.Id, cResult.Id);
     }
-
 }

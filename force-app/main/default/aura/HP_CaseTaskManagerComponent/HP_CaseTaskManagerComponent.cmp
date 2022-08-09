@@ -235,10 +235,10 @@
                 <div style="height: 4rem;margin-left: 0.5rem;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
                     <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
 
-                        <span class="test-id__field-label">Type de tâche</span>
+                        <span class="test-id__field-label">Type d'appel</span>
                     </div>
                     <div class="slds-form-element__control" >
-                        <force:outputField value="{!v.lastTask.Type}"/>
+                        <force:outputField value="{!v.lastTask.CallType}"/>
                     </div>
                 </div>
             </div>

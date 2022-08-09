@@ -5,23 +5,16 @@
             <div slot="actions">
                 <lightning-button-icon icon-name="utility:vide" variant="bare"></lightning-button-icon>
             </div>
-
-            <div class="slds-m-around_medium bloc-card engie-card-contrat-body slds-card__body via-slds-card__body slds-theme--default slds-grid slds-wrap">
-                <div class="slds-size--1-of-2 slds-p-right_xx-small" if:true={showSpinner}>
-
+            <div
+                class="slds-m-around_medium bloc-card engie-card-contrat-body slds-card__body via-slds-card__body slds-theme--default slds-grid">
+                <div class="slds-size--1-of-4 slds-p-right_xx-small" if:true={showSpinner}>
                     <span class="slds-text-heading--label text-type">MODE DE PAIEMENT</span>
-                    <!-- TODO LV PPROD modification Bouton TODO TEST-->
+                    <!-- TODO LV PPROD modification Bouton TODO -->
                     <lightning-button-icon icon-name="utility:edit" variant="bare" onclick={navigateToModePaiement}
                         alternative-text="modifier coordonnée bancaire">
                     </lightning-button-icon>
                     <!-- <a id="editPay" class="icon-v-edit via-action-link slds-text-link--reset" style="font-size:22px;float:right;position:absolute;transform: translate(8px,-10px);" ng-href="#"></a> -->
-                    <!-- FT2-1374 Gestion des coordonnées bancaire du payeur divergent sur vue 360-->
-                    <div if:true={isRolePayeurDivergent} class="slds-tile__detail">
-                        <b class="slds-text-color_error">IBAN lié au payeur divergent</b>
-                    </br></br>
-                    </div>
-                    
-                    <div if:false={isRolePayeurDivergent} class="slds-tile__detail">
+                    <div class="slds-tile__detail">
                         <!-- 'Non prélevé' || prélevé (non mensualisé) || error technique-->
                         <div if:true={isPrelevee}>{selecteditem.modePaiement}</div>
                         <div if:true={isNonPrelevee}>{selecteditem.modePaiement}</div>
@@ -37,18 +30,9 @@
                         <p if:true={isStatutMondatError} class="slds-text-color_error">Informations du mandat
                             indisponibles</p>
                     </div>
-                    <!-- FT2-1307 Afficher présence Payeur divergent sur vue 360 -->
-                    <div>
-                        <span class="slds-text-heading--label text-type">PAYEUR DIVERGENT</span>
-                        <lightning-button-icon icon-name="utility:edit" variant="bare" onclick={navigateToPayeurDivergent}>
-                        </lightning-button-icon>
-                        <div if:true={isPayeurDivergent}>OUI</div>
-                        <div if:false={isPayeurDivergent}>NON</div>
-                    </div>
-
                 </div>
                 <!-- TODO avoir un client mensualisé -->
-                <div class="slds-size--1-of-2 slds-p-left_xx-small" if:true={isMensualisee}>
+                <div class="slds-size--2-of-4 slds-p-right_xx-small" if:true={isMensualisee}>
                     <div class="center">
                         <span class="slds-text-heading--label text-type">CLIENT MENSUALISÉ</span>
                         <div class="facturation-middle-frame slds-grid slds-grid_vertical">
@@ -83,7 +67,7 @@
                     <br />
                 </div>
                 <!-- Client non mensualisé -->
-                <div class="slds-size--1-of-2 slds-p-left_xx-small" if:false={isMensualisee}>
+                <div class="slds-size--2-of-4 slds-p-right_xx-small" if:false={isMensualisee}>
                     <div class="center">
                         <span class="slds-text-heading--label text-type">{selecteditem.periodeFacturation}</span>
                         <!-- Client prélevé -->
@@ -115,53 +99,20 @@
                         </p>
                     </div>
                 </div>
-                <!--Si vous voulez ajouter des nouveaux boutons en 3 colonnes, merci de mettre slds-size_1-of-3-->
-                <div class="slds-size--1-of-2 slds-p-right_xx-small">
-                   <!-- <lightning-icon   icon-name={dossierSolidariteIconName} size="small" variant={dossierSolidariteVariant}>
+                <div class="slds-size--1-of-4 slds-p-right_xx-small">
+                   <lightning-icon   icon-name={dossierSolidariteIconName} size="small" variant={dossierSolidariteVariant}>
                     </lightning-icon>
                     <lightning-button  label="Solidarité" variant="base" onclick={navigateToDossierSolidarite}  title="Solidarité" 
-                        class="display-block slds-m-left_x-small icon-action"></lightning-button> -->
-
-                    <ul class="slds-list_horizontal icon-action">
-                        <li>
-                            <lightning-icon icon-name={dossierSolidariteIconName} size="xx-small" variant={dossierSolidariteVariant}>
-                            </lightning-icon>
-                        </li>
-                        <li class="margin-left-10">
-                             <span class="text-color" onclick={navigateToDossierSolidarite}> Solidarité</span> 
-                        </li>
-                    </ul>
-                    
-                    <ul class="slds-m-top_xx-small slds-list_horizontal icon-action">
-                        <li>
-                            <lightning-icon icon-name="utility:knowledge_base" size="xx-small">
-                            </lightning-icon>
-                        </li>
-                        <li class="margin-left-10">
-                            <span class="text-color" onclick={navigateToHistoriqueFacture}> Historique factures</span> 
-                        </li>
-                    </ul>
-
-                    <ul if:true={showBtnMens} class="slds-m-top_xx-small slds-list_horizontal icon-action">
-                        <li>
-                            <lightning-icon icon-name="utility:date_input" size="xx-small">
-                            </lightning-icon>
-                        </li>
-                        <li class="margin-left-10">
-                            <span class="text-color" onclick={handleOpenRecordClick}> Mensualisation</span> 
-                        </li>
-                    </ul>
-                    <!-- 
+                        class="display-block slds-m-left_x-small icon-action"></lightning-button>
                     <lightning-button variant="base" label="Historique factures" title="Historique factures"
                         onclick={navigateToHistoriqueFacture} icon-name="utility:knowledge_base"
                         class="display-block slds-m-left_x-small icon-action"></lightning-button>
-
                     <lightning-button variant="base" label="Solidarité" title="Solidarite"
                         icon-name="utility:knowledge_base" class="display-block slds-m-left_x-small icon-action">
-                    </lightning-button> 
-                    <lightning-button if:true={showBtnMens} variant="base" label="Mensualisation"
+                    </lightning-button>
+                    <lightning-button if:true={isMensualisee} variant="base" label="Mensualisation"
                         title="Mensualisation" icon-name="utility:date_input"
-                        class="display-block slds-m-left_x-small icon-action" onclick={handleOpenRecordClick}></lightning-button>-->
+                        class="display-block slds-m-left_x-small icon-action" onclick={handleOpenRecordClick}></lightning-button>
 
 
                     <!--lightning-button if:false={noteDebitCreditWarning} variant="base" label="Note de débit/crédit" title="Note de débit/crédit"
@@ -169,8 +120,8 @@
                     </lightning-button-->
                     <!--lightning:icon  icon-name="utility:warning" size="small" class="icon" variant="error">
                     </lightning:icon-->
-                </div>
-                <div class="slds-size--1-of-2 slds-p-left_xx-small">
+
+
                     <ul class="slds-list_horizontal icon-action">
                         <li>
                             <lightning-icon if:true={noteDebitCreditWarning} icon-name="utility:warning" variant="error" size="xx-small"></lightning-icon>
@@ -180,7 +131,7 @@
                             <span class="text-color" onclick={navigateToNoteDebitCredit}> Note de débit/crédit</span>
                         </li>
                     </ul>
-                    <ul class="slds-m-top_xx-small slds-list_horizontal icon-action">
+                    <ul class="slds-list_horizontal icon-action">
                         <li>
                             <lightning-icon if:true={isblocage} icon-name="utility:warning" variant="error" size="xx-small"></lightning-icon>
                             <lightning-icon if:false={isblocage} icon-name="utility:close" size="xx-small"></lightning-icon>
@@ -264,13 +215,13 @@
                                     <span class={mensualite.colorBoldClass}>{mensualite.S.montantEcheance} €</span>
                                 </td>
                                 <td class="slds-p-left_x-small slds-text-align_right" if:true={mensualite.S2}>
-                                    <span class={mensualite.colorBoldClass}>{mensualite.S2.montantEcheance} €</span>
+                                    <span class={mensualite.colorBoldClass}>{mensualite.E2.montantEcheance} €</span>
                                 </td>
                         </tr>
                     </template>
                 </tbody>
             </table>
-            <div if:true={selecteditem.isRegul} class="margin-top-15">
+            <div if:true={isRegul} class="margin-top-15">
                 <div class="container-icon-reject slds-m-right_x-small slds-show_inline-block">
                     <lightning-icon size="xx-small" icon-name="utility:check" alternative-text="prevu" ></lightning-icon>
                 </div>

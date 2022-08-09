@@ -15,29 +15,23 @@
             <sorted>false</sorted>
             <value>
                 <fullName>Nouveau</fullName>
-                <default>false</default>
+                <default>true</default>
                 <label>Nouveau</label>
             </value>
             <value>
                 <fullName>En cours</fullName>
-                <default>true</default>
+                <default>false</default>
                 <label>En cours</label>
-            </value>
-            <value>
-                <fullName>Clôturé</fullName>
-                <default>false</default>
-                <label>Clôturé OK</label>
-            </value>
-            <value>
-                <fullName>Clôturé KO</fullName>
-                <default>false</default>
-                <label>Clôturé KO</label>
             </value>
             <value>
                 <fullName>En attente</fullName>
                 <default>false</default>
-                <isActive>false</isActive>
                 <label>En attente</label>
+            </value>
+            <value>
+                <fullName>Clôturé</fullName>
+                <default>false</default>
+                <label>Clôturé</label>
             </value>
         </valueSetDefinition>
     </valueSet>

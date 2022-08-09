@@ -11,7 +11,7 @@ public with sharing class SM_AP67_SmileHeader_Test {
         Account accWithoutIdLocal = new Account(Name = 'AcctestSmileHeader2', recordTypeId = accountConsumerRTId);
         accList = new List<Account> {acc, accWithoutIdLocal};
         insert accList;
-        Contact con = new Contact(LastName = 'ContestSmileHeader', recordTypeId = contactSmileRTId, SM_isArchive__c = true, Identifiant_Buisness_Partener__c = 'testSmileHeader', AccountId = acc.Id);
+        Contact con = new Contact(LastName = 'ContestSmileHeader', recordTypeId = contactSmileRTId, Identifiant_Buisness_Partener__c = 'testSmileHeader', AccountId = acc.Id);
         Contact conWithAcc = new Contact(LastName = 'ContestSmileHeader2', recordTypeId = contactSmileRTId, Identifiant_Buisness_Partener__c = 'testSmileHeader2', AccountId = accWithoutIdLocal.Id); 
         conList = new List<Contact> {con, conWithAcc};
         insert conList;
@@ -49,10 +49,10 @@ public with sharing class SM_AP67_SmileHeader_Test {
 
         system.assert(output.get('Result') != null);
 
+
     }
-    
     @isTest
-    public static void callSmileHeaderLightningTest(){
+    public static void callSmileHeaderLWCTest(){
         Contact contactInst = [Select id from contact where Identifiant_Buisness_Partener__c = 'testSmileHeader'].get(0);
         Map<String, Object> output = new Map<String, Object>();
         Test.startTest();
@@ -62,7 +62,7 @@ public with sharing class SM_AP67_SmileHeader_Test {
         Test.stopTest();
 
         system.assert(output.get('Result') != null);
-		system.assert(output.get('IsArchiveCNIL') != null);
+
 
     }
 

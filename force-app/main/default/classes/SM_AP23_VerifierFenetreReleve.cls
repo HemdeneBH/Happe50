@@ -33,8 +33,7 @@ global class SM_AP23_VerifierFenetreReleve implements vlocity_cmt.VlocityOpenInt
   //Port 
   gdfsuezComBefChpCalypsoReleveV3.RelevePort port = new gdfsuezComBefChpCalypsoReleveV3.RelevePort();
   port.clientCertName_x = octopusCS.certName__c;
-  SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'Releve' limit 1];
-  port.endpoint_x = octopusCS.endpoint__c + suffixs.suffix__c;
+  port.endpoint_x = octopusCS.endpoint__c + 'E-Releve_v3';
   port.inputHttpHeaders_x = new Map < String, String > {
    'Content-Type' => 'text/xml;charset=utf-8'
   };

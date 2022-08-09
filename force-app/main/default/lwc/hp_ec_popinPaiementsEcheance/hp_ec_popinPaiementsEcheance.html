@@ -1,0 +1,52 @@
+<!--
+  @description       : 
+  @author            : Younes ZAATOUCHE
+  @group             : 
+  @last modified on  : 07-26-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <div class="hp-popup hp-payments-popin">
+        <section
+                role="dialog"
+                tabindex="-1"
+                aria-labelledby="modal-heading-01"
+                aria-modal="true"
+                aria-describedby="modal-content-id-1"
+                class="slds-modal slds-fade-in-open payments-modal"
+        >
+            <div class="hp-payments-popin__container slds-modal__container">
+                <div class="hp-container">
+                    <header class="slds-modal__header hp-header">
+                        <h1 class="hp-bigTitle">{titleText}</h1>
+                        <span class="hp-closeButton">
+                            <a onclick={closePopin}>
+                                <img class="hp-close-icon" src={iconClose} alt="close" />
+                            </a>
+                        </span>
+                    </header>
+                            <c-hp_ec_list-payements
+                            list-payements={listPayements}
+                            list-payments-title={listPaymentsTitle}
+                            text-rappel={textRappel}
+                            message-list-payement={messageListPayement}
+                            bouton-list-payment-label={boutonListPaymentLabel}
+                            sold-to-display={soldToDisplay}
+                            amount={amount}
+                            montant-to-paye={montantToPaye}
+                            show-list-payement={showListPayement}
+                            echeanceid={echeanceid}
+                            is-etat-inactif={isEtatInactif}
+                            contact={contact}
+                            payement-mode-title={payementModeTitle}
+                            is-show={isShow}
+                            >
+
+                        </c-hp_ec_list-payements>
+                    
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open payments-backdrop"></div>
+    </div>
+</template>

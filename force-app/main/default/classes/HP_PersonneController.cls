@@ -3,7 +3,7 @@
  * @Description        : 
  * @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
  * @Group              : 
- * @Last Modified By   : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @Last Modified By   : Hemdene Ben Hammouda
 
 
 
@@ -11,7 +11,7 @@
 
 
 
- * @Last Modified On   : 07-06-2021
+ * @Last Modified On   : 03-25-2022
 
 
 
@@ -71,7 +71,9 @@ public with sharing class HP_PersonneController {
 			idcont = (String)clientToPersist.get('id');
 			clientToPersist.remove('id');
 			idXdataPersonne = String.valueOf([select Id_Tiers__c from Contact where Id = :idcont].Id_Tiers__c);
-			HP_CALL001_XDATA.updatePersonne(idXdataPersonne, JSON.serialize(clientToPersist));
+			System.debug('@@@ idXdataPersonne : '+idXdataPersonne);
+			Integer result = HP_CALL001_XDATA.updatePersonne(idXdataPersonne, JSON.serialize(clientToPersist));
+			System.debug('@@@ result : '+result);
 		} else {
 			idXdataPersonne = HP_PersonneService.ecrirePersonne(JSON.serialize(clientToPersist));
 
@@ -80,6 +82,7 @@ public with sharing class HP_PersonneController {
 		for(Map<String, Object> item : concentementList) {
 			item.put('idPersonne' , Integer.valueOf(idXdataPersonne));
 		}
+		System.debug('@@@ concentementList : '+concentementList);
 		HP_CALL001_XDATA.sendConsentResponses(JSON.serialize(concentementList));
 		String mp = (String)client.get('numeroMobile');
 		if(mp != null && mp .length() == 10) {
@@ -102,7 +105,7 @@ public with sharing class HP_PersonneController {
 		Complement_adresse__c = (String)client.get('complementAdresse'),
 		Id_Tiers__c = Integer.valueOf(idXdataPersonne),
 
-HP_Numero_etranger__c = (String)client.get('numeroEtranger'),
+		HP_Numero_etranger__c = (String)client.get('numeroEtranger'),
 		HP_StopEmail__c= (Boolean)client.get('stopEmail'),
 		HP_StopSMS__c = (Boolean)client.get('stopSms'),
 		HP_OptinMarketing__c = (Boolean)client.get('optinMarketing'),

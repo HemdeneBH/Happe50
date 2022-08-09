@@ -1,0 +1,112 @@
+<!--
+    @description       : 
+    @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+    @group             : 
+    @last modified on  : 08-02-2022
+    @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+  -->
+  <template>
+    <template if:true={isShow}>
+    <template if:true={showListPayement}>
+    <template if:true={showListPayementInPopinMode}>
+        <div class="hp-payments-popin__container slds-modal__container">
+            <div class="hp-container">
+                <header class="slds-modal__header hp-header">
+                    <h1 class="hp-bigTitle">{listPaymentsTitle}</h1>
+                </header>
+                <div>
+                   
+
+                    <div class="hp-wrapper">
+                        <div class="hp-content">
+            
+            
+                          <div class="hp-popin-echeance-title">{textRappel} 
+                          <span class="hp-popin-echeance-montant">{soldToDisplay}€</span></div>
+            
+                          <div class="dropdown__filter">
+                                <select class="dropdown__filter-selected" name="payementList" onchange={getReference}>
+                                    <template  for:each={listPayements} for:item="item">
+                                        <option  class="dropdown__select-option" key={item.ref} value={item.ref}>{item.typeDoc} <br>{item.energie} {item.ref}-{item.montant}€ {item.type} du {item.dateExigible}</option>
+                                    </template>
+                                </select>
+
+
+                            <!-- <input type="checkbox" class="dropdown__switch" id="filter-switch" hidden />
+                            <label for="filter-switch" class="dropdown__options-filter">
+                                <ul class="dropdown__filter" role="listbox" tabindex="-1" >
+                                <li class="dropdown__filter-selected" aria-selected="true" >
+                                </li>
+                                <li>
+                                    <ul class="dropdown__select" onchange={getReference}>
+                                        <template  for:each={listPayements} for:item="item">
+                                            <li class="dropdown__select-option" role="option" key={item.ref} value={item.ref} >
+                                                    <input class="select_input" type="radio" name="awesomeness">
+                                                    <label class="select_label" for="awesomeness-ridiculous">{item.typeDoc} <br>{item.energie} {item.ref}-{item.montant}€ {item.typeDoc} du {item.dateExigible}</label>
+                                                </li>
+                                        </template>
+                                    </ul>
+                                </li>
+                              </ul>			
+                            </label> -->
+                          </div>
+                          <div class="hp-solde"> {messageListPayement}
+                            <span class="hp-solde-montant"> {amount}€ </span>
+                          </div>
+                          <div class="hp-btnContainer" onclick={openPopinPayementMode}> 
+                            <button class="hp-firstButton">
+                                {boutonListPaymentLabel}
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+                    <!-- <form>
+                        <ul class="select_options" onchange={getReference}>
+                            <template  for:each={listPayements} for:item="item">
+                                    <li class="select_option" key={item.ref} value={item.ref}>
+                                        <input class="select_input" type="radio" name="awesomeness">
+                                        <label class="select_label" for="awesomeness-ridiculous">{item.typeDoc} <br>{item.energie} {item.ref}-{item.montant}€ {item.typeDoc} du {item.dateExigible}</label>
+                                    </li>
+                            </template>
+                        </ul>
+                        
+                    </form> -->
+                </div>
+                <!-- <div>
+                    {messageListPayement}{amount}€
+                </div>
+                <div class="hp-firstButton" onclick={openPopinPayementMode}>
+                    {boutonListPaymentLabel}
+                </div> -->
+            </div>
+        </div>
+    </template>
+        
+    </template>
+    <template if:false={showListPayement}>
+        <c-hp_ec_payment-modes
+            echeanceid={echeanceid}
+            amount={montantToPaye}
+            contact={contact}
+            title-text={payementModeTitle}
+            is-etat-inactif={isEtatInactif}
+        >
+        </c-hp_ec_payment-modes>
+    </template>
+</template>
+    
+    <template if:true={popinPayementMode}>
+        <c-hp_ec_popin-payments
+            echeanceid={echeanceid}
+            amount={montantToPaye}
+            contact={contact}
+            title-text={payementModeTitle}
+            is-etat-inactif={isEtatInactif}
+            onclosepopin={closePopin}>
+        </c-hp_ec_popin-payments>
+    </template>
+        
+</template>

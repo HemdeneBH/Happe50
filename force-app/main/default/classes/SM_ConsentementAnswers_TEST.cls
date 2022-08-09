@@ -1,16 +1,15 @@
 @isTest
 public class SM_ConsentementAnswers_TEST {
     /*
-*   @description : Appel depuis la vue 360
+*	@description : Appel depuis la vue 360
 */
     @isTest(SeeAllData = true)
     public static void callConsentementAnswers(){
         
         
         String methodName='apiConsentementAnswers';
-        Map < String, Object > inputMap = new Map < String, Object >(); 
+        Map < String, Object > inputMap = new Map < String, Object >();	
         Map < String, Object > outMap = new Map < String, Object >();
-        Map < String, Object > outMapWithoutId = new Map < String, Object >();
         Map < String, Object > options = new Map < String, Object >();
         SM_ConsentementAnswers_API trApiSerTest=new SM_ConsentementAnswers_API();
         inputMap.put('idPersonne',[select ID_Tiers__c from contact where ID_Tiers__c!=null limit 1].ID_Tiers__c);
@@ -42,10 +41,7 @@ public class SM_ConsentementAnswers_TEST {
         Response.put('consentNew', 'true');
         listConsentement.add(Response);
         inputMapUpdate.put('consentementResult', listConsentement);
-        outMap = SM_ConsentementAnswers_API.updateConsentement(inputMapUpdate); 
-        Response.put('id', '');
-        listConsentement.add(Response);
-        outMapWithoutId = SM_ConsentementAnswers_API.updateConsentement(inputMapUpdate);     
+        outMap = SM_ConsentementAnswers_API.updateConsentement(inputMapUpdate);     
     }
     
 }

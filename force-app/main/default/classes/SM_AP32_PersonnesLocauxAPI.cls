@@ -54,31 +54,23 @@ global class SM_AP32_PersonnesLocauxAPI implements vlocity_cmt.VlocityOpenInterf
     
     public static List<Object> transformDataToCard(List<Object> apiData) {
         
-        List<String> listIdContacts = new List<String>();
+        String idContact ='';
         String idBP ='';
-        //FT2-1678 OPERATION IN LOOPS: Usages de SOQL ou DML dans des boucles 
+        
         List<Object> listTemp = new List <Object>();
-
-        Schema.RecordTypeInfo rtInfo = Schema.SObjectType.Contact.getRecordTypeInfosByDeveloperName().get('Contact_Smile');
-
         for (Object obj : apiData) {
             Map <String,Object> objectX = (Map <String, Object>) obj;
-            listIdContacts.add((String) objectX.get('idContact'));
-        }
+            idContact =(String) objectX.get('idContact');
+            List<RecordType> recordTypeList = [SELECT Id FROM RecordType WHERE DeveloperName = 'Contact_smile' limit 1];
+            RecordType recordType = recordTypeList.get(0);
             
-        List<Contact> contact= [SELECT Id,Identifiant_Buisness_Partener__c,ID_Tiers_Unifie__c,ID_Tiers__c
-                                FROM Contact 
-                                where Id IN :listIdContacts and RecordTypeId=:rtInfo.getRecordTypeId()];
-         
-                                
-        if(contact != null && contact.size() == 1 ){
-            Contact contactdetail = contact.get(0);
-            idBP = contactDetail.Identifiant_Buisness_Partener__c;
-            Decimal idPersonne =contactDetail.Id_Tiers__c ;
-        }
-        for (Object obj : apiData) {
-        Map <String,Object> objectX = (Map <String, Object>) obj;   
+            List<Contact> contact= [SELECT Id,Identifiant_Buisness_Partener__c,ID_Tiers_Unifie__c,ID_Tiers__c FROM Contact where Id = :idContact and RecordTypeId=:recordType.Id];
             
+            if(contact != null && contact.size() == 1 ){
+                Contact contactdetail = contact.get(0);
+                idBP = contactDetail.Identifiant_Buisness_Partener__c;
+                Decimal idPersonne =contactDetail.Id_Tiers__c ;
+            }
             
             String idAddress = String.valueOf(objectX.get('idAdresse'));
             
@@ -121,23 +113,15 @@ global class SM_AP32_PersonnesLocauxAPI implements vlocity_cmt.VlocityOpenInterf
         system.debug(idContact);
         
         List<Object> locaux = new List <Object>();
-        List<AccountContactRelation > AccountRelations= [SELECT AccountId, account.ID_Local__c, account.ID_Porte_feuille_contrat__c, account.No_Compte_contrat__c, ContactId,Id
-                                                         FROM AccountContactRelation 
-                                                         where ContactId = :idContact];
-     
-        List<String> ContactAccount = new List<String>();
+        List<AccountContactRelation > AccountRelations= [SELECT AccountId,ContactId,Id FROM AccountContactRelation where ContactId = :idContact];
+        
         if(AccountRelations != null && AccountRelations.size() > 0 ){
             System.debug('AccountRelations.size() ' + AccountRelations.size());
-
-            //FT2-1678 OPERATION IN LOOPS: Usages de SOQL ou DML dans des boucles 
-
             for(AccountContactRelation AccountRelation : AccountRelations){
-                ContactAccount.add((String) AccountRelation.get('AccountId'));
-
-            }
-
-            List<Account> accounts = [SELECT Id,ID_Local__c,ID_Porte_feuille_contrat__c,No_Compte_contrat__c FROM Account WHERE Id IN :ContactAccount];  
-                            
+                //   Map<String, List<String>> mapAccountRelation = new Map<String, List<String>>();
+                String ContactAccount  = AccountRelation.AccountId;
+                System.debug('ContactAccount ' + ContactAccount);
+                List<Account> accounts = [SELECT Id,ID_Local__c,ID_Porte_feuille_contrat__c,No_Compte_contrat__c FROM Account WHERE Id =:ContactAccount];  
                 if(accounts != null && accounts.size() > 0 ){
                     
                     for(Account account : accounts){
@@ -171,7 +155,7 @@ global class SM_AP32_PersonnesLocauxAPI implements vlocity_cmt.VlocityOpenInterf
                     }
                 }
                 
-            
+            }
             
             system.debug('output locaux' + locaux.size());
             List<Object> transformedData =  (List<Object>) transformDataToCard(locaux) ;

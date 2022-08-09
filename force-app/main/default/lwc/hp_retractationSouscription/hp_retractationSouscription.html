@@ -23,7 +23,9 @@
           <lightning-button if:true={popupYesNo} variant="brand" label="Oui" onclick={validRetractation} class="slds-m-left_x-small"></lightning-button>
           <lightning-button if:false={popupYesNo} variant="brand" label="Fermer" onclick={closeRetractation} class="slds-m-left_x-small"></lightning-button>
           <lightning-button if:true={permissionViewLog} variant="brand-outline" label="Ouvrir débougage" onclick={openDebug} class="slds-m-left_x-small"></lightning-button>
+
         </footer>
+
       </div>
 <template if:true={debugPopupModal}>
   <div class="demo-only">
@@ -38,7 +40,9 @@
                       <span class="slds-assistive-text">Close</span>
                   </button>
                   <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Information de débougage</h2>
+
               </header>
+
               <div class="slds-grid slds-wrap" style="background: white;">
                 <lightning-tabset style="width: 100%;">
                   <lightning-tab label="Information">
@@ -67,6 +71,8 @@
                               <td  class="td-info">Statut PC Gaz</td>
                               <td>{resultData.gazStatusPC}</td>
                             </tr>
+
+
                             <tr if:true={resultData.elecStatusContract}>
                               <td  class="td-info">Statut contrat Elec</td>
                               <td>{resultData.elecStatusContract}</td>
@@ -89,6 +95,8 @@
                               <td class="td-info">Statut OPS gaz</td>
                               <td>{resultData.gazStatusOPS}</td>
                             </tr>
+
+
                             <tr if:true={resultData.dayNumberSave3}>
                               <td class="td-info">Nombre de jour entre date Aujourd'hui<br/> et la date signature (Save3)</td>
                               <td>{resultData.dayNumberSave3}</td>
@@ -101,6 +109,8 @@
                               <td class="td-info">Nombre de jour restant pour l'OPS</td>
                               <td>{resultData.dayNumberOPS}</td>
                             </tr>
+
+
                             <tr if:true={resultData.dateToday}>
                               <td class="td-info">Date aujoud'hui</td>
                               <td>{resultData.dateToday}</td>
@@ -129,6 +139,8 @@
                               <td class="td-info">Date OPS Gaz</td>
                               <td>{resultData.datePrestationGaz}</td>
                             </tr>
+
+
                             <tr>
                               <td class="td-info">Creation Case</td>
                               <td>{resultData.createCase}</td>
@@ -141,14 +153,10 @@
                               <td class="td-info">Mise à jour PC Xdata</td>
                               <td>{resultData.updatePCStatus}</td>
                             </tr>
-
-
                             <tr>
                               <td class="td-info" if:true={resultData.updateSouscriptionStatus}>Nouveau statut Souscription</td>
                               <td>{resultData.updateSouscriptionStatus}</td>
                             </tr>
-
-
                             <tr if:true={resultDataRetractation}>
                               <td class="td-info">Cases créé</td>
                               <td>
@@ -156,6 +164,7 @@
                                 <span if:true={resultDataRetractation.case2}><a href="javascript:void(0)" onclick={openCase2}>Case 2</a></span>
                               </td>
                             </tr>
+
                           </table>
                         </div>
                   </div>
@@ -166,15 +175,20 @@
                       </div>
                   </lightning-tab> 
               </lightning-tabset>
+
               </div>
               <footer class="slds-modal__footer">
                   <lightning-button label="Fermer" variant="neutral" onclick={closeDebugPopupModal}>
                   </lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+
+
               </footer>
           </div>
       </section>
       <div class="slds-backdrop slds-backdrop_open"></div>
   </div>
+
+
 </template>
     <div if:true={showSpinner}>
       <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>

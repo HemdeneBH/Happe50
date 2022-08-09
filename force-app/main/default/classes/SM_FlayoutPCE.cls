@@ -14,8 +14,7 @@ global class SM_FlayoutPCE {
             gdfsuezBefCalypsoPdlgazV2.Dependency port = new gdfsuezBefCalypsoPdlgazV2.Dependency();
             SM_OCTOPUS__c octopusCS = SM_OCTOPUS__c.getOrgDefaults();
             port.clientCertName_x = octopusCS.certName__c;
-            SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'PDLGaz' limit 1];
-            port.endpoint_x =  octopusCS.endpoint__c+suffixs.suffix__c;
+            port.endpoint_x =  octopusCS.endpoint__c+'ES-PDLGaz_v2';
             //  port.endpoint_x = 'https://octopus.ws-ines-rct.engie.com:50001/smile-noprod-gdc/ws/ES-PDLGaz_v2';
             port.inputHttpHeaders_x = new Map<String, String> {'Content-Type' => 'text/xml;charset=utf-8'};
 

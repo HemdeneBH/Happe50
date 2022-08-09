@@ -1,4 +1,6 @@
 global class MP_AP13_GuidUtil {
+    
+    // Classe rétablie après suppression, car il y a des dépendences avec SMILE 
 
     private static String kHexChars = '0123456789abcdef';
 

@@ -267,7 +267,7 @@ public with sharing class HP_EM001_Agilab {
 	
 	/**
 	* @description 
-	* @author Badr Eddine Belkarchi | 18/02/2020 
+	* @author Badr Eddine Belkarchi | 13/03/2022
 	* @param idContratXdata 
 	* @return HP_WRP044_AgilabPaiements 
 	**/
@@ -287,5 +287,115 @@ public with sharing class HP_EM001_Agilab {
 			return outputData;
 		}
 
+	}
+
+	/**
+	* @description 
+	* @author Zaatouche Younes | 17/03/2022 
+	* @param idPorteFueilleContrat 
+	* @return HP_WRP049_AgilabPlansApurement 
+	**/
+	public static HP_WRP049_AgilabPlansApurement getPlansApurement(Integer idPorteFueilleContrat){
+
+		Map<Integer,String> responseMap = HP_UTIL_HTTPUtils.calloutGetToMap(HP_Constantes.AGILAB_VOIR_PLANS_APUREMENT,'id_portefeuille_contrat_xdata='+idPorteFueilleContrat);
+		try{
+			HP_WRP049_AgilabPlansApurement outputData = (HP_WRP049_AgilabPlansApurement)HP_ParseUtils.parse(responseMap.get(200),HP_WRP049_AgilabPlansApurement.class);
+			System.debug('HP_WRP049_AgilabPlansApurement.getPlansApurement.response.outputData : ' + JSON.serialize(outputData));
+			return outputData;
+		} catch(NullPointerException e) {
+			HP_WRP049_AgilabPlansApurement outputData = (HP_WRP049_AgilabPlansApurement)HP_ParseUtils.parse(responseMap.get(422),HP_WRP049_AgilabPlansApurement.class);
+			System.debug('HP_WRP049_AgilabPlansApurement.getPlansApurement.response.outputData : ' + JSON.serialize(outputData));
+			return outputData;
+		}
+	}
+
+	/**
+	* @description 
+	* @author Badr Eddine Belkarchi | 21/03/2022 
+	* @param idContratXdata 
+	* @return HP_WRP051_AgilabAutoReleve 
+	**/
+	public static HP_WRP051_AgilabAutoReleve getAutoReleve(Integer idContratXdata){
+		Map<Integer,String> responseMap = HP_UTIL_HTTPUtils.calloutGetToMap(HP_Constantes.AGILAB_AFFICHER_AUTO_RELEVE,'id_contrat_xdata='+idContratXdata);
+		System.debug('HP_WRP051_AgilabAutoReleve.getAutoReleve.responseMap : ' + JSON.serialize(responseMap));
+
+		try {
+			HP_WRP051_AgilabAutoReleve outputData = HP_WRP051_AgilabAutoReleve.parse(responseMap.get(200));
+			System.debug('HP_WRP051_AgilabAutoReleve.getAutoReleve.response.outputData : ' + JSON.serialize(outputData));
+			return outputData;
+		} catch(NullPointerException e) {
+			HP_WRP051_AgilabAutoReleve outputData = HP_WRP051_AgilabAutoReleve.parse(responseMap.get(422));
+			System.debug('HP_WRP051_AgilabAutoReleve.getAutoReleve.response.outputData : ' + JSON.serialize(outputData));
+			return outputData;
+		}
+	}
+
+
+	/**
+	* @description 
+	* @author Badr Eddine Belkarchi | 31/03/2022 
+	* @param idContratXdata 
+	* @param indexhc 
+	* @param type_releve 
+	* @return HP_WRP052_AgilabEnvoiIndexes 
+	**/
+	public static HP_WRP052_AgilabEnvoiIndexes agilabEnvoiIndexBase(Integer idContratXdata, Integer type_releve, Integer indexhc){
+		String param = 'id_contrat_xdata='+idContratXdata+'&type_releve='+type_releve+'&indexhc='+indexhc+'';
+		Map<Integer,String> responseMap = HP_UTIL_HTTPUtils.calloutGetToMap(HP_Constantes.AGILAB_ENVOI_INDEXES, param);
+		System.debug('HP_WRP052_AgilabEnvoiIndexes.agilabEnvoiIndexBase.responseMap : ' + JSON.serialize(responseMap));
+
+		try {
+			HP_WRP052_AgilabEnvoiIndexes outputData = HP_WRP052_AgilabEnvoiIndexes.parse(responseMap.get(201));
+			System.debug('HP_WRP052_AgilabEnvoiIndexes.agilabEnvoiIndexBase.response.outputData : ' + JSON.serialize(outputData));
+			return outputData;
+		} catch(NullPointerException e) {
+			HP_WRP052_AgilabEnvoiIndexes outputData = HP_WRP052_AgilabEnvoiIndexes.parse(responseMap.get(422));
+			System.debug('HP_WRP052_AgilabEnvoiIndexes.agilabEnvoiIndexBase.response.outputData : ' + JSON.serialize(outputData));
+			return outputData;
+		}
+	}
+
+	/**
+	* @description 
+	* @author Badr Eddine Belkarchi | 31/03/2022 
+	* @param idContratXdata 
+	* @param indexhc 
+	* @param type_releve 
+	* @return HP_WRP052_AgilabEnvoiIndexes 
+	**/
+	public static HP_WRP052_AgilabEnvoiIndexes agilabEnvoiIndexHPHC(Integer idContratXdata, Integer type_releve, Integer indexhc, Integer indexhp){
+		String param = 'id_contrat_xdata='+idContratXdata+'&type_releve='+type_releve+'&indexhc='+indexhc+'&indexhp='+indexhp+'';
+		Map<Integer,String> responseMap = HP_UTIL_HTTPUtils.calloutGetToMap(HP_Constantes.AGILAB_ENVOI_INDEXES, param);
+		System.debug('HP_WRP052_AgilabEnvoiIndexes.agilabEnvoiIndexHPHC.responseMap : ' + JSON.serialize(responseMap));
+
+		try {
+			HP_WRP052_AgilabEnvoiIndexes outputData = HP_WRP052_AgilabEnvoiIndexes.parse(responseMap.get(201));
+			System.debug('HP_WRP052_AgilabEnvoiIndexes.agilabEnvoiIndexHPHC.response.outputData : ' + JSON.serialize(outputData));
+			return outputData;
+		} catch(NullPointerException e) {
+			HP_WRP052_AgilabEnvoiIndexes outputData = HP_WRP052_AgilabEnvoiIndexes.parse(responseMap.get(422));
+			System.debug('HP_WRP052_AgilabEnvoiIndexes.agilabEnvoiIndexHPHC.response.outputData : ' + JSON.serialize(outputData));
+			return outputData;
+		}
+	}
+	/**
+	* @description 
+	* @author Badr Eddine Belkarchi | 20/07/2022
+	* @param id_client_xdata 
+	* @return HP_WRP053_AgilabCoTitulaires 
+	**/
+	public static HP_WRP053_AgilabCoTitulaires getCoTitulaires(Integer id_client_xdata){	
+		Map<Integer,String> responseMap = HP_UTIL_HTTPUtils.calloutGetToMap(HP_Constantes.AGILAB_CO_TITULAIRES,'id_client_xdata='+id_client_xdata);
+		System.debug('HP_WRP053_AgilabCoTitulaires.getCoTitulaires.responseMap : ' + JSON.serialize(responseMap));
+
+		try {
+			HP_WRP053_AgilabCoTitulaires outputData = HP_WRP053_AgilabCoTitulaires.parse(responseMap.get(200));
+			System.debug('HP_WRP053_AgilabCoTitulaires.getCoTitulaires.response.outputData : ' + JSON.serialize(outputData));
+			return outputData;
+		} catch(NullPointerException e) {
+			HP_WRP053_AgilabCoTitulaires outputData = HP_WRP053_AgilabCoTitulaires.parse(responseMap.get(422));
+			System.debug('HP_WRP053_AgilabCoTitulaires.getCoTitulaires.response.outputData : ' + JSON.serialize(outputData));
+			return outputData;
+		}
 	}
 }

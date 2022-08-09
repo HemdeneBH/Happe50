@@ -12,7 +12,7 @@ import clientDemand from '@salesforce/label/c.SM_ClientDemand';
 import codeTypeCalcul06 from '@salesforce/label/c.SM_codeTypeCalcul06';
 
 //Todo externalisé ces paramétres
-const constant = {
+const constant ={
   
   DeveloperName: "Service",
   SobjectType: "Case" ,
@@ -48,13 +48,6 @@ export default class SM_ModePaiement extends NavigationMixin(LightningElement) {
     @api uniteReleveElec;
     @api dateReelleProchaineFacture;
     @api dateTechniqueProchaineFacture;
-    @api EnqSat;
-
-    //params à envoyer vers Situation Compte
-    @api solde;
-    @api DLP;
-    @api soldeColor;
-
     @track factures = [];
     @track error = false;
     @track index;
@@ -68,8 +61,6 @@ export default class SM_ModePaiement extends NavigationMixin(LightningElement) {
     @track checkedInteraction;
     @track DRId_Case;
     @api AccountId;
-
-    gotalllinks = false;
 
 
     handlePause(event){
@@ -118,6 +109,7 @@ export default class SM_ModePaiement extends NavigationMixin(LightningElement) {
     }
 
   
+
   closeTab() {
     //console.log("closeTab");
     var close = true;
@@ -158,30 +150,6 @@ export default class SM_ModePaiement extends NavigationMixin(LightningElement) {
     });
   }
 
-  //Navigation vers Situation de compte
-  navigateToSituationCompte(){
-
-    console.log("nav to historique de conso");
-    const eventName = 'openSituationCompte';
-
-    const inputMap = {
-      IdBusinessPartner: this.IdBusinessPartner,
-      IdPortefeuilleContrat: this.IdPortefeuilleContrat,
-      numeroVoie:this.numeroVoie,
-      ville:this.ville,
-      libelleVoie:this.libelleVoie,
-      complementAdresse:this.complementAdresse,
-      codePostal:this.codePostal,
-      NoCompteContratMaj:this.NoCompteContratMaj,
-      solde: this.solde,
-      DLP:this.DLP,
-      soldeColor: this.soldeColor
-    };
-    
-    const event = new CustomEvent(eventName, { bubbles: true, composed: true, detail: inputMap });
-    this.dispatchEvent(event);
-  
-  }
   
   //Navigation vers tracer interaction
   navigateToInteraction(){
@@ -197,8 +165,7 @@ export default class SM_ModePaiement extends NavigationMixin(LightningElement) {
           DRId_Case:this.DRId_Case,
           StepNameOS:this.label.factureTitle,
           refClientIdBP:this.idBusinessPartner,
-          isLWC:true,
-          EnqSat:this.EnqSat
+          isLWC:true
         }
       }
       //Params pour mise en pause
@@ -210,8 +177,7 @@ export default class SM_ModePaiement extends NavigationMixin(LightningElement) {
           DRId_Case:this.DRId_Case,
           StepNameOS:this.label.factureTitle,
           refClientIdBP:this.idBusinessPartner,
-          isLWC:true,
-          EnqSat:this.EnqSat
+          isLWC:true
         }
 
        
@@ -240,12 +206,14 @@ export default class SM_ModePaiement extends NavigationMixin(LightningElement) {
     }
 
     get showSpinner() {
-      return this.DRId_Case || (this.factures && this.factures.length > 0  && this.gotalllinks === true ) || this.noData  || this.error ;
+      return this.DRId_Case || (this.factures && this.factures.length > 0) || this.noData  || this.error ;
     }
 
+    
+
     getFactureLink(){
+
       console.log(this.label.codeTypeCalcul06);
-      let ind = 0;
       for(const item of this.factures){
         item.montantTotal = item.montantTotal.toFixed(2).replace(".",",");
         if(item.codeTypeCalcul === '06'){
@@ -260,11 +228,7 @@ export default class SM_ModePaiement extends NavigationMixin(LightningElement) {
           if(result && result.data) {
             //console.log("facture id " + item.id);
             item.factureLink = result.data[0].url;
-
           }
-         
-          ind++;
-          if (this.factures.length === ind) this.gotalllinks = true;
          
         })
         .catch(error => {
@@ -272,7 +236,6 @@ export default class SM_ModePaiement extends NavigationMixin(LightningElement) {
           //console.log("got error callFactureDoc ", name , error);
         });
       }
-      
       
     }
 
@@ -336,7 +299,7 @@ export default class SM_ModePaiement extends NavigationMixin(LightningElement) {
             });
            
             this.getFactureLink();
-            
+            //console.log("final data" +result);
           } else {
             this.noData = true
           }

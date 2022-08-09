@@ -4,6 +4,7 @@
     <externalId>false</externalId>
     <label>Raison de l’annulation</label>
     <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
@@ -22,14 +23,14 @@
                 <label>Inéligible</label>
             </value>
             <value>
-                <fullName>AUTRE</fullName>
-                <default>false</default>
-                <label>Autre</label>
-            </value>
-            <value>
                 <fullName>INDEX_NON_COMMUNIQES</fullName>
                 <default>false</default>
                 <label>Index non communiqués</label>
+            </value>
+            <value>
+                <fullName>AUTRE</fullName>
+                <default>false</default>
+                <label>Autre</label>
             </value>
         </valueSetDefinition>
     </valueSet>
