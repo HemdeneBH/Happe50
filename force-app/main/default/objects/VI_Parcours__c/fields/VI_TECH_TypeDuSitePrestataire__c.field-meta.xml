@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_TECH_TypeDuSitePrestataire__c</fullName>
+    <externalId>false</externalId>
+    <formula>TEXT(Owner:User.Contact.VI_Site_Prestataire__r.VI_Type__c)</formula>
+    <label>TECH Type du site / prestataire</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

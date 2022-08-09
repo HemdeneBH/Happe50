@@ -1,0 +1,154 @@
+input[type=checkbox] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+input[type=checkbox]:focus {
+  outline: 0;
+}
+.hp-checkbox {
+  padding: 5px 0 0 0;
+}
+
+.hp-toggle {
+  height: 20px;
+  width: 40px;
+  border-radius: 16px;
+  display: inline-block;
+  position: relative;
+  margin: 0;
+  border: 2px solid var(--disabled);
+  background: transparent;
+  transition: all 0.2s ease;
+}
+.hp-toggle:after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 20px;
+  height: 20px;
+  background: var(--bg-base);
+  border: 2px solid var(--disabled);
+  border-radius: 50%;
+  transition: all 0.2s cubic-bezier(0.5, 0.1, 0.75, 1.35);
+}
+
+.hp-toggle:checked:after {
+  transform: translatex(20px);
+  background: var(--secondary-colour);
+  border: 2px solid var(--text-color);
+}
+
+.hp_container {
+  display: block;
+  width: 500px;
+  height: auto;
+  margin: 0 auto;
+  box-shadow: var(--box-shadow);
+  border: solid 30px var(--primary-colour);
+  background: var(--bg);
+}
+
+
+.hp-header {
+  background-color: var(--modal-header);
+  border: none;
+  display: grid;
+  grid-template-columns: 7fr 1fr;
+  align-items: center;
+  padding: 25px 40px;
+}
+
+.hp-closeButton {
+  justify-self: end;
+}
+
+.hp-closeButton a {
+  justify-self: end;
+  color: var(--secondary-colour);
+  font-family: var(--font-bold);
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: extra-expanded;
+}
+
+.hp-content {
+  padding: 30px 20px 30px 40px;
+}
+
+
+.question-item {
+  padding: 10px 0;
+  display: grid;
+  grid-template-columns: 9fr 1fr;
+ 
+}
+
+.hp-questions {
+  font-family: var(--font-regular);
+  font-size: 14px;
+  font-weight: lighter;
+  color: var(--text-color);
+}
+
+
+.slds-modal {
+  top: 80px;
+}
+.hp-firstButton {
+  margin: 10px 0 5px 0;
+}
+
+.hp-firstButton, 
+.hp-secondButton {
+  min-width: 215px;
+}
+
+.hp-btnContainer {
+  padding: 0 0 30px 0;
+}
+
+@media (max-width: 1024px) {
+  /* Ipad and tablets */
+
+
+
+}
+
+@media (max-width: 768px) {
+  /* mobiles */
+
+}
+
+@media (max-width: 576px) {
+
+  .hp_container {
+    width: auto;
+    height: auto;
+    border: solid 20px var(--primary-colour);
+    margin: 0 15px;
+  }
+
+  .hp-bigTitle {
+    font-size: 20px;
+  }
+
+  .hp-content {
+    padding: 20px;
+  }
+
+  .hp-header {
+    padding: 20px 10px 20px 20px;
+  }
+
+  .hp-firstButton, 
+  .hp-secondButton {
+    min-width: 200px;
+  }
+  .hp-btnContainer {
+    padding: 0 0 20px 0;
+  }
+}

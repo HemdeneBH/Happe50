@@ -1,0 +1,69 @@
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner variant="brand"></lightning-spinner>
+    </template>
+    <div class="container-tracer-interaction">
+        <template if:true={hascancel}>
+            <lightning-button label="Annuler" onclick={openCancelModal} class="slds-m-around_x-small"></lightning-button>
+        </template>
+        <template if:true={hastrace}>
+            <lightning-button label="Interrompre et tracer l’interaction" onclick={openSaveModal} class="slds-m-around_x-small"></lightning-button>
+        </template>
+         <!-- FT2-1665 : Payeur Divergent - Traçage d'interaction - J'ai repondu à la demande du client -->
+        <template if:true={hasresponse}>
+            <lightning-button label="J'ai répondu à la demande du client" onclick={openTraceNominalPayeur} class="slds-m-around_x-small"></lightning-button>
+        </template>
+        <!-- FT2-1464 : Ajout Payeur Divergent: écran d’attribution des rôles -->
+        <template if:true={hascancelpayeur}>
+            <lightning-button label="Annuler" onclick={previousPayeur} class="slds-m-around_x-small"></lightning-button>
+        </template>
+         <!-- FT2-1404 Payeur Divergent - Modification du rôle du payeur divergent (Relance - Facture) -->
+        <template if:true={hascancelmodif}>
+            <lightning-button label="Annuler" onclick={cancelModifPayeur} class="slds-m-around_x-small"></lightning-button>
+        </template>
+        
+        <template if:true={hasclose}>
+            <br/>
+            <div class="close-btn">
+                <lightning-button variant="brand" label="Fermer" onclick={handleClose} class="slds-m-around_x-small"></lightning-button>
+            </div>
+        </template>
+        
+    </div>
+
+      
+    
+    <vlocity_cmt-navigate-action
+    target-type="Component"
+    target-name="c__NavigateHandler"
+    replace    
+    >
+    </vlocity_cmt-navigate-action>
+    <vlocity_cmt-modal
+    size="small"    
+    hideheader
+    theme="slds"
+    >
+    <div slot="header">
+        <div slot="header">
+            <h1>Confirmer</h1>
+        </div>    </div>
+    <div slot="content">
+        <div slot="content">
+            <span>{message}</span>
+        </div>    </div>
+    <div slot="footer">
+        <div slot="footer">
+            <ul class="slds-button-group-row">
+                <li class="slds-button-group-item">
+                    <vlocity_cmt-button variant="neutral" label="Non" onclick={closeModal}>
+                    </vlocity_cmt-button>
+                </li>
+                <li class="slds-button-group-item">
+                    <vlocity_cmt-button variant="neutral" label="Oui" onclick={submit}>
+                    </vlocity_cmt-button>
+                </li>
+            </ul>
+        </div>    </div>
+    </vlocity_cmt-modal>
+</template>

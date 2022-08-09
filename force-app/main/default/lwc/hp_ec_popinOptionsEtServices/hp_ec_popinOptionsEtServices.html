@@ -1,0 +1,48 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 07-12-2022
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<template>
+  <div class="hp_container">
+    <header class="slds-modal__header hp-header">
+      <h1 class="hp-bigTitle">
+        {titrepopin}
+      </h1>
+      <span class="hp-closeButton">
+        <a onclick={closePopinFacture}>
+          <img class="hp-close-icon" src={iconClose} alt="close icon" />
+        </a>
+      </span>
+    </header>
+    <template if:true={spinnerLoad}>
+      <lightning-spinner alternative-text="Chargement en cours merci de patienter" size="large"></lightning-spinner>
+    </template>
+    <div class="hp-content">
+      <div class="hp-content-title">
+          {texteintroductifpopin}
+      </div>
+      <div class="hp-content-text">
+       <p>
+        {textexplicatifpopin}
+       </p>
+      </div>
+      <div class="hp-btnContainer">
+        <div class="hp-alert">
+          <span class="hp-alert-icon">
+            <img src={iconAlert} alt="alert icon" />
+          </span>
+          <span class="hp-alert-text">
+            {textealertepopin}
+          </span>
+        </div>
+        <div class="hp-firstButton" onclick={handleClick}>
+          {labelbouttonpopin}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</template>

@@ -1,0 +1,66 @@
+{
+  "appPageId" : "7e89266e-f5a3-4029-bb48-38a8a732ab93",
+  "componentName" : "community_layout:sldsFlexibleLayout",
+  "id" : "8804e887-8265-4ffc-a8ce-0764cd6f519f",
+  "label" : "Demande Activation",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "backgroundImageConfig" : "",
+        "backgroundImageOverlay" : "rgba(0,0,0,0)",
+        "sectionConfig" : "{\"UUID\":\"054dfcf9-c2c9-44bb-bb74-6d03856b5f9f\",\"columns\":[{\"UUID\":\"1647ed77-7821-41c7-8668-bcdf713707fc\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}"
+      },
+      "componentName" : "community_layout:section",
+      "id" : "054dfcf9-c2c9-44bb-bb74-6d03856b5f9f",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "labelInputEmail" : "Adresse email :",
+            "messageConfirmation" : "L'e-mail d'activation vous a été envoyé",
+            "messageErreurInputEmail" : "Mauvais Format d'Email",
+            "placeHolderInputEmail" : "Ex : Martin@email.com",
+            "texteMention" : "* L'adresse e-mail est celle que vous avez utilisé lors de la souscription à votre offre d'énergie happ-e.",
+            "titreNouveauMotDePasse" : "Renvoyer l'e-mail d'Activation"
+          },
+          "componentName" : "c:hp_ec_demandeActivation",
+          "id" : "c83f49d4-1246-40a6-b888-eaa3873f83f6",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "1647ed77-7821-41c7-8668-bcdf713707fc",
+        "regionLabel" : "Column 1",
+        "regionName" : "col1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "scopedBrandingSetId" : null,
+      "type" : "component"
+    } ],
+    "id" : "d3aff14e-f10b-4deb-8e1c-ce2d1a87e120",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "pageTitle" : "Demande Activation",
+        "recordId" : "{!recordId}"
+      },
+      "componentName" : "community_builder:seoAssistant",
+      "id" : "5874d54f-a582-471c-a9e2-f42c57cdcee3",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "82a0daac-c547-4b5f-bcac-69a329f317af",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "PFlC31YDquY3kutKC990xhLaNFbuiZ",
+  "type" : "view",
+  "viewType" : "custom-demande-activation"
+}

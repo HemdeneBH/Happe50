@@ -1,0 +1,281 @@
+<template>
+    <div class="container-card">
+        <lightning-card>
+            <h2 class="title-paiement">PAIEMENT ET FACTURATION</h2>
+            <div slot="actions">
+                <lightning-button-icon icon-name="utility:vide" variant="bare"></lightning-button-icon>
+            </div>
+
+            <div class="slds-m-around_medium bloc-card engie-card-contrat-body slds-card__body via-slds-card__body slds-theme--default slds-grid slds-wrap">
+                <div class="slds-size--1-of-2 slds-p-right_xx-small" if:true={showSpinner}>
+
+                    <span class="slds-text-heading--label text-type">MODE DE PAIEMENT</span>
+                    <!-- TODO LV PPROD modification Bouton TODO TEST-->
+                    <lightning-button-icon icon-name="utility:edit" variant="bare" onclick={navigateToModePaiement}
+                        alternative-text="modifier coordonnée bancaire">
+                    </lightning-button-icon>
+                    <!-- <a id="editPay" class="icon-v-edit via-action-link slds-text-link--reset" style="font-size:22px;float:right;position:absolute;transform: translate(8px,-10px);" ng-href="#"></a> -->
+                    <!-- FT2-1374 Gestion des coordonnées bancaire du payeur divergent sur vue 360-->
+                    <div if:true={isRolePayeurDivergent} class="slds-tile__detail">
+                        <b class="slds-text-color_error">IBAN lié au payeur divergent</b>
+                    </br></br>
+                    </div>
+                    
+                    <div if:false={isRolePayeurDivergent} class="slds-tile__detail">
+                        <!-- 'Non prélevé' || prélevé (non mensualisé) || error technique-->
+                        <div if:true={isPrelevee}>{selecteditem.modePaiement}</div>
+                        <div if:true={isNonPrelevee}>{selecteditem.modePaiement}</div>
+                        <div if:true={isMensualisee}>Prélevé</div>
+                        <!-- prélevé || mensualité && coordonnées banquaire existantes -->
+                        <div if:true={selecteditem.nomInstitutBancaire}>{selecteditem.nomInstitutBancaire}</div>
+                        <div if:true={selecteditem.iBAN}>{getiBAN}</div>
+                        <!-- prélevé || mensualité && error technique -->
+                        <span class="slds-text-color_error" if:false={selecteditem.nomInstitutBancaire}>Coordonnées
+                            bancaires indisponibles</span>
+                        <p if:true={isStatutMondatConfirmer} style="color:#ff7f1d;">Mandat à confirmer</p>
+                        <p if:true={isStatutMondatColture} style="color:#D3D3D3;">Mandat clôturé</p>
+                        <p if:true={isStatutMondatError} class="slds-text-color_error">Informations du mandat
+                            indisponibles</p>
+                    </div>
+                    <!-- FT2-1307 Afficher présence Payeur divergent sur vue 360 -->
+                    <div>
+                        <span class="slds-text-heading--label text-type">PAYEUR DIVERGENT</span>
+                        <lightning-button-icon icon-name="utility:edit" variant="bare" onclick={navigateToPayeurDivergent}>
+                        </lightning-button-icon>
+                        <div if:true={isPayeurDivergent}>OUI</div>
+                        <div if:false={isPayeurDivergent}>NON</div>
+                    </div>
+
+                </div>
+                <!-- TODO avoir un client mensualisé -->
+                <div class="slds-size--1-of-2 slds-p-left_xx-small" if:true={isMensualisee}>
+                    <div class="center">
+                        <span class="slds-text-heading--label text-type">CLIENT MENSUALISÉ</span>
+                        <div class="facturation-middle-frame slds-grid slds-grid_vertical">
+                            <template if:false={selecteditem.isRegul}>
+                                <br if:true={selecteditem.loadMensualisee}>
+                                <div if:true={isDateEcheanceMensualisee}>Prochain prélèvement le
+                                    {dateEcheanceMensualisee}</div>
+                                <div class="slds-text-color_error" if:true={noDataPlanMesualisee}>Informations du
+                                    prochain prélèvement indisponibles</div>
+                                <div if:true={isDateEcheanceMensualisee}>
+                                    <b>{getMontantCumuleEcheance}</b></div>
+                                <div class="exampleHolder partiel partiel-spinner"
+                                    if:false={selecteditem.loadMensualisee}>
+                                    <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                                </div>
+                            </template>
+                            <template if:true={selecteditem.isRegul}>
+                                <div style="color:#059ce7" class="slds-m-top_x-small">Facture du {getDateComptable}
+                                </div>
+                                <div if:true={selecteditem.factureRegul.montantTotal}>
+                                    <b>{selecteditem.factureRegul.montantTotal} €</b></div>
+                                <div if:false={selecteditem.factureRegul.montantTotal} class="slds-text-color_error">
+                                    <b>Informations de la facture indisponibles</b></div>
+                                <div>prélevé le {getDateEcheance}</div>
+                            </template>
+                        </div>
+                        <p class="slds-text-color_error slds-m-top_x-small" if:true={isDRPIndisponible}>
+                            {selecteditem.conditionPaiementMaj}</p>
+                        <p class="slds-m-top_x-small" if:false={isDRPIndisponible}>{selecteditem.conditionPaiementMaj}
+                        </p>
+                    </div>
+                    <br />
+                </div>
+                <!-- Client non mensualisé -->
+                <div class="slds-size--1-of-2 slds-p-left_xx-small" if:false={isMensualisee}>
+                    <div class="center">
+                        <span class="slds-text-heading--label text-type">{selecteditem.periodeFacturation}</span>
+                        <!-- Client prélevé -->
+                        <div class="facturation-middle-frame slds-grid slds-grid_vertical" if:true={isPrelevee}>
+                            <!-- A revoir -->
+                            <div style="color:#059ce7" class="slds-m-top_x-small">Facture du {getDateComptablePrelevee}
+                            </div>
+                            <div if:true={selecteditem.montantTotal}><b>{getMontantTotal}</b></div>
+                            <div if:false={selecteditem.montantTotal} class="slds-text-color_error"><b>Informations de
+                                    la facture indisponibles</b></div>
+                            <!-- A revoir -->
+                            <div>prélevé le {transformDateEcheance}</div>
+                        </div>
+                        <!-- Client non prélevé -->
+                        <div class="facturation-middle-frame slds-grid slds-grid_vertical" if:true={isNonPrelevee}>
+                            <div style="color:#059ce7" class="slds-m-top_x-small">Facture du {getDateComptablePrelevee}
+                            </div>
+                            <div if:true={selecteditem.montantTotal}><b>{getMontantTotal}</b></div>
+                            <div if:false={selecteditem.montantTotal} class="slds-text-color_error"><b>Informations de
+                                    la facture indisponibles</b></div>
+                        </div>
+                        <!-- Ni l'un ni l'autre -->
+                        <div class="facturation-middle-frame slds-grid slds-grid_vertical" if:true={isNotNothing}>
+                            <div class="slds-text-color_error">Informations de la facture indisponibles</div>
+                        </div>
+                        <p class="slds-text-color_error slds-m-top_x-small" if:true={isDRPIndisponible}>
+                            {selecteditem.conditionPaiementMaj}</p>
+                        <p class="slds-m-top_x-small" if:false={isDRPIndisponible}>{selecteditem.conditionPaiementMaj}
+                        </p>
+                    </div>
+                </div>
+                <!--Si vous voulez ajouter des nouveaux boutons en 3 colonnes, merci de mettre slds-size_1-of-3-->
+                <div class="slds-size--1-of-2 slds-p-right_xx-small">
+                   <!-- <lightning-icon   icon-name={dossierSolidariteIconName} size="small" variant={dossierSolidariteVariant}>
+                    </lightning-icon>
+                    <lightning-button  label="Solidarité" variant="base" onclick={navigateToDossierSolidarite}  title="Solidarité" 
+                        class="display-block slds-m-left_x-small icon-action"></lightning-button> -->
+
+                    <ul class="slds-list_horizontal icon-action">
+                        <li>
+                            <lightning-icon icon-name={dossierSolidariteIconName} size="xx-small" variant={dossierSolidariteVariant}>
+                            </lightning-icon>
+                        </li>
+                        <li class="margin-left-10">
+                             <span class="text-color" onclick={navigateToDossierSolidarite}> Solidarité</span> 
+                        </li>
+                    </ul>
+                    
+                    <ul class="slds-m-top_xx-small slds-list_horizontal icon-action">
+                        <li>
+                            <lightning-icon icon-name="utility:knowledge_base" size="xx-small">
+                            </lightning-icon>
+                        </li>
+                        <li class="margin-left-10">
+                            <span class="text-color" onclick={navigateToHistoriqueFacture}> Historique factures</span> 
+                        </li>
+                    </ul>
+
+                    <ul if:true={showBtnMens} class="slds-m-top_xx-small slds-list_horizontal icon-action">
+                        <li>
+                            <lightning-icon icon-name="utility:date_input" size="xx-small">
+                            </lightning-icon>
+                        </li>
+                        <li class="margin-left-10">
+                            <span class="text-color" onclick={handleOpenRecordClick}> Mensualisation</span> 
+                        </li>
+                    </ul>
+                    <!-- 
+                    <lightning-button variant="base" label="Historique factures" title="Historique factures"
+                        onclick={navigateToHistoriqueFacture} icon-name="utility:knowledge_base"
+                        class="display-block slds-m-left_x-small icon-action"></lightning-button>
+
+                    <lightning-button variant="base" label="Solidarité" title="Solidarite"
+                        icon-name="utility:knowledge_base" class="display-block slds-m-left_x-small icon-action">
+                    </lightning-button> 
+                    <lightning-button if:true={showBtnMens} variant="base" label="Mensualisation"
+                        title="Mensualisation" icon-name="utility:date_input"
+                        class="display-block slds-m-left_x-small icon-action" onclick={handleOpenRecordClick}></lightning-button>-->
+
+
+                    <!--lightning-button if:false={noteDebitCreditWarning} variant="base" label="Note de débit/crédit" title="Note de débit/crédit"
+                        icon-name="utility:money" class="display-block slds-m-left_x-small icon-action">
+                    </lightning-button-->
+                    <!--lightning:icon  icon-name="utility:warning" size="small" class="icon" variant="error">
+                    </lightning:icon-->
+                </div>
+                <div class="slds-size--1-of-2 slds-p-left_xx-small">
+                    <ul class="slds-list_horizontal icon-action">
+                        <li>
+                            <lightning-icon if:true={noteDebitCreditWarning} icon-name="utility:warning" variant="error" size="xx-small"></lightning-icon>
+                            <lightning-icon if:false={noteDebitCreditWarning} icon-name="utility:money" size="xx-small"></lightning-icon>
+                        </li>
+                        <li class="margin-left-10">
+                            <span class="text-color" onclick={navigateToNoteDebitCredit}> Note de débit/crédit</span>
+                        </li>
+                    </ul>
+                    <ul class="slds-m-top_xx-small slds-list_horizontal icon-action">
+                        <li>
+                            <lightning-icon if:true={isblocage} icon-name="utility:warning" variant="error" size="xx-small"></lightning-icon>
+                            <lightning-icon if:false={isblocage} icon-name="utility:close" size="xx-small"></lightning-icon>
+                        </li>
+                        <li class="margin-left-10">
+                            <span class="text-color" onclick={navigateToBlocage}>Blocage</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="exampleHolder" if:false={showSpinner}>
+                    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                </div>
+            </div>
+        </lightning-card>
+        <section if:true={selecteditem.closemensualisation} aria-describedby="dialog-body-id-77" aria-labelledby="dialog-heading-id-81"
+            class="slds-popover slds-nubbin_top-right popup-card slds-p-around_x-large" role="dialog">
+            <h2 class="text-title slds-text-title_bold" id="dialog-heading-id-81">DETAIL DES MENSUALITES</h2>
+            <lightning-icon icon-name="utility:close" onclick={handleOpenRecordClick} size="x-small" class="close-icon"></lightning-icon>
+            <br>
+            <div class="slds-grid slds-wrap">
+                <div class="slds-size--1-of-1">
+                    <div class="slds-float_left">Estimation annuelle</div><div class="slds-float_right">{montantGlobal}</div><div class="points">&nbsp;</div>
+                </div>
+                <div class="slds-size--1-of-1">
+                    <div class="slds-float_left">Montant déjà payé</div><div class="slds-float_right">{montantPaye}</div><div class="points">&nbsp;</div>
+                </div>
+                <!-- <div >
+                    <h2 class="slds-text-title_bold slds-float_left">ECHEANCIER </h2><img class="slds-float_right padding-img" src="/resource/EngieCustomResources/images/ic_bulb.svg"/><div class="points small-widh">&nbsp;</div>
+                </div> -->
+            </div>
+            <!-- /resource/EngieCustomResources/images/ic_bulb.svg -->
+            <br>
+            <table class="slds-size--1-of-1 margin-top-15">
+                <thead>
+                    <tr>
+                        <th colspan=3>
+                            <h2 class="slds-text-title_bold slds-float_left">ECHEANCIER</h2>
+                        </th>
+                        <th if:false={showCumule}></th>
+                        <th if:true={isGaz}>
+                            <img class="slds-float_right padding-img" src="/resource/EngieCustomResources/images/ic_flame.svg"/>
+                        </th>
+                        <th if:true={isElec}>
+                            <img class="slds-float_right padding-img" src="/resource/EngieCustomResources/images/ic_bulb.svg"/>
+                        </th>
+                        <th if:true={isService1} class="th-service">
+                            <lightning-icon size="x-small" icon-name="utility:locker_service_console" variant="success" ></lightning-icon>
+                        </th>
+                        <th if:true={isService2} class="th-service">
+                            <lightning-icon size="x-small" icon-name="utility:locker_service_console" variant="success" ></lightning-icon>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={dataFlyout} for:item='mensualite'>
+                        <tr key={mensualite.key} class="body-table">
+                                <td class="slds-align_absolute-center padding-td">
+                                    <lightning-icon size="xx-small" icon-name="action:approval" alternative-text="prélevé" if:true={mensualite.isApprouved}></lightning-icon>
+                                    <lightning-icon size="x-small" icon-name="utility:warning" alternative-text="rejeté" variant="error" if:true={mensualite.isRejected}></lightning-icon>
+                                    <div class="container-icon-reject" if:true={mensualite.isToApprouved}>
+                                        <lightning-icon size="xx-small" icon-name="utility:check" alternative-text="prevu" ></lightning-icon>
+                                    </div>
+                                </td>
+                                <td class="slds-p-left_x-small">
+                                    <span class={mensualite.colorClass}>{mensualite.dateEcheance}</span>
+                                    <!-- <span if:false={mensualite.actif} class="color-disabled-table">{mensualite.libOffreMaj}</span> -->
+                                </td>
+                                <td class="slds-p-left_x-small">
+                                    <span class={mensualite.colorClass}>{mensualite.codeTranscode}</span>
+                                </td>
+                                <td class="slds-p-left_x-small slds-text-align_right" if:false={showCumule}>
+                                    <span class={mensualite.colorBoldClass}>{mensualite.montantCumuleEcheance} €</span>
+                                </td>
+                                <td class="slds-p-left_x-small slds-text-align_right" if:true={mensualite.G}>
+                                    <span class={mensualite.colorBoldClass}>{mensualite.G.montantEcheance} €</span>
+                                </td>
+                                <td class="slds-p-left_x-small slds-text-align_right" if:true={mensualite.E}>
+                                    <span class={mensualite.colorBoldClass}>{mensualite.E.montantEcheance} €</span>
+                                </td>
+                                <td class="slds-p-left_x-small slds-text-align_right" if:true={mensualite.S}>
+                                    <span class={mensualite.colorBoldClass}>{mensualite.S.montantEcheance} €</span>
+                                </td>
+                                <td class="slds-p-left_x-small slds-text-align_right" if:true={mensualite.S2}>
+                                    <span class={mensualite.colorBoldClass}>{mensualite.S2.montantEcheance} €</span>
+                                </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+            <div if:true={selecteditem.isRegul} class="margin-top-15">
+                <div class="container-icon-reject slds-m-right_x-small slds-show_inline-block">
+                    <lightning-icon size="xx-small" icon-name="utility:check" alternative-text="prevu" ></lightning-icon>
+                </div>
+                Votre facture de régulation est prévue le {getDateEcheance}
+            </div>
+        </section>
+    </div>
+</template>

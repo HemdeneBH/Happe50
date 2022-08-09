@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_TECH_VenteEtUserPartenaireOuSup__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+	OR(		
+		/*Utilisateur connecté = Niveau Partenaire ou Superviseur int --&gt; TRUE pour toutes les ventes des sites internes du compte partenaire*/
+		$User.VI_TECH_HabilitationDuContactPartenaire__c == &quot;Partenaire&quot;, 
+		$User.VI_TECH_HabilitationDuContactPartenaire__c == &quot;Responsable qualité partenaire&quot;,
+		AND(
+			$User.VI_TECH_HabilitationDuContactPartenaire__c == &quot;Superviseur&quot;, 
+			$User.VI_TypeSitePrestataireContactPartenaire__c  == &quot;Interne&quot;
+		),	
+		
+		/*Utilisateur connecté = Niveau Superviseur ext --&gt; TRUE uniquement pour les ventes du prestataire de l&apos;utilisateur*/
+		AND( 
+			OR(
+				AND(
+					$User.VI_TECH_HabilitationDuContactPartenaire__c == &quot;Superviseur&quot;, 
+					$User.VI_TypeSitePrestataireContactPartenaire__c  == &quot;Externe&quot;
+				),
+				$User.VI_TECH_HabilitationDuContactPartenaire__c == &quot;Responsable qualité prestataire&quot;				
+			),
+			/*Le site externe est le même que celui de l&apos;utilisateur connecté*/
+			$User.VI_TECH_IDDuSitePrestataireDuUser__c == Owner:User.VI_TECH_IDDuSitePrestataireDuUser__c
+		)				
+	),
+   true, false
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>TECH Vente et user Partenaire ou Sup</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

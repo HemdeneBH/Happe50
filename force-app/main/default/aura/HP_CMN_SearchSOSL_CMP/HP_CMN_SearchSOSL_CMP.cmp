@@ -1,0 +1,94 @@
+<aura:component implements="flexipage:availableForAllPageTypes"
+                access="global"
+                controller="CMN_SoslQuery_CTL"
+                description="Composant permettant d'effectuer une recherche SOSL ciblée" >
+
+    <!-- Configuration générale du composant -->
+    <aura:attribute name="title"      type="String"  default=""
+                    description="Titre de l'entête du composant." />
+    <aura:attribute name="icon"       type="String"  default="custom:custom17"
+                    description="Icone de l'entête du composant." />
+    <aura:attribute name="showBorder" type="Boolean" default="false"
+                    description="Affichage ou non d'un cadre autour du composant" />
+
+    <!-- Configuration générale du composant -->
+    <aura:attribute name="queryValue"       type="String"
+                    description="Valeur recherchée (input)." />
+
+    <aura:attribute name="query"      type="String"
+                    default="FIND '%%' IN ALL FIELDS RETURNING Knowledge__kav (Title)"
+                    description="Requête SOSL utilisée (avec %% pour positionner le critère)." />
+
+    <aura:attribute name="objects"      type="List"
+                    description="Liste JSON des types d'objets" />
+    <aura:attribute name="showQuery"  type="Boolean" default="false"
+                    description="Affichage ou non de la requête SOSL dans le composant (pour debug)." />
+
+
+    <!-- Résultat de la recherche SOQL -->
+    <aura:attribute name="results" type="Object"
+                    description="Liste des résultats de la requête SOSL." />
+
+    <!-- Initialisation du composant -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"
+                  description="Initialisation du composant: parsing de la configuration puis execution de la requête."/>
+
+
+
+
+
+    <!-- Affichage des résultats -->
+    <lightning:card title="{!v.title}"
+                    iconName="{!v.icon}"
+                    class="{! if(v.showBorder, 'slds-card_boundary', '')}" >
+        <aura:set attribute="actions">
+            <lightning:input class="mySearchBox"
+                             type="text"
+                             name="isExactQuery"
+                             minlength="2"
+                             value="{!v.queryValue}"
+                             variant="label-hidden" />
+
+            <lightning:buttonIcon iconName="utility:search"
+                                  variant="brand"
+                                  size="medium"
+                                  title="Rechercher."
+                                  onclick="{!c.doSearch}"
+                                  class="slds-m-left_xx-small slds-input__icon slds-input__icon_right"/>
+        </aura:set>
+
+        <aura:set attribute="footer">
+          <aura:if isTrue="{!v.showQuery}">
+            <P>Requête : {!v.query}</P>
+          </aura:if>
+        </aura:set>
+
+        <aura:if isTrue="{!v.results.length > 0}">
+        <div class="slds-card__body slds-card__body_inner slds-border_top">
+
+          <lightning:accordion >
+          <aura:iteration items="{!v.results}" var="object" >
+            <lightning:accordionSection label="{! '' + object.name + ' (' + object.values.length + ')'}" name="{!object.name}">
+            <aura:set attribute="body">
+              <ul>
+              <aura:iteration items="{!object.values}" var="item">
+
+                  <li><ui:outputURL value="#"
+                                  target="_self"
+                                  label="{!item.label}"
+                                  click="{!c.navigateToObject}"
+                                  title="{!item.id}"/>{! ' ' + item.detail}</li>
+                  <!--<li><a href="{! '#/sObject/' + item.id + '/view'}">{!item.label}</a>{! ' ' + item.detail}</li>-->
+                  <!--<li><a href="{! '#/sObject/' + item.Id + '/view'}">{!item.Name}{!item.Title}{!item.Subject}</a></li> -->
+                  <!--<li>{!item.Name}{!item.Subject} - {!item.Id}</li> -->
+              </aura:iteration>
+              </ul>
+            </aura:set>
+            </lightning:accordionSection>
+          </aura:iteration>
+        </lightning:accordion>
+        </div>
+        </aura:if>
+    </lightning:card>
+
+</aura:component>

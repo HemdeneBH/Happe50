@@ -1,0 +1,226 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+
+
+  @last modified on  : 03-19-2021
+
+
+  @last modified by  : Slimene Belhaj Ali
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   07-13-2020   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+-->
+<template>
+    <lightning-card>
+
+        <div>
+        <lightning-button label="Créer client Happ-e" title="Non-primary action" onclick={openClientPopupModalPopupModal} class="slds-m-left_x-small"></lightning-button>
+        <lightning-button label="Créer une requête de réclamation" title="Non-primary action" onclick={openReclamationPopupModalPopupModal} class="slds-m-left_x-small"></lightning-button>
+        <lightning-button  if:true={isTelRTDevName} label="Appels Sortants" title="Non-primary action" onclick={openAppelsSortantPopupModal} class="slds-m-left_x-small"></lightning-button>
+        <lightning-button if:true={isTelRTDevName} label="Planifier un rappel" title="Non-primary action" onclick={openPlanifierRappelPopupModal} class="slds-m-left_x-small"></lightning-button>
+    </div>
+    </lightning-card>
+
+<template if:true={updateClientPopupModal}>
+        <div class="demo-only" style="height: 640px;">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container" style="max-width: 100rem;width: 90%;">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={updateClientPopupModalPopupModal}>
+                            <lightning-icon icon-name="utility:close" size="medium">
+                            </lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+
+                    </header>
+                    <div class="slds-grid slds-wrap" style="background: white; padding-bottom: 1rem;">
+                        <c-hp_create-modify-contact  style="width:100%" oncloseupdate={updateClientPopupModalPopupModal}>
+                            </c-hp_create-modify-contact>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+<template if:true={showReclamationCase}>
+    <div class="demo-only" style="height: 640px;">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container" style="max-width: 32rem;width: 90%;">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closePopupModalReclamationCase}>
+                        <lightning-icon icon-name="utility:close" size="medium">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2>Création d’une réclamation</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="slds-grid slds-wrap">
+                        <lightning-record-edit-form record-type-id={reclamationRT} object-api-name="Case" onsuccess={handleSuccess} onsubmit ={handleSubmit} >
+                            <div class="slds-grid slds-gutters" style="height: 20rem;">
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-input-field field-name="HP_Type__c" required>
+                                    </lightning-input-field>
+
+                                   
+                                <lightning-input-field field-name="Priority" required>
+                            </lightning-input-field>
+                            <lightning-input-field field-name="HP_Numero_de_facture__c">
+                            </lightning-input-field>
+                           
+            </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-input-field field-name="HP_Motif__c" required>
+                                    </lightning-input-field>
+                                    <lightning-input-field field-name="HP_Comment__c" required>
+                                    </lightning-input-field>
+                                    <lightning-input-field field-name="ParentId" value={recordId} 
+                                    read-only="true" style="pointer-events: none;opacity: 0.5;">
+                                </lightning-input-field>
+                                </div>
+                              </div>
+                          <div style="float:right">
+                            <lightning-button class="slds-m-top_small" style="margin-right: 0.5rem;" onclick={closeReclamationPopupModalPopupModal}
+                            label="Annuler"></lightning-button>
+                            <lightning-button variant="brand" label="Créer requête" type="submit"
+                            class="slds-m-top_small"></lightning-button>
+                            <div class="exampleHolder" if:true={showSpinner}>
+                                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                            </div>
+                        </div>
+                        </lightning-record-edit-form>
+                </div>
+                </div>
+            </div>
+
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+    <template if:true={showPlanificationCase}>
+        <div class="demo-only" style="height: 740px;">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container" style="max-width: 55rem;width: 90%;">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closePlanifierRappelPopupModal}>
+                            <lightning-icon icon-name="utility:close" size="medium">
+                            </lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2>Planifier un appel</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <div class="slds-grid slds-wrap">
+                            <lightning-record-edit-form record-type-id={phoneRT} object-api-name="Case" 
+                            onsuccess={handleSuccessPL} onsubmit ={handleSubmitPL} onerror={handleErrorPL}>
+                                <div class="slds-grid slds-gutters" style="height: 27rem;width:53rem">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <c-hp_owner-lookup selected-record-id={userId}  selected-value={userName}
+                                        onrecordselection={onRecordSelection}></c-hp_owner-lookup>  
+                                        <lightning-input-field field-name="Priority" required>
+                                        </lightning-input-field>
+                                    <lightning-input-field field-name="HP_TypeAppel__c" required>
+                                </lightning-input-field>
+                                <lightning-input-field field-name="HP_TypeContact__c" required>
+                                </lightning-input-field>
+                                <lightning-input-field field-name="HP_Telephone__c" required  value={contactPhone}>
+                                </lightning-input-field>
+                </div>
+                                    <div class="slds-col slds-size_1-of-2">
+
+                                        <lightning-input-field field-name="HP_TreatmentDate__c" required>
+                                        </lightning-input-field>
+                                        <lightning-input type="time" name="treatment_time" label="Heure de traitement" onchange={handlePLTimeChange} required>
+                                        </lightning-input>
+
+                                        <lightning-input-field field-name="HP_Comment__c" required>
+                                        </lightning-input-field>
+                                        <lightning-input-field field-name="ContactId" value={contactId} required>
+                                        </lightning-input-field>
+                                        <lightning-input-field field-name="ParentId" value={recordId} 
+                                        read-only="true" style="pointer-events: none;opacity: 0.5;">
+                                    </lightning-input-field>
+                                    </div>
+                                  </div>
+                              <div style="float:right">
+                                <lightning-button class="slds-m-top_small" style="margin-right: 0.5rem;" onclick={closePlanifierRappelPopupModal}
+                                label="Annuler"></lightning-button>
+                                <lightning-button variant="brand" label="Créer requête" type="submit"
+                                class="slds-m-top_small"></lightning-button>
+                                <div class="exampleHolder" if:true={showSpinnerPl}>
+                                    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                                </div>
+                            </div>
+                            </lightning-record-edit-form>
+
+
+                    </div>
+
+                    </div>
+                </div>
+    
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </div>
+        </template>
+    
+    <template if:true={showAppelsSortant}>
+        <div class="demo-only" style="height: 740px;">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container" style="max-width: 55rem;width: 90%;">  
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeAppelsSortantPopupModal}>
+                            <lightning-icon icon-name="utility:close" size="medium">
+                            </lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2>Appels sortants</h2>
+                    </header>
+                        <div class="slds-modal__content slds-p-around_medium">
+                            <div class="slds-grid slds-wrap">
+                                <lightning-record-form style="width: 100%;" object-api-name="HP_AppelsSortants__c" fields={selectedFields}
+
+
+                                    onsuccess={handleSuccessAppelsSortant} onsubmit ={handleSubmitAppelsSortant}  onerror={handleErrorAppelsSortant}
+                                    oncancel={handleCancelAppelsSortant}>
+
+
+                                </lightning-record-form>    
+                            </div>
+                        </div>
+                    </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open"></div>
+                </div>
+            </template>
+    
+    <template if:true={showAppelsSortant}>
+        <div class="demo-only" style="height: 740px;">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container" style="max-width: 55rem;width: 90%;">  
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeAppelsSortantPopupModal}>
+                            <lightning-icon icon-name="utility:close" size="medium">
+                            </lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2>Appels sortants</h2>
+                    </header>
+                        <div class="slds-modal__content slds-p-around_medium">
+                            <div class="slds-grid slds-wrap">
+                                <lightning-record-form style="width: 100%;" object-api-name="HP_AppelsSortants__c" fields={selectedFields}
+                                    onsuccess={handleSuccessAppelsSortant} onsubmit ={handleSubmitAppelsSortant}  onerror={handleErrorAppelsSortant}
+                                    oncancel={handleCancelAppelsSortant}>
+                                </lightning-record-form>    
+                            </div>
+                        </div>
+                    </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open"></div>
+                </div>
+            </template>
+</template>

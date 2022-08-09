@@ -1,0 +1,261 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 11-01-2021
+  @last modified by  : Badr Eddine Belkarchi
+-->
+<template>
+    <div class="bigTitle">{cardTitle}</div>
+   <lightning-card title={blocTitle}>
+    <div class="slds-grid">
+        <div class="slds-size--1-of-3 slds-p-top_x-small container">
+                <div class="slds-grid">
+                    <div class="slds-size--1-of-2 slds-text-align_right titles">
+                        <p>Date de création : </p>
+                    </div>  
+                    <div class="slds-size--1-of-2 slds-p-left_medium slds-text-align_left">
+                        <p>{createDate} </p>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-size--1-of-2 slds-text-align_right titles">
+                        <p>Date limite de paiement : </p>
+                    </div>  
+                    <div class="slds-size--1-of-2 slds-p-left_medium slds-text-align_left">
+                        <p>{dateLimite}</p>
+                    </div>
+                </div>
+                <br/>
+                <div class="slds-grid">
+                    <div class="slds-size--1-of-2 slds-text-align_right titles">
+                        <p>Date de début de période de facturation : </p>
+                    </div>  
+                    <div class="slds-size--1-of-2 slds-p-left_medium slds-text-align_left">
+                        <p>{dateDebutFacturation}</p>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-size--1-of-2 slds-text-align_right titles">
+                        <p>Date de fin de période de facturation : </p>
+                    </div>  
+                    <div class="slds-size--1-of-2 slds-p-left_medium slds-text-align_left">
+                        <p>{dateFinFacturation}</p>
+                    </div>
+                </div>
+                <br/>
+                <div class="slds-grid">
+                    <div class="slds-size--1-of-2 slds-text-align_right titles">
+                        <p>Date d’envoi en recouvrement : </p>
+                    </div>  
+                    <div class="slds-size--1-of-2 slds-p-left_medium slds-text-align_left">
+                        <p>{recouvrementDate}</p>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-size--1-of-2 slds-text-align_right titles">
+                        <p>Prestataire recouvrement : </p>
+                    </div>  
+                    <div class="slds-size--1-of-2 slds-p-left_medium slds-text-align_left">
+                        <p>{prestataireRecouvrement}</p>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-size--1-of-2 slds-text-align_right titles">
+                        <p>Date de passage en irrecouvrable : </p>
+                    </div>  
+                    <div class="slds-size--1-of-2 slds-p-left_medium slds-text-align_left">
+                        <p>{irrecouvrableDate}</p>
+                    </div>
+                </div>
+                <br/>
+                <div class="slds-grid">
+                    <div class="slds-size--1-of-2 slds-text-align_right titles">
+                        <p>Date de début de surendettement : </p>
+                    </div>  
+                    <div class="slds-size--1-of-2 slds-p-left_medium slds-text-align_left">
+                        <p>{surEndettementStart}</p>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-size--1-of-2 slds-text-align_right titles">
+                        <p>Date de fin de surendettement : </p>
+                    </div>  
+                    <div class="slds-size--1-of-2 slds-p-left_medium slds-text-align_left">
+                        <p>{surEndettementEnd}</p>
+                    </div>
+                </div>
+        </div>
+        <div class="slds-size--1-of-3 slds-p-top_x-small container">
+                <div class="slds-p-left_small">
+                    <div class="slds-grid">
+                        <div class="slds-size--1-of-3" style="text-align: center;">
+                            <p class="titles">Montant TTC</p>
+                            <p><lightning-formatted-number value={_currentFacture.montant_ttc}
+                                format-style="currency" currency-code="EUR" class="amounts"></lightning-formatted-number></p>
+                        </div>
+                        <div class="slds-size--1-of-3" style="text-align: center;">
+                            <p class="titles">Montant restant dû</p>
+                            <p><lightning-formatted-number value={_currentFacture.montant_restant_du}
+                                format-style="currency" currency-code="EUR" class="amounts"></lightning-formatted-number></p>
+                        </div>
+                    </div>
+                    <br/> <br/>
+                    <div>
+                        <div class="slds-grid">
+                            <div class="slds-size--1-of-3">
+                                <p class="titles">Modalité de paiement : </p>
+                            </div>
+                            <div class="slds-size--2-of-3">
+                                {modalitePaiement}
+                            </div> 
+                        </div>
+                        <div class="slds-grid">
+                            <div class="slds-size--1-of-3">
+                                <p class="titles">Ouverture CB : </p>
+                            </div>
+                            <div class="slds-size--2-of-3">
+                                {ouvertureCB}
+                            </div> 
+                        </div>
+                        <div class="slds-grid">
+                            <div class="slds-size--1-of-3">
+                                <p class="titles">Statut : </p>
+                            </div>
+                            <div class="slds-size--2-of-3">
+                                {statutFacture}
+                            </div> 
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                </div>
+        </div>
+        <div class="slds-size--1-of-3 slds-text-align_left slds-p-top_x-small container">
+                <div class="slds-p-left_small">
+                    <div class="slds-grid">
+                        <div class="slds-size--1-of-3">
+                            <p class="titles">Eligibilité plan d’apurement : </p>
+                        </div>
+                        <div class="slds-size--2-of-3">
+                            {eligiblePa}
+                        </div> 
+                    </div>
+                    <div class="slds-grid">
+                        <div class="slds-size--1-of-3">
+                            <p class="titles">Plan d’apurement en cours : </p>
+                        </div>
+                        <div class="slds-size--2-of-3">
+                            {_currentFacture.plan_apurement_en_cours}
+                        </div> 
+                    </div>
+                    <div class="slds-grid">
+                        <div class="slds-size--1-of-3">
+                            <p class="titles">Plan de relance en cours : </p>
+                        </div>
+                        <div class="slds-size--2-of-3">
+                            {_currentFacture.relance_en_cours}
+                        </div> 
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                </div>
+        </div>
+    </div>
+    <div class="slds-grid">
+        <div class="slds-size--1-of-3 slds-text-align_left slds-p-top_x-small s-container">
+            <div class="slds-grid">
+                <div class="slds-size--1-of-2">
+                    <div class="slds-grid">
+                        <div class="slds-size--1-of-2 slds-text-align_right titles">
+                            <p>Index début : </p>
+                        </div>  
+                        <div class="slds-size--1-of-2 slds-p-left_medium slds-text-align_left">
+                            <p>{minIndex} </p>
+                        </div>
+                    </div>
+                    <div class="slds-grid">
+                        <div class="slds-size--1-of-2 slds-text-align_right titles">
+                            <p>Index fin : </p>
+                        </div>  
+                        <div class="slds-size--1-of-2 slds-p-left_medium slds-text-align_left">
+                            <p>{maxIndex} </p>
+                        </div>
+                    </div>
+                </div>
+            <template if:true={isHPHC}>
+                    <div class="slds-size--1-of-2">
+                        <div class="slds-grid">
+                            <div class="slds-size--1-of-2 slds-text-align_right titles">
+                                <p>Index HC début : </p>
+                            </div>  
+                            <div class="slds-size--1-of-2 slds-p-left_medium slds-text-align_left">
+                                <p>{minIndex} </p>
+                            </div>
+                        </div>
+                        <div class="slds-grid">
+                            <div class="slds-size--1-of-2 slds-text-align_right titles">
+                                <p>Index HC fin : </p>
+                            </div>  
+                            <div class="slds-size--1-of-2 slds-p-left_medium slds-text-align_left">
+                                <p>{maxIndex} </p>
+                            </div>
+                        </div>
+                    </div>
+            </template>
+        </div>
+        </div>
+        <div class="slds-size--2-of-3 slds-text-align_left slds-p-top_x-small s-container">&nbsp;</div>
+    </div>
+</lightning-card>
+<lightning-card>
+    <div class="small-container slds-m-top_small slds-p-top_large">
+        
+        <p class="titles slds-p-left_small"><lightning-icon icon-name="standard:case" alternative-text="Related Cases" title="Related Cases" size="small"></lightning-icon>  &nbsp; Requête(s) associée(s) à la facture ({numberOfCases})</p>
+    </div>
+    <template if:true={showRelatedCases}>
+        <lightning-datatable data={relatedCasesToDisplay}
+        columns={columns} 
+        key-field="id" 
+        hide-checkbox-column="true"
+        onrowaction={handleRowAction}> 
+        </lightning-datatable> 
+        <div class="slds-text-align_center slds-p-around_medium"><a onclick={showAllCases}>Afficher tout</a></div>
+    </template>
+</lightning-card>
+<template if:true={showAll}>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_large">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                    <lightning-icon icon-name="utility:close"
+                        alternative-text="close"
+                        variant="inverse"
+                        size="small" ></lightning-icon>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate"><lightning-icon icon-name="standard:case" alternative-text="Related Cases" title="Related Cases" size="small"></lightning-icon> &nbsp; Requête(s) associée(s) à la facture ({numberOfCases})</h2>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <lightning-card>
+                    <lightning-datatable data={relatedCases}
+                    columns={columns} 
+                    key-field="id" 
+                    hide-checkbox-column="true"
+                    onrowaction={handleRowAction}> 
+                    </lightning-datatable> 
+                </lightning-card>
+            </div>
+            <footer class="slds-modal__footer">
+                <button class="slds-button slds-button_brand" onclick={closeModal}>Fermer</button>
+            </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</template>
+</template>

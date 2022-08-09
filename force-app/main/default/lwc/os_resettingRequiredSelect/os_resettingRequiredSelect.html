@@ -1,0 +1,49 @@
+<template>
+	<slot>
+		<vlocity_cmt-combobox options={_realtimeOptions}
+							  label={jsonDef.propSetMap.label}
+							  class={_styleClasses.input}
+							  required
+							  tab-index={tabIndex}
+							  onchange={handleChange}
+							  theme={_theme}
+							  value={elementValue}
+							  field-level-help={_handleHelpText}
+							  data-refresh={refresh}
+							  read-only={_isReadOnly}
+							  data-show-lookup="true"
+							  message-when-value-missing={_messageWhenValueMissing}
+							  data-omni-input>
+			<template if:true={jsonDef.propSetMap.repeat}>
+				<span slot="label"
+					  style="bottom:7px; right:-11px;"
+					  class={_styleClasses.repeatContainer}
+					  role="group">
+					<button if:true={canRepeat}
+							class={_styleClasses.repeatAdd}
+							onclick={handleAdd}>
+						<lightning-icon icon-name="utility:add"
+										alternative-text="Repeat Select"
+										extraclass={_styleClasses.repeatIcons}
+										size="xx-small">
+						</lightning-icon>
+					</button>
+					<button if:true={canRemove}
+							class={_styleClasses.repeatRemove}
+							onclick={handleRemove}>
+						<lightning-icon icon-name="utility:close"
+										alternative-text="Remove Select"
+										extraclass={_styleClasses.repeatIcons}
+										size="xx-small">
+						</lightning-icon>
+					</button>
+				</span>
+			</template>
+		</vlocity_cmt-combobox>
+	</slot>
+	<c-os_base-mixin-extension omni-json-def={jsonDef}
+							   omni-json-data={jsonData}
+							   omni-resume={resume}
+							   omni-script-header-def={scriptHeaderDef}>
+	</c-os_base-mixin-extension>
+</template>

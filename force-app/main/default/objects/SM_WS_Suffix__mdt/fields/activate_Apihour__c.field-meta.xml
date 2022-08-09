@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>activate_Apihour__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>@Description faire appel à ce service via APIHOUR</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>Remettre le service sur APIHOUR</inlineHelpText>
+    <label>activate_Apihour</label>
+    <type>Checkbox</type>
+</CustomField>

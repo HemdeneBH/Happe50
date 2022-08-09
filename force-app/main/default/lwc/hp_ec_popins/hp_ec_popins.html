@@ -1,0 +1,14 @@
+<template>
+    <template if:true={showChat}>
+        <c-hp_ec_popin-chat></c-hp_ec_popin-chat>
+    </template>
+    <template if:true={showContact}>
+        <c-hp_ec_popin-contact></c-hp_ec_popin-contact>
+    </template>
+    <template if:true={showHistory}>
+        <c-hp_ec_popin-history></c-hp_ec_popin-history>
+    </template>
+    <template if:true={showMessages}>
+        <c-hp_ec_popin-messages openedmessage={openedMessage}></c-hp_ec_popin-messages>
+    </template>
+</template>

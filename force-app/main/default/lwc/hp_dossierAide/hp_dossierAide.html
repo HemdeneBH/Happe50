@@ -1,0 +1,192 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 12-20-2021
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<template>
+  <lightning-card title="GESTION DES DOSSIERS D'AIDES">
+    <div class="slds-text-title_caps slds-p-left_medium slds-text-heading_small slds-text-title_bold" >contrats concernés</div>
+    <br/>
+    <div if:true={gazLine} class="slds-p-left_medium ">
+      <lightning-input type="checkbox" label={gazLine} name="inputGaz" onchange={handleGaz}></lightning-input>
+    </div>
+    <div if:true={aideLineGaz} class="slds-p-left_x-large" style="color: blue;">
+      {aideLineGaz}
+    </div>
+    <div if:true={elecLine} class="slds-p-left_medium">
+      <lightning-input type="checkbox" label={elecLine} name="inputElec" onchange={handleElec}></lightning-input>
+    </div>
+    <div if:true={aideLineElec} class="slds-p-left_x-large" style="color: blue;">
+      {aideLineElec}
+    </div>
+    <br/>
+    <br/>
+    <div class="slds-grid">
+      <div class="slds-size_1-of-2 slds-p-left_medium slds-p-right_medium">
+        <lightning-input type="date" onchange={handleStartDate} label="Période d'aide (début)"></lightning-input>
+      </div>
+      <div class="slds-size_1-of-2 slds-p-left_medium slds-p-right_medium">
+        <lightning-input type="date" onchange={handleEndDate} label="Période d'aide (fin)"></lightning-input>
+        <br/>
+        <lightning-button variant="brand" class="slds-float_right" label="Sauvegarder" onclick={handleSubmit} disabled={activateButton}></lightning-button>
+      </div>
+    </div>
+  </lightning-card>
+    <lightning-accordion allow-multiple-sections-open active-section-name="listCases">
+        <lightning-accordion-section name="generatePDF" label="Générer fiche navette">
+            <lightning-card>
+              <div class="slds-p-bottom_medium">
+                <div class="slds-box slds-border_top slds-border_right slds-border_left slds-border_bottom">
+                  <div class="slds-grid slds-p-left_medium slds-p-bottom_medium">
+                    <div class="slds-size_1-of-2 slds-text-title_bold">
+                      Nom / Prénom :
+                    </div>
+                    <div class="slds-size_1-of-2 slds-p-right_medium">
+                      {clientName}
+                    </div>
+                  </div>
+                    <div class="slds-grid slds-p-left_medium slds-p-bottom_medium">
+                    <div class="slds-size_1-of-2 slds-text-title_bold">
+                      Réf. Client :
+                    </div>
+                    <div class="slds-size_1-of-2 slds-p-right_medium">
+                      {idXdataClient}
+                    </div>
+                  </div>
+                  <div class="slds-grid slds-p-left_medium slds-p-bottom_medium">
+                    <div class="slds-size_1-of-2 slds-text-title_bold">
+                      Situation de compte au :
+                    </div>
+                    <div class="slds-size_1-of-2 slds-p-right_medium">
+                      <lightning-input type="date" value={situationCompte} onchange={handleSituationCompte} variant="label-hidden"></lightning-input>
+                    </div>
+                  </div>
+                  <div class="slds-grid slds-p-left_medium slds-p-bottom_medium">
+                    <div class="slds-size_1-of-2 slds-text-title_bold">
+                      Montant dû à date :
+                    </div>
+                    <div class="slds-size_1-of-2 slds-p-right_medium">
+                      <lightning-input type="number" value={montantDu} onchange={handleMontantDu} formatter="currency" step=".01" variant="label-hidden"></lightning-input>
+                    </div>
+                  </div>
+                  <div class="slds-grid slds-p-left_medium slds-p-bottom_medium">
+                    <div class="slds-size_1-of-2 slds-text-title_bold">
+                      Date de la prochaine facture :
+                    </div>
+                    <div class="slds-size_1-of-2 slds-p-right_medium">
+                      <lightning-input type="date" value={dateNextInvoice} onchange={handleDateNextInvoice} variant="label-hidden"></lightning-input>
+                    </div>
+                  </div>
+                </div>
+                <div class="slds-box slds-border_top slds-border_right slds-border_left slds-border_bottom">
+                  <div class="slds-text-title_bold" style="text-decoration:underline;">
+                    Données financières
+                  </div>
+                  <br/>
+                  <div class="slds-grid slds-p-left_medium slds-p-bottom_medium">
+                    <div class="slds-size_1-of-2 slds-text-title_bold">
+                      Prélèvement en cours :
+                    </div>
+                    <div class="slds-size_1-of-2 slds-p-right_medium">
+                      <lightning-combobox  value={value} options={options} onchange={handleChangePrelevement} variant="label-hidden">
+                        </lightning-combobox>
+                    </div>
+                  </div>
+                  <div class="slds-grid slds-p-left_medium slds-p-bottom_medium">
+                    <div class="slds-size_1-of-2 slds-text-title_bold">
+                      Date et montants des derniers règlements :
+                    </div>
+                    <div class="slds-size_1-of-2 slds-p-right_medium">
+                      <lightning-input type="text" onchange={handleTextDerniersReglements} variant="label-hidden"></lightning-input>
+                    </div>
+                  </div>
+                  <div class="slds-grid slds-p-left_medium slds-p-bottom_medium">
+                    <div class="slds-size_1-of-2 slds-text-title_bold">
+                      Client mensualisé :
+                    </div>
+                    <div class="slds-size_1-of-2 slds-p-right_medium">
+                      <lightning-combobox  value={clientMensualise} options={options} onchange={handleChangeMensualise} variant="label-hidden">
+                      </lightning-combobox>
+                    </div>
+                  </div>
+                </div>
+                <div class="slds-box slds-border_top slds-border_right slds-border_left slds-border_bottom">
+                  <div class="slds-text-title_bold" style="text-decoration:underline;">
+                    Plan d’apurement
+                  </div>
+                  <br/>
+                  <div class="slds-grid slds-p-left_medium slds-p-bottom_medium">
+                    <div class="slds-size_1-of-2 slds-text-title_bold">
+                      Plan d’apurement :
+                    </div>
+                    <div class="slds-size_1-of-2 slds-p-right_medium">
+                      <lightning-combobox  value={value} options={options} onchange={handleChangePlanApurement} variant="label-hidden">
+                      </lightning-combobox>
+                    </div>
+                  </div>
+                  <div class="slds-grid slds-p-left_medium slds-p-bottom_medium">
+                    <div class="slds-size_1-of-2 slds-text-title_bold">
+                      Montant total plan d’apurement :
+                    </div>
+                    <div class="slds-size_1-of-2 slds-p-right_medium">
+                      <lightning-input type="number" value={montantTotalApurement} onchange={handleMontantTotalApurement} formatter="currency" step=".01" variant="label-hidden"></lightning-input>
+                    </div>
+                  </div>
+                  <div class="slds-grid slds-p-left_medium slds-p-bottom_medium">
+                    <div class="slds-size_1-of-2 slds-text-title_bold">
+                      Solde plan d’apurement :
+                    </div>
+                    <div class="slds-size_1-of-2 slds-p-right_medium">
+                      <lightning-input type="number" value={soldePlanApurement} onchange={handleSoldePlanApurement} formatter="currency" step=".01" variant="label-hidden"></lightning-input>
+                    </div>
+                  </div>
+                </div>
+                <div class="slds-box slds-border_top slds-border_right slds-border_left slds-border_bottom">
+                <div class="slds-grid slds-p-left_medium slds-p-top_medium">
+                  <div class="slds-size_1-of-2 slds-text-title_bold">Requêtes liées</div>
+                    <div if:false={relatedCaseNumber}  class="slds-size_1-of-2 slds-p-right_medium">
+                      <lightning-combobox options={relatedCases}  onchange={handleChangeRelatedCase} variant="label-hidden">
+                      </lightning-combobox>
+                    </div>
+                    <div if:true={relatedCaseNumber}  class="slds-size_1-of-2 slds-p-right_medium">
+                      {relatedCaseNumber}
+                    </div>
+                  </div>
+                  <div class="slds-grid slds-p-bottom_medium">
+                    <div class="slds-p-top_medium slds-align_absolute-center">
+                      <lightning-button variant="brand" label="Générer fiche navette" onclick={handleGeneratePDF} disabled={activateButtonPDF}></lightning-button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </lightning-card>
+        </lightning-accordion-section>
+
+        <lightning-accordion-section name="listCases" label="Liste des échanges avec les services sociaux">
+          <template if:true={relatedCasesData}>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+              <lightning-card>
+                  <lightning-datatable data={relatedCasesData}
+                  columns={columns} 
+                  key-field="id" 
+                  hide-checkbox-column="true"
+                  onrowaction={handleRowAction}> 
+                  </lightning-datatable> 
+              </lightning-card>
+          </div>
+        </template>
+        <template if:false={relatedCasesData}>
+          <lightning-card>
+            <p class="slds-p-left_medium slds-text-title_bold">Il n'existe pas d'échange avec les services sociaux</p>
+          </lightning-card>
+        </template>
+        </lightning-accordion-section>
+          <div class="slds-grid">
+            <div class="slds-size_3-of-3 slds-p-right_medium">
+              <lightning-button variant="nuteral" class="slds-float_right" label="Fermer" onclick={closeDossierAide} ></lightning-button>
+            </div>
+          </div>
+    </lightning-accordion> 
+</template>

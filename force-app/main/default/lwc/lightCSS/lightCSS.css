@@ -1,0 +1,25 @@
+/* light variables */
+:host{
+    --primary-colour: #6647ea;
+    --secondary-colour: #01d9f0;
+    --secondary-colour-light: rgba(1,217,240,.3);
+    --tertiary-colour: #ee5d29;
+    --nav-item-colour: #6647ea;
+
+    --black: #26242b;
+    --white: #ffffff;
+    --blue: #05a8ff;
+    --grey-dark: #424242;
+    --black-dark-white-light: #ffffff;
+    --white-dark-black-white: #000000;
+    --bg-profile-icon: #e5ebf5;
+    --menu-bg: linear-gradient(20deg, #e5ebf5 23%, #ffffff 96%);
+    --menu-box-shadow: -5px 5px 15px 0 rgba(12, 29, 38, 0.21);
+  }
+  
+
+
+  .hp-logo{
+    -webkit-filter: invert(100%); /* Safari/Chrome */
+    filter: invert(100%);
+  }

@@ -1,0 +1,465 @@
+/* __________________________________
+* Design des boutons ronds latéraux |
+* _________________________________*/
+
+.vi-round-btn {
+		width: 64px;
+		height: 64px;
+		border-radius: 32Px;
+		border: none;
+		position: absolute;
+		right: -16px;
+		background-color: #009de9;
+		color: #FFFFFF;
+		font-size: 0px;
+		padding: 20px;
+		transition: all 0.5s;
+		cursor: pointer;
+		z-index: 10;
+		font-family: 'Lato', Helvetica, Arial, serif;
+		font-weight: 700;
+		line-height: 16px;
+}
+
+.vi-round-btn:hover {
+		font-size: 16px;
+}
+
+.vi-round-btn img {
+		height: 18px;
+		width: 18px;
+		position: absolute;
+		top: 23px;
+		right: 23px;
+}
+
+.vi-round-btn span {
+		cursor: pointer;
+		display: inline-block;
+		position: relative;
+}
+
+.vi-round-btn-1 {
+		top: 0px;
+}
+
+.vi-round-btn-1:hover {
+		width: 212px;
+}
+
+.vi-round-btn-2 {
+		top: 50px;
+}
+
+.vi-round-btn-2:hover {
+		width: 250px;
+}
+
+.vi-round-btn-3 {
+		top: 150px;
+}
+.vi-round-btn-3:hover {
+		width: 220px;
+}
+
+.vi-round-btn-4 {
+		top: 250px;
+}
+
+.vi-round-btn-4:hover {
+		width: 150px;
+}
+
+.vi-round-btn-5 {
+	background-color: red !important;
+	top: 350px;
+}
+
+.vi-round-btn-5:hover {
+	width: 120px;
+}
+
+/*_______________________________________
+* Design des popups associées au bouton |
+* _____________________________________*/
+
+.vi-modal-background {
+		background-color: rgba(0, 0, 0, 0.25);
+		position: fixed;
+		height: 100%;
+		width: 100%;
+		left: 0px;
+		top: 0px;
+		z-index: 20;
+		padding-top: 200px;
+		padding-left: 446px;
+}
+
+.vi-modal {
+		position: absolute;
+		right: 40px;
+		height: 400px;
+		width: 590px;
+		background-color: transparent;
+		z-index: 30;
+}
+
+.vi-modal-5 {
+	position: absolute;
+	right: 40px;
+	height: 400px;
+	width: 880px;
+	background-color: transparent;
+	z-index: 30;
+}
+
+.vi-modal-top {
+		top: -10px;
+}
+
+.vi-modal-center {
+		top: 90px;
+}
+
+.vi-modal-bottom {
+		top: 190px;
+}
+
+/* _______________________________
+* Eléments de l'entête des popup |
+* ______________________________*/
+
+.vi-modal-header {
+		background-color: #FFFFFF;
+		padding-left: 48px;
+		padding-top: 35px;
+		width: 560px;
+		height: 96px;
+		font-family: "Lato", Helvetica, Arial, serif;
+		font-size: 24px;
+}
+
+.vi-modal-header-5 {
+	background-color: #FFFFFF;
+	padding-left: 48px;
+	padding-top: 35px;
+	width: 850px;
+	height: 96px;
+	font-family: "Lato", Helvetica, Arial, serif;
+	font-size: 24px;
+}
+
+.vi-close-btn {
+		position: absolute;
+		top: 29px;
+		right: 65px;
+		height: 24px;
+		width: 24px;
+		border: none;
+		background-color: transparent;
+		cursor: pointer;
+}
+
+
+.vi-close-btn-5{
+	position: absolute;
+	top: 36px;
+	right: 80px;
+	height: 24px;
+	width: 24px;
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
+}
+/* ____________________________
+* Eléments du corps des popup |
+* ___________________________*/
+
+.vi-modal-content {
+		background-color: #FFFFFF;
+		padding-left: 48px;
+		padding-right: 48px;
+		width: 560px;
+		font-family: 'Lato', Helvetica, Arial, serif;
+		font-weight: 700;
+}
+
+.vi-modal-content-5 {
+	background-color: #FFFFFF;
+	padding-left: 48px;
+	padding-right: 48px;
+	width: 850px;
+	font-family: 'Lato', Helvetica, Arial, serif;
+	font-weight: 700;
+}
+
+
+.vi-modal-content-5-Script {
+	background-color: #FFFFFF;
+	padding-left: 48px;
+	padding-right: 48px;
+	width: 850px;
+	max-height: 500px;
+	overflow-y: scroll;
+}
+
+
+.vi-comment-input {
+		width: 100%;
+		height: 159px;
+		background-color: #eeeeee;
+		color: grey;
+		border-style: none;
+		margin-right: 48px;
+		margin-left: 48 px;
+		font-family: "Lato";
+		font-size: 16px;
+		resize: none;
+		padding: 20px 20px 43px;
+}
+
+
+
+
+
+.vi-modal-content-1 {
+		height: 209px;
+}
+
+.vi-modal-content-2 {
+		height: 159px;
+}
+
+.vi-modal-content-3 {
+		height: 359px;
+}
+
+.vi-modal-message{
+		font-family: "Lato", Helvetica, Arial, serif;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 400;
+		padding-bottom: 10px;
+}
+
+.vi-modal-checkbox{
+		position: absolute;
+		margin: 2px;
+		background-color: #FFF;
+		height: 20px;
+		width: 20px;
+		border-radius: 0;
+		border: solid 1px #000;
+}
+
+.vi-modal-label{
+		font-family: "Lato", Helvetica, Arial, serif;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 400;
+}
+
+.vi-modal-checkbox-label{
+		transform: translatex(-5px);
+}
+
+.vi-checked{
+		height: 24px;
+		width: 24px;
+}
+
+.vi-dropdown-arrow{
+		transform: rotate(90deg);
+		background-color: transparent;
+		color: rgb(227, 227, 227);
+		height: 20px;
+		width: 20px;
+		font-size: 20px;
+		position: absolute;
+		right: 0px;
+		top: 55px;
+}
+
+.vi-dropdown{
+		position: absolute;
+		top: 75px;
+		width: 100%;
+		overflow-y: scroll;
+		max-height: 180px;
+		z-index: 50;
+		background-color: #FFF;
+		box-shadow: 0 0 5px 0px #CCC;
+}
+
+.vi-dropdown::-webkit-scrollbar{
+		display: none;
+}
+
+.vi-dropdown-list-element{
+		font-family: "Lato", Helvetica, Arial, serif;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 400;
+		padding: 5px 10px;
+}
+
+.vi-dropdown-list-element:hover{
+		background-color: #EEE;
+}
+
+
+.vi-triangle {
+	position: absolute;
+	top: 80px;
+	right: 14px;
+	width: 16px;
+}
+
+.vi-triangle-aide{
+	position: absolute;
+	top: 180px;
+	right: 14px;
+	width: 16px;
+}
+
+.vi-triangle-top {
+	position: absolute;
+	top: 80px;
+	right: 14px;
+	width: 16px;
+}
+
+.vi-modal-warning{
+	font-family: "Lato", Helvetica, Arial, serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	color: red;
+	width: 560px;
+	height: 24px;
+	background-color: #FFF;
+	padding-left: 48px;
+	padding-top: 12px;
+}
+
+.vi-radio{
+	height: 20px;
+	width: 20px;
+	border-radius: 12px;
+	border: 2px solid darkgray;
+	padding : 3px;
+	background-color: transparent;
+}
+
+.vi-radio-checked{
+		height: 100%;
+		width: 100%;
+		border-radius: 50%;
+		background-color: darkgray;
+}
+
+/* _________________________________________
+* Elements dans le pied de page des popups |
+* ________________________________________*/
+
+.vi-modal-footer {
+		background-color: #FFFFFF;
+		padding-right: 48px;
+		padding-top: 34px;
+		width: 560px;
+		height: 126px;
+
+}
+
+.vi-modal-footer-transfert {
+		padding-left: 216px;
+}
+
+.vi-modal-footer-comment {
+		padding-left: 216px;
+}
+
+.vi-modal-footer-delay {
+		padding-left: 140px;
+}
+
+.vi-modal-footer-cancel {
+		padding-left: 161px;
+}
+
+.vi-modal-white-btn {
+		border-radius: 0;
+		color: #009de9;
+		height: 44px;
+		background-color: transparent;
+		border: solid 1px #009de9;
+		margin-right: 16px;
+}
+
+.vi-modal-blue-btn {
+		border-radius: 0;
+		border: solid 1px #009de9;
+		background-color: #009de9;
+		color: #FFFFFF;
+		height: 44px;
+}
+
+.vi-modal-width-098-btn {
+		width: 98px;
+}
+
+.vi-modal-width-190-btn {
+		width: 190px;
+}
+
+.vi-modal-width-114-btn {
+		width: 114px;
+}
+
+.vi-modal-width-166-btn {
+		width: 166px;
+}
+
+.vi-modal-width-169-btn {
+		width: 169px;
+}
+
+/* Les éléments suivants sont là en complément de classes Bootstrap existantes.
+* Elles existent aussi par ailleurs, et seront intégrées à la CSS globale. */
+
+.form-control:focus{
+		box-shadow: 0 0 0 0;
+}
+
+.form-control{
+		border-top: 0;
+		border-right: 0;
+		border-left:0;
+		border-bottom-color: rgb(227, 227, 227);
+		border-radius: 0px;
+}
+
+.form-group{
+		text-align: left;
+}
+
+.label-text-small-act {
+  background-color: transparent;
+  flex-shrink: 0;
+  height: auto;
+  letter-spacing: 0px;
+  line-height: 12px;
+  margin-top: 6px;
+  min-height: 12px;
+  text-align: left;
+  width: auto;
+}
+
+.lato-normal-monza-12px {
+  color: rgba(204, 0, 51, 1);
+  font-family: "Lato", Helvetica, Arial, serif;
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 400;
+	width: 94%;
+}

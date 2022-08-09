@@ -1,0 +1,184 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 04-13-2022
+  @last modified by  : FT2-AE
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   09-18-2020   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+-->
+<template>	
+        <div class="container-card">
+                 <!--Affichage du PopUp pour un client Retractation-->		
+	        <div if:true={isRetractation} class="retractationPopUp">
+	                <c-card-error class="slds-size--3-of-4"
+			              style="white-space: pre-wrap"
+			              error-message={retractationMessage}>
+		        </c-card-error>
+	        </div>
+                 <!--Affichage du PopUp pour un client VIP-->		
+	        <div if:true={isClientVip} class="clientVipPopUp">
+	                <c-card-error class="slds-size--3-of-4"
+			              style="white-space: pre-wrap"
+			              error-message={clientVIPMessage}>
+		        </c-card-error>
+	        </div>
+                
+                <!--<button onclick={handleOpenEmmenagementNew}>TEST Nouveau emmenagement</button>-->
+
+                <lightning-progress-bar value={progress}></lightning-progress-bar>
+                <div class="header-container-emmenagement-adresses" if:false={error}>
+                        <div if:false={longList} class="header-container slds-tabs_default">
+                                <div class="header-container-adresses slds-grid">
+                                        <template for:each={firstListAdresses} for:item="adress">
+                                                <div key={adress.key} class="slds-col slds-size_1-of-3">
+                                                        <div id={adress.key} if:false={adress.selected}
+                                                                class="header-bloc-adresse" onclick={handleActive}>
+                                                                <div><span if:true={adress.numeroVoie}>{adress.numeroVoie},
+                                                                        </span><span>{adress.libelleVoie}</span></div>
+                                                                <div if:true={adress.complementAdresse}>
+                                                                        {adress.complementAdresse}</div>
+                                                                <div>{adress.codePostal} {adress.ville} <span
+                                                                                if:true={adress.NoCompteContratMaj}>({adress.NoCompteContratMaj})</span>
+                                                                                <span class="slds-text-color_error" if:true={adress.irrecouvrable}> Irrécouvrable</span>
+                                                                </div>
+                                                        </div>
+                                                        <div id={adress.key} if:true={adress.selected} onclick={handleActive}
+                                                                class="selected header-bloc-adresse">
+                                                                <div><span if:true={adress.numeroVoie}>{adress.numeroVoie},
+                                                                        </span><span>{adress.libelleVoie}</span></div>
+                                                                <div if:true={adress.complementAdresse}>
+                                                                        {adress.complementAdresse}</div>
+                                                                <div>{adress.codePostal} {adress.ville} <span
+                                                                                if:true={adress.NoCompteContratMaj}>({adress.NoCompteContratMaj})</span>
+                                                                                <span class="slds-text-color_error" if:true={adress.irrecouvrable}> Irrécouvrable</span>
+                                                                                
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </template>
+                                </div>
+                        </div>
+                        <div if:true={longList} class="header-container long-list slds-tabs_default">
+                                <div class="header-container-adresses slds-grid">
+                                        <template for:each={firstListAdresses} for:item="adress">
+                                                <div key={adress.key} class="slds-col slds-size_1-of-3">
+                                                        <div id={adress.key} if:false={adress.selected}
+                                                                class="header-bloc-adresse" onclick={handleActive}>
+                                                                <div><span if:true={adress.numeroVoie}>{adress.numeroVoie},
+                                                                        </span><span>{adress.libelleVoie}</span></div>
+                                                                <div if:true={adress.complementAdresse}>
+                                                                        {adress.complementAdresse}</div>
+                                                                <div>{adress.codePostal} {adress.ville} <span
+                                                                                if:true={adress.NoCompteContratMaj}> ({adress.NoCompteContratMaj})</span>
+                                                                                <span class="slds-text-color_error" if:true={adress.irrecouvrable}> Irrécouvrable</span>
+                                                                </div>
+                                                        </div>
+                                                        <div id={adress.key} if:true={adress.selected} onclick={handleActive}
+                                                                class="selected header-bloc-adresse">
+                                                                <div><span if:true={adress.numeroVoie}>{adress.numeroVoie},
+                                                                        </span><span>{adress.libelleVoie}</span></div>
+                                                                <div if:true={adress.complementAdresse}>
+                                                                        {adress.complementAdresse}</div>
+                                                                <div>{adress.codePostal} {adress.ville} <span
+                                                                                if:true={adress.NoCompteContratMaj}>({adress.NoCompteContratMaj})</span>
+                                                                                <span class="slds-text-color_error" if:true={adress.irrecouvrable}> Irrécouvrable</span>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </template>
+                                </div>
+                        </div>
+                        <div if:true={longList} class="second-list-adresses-length" onclick={handleSecondAdresses}>
+                                +{secondListSize}
+                                <br>
+                                <lightning-icon icon-name="utility:chevrondown" size="xx-small" if:false={openSecondAdresses}>
+                                </lightning-icon>
+                                <lightning-icon icon-name="utility:chevronup" size="xx-small" if:true={openSecondAdresses}>
+                                </lightning-icon>
+                        </div>
+                        <div if:true={openSecondAdresses} class="second-list-adresses">
+                                <template for:each={secondListAdresses} for:item="adress">
+                                        <div key={adress.key} class="container-second-adresse-item">
+                                                <div id={adress.key} if:false={adress.selected}
+                                                        class="header-bloc-adresse second-adresse-item" onclick={handleActive}>
+                                                        <div><span if:true={adress.numeroVoie}>{adress.numeroVoie},
+                                                                </span><span>{adress.libelleVoie}</span></div>
+                                                        <div if:true={adress.complementAdresse}>{adress.complementAdresse}</div>
+                                                        <div>
+                                                                {adress.codePostal} {adress.ville} <span
+                                                                        if:true={adress.NoCompteContratMaj}>({adress.NoCompteContratMaj})</span>
+                                                                        <span class="slds-text-color_error" if:true={adress.irrecouvrable}> Irrécouvrable</span>
+                                                        </div>
+                                                </div>
+                                                <div id={adress.key} if:true={adress.selected} onclick={handleActive}
+                                                        class="selected header-bloc-adresse second-adresse-item">
+                                                        <div><span if:true={adress.numeroVoie}>{adress.numeroVoie},
+                                                                </span><span>{adress.libelleVoie}</span></div>
+                                                        <div if:true={adress.complementAdresse}>{adress.complementAdresse}</div>
+                                                        <div>{adress.codePostal} {adress.ville} <span
+                                                                        if:true={adress.NoCompteContratMaj}>({adress.NoCompteContratMaj})</span>
+                                                                        <span class="slds-text-color_error" if:true={adress.irrecouvrable}> Irrécouvrable</span>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </template>
+                        </div>
+                        <div class="header-container-emmenagement">
+                                <a class="slds-truncate via-action-link slds-text-link--reset" onclick={handleOpenEmmenagement}>
+                                        <img src="/resource/EngieCustomResources/images/ajout_logement.svg" />
+                                </a>
+                        </div>
+                </div>
+                <div class="body-container">
+                        <div if:true={showBody} class="slds-grid slds-wrap">
+                                <c-card-pdl-pce if:true={selectedItem} class="slds-size_1-of-3 slds-p-right_xx-small slds-m-bottom_x-small"
+                                        selecteditem={selectedItem} listrecord={listRecord} type="pce" index={index} onpopupevent={popupEvent}></c-card-pdl-pce>
+                                <c-card-pdl-pce if:true={selectedItem} class="slds-size--1-of-3 slds-p-right_xx-small slds-m-bottom_x-small"
+                                        selecteditem={selectedItem} listrecord={listRecord} type="pdl" index={index} onpopupevent={popupEvent}>
+                                </c-card-pdl-pce>
+                                <c-card-information-logement
+                                        class="slds-size--1-of-6 slds-p-right_xx-small slds-m-bottom_x-small"
+                                        information={selectedItem.typeOccupation}></c-card-information-logement>
+                                <c-card-information-logement
+                                        class="slds-size--1-of-6 slds-p-right_xx-small slds-m-bottom_x-small"
+                                        information={selectedItem.typeResidence}></c-card-information-logement>
+                                <c-card-energie if:true={selectedItem} class="slds-size--1-of-3 slds-p-right_xx-small slds-m-bottom_x-small"
+                                        listrecord={listRecord} contratactif={selectedItem.contratactifgazWS} selecteditem={selectedItem}
+                                        contratserviceelecvert={selectedItem.contratserviceelecvert} contratservicegazvert={selectedItem.contratservicegazvert}
+                                        contratinactif={selectedItem.contratinactifgazWS} contratactifsecondaire={selectedItem.contratactifelecWS} title={selectedItem.titleWS} type="gaz"
+                                        index={index} onpopupevent={popupEvent}></c-card-energie>
+                                <c-card-energie class="slds-size--1-of-3 slds-p-right_xx-small slds-m-bottom_x-small"
+                                        listrecord={listRecord} contratactif={selectedItem.contratactifelecWS} contratactifsecondaire={selectedItem.contratactifgazWS} selecteditem={selectedItem}
+                                        contratserviceelecvert={selectedItem.contratserviceelecvert} contratservicegazvert={selectedItem.contratservicegazvert}
+                                        contratinactif={selectedItem.contratinactifelecWS} title={selectedItem.titleElecWS}
+                                        type="elec" index={index} onpopupevent={popupEvent}></c-card-energie>
+                                <c-card-service class="slds-size--1-of-3 slds-p-right_xx-small slds-m-bottom_x-small"
+                                        onpopupevent={popupEvent} selecteditem={selectedItem} recordid={recordId} contratactifelec={selectedItem.contratactifelecWS} contratactifgaz={selectedItem.contratactifgazWS} 
+                                        contratservicegazvert={selectedItem.contratservicegazvert} contratserviceelecvert={selectedItem.contratserviceelecvert}></c-card-service>
+                                <c-card-solde if:true={selectedItem} class="slds-size--1-of-3 slds-p-right_xx-small slds-m-bottom_x-small"
+                                        listrecord={listRecord} index={index} selecteditem={selectedItem} recordid={recordId}></c-card-solde>
+                                        <c-card-paiement-facturation if:true={selectedItem} onpopupevent={popupEvent} class="slds-size--2-of-3 slds-p-right_xx-small slds-m-bottom_x-small"
+                                        selecteditem={selectedItem} listrecord={listRecord} index={index} recordid={recordId}  dossierrecouvrement={DossierRecouvrement} 
+                                        idplanpaiement={idPlanPaiement} listorderedadresses={listOrderedAdresses}></c-card-paiement-facturation>
+                                <c-footer-view360 if:true={selectedItem} class="slds-size--1-of-1" selecteditem={selectedItem} listrecord={listRecord} listorderedadresses={listOrderedAdresses}
+                                        index={index} recordid={recordId}></c-footer-view360>
+                        </div>
+                        <div if:true={error} class="slds-grid slds-grid_vertical-align-center slds-grid_align-center error-container">
+                                <c-card-error class="slds-size--3-of-4"
+                                        error-message={errorMessage}>
+                                </c-card-error>
+                        </div>
+                        <div if:true={newEmmenagement} class="slds-grid slds-grid_vertical-align-center slds-grid_align-center error-container">
+                                <c-card-error class="slds-size--2-of-4"
+                                        error-message={errorMessage}>
+                                </c-card-error>
+                        </div>
+                        <div if:true={isFlagCreationContratEnCours} class="slds-grid slds-grid_vertical-align-center slds-grid_align-center error-container">
+                                <c-card-contrat-en-cours class="slds-size--4-of-4"></c-card-contrat-en-cours>
+                        </div>
+                        
+                </div>
+        </div>
+</template>

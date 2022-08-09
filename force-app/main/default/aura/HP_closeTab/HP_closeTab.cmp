@@ -1,0 +1,3 @@
+<aura:component implements="force:lightningQuickAction,lightning:availableForFlowActions">
+	<lightning:workspaceAPI aura:id="workspace"/>
+</aura:component>

@@ -1,0 +1,75 @@
+.active {
+    color: #19a546;
+  }
+  
+  .enCours {
+    color: #ff7f1d;
+  }
+
+  .title-service {
+    position: absolute;
+    top: 12px;
+    left: 15px;
+    font-size: 1.2em;
+    font-weight: 600;
+  }
+
+.resilie-label {
+  color: #c1c0c0;
+}
+
+.date-service {
+  min-height: 20px;
+}  
+
+
+  .bloc-card {
+    height: 196px;
+  }
+  
+  .position-right {
+      right: 0;
+  }
+  
+  .close-popover:hover {
+      cursor: pointer;   
+  }
+  
+  .container-card {
+    position: relative;
+  }
+  
+  .popover-260 {
+    height: 270px;
+  }
+  
+  .container-card .popup-card {
+    position: absolute;
+    top: 0;
+    right: calc(-100% - 12px);
+    background-color: #e0f5ff;
+  }
+  
+  .container-card .label {
+    font-size: 10px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #767676;
+  }
+  
+  .container-card .value {
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: black;
+  }
+
+  .back-to-line{
+    word-wrap: break-word;
+  }

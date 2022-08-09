@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SESSION_MDR__c</fullName>
+    <externalId>false</externalId>
+    <label>Session formation SMILE</label>
+    <referenceTo>Session_SMILE__c</referenceTo>
+    <relationshipLabel>ParticipantS (Session formation SMILE)</relationshipLabel>
+    <relationshipName>ParticipantS1</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>true</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

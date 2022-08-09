@@ -1,0 +1,29 @@
+<template>
+    <div class="hp-popup hp-chat-popin">
+        <section
+            role="dialog"
+            tabindex="-1"
+            aria-labelledby="modal-heading-01"
+            aria-modal="true"
+            aria-describedby="modal-content-id-1"
+            class="slds-modal slds-fade-in-open chat-modal"
+        >
+            <div class="hp-chat-popin__container slds-modal__container">
+                <div class="hp-container">
+                    <header class="slds-modal__header hp-header">
+                        <h1 class="hp-bigTitle">{titleText}</h1>
+                        <span class="hp-closeButton">
+                            <a onclick={closePopin}>
+                                <img class="hp-close-icon" src={iconClose} alt="close" />
+                            </a>
+                        </span>
+                    </header>
+                    <div class="hp-content">
+                        <div class="hp-wrapper chat-wrapper" lwc:dom="manual"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open chat-backdrop"></div>
+    </div>
+</template>

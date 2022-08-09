@@ -1,0 +1,14 @@
+<aura:component implements="flexipage:availableForAllPageTypes,lightning:isUrlAddressable" access="global" >
+	<lightning:workspaceAPI aura:id="workspace" />
+    <aura:handler value="{!this}" name="init" action="{!c.init}"/>
+
+    <aura:attribute name="recordId" type="String" default="{!v.pageReference.state.c__recordId}"></aura:attribute>
+    <aura:attribute name="AccountId" type="String" default="{!v.pageReference.state.c__AccountId}"></aura:attribute>
+    <aura:attribute name="listnotedebitcredit" type="String" default="{!v.pageReference.state.c__listnotedebitcredit}"></aura:attribute>
+	<aura:attribute name="IdBusinessPartner" type="String" default="{!v.pageReference.state.c__IdBusinessPartner}"></aura:attribute>
+    <aura:attribute name="EnqSat" type="String" default="{!v.pageReference.state.c__EnqSat}"></aura:attribute>
+
+
+    <c:smNoteDebitCredit listnotedebitcredit='{!v.listnotedebitcredit}' IdBusinessPartner='{!v.IdBusinessPartner}' recordId='{!v.recordId}' AccountId='{!v.AccountId}' oncloseclicked='{!c.handlecloseTabEvent}' onopenInteraction="{!c.openInteraction}"  EnqSat='{!v.EnqSat}'/>	
+
+</aura:component>

@@ -1,0 +1,249 @@
+<!--
+  @File Name          : hP_UTIL_LogConsole.html
+  @Description        : 
+  @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
+  @Group              : 
+  @Last Modified By   : Hemdene Ben Hammouda
+  @Last Modified On   : 01-10-2022
+  @Modification Log   : 
+  Ver       Date            Author      		    Modification
+  1.0    05/03/2020   ChangeMeIn@UserSettingsUnder.SFDoc     Initial Version
+-->
+<template>
+    <template if:false={vue360}>
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_1-of-3">
+                <lightning-input type="datetime" name="startDate" label="Start Date" value={startDate} onchange={handleChange} required></lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+                <lightning-input type="datetime" name="endDate" label="End Date" value={endDate} onchange={handleChange} required></lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-3" style="padding-right : 1em; padding-top : 1.5em">
+                <lightning-input type="text" onchange={handleChange}
+                        label="Key Word"  value={keyWord} name="keyWord"
+                        checked>
+                </lightning-input>
+            </div>
+        </div>
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_1-of-6" style="padding-right : 1em">
+                <lightning-input type="text" onchange={handleChange}
+                        label="User Name"  value={username} name="username"
+                        checked>
+                </lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-6" style="padding-right : 1em">
+                <lightning-input type="text" onchange={handleChange}
+                        label="End Point" value={endPoint} name="endPoint"
+                        checked>
+                </lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-6" style="padding-right : 1em">
+                <lightning-combobox onchange={handleChange}
+                    name="method"
+                    label="Method"
+                    placeholder="Choose Method"
+                    value={method}
+                    options={methodOptions}>
+                </lightning-combobox>
+            </div>
+            <div class="slds-col slds-size_1-of-6" style="padding-right : 1em">
+                <lightning-combobox onchange={handleChange}
+                    name="status"
+                    label="Status"
+                    placeholder="Choose Status"
+                    value={status} 
+                    options={statusOptions}>
+                </lightning-combobox>
+            </div>
+            <div class="slds-col slds-size_1-of-6" style="padding-right : 1em">
+                <lightning-combobox onchange={handleChange}
+                    name="direction"
+                    label="Direction"
+                    placeholder="Choose Direction"
+                    value={direction}
+                    options={directionOptions} required>
+                </lightning-combobox>
+            </div>
+            <div class="slds-col slds-size_1-of-6" style="padding-right : 1em;padding-top: 1.5rem;">
+            <div style="text-align: right;padding-right: 1rem;">
+                <lightning-button if:true={hasData}  label="Statistic"  onclick={openPopupModalGlobalStatistic} class="slds-m-left_x-small" ></lightning-button>
+                <lightning-button variant="brand" label="Search"  onclick={searchLog} class="slds-m-left_x-small" style="margin-left: 1em;"></lightning-button>   
+            </div>
+            </div>
+        </div>
+        <div class="slds-grid slds-wrap" style="margin-bottom: 3rem">
+            <template if:true={showLogLimitMessage}>
+
+                <div class="slds-text-color_error slds-text-align_center">
+                    Certains logs ne sont pas affichés, affinez les critères pour les consulter.
+
+                </div>
+            </template>
+        </div>
+    </template>
+        <template if:true={vue360}>Total Duration call API : <b>{totalApiDuration} ms ({numberAPICall})</b>
+            <lightning-input type="text" onchange={handleChange}
+            label="Quick search"  value={quickSearch} name="quickSearch" style="margin-bottom: 0.2rem;"
+            checked></lightning-input>
+    </template>
+    <div class="slds-table--header-fixed_container" style="height:25rem">
+        <div class="slds-scrollable_y" style="height:85%;">
+<table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table--header-fixed">
+    <thead>
+      <tr class="slds-line-height_reset slds-text-title_caps">
+        <template if:false={vue360}>
+        <th class="" scope="col">
+          <div class="slds-truncate slds-cell-fixed" title="Id Transaction">Id Transaction</div>
+        </th>
+        <th class="" scope="col" style="width: 7rem;">
+          <div class="slds-truncate slds-cell-fixed" title="Direction">Direction</div>
+        </th>
+    </template>
+        <th class="" scope="col" style="width: 7rem;">
+          <div class="slds-truncate slds-cell-fixed" title="Status" >Status</div>
+        </th>
+        <template if:false={vue360}>
+        <th class="" scope="col">
+          <div class="slds-truncate slds-cell-fixed" title="Username">Username</div>
+        </th>
+        </template>
+        <th class="" scope="col">
+          <div class="slds-truncate slds-cell-fixed" title="Date">Date</div>
+        </th>
+        <th class="" scope="col" style="width: 10rem;">
+          <div class="slds-truncate slds-cell-fixed" title="Time Execution">Time Execution</div>
+        </th>
+        <th class="" scope="col" style="width: 7rem;">
+            <div class="slds-truncate slds-cell-fixed" title="Method">Method</div>
+          </th>
+        <th class="" scope="col">
+          <div class="slds-truncate slds-cell-fixed" title="End Point">Details</div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+        <template for:each={resultListLog} for:item="log">
+            <tr  key={log.dateCall}>
+                <template if:false={vue360}>
+                    <th scope="row">
+                        <div class="slds-truncate">
+                    {log.idTransaction}
+                        </div>
+                        </th>
+                        <th scope="row">
+                            <div class="slds-truncate">
+                    {log.direction}
+                </div>
+                </th>
+            </template>
+            <th scope="row" class={log.classCssError}>
+                <div class="slds-truncate"  style="text-align: center;">
+                    {log.status}
+                </div>
+                </th>
+                <template if:false={vue360}>
+                    <th scope="row">
+                        <div class="slds-truncate">
+                    {log.username}
+                        </div>
+                        </th>
+                </template>
+                <th scope="row">
+                    <div class="slds-truncate">
+                    {log.dataFormetter}
+                </div>
+                </th>
+                <th scope="row" class={log.classCssTime}>
+                    <div class="slds-truncate" style="text-align: center;">
+                    {log.timeExecution} ms
+                    </div>
+                    </th>
+                    <th scope="row" >
+                        <div class="slds-truncate">
+                    {log.method}
+                        </div>
+                        </th>
+                        <th scope="row">
+                            <div class="slds-truncate">
+                    {log.endPointTruncate} 
+                    <lightning-icon onclick={viewDetails} icon-name="action:more" size="xx-small" data-id={log.dateCall} style="float:right;"></lightning-icon>
+                </div>
+                </th>
+            </tr>
+        </template>
+        </tbody>
+    </table>
+    </div>
+    </div>
+    <template if:true={popupModal}>
+        <div class="demo-only" style="height: 640px;">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container" style="max-width: 100rem;width: 80%;">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closePopupModal}>
+                            <lightning-icon icon-name="utility:close" size="medium">
+                            </lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2>{logSelected.method} : {logSelected.status} ({logSelected.timeExecution} ms)</h2>
+                        <span id="modal-heading-01" style="overflow-wrap: anywhere;"><b>End point</b> :{logSelected.endPoint}</span>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-2" style="padding-right : 1em">
+                        <b>Request : </b> <br/>
+                        <pre>
+                                {logSelected.requestBody}
+                            </pre>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2" style="padding-right : 1em">
+                            <b>Response : </b><br/>
+                            <pre>
+                        {logSelected.responseBody}
+                    </pre>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+        </template>
+        <div if:true={isLoad}>
+            <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+            </div>
+            <template if:true={popupModalGlobalStatistic}>
+                <div class="demo-only" style="height: 640px;">
+                    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+                        <div class="slds-modal__container" style="max-width: 100rem;width: 80%;">
+                            <header class="slds-modal__header">
+                                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closePopupModalGlobalStatistic}>
+                                    <lightning-icon icon-name="utility:close" size="medium">
+                                    </lightning-icon>
+                                    <span class="slds-assistive-text">Close</span>
+                                </button>
+                                <h2>Statistics</h2>
+                            </header>
+                            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                                <div class="slds-grid slds-wrap">
+                                    <div class="slds-col slds-size_1-of-3" style="padding-right : 1em">
+                                        <div class="chartokko slds-m-around_medium" lwc:dom="manual"></div>
+                                    </div>
+                                    <div class="slds-col slds-size_2-of-3" style="padding-right : 1em">
+                                        <div class="chartavrage slds-m-around_medium" lwc:dom="manual"></div>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2" style="padding-right : 1em">
+                                        <div class="chartOKKOByApi slds-m-around_medium" lwc:dom="manual"></div>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2" style="padding-right : 1em">
+                                        <div class="chartLineTime slds-m-around_medium" lwc:dom="manual"></div>
+                                    </div>
+                            </div>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open"></div>
+                </div>
+                </template>
+</template>

@@ -1,0 +1,10 @@
+<template>
+    <div class="tooltip">
+        <button class="tooltip__btn" aria-describedby="tooltip-content">
+            <span style={iconTooltipStyle}></span>
+        </button>
+        <div class="tooltip__content" data-id="tooltip-content">
+            <lightning-formatted-rich-text value={content}></lightning-formatted-rich-text>
+        </div>
+    </div>
+</template>

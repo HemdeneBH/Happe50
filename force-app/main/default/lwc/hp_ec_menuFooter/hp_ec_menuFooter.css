@@ -1,0 +1,51 @@
+:host(.lightTheme) .hp-bloc-app-happe   {
+  background-color: var(--light-primary-colour);
+} 
+:host(.darkTheme) .hp-bloc-app-happe  {
+  background-color: var(--dark-primary-colour);;
+} 
+
+.hp-bloc-nav-phone{
+    font-family: "font_AvantBold";
+    font-size: 20px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 2.25;
+    letter-spacing: 0.6px;
+    text-align: center;
+    color: var(--white);
+    border-top: solid 2px var(--true-black);
+    padding: 10px 0;
+    -webkit-box-shadow: 0px 10px 15px -1px rgba(0,0,0,0.3); 
+    box-shadow: 0px 10px 15px -1px rgba(0,0,0,0.3);
+  }
+  
+  .hp-bloc-nav-phone a{
+    color: var(--white);
+  }
+
+  .hp-bloc-app-happe {
+    display: flex;
+    padding: 10px;
+    color: var(--white);
+    font-weight: bold;
+    align-items: center;
+    box-shadow: -5px 5px 25px 0 rgba(0, 0, 0, 0.7);
+  }
+
+
+  .hp-bloc-app-happe p{
+    font-size: 15px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: 0.45px;
+    text-align: left;
+    color: var(--white);
+  }
+  .hp-bloc-app-happe p a{
+   text-decoration: none;
+   color: var(--white);
+  }

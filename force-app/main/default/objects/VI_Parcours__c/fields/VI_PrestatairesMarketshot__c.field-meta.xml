@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_PrestatairesMarketshot__c</fullName>
+    <externalId>false</externalId>
+    <label>Sites / Prestataires Marketshot</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Active contact</fullName>
+                <default>false</default>
+                <label>Active contact</label>
+            </value>
+            <value>
+                <fullName>ADM Value</fullName>
+                <default>false</default>
+                <label>ADM Value</label>
+            </value>
+            <value>
+                <fullName>Webhelp</fullName>
+                <default>false</default>
+                <label>Webhelp</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

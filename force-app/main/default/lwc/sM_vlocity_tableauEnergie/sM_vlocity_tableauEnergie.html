@@ -1,0 +1,209 @@
+<template>
+    <div class="slds-size_1-of-1">
+        <label class="slds-form-element__label vlc-slds-inline-control__label">Facture Contestée</label>
+        <br/>
+        <div class="container-tabs">
+            <div class="icon-energie" if:true={omniJsonData.pce}>
+                <img src="/resource/EngieCustomResources/images/picto-gaz-naturel.svg"/>  
+            </div>
+            <div class="icon-energie icon-energie-elec" if:true={isPDLPCE}>
+                <img src="/resource/EngieCustomResources/images/picto-electricite.svg"/>  
+            </div>
+            <div class="icon-energie" if:true={isonlyPDL}>
+                <img src="/resource/EngieCustomResources/images/picto-electricite.svg"/>  
+            </div>
+            <lightning-tabset>
+                <lightning-tab label="GAZ" icon-name="utility:vide" if:true={consoGaz} data-energie="Gaz" onactive={swichTabGaz}>
+                    <div class="slds-p-around_large slds-clearfix">
+                        <table class="tab-gaz">
+                            <thead>
+                                <tr class="tableListPa">
+                                    <th scope="col">DATE DE RELEVÉ</th>
+                                    <th scope="col">N° DE FACTURE</th>
+                                    <th scope="col">INDEX DE DÉBUT</th>
+                                    <th scope="col">INDEX DE FIN</th>
+                                    <th scope="col">CONSO EN M3</th>
+                                    <th scope="col">COÉF. DE CONVERSION</th>
+                                    <th scope="col">CONSO EN KWH</th>
+                                    <th scope="col">CATÉGORIE</th>
+                                    <th scope="col">MOTIF DE RELEVÉ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="tableListPaTr">
+                                    <td data-label="DATE DE RELEVÉ">
+
+                                        {consoGaz.dateReleve}
+                                    </td>
+                                    <td data-label="N° DE FACTURE ASSOCIÉE">
+                                        {consoGaz.idFacture}
+
+                                    </td>
+                                    <td data-label="INDEX DE DÉBUT">
+                                        {consoGaz.indexDebut}
+                                    </td>
+                                    <td data-label="INDEX DE FIN">
+                                        {consoGaz.indexFin}
+                                    </td>
+                                    <td data-label="CONSO EN M3">
+
+                                        {consoGaz.consommationBrute}
+                                    </td>
+                                    <td data-label="COÉF. DE CONVERSION">
+                                        {consoGaz.KPCS}
+                                    </td>
+                                    <td data-label="CONSO EN KWH">
+                                        {consoGaz.consommationKwh}
+
+                                    </td>
+                                    <td data-label="CATÉGORIE">
+                                        {consoGaz.categorieReleve.libelleCourt}
+                                    </td>
+                                    <td data-label="MOTIF DE RELEVÉ">
+                                        {consoGaz.motifReleve.libelleCourt}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </lightning-tab>
+                <lightning-tab label="ELECTRICITE" icon-name="utility:vide" if:true={consoElec} data-energie="Elec" onactive={swichTabElec}>
+                    <div class="slds-p-around_large slds-clearfix">
+                        <table class="tab-elec">
+                            <thead>
+                                <tr class="tableListPa">
+                                    <th scope="col">DATE DE RELEVÉ</th>
+                                    <th scope="col">N° DE FACTURE</th>
+                                    <th scope="col">LIBELLÉ CADRAN</th>
+                                    <th scope="col">INDEX DE DÉBUT</th>
+                                    <th scope="col">INDEX DE FIN</th>
+                                    <th scope="col">CONSO EN KWH</th>
+                                    <th scope="col">CATÉGORIE</th>
+                                    <th scope="col">MOTIF DE RELEVÉ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="tableListPaTr">
+                                    <td data-label="DATE DE RELEVÉ" class="alignement-top">
+
+                                        {consoElec.dateReleve}
+                                    </td>
+                                    <td data-label="N° DE FACTURE ASSOCIÉE" class="alignement-top">
+                                        {consoElec.numeroFacture}
+                                    </td>
+                                    <td data-label="LIBELLÉ CADRAN">
+                                        <template if:true={consoElec.cadran}>
+                                            {consoElec.cadran.libelleLong}
+                                        </template>
+                                    </td>
+                                    <td data-label="INDEX DE DÉBUT">
+                                        {consoElec.indexDebut}
+                                    </td>
+                                    <td data-label="INDEX DE FIN">
+                                        {consoElec.indexFin}
+                                    </td>
+                                    <td data-label="CONSO EN KWH">
+                                        {consoElec.consommationKwh}
+                                    </td>
+                                    <td data-label="CATÉGORIE" class="alignement-top">
+                                        <template if:true={consoElec.categorieReleve}>
+                                            {consoElec.categorieReleve.libelleCourt}
+                                        </template>
+                                    </td>
+                                    <td data-label="MOTIF DE RELEVÉ" class="alignement-top">
+                                        <template if:true={consoElec.motifReleve}>
+                                            {consoElec.motifReleve.libelleCourt}
+                                        </template>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </lightning-tab>
+            </lightning-tabset>
+        </div>
+        <!-- <div class="cb" data-ng-click="swichTab(true)" data-ng-if="consoGaz" ng-class="{ 'selected-tab':tab}">
+            <div class="icon-energie">
+                <img src="/resource/EngieCustomResources/images/picto-gaz-naturel.svg"/>  
+            </div>
+            <span>GAZ</span>
+        </div>
+        <div class="cb" data-ng-click="swichTab(false)" data-ng-if="consoElec" ng-class="{ 'selected-tab': !tab}">
+            <div class="icon-energie">
+                <img src="/resource/EngieCustomResources/images/picto-electricite.svg"/>  
+            </div>
+            <span>ÉLECTRICITÉ</span>
+        </div>
+        <table ng-show="!tab" class="tab-elec" data-ng-if="consoElec">
+            <thead>
+                <tr class="tableListPa">
+                    <th scope="col">DATE DE RELEVÉ</th>
+                    <th scope="col">N° DE FACTURE</th>
+                    <th scope="col">LIBELLÉ CADRAN</th>
+                    <th scope="col">INDEX DE DÉBUT</th>
+                    <th scope="col">INDEX DE FIN</th>
+                    <th scope="col">CONSO EN KWH</th>
+                    <th scope="col">CATÉGORIE</th>
+                    <th scope="col">MOTIF DE RELEVÉ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="tableListPaTr">
+                    <td class="alignement-top">
+                        {{consoElec.dateFinConsommation}}
+                    </td>
+                    <td class="alignement-top">
+                        <span data-ng-if="!consoElec.simulationFlag">{{consoElec.idFacture}}</span>
+                    </td>
+                    <td>
+                        <div data-ng-repeat="cadran in consoElec.cadran">{{cadran.code}}</div>
+                    </td>
+                    <td>
+                        <div data-ng-repeat="cadran in consoElec.cadran">{{cadran.indexDebut}}</div>
+                    </td>
+                    <td>
+                        <div data-ng-repeat="cadran in consoElec.cadran">{{cadran.indexFin}}</div>
+                    </td>
+                    <td data-label="CONSO EN KWH">
+                        <div data-ng-repeat="cadran in consoElec.cadran">{{cadran.quantite}}</div>
+                    </td>
+                    <td class="alignement-top">
+                        {{consoElec.categorieReleve.libelleCourt}}
+                    </td>
+                    <td class="alignement-top">
+                        {{consoElec.motifReleve.libelleCourt}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table  ng-show="tab" class="tab-gaz" data-ng-if="consoGaz">
+            <thead>
+                <tr class="tableListPa">
+                    <th scope="col">DATE DE RELEVÉ</th>
+                    <th scope="col">N° DE FACTURE</th>
+                    <th scope="col">INDEX DE DÉBUT</th>
+                    <th scope="col">INDEX DE FIN</th>
+                    <th scope="col">CONSO EN M3</th>
+                    <th scope="col">COÉF. DE CONVERSION</th>
+                    <th scope="col">CONSO EN KWH</th>
+                    <th scope="col">CATÉGORIE</th>
+                    <th scope="col">MOTIF DE RELEVÉ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="tableListPaTr">
+                    <td>{{consoGaz.dateFinConsommation}}</td>
+                    <td><span data-ng-if="!consoGaz.simulationFlag">{{consoGaz.idFacture}}</span></td>
+                    <td>{{consoGaz.indexDebut}}</td>
+                    <td>{{consoGaz.indexFin}}</td>
+                    <td>{{consoGaz.quantiteM3}}</td>
+                    <td>{{consoGaz.kPCS}}</td>
+                    <td>{{consoGaz.quantiteKWh}}</td>
+                    <td>{{consoGaz.categorieReleve.libelleCourt}}</td>
+                    <td>{{consoGaz.motifReleve.libelleCourt}}</td>
+                </tr>
+            </tbody>
+        </table> -->
+    </div>
+</template>

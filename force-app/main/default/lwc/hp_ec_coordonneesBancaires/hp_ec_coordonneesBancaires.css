@@ -1,0 +1,112 @@
+.hp-coordonneesBancaires {
+    padding: 35px 40px;
+    margin: 15px;
+    min-height: 300px;
+}
+
+.hp-bigTitle {
+    max-width: 275px;
+    padding: 0 0 15px 0;
+
+}
+
+.hp-bloc {
+    padding: 10px 0;
+}
+
+.title {
+    font-family: var(--font-bold);
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+    color: var(--blue);
+}
+
+.subtitle {
+    font-family: var(--font-regular);
+    font-size: 14px;
+    font-weight: 200;
+    text-align: left;
+    color: var(--text-color);
+}
+
+.hp-link {
+    padding: 10px 0 0 0;
+}
+
+.hp-modifPaiement {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    font-family: var(--font-bold);
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--secondary-colour);
+    text-decoration: underline;
+}
+
+.leftBloc {
+    justify-self: start;
+}
+
+.rightBloc {
+    justify-self: end;
+}
+
+.hp-link>a {
+    color: var(--secondary-colour);
+    font-family: var(--font-bold);
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.hp-link>a:hover,
+.hp-link>a:active,
+.hp-link>a:focus {
+    color: var(--text-color);
+}
+
+.rightBloc .chevron::before {
+    border-style: solid;
+    font-size: 16px;
+    border-width: 0.15em 0.15em 0 0;
+    content: '';
+    display: inline-block;
+    height: 0.60em;
+    right: 0.15em;
+    transform: rotate(-45deg);
+    vertical-align: middle;
+    width: 0.60em;
+}
+
+.rightBloc .chevron.right:before {
+    transform: rotate(45deg);
+}
+
+
+@media (max-width: 1024px) {
+
+    /* Ipad and tablets */
+    .hp-coordonneesBancaires {
+        margin: 10px 0;
+        min-height: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    /* tablets et big mobiles */
+
+}
+
+@media (max-width: 576px) {
+
+    /* mobiles */
+
+}
+@media (max-width: 374px) {
+  
+    .hp-coordonneesBancaires{
+      padding: 25px 20px;
+    }
+    
+  }

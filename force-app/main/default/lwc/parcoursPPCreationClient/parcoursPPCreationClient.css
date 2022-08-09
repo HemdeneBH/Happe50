@@ -1,0 +1,187 @@
+.form-control:focus {
+  box-shadow: 0 0 0 0;
+}
+
+.form-control {
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  border-bottom-color: rgb(227, 227, 227);
+  border-radius: 0px;
+}
+
+.form-group {
+  text-align: left;
+}
+
+.title {
+  border-style: solid;
+  border-color: rgba(0, 157, 233, 1);
+  border-width: 1px;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  border-radius: 0px;
+  font-family: "Lato", Helvetica, Arial, serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  color:#009de9;
+}
+
+.form-check-label{
+    font-family: "Lato", Helvetica, Arial, serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.text-title{
+    font-family: "Lato", Helvetica, Arial, serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+		padding-left: inherit;
+}
+
+.text-titleCivilite{
+    font-family: "Lato", Helvetica, Arial, serif;
+		font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+		padding-left: inherit;
+}
+
+.voir-moins {
+  background-color: transparent;
+  flex-shrink: 0;
+  height: auto;
+  line-height: 25px;
+  min-height: 25px;
+  text-align: center;
+  text-decoration: underline;
+  white-space: nowrap;  
+  width: 311px;
+  font-family: "Lato", Helvetica, Arial, serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  color: rgba(0, 157, 233, 1);
+}
+
+.paragraph{
+  flex-shrink: 0;
+  height: auto;
+  line-height: 19px;
+  min-height: 167px;
+  text-align: left;
+  width: 687px;
+  font-family: "Lato", Helvetica, Arial, serif;
+}
+.adresse {
+  background-color: transparent;
+	font-family: "Lato", Helvetica, Arial, serif;
+  color: rgba(33, 33, 33, 1);
+  height: auto;
+  left: 0px;
+  line-height: 19px;
+  position: absolute;
+  text-align: left;
+  top: 0px;
+  white-space: nowrap;
+  width: auto;
+}
+
+.textbody-left {
+  font-family: "Lato", Helvetica, Arial, serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.overlap-group {
+  background-color: transparent;
+  flex-shrink: 0;
+  height: 34px;
+  position: relative;
+  width: 105px;
+}
+.listtext-copy-8 {
+		align-items: center;
+		background-color: white;
+		display: inline-flex;
+		flex-direction: row;
+		flex-shrink: 0;
+		height: 48px;
+		justify-content: flex-start;
+		min-width: 270px;
+		padding: 0 20px;
+		width: 100%;
+}
+
+.listtext-copy-8:hover {
+  background-color: whitesmoke;
+
+}
+
+.tooltip {
+  background-color: transparent;
+  flex-shrink: 0;
+  height: 218px;
+  width: 271px;
+}
+
+.group-2 {
+  align-items: flex-start;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  height: auto;
+  float: left;
+  justify-content: flex-start;
+  min-height: 46px;
+  width: 64px;
+	margin-bottom: 1rem;
+}
+
+.group {
+  align-items: flex-start;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  height: auto;
+  justify-content: flex-start;
+  min-height: 25px;
+	margin-left: 100px;
+  width: auto;
+	margin-bottom: 1rem;
+}
+
+.errorMessage {
+		color: rgba(204, 0, 51, 1);
+		font-family: "Lato", Helvetica, Arial, serif;
+		font-size: 12px;
+		font-style: italic;
+		font-weight: 400;
+		background-color: transparent;
+		flex-shrink: 0;
+		height: auto;
+		letter-spacing: 0px;
+		line-height: 12px;
+		margin-top: 6px; 
+		min-height: 12px;
+		min-width: 236px;
+		text-align: left;
+		white-space: nowrap;
+		width: auto;
+}
+
+
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}

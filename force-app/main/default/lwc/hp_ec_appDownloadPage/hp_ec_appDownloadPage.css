@@ -1,0 +1,97 @@
+.hp-popinApp {
+  display: block;
+  margin: 0 auto;
+  padding: 50px 40px;
+  min-height: 600px;
+  height: auto;
+  max-width: 480px;
+  box-shadow: -5px 5px 15px 0 rgba(12, 29, 38, 0.21);
+  border: solid 30px var(--primary-colour);
+  background-image: var(--light-bg);
+}
+
+.hp-subTitle {
+  font-family: var(--font-regular);
+  font-size: 16px;
+  color: var(--true-black);
+  text-align: center;
+  padding: 30px 0 0 0;
+}
+
+.hp-slogan {
+  color: var(--primary-colour);
+  font-family: var(--font-bold);
+  font-size: 22px;
+  text-align: center;
+}
+
+.hp-googlePlay,
+.hp-appStore {
+  padding: 10px 0;
+}
+
+.hp-bigTitle {
+  text-align: center;
+  color: var(--true-black);
+  text-transform: uppercase;
+  padding: 40px 0 0 0;
+  font-size: 22px;
+  text-align: center;
+}
+
+.hp-logo {
+  display: flex;
+  justify-content: center;
+}
+
+
+.hp-closeButton {
+  position: relative;
+}
+
+.hp_imgcontainer {
+  padding: 30px 0;
+  display: grid;
+  justify-content: center;
+}
+
+.hp-closeButton a {
+  position: absolute;
+  top: -25px;
+  right: -10px;
+  border-radius: 50%;
+  border:  1px solid var transparent;
+  padding: 2px;
+}
+
+.hp-closeButton a:hover,
+.hp-closeButton a:focus,
+.hp-closeButton a:active {
+  border:  1px solid var(--primary-colour);
+}
+
+
+@media (max-width: 1024px) {
+
+  /* Ipad and tablets */
+  .hp-popinApp {
+    padding: 40px 25px;
+    height: auto;
+    max-width: 420px;
+    border: solid 20px var(--primary-colour);
+  }
+
+  .hp-logo img {
+    width: 160px;
+  }
+
+  .hp-bigTitle {
+    font-size: 20px;
+  }
+
+}
+
+@media (max-width: 576px) {
+
+
+}

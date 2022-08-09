@@ -1,0 +1,87 @@
+.tooltip {
+    position: relative;
+    pointer-events: none;
+}
+
+.tooltip .tooltip__btn {
+    pointer-events: all;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    margin: 0;
+    padding: 0;
+    background-color: var(--primary-colour);
+    border: 2px solid var(--primary-colour);
+    color: var(--white);
+    text-align: center;
+    font-family: var(--font-bold);
+    transition: all 0.1s;
+    z-index: 2;
+}
+
+.tooltip:hover .tooltip__btn,
+.tooltip:focus-within .tooltip__btn {
+    border-color: var(--text-color);
+}
+
+.tooltip .tooltip__btn span {
+    display: block;
+    margin: auto;
+    background-color: var(--white);
+    width: 12px;
+    height: 28px;
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center center;
+}
+
+.tooltip .tooltip__content {
+    display: inline-flex;
+    padding: 10px 10px 10px 20px;
+    max-width: 330px;
+    overflow: auto;
+    text-overflow: ellipsis;
+    pointer-events: all;
+    width: 100%;
+    width: calc(100% - 18px);
+    position: absolute;
+    min-height: 50px;
+    top: 50%;
+    left: 18px;
+    transform: translateY(-50%);
+    background: var(--bg-base);
+    border: 2px solid var(--text-color);
+    color: var(--text-color);
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1;
+    transition: opacity 0.1s,
+                visibility 0s 0.1s;
+}
+
+.tooltip:focus-within .tooltip__content,
+.tooltip:hover .tooltip__content {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.1s,
+                visibility 0s;
+}
+
+.tooltip .tooltip__content lightning-formatted-rich-text {
+    font-size: 14px;
+    line-height: 15px;
+    letter-spacing: 0.42px;
+}
+
+@media (max-width: 375px) {
+
+    /* small mobiles */
+  
+    .tooltip .tooltip__content lightning-formatted-rich-text{
+      font-size: 12px;
+    } 
+  }

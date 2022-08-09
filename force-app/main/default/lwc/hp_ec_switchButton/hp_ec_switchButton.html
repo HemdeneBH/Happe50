@@ -1,0 +1,26 @@
+<template>
+    <div class="switch-button">
+        <template for:each={options} for:item="opt">
+            <label key={opt.value}>
+                <input
+                    type="radio"
+                    name={name}
+                    value={opt.value}
+                    onchange={handlechange}
+                    if:true={opt.checked}
+                    checked="checked"
+                />
+                <input
+                    type="radio"
+                    name={name}
+                    value={opt.value}
+                    onchange={handlechange}
+                    if:false={opt.checked}
+                />
+                <span class="label">
+                    <lightning-formatted-rich-text value={opt.label}></lightning-formatted-rich-text>
+                </span>
+            </label>
+        </template>
+    </div>
+</template>

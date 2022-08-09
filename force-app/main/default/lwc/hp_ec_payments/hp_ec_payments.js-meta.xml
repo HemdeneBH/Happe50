@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>54.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+
+            <property name="titreV1" label="Titre V1" type="String" default="Mes modes de paiement"></property>
+            <property name="titreV2" label="Titre V2" type="String" default="Mon mode de paiement"></property>
+
+            <property name="labelMoyenPaiement1" label="Label Moyen de paiement 1" type="String" default="Carte bancaire"></property>
+            <property name="labelMoyenPaiement2" label="Label Moyen de paiement 2" type="String" default="Paylib"></property>
+            <property name="labelMoyenPaiement3" label="Label Moyen de paiement 3" type="String" default="Amazon Pay"></property>
+            <property name="labelMoyenPaiement4" label="Label Moyen de paiement 4" type="String" default="Paiement à plusieurs"></property>
+            <property name="labelMoyenPaiement5" label="Label Moyen de paiement 5" type="String" default="Coupon chèque"></property>
+
+            <property name="labelBoutonPaiement1" label="Label Bouton de paiement 1" type="String" default="Payer par"></property>
+            <property name="labelBoutonPaiement2" label="Label Bouton de paiement 2" type="String" default="Pay"></property>
+            <property name="labelBoutonPaiement3" label="Label Bouton de paiement 3" type="String" default="Amazon Pay"></property>
+            <property name="labelBoutonPaiement4" label="Label Bouton de paiement 4" type="String" default="Payer à plusieurs"></property>
+            <property name="labelBoutonPaiement5" label="Label Bouton de paiement 5" type="String" default="Télécharger"></property>
+
+
+            <property name="lienEnSavoirPlusPaiement1" label="Lien En Savoir+ paiement 1" type="String" default=""></property>
+            <property name="showLienEnSavoirPlusPaiement1" label="Afficher En Savoir+ paiement 1" type="Boolean" default="true"></property>
+
+            <property name="lienEnSavoirPlusPaiement2" label="Lien En Savoir+ paiement 2" type="String" default=""></property>
+            <property name="showLienEnSavoirPlusPaiement2" label="Afficher En Savoir+ paiement 2" type="Boolean" default="true"></property>
+
+            <property name="lienEnSavoirPlusPaiement3" label="Lien En Savoir+ paiement 3" type="String" default=""></property>
+            <property name="showLienEnSavoirPlusPaiement3" label="Afficher En Savoir+ paiement 3" type="Boolean" default="true"></property>
+
+            <property name="lienEnSavoirPlusPaiement4" label="Lien En Savoir+ paiement 4" type="String" default="http://google.com"></property>
+            <property name="showLienEnSavoirPlusPaiement4" label="Afficher En Savoir+ paiement 4" type="Boolean" default="true"></property>
+
+            <property name="lienEnSavoirPlusPaiement5" label="Lien En Savoir+ paiement 5" type="String" default=""></property>            
+            <property name="showLienEnSavoirPlusPaiement5" label="Afficher En Savoir+ paiement 5" type="Boolean" default="true"></property>
+
+            <property name="textModePaiement" label="Texte Mode de paiement V1" type="String" default="Mon mode de paiement"></property>
+            <property name="textDatePrelevementPart1" label="text Date Prélèvement Part1" type="String" default="Vous avez adhéré au prélèvement automatique chaque"></property>
+            <property name="textDatePrelevementPart2" label="text Date Prélèvement Part 2" type="String" default="du mois"></property>
+
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

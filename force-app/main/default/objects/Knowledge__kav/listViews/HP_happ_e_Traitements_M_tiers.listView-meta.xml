@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HP_happ_e_Traitements_M_tiers</fullName>
+    <columns>ARTICLE_NUMBER</columns>
+    <columns>HP_TECH_DataCategories__c</columns>
+    <columns>TITLE</columns>
+    <columns>VALIDATION_STATUS_ENUM</columns>
+    <columns>PUBLISH_STATUS</columns>
+    <columns>LAST_UPDATE</columns>
+    <columns>LAST_PUBLISHED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>HP_TECH_DataCategories__c</field>
+        <operation>contains</operation>
+        <value>Traitement,Knowledge</value>
+    </filters>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Knowledge__kav.happ_e</value>
+    </filters>
+    <label>happ-e : Traitements Métiers</label>
+    <sharedTo>
+        <role>HP_Conseiller_Niveau_3</role>
+        <role>HP_HAPPE</role>
+    </sharedTo>
+</ListView>

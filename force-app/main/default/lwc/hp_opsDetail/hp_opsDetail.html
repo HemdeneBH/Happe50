@@ -1,0 +1,192 @@
+<!--
+  @description       : 
+  @author            : Slimene Belhaj Ali
+  @group             : 
+  @last modified on  : 03-03-2021
+  @last modified by  : Slimene Belhaj Ali
+  Modifications Log 
+  Ver   Date         Author               Modification
+  1.0   02-17-2021   Slimene Belhaj Ali   Initial Version
+-->
+<template>
+    <lightning-card>
+        <span style="font-size: 1.2rem; font-weight: bold;margin-left:1rem">MODIFIER LE RENDEZ-VOUS DISTRIBUTEUR</span>
+        <br/>
+
+        <div class="slds-grid slds-gutters" style="margin:1rem">
+            <div class="slds-col slds-size_1-of-2">
+                <span style="font-weight: bold;">Logement</span><br/><br/>
+                <lightning-icon icon-name="utility:home" size="x-small" style="margin-right: 1rem;"></lightning-icon>
+                {currentPfc.numeroVoie} {currentPfc.libelleVoie} {currentPfc.codePostal} {currentPfc.ville}
+            <br/><br/>
+            <b>{numLabel} :</b> {_ops.Numero_PDL_PCE__c}
+            <br/>
+            <b>Energie :</b> {enegrie}
+            <br/><br/>
+            <b>Commentaire distributeur :</b> 
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <span style="font-weight: bold;">OPS</span><br/><br/>
+                <b>Numéro d'affaire :</b> {_ops.Numero_affaire_distributeur__c}<br/>
+                <b>Type d'OPS :</b> {opsOctopus.opsType} <br/><br/>
+
+                <b>Date Initial :</b> {opsOctopus.datePrevue}<br/>  
+                <b>Créneau :</b>  {opsOctopus.creneau}<br/> 
+                <b>Personne à contacter :</b> {personneContacter}<br/> <br/> 
+                
+                <b>Statut :</b> {opsOctopus.opsStatus}<br/> 
+            </div>
+          </div>
+
+    
+    
+    <div style="text-align: end;padding-right: 0.5rem;" if:true={showModifyButton}>
+        <lightning-button label="Fermer" onclick={closeOps} class="slds-m-left_x-small"></lightning-button>
+
+        <lightning-button disabled={disabledModify} variant="brand" label="Modifier" onclick={modify} class="slds-m-left_x-small"></lightning-button>
+        <lightning-helptext if:true={disabledModify} content={messageModify}></lightning-helptext>
+   
+    </div>
+    <hr/>
+    <div if:true={showModify}>
+        
+        <span style="font-size: 1rem; font-weight: bold;margin-left:1rem">Choisir une nouvelle date</span>
+        <br/>
+
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_1-of-2 padding-modify">
+                <lightning-input type="date" name="date" label="Date" required onchange={handleData} class="validation"></lightning-input>
+                <span style="color: orange;font-size: 0.7rem;" if:true={showDateError}>
+                    {showDateErrorMessage}
+                </span>
+            </div>
+           
+            <div class="slds-col slds-size_1-of-2 padding-modify">
+                <lightning-combobox name="creneau" class="validation"
+            label="Créneau" required onchange={handleData}
+            value={value}
+            placeholder="Selectionner un créneau"
+            options={creneauOptions}></lightning-combobox>
+            </div>
+        </div>
+        <br/> <br/>
+        <span style="font-size: 1rem; font-weight: bold;margin-left:1rem">Contact pour ce rendez-vous</span>
+       
+
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_1-of-3 padding-modify">
+                <lightning-combobox onchange={handleData} class="validation"
+                label="Civilité" required name="civilite" value={civilite}
+                
+                placeholder="Selectionner une civilité"
+                options={civiliteOptions}></lightning-combobox>
+            </div>
+           
+            <div class="slds-col slds-size_1-of-3 padding-modify">
+                <lightning-input type="text" class="validation" label="Nom" required name="nom" onchange={handleData} value={nom}></lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-3 padding-modify">
+                <lightning-input type="text" class="validation" label="Prénom" required name="prenom" onchange={handleData} value={prenom}></lightning-input>
+            </div>
+        </div>
+
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_1-of-2 padding-modify">
+                <lightning-input type="tel" class="validation" label="Téléphone" pattern="[0]?([1-7]|9)[0-9]{8}" required onchange={handleData} name="tel" value={tel}
+                message-when-pattern-mismatch="Veuillez saisir un numéro commençant par 01 à 07 ou 09 suivi de 8 chiffres"></lightning-input>
+            </div>
+           
+            <div class="slds-col slds-size_1-of-2 padding-modify">
+                <lightning-textarea class="validation" label="Commentaire" placeholder="Commentaire..." required name="commentaire" onchange={handleData}></lightning-textarea>
+            </div>
+        </div>
+
+        <div style="text-align: end;padding-right: 0.5rem;">
+            <lightning-button label="Fermer" onclick={closeOps} class="slds-m-left_x-small"></lightning-button>
+    
+            <lightning-button variant="brand" label="Valider" onclick={validCreneau1Step} class="slds-m-left_x-small"></lightning-button>
+       
+        </div>
+    </div>
+
+
+    <div if:true={showCreneau}>
+        <center style="color: rgb(255,223,0); font-weight: bold;font-size: 1rem;">Nouvelle date indisponible</center>
+     
+        <center style="font-weight: bold;font-size: 1rem;margin-top: 0.5rem;">Liste des RDV disponibles</center>
+       
+        <div class="slds-grid slds-wrap">
+            <template for:each={disponibilites} for:item='disp'>
+                <div class="slds-col slds-size_1-of-2" key={disp.index} onclick={selectDispo} data-id={disp.index}>
+                   <div class={disp.class}>
+                        {disp.dateFormat}  {disp.creneauLibelle}
+                   </div>
+                </div>
+            </template>
+
+        </div>
+
+        <div style="text-align: end;padding-right: 0.5rem;">
+            <lightning-button label="Fermer" onclick={closeOpsCancel} class="slds-m-left_x-small"></lightning-button>
+    
+            <lightning-button variant="brand" label="Valider" onclick={validCreneau2Step} class="slds-m-left_x-small"></lightning-button>
+       
+        </div>
+    </div>
+ <div if:true={showSuccess}>
+    <!--<div >-->
+        <center style="color:Green; font-weight: bold;font-size: 1rem;">Nouvelle date validée!</center>
+        <center style="color:red; font-weight: bold;font-size: 1rem;" if:true={successMessage}>{successMessage}</center>
+        <center style="font-weight: bold;font-size: 1rem;margin-top: 0.5rem;">RDV le {dateFormat} {creneauLabel}</center>
+    
+        <div style="text-align: end;padding-right: 0.5rem;margin-top:2.5rem;padding-left: 0.5rem;">
+            <table>
+                <tr>
+                    <td>
+                        <lightning-input type="checkbox"
+                        label="Envoyer une notification par email" name="email"
+                        onchange={handleData}>
+                        </lightning-input>
+                    </td>
+                    <td>
+                        <lightning-input type="checkbox"
+                     label="Envoyer une notification par SMS" name="sms"
+                     onchange={handleData}>
+                     </lightning-input>
+                    </td>
+                    <td>
+                        <lightning-button label="Fermer" onclick={closeOps} class="slds-m-left_x-small"></lightning-button>
+                    </td>
+                    <td>
+                        <lightning-button variant="brand" label="Envoyer la notification" onclick={sendNotification} class="slds-m-left_x-small"></lightning-button>
+                    </td>
+                </tr>
+            </table>
+            
+            
+                     
+            
+    
+            
+       
+        </div>
+    </div>
+
+    <div if:true={showError}>
+        <center style="color: red; font-weight: bold;font-size: 1rem;">Erreur lors de l'enregistrement : <b>{errorMessageOPS}</b></center>
+        
+        <center style="font-weight: bold;font-size: 1rem;margin-top: 0.5rem;">Accéder au portail du distributeur</center>
+        <center style="font-size: 1rem;margin-top: 0.5rem;"><a href={urlPortail} target="_blank">Portail {distName}</a></center>
+
+        <div style="text-align: end;padding-right: 0.5rem;;margin-top:2.5rem">
+            <lightning-button label="Fermer" onclick={closeOps} class="slds-m-left_x-small"></lightning-button>
+    
+            
+        </div>
+    </div>
+</lightning-card>
+
+<div class="exampleHolder" if:true={showSpinner}>
+    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+</div>
+</template>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_VR04_Sous_Type</fullName>
+    <active>false</active>
+    <description>@description: Le champ Sous_type__c doit être obligatoirement rempli si le status est différent de &quot;Nouveau&quot;.
+@projet: Smile</description>
+    <errorConditionFormula>AND(
+NOT(ISPICKVAL(Statut__c, &apos;Nouveau&apos;)),
+OR(ISPICKVAL(Type__c, &apos;Blocage sur MES/RES/CHO&apos;),
+ISPICKVAL(Type__c, &apos;Situation compte/règlement/remboursement&apos;)),
+ISBLANK(TEXT(Sous_type__c))
+)</errorConditionFormula>
+    <errorDisplayField>Sous_type__c</errorDisplayField>
+    <errorMessage>Merci de renseigner le sous type de l&apos;intervention.</errorMessage>
+</ValidationRule>

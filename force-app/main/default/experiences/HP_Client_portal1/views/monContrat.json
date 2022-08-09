@@ -1,0 +1,173 @@
+{
+  "appPageId" : "7e89266e-f5a3-4029-bb48-38a8a732ab93",
+  "componentName" : "community_layout:sldsFlexibleLayout",
+  "id" : "8c85034a-4f87-4298-80fb-b4a1603c5c70",
+  "label" : "Mon contrat",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "backgroundImageConfig" : "",
+        "backgroundImageOverlay" : "rgba(0,0,0,0)",
+        "sectionConfig" : "{\"UUID\":\"2c81e571-e9d4-404b-b5ac-23a9f9e94ae6\",\"columns\":[{\"UUID\":\"f55b4f4d-f81f-47de-ab84-7407c76a68a3\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}"
+      },
+      "componentName" : "community_layout:section",
+      "id" : "2c81e571-e9d4-404b-b5ac-23a9f9e94ae6",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "detailOffreText" : "Voir le détail de l’offre",
+            "titleText" : "Mon Offre"
+          },
+          "componentName" : "c:hp_ec_offre",
+          "id" : "895d1c3e-3a01-473a-ad13-6026c6091549",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        }, {
+          "componentAttributes" : { },
+          "componentName" : "c:hp_ec_accountActivation",
+          "id" : "f7269925-d452-4534-82d2-673c1c80eac8",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "f55b4f4d-f81f-47de-ab84-7407c76a68a3",
+        "regionLabel" : "Column 1",
+        "regionName" : "col1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "scopedBrandingSetId" : null,
+      "type" : "component"
+    }, {
+      "componentAttributes" : {
+        "backgroundImageConfig" : "",
+        "backgroundImageOverlay" : "rgba(0,0,0,0)",
+        "sectionConfig" : "{\"UUID\":\"c2e537d3-4b1b-496a-b322-1c99e7ec4e8a\",\"columns\":[{\"UUID\":\"71ff996d-b14f-4436-aa18-27e5d2e448bb\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"4\",\"seedComponents\":[]},{\"UUID\":\"45237a7b-f8e9-4417-b6c5-5762d88907d0\",\"columnName\":\"Column 2\",\"columnKey\":\"3dabd\",\"columnWidth\":\"8\",\"seedComponents\":[]}]}"
+      },
+      "componentName" : "community_layout:section",
+      "id" : "c2e537d3-4b1b-496a-b322-1c99e7ec4e8a",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "justificatifButtonLabel" : "JUSTIFICATIF DOMICILE",
+            "titleText" : "MON CONTRAT",
+            "voirContractButtonLabel" : "VOIR MON CONTRAT"
+          },
+          "componentName" : "c:hp_ec_contract",
+          "id" : "3bfd71b7-9d2f-49fb-bb61-10eedf7196b2",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        }, {
+          "componentAttributes" : { },
+          "componentName" : "c:hp_ec_helpContact",
+          "id" : "24130bef-eb74-4afd-ac18-fd4b5d01a2a1",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "71ff996d-b14f-4436-aa18-27e5d2e448bb",
+        "regionLabel" : "Column 1",
+        "regionName" : "col1",
+        "renditionMap" : { },
+        "type" : "region"
+      }, {
+        "components" : [ {
+          "componentAttributes" : {
+            "dateReglementPersonnaliseLabel" : "Date de règlement personnalisée",
+            "depanExpressLabel" : "Dépan’Express",
+            "depanExpressURL" : "www.google.com",
+            "factureEnLigneLabel" : "Ma facture en ligne",
+            "modePaiementLabel" : "Mode de paiement",
+            "optionVertElecLabel" : "Option Vertélec+ happ-e",
+            "titleText" : "Mes options et services 2",
+            "voirOptionsLabel" : "Voir toutes les options",
+            "voirOptionsURL" : "www.google.com"
+          },
+          "componentName" : "c:hp_ec_optionsServices",
+          "id" : "74085a27-e5c7-4d66-a60b-36167c54b322",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        }, {
+          "componentAttributes" : {
+            "sectionConfig" : "{\"UUID\":\"e55897ef-4cdf-4500-ad5b-fad7e5e3507c\",\"columns\":[{\"UUID\":\"32dc5562-c493-4543-a80a-e1478ac37cc9\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"6\",\"seedComponents\":[]},{\"UUID\":\"7567d061-ba64-4e56-8dc3-af0ccd1b8914\",\"columnName\":\"Column 2\",\"columnKey\":\"1852b\",\"columnWidth\":\"6\",\"seedComponents\":[]}]}"
+          },
+          "componentName" : "dxp_layout:columns",
+          "id" : "e55897ef-4cdf-4500-ad5b-fad7e5e3507c",
+          "regions" : [ {
+            "components" : [ {
+              "componentAttributes" : {
+                "title" : "Mon Statut"
+              },
+              "componentName" : "c:hp_ec_statusComponent",
+              "id" : "bfb66615-3bf1-43ef-89e1-1bcf9c099f8f",
+              "renderPriority" : "NEUTRAL",
+              "renditionMap" : { },
+              "type" : "component"
+            } ],
+            "id" : "32dc5562-c493-4543-a80a-e1478ac37cc9",
+            "regionLabel" : "Column 1",
+            "regionName" : "col1",
+            "renditionMap" : { },
+            "type" : "region"
+          }, {
+            "components" : [ {
+              "componentAttributes" : {
+                "title" : "Mes Documents"
+              },
+              "componentName" : "c:hp_ec_myDocuments",
+              "id" : "8e2416dc-a569-4522-93c2-82872fe85feb",
+              "renderPriority" : "NEUTRAL",
+              "renditionMap" : { },
+              "type" : "component"
+            } ],
+            "id" : "7567d061-ba64-4e56-8dc3-af0ccd1b8914",
+            "regionLabel" : "Column 2",
+            "regionName" : "1852b",
+            "renditionMap" : { },
+            "type" : "region"
+          } ],
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "45237a7b-f8e9-4417-b6c5-5762d88907d0",
+        "regionLabel" : "Column 2",
+        "regionName" : "3dabd",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "scopedBrandingSetId" : null,
+      "type" : "component"
+    } ],
+    "id" : "a9872876-c948-432e-9f67-4f3da56da3f8",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "pageTitle" : "Mon contrat",
+        "recordId" : "{!recordId}"
+      },
+      "componentName" : "community_builder:seoAssistant",
+      "id" : "dad82aaa-bb9d-4e65-a7c1-11e6244bc6a3",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "8b750d8b-2c4d-4890-9637-115febb8b3f4",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "bpHmsKcRsRJVAxsjPUCXd7yA8oGvLt",
+  "type" : "view",
+  "viewType" : "custom-mon-contrat"
+}

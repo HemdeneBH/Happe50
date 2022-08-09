@@ -1,0 +1,10 @@
+{
+  "activeViewId" : "8c85034a-4f87-4298-80fb-b4a1603c5c70",
+  "appPageId" : "7e89266e-f5a3-4029-bb48-38a8a732ab93",
+  "configurationTags" : [ ],
+  "id" : "bf4489fe-d02d-4093-822b-ae3ee3b1c899",
+  "label" : "Mon contrat",
+  "routeType" : "custom-mon-contrat",
+  "type" : "route",
+  "urlPrefix" : "mon-contrat"
+}

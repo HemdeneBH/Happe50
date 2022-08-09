@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ConsommationSansFournisseur__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Remontée de la donnée du distributeur qui permet d&apos;identifier si le PDL est dans un cas de consommation sans fournisseur. Applicable uniquement pour le Gaz</description>
+    <externalId>false</externalId>
+    <label>ConsommationSansFournisseur</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

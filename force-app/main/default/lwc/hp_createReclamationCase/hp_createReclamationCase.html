@@ -1,0 +1,57 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 07-28-2021
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<template>
+    <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+        <div class="slds-modal__container" style="width:50rem;">
+            <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Fermer" onclick={closeReclamation}>
+                <lightning-icon icon-name="utility:close" size="medium">
+                </lightning-icon>
+                <span class="slds-assistive-text">Fermer</span>
+                </button>                                                                           
+                <h1 class="slds-text-heading_medium slds-m-bottom_large" style="margin-top: 0.3rem;margin-bottom: 0.3rem;font-size: 1.4rem;">
+                    Création d’une réclamation
+                </h1>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1" style="background: white;">
+                <div class="slds-grid slds-wrap">
+                    <lightning-record-edit-form record-type-id={reclamationRT} style="width:100%;" object-api-name="Case" onsuccess={handleSuccess} onsubmit ={handleSubmit} >
+                    <div class="slds-grid slds-gutters" style="height: 20rem;">
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-input-field field-name="HP_Type__c" required>
+                            </lightning-input-field>
+                            <lightning-input-field field-name="Priority" required>
+                            </lightning-input-field>
+                            <lightning-input-field field-name="HP_Numero_de_facture__c">
+                            </lightning-input-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-input-field field-name="HP_Motif__c" required>
+                            </lightning-input-field>
+                            <lightning-input-field field-name="HP_Comment__c" required>
+                            </lightning-input-field>
+                            <lightning-input-field field-name="ParentId" value={recordId} 
+                            read-only="true" style="pointer-events: none;opacity: 0.5;">
+                            </lightning-input-field>
+                        </div>
+                    </div>
+                    <div style="float:right">
+                        <lightning-button class="slds-m-top_small" style="margin-right: 0.5rem;" onclick={closeReclamation}
+                        label="Annuler"></lightning-button>
+                        <lightning-button variant="brand" label="Créer requête" type="submit"
+                        class="slds-m-top_small"></lightning-button>
+                        <div if:true={showSpinner}>
+                            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                        </div>
+                    </div>
+                    </lightning-record-edit-form>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>

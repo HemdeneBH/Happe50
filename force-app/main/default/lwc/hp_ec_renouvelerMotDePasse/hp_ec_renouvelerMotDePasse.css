@@ -1,0 +1,118 @@
+.slds-has-error .slds-form-element__help,
+.slds-required {
+  color: var(--rose) !important;
+}
+.slds-form-element {
+  margin: 20px 0;
+}
+.slds-input::placeholder {
+  font-family: var(--font-normal);
+  color: var(--placeholder);
+  font-size: 16px;
+  letter-spacing: 0.48px;
+  cursor: text;
+}
+.hp-renouvelerMotDePasse {
+  padding: 50px 40px;
+  min-height: 600px;
+  height: auto;
+  max-width: 480px;
+  box-shadow: -5px 5px 15px 0 rgba(12, 29, 38, 0.21);
+  border: solid 30px var(--light-primary-colour);
+  background-image: var(--light-bg);
+}
+.hp-inputLabelTooltip {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: center;
+}
+.hp-bigTitle {
+  text-align: center;
+  color: var(--true-black);
+  text-transform: uppercase;
+  padding: 40px 0 0 0;
+  font-size: 22px;
+}
+.hp-bad-input{
+    color : var(--rose);
+    font-family: var(--font-bold);
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1.07;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+  }
+.hp-logo {
+  display: flex;
+  justify-content: center;
+}
+.hp-success{
+  color : var(--blue);
+  font-family: var(--font-bold);
+  font-size: 16px;
+  text-align: center;
+  padding: 20px;
+}
+.hp-alert {
+  display: grid;
+  grid-template-columns: 1fr 9fr;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.hp-alert-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: var(--white);
+  background: var(--rose);
+}
+
+.hp-alert-text {
+  padding: 0 0 0 15px;
+  color: var(--rose);
+  font-family: var(--font-bold);
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.07;
+}
+.hp-logo img {
+  width: 175px;
+  height: auto;
+  object-fit: contain;
+}
+.hp-firstButton {
+  min-width: 210px;
+}
+.hp-mentionBox {
+  font-family: var(--font-regular);
+  font-weight: lighter;
+  color: var(--dark-disabled);
+  font-size: 14px;
+  text-align: left;
+  padding: 20px 0 0 0;
+}
+@media (max-width: 1024px) {
+  /* Ipad and tablets */
+  .hp-renouvelerMotDePasse {
+    padding: 40px 25px;
+    height: auto;
+    max-width: 420px;
+    border: solid 20px var(--light-primary-colour);
+  }
+  .hp-logo img {
+    width: 160px;
+  }
+  .hp-bigTitle {
+    font-size: 20px;
+  }
+}
+@media (max-width: 576px) {
+  /* mobiles */
+}

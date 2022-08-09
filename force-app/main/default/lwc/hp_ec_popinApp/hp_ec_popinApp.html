@@ -1,0 +1,54 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 05-02-2022
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<template>
+    <div >
+        <div class="hp-closeButton">
+            <a onclick={closePopinApp}>
+                <img class="hp-close-icon" src={closeIcon} alt="close icon" />
+            </a>
+        </div>
+        <div class="hp-content">
+            <div class="hp-logo">
+                <img src={blackLogo}>
+            </div>
+
+            <div class="hp-bigTitle">
+                <p>Vous souhaitez</p>
+                <p>télécharger</p>
+                <p> l’application happ-e</p>
+            </div>
+
+            <div class="hp-subTitle">
+                Veuillez choisir votre version :
+            </div>
+            <div class="hp_imgcontainer">
+                <div class="hp-googlePlay">
+                    <a href={liengoogleplay} target="_blank">
+                        <img src={googleplay}>
+                    </a>
+                </div>
+
+                <div class="hp-appStore">
+                    <a href={lienappstore} target="_blank">
+                        <img src={appStore}>
+                    </a>
+                </div>
+            </div>
+
+            <div class="hp-slogan">
+                <p>
+                    Merci!
+                </p>
+                <p>
+                    Soyez happ-e :)
+                </p>
+
+            </div>
+        </div>
+    </div>
+</template>

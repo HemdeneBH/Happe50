@@ -1,0 +1,18 @@
+<template>
+    <c-cf-sm-options-summary-container
+            key={omniJsonDef.lwcId} 
+            data-omni-key={omniJsonDef.name} 
+            omni-resume={resume} 
+            data-omni-layout={layout} 
+            omni-json-def={omniJsonDef} 
+            omni-json-data={omniJsonDef.response} 
+            omni-seed-json={omniJsonDef.propSetMap.seedDataJSON} 
+            omni-custom-state={omniJsonDef.customSaveState} 
+            omni-script-header-def={omniScriptHeaderDef} 
+            omni-json-data-str={omniJsonDef} 
+            data-omni-input=""
+            parent-data="true"
+            parent-attribute={parentAttribute} 
+            records={options}
+    ></c-cf-sm-options-summary-container>
+</template>

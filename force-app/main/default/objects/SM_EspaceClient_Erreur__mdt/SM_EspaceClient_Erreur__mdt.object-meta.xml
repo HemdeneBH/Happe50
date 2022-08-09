@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>@Project : Smile
+@Description : Ce Custom Metadata Type contient les différents code d&apos;erreurs retournés par l&apos;api digital et les libellés correspondants de chaque code</description>
+    <label>SM_EspaceClient_Erreur</label>
+    <pluralLabel>SM_EspaceClient_Erreurs</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

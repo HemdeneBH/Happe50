@@ -1,0 +1,10 @@
+{
+  "activeViewId" : "59de0665-0d8d-4b10-b70b-2605be1922b2",
+  "appPageId" : "7e89266e-f5a3-4029-bb48-38a8a732ab93",
+  "configurationTags" : [ ],
+  "id" : "f46858de-a73a-4f00-afd8-0a2ab907535c",
+  "label" : "Mes documents",
+  "routeType" : "custom-mes-documents",
+  "type" : "route",
+  "urlPrefix" : "mes-documents"
+}

@@ -1,0 +1,472 @@
+<template>
+    <lightning-card>
+        <h1 class="slds-text-heading_large slds-m-top_large slds-m-right_large slds-m-bottom_large slds-m-left_large title-modif">Modification de la fiche Client</h1>
+        <!-- Formulaire -->
+        <lightning-record-edit-form record-id={recordId} object-api-name="Contact" onerror={handleErrorForm} onblur={handleLoad} onload={handleLoad} onsubmit={handleSubmit} onsuccess={handleSucess}>
+            <lightning-messages class="lightning-messages"></lightning-messages>
+            
+            <!-- Civility (ReadOnly) -->
+            <div class="slds-box slds-box_x-small slds-m-left_x-large slds-m-right_x-large slds-m-bottom_x-large">
+                <div class="slds-grid slds-gutters slds-m-left_large slds-m-right_large">
+                    <div class="slds-col slds-size_1-of-3">
+                        <div class="slds-form-element__label">Civilité</div>
+                        <lightning-output-field variant="label-hidden" field-name="Salutation"></lightning-output-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <div class="slds-form-element__label">Nom</div>
+                        <lightning-output-field variant="label-hidden" field-name="LastName"></lightning-output-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <div class="slds-form-element__label">Prénom</div>
+                        <lightning-output-field variant="label-hidden" field-name="FirstName"></lightning-output-field>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Form -->
+            <div class="slds-box slds-box_x-small slds-m-left_x-large slds-m-right_x-large slds-m-bottom_x-large">
+                <!-- Address Section -->
+                <div class="slds-p-left_x-small slds-p-right_x-small">
+                    <div class="slds-text-heading_medium">Adresse de contact</div>
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-col slds-size_1-of-1">
+                            <lightning-radio-group
+                                                onchange={handleChangeRecherche}
+                                                options={optionsRecherche}
+                                                value="1"
+                                                type="button"></lightning-radio-group>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-gutters" if:true={typeSearchAdress} onload={loadConcatAdresse}>
+                        <div class="slds-col slds-size_2-of-4">
+                            <div class="slds-form-element__label">Adresse</div>
+                            <lightning-input data-id="address" variant="label-hidden" list="valueList" message-when-value-missing=" " onchange={getAddressSuggestions} value={addressSelected} required></lightning-input>
+                            <div if:true={isAddressFieldEmpty} role="alert" class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error">
+                                <h2>Veuillez saisir une adresse valide.</h2>
+                            </div>
+                            <div data-id="listAddressSuggested" class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid slds-hide" role="listbox" style="position: relative;">
+                                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                    <template for:each={listAddressResult} for:item="adresse">
+                                        <li role="presentation" class="slds-listbox__item" key={adresse.id}>
+                                            <div data-id={adresse.id} 
+                                                data-label={adresse.label}
+                                                data-housenumber={adresse.numero}
+                                                data-street={adresse.voie}
+                                                data-postcode={adresse.codePostal}
+                                                data-city={adresse.ville}
+                                                data-idstreet={adresse.idVoie}
+                                                class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                                role="option" onclick={selectAddressValue}>
+                                                <span class="slds-media__body">
+                                                    <span class="slds-listbox__option-text slds-listbox__option-text_entity">{adresse.label}</span>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="slds-col slds-size_2-of-4">
+                            <div class="slds-form-element__label">Complément d'adresse</div>
+                            <lightning-input-field data-id="complementAdresse" variant="label-hidden" field-name="Complement_adresse__c" class="cmpAdress"></lightning-input-field>
+                            <div data-id="listComplementSuggested" class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid slds-hide" role="listbox" style="position: relative;">
+                                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                    <template for:each={listComplementResult} for:item="complement">
+                                        <li role="presentation" class="slds-listbox__item" key={complement.label}>
+                                            <div data-id={complement.id} 
+                                                data-label={complement.label}
+                                                class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                                role="option" onclick={selectComplementValue}>
+                                                <span class="slds-media__body">
+                                                    <span class="slds-listbox__option-text slds-listbox__option-text_entity">{complement.label}</span>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-grid slds-gutters" if:false={typeSearchAdress}>
+                        <div class="slds-col slds-size_2-of-4">
+                            <div class="slds-form-element__label">Code postal</div>
+                            <lightning-input onfocusout={closeTabsAdressManuelle} type="number" data-id="codePostal" variant="label-hidden" list="valueList" message-when-value-missing=" " onchange={changeCodePostal} onclick={checkListCodesPostaux} value={codePostal} required></lightning-input>
+                            <div if:true={isCodePostalFieldEmpty} role="alert" class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error">
+                                <h2>Veuillez saisir un code postal.</h2>
+                            </div>
+                            <div data-id="listCodesPostauxSuggested" class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid slds-hide" role="listbox" style="position: relative;">
+                                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                    <template for:each={listCodesPostaux} for:item="zipCode">
+                                        <li role="presentation" class="slds-listbox__item" key={zipCode}>
+                                            <div data-value={zipCode}
+                                                class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                                role="option" onclick={selectCodePostalValue}>
+                                                <span class="slds-media__body">
+                                                    <span class="slds-listbox__option-text slds-listbox__option-text_entity">{zipCode}</span>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_2-of-4">
+                            <div class="slds-form-element__label">Ville</div>
+                            <lightning-input onfocusout={closeTabsAdressManuelle} data-id="ville" variant="label-hidden" list="valueList" message-when-value-missing=" " onchange={changeVille} onclick={checkListVille} value={ville} required></lightning-input>
+                            <div if:true={isCityFieldEmpty} role="alert" class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error">
+                                <h2>Veuillez saisir une ville.</h2>
+                            </div>
+                            <div data-id="listVillesSuggested" class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid slds-hide" role="listbox" style="position: relative;">
+                                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                    <template for:each={listVilles} for:item="ville">
+                                        <li role="presentation" class="slds-listbox__item" key={ville}>
+                                            <div data-value={ville}
+                                                class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                                role="option" onclick={selectVilleValue}>
+                                                <span class="slds-media__body">
+                                                    <span class="slds-listbox__option-text slds-listbox__option-text_entity">{ville}</span>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                    <div class="slds-grid slds-gutters" if:true={showValidateBtn}>
+                        <div class="slds-col slds-size_2-of-1 slds-m-top_x-small">
+                            <lightning-button variant="success" label="Valider" title="Valider" disabled={disabled} onclick={setNextStep}></lightning-button>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-gutters" if:true={secondStep}>
+                        <div class="slds-col slds-size_1-of-6">
+                            <div class="slds-form-element__label">N° de la voie</div>
+                            <lightning-input onfocusout={closeTabsAdressManuelle} data-id="numeroRue" variant="label-hidden" list="valueList" message-when-value-missing=" " onchange={changeNumero} onclick={checkListNumero} value={numero}></lightning-input>
+                            <div data-id="listNumerosSuggested" class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid slds-hide" role="listbox" style="position: relative;">
+                                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                    <template for:each={listNumeros} for:item="numero">
+                                        <li role="presentation" class="slds-listbox__item" key={numero.numeroVoie}>
+                                            <div data-value={numero.numeroVoie}
+                                                class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                                role="option" onclick={selectNumeroValue}>
+                                                <span class="slds-media__body">
+                                                    <span class="slds-listbox__option-text slds-listbox__option-text_entity">{numero.numeroVoie}</span>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_5-of-6">
+                            <div class="slds-form-element__label">Nom de la voie</div>
+                            <lightning-input onfocusout={closeTabsAdressManuelle} data-id="rue" variant="label-hidden" list="valueList" message-when-value-missing=" " onchange={changeRue} value={rue} required></lightning-input>
+                            <div if:true={isStreetFieldEmpty} role="alert" class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error">
+                                <h2>Veuillez saisir un nom de la voie.</h2>
+                            </div>
+                            <div data-id="listRuesSuggested" class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid slds-hide" role="listbox" style="position: relative;">
+                                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                    <template for:each={listRues} for:item="rue">
+                                        <li role="presentation" class="slds-listbox__item" key={rue.codePostal}>
+                                            <div data-value={rue.libelleVoie}
+                                                class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                                role="option" onclick={selectRueValue}>
+                                                <span class="slds-media__body">
+                                                    <span class="slds-listbox__option-text slds-listbox__option-text_entity">{rue.libelleVoie}</span>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-col slds-size_2-of-4" if:false={typeSearchAdress}>
+                            <div class="slds-form-element__label">Complément d'adresse</div>
+                            <lightning-input-field data-id="complementAdresse" variant="label-hidden" field-name="Complement_adresse__c" class="cmpAdress"></lightning-input-field>
+                        </div>
+                        <div class="slds-col slds-size_2-of-4">
+                            <div class="slds-form-element__label">Chez</div>
+                            <lightning-input-field data-id="chez" variant="label-hidden" field-name="Chez__c" class="cmpAdress"></lightning-input-field>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Section Telephone Mobile -->
+                <div class="slds-p-left_x-small slds-p-right_x-small slds-m-top_x-large">
+                    <div class="slds-text-heading_medium">Téléphone Mobile</div>
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-col slds-size_2-of-4">
+                            <div class="slds-form-element__label">Refus Mobile</div>
+                            <lightning-input-field data-id="RefusTelMobile" variant="label-hidden" field-name="Refus_Mobile__c" onchange={handleChangeRefus}></lightning-input-field>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-gutters">
+                        <div data-id="Mobile1Container" class="slds-col slds-size_2-of-4">
+                            <div class="slds-form-element__label">Numéro de mobile 1</div>
+                            <lightning-input-field variant="label-hidden" field-name="MobilePhone" data-id="Mobile1" onkeyup={handleKeyUpNumTel} onchange={handleChangeNumTel}></lightning-input-field>
+                            <div class="slds-m-left_xxx-small slds-form-element__help slds-hide" data-id="errorMobile1Format">Veuillez saisir un numéro commençant par 06 ou 07 suivi de 8 chiffres</div>
+                            <div role="alert" class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error slds-hide" data-id="errorMobile1DQE">Veuillez vérifiez le numéro de téléphone</div>
+                        </div>
+                        
+                        <div data-id="Mobile2Container"  class="slds-col slds-size_2-of-4">
+                            <div class="slds-form-element__label">Numéro de mobile 2</div>
+                            <lightning-input-field variant="label-hidden" field-name="Mobile_2__c" data-id="Mobile2" onkeyup={handleKeyUpNumTel} onchange={handleChangeNumTel}></lightning-input-field>
+                            <div class="slds-m-left_xxx-small slds-form-element__help slds-hide" data-id="errorMobile2Format">Veuillez saisir un numéro commençant par 06 ou 07 suivi de 8 chiffres</div>
+                            <div role="alert" class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error slds-hide" data-id="errorMobile2DQE">Veuillez vérifiez le numéro de téléphone</div>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-gutters">
+                        <div data-id="Mobile3Container" class="slds-col slds-size_2-of-4">
+                            <div class="slds-form-element__label">Numéro de mobile 3</div>
+                            <lightning-input-field variant="label-hidden" field-name="Mobile_3__c" data-id="Mobile3" onkeyup={handleKeyUpNumTel} onchange={handleChangeNumTel}></lightning-input-field>
+                            <div class="slds-m-left_xxx-small slds-form-element__help slds-hide" data-id="errorMobile3Format">Veuillez saisir un numéro commençant par 06 ou 07 suivi de 8 chiffres</div>
+                            <div role="alert" class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error slds-hide" data-id="errorMobile3DQE">Veuillez vérifiez le numéro de téléphone</div>
+                        </div>
+                        <div class="slds-col slds-size_2-of-4">
+                            <div class="slds-form-element__label">Numéro mobile de préférence</div>
+                            <lightning-combobox variant="label-hidden" onchange={handleChangePreferredNum} label="Numéro mobile de préférence" data-id="mobilePrincipalComboBox" value={value} placeholder="-Select-" options={mobilePrincipalOptionsRestricted}></lightning-combobox>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Telephone Fixe -->
+                <div class="slds-p-left_x-small slds-p-right_x-small slds-m-top_x-large">
+                    <div class="slds-text-heading_medium">Téléphone Fixe</div>
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-col slds-size_2-of-4">
+                            <div class="slds-form-element__label">Refus Fixe</div>
+                            <lightning-input-field data-id="RefusTelFixe" variant="label-hidden" field-name="Refus_Fixe__c" onchange={handleChangeRefus}></lightning-input-field>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-gutters">
+                        <div data-id="Fixe1Container" class="slds-col slds-size_2-of-4">
+                            <div class="slds-form-element__label">Numéro de fixe 1</div>
+                            <lightning-input-field variant="label-hidden" field-name="Phone" data-id="Fixe1" onkeyup={handleKeyUpNumTel} onchange={handleChangeNumTel}></lightning-input-field>
+                            <div class="slds-m-left_xxx-small slds-form-element__help slds-hide" data-id="errorFixe1Format">Veuillez saisir un numéro commençant par 01 à 05 ou 09 suivi de 8 chiffres</div>
+                            <div role="alert" class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error slds-hide" data-id="errorPhone1DQE">Veuillez vérifiez le numéro de téléphone</div>
+                        </div>
+                        <div data-id="Fixe2Container" class="slds-col slds-size_2-of-4">
+                            <div class="slds-form-element__label">Numéro de fixe 2</div>
+                            <lightning-input-field variant="label-hidden" field-name="Tel_Fixe_2__c" data-id="Fixe2" onkeyup={handleKeyUpNumTel} onchange={handleChangeNumTel}></lightning-input-field>
+                            <div class="slds-m-left_xxx-small slds-form-element__help slds-hide" data-id="errorFixe2Format">Veuillez saisir un numéro commençant par 01 à 05 ou 09 suivi de 8 chiffres</div>
+                            <div role="alert" class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error slds-hide" data-id="errorPhone2DQE">Veuillez vérifiez le numéro de téléphone</div>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-gutters">
+                        <div data-id="Fixe3Container" class="slds-col slds-size_2-of-4">
+                            <div class="slds-form-element__label">Numéro de fixe 3</div>
+                            <lightning-input-field variant="label-hidden" field-name="Tel_Fixe_3__c" data-id="Fixe3" onkeyup={handleKeyUpNumTel} onchange={handleChangeNumTel}></lightning-input-field>
+                            <div class="slds-m-left_xxx-small slds-form-element__help slds-hide" data-id="errorFixe3Format">Veuillez saisir un numéro commençant par 01 à 05 ou 09 suivi de 8 chiffres</div>
+                            <div role="alert" class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error slds-hide" data-id="errorPhone3DQE">Veuillez vérifiez le numéro de téléphone</div>
+                        </div>
+                        <div class="slds-col slds-size_2-of-4">
+                            <div class="slds-form-element__label">Téléphone fixe de préférence</div>
+                            <lightning-combobox variant="label-hidden" onchange={handleChangePreferredNum} data-id="telFixePrincipalComboBox" value={value} placeholder="-Select-"  options={telFixePrincipalOptionsRestricted}></lightning-combobox>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Email -->
+                <div class="slds-p-left_x-small slds-p-right_x-small slds-m-top_x-large">
+                    <div class="slds-text-heading_medium">Email</div>
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-col slds-size_2-of-4">
+                            <div class="slds-form-element__label">Refus Email</div>
+                            <lightning-input-field data-id="RefusEmail" variant="label-hidden" field-name="Refus_Email__c" onchange={handleChangeRefus}></lightning-input-field>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-gutters">
+                        <div data-id="AdresseMail1Container" class="slds-col slds-size_2-of-4">
+                            <div class="slds-form-element__label">Email 1</div>
+                            <lightning-input-field variant="label-hidden" field-name="Email" data-id="AdresseMail1" onchange={handleChangeEmail}></lightning-input-field>
+                            <div role="alert" class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error slds-hide" data-id="errorAdresseMail1DQE">Email KO : {msgEmail1}</div>
+                        </div>
+                        <div data-id="AdresseMail2Container" class="slds-col slds-size_2-of-4">
+                            <div class="slds-form-element__label">Email 2</div>
+                            <lightning-input-field variant="label-hidden" field-name="Adresse_Mail_2__c" data-id="AdresseMail2" onchange={handleChangeEmail}></lightning-input-field>
+                            <div role="alert" class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error slds-hide" data-id="errorAdresseMail2DQE">Email KO : {msgEmail2}</div>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-gutters">
+                        <div data-id="AdresseMail3Container" class="slds-col slds-size_2-of-4">
+                            <div class="slds-form-element__label">Email 3</div>
+                            <lightning-input-field variant="label-hidden" field-name="Adresse_Mail_3__c" data-id="AdresseMail3" onchange={handleChangeEmail}></lightning-input-field>
+                            <div role="alert" class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error slds-hide" data-id="errorAdresseMail3DQE">Email KO : {msgEmail3}</div>
+                        </div>
+                        <div class="slds-col slds-size_2-of-4">
+                            <div class="slds-form-element__label">Email de préférence</div>
+                            <lightning-combobox variant="label-hidden" onchange={handleChangePreferredEmail} data-id="emailPrincipalComboBox" value={value} options={emailPrincipalOptionsRestricted} placeholder="-Select-"></lightning-combobox>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Préférence -->
+                <div class="slds-p-left_x-small slds-p-right_x-small slds-m-top_x-large">
+                    <div class="slds-text-heading_medium">Préférence</div>
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-col slds-size_2-of-4">
+                            <div class="slds-form-element__label">Choisissez un canal de préférence</div>
+                            <lightning-input-field data-id="canalPreference" variant="label-hidden" field-name="Canal_de_preference__c"></lightning-input-field>
+                        </div>
+                            <div class="slds-col slds-size_2-of-4"></div>
+                        </div>   
+                </div>
+
+                <div class="slds-p-left_x-small slds-p-right_x-small slds-m-top_x-large slds-m-bottom_x-large">
+                    <div class="slds-text-heading_medium">Gestion des STOPS</div>
+                    <div if:true={isStopsLoaded}>
+                        <div class="slds-grid slds-gutters">
+                        <div class="slds-col slds-size_2-of-4">
+                            <div class="slds-form-element__label">Stop Phoning</div>
+                                    <lightning-input type="checkbox" name="stopPhoning" onchange={handleChangeStops} checked={oldStops.stopPhoning}> </lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_2-of-4">
+                                <div class="slds-form-element__label">Stop Amelioration Experience Client</div>
+                                <lightning-input type="checkbox" name="stopAmeliorationExperienceClient" onchange={handleChangeStops} checked={oldStops.stopAmeliorationExperienceClient}> </lightning-input>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-gutters">
+                            <div class="slds-col slds-size_2-of-4">
+                                <div class="slds-form-element__label">Stop mailing</div>
+                                <lightning-input type="checkbox" name="stopMailing" onchange={handleChangeStops} checked={oldStops.stopMailing}> </lightning-input>
+                            </div>
+                            <div class="slds-col slds-size_2-of-4">
+                                <div class="slds-form-element__label">Stop Analyse Statistique</div>
+                                <lightning-input type="checkbox" name="stopAnalyseStatistique" onchange={handleChangeStops} checked={oldStops.stopAnalyseStatistique}> </lightning-input>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-col slds-size_2-of-4">
+                            <div class="slds-form-element__label">Stop Emailing</div>
+                                <lightning-input type="checkbox" name="stopEmailing" onchange={handleChangeStops} checked={oldStops.stopEmailing}> </lightning-input>
+                            </div>
+                            <div class="slds-col slds-size_2-of-4">
+                                <div class="slds-form-element__label">Stop Prospection Commerciale</div>
+                                <lightning-input type="checkbox" name="stopProspectionCommerciale" onchange={handleChangeStops} checked={oldStops.stopProspectionCommerciale}> </lightning-input>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-gutters">
+                            <div class="slds-col slds-size_2-of-4">
+                                <div class="slds-form-element__label">Stop Smsing</div>
+                                <lightning-input type="checkbox" name="stopSMSing" onchange={handleChangeStops} checked={oldStops.stopSMSing}> </lightning-input>
+                            </div>
+                            <div class="slds-col slds-size_2-of-4">
+                                <div class="slds-form-element__label">Stop Prospection Commerciale Porte à Porte</div>
+                                <lightning-input type="checkbox" name="stopPorteAPorte" onchange={handleChangeStops} checked={oldStops.stopPorteAPorte}> </lightning-input>
+                        </div>
+                    </div>
+                </div>
+                    <template if:true={isDisplayStopsSpinner}>
+                        <div class="stopsSpinnerHolder">
+                            <lightning-spinner alternative-text="Chargement des stops" size="small"></lightning-spinner>
+                        </div>
+                    </template>
+                    <template if:true={isErrorCallWsStops}>
+                        <div class="slds-box slds-text-heading_small">
+                            <p>Échec de chargement des stops</p>
+                            <p class="slds-text-color_error">{errorMessageOctopusStops}</p>
+                        </div>
+                    </template>
+                    <template if:true={techErrorMessageOctopusStops}>
+                        <div class="slds-box slds-text-heading_small">
+                            <p>Échec de chargement des stops !</p>
+                            <p class="slds-text-color_error">{techErrorMessageOctopusStops}</p>
+                        </div>
+                    </template>
+                </div>
+                
+                
+                <!-- Section Consentements -->
+
+                <div class="slds-p-left_x-small slds-p-right_x-small slds-m-top_x-large">
+                    <div class="slds-text-heading_medium">Consentements</div>                
+                    <div class="slds-grid slds-gutters">
+                        <div if:true={isConsentements}>
+                            <template for:each={questionsConsentements.consentementResult} for:item="consentement">
+                                <div key={consentement.key} class="slds-m-top_large slds-grid slds-wrap">
+                                    <div class="slds-col slds-size_9-of-12 slds-m-right_x-small">
+                                        <span>
+                                            {consentement.questionLabel}
+                                        </span>
+                                    </div>
+                                    <div class="slds-col slds-size_2-of-12 slds-m-left_x-small">
+                                        <lightning-radio-group name={consentement.key} options={options}
+                                                               value={consentement.consent} onchange={handleChangeConsentements}
+                                                               class="customRadioCls" type="radio"></lightning-radio-group>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>    
+
+                
+                <div class="slds-p-left_x-small slds-p-right_x-small slds-m-top_x-large">              
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-1">
+                            <lightning-input type="toggle" class="slds-float_left" label={label.SM_modifAdresseOption}  
+                            name="input2" disabled={isDisabledAddressModified}
+                            message-toggle-inactive="Non" message-toggle-active="Oui"
+                            onclick={handleModifAdress}
+                            ></lightning-input>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hiden fields-->
+                <div class="slds-hide">
+                    <lightning-input-field data-id="noVoie" field-name="No_Voie__c" class="slds-col slds-size_2-of-6"></lightning-input-field>
+                    <lightning-input-field data-id="Street" field-name="MailingStreet" class="slds-col slds-size_2-of-6"></lightning-input-field>
+                    <lightning-input-field data-id="noPostal" field-name="MailingPostalCode" class="slds-col slds-size_2-of-6"></lightning-input-field>
+                    <lightning-input-field data-id="City" field-name="MailingCity" class="slds-col slds-size_2-of-6"></lightning-input-field>
+                    <lightning-input-field data-id="mobilePrincipal" field-name="Mobile_Principal__c" class="slds-col slds-size_2-of-6"></lightning-input-field>
+                    <lightning-input-field data-id="fixePrincipal" field-name="Tel_Fixe_Principal__c" class="slds-col slds-size_2-of-6"></lightning-input-field>
+                    <lightning-input-field data-id="emailPrincipal" field-name="Adresse_Mail_Principale__c" class="slds-col slds-size_2-of-6"></lightning-input-field>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="slds-card__footer">
+
+                <div class="slds-clearfix slds-float_left">
+                    <lightning-button variant="Neutral" label="Annuler" title="Annuler" onclick={handleOpenCancelModal} class="slds-float_left"></lightning-button>
+                </div>
+                <div class="slds-clearfix">
+                    <!--<lightning-button variant="brand" label="Sauvegarder" title="Sauvegarder" type="submit" class="slds-float_right" disabled={isDisabled}></lightning-button> Suppression consentements obligatoires modif-->
+                    <lightning-button variant="brand" label="Sauvegarder" title="Sauvegarder" type="submit" class="slds-float_right" ></lightning-button>
+                </div>
+            </div>
+        </lightning-record-edit-form>
+
+        <!-- Spinner -->
+        <div if:true={showSpinner} class="spinner">
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </div>
+    </lightning-card>
+
+    <!-- Confirm Cancel modal -->
+    <div if:true={isOpenModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header slds-theme--info slds-text-heading_medium slds-theme--alert-texture">
+                    Confirmation
+                </header>
+                <div class="slds-modal__content slds-p-around_medium slds-text-heading_small slds-text-align_center" id="modal-content-id-1">
+                    &Ecirc;tes-vous sûr d'annuler les modifications ?
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Annuler" variant="neutral" onclick={handleCloseCancelModal} class="slds-float_left"></lightning-button>
+                    <lightning-button label="OK" variant="destructive" onclick={handleCloseTab} class="slds-float_right"></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
+</template>

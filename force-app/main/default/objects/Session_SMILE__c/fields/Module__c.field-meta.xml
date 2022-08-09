@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Module__c</fullName>
+    <externalId>false</externalId>
+    <label>Module</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Socle, Gestes simples, Acquisition, Résiliation</fullName>
+                <default>false</default>
+                <label>Socle, Gestes simples, Acquisition, Résiliation</label>
+            </value>
+            <value>
+                <fullName>Compléments Acquisition</fullName>
+                <default>false</default>
+                <label>Compléments Acquisition</label>
+            </value>
+            <value>
+                <fullName>Compléments Résiliation</fullName>
+                <default>false</default>
+                <label>Compléments Résiliation</label>
+            </value>
+            <value>
+                <fullName>Facturation</fullName>
+                <default>false</default>
+                <label>Facturation</label>
+            </value>
+            <value>
+                <fullName>Compléments Facturation</fullName>
+                <default>false</default>
+                <label>Compléments Facturation</label>
+            </value>
+            <value>
+                <fullName>Tableau de bord et pilotage</fullName>
+                <default>false</default>
+                <label>Tableau de bord et pilotage</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

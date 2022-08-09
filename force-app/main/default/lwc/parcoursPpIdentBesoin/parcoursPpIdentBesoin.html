@@ -1,0 +1,72 @@
+<template>
+    <div class="container" style="margin-bottom: 70px">
+        <div class="row">
+            <h1 class="col-lg-12 text-center" style="margin-top: 50px;">Identifions vos besoins</h1>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center" style="margin-top: 30px;">
+                <p class="font-class-1">Vous avez besoin</p>
+            </div>
+        </div>
+        <br />
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-lg-4 text-center justify-content-center">
+                <button type="button" class="btn btn-outline-primary" onclick={handleButtonClick} data-id="Electricité"
+                    data-current={isElectriciteActive}>
+                    <div  onclick={handleButtonClick} class="mb-4" data-id="Electricité">
+                        <span class="showImageOnHover"  onclick={handleButtonClick} data-id="Electricité">
+                            <img class="btn-img-size " src={ElecImage} onclick={handleButtonClick} data-id="Electricité">
+                        </span>
+                        <span class="hideImageOnHover"  onclick={handleButtonClick} data-id="Electricité">
+                            <img class="btn-img-size " src={ElecImageInBlue} onclick={handleButtonClick} data-id="Electricité">
+                        </span>
+                    </div>
+                    
+                    <p class="font-class-1" onclick={handleButtonClick} data-id="Electricité">d'électricité</p>
+                </button>
+            </div>
+            <div class="col-lg-4 text-center justify-content-center">
+                <button type="button" class="btn btn-outline-primary" onclick={handleButtonClick} data-id="Gaz"
+                    data-current={isGazActive}>
+                    <div  onclick={handleButtonClick} class="mb-4" data-id="Gaz">
+                        <span class="showImageOnHover"  onclick={handleButtonClick} data-id="Gaz"> 
+                            <img class="btn-img-size " src={GazImage} onclick={handleButtonClick} data-id="Gaz">
+                        </span>
+                        <span class="hideImageOnHover"  onclick={handleButtonClick} data-id="Gaz">
+                            <img class="btn-img-size " src={GazImageInBlue} onclick={handleButtonClick} data-id="Gaz">
+                        </span>
+                    </div>
+                    
+                    <p class="font-class-1" onclick={handleButtonClick} data-id="Gaz">de gaz naturel</p>
+                </button>
+            </div>
+            <div class="col-lg-4 text-center justify-content-center">
+                <button type="button" class="btn btn-outline-primary" onclick={handleButtonClick}
+                    data-id="Electricité + Gaz" data-current={isElectriciteGazActive}>
+                    
+                    <div  onclick={handleButtonClick} class="mb-4" data-id="Electricité + Gaz">
+                        <span class="showImageOnHover"  onclick={handleButtonClick} data-id="Electricité + Gaz">
+                            <img class="btn-img-size " src={ElecImage} onclick={handleButtonClick} data-id="Electricité + Gaz">
+                        </span>
+                        <span class="hideImageOnHover"  onclick={handleButtonClick} data-id="Electricité + Gaz">
+                            <img class="btn-img-size " src={ElecImageInBlue} onclick={handleButtonClick} data-id="Electricité + Gaz">
+                        </span>
+                        <span class="showImageOnHover"  onclick={handleButtonClick} data-id="Electricité + Gaz">
+                            <img class="btn-img-size " src={GazImage} onclick={handleButtonClick} data-id="Electricité + Gaz">
+                        </span>
+                        <span class="hideImageOnHover"  onclick={handleButtonClick} data-id="Electricité + Gaz">
+                            <img class="btn-img-size " src={GazImageInBlue} onclick={handleButtonClick} data-id="Electricité + Gaz">
+                        </span>
+                    </div>
+                    
+                    <p class="font-class-1" onclick={handleButtonClick} data-id="Electricité + Gaz">d'électricité et de gaz naturel</p>
+                </button>
+            </div>
+        </div>
+        <br />
+        <div style="position: absolute;height:10%;width: 100%;bottom: -50px;left: 0%;">
+			<button onclick={handlePrecedent} class="buttonPrecedent">Précédent</button>
+			<button onclick={handleSuivant} class="buttonSuivant">Suivant</button>
+		</div>
+    </div>
+</template>

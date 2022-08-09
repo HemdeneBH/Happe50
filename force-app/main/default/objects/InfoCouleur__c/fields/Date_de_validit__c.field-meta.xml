@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Date_de_validit__c</fullName>
+    <description>Permet de prédéfinir une période d&apos;affichage pour les Info Couleur</description>
+    <externalId>false</externalId>
+    <label>Date de validité</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

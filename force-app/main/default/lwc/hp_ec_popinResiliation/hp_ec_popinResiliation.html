@@ -1,0 +1,59 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 02-01-2022
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<template>
+    <div class="hp_popinResiliation">
+
+      <header class="slds-modal__header hp-header">
+        <h1 class="hp-bigTitle">
+          {popinresiliationtitle}
+        </h1>
+        <span class="hp-closeButton">
+          <a onclick={closePopinResiliation}><img class="hp-close-icon" src={iconClose} alt="close icon" /></a>
+        </span>
+      </header>
+
+      <div class="hp-content">
+        <div class="hp-modalBloc">
+
+
+          <div class="hp-alert">
+            <span class="hp-alert-icon">
+              <img src={iconAlert} alt="alert icon" />
+            </span>
+            <span class="hp-alertTitle">
+            {popinresiliationmessagealerte}
+            </span>
+          </div>
+          <div class="hp-alertText">
+            {popinresiliationtexteexplicatif}
+          </div>
+          <div class="hp-btnContainer">
+            <div class="hp-firstButton" onclick={handleVoirContract}>
+              {popinresiliationbouttondemenager}
+            </div>
+          </div>
+        </div>
+        <div class="hp-modalBloc">
+          <div class="hp-ResilTitle">
+            {popinresiliationtexte}
+          </div>
+          <div class="hp-textResil">
+            {popinresliationtexteresiliation}
+          </div>
+          <div class="hp-btnContainer">
+            <div class="hp-telButton">
+              {popinresiliationnumero}
+            </div>
+            <div class="hp-secondButton">
+              {popinresiliationresilierboutton}
+              </div> 
+            </div>      
+          </div>
+        </div>
+    </div>
+</template>

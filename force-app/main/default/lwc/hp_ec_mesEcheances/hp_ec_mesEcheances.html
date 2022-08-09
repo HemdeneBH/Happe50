@@ -1,0 +1,22 @@
+<template>
+    <template if:true={showEchancierComponent}>
+    <div class="hp-mesFactures c-content-bg slds-col">
+        <div class="hp-bigTitle">{title}</div>
+        <template for:each={echeancePlanExtraiteList} for:item="echeanceplan">
+            <div key={echeanceplan.reference} class="hp-factures-items">
+                <a href={echeanceplan.url_document}  class="leftBloc">
+                    <span class="slds-truncate">{echeanceplan.libelle}</span> &nbsp;
+                    <lightning-formatted-date-time value={echeanceplan.date_creation} year="numeric"></lightning-formatted-date-time>
+                    <span class="chevron right"></span>  
+                </a>
+            <span class="hp-icon-download rightBloc">
+                <a href={echeanceplan.url_document}>
+                <img src ={iconDownload} alt="modify"/>
+                </a>
+            </span>
+        </div>
+        </template>
+    </div>
+   </template>
+    
+</template>

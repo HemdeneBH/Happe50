@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+            <apiVersion>46.0</apiVersion>
+            <description>Vlocity OmniScript Auto-generated - a2F6E000001hZ3kUAE</description>
+            <isExposed>true</isExposed><runtimeNamespace>vlocity_cmt</runtimeNamespace>
+            <masterLabel>smileContact/Prel/French</masterLabel>
+            <targets>
+                <target>lightningCommunity__Page</target>
+                <target>lightningCommunity__Default</target>
+                <target>lightning__RecordPage</target>
+                <target>lightning__AppPage</target>
+                <target>lightning__HomePage</target>
+            </targets>
+            <targetConfigs>
+              <targetConfig targets="lightning__AppPage, lightning__HomePage, lightning__RecordPage, lightningCommunity__Default">
+                  <property name="layout" type="String" />
+              </targetConfig>
+            </targetConfigs>
+        </LightningComponentBundle>

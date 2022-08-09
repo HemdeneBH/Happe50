@@ -1,0 +1,61 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 02-16-2022
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<template>
+    <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+        <div class="hp_popinPaiements" >
+          <header class="slds-modal__header hp-header">                                                                     
+            <h1 class="hp-bigTitle" >
+                {titleText}
+            </h1>
+            <a class="hp-closeButon" onclick={closePopin} >X</a>
+          </header>
+          <div class="slds-modal__content hp-content">
+            <div class="hp-valeurActelleBox">
+              <span class="hp-valeurActuelleLabel">
+                Mensualité actuelle : 
+              </span> 
+              <span class="hp-valeurActuelle">
+                  {montantmensuel}
+              </span>
+              <div class="hp-inputBox slds-grid">
+                  <div class="hp-inputLabel slds-size_1-of-2">Nouvelle mensualité : </div>
+                  <div class="slds-size_1-of-2 hp-input">
+                  <!-- <lightning-input type="text" class="hp-input" onchange={handleChangeMontant}></lightning-input> -->
+                </div>
+              </div> 
+            </div> 
+            <div class="hp-valeurActelleBox">
+              <span class="hp-valeurActuelleLabel">
+                Date de règlement actuelle : 
+              </span>
+              <span class="hp-valeurActuelle">
+                  {datemensualite}
+              </span> 
+              <div class="hp-inputBox slds-grid">
+                  <div class="hp-inputLabel slds-size_1-of-2">
+                      Nouvelle date : 
+                  </div>
+                  <div class="slds-size_1-of-2 hp-input">
+                  <!-- <lightning-input type="text"  onchange={handleChangeDate}></lightning-input> -->
+                </div>
+              </div>
+            </div>
+            <div class="hp-alerteBox">
+              <span class="hp-textAlerte">
+                {texteAlerte}
+              </span>  
+            </div> 
+            <div class="hp-buttonBox">
+              <span class="hp-button">
+                {labelButton}
+              </span>
+            </div> 
+          </div>
+        </div>
+      </section>
+</template>

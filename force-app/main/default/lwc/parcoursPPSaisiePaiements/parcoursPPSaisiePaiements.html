@@ -1,0 +1,1381 @@
+<template>
+	<div data-id="complete">
+		<template if:false={loaded}>
+			<div class="exampleHolder">
+				<lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+			</div>
+		</template>
+
+		<template if:true={loaded}>
+
+			<div class="container" style="margin-bottom: 70px" data-id="paiement">
+
+				<!-- Start DDPCM - 787 -->
+				<template if:true={isNewCanaux}>
+
+				</template>
+				<template if:false={isNewCanaux}>
+				<!-- Start DDPCM - 787 -->
+
+					<div class="row">
+						<h1 class="col-lg-12 text-center" style="margin-top: 50px;">Choix du moyen de paiement</h1>
+					</div>
+
+
+					<div class="row mb-10" style="margin-top:40px;">
+						<div class="col-lg-2"></div>
+						<div class="col-lg-2">
+							<span class="text-center"
+								style="background-color:rgba(179, 179, 179); border-radius: 2px; color: white; padding-left:8px; padding-top:3px; padding-bottom:7px; padding-right:8px;">Service
+								gratuit </span>
+						</div>
+
+						<div class="col-lg-5"></div>
+					</div>
+
+					<div class="row mb-10" style="margin-top:18px">
+						<div class="col-lg-2"></div>
+						<div class="col-lg-1 prlvement-au titlehecto">
+							<input type="checkbox" onclick={handlePrelevementAutoClick}
+								style="margin-right: 7px; height: 60%;" data-id="prelevementAuto" checked={isAuto}>
+							Prélèvement automatique<br>
+						</div>
+
+
+						<div class="col-lg-3"></div>
+					</div>
+
+					<template if:true={isAuto}>
+						<!-- Start DDPCM -1029 -->
+						<div class="row mb-10" style="margin-top:30px">
+							<div class="col-lg-2"></div>
+							<div class="col-lg-1 prlvement-au titlehecto" style="color:gray">
+								La mensualisation est possible uniquement en cas de prélèvement automatique.
+							</div>
+							<div class="col-lg-3"></div>
+						</div>
+						<br>
+						<br>
+						<br>
+						<!-- End DDPCM -1029 -->
+						<div class="row mb-10" style="margin-top:30px">
+							<div class="col-lg-4"></div>
+							<template if:false={isDeuxMois}>
+								<div class="col-lg-1"
+									style="color: #2196f3; font-size: 16px;font-style: normal;font-weight: 400;">Mensuel
+								</div>
+							</template>
+							<template if:true={isDeuxMois}>
+								<div class="col-lg-1"
+									style="color:rgba(189, 189, 189, 1); font-size: 16px;font-style: normal;font-weight: 400;">
+									Mensuel</div>
+							</template>
+							<div class="col-lg-1 text-center">
+								<label class="switch">
+									<input type="checkbox" onclick={handleFrequencePrelevement} data-id="frequence"
+										checked={isTousLesDeuxmois} style="border-color: #2196f3;">
+									<span class="slider round"></span>
+									<!--span class="input-group-addon font-class-1 text-left"
+													style="margin-left: 80px;margin-right: 30px;">HP/HC</span-->
+								</label>
+							</div>
+							<template if:true={isDeuxMois}>
+								<div class="col-lg-4"
+									style="color: #2196f3; font-size: 16px;font-style: normal;font-weight: 400;">Tous les
+									deux mois</div>
+							</template>
+							<template if:false={isDeuxMois}>
+								<div class="col-lg-4"
+									style="color:rgba(189, 189, 189, 1); font-size: 16px;font-style: normal;font-weight: 400;">
+									Tous les deux mois</div>
+							</template>
+
+							<div class="col-lg-2"></div>
+						</div>
+						<template if:true={isNewCanaux}>
+
+						</template>
+						<template if:false={isNewCanaux}>
+							<div if:true={isShowIBAN} class="row" style="margin-top: 30px;">
+								<div class="col-lg-2 text-center"></div>
+								<div class="col-lg-8 text-center">
+		
+									<div class="container" style={boxColor}>
+		
+		
+										<div class="row mb-5" style="margin-top:30px; margin-bottom:20px">
+											<div class="col-lg-1 text-left"></div>
+		
+		
+		
+											<div class="col-lg-10 text-left">
+		
+												<template if:false={isTest}>
+													<template if:true={isExistant}>
+														<div class="row">
+															<div class="col-lg-8"></div>
+															<div class="col-lg-4" style="margin-top: 10px;">
+																<span
+																	style="cursor:pointer;color: rgba(0, 157, 233, 1);font-size: 16px;text-decoration: underline;"
+																	onclick={handleTest}>
+																	Choisir IBAN existant
+																</span>
+															</div>
+														</div>
+													</template>
+													<div class="row" style="margin-top:10px">
+														<div class="col-lg-1 text-left"></div>
+														<div class="col-lg-10 text-left"
+															style="border-bottom-width: 2px; border-bottom-color:  rgb(227, 227, 227); border-bottom-style: solid;">
+															<div class="form-group">
+																<div class="row">
+																	<div class="col-lg-6">
+																		<label for="titulaire" style="font-size: 18px;">Nom du
+																			titulaire</label>
+		
+																	</div>
+																	<div class="col-lg-6">
+		
+																	</div>
+																</div>
+															</div>
+															<input type="text" data-id="titul"
+																style="border-top:0;border-bottom:0;border-left:0;border-right:0; margin-bottom:10px; color: gray"
+																name="titulaire" size="50" class="font-class-1"
+																oninput={ibanIsOk}
+																value={_record.VI_NomTitulaireMoyendePaiement__c}></input>
+														</div>
+		
+													</div>
+		
+													<template if:true={showMessageTitul}>
+														<div class="row">
+															<div class="col-lg-3">
+		
+															</div>
+															<div class="col-lg-6">
+																<p
+																	class="label-text-small-act lato-normal-monza-12px text-center">
+																	Merci de renseigner le nom du titulaire du compte bancaire
+																	pour pouvoir continuer.</p>
+															</div>
+															<div class="col-lg-3">
+		
+															</div>
+														</div>
+		
+													</template>
+		
+													<div class="mb-5">
+		
+													</div>
+		
+													<div class="row">
+														<div class="col-lg-1 text-left"></div>
+														<div class="col-lg-10 text-left"
+															style="border-bottom-width: 2px; border-bottom-color:  rgb(227, 227, 227); border-bottom-style: solid;">
+															<div class="form-group">
+																<div class="row" style="margin-bottom: 10px;">
+																	<div class="col-lg-6">
+																		<label for="iban"
+																			style="font-size: 16px; margin-left:Opx">IBAN</label>
+		
+																	</div>
+																	<div class="col-lg-2"></div>
+																</div>
+															</div>
+															<div class="row">
+																<div class="col-lg-1">
+																	<div style="color: gray; font-size: 20px; margin-left:15px">
+																		FR</div>
+																</div>
+																<div class="col-lg-11" style="margin-top: 2px;">
+																	<input type="text" data-id="iban"
+																		style="border-top:0;border-bottom:0;border-left:0;border-right:0; margin-bottom:0px; color: gray"
+																		name="iban" size="40" class="font-class-1"
+																		pattern="^\w{2}\d{2}\s\d{4}\s\d{4}\s\d{4}\s\d{4}\s\d{4}\s\d{3}$"
+																		oninput={ibanIsOk} maxlength="39"></input>
+		
+																</div>
+		
+															</div>
+		
+		
+		
+														</div>
+		
+													</div>
+													<template if:true={showMessageIban}>
+														<div class="row">
+															<div class="col-lg-3">
+		
+															</div>
+															<div class="col-lg-6">
+																<p
+																	class="label-text-small-act lato-normal-monza-12px text-center">
+																	Merci de renseigner un IBAN valide (27 caractères) pour
+																	pouvoir continuer.</p>
+															</div>
+															<div class="col-lg-3">
+		
+															</div>
+														</div>
+		
+													</template>
+													<div class="row">
+														<div class="col-lg-1"></div>
+		
+														<div class="iconnormalsecurity col-lg-11"
+															style="margin-top: 8px; padding-left: 4px;">
+		
+															<img src={cadenas} style="margin-bottom: 4px;" width="10" />
+		
+															<p class="les-donnes-sont"
+																style="padding-left: 4px; margin-bottom: 0px; color:darkgray">
+																Les données sont bien sécurisées
+															</p>
+														</div>
+													</div>
+													<!--Boutton-->
+													<div class="row mt-4" style="margin-top:40px">
+														<div class="col-lg-4 text-center"></div>
+														<button type="button" onclick={handleSaisieIban} name="bouttonContinuer"
+															class="col-lg-4 btn"
+															style="height: 44px;width: 260px;color: #fff;
+																																																																							background-color: rgba(0, 153, 52, 1);
+																																																																							border-color: rgba(0, 153, 52, 1);border-radius:3px">
+															<p class="font-class-2">Confirmer</p>
+														</button>
+														<div class="col-lg-4 text-center"></div>
+													</div>
+													<!-- fin boutton-->
+		
+												</template>
+		
+												<template if:true={isTest}>
+													<div class="row">
+														<div class="col-lg-9"></div>
+														<div class="col-lg-3" style="margin-top: 10px;">
+															<span
+																style="cursor:pointer;color: rgba(0, 157, 233, 1);font-size: 16px;text-decoration: underline;"
+																onclick={handleTest}>
+																<img src={commentaireImage}
+																	style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 19px;margin-right: 8px" />
+																Nouveau
+															</span>
+														</div>
+													</div>
+													<form>
+														<div class="form-group">
+															<label for="iban" class="font-class-1"
+																style="margin-top: 30px; margin-left: 20px">IBAN </label>
+															<div>
+																<div class="select-box"
+																	style="width:490px; margin-top: 20px; margin-left: 10px;">
+																	<div class="select-box__current" tabindex="0">
+																		<div class="select-box__value"
+																			key={selectedCoobList.idCoordonneeBancaire}>
+																			<input class="select-box__input" type="radio"
+																				id={selectedCoobList.idCoordonneeBancaire}
+																				value={selectedCoobList.idCoordonneeBancaire}
+																				name="Ben" checked="checked"
+																				key={selectedCoobList.idCoordonneeBancaire} />
+		
+		
+																			<div class="container">
+																				<div class="row">
+																					<label style="background-color: #faf9f9;z-index:10"
+																						class="col-lg-2 select-box__option font-class-1">
+																						<template
+																							if:true={selectedCoobList.isSigned}>
+																							<img style="height: 40px" src={checkboxIban} />
+																						</template>
+																					</label>
+																					<label class="col-lg-10" style="background-color: #faf9f9;
+																					display: flex;
+																					align-items: center;">
+																						IBAN : {selectedCoobList.IbanNumberX} -
+																						BIC :
+																						{selectedCoobList.bic}<br>
+																						Nom de la banque :
+																						{selectedCoobList.Nombanque}
+																						- Titulaire du compte :
+																						{selectedCoobList.TitulaireCompte}
+																					</label>
+																				</div>
+		
+																			</div>
+																		</div>
+																		<img class="select-box__icon grayscale"
+																			src={optionDropImage} alt="Arrow Icon"
+																			aria-hidden="true" />
+																	</div>
+		
+																	<ul class="select-box__list" style="z-index: 7;" id="myUl">
+																		<template for:each={coobList} for:item="option">
+																			<li style="z-index: 7;" key={option.idCoordonneeBancaire}
+																				onclick={handleChoixCoob}
+																				data-coobid={option.idCoordonneeBancaire}
+																				data-id={option.idCoordonneeBancaire}
+																				data-ibannumber={option.IbanNumber}
+																				data-ibannumberx={option.IbanNumberX}
+																				data-bic={option.bic}
+																				data-nombanque={option.Nombanque}
+																				data-titulairecompte={option.TitulaireCompte}
+																				data-idcompteclient={option.idCompteClientCoordB}
+																				data-issigned={option.isSigned}
+																				data-libelle={option.libelle}
+																				>
+																				<div style="z-index: 7;" class="container" onclick={handleChoixCoob}
+																					data-coobid={option.idCoordonneeBancaire}
+																					data-id={option.idCoordonneeBancaire}
+																					data-ibannumber={option.IbanNumber}
+																					data-ibannumberx={option.IbanNumberX}
+																					data-bic={option.bic}
+																					data-nombanque={option.Nombanque}
+																					data-titulairecompte={option.TitulaireCompte}
+																					data-idcompteclient={option.idCompteClientCoordB}
+																					data-issigned={option.isSigned}
+																					data-libelle={option.libelle}>
+																					<div style="z-index: 7;" class="row" onclick={handleChoixCoob}
+																						data-coobid={option.idCoordonneeBancaire}
+																						data-id={option.idCoordonneeBancaire}
+																						data-ibannumber={option.IbanNumber}
+																						data-ibannumberx={option.IbanNumberX}
+																						data-bic={option.bic}
+																						data-nombanque={option.Nombanque}
+																						data-titulairecompte={option.TitulaireCompte}
+																						data-idcompteclient={option.idCompteClientCoordB}
+																						data-issigned={option.isSigned}
+																						data-libelle={option.libelle}>
+																						<label style="z-index: 7;"
+																							class="col-lg-2 select-box__option font-class-1"
+																							onclick={handleChoixCoob}
+																							data-coobid={option.idCoordonneeBancaire}
+																							data-id={option.idCoordonneeBancaire}
+																							data-ibannumber={option.IbanNumber}
+																							data-ibannumberx={option.IbanNumberX}
+																							data-bic={option.bic}
+																							data-nombanque={option.Nombanque}
+																							data-titulairecompte={option.TitulaireCompte}
+																							data-idcompteclient={option.idCompteClientCoordB}
+																							data-issigned={option.isSigned}
+																							data-libelle={option.libelle}>
+																							<template if:true={option.isSigned} style="z-index: 7;"
+																								onclick={handleChoixCoob}
+																								data-coobid={option.idCoordonneeBancaire}
+																								data-id={option.idCoordonneeBancaire}
+																								data-ibannumber={option.IbanNumber}
+																								data-ibannumberx={option.IbanNumberX}
+																								data-bic={option.bic}
+																								data-nombanque={option.Nombanque}
+																								data-titulairecompte={option.TitulaireCompte}
+																								data-idcompteclient={option.idCompteClientCoordB}
+																								data-issigned={option.isSigned}
+																								data-libelle={option.libelle}>
+																								<img onclick={handleChoixCoob}
+																									data-coobid={option.idCoordonneeBancaire}
+																									name="ibanSelected"
+																									data-id={option.idCoordonneeBancaire}
+																									data-ibannumber={option.IbanNumber}
+																									data-ibannumberx={option.IbanNumberX}
+																									data-bic={option.bic}
+																									data-nombanque={option.Nombanque}
+																									data-titulairecompte={option.TitulaireCompte}
+																									data-idcompteclient={option.idCompteClientCoordB}
+																									data-issigned={option.isSigned}
+																									data-libelle={option.libelle}
+																									class="mt-3" style="height: 40px;z-index: 7;" src={checkboxIban} />
+																							</template>
+																						</label>
+																						<label key={option.idCoordonneeBancaire}
+																							onclick={handleChoixCoob}
+																							data-coobid={option.idCoordonneeBancaire}
+																							data-id={option.idCoordonneeBancaire}
+																							data-ibannumber={option.IbanNumber}
+																							data-ibannumberx={option.IbanNumberX}
+																							data-bic={option.bic}
+																							data-nombanque={option.Nombanque}
+																							data-titulairecompte={option.TitulaireCompte}
+																							data-idcompteclient={option.idCompteClientCoordB}
+																							data-issigned={option.isSigned}
+																							data-libelle={option.libelle}
+																							class="col-lg-10 select-box__option ;z-index: 7;"
+																							for={option.idCoordonneeBancaire}
+																							style="color: #808080; font-size:14px"
+																							aria-hidden="aria-hidden">
+																							IBAN : {option.IbanNumberX} - BIC :
+																							{option.bic}
+																							Nom de la banque :
+																							{option.Nombanque} -
+																							Titulaire du compte :
+																							{option.TitulaireCompte}
+																						</label>
+																					</div>
+																				</div>
+																			</li>
+																		</template>
+																	</ul>
+																</div>
+															</div>
+														</div>
+													</form>
+		
+													<!--Boutton-->
+													<!-- Start DDPCM - 276 -->
+													<template if:true={isConfirmerPossible}>
+													<div class="row" style="margin-top:70px">
+														<div class="col-lg-4 text-center"></div>
+														<button type="button" onclick={handleConfirmerIbanHTML}
+															name="bouttonContinuer" class="col-lg-4 btn"
+															style="height: 44px;width: 260px;color: #fff;
+																																																																								background-color: rgba(0, 153, 52, 1);
+																																																																								border-color: rgba(0, 153, 52, 1);border-radius:3px; position: relative">
+															<p class="font-class-2">Confirmer</p>
+														</button>
+														<div class="col-lg-4 text-center"></div>
+													</div>
+													</template>
+													<template if:false={isConfirmerPossible}>
+														<div class="row" style="margin-top:70px">
+															<div class="col-lg-4 text-center"></div>
+															<button type="button" disabled
+																name="bouttonContinuer" class="col-lg-4 btn"
+																style="height: 44px;width: 260px;color: #fff;
+																background-color:rgb(179, 179, 179);
+																border-color: rgb(179, 179, 179);border-radius:3px; position: relative">
+																<p class="font-class-2">Confirmer</p>
+															</button>
+															<div class="col-lg-4 text-center"></div>
+														</div>
+													</template>
+													<!-- End DDPCM - 276 -->
+													<!-- fin boutton-->
+		
+												</template>
+		
+		
+		
+		
+											</div>
+		
+											<div class="col-lg-1 text-left"></div>
+		
+										</div>
+									</div>
+		
+		
+		
+								</div>
+								<div class="col-lg-2 text-center"></div>
+		
+							</div>
+							<div if:false={isShowIBAN} class="row" style="margin-top: 30px;">
+								<div class="col-lg-2 text-center"></div>
+								<div class="col-lg-8 text-center">
+		
+									<div class="container" style="border: 2px solid;border-radius: 16px;border-color: rgba(179,179,179, 1);">
+		
+		
+										<div class="row mb-5" style="margin-top:30px; margin-bottom:20px">
+											<div class="col-lg-1 text-left"></div>
+		
+		
+		
+											<div class="col-lg-10 text-left">
+		
+												<template if:false={isTest}>
+													<template if:true={isExistant}>
+														<div class="row">
+															<div class="col-lg-8"></div>
+															<div class="col-lg-4" style="margin-top: 10px;">
+																<span
+																	style="color: rgba(179, 179, 179, 1);font-size: 16px;text-decoration: underline;">
+																	Choisir IBAN existant
+																</span>
+															</div>
+														</div>
+													</template>
+													<div class="row" style="margin-top:10px">
+														<div class="col-lg-1 text-left"></div>
+														<div class="col-lg-10 text-left"
+															style="border-bottom-width: 2px; border-bottom-color:  rgb(227, 227, 227); border-bottom-style: solid;">
+															<div class="form-group">
+																<div class="row">
+																	<div class="col-lg-6">
+																		<label for="titulaire" style="font-size: 18px;color:rgba(179, 179, 179, 1)">Nom du
+																			titulaire</label>
+		
+																	</div>
+																	<div class="col-lg-6">
+		
+																	</div>
+																</div>
+															</div>
+															<input type="text" data-id="titul"
+																style="pointer-events:none;border-top:0;border-bottom:0;border-left:0;border-right:0; margin-bottom:10px; background-color:white; color: gray"
+																name="titulaire" size="50" class="font-class-1"
+																oninput={ibanIsOk} disabled></input>
+														</div>
+		
+													</div>
+		
+													<div class="mb-5">
+		
+													</div>
+		
+													<div class="row">
+														<div class="col-lg-1 text-left"></div>
+														<div class="col-lg-10 text-left"
+															style="border-bottom-width: 2px; border-bottom-color:  rgb(227, 227, 227); border-bottom-style: solid;">
+															<div class="form-group">
+																<div class="row" style="margin-bottom: 10px;">
+																	<div class="col-lg-6">
+																		<label for="iban"
+																			style="font-size: 16px; margin-left:Opx; color:rgba(179, 179, 179, 1)">IBAN</label>
+		
+																	</div>
+																	<div class="col-lg-2"></div>
+																</div>
+															</div>
+															<div class="row">
+																<div class="col-lg-1">
+																	<div style="color: gray; font-size: 20px; margin-left:15px">
+																		FR</div>
+																</div>
+																<div class="col-lg-11" style="margin-top: 2px;">
+																	<input type="text" data-id="iban"
+																		style="border-top:0;border-bottom:0;border-left:0;border-right:0; margin-bottom:0px; color: gray; background-color:white;"
+																		name="iban" size="40" class="font-class-1"
+																		pattern="^\w{2}\d{2}\s\d{4}\s\d{4}\s\d{4}\s\d{4}\s\d{4}\s\d{3}$"
+																		oninput={ibanIsOk} maxlength="39" disabled></input>
+		
+																</div>
+		
+															</div>
+		
+		
+		
+														</div>
+		
+													</div>
+													<div class="row">
+														<div class="col-lg-1"></div>
+		
+														<div class="iconnormalsecurity col-lg-11"
+															style="margin-top: 8px; padding-left: 4px;">
+		
+															<img src={cadenas} style="margin-bottom: 4px;" width="10" />
+		
+															<p class="les-donnes-sont"
+																style="padding-left: 4px; margin-bottom: 0px; color:darkgray">
+																Les données sont bien sécurisées
+															</p>
+														</div>
+													</div>
+													<!--Boutton-->
+													<div class="row mt-4" style="margin-top:40px">
+														<div class="col-lg-4 text-center"></div>
+														<button type="button" onclick={handleSaisieIban} name="bouttonContinuer"
+															class="col-lg-4 btn"
+															style="height: 44px;width: 260px;color: #fff;background-color:rgb(179, 179, 179);border-radius:3px" disabled>
+															<p class="font-class-2">Confirmer</p>
+														</button>
+														<div class="col-lg-4 text-center"></div>
+													</div>
+													<!-- fin boutton-->
+		
+												</template>
+		
+												<template if:true={isTest}>
+													<div class="row">
+														<div class="col-lg-9"></div>
+														<div class="col-lg-3" style="margin-top: 10px;">
+															<span
+																style="color: rgba(179, 179, 179, 1);font-size: 16px;text-decoration: underline;">
+																<img src={commentaireImage1}
+																	style="color: rgba(179, 179, 179, 1);height: 19px;margin-right: 8px" />
+																Nouveau
+															</span>
+														</div>
+													</div>
+													<form>
+														<div class="form-group">
+															<label for="iban" class="font-class-1"
+																style="margin-top: 30px; margin-left: 20px; color:rgb(179, 179, 179);">IBAN </label>
+															<div>
+																<div class="select-box"
+																	style="width:490px; margin-top: 20px; margin-left: 10px;">
+																	<div class="select-box__current" tabindex="0">
+																		<div class="select-box__value"
+																			key={selectedCoobList.idCoordonneeBancaire}>
+																			<input class="select-box__input" type="radio"
+																				id={selectedCoobList.idCoordonneeBancaire}
+																				value={selectedCoobList.idCoordonneeBancaire}
+																				name="Ben" checked="checked"
+																				key={selectedCoobList.idCoordonneeBancaire} 
+																				disabled />
+		
+		
+																			<div class="container">
+																				<div class="row">
+																					<label style="background-color: #faf9f9;z-index:10"
+																						class="col-lg-2 select-box__option font-class-1">
+																						<template
+																							if:true={selectedCoobList.isSigned}>
+																							<img style="height: 40px" src={checkboxIban} />
+																						</template>
+																					</label>
+																					<label class="col-lg-10" style="background-color: #faf9f9;
+																					display: flex;
+																					align-items: center;">
+																						IBAN : {selectedCoobList.IbanNumberX} -
+																						BIC :
+																						{selectedCoobList.bic}<br>
+																						Nom de la banque :
+																						{selectedCoobList.Nombanque}
+																						- Titulaire du compte :
+																						{selectedCoobList.TitulaireCompte}
+																					</label>
+																				</div>
+		
+																			</div>
+																		</div>
+																		<img class="select-box__icon grayscale"
+																			src={optionDropImage} alt="Arrow Icon"
+																			aria-hidden="true" />
+																	</div>
+		
+																</div>
+															</div>
+														</div>
+													</form>
+		
+													<!--Boutton-->
+													<div class="row" style="margin-top:70px">
+														<div class="col-lg-4 text-center"></div>
+														<button type="button" disabled
+															name="bouttonContinuer" class="col-lg-4 btn"
+															style="height: 44px;width: 260px;color: #fff;
+															background-color:rgb(179, 179, 179);
+															border-color: rgb(179, 179, 179);border-radius:3px; position: relative">
+															<p class="font-class-2">Confirmer</p>
+														</button>
+														<div class="col-lg-4 text-center"></div>
+													</div>
+													<!-- fin boutton-->
+		
+												</template>
+		
+		
+		
+		
+											</div>
+		
+											<div class="col-lg-1 text-left"></div>
+		
+										</div>
+									</div>
+		
+		
+		
+								</div>
+								<div class="col-lg-2 text-center"></div>
+		
+							</div>
+							<!-- START IBAN EN SELFCARE -->
+							<br>
+							<div class="row mb-10" style="margin-top:18px">
+								<div class="col-lg-4"></div>
+								<div class="col-lg-6">
+									<input type="checkbox" id="IBANEnSelfCare" data-id="IBANEnSelfCare" onclick={handleIBANSELFCARE}
+									checked={_record.VI_IBANEnSelfCare__c} style="margin-right: 7px;">
+									<label for="IBANEnSelfCare" style="font-size: 18px;font-style: normal;margin-right: 7px;">IBAN en selfcare</label>
+									<lightning-helptext class="redColor" 
+										content="Dans l’email récapitulatif, le client pourra cliquer sur un lien pour renseigner son IBAN et signer son mandat Sepa.">
+									</lightning-helptext>
+								</div>
+								<div class="col-lg-2"></div>
+							</div>
+							<!-- END IBAN EN SELFCARE -->
+						</template>
+					</template>
+					<template if:false={isAuto}>
+
+						<div class="row mb-10" style="margin-top:30px">
+							<div class="col-lg-2"></div>
+							<div class="col-lg-1 prlvement-au titlehecto" style="color:gray">
+
+								Le client règlera ses paiements par carte bleue, TIP ou chèque.
+							</div>
+
+
+							<div class="col-lg-3"></div>
+						</div>
+
+					</template>
+
+				<!-- Start DDPCM - 787 -->
+				</template>
+				<!-- End DDPCM - 787 -->
+
+				<div class="row" style="margin-top: 10px;">
+					<h1 class="col-lg-12 text-center" style="margin-top: 50px;" data-id="serviceGestion">Services de
+						gestion</h1>
+				</div>
+
+				<template if:true={isAuto}>
+					<template if:false={isNewCanaux}>
+
+						<div class="row mb-10" style="margin-top:40px;">
+							<div class="col-lg-2"></div>
+							<div class="col-lg-2">
+								<span class="text-center"
+									style="background-color:rgba(179, 179, 179); border-radius: 2px; color: white; padding-left:8px; padding-top:3px; padding-bottom:7px; padding-right:8px;">Service
+									gratuit </span>
+							</div>
+
+							<div class="col-lg-5"></div>
+						</div>
+
+						<div class="row mb-10" style="margin-top:18px">
+							<div class="col-lg-2"></div>
+							<div class="col-lg-8 prlvement-au titlehecto">
+								<input type="checkbox" style="margin-right: 7px;" name="factureEnLigne"
+									onclick={handleGestion} checked={isFactureOui}>
+								Facture en ligne
+							</div>
+
+							<div class="col-lg-2"></div>
+						</div>
+
+					</template>
+				</template>
+				<template if:true={isNewCanaux}>
+					<!-- Start DDPCM-786 -->
+					<div if:true={isMensualisationAccessible}>
+					<!-- End DDPCM-786 -->
+						<!-- Start DDPCM-1109 New Canaux -->
+						<div class="col-lg-1"></div>
+						<div class="col-lg-10 blueBorder">
+						<!-- End DDPCM-1109 New Canaux -->
+
+							<!-- Start DDPCM-863 New Canaux -->
+							<!-- Start DDPCM 1110 -->
+
+							<div class="row mb-10" style="margin-top:40px;">
+								<div class="col-lg-4">
+									<span class="text-center"
+										style="margin-left: 80px; background-color:rgba(179, 179, 179); border-radius: 2px; color: white; padding-left:8px; padding-top:3px; padding-bottom:7px; padding-right:8px;">Service
+										gratuit </span>
+								</div>
+
+								<div class="col-lg-5"></div>
+							</div>
+
+							<div class="row" style="margin-top:18px;">
+								<div class="col-lg-2 prlvement-au titlehecto " style="margin-right: 10px;">
+									<p style="margin-left: 80px; margin-right: 7px; color:#2196f3">
+										<strong> Mensualisation </strong>
+									</p>
+								</div>
+
+								<div class="col-lg-7"></div>
+								<div class="form-check form-check-inline" style="margin-left: 30px;">
+									<input class="form-check-input" type="radio" name="MensualisationOui"
+										data-id="mensualisationOui" id="mensualisationOui" data-current={MensualisationOui} value="Oui"
+										onclick={handleGestion} checked={isMensualisationOui}>
+									<label class="form-check-label" style="margin-left:5px ;margin-right: 5px"
+										for="mensualisationOui">Oui</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" name="MensualisationNon"
+										data-id="mensualisationNon" id="mensualisationNon" data-current={MensualisationNon} value="Non"
+										onclick={handleGestion} checked={isMensualisationNon}>
+									<label class="form-check-label" style="margin-left:5px"
+										for="mensualisationNon">Non</label>
+								</div>
+								<!-- End DDPCM 1110 -->
+							</div>
+
+							<div class="row mb-10" style="margin-top:8px; margin-bottom:40px">
+								<div class="col-lg-10 prlvement-au titlehecto">
+									<template if:false={isAjustementMensuNot0}>
+										<p class="text14-grey500-center" style="width:50%; margin-left: 80px;">
+											Montant mensuel : {_record.VI_MontantdelaMensualitePanierClient__c} €/mois.<br>
+											Le montant affiché s'applique uniquement sur ce contrat.
+										</p>
+									</template>
+									<template if:true={isAjustementMensuNot0}>
+										<p class="text14-grey500-center" style="width:50%; margin-left: 80px;">
+											Montant mensuel : {_record.VI_MontantdelaMensualitePanierClient__c} €/mois, <em
+											class="barre">{_record.VI_MontantOffrePanierClient__c} €/mois.</em><br>
+											Le montant affiché s'applique uniquement sur ce contrat.
+										</p>
+									</template>
+								</div>
+								<!-- Start DDPCM-1109 New Canaux -->
+								<br>
+								<template if:false={informationMensualisation}>
+									<div class="row" style="margin-top:10px">
+										<div class="col-lg-2 text-center"></div>
+										<div class="col-lg-9 text-center voir-moins">
+											<p style=" cursor: pointer;color: #2196f3;" onclick={showInformationMensualisation}>
+												Voir Plus</p>
+										</div>
+										<div class="col-lg-1 text-center"></div>
+									</div>
+								</template>
+								<template if:true={informationMensualisation}>
+									<div class="row" style="margin-top:10px">
+										<div class="col-lg-2 text-center"></div>
+										<div class="col-lg-9 text-center voir-moins">
+											<p style=" cursor: pointer;color: #2196f3;" onclick={showInformationMensualisation}>
+												Voir Moins</p>
+										</div>
+										<div class="col-lg-1 text-center"></div>
+									</div>
+
+									<div class="row" style="margin-top:10px">
+										<div class="col-lg-1 text-center"></div>
+										<div class="col-lg-9 text-left" style="margin-left: 20px; color: #2196f3">
+											<p class="text14-grey500-center; margin-left: 80px;">
+												Moyen de paiement permettant de lisser son budget sur l'année sur la base d'un
+												échéancier sur 11mois indiaquant le montant prélevé et les dates de
+												prélèvement.<br><br>
+												Une seule facture par an basée sur le relevé de consomations réelles.<br><br>
+												En fin de cycle de mensualisation, une facture de régulation qui donne lieu à un
+												dernier prélèvement ou à un remboursement par virement en cas de trop perçu.
+											</p>
+										</div>
+										<div class="col-lg-2 text-center"></div>
+									</div>
+								</template>
+
+								<div class="col-lg-2"></div>
+							</div>
+
+						</div>
+					</div>
+					
+
+					<!-- Start DDPCM-786 -->
+					<div if:false={isMensualisationAccessible}>
+						<div class="col-lg-1"></div>
+						<div class="col-lg-10 greyBorder">
+							<div class="row mb-10" style="margin-top:40px;">
+								<div class="col-lg-4">
+									<span class="text-center"
+										style="margin-left: 80px; background-color:rgba(179, 179, 179); border-radius: 2px; color: white; padding-left:8px; padding-top:3px; padding-bottom:7px; padding-right:8px;">Service
+										gratuit </span>
+								</div>
+								<div class="col-lg-5"></div>
+							</div>
+							<div class="row" style="margin-top:18px;">
+								<div class="col-lg-2 prlvement-au titlehecto " style="margin-right: 10px;">
+									<p style="margin-left: 80px; margin-right: 7px; color:grey">
+										<strong> Mensualisation </strong>
+									</p>
+								</div>
+								<div class="col-lg-7"></div>
+								<div class="form-check form-check-inline" style="margin-left: 30px;">
+									<input class="form-check-input" type="radio" disabled>
+									<label class="form-check-label" style="margin-left:5px ;margin-right: 5px">Oui</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" disabled>
+									<label class="form-check-label" style="margin-left:5px">Non</label>
+								</div>
+							</div>
+							<div class="row mb-10" style="margin-top:8px; margin-bottom:40px">
+								<div class="col-lg-10 prlvement-au titlehecto">
+									<p class="text14-grey500-center" style="width:50%; margin-left: 80px; color: grey">
+										Montant mensuel : {offreTotalPriceVar} €/mois.<br>
+										Le montant affiché s'applique uniquement sur ce contrat.
+									</p>
+								</div>
+								<br>
+								<template if:false={informationMensualisation}>
+									<div class="row" style="margin-top:10px">
+										<div class="col-lg-2 text-center"></div>
+										<div class="col-lg-9 text-center voir-moins">
+											<p style="color: grey;">
+												Voir Plus</p>
+										</div>
+										<div class="col-lg-1 text-center"></div>
+									</div>
+								</template>
+								<div class="col-lg-2"></div>
+							</div>
+						</div>
+					</div>
+					<!-- End DDPCM-786 -->
+
+					<div class="col-lg-1"></div>
+					<div class="col-lg-10 blueBorder">
+
+						<div class="row mb-10" style="margin-top:40px;">
+							<div class="col-lg-1"></div>
+							<div class="col-lg-4">
+								<span class="text-center"
+									style="background-color:rgba(179, 179, 179); border-radius: 2px; color: white; padding-left:8px; padding-top:3px; padding-bottom:7px; padding-right:8px;">Service
+									gratuit </span>
+							</div>
+
+							<div class="col-lg-5"></div>
+						</div>
+
+						<div class="row" style="margin-top:18px;">
+							<div class="col-lg-1"></div>
+							<div class="col-lg-2 prlvement-au titlehecto " style="margin-right: 10px;">
+								<p style="margin-right: 7px; color:#2196f3">
+									<strong> Espace Client </strong>
+								</p>
+							</div>
+
+							<div class="col-lg-5"></div>
+						</div>
+
+						<div class="row mb-10" style="margin-top:8px; margin-bottom:40px">
+							<div class="col-lg-1"></div>
+							<div class="col-lg-9 prlvement-au titlehecto">
+								<p class="text14-grey500-center" >
+									L'espace client sera crée automatiquement. Le client recevra un email pour l'activer
+									(Choix du mot de passe). <br>
+									Merci de vérifier l'adresse email du client.
+								</p>
+							</div>
+							<br>
+							<template if:false={informationEspaceClient}>
+								<div class="row" style="margin-top:10px">
+									<div class="col-lg-2 text-center"></div>
+									<div class="col-lg-9 text-center voir-moins">
+										<p style=" cursor: pointer;color: #2196f3;" onclick={showinformationEspaceClient}>
+											Voir Plus</p>
+									</div>
+									<div class="col-lg-1 text-center"></div>
+								</div>
+							</template>
+							<template if:true={informationEspaceClient}>
+
+								<div class="row" style="margin-top:10px">
+									<div class="col-lg-2 text-center"></div>
+									<div class="col-lg-9 text-center voir-moins">
+										<p style=" cursor: pointer; color: #2196f3;" onclick={showinformationEspaceClient}>
+											Voir Moins</p>
+									</div>
+									<div class="col-lg-1 text-center"></div>
+								</div>
+
+								<div class="col-lg-1"></div>
+								<div class="col-lg-9 text-left" style="color: #2196f3">
+									<strong>Espace personnel et sécurisé qui permet de gérer son contrat d'énergie gaz et/ou
+										électricité :</strong><br><br>
+									<strong>∙</strong> Gestion de l'ensemble des contrats d'energie pour plusieurs adresses si necessaire.<br>
+									<strong>∙</strong> Affichage de l'historiqu de 5ans de factures.<br>
+									<strong>∙</strong> Suivi de ses consomationset ses relevés de compteurs.<br>
+									<strong>∙</strong> Accès gratuit au service CAP EcoConso pour analyser et optimiser sa consommation.<br>
+									<strong>∙</strong> Gestion de ses moyens de paiement pour le réglement de ses factures.<br>
+									<strong>∙</strong> Souscription en ligne aux contrats d'énergie et aux offres de services d'Engie.<br>
+								</div>
+								<div class="col-lg-1"></div>
+							</template>
+						</div>
+					</div>
+
+					<div class="col-lg-1"></div>
+					<div class="col-lg-10 blueBorder">
+
+						<div class="row mb-10" style="margin-top:40px;">
+							<div class="col-lg-1"></div>
+							<div class="col-lg-2">
+								<span class="text-center"
+									style="background-color:rgba(179, 179, 179); border-radius: 2px; color: white; padding-left:8px; padding-top:3px; padding-bottom:7px; padding-right:8px;">Service
+									gratuit </span>
+							</div>
+
+							<div class="col-lg-5"></div>
+						</div>
+
+						<div class="row" style="margin-top:18px;">
+							<div class="col-lg-1"></div>
+
+							<!-- Start DDPCM 1110 -->
+
+							<div class="col-lg-2 prlvement-au titlehecto " style="margin-right: 10px; color: #2196f3">
+								Facture en ligne
+							</div>
+	
+							<div class="col-lg-6"></div>
+							<div class="form-check form-check-inline" style="margin-left: 30px;">
+								<input class="form-check-input" type="radio" name="FactureOui"
+									data-id="FactureOui" id="FactureOui" data-current={FactureOui} value="Oui"
+									onclick={handleGestion} checked={isFactureOui}>
+								<label class="form-check-label" style="margin-left:5px ;margin-right: 5px"
+									for="FactureOui">Oui</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" name="FactureNon"
+									data-id="FactureNon" id="FactureNon" data-current={FactureNon} value="Non"
+									onclick={handleGestion} checked={isFactureNon}>
+								<label class="form-check-label" style="margin-left:5px"
+									for="FactureNon">Non</label>
+							</div>
+
+							<!-- End DDPCM 1110 -->
+		
+							<div class="col-lg-5"></div>
+						</div>
+		
+						<div class="row mb-10" style="margin-top:8px; margin-bottom:40px">
+							<div class="col-lg-1"></div>
+							<div class="col-lg-9 prlvement-au titlehecto">
+								<p class="text14-grey500-center">
+									Toutes les factures archivées pendant 5 ans : consultation,
+									téléchargement et impression en ligne.<br> Reception d'un e-mail
+									lors de la mise à disposition de chaque nouvelle facture.
+								</p>
+							</div>
+							<br>
+							<template if:false={informationEFacture}>
+								<div class="row" style="margin-top:10px">
+									<div class="col-lg-2 text-center"></div>
+									<div class="col-lg-9 text-center voir-moins">
+										<p style=" cursor: pointer;color: #2196f3;" onclick={showinformationEFacture}>
+											Voir Plus</p>
+									</div>
+									<div class="col-lg-1 text-center"></div>
+								</div>
+							</template>
+							<template if:true={informationEFacture}>
+
+								<div class="row" style="margin-top:10px">
+									<div class="col-lg-2 text-center"></div>
+									<div class="col-lg-9 text-center voir-moins">
+										<p style=" cursor: pointer; color: #2196f3;" onclick={showinformationEFacture}>
+											Voir Moins</p>
+									</div>
+									<div class="col-lg-1 text-center"></div>
+								</div>
+
+								<div class="col-lg-1"></div>
+								<div class="col-lg-9 text-left" style="color: #2196f3">
+									<p class="text14-grey500-center">
+										<strong>∙</strong> Rapide : accès aux factures en quelques clics, 24H/24, 7J/7, pendant 5ans.<br>
+										<strong>∙</strong> Facile : plus de facture(s) à réceptionner, classer et ranger. <br>
+										<strong>∙</strong> Pratique : gain de place. Fini les factures perdues ! <br><br>
+										Les clients sont aussi averti par e-mail de tout changement des Conditions
+										Générales de Ventes de Gaz et/ou d'Electricité.
+									</p>	
+								</div>
+								<div class="col-lg-1"></div>
+							</template>
+						
+							
+							<div class="col-lg-2"></div>
+						</div>
+					</div>
+					<div class="col-lg-1"></div>
+					<div class="col-lg-10 blueBorder">
+
+						<div class="row mb-10" style="margin-top:40px;">
+							<div class="col-lg-1"></div>
+							<div class="col-lg-2">
+								<span class="text-center"
+									style="background-color:rgba(179, 179, 179); border-radius: 2px; color: white; padding-left:8px; padding-top:3px; padding-bottom:7px; padding-right:8px;">Service
+									gratuit </span>
+							</div>
+
+							<div class="col-lg-5"></div>
+						</div>
+
+						<div class="row" style="margin-top:18px;">
+							<div class="col-lg-1"></div>
+
+							<!-- Start DDPCM 1110 -->
+
+							<div class="col-lg-2 prlvement-au titlehecto " style="margin-right: 10px; color: #2196f3;">
+								Documents 100% en ligne
+							</div>
+							<div class="col-lg-6"></div>
+							<div class="form-check form-check-inline" style="margin-left: 30px;">
+								<input class="form-check-input" type="radio" name="EdocOui"
+									data-id="EdocOui" id="EdocOui" data-current={EdocOui} value="Oui"
+									onclick={handleGestion} checked={isEdocOui}>
+								<label class="form-check-label" style="margin-left:5px ;margin-right: 5px"
+									for="EdocOui">Oui</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" name="EdocNon"
+									data-id="EdocNon" id="EdocNon" data-current={EdocNon} value="Non"
+									onclick={handleGestion} checked={isEdocNon}>
+								<label class="form-check-label" style="margin-left:5px"
+									for="EdocNon">Non</label>
+							</div> 
+
+							<!-- End DDPCM 1110 -->
+
+						</div>
+		
+						<div class="row mb-10" style="margin-top:8px; margin-bottom:40px">
+							<div class="col-lg-1"></div>
+							<div class="col-lg-9 prlvement-au titlehecto">
+								<p class="text14-grey500-center">
+									L'échéancier de paiement, les avenants au contrat, etc, accessibles depuis votre Espace
+									Client.
+								</p>
+							</div>
+							<br>
+							<template if:false={informationEDoc}>
+								<div class="row" style="margin-top:10px">
+									<div class="col-lg-2 text-center"></div>
+									<div class="col-lg-9 text-center voir-moins">
+										<p style=" cursor: pointer;color: #2196f3;" onclick={showinformationEDoc}>
+											Voir Plus</p>
+									</div>
+									<div class="col-lg-1 text-center"></div>
+								</div>
+							</template>
+							<template if:true={informationEDoc}>
+
+								<div class="row" style="margin-top:10px">
+									<div class="col-lg-2 text-center"></div>
+									<div class="col-lg-9 text-center voir-moins">
+										<p style=" cursor: pointer; color: #2196f3;" onclick={showinformationEDoc}>
+											Voir Moins</p>
+									</div>
+									<div class="col-lg-1 text-center"></div>
+								</div>
+
+								<div class="col-lg-1"></div>
+								<div class="col-lg-9 text-left" style="color: #2196f3">
+									<p class="text14-grey500-center">
+										Le service e-document inclut l'envoi du Client par courrier éléctronique à
+										l'adresse communiqué par ce dernier dans son Espace Client: <br>
+										<strong>∙</strong> Des évolutions des Conditions Générales de Ventes de Gaz et/ou
+										d'Electricité.<br>
+										<strong>∙</strong> Des évolutions des Conditions Générales de Ventes de Gaz et/ou
+										d'Electricité.<br><br>
+
+										Le Client recevra également les e-documents suivants au format éléctronique
+										(option désactivable sur simple demande auprès d'ENGIE):<br>
+										<strong>∙</strong> Le courrier de reconduction du contrat d'energie.<br>
+										<strong>∙</strong> Les avenants au contrat d'énergie.<br>
+										<strong>∙</strong> Le premier plan de paiement si le CLient a choisi la mensualisation et toute
+										actualisation de celui-ci.<br>
+									</p>	
+								</div>
+								<div class="col-lg-1"></div>
+							</template>
+						
+							<div class="col-lg-2"></div>
+						</div>
+					</div>
+					<!-- End DDPCM-863 New Canaux -->
+				</template>
+				<template if:false={isNewCanaux}>
+					<!-- End DDPCM-1109 New Canaux -->
+					<div class="row mb-10" style="margin-top:60px;">
+						<div class="col-lg-2"></div>
+						<div class="col-lg-2">
+							<span class="text-center"
+								style="background-color:rgba(179, 179, 179); border-radius: 2px; color: white; padding-left:8px; padding-top:3px; padding-bottom:7px; padding-right:8px;">Service
+								gratuit </span>
+						</div>
+						<div class="col-lg-5"></div>
+					</div>
+	
+					<div class="row" style="margin-top:18px;">
+						<div class="col-lg-2"></div>
+						<div class="col-lg-2 prlvement-au titlehecto " style="margin-right: 10px;">
+							<input type="checkbox" style="margin-right: 7px;" name="eDoc" onclick={handleGestion}
+								checked={isEdocOui}>
+							Documents 100% en ligne
+						</div>
+						<div class="col-lg-5"></div>
+					</div>
+	
+					<div class="row mb-10" style="margin-top:8px; margin-bottom:40px">
+						<div class="col-lg-2"></div>
+						<div class="col-lg-4 prlvement-au titlehecto">
+							<p class="text14-grey500-center">
+								L'échéancier de paiement, les avenants au contrat, etc, accessibles depuis votre Espace
+								Client.
+							</p>
+						</div>
+						<div class="col-lg-4"></div>
+					</div>
+	
+				</template>
+				
+				<template if:true={showErrorOnSuivant}>
+					<div class="row">
+						<!-- Start DDPCM - 1110 -->
+						<div if:true={isNewCanaux} class="col-lg-12">
+							<p if:true={isErrorMensualité} class="col-lg-12 text-center font-class-1" style="color:#f00020; margin-top: 10px;">
+								Merci d’effectuer un choix pour la mensualisation.
+							</p>
+							<p if:true={isErrorEDoc} class="col-lg-12 text-center font-class-1" style="color:#f00020; margin-top: 10px;">
+								Merci d’effectuer un choix pour les documents 100% en ligne.
+							</p>
+							<p class="text-center font-class-1" style="color:#f00020; margin-top: 10px;">
+								Toutes les étapes du parcours (y compris l'étape Services de gestion) doivent
+								être terminées. Merci de les compléter pour accéder au récapitulatif de la souscription.
+							</p>
+						</div>
+						<!-- End DDPCM - 1110 -->
+						<div if:false={isNewCanaux} class="col-lg-12">
+							<p class="text-center font-class-1" style="color:#f00020; margin-top: 10px;">
+								Toutes les étapes du parcours (y compris l'étape Saisie des moyens de paiement) doivent
+								être terminées. Merci de les compléter pour accéder au récapitulatif de la souscription.
+							</p>
+						</div>
+					</div>
+				</template>
+
+				<div class="row">
+					<div class="col-lg-4 text-center"></div>
+					<button type="button" class="col-lg-4 btn" style="height: 44px;width: 260px;color: #fff;
+																													background-color: rgba(0, 153, 52, 1);
+																													border-color: rgba(0, 153, 52, 1);border-radius:0" onclick={handleServiceGestion}>
+						<p class="font-class-2">Suivant</p>
+					</button>
+					<div class="col-lg-4 text-center"></div>
+				</div>
+
+
+
+				<div style="position: absolute;height:10%;width: 100%;bottom: -150px;left: 0%;">
+					<button onclick={handlePrecedent} class="buttonPrecedent">Précédent</button>
+				</div>
+
+			</div>
+		</template>
+		<!-- Star DDPCM - 854 New Canaux -->
+
+		<div if:true={isModalOpenWarningMensualite} class="vi-modal-WarningMensualite container">
+			<div class="row" style="margin-top: 10px;">
+				<h1 class="col-lg-1"></h1>
+				<h1 class="col-lg-11" style="margin-top: 50px;" data-id="serviceGestion">Attention</h1>
+			</div>
+			<div class="row">
+				<p class="col-lg-12 text-center font-class-5" style="margin-top: 20px;">
+					Vous n’avez pas choisi la mensualisation, validez-vous ce choix de manière définitive ?</p>
+			</div>
+			<br>
+			<br>
+			<div class="row">
+				<div class="col-lg-8 text-center"></div>
+				<button type="button" class="col-lg-3 btn" style="height: 44px;width: 260px;color: #fff;
+						background-color: rgba(0, 153, 52, 1);
+						border-color: rgba(0, 153, 52, 1);border-radius:0" onclick={closeModalWarningMensualite}>
+					<p class="font-class-2">Continuer</p>
+				</button>
+				<div class="col-lg-1 text-center"></div>
+			</div>
+		</div>
+
+		<!-- "Fond grisé" des popups -->
+		<div onclick={closeModalWarningMensualite} class="vi-modal-background" if:true={isModalOpenBackgroundWarningMensualite}></div>
+
+		<!-- End DDPCM - 854 New Canaux -->
+
+		<!-- Star DDPCM - 786 New Canaux -->
+
+		<div if:true={isModalOpenAjustementMensualite} class="vi-modal-mensualite container">
+			<!--Header-->
+            <div class="vi-modal-header-mensualite">
+                <img title="Close" onclick={closeModalAjustementMensualite} class="vi-close-btn-mensualite" src={closeImage} />
+                <span style="position: absolute;top: 35%;left: 24%;">Ajuster vos mensualités jusqu’à +/- 10%</span>
+            </div>
+			<!--Body-->
+			<br>
+			<br>
+			<div class="vi-modal-container-mensualite">
+				<div class="vi-modal-container-mensualite-button">
+					<button disabled={showButtonMoins} onclick={buttonMoinsAction}
+						class={viModalButtonMinusMensualite}><span
+							class="buttonMensualiteTextMinus">-</span></button>
+					<div class="vi-modal-container-mensualite-button-trait"></div>
+					<template if:true={isOrange}>
+						<Strong>
+							<span data-id="modalTotalPriceId" class="vi-modal-container-mensualite-button-text1"
+								style="color:rgb(228,118,0);">{offreTotalPriceVarRounded} € TTC /
+								mois</span>
+						</Strong>
+						<Strong><span class="vi-modal-container-mensualite-button-text2">11 mensualités /
+								an</span></Strong>
+					</template>
+					<template if:true={isBlue}>
+						<Strong>
+							<span data-id="modalTotalPriceId" class="vi-modal-container-mensualite-button-text1"
+								style="color: var(--cerulean);">{offreTotalPriceVarRounded} € TTC /
+								mois</span>
+						</Strong>
+						<Strong><span class="vi-modal-container-mensualite-button-text2">11 mensualités /
+								an</span></Strong>
+					</template>
+					<template if:true={isGreen}>
+						<Strong>
+							<span data-id="modalTotalPriceId" class="vi-modal-container-mensualite-button-text1"
+								style="color:rgb(0,153,52);">{offreTotalPriceVarRounded} € TTC /
+								mois</span>
+						</Strong>
+						<Strong><span class="vi-modal-container-mensualite-button-text2">11 mensualités /
+								an</span></Strong>
+					</template>
+					<button disabled={showButtonPlus} onclick={buttonPlusAction}
+						class={viModalButtonPlusMensualite}><span
+							class="buttonMensualiteTextPlus">+</span>
+					</button>
+				</div>
+				<template if:true={isOrange}>
+					<div class="vi-modal-container-mensualite-astuce orangeBorder">
+						<span class="vi-modal-container-mensualite-border-text">
+							D'après nos calculs, cette mensualité risque de générer une facture de régulation avec un
+							montant élevé.
+						</span>
+					</div>
+				</template>
+				<template if:true={isBlue}>
+					<div class="vi-modal-container-mensualite-astuce blueBorder">
+						<span class="vi-modal-container-mensualite-border-text">
+							D'après nos calculs, cette mensualité devrait vous permettre d'avoir la facture de
+							régulation la plus petite possible le 12 ème mois.
+						</span>
+					</div>
+				</template>
+				<template if:true={isGreen}>
+					<div class="vi-modal-container-mensualite-astuce greenBorder">
+						<span class="vi-modal-container-mensualite-border-text">
+							D'après nos calculs, cette mensualité vous permettra d'avoir une facture de régulation avec
+							un montant faible.
+						</span>
+					</div>
+				</template>
+				<br>
+				<br>
+
+			</div>
+			<!--Footer-->
+			<div class="vi-modal-footer-mensualite">
+				<button onclick={validerMensualite} class='vi-modal-btn-mensualite'>
+					Valider les mensualités
+				</button>
+			</div>
+		</div>
+
+		<!-- "Fond grisé" des popups -->
+		<div if:true={isBackgroundModalOpenAjustementMensualite} onclick={closeModalAjustementMensualite} class="vi-modal-background"></div>
+
+		<!-- End DDPCM - 786 New Canaux -->
+	</div>
+</template>

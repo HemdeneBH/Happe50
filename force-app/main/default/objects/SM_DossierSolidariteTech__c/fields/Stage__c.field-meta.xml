@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Stage__c</fullName>
+    <description>@SMILE Etape</description>
+    <externalId>false</externalId>
+    <label>Etape</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>DossierStatus__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Z110</fullName>
+                <default>false</default>
+                <label>Z100-OK engagement + OK info SvSx</label>
+            </value>
+            <value>
+                <fullName>Z120</fullName>
+                <default>false</default>
+                <label>Z100-OK engagement + KO info SvSx</label>
+            </value>
+            <value>
+                <fullName>Z130</fullName>
+                <default>false</default>
+                <label>Z100-KO engagement + OK info SvSx</label>
+            </value>
+            <value>
+                <fullName>Z140</fullName>
+                <default>false</default>
+                <label>Z100-KO engagement + KO info SvSx</label>
+            </value>
+            <value>
+                <fullName>Z210</fullName>
+                <default>false</default>
+                <label>Z200-Dossier FSL en cours</label>
+            </value>
+            <value>
+                <fullName>Z220</fullName>
+                <default>false</default>
+                <label>Z200-Refus de prise en charge FSL</label>
+            </value>
+            <value>
+                <fullName>Z310</fullName>
+                <default>false</default>
+                <label>Z300-Aide FSL Totale</label>
+            </value>
+            <value>
+                <fullName>Z320</fullName>
+                <default>false</default>
+                <label>Z300-Aide FSL Partielle</label>
+            </value>
+            <value>
+                <fullName>Z325</fullName>
+                <default>false</default>
+                <label>Z300-Aide FSL Préventive</label>
+            </value>
+            <value>
+                <fullName>Z330</fullName>
+                <default>false</default>
+                <label>Z300-Aide FSL Refusée</label>
+            </value>
+            <value>
+                <fullName>Z350</fullName>
+                <default>false</default>
+                <label>Z500-Aide en attente d&apos;affectation</label>
+            </value>
+            <value>
+                <fullName>Z360</fullName>
+                <default>false</default>
+                <label>Z500-Aide affectée</label>
+            </value>
+            <value>
+                <fullName>Z370</fullName>
+                <default>false</default>
+                <label>Z500-Dossier ajourné</label>
+            </value>
+            <value>
+                <fullName>Z380</fullName>
+                <default>false</default>
+                <label>Z500-Dossier clos</label>
+            </value>
+            <value>
+                <fullName>Z410</fullName>
+                <default>false</default>
+                <label>Z400-Plan d&apos;apurement proposé</label>
+            </value>
+            <value>
+                <fullName>Z420</fullName>
+                <default>false</default>
+                <label>Z400-Plan d&apos;apurement accepté</label>
+            </value>
+            <value>
+                <fullName>Z430</fullName>
+                <default>false</default>
+                <label>Z400-Plan d&apos;apurement refusé</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>ENGA</controllingFieldValue>
+            <controllingFieldValue>RFSL</controllingFieldValue>
+            <valueName>Z110</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ENGA</controllingFieldValue>
+            <controllingFieldValue>RFSL</controllingFieldValue>
+            <valueName>Z120</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ENGA</controllingFieldValue>
+            <controllingFieldValue>RFSL</controllingFieldValue>
+            <valueName>Z130</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ENGA</controllingFieldValue>
+            <controllingFieldValue>RFSL</controllingFieldValue>
+            <valueName>Z140</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ENGA</controllingFieldValue>
+            <controllingFieldValue>RFSL</controllingFieldValue>
+            <valueName>Z210</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ENGA</controllingFieldValue>
+            <controllingFieldValue>RFSL</controllingFieldValue>
+            <valueName>Z220</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ENGA</controllingFieldValue>
+            <controllingFieldValue>RFSL</controllingFieldValue>
+            <valueName>Z310</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ENGA</controllingFieldValue>
+            <controllingFieldValue>RFSL</controllingFieldValue>
+            <valueName>Z320</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ENGA</controllingFieldValue>
+            <controllingFieldValue>RFSL</controllingFieldValue>
+            <valueName>Z325</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ENGA</controllingFieldValue>
+            <controllingFieldValue>RFSL</controllingFieldValue>
+            <valueName>Z330</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ENGA</controllingFieldValue>
+            <controllingFieldValue>RFSL</controllingFieldValue>
+            <controllingFieldValue>TSAA</controllingFieldValue>
+            <controllingFieldValue>TAPA</controllingFieldValue>
+            <controllingFieldValue>TATA</controllingFieldValue>
+            <controllingFieldValue>TAPR</controllingFieldValue>
+            <valueName>Z350</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ENGA</controllingFieldValue>
+            <controllingFieldValue>RFSL</controllingFieldValue>
+            <controllingFieldValue>TSAA</controllingFieldValue>
+            <controllingFieldValue>TAPA</controllingFieldValue>
+            <controllingFieldValue>TATA</controllingFieldValue>
+            <controllingFieldValue>TAPR</controllingFieldValue>
+            <valueName>Z360</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ENGA</controllingFieldValue>
+            <controllingFieldValue>RFSL</controllingFieldValue>
+            <controllingFieldValue>TSAA</controllingFieldValue>
+            <controllingFieldValue>TAPA</controllingFieldValue>
+            <controllingFieldValue>TATA</controllingFieldValue>
+            <controllingFieldValue>TAPR</controllingFieldValue>
+            <valueName>Z370</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ENGA</controllingFieldValue>
+            <controllingFieldValue>RFSL</controllingFieldValue>
+            <controllingFieldValue>TSAA</controllingFieldValue>
+            <controllingFieldValue>TAPA</controllingFieldValue>
+            <controllingFieldValue>TATA</controllingFieldValue>
+            <controllingFieldValue>TAPR</controllingFieldValue>
+            <valueName>Z380</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ENGA</controllingFieldValue>
+            <controllingFieldValue>RFSL</controllingFieldValue>
+            <controllingFieldValue>TSAA</controllingFieldValue>
+            <controllingFieldValue>TAPA</controllingFieldValue>
+            <controllingFieldValue>TATA</controllingFieldValue>
+            <controllingFieldValue>TAPR</controllingFieldValue>
+            <valueName>Z410</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ENGA</controllingFieldValue>
+            <controllingFieldValue>RFSL</controllingFieldValue>
+            <controllingFieldValue>TSAA</controllingFieldValue>
+            <controllingFieldValue>TAPA</controllingFieldValue>
+            <controllingFieldValue>TATA</controllingFieldValue>
+            <controllingFieldValue>TAPR</controllingFieldValue>
+            <valueName>Z420</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ENGA</controllingFieldValue>
+            <controllingFieldValue>RFSL</controllingFieldValue>
+            <controllingFieldValue>TSAA</controllingFieldValue>
+            <controllingFieldValue>TAPA</controllingFieldValue>
+            <controllingFieldValue>TATA</controllingFieldValue>
+            <controllingFieldValue>TAPR</controllingFieldValue>
+            <valueName>Z430</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

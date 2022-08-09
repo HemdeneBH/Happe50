@@ -1,0 +1,248 @@
+:host {
+    --dxp-c-link-text-color: var(--white);
+    --dxp-c-section-content-spacing-block-start: 0;
+    --dxp-s-section-content-spacing-block-start: 0;
+    --dxp-c-section-content-spacing-inline-end: 0;
+    --dxp-c-section-content-spacing-block-end: 0;
+    --dxp-s-section-content-spacing-block-end: 0;
+    --dxp-c-section-content-spacing-inline-start: 0;
+}
+
+:host .section-content[community_layout-section_section] {
+    padding: 0 !important;
+}
+
+
+/*lightTheme*/
+
+:host(.lightTheme) .c-btn:disabled {
+    background-color: var(--light-disabled);
+}
+
+:host(.lightTheme) .c-btn--secondary {
+    background-color: var(--white);
+    color: var(--black);
+    border: 4px solid var(--light-secondary-colour);
+}
+:host(.lightTheme) .c-btn--secondary:hover:not(:disabled) {
+    background-color: var(--white);
+    color: var(--black);
+    border: 4px solid var(--black);
+}
+
+:host(.lightTheme) .c-btn--secondary:hover .c-btn-aideContact_icon .hp-aideContact_icon {
+    filter: invert(100%) sepia(40%) saturate(35%) hue-rotate(229deg) brightness(50%) contrast(100%);
+}
+:host(.lightTheme) .c-btn--secondary:active:not(:disabled) {
+    background-color: var(--white);
+    color: var(--black);
+    border: 4px solid var(--light-primary-colour);
+}
+:host(.lightTheme) .c-btn--secondary:focus {
+    outline: 1px dashed var(--light-secondary-colour);
+    text-decoration: none;
+}
+:host(.lightTheme) .c-btn--secondary:disabled {
+    color: var(--text-disabled);
+    background-color: var(--white);
+    border: 4px solid var(--light-disabled);
+    background-image: none;
+    outline: none;
+    cursor: no-drop;
+}
+:host(.lightTheme) .c-btn-deconnexion a, 
+:host(.lightTheme) .c-btn-aideContact a {
+    color: var(--black);
+}
+/*darkTheme*/
+
+:host(.darkTheme) .c-btn:disabled {
+    background-color: var(--dark-disabled);
+}
+
+:host(.darkTheme) .c-btn--secondary {
+    background-color: black;
+    color: var(--white);
+    border: 4px solid var(--light-secondary-colour);
+}
+:host(.darkTheme) .c-btn--secondary:hover:not(:disabled) {
+    background-color: black;
+    color: var(--white);
+    border: 4px solid var(--white);
+}
+:host(.darkTheme) .c-btn--secondary:hover .c-btn-aideContact_icon .hp-aideContact_icon {
+    filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(159deg) brightness(150%) contrast(101%)
+}
+
+:host(.darkTheme) .c-btn--secondary:active:not(:disabled) {
+    background-color: black;
+    color: var(--white);
+    border: 4px solid var(--dark-primary-colour);
+}
+:host(.darkTheme) .c-btn--secondary:focus {
+    outline: 1px dashed var(--light-secondary-colour);
+    text-decoration: none;
+}
+:host(.darkTheme) .c-btn--secondary:disabled {
+    color: var(--dark-disabled);
+    background-color: black;
+    border: 4px solid var(--dark-disabled);
+    background-image: none;
+    outline: none;
+    cursor: no-drop;
+}
+:host(.darkTheme) .c-btn-deconnexion a, 
+:host(.darkTheme) .c-btn-aideContact a {
+    color: var(--white);
+}
+
+.c-btn--secondary:disabled:hover {
+    outline: none;
+    cursor: no-drop;
+}
+
+.c-btn--secondary:disabled:active {
+    outline: none;
+    cursor: no-drop;
+}
+
+.c-btn-aideContact_icon {
+    padding: 0 0 2px 10px ;
+}
+
+.c-header-menu {
+    margin: 40px 0 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    max-width: 1455px;
+    flex-grow: 1;
+}
+
+.c-btn {
+    font-family: var(--font-bold);
+    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 0.6px;
+    padding: 16px 30px;
+    border: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: end;
+    flex: 0 1 auto;
+    text-decoration: none;
+    vertical-align: middle;
+    text-transform: uppercase;
+    line-height: normal;
+    white-space: nowrap;
+    margin: 0 10px;
+}
+
+.c-btn:disabled {
+    color: var(--text-disabled);
+    background-color: var(--grey-medium2);
+    background-image: none;
+    outline: none;
+    cursor: no-drop;
+}
+
+.c-btn--secondary {
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 14px 18px;
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
+    cursor: pointer;
+}
+.c-btn:disabled:hover {
+    outline: none;
+    cursor: no-drop;
+}
+.c-btn:disabled:active {
+    outline: none;
+    cursor: no-drop;
+}
+.c-btn--secondary:hover:not(:disabled) {
+    color: var(--white);
+    background-clip: border-box;
+    background-image: none;
+    text-decoration: none;
+}
+.c-btn--secondary:hover:not(:disabled) span.c-btn__iconItem {
+    color: var(--white);
+    text-decoration: none;
+}
+.c-btn--secondary:active:not(:disabled) {
+    background-clip: border-box;
+    text-decoration: none;
+}
+.c-btn--secondary:active:not(:disabled) span.c-btn__iconItem {
+    color: var(--white);
+}
+
+c-hp_ec_dropdown-address {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 1 auto;
+    text-decoration: none;
+    min-width: 140px;
+    width: 520px;
+    vertical-align: middle;
+    line-height: normal;
+    margin: 0 15px;
+}
+.hp-aideContact_icon {
+    width: 24px;
+    height: auto;
+}
+@media (max-width: 1390px) {
+    /* 1390px screen and all screens smaller */
+    .c-header-menu {
+       justify-content: start;
+    }
+}
+@media (max-width: 1280px) {
+    /* 1280px screen and all screens smaller */
+    .c-header-menu {
+        display: inline-flex;
+        align-items: stretch;
+        flex-direction: column;
+        margin: 80px 20px 0 20px;
+        width: calc(100% - 40px);
+    }
+    c-hp_ec_dropdown-address {
+        max-width: none;
+    }
+
+
+    .c-header-menu .c-btn-aideContact,
+    .c-header-menu .c-btn-deconnexion {
+        display: none;
+    }
+
+    .c-header-menu c-hp_ec_dropdown-address {
+        width: 100%;
+        white-space: normal;
+        font-size: 14px;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+@media (max-width: 1024px) {
+    /* Ipad and tablets */
+    c-hp_ec_dropdown-address {
+        max-width: none;
+    }
+        
+}
+
+@media (max-width: 576px) { 
+    /* mobiles */
+    c-hp_ec_dropdown-address {
+        max-width: none;
+    }
+}

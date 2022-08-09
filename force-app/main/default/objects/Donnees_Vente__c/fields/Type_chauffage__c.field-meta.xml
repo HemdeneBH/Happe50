@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type_chauffage__c</fullName>
+    <externalId>false</externalId>
+    <label>Type chauffage</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Gaz</fullName>
+                <default>false</default>
+                <label>Gaz</label>
+            </value>
+            <value>
+                <fullName>Elec</fullName>
+                <default>false</default>
+                <label>Elec</label>
+            </value>
+            <value>
+                <fullName>Fioul</fullName>
+                <default>false</default>
+                <label>Fioul</label>
+            </value>
+            <value>
+                <fullName>Réseau de chaleur</fullName>
+                <default>false</default>
+                <label>Réseau de chaleur</label>
+            </value>
+            <value>
+                <fullName>Propane GPL</fullName>
+                <default>false</default>
+                <label>Propane GPL</label>
+            </value>
+            <value>
+                <fullName>Butane</fullName>
+                <default>false</default>
+                <label>Butane</label>
+            </value>
+            <value>
+                <fullName>Bois</fullName>
+                <default>false</default>
+                <label>Bois</label>
+            </value>
+            <value>
+                <fullName>Solaire</fullName>
+                <default>false</default>
+                <label>Solaire</label>
+            </value>
+            <value>
+                <fullName>Autre énergie renouvelable</fullName>
+                <default>false</default>
+                <label>Autre énergie renouvelable</label>
+            </value>
+            <value>
+                <fullName>Autre</fullName>
+                <default>false</default>
+                <label>Autre</label>
+            </value>
+            <value>
+                <fullName>NSP</fullName>
+                <default>false</default>
+                <label>NSP</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

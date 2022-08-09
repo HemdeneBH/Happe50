@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>@Project: Smile &amp; MyPower
+@Description: Suffix des appels Webservices</description>
+    <label>SM_WS_Suffix</label>
+    <pluralLabel>SM_WS_Suffixs</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

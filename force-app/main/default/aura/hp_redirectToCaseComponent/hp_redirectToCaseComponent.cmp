@@ -1,0 +1,19 @@
+<!--
+  @description       : 
+  @author            : Slimene Belhaj Ali
+  @group             : 
+  @last modified on  : 02-26-2021
+  @last modified by  : Slimene Belhaj Ali
+  Modifications Log 
+  Ver   Date         Author               Modification
+  1.0   02-26-2021   Slimene Belhaj Ali   Initial Version
+-->
+<aura:component implements="lightning:backgroundUtilityItem"
+access="global" >
+    <!-- EMP API component -->
+    <lightning:empApi aura:id="empApi" />
+
+    <!-- Calls the onInit controller function on component initalization -->
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}"/>
+
+</aura:component>

@@ -1,0 +1,33 @@
+<aura:component implements="lightning:isUrlAddressable,lightning:availableForFlowScreens,lightning:actionOverride" access="global">
+        <lightning:workspaceAPI aura:id="workspace"/>
+    
+        
+            <div class="demo-only" style="height: 640px;" if:true="checkBool"> 
+         
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open"> 
+        
+                    <div class="slds-modal__container"> 
+        
+                        
+        
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">                             
+        
+                            Merci de passer depuis la vue 360 du client pour effectuer des modifications directement depuis la fiche client                             
+                        
+                          
+                         <footer>
+                            <lightning:button variant="Brand" 
+                            label="Fermer"
+                            title="Fermer"
+                            class="slds-float_right"
+                            onclick="{!c.closeModel}"/>
+                           </footer> 
+                        </div>   
+                        </div>  
+                </section> 
+        
+                <div class="slds-backdrop slds-backdrop_open"></div> 
+            </div> 
+           
+         <div style="height: 1%;"></div>
+        </aura:component>

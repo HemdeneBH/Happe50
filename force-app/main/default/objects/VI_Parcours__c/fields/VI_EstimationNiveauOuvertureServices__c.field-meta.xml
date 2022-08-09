@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_EstimationNiveauOuvertureServices__c</fullName>
+    <description>champ technique (estimation de lirePDL). Necessaire pour le lancement des prix et remises pour remplir les tableaux annexes des CPV</description>
+    <externalId>false</externalId>
+    <label>Estimation Niveau ouverte services</label>
+    <length>50</length>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

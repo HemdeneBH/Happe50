@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_plage_possibles</fullName>
+    <columns>MasterLabel</columns>
+    <columns>Plagepossible__c</columns>
+    <columns>DeveloperName</columns>
+    <columns>MotifLabel__c</columns>
+    <columns>Type__c</columns>
+    <columns>CodeBlocage__c</columns>
+    <columns>ParcoursBlocages__c</columns>
+    <columns>ParcoursCNP__c</columns>
+    <columns>ParcoursSOL__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All plage possibles</label>
+    <language>en_US</language>
+</ListView>

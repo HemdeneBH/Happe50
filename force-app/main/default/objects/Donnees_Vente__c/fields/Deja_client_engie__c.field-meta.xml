@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Deja_client_engie__c</fullName>
+    <externalId>false</externalId>
+    <label>Déjà client engie</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>OUI</fullName>
+                <default>false</default>
+                <label>OUI</label>
+            </value>
+            <value>
+                <fullName>NON</fullName>
+                <default>false</default>
+                <label>NON</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

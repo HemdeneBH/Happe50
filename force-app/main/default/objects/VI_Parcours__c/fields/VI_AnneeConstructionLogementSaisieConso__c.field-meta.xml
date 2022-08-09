@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_AnneeConstructionLogementSaisieConso__c</fullName>
+    <description>Le PP choisi, en fonction du prospect au téléphone ; l&apos;année de construction du logement</description>
+    <externalId>false</externalId>
+    <label>Année de construction du logement</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Avant 1975</fullName>
+                <default>false</default>
+                <label>Avant 1975</label>
+            </value>
+            <value>
+                <fullName>Entre 1975 et 1988</fullName>
+                <default>false</default>
+                <label>Entre 1975 et 1988</label>
+            </value>
+            <value>
+                <fullName>Entre 1989 et 1999</fullName>
+                <default>false</default>
+                <label>Entre 1989 et 1999</label>
+            </value>
+            <value>
+                <fullName>Entre 2000 et 2005</fullName>
+                <default>false</default>
+                <label>Entre 2000 et 2005</label>
+            </value>
+            <value>
+                <fullName>Après 2005</fullName>
+                <default>false</default>
+                <label>Après 2005</label>
+            </value>
+            <value>
+                <fullName>Je ne sais pas</fullName>
+                <default>true</default>
+                <label>Je ne sais pas</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

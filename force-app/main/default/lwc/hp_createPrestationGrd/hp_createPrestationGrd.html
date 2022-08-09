@@ -1,0 +1,78 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+
+  @last modified on  : 10-07-2021
+
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<template>
+  <template if:true={isPrestationAuto}>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+      <div class="slds-modal__container" style="width:30rem;">
+        <header class="slds-modal__header">
+          <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Fermer" onclick={closePrestation}>
+            <lightning-icon icon-name="utility:close" size="medium">
+            </lightning-icon>
+            <span class="slds-assistive-text">Fermer</span>
+            </button> 
+          <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Création d’une prestation GRD</h2>
+        </header>
+        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+          <p>Confirmez-vous le passage de cette prestation en traitement manuel ?</p>
+        </div>
+        <footer class="slds-modal__footer">
+          <lightning-button label="Non" variant="neutral" class="slds-m-top_small" onclick={handleChoice} value="non"></lightning-button> 
+          <lightning-button label="Oui" variant="brand" class="slds-m-top_small" onclick={handleChoice} value="oui"></lightning-button> 
+        </footer>
+      </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+  </template>
+  <template if:true={isPrestationManual}>
+  <section role="dialog" class="slds-modal slds-fade-in-open slds-modal_small" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+    <div class="slds-modal__container" style="width:30rem;">
+      <header class="slds-modal__header">
+        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Fermer" onclick={closePrestation}>
+        <lightning-icon icon-name="utility:close" size="medium">
+        </lightning-icon>
+        <span class="slds-assistive-text">Fermer</span>
+        </button>                                                                           
+        <h1 class="slds-text-heading_medium slds-m-bottom_large" style="margin-top: 0.3rem;margin-bottom: 0.3rem;font-size: 1.4rem;">
+          Création d’une prestation GRD
+        </h1>
+      </header>
+    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2" style="background: white;">
+        <div class="slds-grid slds-wrap">
+
+            <lightning-record-edit-form record-type-id={prestationRT} style="width:100%;" object-api-name="Prestation_distributeur__c" onsuccess={handleSuccess} onsubmit ={handleSubmit} onerror={handleError}>
+
+                <div class="slds-size_2-of-3" style="height: 20rem;" >
+                  <lightning-input-field field-name="Numero_affaire_distributeur__c" required>
+                  </lightning-input-field>
+                  <lightning-input-field field-name="Creneau__c" >
+                  </lightning-input-field>
+                  <lightning-input-field field-name="Date_de_prestation__c">
+                  </lightning-input-field>
+                  <lightning-input-field field-name="HP_Effective_Date__c" onchange={handleDateChange}>
+                  </lightning-input-field>
+                  <lightning-input type="checkbox" label="Prestation GRD Urgente" onchange={handleCheckboxChange}>
+                  </lightning-input>
+                </div>
+                <div style="float:right">
+                  <lightning-button class="slds-m-top_small" style="margin-right: 0.5rem;" onclick={closePrestation}
+                  label="Annuler"></lightning-button>
+                  <lightning-button variant="brand" label="Créer prestation" type="submit"
+                  class="slds-m-top_small"></lightning-button>
+                  <div if:true={showSpinner}>
+                    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                  </div>
+              </div>
+            </lightning-record-edit-form>
+      </div>
+    </div>
+    </div>
+  </section>
+</template>
+</template>

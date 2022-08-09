@@ -1,0 +1,42 @@
+<!--
+  @description       :  Pop-up de confirmation de suppression d'un payeur divergent
+  @author            : FT2-AE
+  @group             : Smile
+  @last modified on  : 12-15-2021
+  @last modified by  : FT2-AE
+-->
+<template>
+  <div class="btn_delete">
+    <lightning-button variant="destructive" label="Supprimer" title="Supprimer payeur" onclick={openDeletePayeurPopup} class="slds-m-left_x-small"></lightning-button>
+ </div>
+    <!--FT2-1469  Pop-up de confirmation de suppression d'un payeur divergent -->
+    <template if:true={openConfirmDeleteModal}>
+        <section role="dialog" tabindex="-1" aria-label="Meaningful description of the modal content" 
+        aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+        <div class="containerdelete">
+                </br>
+                <div  id="modal-content-id-1" style="text-align: center;">
+                    <H2 class="headerPopupDelete">SUPPRESSION DU PAYEUR DIVERGENT</H2>
+                    </br>
+                    </br>
+                    <p> <lightning-icon icon-name="utility:warning" title="Warning" size="small" class="warning-icon"></lightning-icon>
+                        &nbsp;Etes-vous sûr de vouloir supprimer le payeur divergent?</p>
+                    </br>
+                </div>
+            <footer >
+                <div style="text-align: center;">
+                    <button class="slds-button slds-button_outline-brand"  onclick={noDeletePayeurDivergent}>ANNULER</button>
+                    &nbsp; &nbsp;
+                    <button class="slds-button slds-button_brand " onclick={yesDeletePayeurDivergent}>OUI, SUPPRIMER</button>
+                </div>
+            </footer>
+                </br>
+                </br>
+            <div if:true={showSpinnerLoading}>
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </div>
+        </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_DP_Echeance_de_projet__c</fullName>
+    <description>Champ spécifique au parcours détection de projet</description>
+    <externalId>false</externalId>
+    <label>Échéance de projet</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>SM_DP_Projet__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Projet &lt;3</fullName>
+                <default>false</default>
+                <label>Projet &lt;3</label>
+            </value>
+            <value>
+                <fullName>Projet de 3 mois a 6 mois</fullName>
+                <default>false</default>
+                <label>Projet de 3 mois a 6 mois</label>
+            </value>
+            <value>
+                <fullName>Projet entre 6 et 12 mois</fullName>
+                <default>false</default>
+                <label>Projet entre 6 et 12 mois</label>
+            </value>
+            <value>
+                <fullName>Projet &lt; 3 mois</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Projet &lt; 3 mois</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Mon Pilotage Elec</controllingFieldValue>
+            <controllingFieldValue>Projet Chauffage</controllingFieldValue>
+            <controllingFieldValue>Projet Climatisation</controllingFieldValue>
+            <controllingFieldValue>Projet Isolation</controllingFieldValue>
+            <controllingFieldValue>Projet Panneaux solaires</controllingFieldValue>
+            <controllingFieldValue>Projet Adoucisseur d’eau</controllingFieldValue>
+            <controllingFieldValue>Projet Ballon d’eau chaude sanitaire</controllingFieldValue>
+            <controllingFieldValue>Projet Entretien</controllingFieldValue>
+            <controllingFieldValue>Emménagement</controllingFieldValue>
+            <controllingFieldValue>Résiliation</controllingFieldValue>
+            <controllingFieldValue>Déménagement</controllingFieldValue>
+            <valueName>Projet &lt;3</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Mon Pilotage Elec</controllingFieldValue>
+            <controllingFieldValue>Projet Chauffage</controllingFieldValue>
+            <controllingFieldValue>Projet Climatisation</controllingFieldValue>
+            <controllingFieldValue>Projet Isolation</controllingFieldValue>
+            <controllingFieldValue>Projet Panneaux solaires</controllingFieldValue>
+            <controllingFieldValue>Projet Adoucisseur d’eau</controllingFieldValue>
+            <controllingFieldValue>Projet Ballon d’eau chaude sanitaire</controllingFieldValue>
+            <controllingFieldValue>Projet Entretien</controllingFieldValue>
+            <controllingFieldValue>Emménagement</controllingFieldValue>
+            <controllingFieldValue>Résiliation</controllingFieldValue>
+            <controllingFieldValue>Déménagement</controllingFieldValue>
+            <valueName>Projet de 3 mois a 6 mois</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Mon Pilotage Elec</controllingFieldValue>
+            <controllingFieldValue>Projet Chauffage</controllingFieldValue>
+            <controllingFieldValue>Projet Climatisation</controllingFieldValue>
+            <controllingFieldValue>Projet Isolation</controllingFieldValue>
+            <controllingFieldValue>Projet Panneaux solaires</controllingFieldValue>
+            <controllingFieldValue>Projet Adoucisseur d’eau</controllingFieldValue>
+            <controllingFieldValue>Projet Ballon d’eau chaude sanitaire</controllingFieldValue>
+            <controllingFieldValue>Projet Entretien</controllingFieldValue>
+            <valueName>Projet entre 6 et 12 mois</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

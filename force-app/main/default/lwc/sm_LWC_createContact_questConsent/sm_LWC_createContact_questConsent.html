@@ -1,0 +1,29 @@
+<template>
+    <lightning-accordion active-section-name="A">
+        <lightning-accordion-section name="A" label="Consentements">
+            <div class="slds-var-m-top_large slds-var-m-left_large">
+                <template for:each={questionsConsentements} for:item="consentement">
+                    <div key={consentement.key} class="slds-grid slds-wrap slds-var-m-right_small">
+                        <div class="slds-col slds-size_9-of-12 slds-var-m-right_x-small">
+                            <span>
+                                <!--<span class="required-color">* </span>-->
+                                {consentement.questionLabel}
+                            </span>
+                        </div>
+                        <div class="slds-col slds-size_2-of-12 slds-var-m-left_x-small">
+                            <lightning-radio-group name={consentement.key}
+                                                   options={optionsRadio}
+                                                   value={consentement.consent}
+                                                   type="radio"
+                                                   class="customRadioCls"
+                                                   onchange={handleChangeConsentements}></lightning-radio-group>
+                        </div>
+                    </div>
+                </template>
+                <!--<div if:true={showValidation} class="slds-has-error">
+                    <div class="slds-form-element__help">Veuillez répondre aux questions de consentement</div>
+                </div>-->
+            </div>
+        </lightning-accordion-section>
+    </lightning-accordion>
+</template>

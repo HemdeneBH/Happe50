@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SMILE_Profile__c</fullName>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <label>SMILE Profile</label>
+    <required>true</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>SM_Utilisateur métier restriction maximale</fullName>
+                <default>true</default>
+                <label>SM_Utilisateur métier restriction maximale</label>
+            </value>
+            <value>
+                <fullName>SM_Utilisateur métier restriction moyenne</fullName>
+                <default>false</default>
+                <label>SM_Utilisateur métier restriction moyenne</label>
+            </value>
+            <value>
+                <fullName>SM_Utilisateur métier restriction faible</fullName>
+                <default>false</default>
+                <label>SM_Utilisateur métier restriction faible</label>
+            </value>
+            <value>
+                <fullName>SM_Utilisateur admin métier</fullName>
+                <default>false</default>
+                <label>SM_Utilisateur admin métier</label>
+            </value>
+            <value>
+                <fullName>SM_SystemAdmin</fullName>
+                <default>false</default>
+                <label>SM_SystemAdmin</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

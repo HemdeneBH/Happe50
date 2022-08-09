@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Satisfaction_post_formation</fullName>
+    <active>true</active>
+    <label>Satisfaction post-formation</label>
+    <picklistValues>
+        <picklist>Prestataire__c</picklist>
+        <values>
+            <fullName>DSPC Externe Dakar Fes DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DSPC Externe Fes DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dunkerque DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ENGIE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HUBICUS Toulouse DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INT_Dunkerque</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INT_Metz</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INT_Quimper</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>La Baule DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Metz DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prestataire ACCENTURE DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prestataire Armatis DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prestataire Arvato DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prestataire COMDATA DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prestataire Contentia DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prestataire DEAFI DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prestataire Effico DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prestataire Euro CRM DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prestataire GERI DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prestataire Gayssot DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prestataire Sitel Group DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prestataire Téléperformance DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Quimper DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Télévente Externe COMDATA DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Télévente Externe Euro CRM DGP</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Site__c</picklist>
+        <values>
+            <fullName>ACCENTURE EBENE CNF DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Armatis Caen DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Armatis Guimaraes DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Armatis Porto DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Armatis Tunis DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Arvato Casablanca DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Arvato Chaumont DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Arvato Dakar DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Arvato Dunkerque DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Arvato Marrakech DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BOC Dunkerque DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BOC LA BAULE DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>COMDATA Casablanca DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>COMDATA MarcqEnBaroeul</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>COMDATA Soissons</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contentia Ebene reco clt  DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contentia Marcq en baroeul reco clt  DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contentia Nantes reco clt  DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DAKAR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DEAFI Montreuil</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DUNKERQUE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EM%2FDM Dunkerque DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EM%2FDM LA BAULE DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EM%2FDM Quimper DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ESSENTIEL LA BAULE DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Effica énergét%2E Quimper DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Effico Tours recouv clt DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Equipe 1 Fes DSPC DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Equipe 1 Fes Dakar DSPC DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Equipe HUBICUS Toulouse DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Equipe_1_Televente_COMDATA_Casablanca</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Equipe_1_Televente_COMDATA_Poitiers</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Equipe_1_Televente_Euro_CRM_Lisieux_DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Equipe_1_Televente_Euro_CRM_Mo_DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Essentiel Metz DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Euro CRM Moka DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GERI Lyon recou clt actifs DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gayssot Lyon recou clt actifs DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MAXEVILLE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>METZ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>N%2FA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PALMIER-CASABLANCA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PREMIUM LA BAULE DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Premium Dunkerque DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Premium Metz DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Premium Quimper DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QUIMPER</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SOLIDARITE LA BAULE DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sitel Group Dakar</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sitel Group FES DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sitel Group La Rochelle DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sitel Group Nancy DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Solidarité Metz DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Solidarité Quimper DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Téléperformance Lyon DGP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Téléperformance Tunis DGP</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

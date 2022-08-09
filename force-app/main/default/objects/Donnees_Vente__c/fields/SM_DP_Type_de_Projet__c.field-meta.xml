@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_DP_Type_de_Projet__c</fullName>
+    <description>Champ spécifique au parcours détection de projet</description>
+    <externalId>false</externalId>
+    <label>Type de Projet</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>SM_DP_Projet__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Projet Isolation des combles</fullName>
+                <default>false</default>
+                <label>Projet Isolation des combles</label>
+            </value>
+            <value>
+                <fullName>Projet Isolation du plancher</fullName>
+                <default>false</default>
+                <label>Projet Isolation du plancher</label>
+            </value>
+            <value>
+                <fullName>Projet Isolation des murs</fullName>
+                <default>false</default>
+                <label>Projet Isolation des murs</label>
+            </value>
+            <value>
+                <fullName>Projet Remplacement fenêtres</fullName>
+                <default>false</default>
+                <label>Projet Remplacement fenêtres</label>
+            </value>
+            <value>
+                <fullName>Projet Entretien Chaudière</fullName>
+                <default>false</default>
+                <label>Projet Entretien Chaudière</label>
+            </value>
+            <value>
+                <fullName>Projet Entretien Pompe à chaleur</fullName>
+                <default>false</default>
+                <label>Projet Entretien Pompe à chaleur</label>
+            </value>
+            <value>
+                <fullName>Projet Remplacement Chaudière</fullName>
+                <default>false</default>
+                <label>Projet Remplacement Chaudière</label>
+            </value>
+            <value>
+                <fullName>Projet Pompe à chaleur</fullName>
+                <default>false</default>
+                <label>Projet Pompe à chaleur</label>
+            </value>
+            <value>
+                <fullName>Projet Radiateurs électriques</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Projet Radiateurs électriques</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Projet Chauffage</controllingFieldValue>
+            <valueName>Projet Remplacement Chaudière</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Projet Chauffage</controllingFieldValue>
+            <valueName>Projet Pompe à chaleur</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Projet Isolation</controllingFieldValue>
+            <valueName>Projet Isolation des combles</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Projet Isolation</controllingFieldValue>
+            <valueName>Projet Isolation du plancher</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Projet Isolation</controllingFieldValue>
+            <valueName>Projet Isolation des murs</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Projet Isolation</controllingFieldValue>
+            <valueName>Projet Remplacement fenêtres</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Projet Entretien</controllingFieldValue>
+            <valueName>Projet Entretien Chaudière</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Projet Entretien</controllingFieldValue>
+            <valueName>Projet Entretien Pompe à chaleur</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

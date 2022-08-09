@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Define in JSON all attributes that can be used for a process (batch, trigger, api ...)</description>
+    <label>SM_ProcessSettings</label>
+    <pluralLabel>SM_ProcessSettings</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

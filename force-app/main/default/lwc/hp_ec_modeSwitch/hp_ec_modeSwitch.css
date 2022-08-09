@@ -1,0 +1,20 @@
+.switch-container {
+   margin-bottom: 12px;
+}
+
+.switch-container p {
+   text-align: center;
+   font-size: 12px;
+   letter-spacing: 0.36px;
+   padding: 5px 0;
+   color: var(--text-color);
+}
+
+.switch-container c-hp_ec_switch-button {
+   display: block;
+   width: 136px;
+}
+
+.switch-container c-hp_ec_switch-button .switch-button label .label {
+   font-family: var(--font-normal);
+ }

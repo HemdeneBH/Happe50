@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_role</fullName>
+    <columns>MasterLabel</columns>
+    <columns>DeveloperName</columns>
+    <columns>OKTA_Department__c</columns>
+    <columns>SMILE_Equipe__c</columns>
+    <columns>SMILE_Prestataire__c</columns>
+    <columns>SMILE_Site__c</columns>
+    <columns>SMILE_Trigramme_Prestataire__c</columns>
+    <columns>SMILE_Trigramme_Site__c</columns>
+    <columns>TelephoneSite__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All role</label>
+    <language>en_US</language>
+</ListView>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HP_MotifContact__c</fullName>
+    <externalId>false</externalId>
+    <label>Motif Contact</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Un déménagement</fullName>
+                <default>false</default>
+                <label>Un déménagement</label>
+            </value>
+            <value>
+                <fullName>Une souscription à un contrat d’électricité et/ou de gaz</fullName>
+                <default>false</default>
+                <label>Une souscription à un contrat d’électricité et/ou de gaz</label>
+            </value>
+            <value>
+                <fullName>Une souscription à un service</fullName>
+                <default>false</default>
+                <label>Une souscription à un service</label>
+            </value>
+            <value>
+                <fullName>Une question sur vos factures</fullName>
+                <default>false</default>
+                <label>Une question sur vos factures</label>
+            </value>
+            <value>
+                <fullName>Une question sur vos paiements</fullName>
+                <default>false</default>
+                <label>Une question sur vos paiements</label>
+            </value>
+            <value>
+                <fullName>Une question sur votre contrat d’énergie</fullName>
+                <default>false</default>
+                <label>Une question sur votre contrat d’énergie</label>
+            </value>
+            <value>
+                <fullName>Une question ou un conseil sur les offres et les services</fullName>
+                <default>false</default>
+                <label>Une question ou un conseil sur les offres et les services</label>
+            </value>
+            <value>
+                <fullName>Un relevé de consommation</fullName>
+                <default>false</default>
+                <label>Un relevé de consommation</label>
+            </value>
+            <value>
+                <fullName>Une urgence coupure</fullName>
+                <default>false</default>
+                <label>Une urgence coupure</label>
+            </value>
+            <value>
+                <fullName>Une réclamation</fullName>
+                <default>false</default>
+                <label>Une réclamation</label>
+            </value>
+            <value>
+                <fullName>Une question sur l’utilisation de l’Espace Client sur Internet</fullName>
+                <default>false</default>
+                <label>Une question sur l’utilisation de l’Espace Client sur Internet</label>
+            </value>
+            <value>
+                <fullName>Une question sur l’utilisation de l’application mobile</fullName>
+                <default>false</default>
+                <label>Une question sur l’utilisation de l’application mobile</label>
+            </value>
+            <value>
+                <fullName>Une résiliation</fullName>
+                <default>false</default>
+                <label>Une résiliation</label>
+            </value>
+            <value>
+                <fullName>Autre</fullName>
+                <default>false</default>
+                <label>Autre</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

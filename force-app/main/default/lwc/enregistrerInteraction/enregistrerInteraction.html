@@ -1,0 +1,17 @@
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner variant="brand"></lightning-spinner>
+    </template>
+    <template if:true={hasNextStep}>
+        <lightning-button label="Suivant" onclick={handleNext} class="slds-m-left_x-small"></lightning-button>
+    </template>
+    <template if:false={hasNextStep}>
+        <lightning-button label="Enregistrer" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+    </template>
+    <vlocity_cmt-navigate-action
+        target-type="Component"
+        target-name="c__NavigateHandler"
+        replace    
+    >
+    </vlocity_cmt-navigate-action>
+</template>

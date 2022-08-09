@@ -1,0 +1,129 @@
+:host {
+    --scrollbar: var(--darkGrey);
+}
+
+:host.lightTheme {
+    --scrollbar: var(--grey);
+}
+
+.mobile-only {
+    display: none;
+}
+
+.visually-hidden {
+    clip: rect(0 0 0 0); 
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap; 
+    width: 1px;
+}
+
+/* animations */
+@keyframes slide-from-bottom {
+    0% { transform: translateY(100%); }
+    100% { transform: translateY(0%); }
+}
+
+@keyframes fade-in {
+    0% { opacity: 0; }
+    100% {opacity: 1; }
+}
+
+.slds-backdrop_open.chat-backdrop {
+    background-color: transparent;
+    animation: fade-in 0.3s ease-in-out forwards;
+}
+
+.slds-backdrop_open.chat-backdrop::before,
+.slds-backdrop_open.chat-backdrop::after {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.slds-backdrop_open.chat-backdrop::before {
+    background-color: var(--disabled);
+    opacity: 0.4;
+}
+
+.slds-backdrop_open.chat-backdrop::after {
+    background-color: var(--dark-primary-colour);
+    opacity: 0.1;
+}
+
+/* Popin container */
+/* -------------------------------------------------------------------------------------------------- */
+.hp-chat-popin .hp-chat-popin__container {
+    display: flex;
+    width: 450px;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    margin-left: auto;
+}
+
+.hp-container {
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    max-width: 100%;
+    height: 664px;
+    max-height: 100%;
+    margin: 0;
+    margin-top: auto;
+    box-shadow: var(--box-shadow);
+    border-top: 30px solid var(--primary-colour);
+    border-left: 30px solid var(--primary-colour);
+    background-image: var(--bg);
+    overflow: hidden;
+    color: var(--text-color);
+    animation: slide-from-bottom 0.3s ease-in-out forwards;
+}
+
+.hp-header {
+    background-color: var(--bg-base);
+    border: none;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    align-items: center;
+    padding: 25px 40px;
+}
+
+.hp-bigTitle {
+    font-size: 25px;
+    letter-spacing: 0.75px;
+    line-height: 30px;
+}
+
+.hp-closeButton {
+    justify-self: end;
+}
+
+.hp-closeButton a {
+    justify-self: end;
+    color: var(--secondary-colour);
+    font-family: var(--font-bold);
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: extra-expanded;
+}
+
+
+@media (max-width: 1024px) {
+    .hp-chat-popin .hp-chat-popin__container {
+        top: 60px;
+        width: 100%;
+    }
+
+    .hp-container {
+        border: none;
+        width: 100%;
+        height: 100%;
+    }
+}

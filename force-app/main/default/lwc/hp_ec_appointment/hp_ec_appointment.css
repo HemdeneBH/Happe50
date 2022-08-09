@@ -1,0 +1,443 @@
+.appointment {
+    position: relative;
+    margin: 15px;
+}
+
+.appointment__content {
+    padding: 30px 40px;
+}
+
+.close {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+.close span {
+    font-family: var(--font-bold);
+    color: var(--secondary-colour);
+}
+
+.close img {
+    display: none;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 25px 0;
+}
+
+.form-col--datetime {
+    width: 200px;
+    padding-right: 24px;
+    margin-right: 24px;
+    border-right: 2px solid var(--bg-base);
+}
+
+.form-col--contact {
+    width: calc(100% - 224px);
+}
+
+.form-col--contact fieldset {
+    display: flex;
+    align-items: flex-end;
+}
+
+.form-col--contact .form-row {
+    flex: 1;
+    padding-right: 20px;
+}
+
+label,
+legend {
+    display: block;
+    font-family: var(--font-bold);
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.form-row {
+    position: relative;
+    margin-bottom: 24px;
+}
+
+.placeholder-label {
+    font-family: var(--font-normal);
+    color: var(--text-color);
+    font-size: 16px;
+    line-height: 19px;
+    min-height: 32px;
+    padding-top: 6px;
+    padding-bottom: 7px;
+    margin-bottom: -32px;
+    letter-spacing: 0.48px;
+    pointer-events: none;
+}
+
+.form-row.has-content .placeholder-label,
+.form-row:focus-within .placeholder-label {
+    opacity: 0;
+}
+
+input,
+select,
+textarea {
+    color: var(--text-color);
+    width: 100%;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: 0.48px;
+}
+
+input:focus,
+input:focus-visible,
+input:active,
+select:focus,
+select:focus-visible,
+select:active,
+textarea:focus,
+textarea:focus-visible,
+textarea:active {
+    color: var(--text-color);
+}
+
+input::-webkit-calendar-picker-indicator {
+    opacity: 0;
+}
+
+select option {
+    background-color: var(--bg-base);
+}
+
+.form-buttons {
+    flex: 1 0 50%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.form-buttons button {
+    margin: 0;
+}
+
+.form-buttons button:nth-child(odd) {
+    margin-right: 5px;
+}
+
+.form-buttons button:nth-child(even) {
+    margin-left: 5px;
+}
+
+.hp-firstButton {
+    border: none;
+}
+
+.hp-firstButton:disabled {
+    color: var(--white);
+    background-color: var(--grey);
+}
+
+.alert {
+    display: inline-block;
+    font-family: var(--font-bold);
+    color: var(--rose);
+}
+
+form .alert {
+    display: flex;
+    flex: 1 0 50%;
+}
+
+.alert .icon {
+    background-color: var(--rose);
+    margin-right: 20px;
+    flex: 0 0 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.time-slots {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.time-slots li {
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+    flex: 0 0 33.33%;
+    flex: 0 0 calc(100% / 3);
+    padding: 5px;
+}
+
+.time-slots input {
+    opacity: 0;
+    position: absolute;
+}
+
+.time-slots label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 12px;
+    box-shadow: 0 0 0 1px inset var(--text-color);
+    font-family: var(--font-normal);
+    text-align: center;
+    font-size: 15px;
+    line-height: 17px;
+    letter-spacing: 0.45px;
+}
+
+.time-slots label:hover {
+    color: var(--secondary-colour);
+    box-shadow: 0 0 0 1px inset var(--secondary-colour);
+}
+
+.time-slots input:checked ~ label {
+    font-family: var(--font-bold);
+    color: var(--rose);
+    box-shadow: 0 0 0 3px inset var(--rose);
+}
+
+.confirmation-message {
+    text-align: center;
+    margin: 65px 0;
+}
+
+.confirmation-message p {
+    font-size: 18px;
+    line-height: 45px;
+    letter-spacing: 0.54px;
+}
+
+.confirmation-message .blue {
+    font-family: var(--font-bold);
+    color: var(--blue);
+    font-size: 20px;
+    line-height: 25px;
+    letter-spacing: 0.6px;
+}
+
+.confirmation-form {
+    display: flex;
+}
+
+.confirmation-form .form-row {
+    margin: 24px 0;
+}
+
+input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+}
+
+input[type="checkbox"] ~ label {
+    font-family: var(--font-normal);
+    position: relative;
+    color: var(--secondary-colour);
+    padding-left: 35px;
+}
+
+input[type="checkbox"] ~ label::before,
+input[type="checkbox"] ~ label::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+}
+
+input[type="checkbox"] ~ label::before {
+    border: 2px solid var(--secondary-colour);
+}
+
+input[type="checkbox"]:checked ~ label::after {
+    content: '✓';
+    text-align: center;
+    color: var(--secondary-colour);
+}
+
+.error {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.error .alert {
+    margin: 65px auto;
+    font-size: 20px;
+    line-height: 25px;
+    letter-spacing: 0.6px;
+}
+
+.error .form-buttons {
+    padding-left: 105px;
+}
+
+.error .form-buttons :first-child {
+    margin: auto;
+}
+
+/* MOBILE */
+/* ------------------------------------------------------------------------ */
+@media (max-width: 1024px) {
+    .appointment {
+        position: relative;
+        margin: 10px 0;
+    }
+
+    .close span {
+        display: none;
+    }
+    .close img {
+        display: block;
+    }
+
+    .form-col {
+        flex: 1 0 100%;
+    }
+
+    .form-col--datetime {
+        width: 100%;
+        border-right: none;
+        padding-right: 0;
+        margin-right: 0;
+        margin-bottom: 24px;
+        border-bottom: 2px solid var(--bg-base);
+    }
+
+    .form-col--datetime fieldset {
+        display: flex;
+    }
+
+    .form-col--datetime .form-row:nth-child(odd) {
+        width: 50%;
+        padding-right: 7.5px;
+    }
+
+    .form-col--datetime .form-row:nth-child(even) {
+        width: 50%;
+        padding-left: 7.5px;
+    }
+
+    .form-col--contact {
+        width: 100%;
+    }
+
+    .form-col--contact fieldset {
+        display: block;
+    }
+
+    .form-col--contact .form-row {
+        padding-right: 0;
+    }
+
+    .form-buttons {
+        flex: 1 0 100%;
+    }
+
+    .form-buttons button {
+        width: 50%;
+        width: calc(50% - 5px);
+    }
+
+    .form-buttons.mobile-wrap {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .form-buttons.mobile-wrap button {
+        width: auto;
+        margin: 0 0 10px;
+    }
+
+    form .alert {
+        margin-top: 24px;
+        flex: 1 0 100%;
+        order: 4;
+    }
+
+    .time-slots li {
+        flex: 0 0 224px;
+    }
+
+    .confirmation-form {
+        display: block;
+    }
+
+    .error .form-buttons {
+        padding: 0;
+        flex-direction: column;
+    }
+
+    .error .form-buttons :first-child {
+        margin: 0 0 10px;
+    }
+}
+
+  
+@media (max-width: 576px) {
+    /* mobiles */
+  
+    .form-buttons {
+       display: grid;
+       justify-content: center;
+    }
+
+    .form-buttons button {
+       margin: 5px;
+    }
+
+    .form-col--datetime fieldset {
+       flex-direction: column;
+    }
+
+    .form-col--datetime .form-row:nth-child(odd) {
+        width: 100%;
+        padding-right: 0;
+    }
+
+    .form-col--datetime .form-row:nth-child(even) {
+        width: 100%;
+        padding-left: 0;
+    }
+
+    .form-buttons button:nth-child(odd) {
+        width: 100%;
+        min-width: 150px;
+    }
+    
+    .form-buttons button:nth-child(even) {
+        width: 100%;
+        min-width: 150px;
+    }
+
+    .hp-bigTitle {
+        padding-left: 10px;
+    }
+
+    .close {
+        top: 30px;
+        right: 30px;
+    }
+
+}

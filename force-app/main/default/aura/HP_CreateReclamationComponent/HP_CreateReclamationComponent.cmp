@@ -1,0 +1,4 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId">
+    <aura:attribute name="recordId" type="String" />
+    <c:hp_createReclamation recordid="{!v.recordId}" onclose="{!c.closeQA}"></c:hp_createReclamation>
+</aura:component>

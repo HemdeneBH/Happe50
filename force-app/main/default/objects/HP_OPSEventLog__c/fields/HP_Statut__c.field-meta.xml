@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HP_Statut__c</fullName>
+    <externalId>false</externalId>
+    <label>Statut</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>A Traiter</fullName>
+                <default>false</default>
+                <label>A Traiter</label>
+            </value>
+            <value>
+                <fullName>Traitement OK</fullName>
+                <default>false</default>
+                <label>Traitement OK</label>
+            </value>
+            <value>
+                <fullName>Traitement KO</fullName>
+                <default>false</default>
+                <label>Traitement KO</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

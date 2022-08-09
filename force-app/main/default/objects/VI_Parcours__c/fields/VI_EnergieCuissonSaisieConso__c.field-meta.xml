@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_EnergieCuissonSaisieConso__c</fullName>
+    <description>Le PP choisi, en fonction du prospect au téléphone ; l&apos;énergie utilisée pour la cuisson</description>
+    <externalId>false</externalId>
+    <label>Energie Cuisson</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Gaz naturel</fullName>
+                <default>false</default>
+                <label>Gaz naturel</label>
+            </value>
+            <value>
+                <fullName>Electricité</fullName>
+                <default>false</default>
+                <label>Electricité</label>
+            </value>
+            <value>
+                <fullName>Fioul</fullName>
+                <default>false</default>
+                <label>Fioul</label>
+            </value>
+            <value>
+                <fullName>Butane</fullName>
+                <default>false</default>
+                <label>Butane</label>
+            </value>
+            <value>
+                <fullName>Bois</fullName>
+                <default>false</default>
+                <label>Bois</label>
+            </value>
+            <value>
+                <fullName>Charbon</fullName>
+                <default>false</default>
+                <label>Charbon</label>
+            </value>
+            <value>
+                <fullName>Mixte</fullName>
+                <default>false</default>
+                <label>Mixte</label>
+            </value>
+            <value>
+                <fullName>Je ne sais pas</fullName>
+                <default>false</default>
+                <label>Je ne sais pas</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

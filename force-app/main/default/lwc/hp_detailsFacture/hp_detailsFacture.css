@@ -1,0 +1,31 @@
+.titles{
+    font-size: 13px;
+    font-weight: 800;
+}
+.amounts {
+    font-size: 20px;
+    font-weight: 900;
+}
+.bigTitle{
+    font-size: 22px;
+    font-weight: 700;
+}
+.blocTtile{
+    font-size: 18px;
+    font-weight: 700;
+}
+.container{
+    background-color:#ecedef;
+    border: 15px solid white;
+    height: 275px;
+}
+.small-container{
+    background-color:#ecedef;
+    border: 8px solid white;
+    height: 80px;
+}
+.s-container{
+    background-color:#ecedef;
+    border: 15px solid white;
+    height: 100px;
+}

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_StatutCasePartnerCommunity__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(AND(ISPICKVAL(VI_Case__r.Status, &quot;Pré-clôturé&quot;),
+       ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;Abandon&quot;)),&quot;Abandon&quot;,
+			
+IF(ISPICKVAL(VI_Case__r.Status, &quot;Annulé&quot;),&quot;Annulé&quot;,
+			
+IF(OR(AND(ISPICKVAL(VI_Case__r.Status, &quot;Pré-clôturé&quot;),
+          ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;Rétractation&quot;)
+																																															),
+						ISPICKVAL(VI_Case__r.Status, &quot;Rétracté&quot;)),&quot;Rétracté&quot;,
+
+
+			
+			
+IF(OR(AND(ISPICKVAL(VI_Case__r.Status, &quot;En attente&quot;),
+                                                    ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;Retour distributeur&quot;)				
+						), 
+						AND(ISPICKVAL(VI_Case__r.Status, &quot;A traiter&quot;),
+										ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;Absence retour distributeur&quot;)
+						),
+						AND(ISPICKVAL(VI_Case__r.Status, &quot;En traitement&quot;),
+										ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;Absence retour distributeur&quot;)
+						),
+						AND(ISPICKVAL(VI_Case__r.Status, &quot;Pré-clôturé&quot;),
+										OR(ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;Conforme&quot;),
+													ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;&quot;)
+										)
+      ),
+						AND(ISPICKVAL(VI_Case__r.Status, &quot;Clôturé&quot;),
+										OR(ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;Conforme&quot;),
+													ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;&quot;)))),&quot;Vente transformée&quot;,
+
+
+
+IF(AND (OR(AND(ISPICKVAL(VI_Case__r.Status, &quot;En Traitement&quot;),
+															ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;&quot;)
+											),
+											AND(ISPICKVAL(VI_Case__r.Status, &quot;En attente&quot;),
+														 ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;Retour client&quot;)
+											),
+											AND(ISPICKVAL(VI_Case__r.Status, &quot;A traiter&quot;),
+               ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;Retour client&quot;)
+											),
+										ISPICKVAL(VI_Case__r.Status, &quot;Différé&quot;))),&quot;En traitement BO&quot;,
+			
+
+IF(AND(ISPICKVAL(VI_Case__r.Status, &quot;En attente&quot;),
+       ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;Retour Partenaire&quot;)),&quot;Vente à completer&quot;, 
+
+
+IF(AND(OR(ISPICKVAL(VI_Case__r.Status, &quot;A traiter&quot;),
+									 ISPICKVAL(VI_Case__r.Status, &quot;Affecté&quot;)
+							),
+							OR(ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;&quot;),
+										ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;Retour Partenaire&quot;)
+								/*ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;Absence retour Partenaire&quot;)*/ 	)),&quot;A traiter BO&quot;,
+			
+
+IF(AND( /*CPV envoyées*/
+       CONTAINS(TEXT(VI_StatutParcours__c),&quot;CPV Envoyées&quot;),
+							NOT(ISPICKVAL(VI_Case__r.VI_StatutEnveloppe__c ,&quot;Delivered&quot;)),
+	      NOT(ISPICKVAL(VI_Case__r.VI_StatutEnveloppe__c ,&quot;Signed&quot;))
+			), &quot;CPV envoyées&quot;,
+			
+			
+IF(AND(ISPICKVAL(VI_ChoixParcours__c, &quot;CHF&quot;),
+							ISPICKVAL(VI_Case__r.VI_StatutEnveloppe__c,&quot;Signed&quot;)),&quot;CPV signées&quot;,	
+			
+			
+IF(AND(ISPICKVAL(VI_ChoixParcours__c, &quot;CHF&quot;),
+							ISPICKVAL(VI_Case__r.VI_StatutEnveloppe__c, &quot;Delivered&quot;)), &quot;CPV délivrées&quot;,		
+			
+&quot;&quot;))))))))))</formula>
+    <label>Statut du case</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

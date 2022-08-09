@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_AdresseDeConsoIdentique__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Si cette case est cochée alors l&apos;adresse du client et la même que celle de son local.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Si l&apos;étape identification local est complétée et qu&apos;on recherche le local par adresse alors cette case apparait afin de préremplir automatiquement les champs de recherche par l&apos;adresse du client.</inlineHelpText>
+    <label>Adresse de consommation identique</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

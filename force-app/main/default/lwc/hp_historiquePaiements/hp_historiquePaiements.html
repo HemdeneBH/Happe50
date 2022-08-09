@@ -1,0 +1,171 @@
+<!--
+  @description       : 
+  @author            : Badr Eddine Belkarchi
+  @group             : 
+  @last modified on  : 10-18-2021
+  @last modified by  : Badr Eddine Belkarchi
+-->
+<template>
+
+    <!-- <template if:true={isAdressLoaded}> -->
+        <lightning-card title="ADRESSE DU LOGEMENT">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-3">
+                    <template if:true={isAdressLoaded}>
+                    <div class="slds-m-left_small">
+                        <lightning-icon icon-name="utility:home" alternative-text="Adresse" title="Adresse" size="x-small"></lightning-icon>
+                        &nbsp;&nbsp;&nbsp;{_contratLocaux.numeroVoie}, {_contratLocaux.libelleVoie} {_contratLocaux.complementAdresse} {_contratLocaux.codePostal} {_contratLocaux.ville}
+                    </div>
+                    </template>
+                    <template if:false={isAdressLoaded}>
+                        <div class="slds-m-left_small">
+                            <lightning-icon icon-name="utility:home" alternative-text="Adresse" title="Adresse" size="x-small"></lightning-icon>
+                            &nbsp;&nbsp;&nbsp;L'adresse du logement n'est pas récupérée.
+                        </div>
+                    </template>
+                </div>
+                <div class="slds-col slds-size_2-of-3 slds-p-around_none">
+                    <template if:true={idContratElecNotRetrieved}><div class="slds-text-heading_small">Il n'y a pas de paiements disponibles pour le contrat Elec.</div></template>
+                    <template if:true={idContratGazNotRetrieved}><div class="slds-text-heading_small">Il n'y a pas de paiements disponibles pour le contrat Gaz.</div></template>
+                    <template if:true={isElecDettesTableEmpty}><div class="slds-text-heading_small">Il n'y a pas de paiements disponibles pour le contrat Elec.</div></template>
+                    <template if:true={isGazDettesTableEmpty}><div class="slds-text-heading_small">Il n'y a pas de paiements disponibles pour le contrat Gaz.</div></template>
+                </div>
+            </div>
+        </lightning-card> 
+    <!-- </template> -->
+
+    <template if:true={showPaiementsFlottants}>
+        <div class="slds-m-top_medium">
+            <lightning-card title="PAIEMENTS FLOTTANTS">
+                <div class="tablecontainer">
+                    <lightning-datatable data={paiementsFlottants}
+                        columns={columnsPaiementsFlottants} 
+                        key-field="id" 
+                        hide-checkbox-column="true"
+                        default-sort-direction={defaultSortDirection}
+                        sorted-direction={sortDirectionPaiementsFlottants}
+                        sorted-by={sortPaiementsFlottantsBy}
+                        onsort={onHandleSortPaiementsFlottants}
+                        onheaderaction={handleHeaderActionPaiementsFlottants}> 
+                    </lightning-datatable> 
+                </div>
+            </lightning-card>
+        </div>
+    </template>
+    
+    <template if:true={showELEC} >
+        <div class="slds-m-top_medium">
+            <lightning-card title="DETAIL DETTES ELEC">
+                    <template if:true={isAdressLoaded}>
+                            <div class="slds-m-left_small slds-m-bottom_small">
+                                <h1>Numéro de PDL : {_consommationData .PDL}</h1>
+                            </div>
+                    </template>
+                    <template if:true={isElecDettesTableReady}>
+                        <div class="tablecontainer">
+                            <lightning-datatable data={elecDettes}
+                                columns={columnsDettesElec} 
+                                key-field="id" 
+                                hide-checkbox-column="true"
+                                default-sort-direction={defaultSortDirection}
+                                sorted-direction={sortDirectionDettesElec}
+                                sorted-by={sortDettesElecBy}
+                                onsort={onHandleSortDettesElec}
+                                onheaderaction={handleHeaderActionELEC}
+                                onrowaction={handleRowAction}> 
+                            </lightning-datatable> 
+                        </div>
+                    </template>
+    
+                    <template if:true={showPaiementsRelatedToDetteElec}>
+                        <div class="slds-m-vertical_small slds-align_absolute-center" style="width: 60%;">
+                            <div class="slds-grid slds-grid_vertical">
+                                <div class="slds-col slds-p-vertical_x-small slds-border_right slds-border_top slds-border_left">
+                                    <div class="slds-grid slds-grid_align-spread">
+                                        <div class="slds-col"></div>
+                                        <div class="slds-col">
+                                            <h6 class="slds-text-heading_small">
+                                                Détail Paiements affectés à la dette : {selectedDetteElec.ref_dette}
+                                            </h6>
+                                        </div>
+                                        <div class="slds-col">
+                                            <p class="slds-m-right_small" style="cursor: pointer;" onclick={onHidePaiementsRelatedToDetteElec}>
+                                                <lightning-icon icon-name="utility:close" alternative-text="Fermer" title="Fermer" size="x-small"></lightning-icon>
+                                            </p>
+                                        </div>
+                                        </div>
+                                </div>
+                                <div class="slds-col slds-border_right slds-border_left">
+                                    <lightning-datatable style="zoom: 90%;"
+                                        data={paiementsRelatedToDetteElec} 
+                                        columns={columnsPaiementsDetail} 
+                                        key-field="id" 
+                                        hide-checkbox-column="true">
+                                    </lightning-datatable>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+            </lightning-card>
+        </div>
+    </template>
+    
+    <template if:true={showGAZ}>
+        <div class="slds-m-top_medium">
+            <lightning-card title="DETAIL DETTES GAZ" >
+                    <template if:true={isAdressLoaded}>
+                            <div class="slds-m-left_small slds-m-bottom_small">
+                                <h1>Numéro de PCE : {_consommationData .PCE}</h1>
+                            </div>
+                    </template>
+                    <template if:true={isGazDettesTableReady}>
+                        <div class="tablecontainer">
+                            <lightning-datatable data={gazDettes}
+                                columns={columnsDettesGaz} 
+                                key-field="id" 
+                                hide-checkbox-column="true"
+                                default-sort-direction={defaultSortDirection}
+                                sorted-direction={sortDirectionDettesGaz}
+                                sorted-by={sortDettesGazBy}
+                                onsort={onHandleSortDettesGaz}
+                                onheaderaction={handleHeaderActionGaz}
+                                onrowaction={handleRowAction}> 
+                            </lightning-datatable> 
+                        </div>
+                    </template>
+    
+                    <template if:true={showPaiementsRelatedToDetteGaz}>
+                        <div class="slds-m-vertical_small slds-align_absolute-center" style="width: 60%;">
+                            <div class="slds-grid slds-grid_vertical">
+                                <div class="slds-col slds-p-vertical_x-small slds-border_right slds-border_top slds-border_left">
+                                    <div class="slds-grid slds-grid_align-spread">
+                                        <div class="slds-col"></div>
+                                        <div class="slds-col">
+                                            <h6 class="slds-text-heading_small">
+                                                Détail Paiements affectés à la dette : {selectedDetteGaz.ref_dette}
+                                            </h6>
+                                        </div>
+                                        <div class="slds-col">
+                                            <p class="slds-m-right_small" style="cursor: pointer;" onclick={onHidePaiementsRelatedToDetteGaz}>
+                                                <lightning-icon icon-name="utility:close" alternative-text="Fermer" title="Fermer" size="x-small"></lightning-icon>
+                                            </p>
+                                        </div>
+                                        </div>
+                                </div>
+                                <div class="slds-col slds-border_right slds-border_left">
+                                    <lightning-datatable style="zoom: 90%;"
+                                        data={paiementsRelatedToDetteGaz} 
+                                        columns={columnsPaiementsDetail} 
+                                        key-field="id" 
+                                        hide-checkbox-column="true">
+                                    </lightning-datatable>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+            </lightning-card>
+        </div>
+    </template>
+    
+
+</template>

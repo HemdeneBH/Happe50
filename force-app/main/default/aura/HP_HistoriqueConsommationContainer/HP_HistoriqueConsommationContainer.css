@@ -1,0 +1,23 @@
+.THIS .slds-th__action{
+    /* background-color : rgb(204, 202, 202);
+    color : black;
+    font-weight: bold; */
+    border:collapse;
+    justify-content: center !important; 
+  }
+.THIS tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+.THIS tr:hover {
+    background-color: rgb(111, 212, 243);
+}
+.THIS .tablecontainer {
+    margin-left: 15px;
+    margin-right: 15px;
+    border-collapse: collapse;
+}
+
+.THIS table {
+    width: fit-content;
+}

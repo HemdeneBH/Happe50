@@ -1,0 +1,40 @@
+<!--
+  @description       : 
+  @author            : Clément Bauny
+  @group             : 
+  @last modified on  : 06-24-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <div data-id='footerContainer' class="c-footerContainer">
+        <div class="c-footerContainer_content_bloc">
+            <div class="c-footerSpace_menu">
+            </div>
+            <div class="c-footerContainer_content">
+                <div class="c-footerSpace">
+                </div>
+                <div class="c-footerLogo">
+                    <div class="c-footerLogo_logo">{copyrightMention}</div>
+                    <ul class="c-footerLogo_details">
+                        <li><a href={lienMention}>{mentionLabel}</a></li>
+                        <li><a href={lienCGV}>{label}</a></li>
+                    </ul>
+                </div>
+                <div class="c-footerSideContents">
+                    <div class="c-footerSocialmedias">
+                        <template for:each={blogs} for:item="blog"> 
+                            <span class="hp-added-imgs" key={blog.key}>
+                                <a href={blog.url}>
+                                    <img class="hp-insta" src={blog.imageUrl} alt={blog.imageAltText} />
+                                </a>
+                            </span>
+                        </template>
+                    </div>
+                    <div class="c-footerColorMode">
+                        <c-hp_ec_mode-switch class={theme} ></c-hp_ec_mode-switch>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

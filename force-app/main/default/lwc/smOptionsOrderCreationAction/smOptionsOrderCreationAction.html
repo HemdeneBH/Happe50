@@ -1,0 +1,47 @@
+<template>
+    
+    <div if:false={isOrderCreated} class="slds-size_1-of-1 slds-m-bottom_xx-small engie-smile-button-wrapper">
+        <!-- Spinner copied from Omniscript Base Action-->
+        <template if:true={isPageLoading}>
+        <vlocity_cmt-spinner variant="brand"
+                alternative-text="Loading..."
+                theme={theme}
+                message={spinnerActionMessage}
+                size="medium">
+            </vlocity_cmt-spinner>
+        </template>
+        
+        <!--Action button to call IP-->
+        <vlocity_cmt-button type="button"
+            variant="brand"
+            onclick={execute}
+            theme={theme}
+            label={label}
+            extraclass={buttonClass}>
+
+        </vlocity_cmt-button>
+    </div>
+
+    <!-- Message display based on OmniScript Messaging template-->
+    <div role={ariaRole} >
+        <div if:true={showMessage} class={messagingClass}>
+            <div class="slds-media__figure">
+                <span class="slds-icon_container">
+                    <vlocity_cmt-icon 
+                            theme={theme}
+                            icon-name={messagingIcon}
+                            variant={messagingVariant}>
+                    </vlocity_cmt-icon>
+                </span>
+            </div>
+            <div class="slds-media__body">
+                <p class={textClass}>{messageText}</p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div if:true={debug}>{debug}</div>
+
+</template>

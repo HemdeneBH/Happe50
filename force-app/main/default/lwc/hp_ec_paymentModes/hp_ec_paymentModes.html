@@ -1,0 +1,143 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 06-10-2022
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<template>
+    <template if:true={version1}>
+        <div class="c-payments c-content-bg">
+        <h2 class="hp-bigTitle">{titreV1}</h2>
+    <div class="payment-modes">
+        <ul>
+            <li>
+                <span>Carte Bancaire</span>
+                    <template if:false={isEtatInactif}>
+                        <template if:true={showLienEnSavoirPlusPaiement1}>
+                            <a class="hp-link" onclick={handleNavigateEnSavoirPlusPaiement1}>En savoir +</a>
+                        </template>
+                    </template>
+                        <button disabled={isEtatInactif} onclick={handleClickCB}>
+                    <span>Payer par &nbsp;</span>
+                    <span aria-hidden="true" class="icon icon-cb" style={styleIconCB}></span>
+                    <span class="visually-hidden">CB</span>
+                </button>
+            </li>
+            <li>
+                <span>Paylib</span>
+                    <template if:false={isEtatInactif}>
+                        <template if:true={showLienEnSavoirPlusPaiement2}>
+                            <a class="hp-link" onclick={handleNavigateEnSavoirPlusPaiement2}>En savoir +</a>
+                        </template>
+                    </template>
+                        <button disabled={isEtatInactif} onclick={handleClickPaylib}>
+                    <span aria-hidden="true" class="icon icon-paylib" style={styleIconPaylib}></span>
+                    <span class="visually-hidden">Paylib</span>
+                </button>
+            </li>
+            <li>
+                <span>AmazonPay</span>
+                    <template if:false={isEtatInactif}>
+                        <template if:true={showLienEnSavoirPlusPaiement3}>
+                            <a class="hp-link" onclick={handleNavigateEnSavoirPlusPaiement3}>En savoir +</a>
+                        </template>
+                    </template>
+                    <button disabled={isEtatInactif} onclick={handleClickAmazonPay}>
+                    <span aria-hidden="true" class="icon icon-paypal" style={styleIconAmazonPay}></span>
+                    <span class="visually-hidden">AmazonPay</span>
+                </button>
+            </li>
+            <!-- <li>
+                <span>Paypal</span>
+                    <template if:false={isEtatInactif}>
+                        <template if:true={showLienEnSavoirPlusPaiement3}>
+                            <a class="hp-link" onclick={handleNavigateEnSavoirPlusPaiement3}>En savoir +</a>
+                        </template>
+                    </template>
+                    <button disabled={isEtatInactif} onclick={handleClickAmazonPay}>
+                    <span aria-hidden="true" class="icon icon-paypal" style={styleIconPaypal}></span>
+                    <span class="visually-hidden">Paypal</span>
+                </button>
+            </li> -->
+            <li>
+                <span>Paiement à plusieurs</span>
+                    <template if:false={isEtatInactif}>
+                        <template if:true={showLienEnSavoirPlusPaiement4}>
+                            <a class="hp-link" onclick={handleNavigateEnSavoirPlusPaiement4}>En savoir +</a>
+                        </template>
+                    </template>
+                        <button disabled={isEtatInactif} onclick={openPaiementAplusieursPopin}>Payer à plusieurs</button>
+                </li>
+                <li>
+                    <span>Coupon chèque</span>
+                    <template if:false={isEtatInactif}>
+                        <template if:true={showLienEnSavoirPlusPaiement5}>
+                            <a class="hp-link" onclick={handleNavigateEnSavoirPlusPaiement5}>En savoir +</a>
+                        </template>
+                    </template>
+                    <button disabled={isEtatInactif}>Télécharger</button>
+            </li>
+        </ul>
+    </div>
+        </div>
+    </template>
+
+    <template if:true={version2}>
+        <div class="c-payments c-content-bg">
+            <h2 class="hp-bigTitle">{titreV2}</h2>
+            <div class="hp-option-item">
+                <div class="left">
+                    <span class="iconChecked">
+                        <img class="hp-checked_icon" src ={iconChecked} alt="checked icon"/>
+                    </span>
+                    <span class="option-item">
+                        {textModePaiement} : {actifPRTF.libelleModeEncaissement}
+                    </span>
+                </div>
+                <span class="hp-status">Actif</span>
+            </div>
+            <template if:true={datePrelevement}>
+                <div class="c-blocConfirm">
+                    <div class="c-blocConfirm-icon">
+                        <div class="c-blocConfirm-innerCircle">
+                            <img class="c-blocConfirm-img" src={iconConfirm} alt="confirm icon" />
+                        </div>
+                    </div>
+                    <div class="c-blocConfirm__text-wrapper">
+                        <div class="c-blocConfirm__text">
+                            <p>{textDatePrelevementPart1} {datePrelevement} {textDatePrelevementPart2}.</p>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </template>
+    <form method="POST" action={sogenactifRedirectionURL} data-id="sogenactif">
+        <input data-id="redirectionVersion" type="hidden" name="redirectionVersion" value={redirectionVersion}>
+        <input data-id="redirectionData" type="hidden" name="redirectionData" value={redirectionData}>
+      </form>
+
+      <template if:true={paiementAplusieursPopin}>
+        <c-hp_ec_popin-paiement-a-plusieurs
+            amount={amount}
+            echeanceid={echeanceid}
+            onclosepopin={closePaiementAplusieursPopin}>
+        </c-hp_ec_popin-paiement-a-plusieurs>
+    </template>
+
+    <form method="POST" data-id="amazonePayForm" enctype="application/x-www-form-urlencoded" action="https://payments.amazon.fr/checkout/initiate">
+        <input data-id="payloadJSON" type="hidden" name="payloadJSON" value={payloadJSON}>
+        <input data-id="signature" type="hidden" name="signature" value={signature}>
+        <input data-id="publicKeyId" type="hidden" name="publicKeyId" value={publicKeyId}>
+        <input data-id="algorithm" type="hidden" name="algorithm" value="AMZN-PAY-RSASSA-PSS">
+        <input data-id="ledgerCurrency" type="hidden" name="ledgerCurrency" value="EUR">
+        <input data-id="checkoutLanguage" type="hidden" name="checkoutLanguage" value="fr_FR">
+        <input data-id="merchantId" type="hidden" name="merchantId" value="A1CGM8RVR4O6KL">
+        <input data-id="productType" type="hidden" name="productType" value="PayOnly">
+        <input data-id="environment" type="hidden" name="environment" value="SANDBOX">
+        <input data-id="merchantDomain" type="hidden" name="merchantDomain" value="agilab-recette.myengie.com">
+        <input data-id="origin_url" type="hidden" name="origin_url" value="https://agilab-recette.myengie.com/espace-client/492878?tab=factures">
+        <input data-id="viewType" type="hidden" name="viewType" value="redirectView">
+    </form>
+</template>

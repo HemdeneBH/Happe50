@@ -1,0 +1,67 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 02-01-2022
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<template>
+    <div class="hp-donnesPersonnelles">
+        <div class="hp-bigTitle">
+            {titre}
+        </div>
+        <div class="slds-grid">
+            <div class="slds-size--3-of-4 hp-styleClass" onclick={showPopinConsentements}>
+                <a onclick={showPopinConsentements}> {consentementLabel}</a>
+            </div>
+            <div class="slds-size--1-of-4 hp-styleClass">
+                <a onclick={showPopinConsentements}> ></a>
+            </div>
+        </div>
+        <div class="slds-grid">
+            <div class="slds-size--3-of-4 hp-styleClass">
+                <a onclick={showPopinDonneesCollectees}> {donnesCollecteesLabel} </a>
+            </div>
+            <div class="slds-size--1-of-4 hp-styleClass">
+                <a onclick={showPopinDonneesCollectees}> > </a>
+            </div>
+        </div>
+        <div class="slds-grid">
+            <div class="slds-size--3-of-4 hp-styleClass">
+                <a onclick={openCharteURL}> {charteLabel}</a>
+            </div>
+            <div class="slds-size--1-of-4 hp-styleClass">
+                <a onclick={openCharteURL}> ></a>
+            </div>
+        </div>
+    </div>
+    <template if:true={showConsentementsPopup}>
+        <div class="hp-popup">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <c-hp_ec_popin-consentements popinconsentementstitle="MES CONSENTEMENTS" idclient="204833"
+                        recordid="0031l00000b5gzLAAQ" onopenpopinconsentements={openPopinConsentements}>
+                    </c-hp_ec_popin-consentements>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+    <template if:true={showDonneesCollecteesPopup}>
+        <div class="hp-popup">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <c-hp_ec_popin-donnees-collectees popindonneescollecteestitle="Données Collectées"
+                        popindonneescollecteestexteexplicatif="à tout moment, vous pouvez demander une copie de vos informations collectees par ENGIE."
+                        popindonneescollecteesmessageerreur="Ce fichier ne restera disponible que pendant 5 jours."
+                        popindonneescollecteeslibellebouton="Créer le Dossier" recordid="0031l00000b5gzLAAQ"
+                        onopenpopindonneescollectees={openPopinDonneesCollectees}>
+                    </c-hp_ec_popin-donnees-collectees>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+</template>

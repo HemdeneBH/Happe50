@@ -1,0 +1,34 @@
+<!--
+  @description       : Tableau qui affiche la liste de contacts pour choisir un payeur divergent
+  @author            : AE
+  @group             : FT2
+  @last modified on  : 09-29-2021
+  @last modified by  : AE
+-->
+<template>
+    <label class="sm_LabelTable">{sizeTab} <span if:true={resultat}>résultats</span><span if:false={resultat}>résultat</span></label>
+    <br>
+    <br>
+    <br>
+    <vlocity_cmt-data-table class="sm-table_custom" extraclass="slds-table_bordered" issearchavailable="false" issortavailable="false"
+        theme={theme} draggable="false" columns={columns} records={tableData} row-delete="false" pagesize="15">
+        <vlocity_cmt-data-table-cell data-field-name="Identifiant_Buisness_Partener__c" class="dataTableCell">
+        </vlocity_cmt-data-table-cell>
+        <vlocity_cmt-data-table-cell data-field-name="Salutation" class="dataTableCell">
+        </vlocity_cmt-data-table-cell>
+        <vlocity_cmt-data-table-cell data-field-name="LastName" class="dataTableCell">
+        </vlocity_cmt-data-table-cell>
+        <vlocity_cmt-data-table-cell data-field-name="FirstName" class="dataTableCell">
+        </vlocity_cmt-data-table-cell>
+        <vlocity_cmt-data-table-cell data-field-name="MailingPostalCode" class="dataTableCell">
+        </vlocity_cmt-data-table-cell>
+        <vlocity_cmt-data-table-cell data-field-name="MailingCity" class="dataTableCell">
+        </vlocity_cmt-data-table-cell>
+        <vlocity_cmt-data-table-cell data-field-name="No_Voie__c" class="dataTableCell">
+        </vlocity_cmt-data-table-cell>
+        <vlocity_cmt-data-table-cell data-field-name="MailingStreet" class="dataTableCell">
+        </vlocity_cmt-data-table-cell>
+        <c-sm_fc_-custom-data-table-cell-action data-field-name="Id" class="dataTableCell">
+        </c-sm_fc_-custom-data-table-cell-action>
+    </vlocity_cmt-data-table>
+</template>

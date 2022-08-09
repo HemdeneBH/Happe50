@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="titreFirstTab" label="Titre premier onglet" type="String" default="Ma consommation"></property>
+
+           <property name="textPasDeConsommations" label="RichText qui remplace le graphique si pas de consommations" type="String" 
+                        default="En tant que nouveau client, vous n'avez pas encore de données disponibles. Patience, vous trouverez bientôt un aperçu de votre consommation ici-même et une vue détaillée dans votre page 'Ma consommation'"></property>
+
+            <property name="lienSpecifique" label="Le lien menant vers la page des consommations" type="String" default="/ma-consommation"/>
+            <property name="libelleDuLien" label="Libellé du lien menant vers la page des consommations" type="String" default="Ma consommation en détail"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,17 @@
+<!--
+  @description       : 
+  @author            : Clément Bauny
+  @group             : 
+  @last modified on  : 10-07-2021
+  @last modified by  : Clément Bauny
+-->
+<template>
+    <div>
+        <h1>Register</h1>
+    </div>
+    <div>
+        <lightning-input type="email" label="Email address" name="login"></lightning-input>
+        <lightning-input type="password" label="Password" name="pwd" placeholder="Enter Password"></lightning-input>
+        <lightning-button label="Validate" title="Validate" icon-name="utility:save" onclick={communityRegister}></lightning-button>
+    </div>    
+</template>

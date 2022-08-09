@@ -1,0 +1,133 @@
+<!--
+  @description       : 
+  @author            : Badr Eddine Belkarchi
+  @group             : 
+  @last modified on  : 03-24-2022
+  @last modified by  : Badr Eddine Belkarchi
+-->
+<template>
+    <div data-id='pageContent' class={theme}>
+        <div class="hp-mon-mode-paiements">
+
+            <template if:true={version1}>
+                <div class="hp-bigTitle">{titleV1}</div>
+
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_6-of-12">
+                        <div class="Mon-mode-de-paiement">{labelMoyenPaiement1}</div>
+                    </div>
+                    <div class="slds-col slds-size_3-of-12">
+                        <template if:false={isEtatInactif}>
+                            <template if:true={showLienEnSavoirPlusPaiement1}>
+                                <div class="enSavoirPlus" onclick={handleNavigateEnSavoirPlusPaiement1}>En savoir +
+                                </div>
+                            </template>
+                        </template>
+                    </div>
+                    <div class="slds-col slds-size_3-of-12">
+                        <button class="btn-modifier" disabled={isEtatInactif}>{labelBoutonPaiement1}</button>
+                    </div>
+                </div>
+
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_6-of-12">
+                        <div class="Mon-mode-de-paiement">{labelMoyenPaiement2}</div>
+                    </div>
+                    <div class="slds-col slds-size_3-of-12">
+                        <template if:false={isEtatInactif}>
+                            <template if:true={showLienEnSavoirPlusPaiement2}>
+                                <div class="enSavoirPlus" onclick={handleNavigateEnSavoirPlusPaiement2}>En savoir +
+                                </div>
+                            </template>
+                        </template>
+                    </div>
+                    <div class="slds-col slds-size_3-of-12">
+                        <button class="btn-modifier" disabled={isEtatInactif}>{labelBoutonPaiement2}</button>
+                    </div>
+                </div>
+
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_6-of-12">
+                        <div class="Mon-mode-de-paiement">{labelMoyenPaiement3}</div>
+                    </div>
+                    <div class="slds-col slds-size_3-of-12">
+                        <template if:false={isEtatInactif}>
+                            <template if:true={showLienEnSavoirPlusPaiement3}>
+                                <div class="enSavoirPlus" onclick={handleNavigateEnSavoirPlusPaiement3}>En savoir +
+                                </div>
+                            </template>
+                        </template>
+                    </div>
+                    <div class="slds-col slds-size_3-of-12">
+                        <button class="btn-modifier" disabled={isEtatInactif}>{labelBoutonPaiement3}</button>
+                    </div>
+                </div>
+
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_6-of-12">
+                        <div class="Mon-mode-de-paiement">{labelMoyenPaiement4}</div>
+                    </div>
+                    <div class="slds-col slds-size_3-of-12">
+                        <template if:false={isEtatInactif}>
+                            <template if:true={showLienEnSavoirPlusPaiement4}>
+                                <div class="enSavoirPlus" onclick={handleNavigateEnSavoirPlusPaiement4}>En savoir +
+                                </div>
+                            </template>
+                        </template>
+                    </div>
+                    <div class="slds-col slds-size_3-of-12">
+                        <button class="btn-modifier" disabled={isEtatInactif}>{labelBoutonPaiement4}</button>
+                    </div>
+                </div>
+
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_6-of-12">
+                        <div class="Mon-mode-de-paiement">{labelMoyenPaiement5}</div>
+                    </div>
+                    <div class="slds-col slds-size_3-of-12">
+                        <template if:false={isEtatInactif}>
+                            <template if:true={showLienEnSavoirPlusPaiement5}>
+                                <div class="enSavoirPlus" onclick={handleNavigateEnSavoirPlusPaiement5}>En savoir +
+                                </div>
+                            </template>
+                        </template>
+                    </div>
+                    <div class="slds-col slds-size_3-of-12">
+                        <button class="btn-modifier" disabled={isEtatInactif}>{labelBoutonPaiement5}</button>
+                    </div>
+                </div>
+
+                <!--             
+                <div class="message-2">Vous bénéficiez d’une aide solidarité logement de : <span class="text-style-1">{aideSolidariteLogement}</span></div>
+                <div class="message-2">Crédit utilisé : <span class="text-style-1">{creditUtilise}</span> | Crédit restant :<span class="text-style-1">{creditRestant}</span></div>
+                 -->
+            </template>
+
+            <template if:true={version2}>
+                <div class="hp-bigTitle">{titleV2}</div>
+                <div class="slds-grid">
+                    <div class="slds-col">
+                        <!-- TODO: add validation icon -->
+                        <div class="Mon-mode-de-paiement">{textModePaiement} : {actifPRTF.libelleModeEncaissement}
+                            <span class="Actif">&nbsp;Actif</span>
+                        </div>
+                    </div>
+                    <div class="slds-col">
+                        <button class="btn-modifier">Modifier</button>
+                    </div>
+                </div>
+
+                <div class="Rectangle-4721 slds-align_absolute-center">
+                    <div class="message-1">
+                        {textDatePrelevementPart1} {datePrelevement} {textDatePrelevementPart2}.
+                    </div>
+                </div>
+                <!-- 
+                <div class="message-2">{labelAideSolidariteLogement} <span class="text-style-1">{aideSolidariteLogement}</span></div>
+                <div class="message-2">{labelCreditUtilise} <span class="text-style-1">{creditUtilise}</span> | {labelCreditRestant} <span class="text-style-1">{creditRestant}</span></div>
+                 -->
+            </template>
+            
+        </div>
+    </div>
+</template>

@@ -1,0 +1,39 @@
+.THIS{
+	height: 50%;
+}
+.display-none{
+   display: none;
+}
+.slds-page-header_title{
+   color: #00396b;
+}
+.THIS{
+   text-decoration-color: #3e3e3c;
+   font-family: Helvetica;
+}
+.title.slds-p-top_x-large.slds-m-bottom_x-small{
+   color: #00396b;	
+   font-weight: 400;
+}
+.white{
+   background-color: white;
+}
+.slds-modal__footer.slds-m-top_large {
+   margin-bottom: 60px;
+}
+.tst.slds-col.slds-size_6-of-6{
+	display:inline-block;
+}
+.svgd{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+    vertical-align: middle;
+    justify-content: center;
+    border: 1px solid rgb(217, 219, 221);
+    transition: border .15s linear;
+    background-color: rgb(0, 112, 210);
+    border-color: rgb(0, 112, 210);
+    color: rgb(255, 255, 255);
+    font-family:'Salesforce Sans',Arial,sans-serif;
+}

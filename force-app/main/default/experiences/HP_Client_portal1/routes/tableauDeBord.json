@@ -1,0 +1,10 @@
+{
+  "activeViewId" : "6f30d46a-1946-4db9-a274-e1e301489f6b",
+  "appPageId" : "7e89266e-f5a3-4029-bb48-38a8a732ab93",
+  "configurationTags" : [ ],
+  "id" : "5c1b35fc-5a38-4242-bcfa-36f9fd32e409",
+  "label" : "Tableau de bord",
+  "routeType" : "custom-tableau-de-bord",
+  "type" : "route",
+  "urlPrefix" : "tableau-de-bord"
+}

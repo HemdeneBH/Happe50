@@ -1,0 +1,9 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" controller="SM_CaseHarmonicaResil_Controller">
+    <lightning:workspaceAPI aura:id="workspace"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+     <a class="divbtn" onclick="{! c.openResil }" aura:id="linkmv">
+        <p style="height:50px;width:100px;border-width:0px;font-size: 18px;margin-bottom: -5%;margin-top: 2%;"> Résiliation </p>
+    </a>
+   <!--<lightning:button label="Résiliation" title="Résiliation" onclick="{! c.openResil }" class="slds-button slds-button_brand"/>-->
+</aura:component>

@@ -1,0 +1,10 @@
+{
+  "activeViewId" : "d598e2cb-0d05-43c0-9c3f-492c6b0dbe89",
+  "appPageId" : "7e89266e-f5a3-4029-bb48-38a8a732ab93",
+  "configurationTags" : [ ],
+  "id" : "979aad5d-be2c-4a7b-90be-e67d25f9f5be",
+  "label" : "Mon espace parrain",
+  "routeType" : "custom-mon-espace-parrain",
+  "type" : "route",
+  "urlPrefix" : "mon-espace-parrain"
+}

@@ -1,0 +1,84 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 05-25-2022
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<template>
+    <div class="hp_container">
+        <div class="hp-renouvelerMotDePasse">
+            <div class="hp-content">
+                <div class="hp-logo">
+                    <img src={blackLogo}>
+                </div>
+                <div class="hp-bigTitle">
+                    {titreRenouvelerMotDePasse}
+                </div>
+                <div if:true={showSuccess} class="hp-success">{messageConfirmation}</div>
+                <template if:false={displayError}>
+                    <div class="slds-form-element hp-identite disabled">
+                        <label class="slds-form-element__label hp-inputLabel" for="hp-input-identite">
+                            {labelInputIdentite}
+                        </label>
+                        <div class="slds-form-element__control">
+                            <input class="hp-textInput slds-input" type="text" data-id="hp-input-identite"
+                                placeholder={placeHolderInputIdentite} 
+                                value={nameValue}
+                                readonly="readonly"/>
+                        </div>
+                    </div>
+                    <div class="slds-form-element hp-emailAssocie disabled">
+                        <label class="slds-form-element__label hp-inputLabel" for="hp-input-emailAssocie">
+                            {labelInputEmail}
+                        </label>
+                        <div class="slds-form-element__control">
+                            <input class="hp-textInput slds-input" type="email" data-id="hp-input-emailAssocie"
+                                placeholder={placeHolderInputEmail} value={emailValue}
+                                readonly="readonly"/>
+                        </div>
+                    </div>
+                    <div class="slds-form-element hp-mdp">
+                        <label class="slds-form-element__label hp-inputLabel hp-inputLabelTooltip" for="hp-input-mdp">
+                            {labelInputMDP} <span class="hp-tooltip"><c-hp_ec_tooltip content={messageInfoBulle}></c-hp_ec_tooltip></span>
+                        </label>
+                        <div class="slds-form-element__control">
+                            <input class="hp-textInput slds-input" type="password" data-id="hp-input-mdp"
+                                placeholder={placeHolderInputMDP} onchange={handlePassword} />
+                        </div>
+                    </div>
+                    <div class="slds-form-element hp-confirm-mdp">
+                        <label class="slds-form-element__label hp-inputLabel" for="hp-input-confirm-mdp">
+                            {labelInputConfirmationMDP}
+                        </label>
+                        <div class="slds-form-element__control">
+                            <input class="hp-textInput slds-input" type="password" data-id="hp-input-confirm-mdp"
+                                placeholder={placeHolderInputMDP} onchange={handlePasswordConfirmation} />
+                        </div>
+                    </div>
+                    <span if:true={showError} class="hp-bad-input"> {errorMessage}</span>
+                    <div class="hp-btnContainer">
+                        <div class="hp-firstButton" onclick={submitPassword}>
+                            Valider
+                        </div>
+                    </div>
+                </template>
+                <template if:true={displayError}>
+                    <div class="hp-alert">
+                        <span class="hp-alert-icon">
+                          <img src={iconAlert} alt="alert icon" />
+                        </span>
+                        <span class="hp-alert-text">
+                          {messageErreurActivationExpiree}
+                        </span>
+                      </div>
+                      <div class="hp-btnContainer">
+                        <div class="hp-firstButton" onclick={handleNavigation}>
+                            Renouveler ma demande
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,145 @@
+.hp_popinPaiements{
+    height: 615.5px;
+    width:550px;
+    box-shadow: -5px 5px 25px 0 rgba(0, 0, 0, 0.7);
+    border: solid 15px #8b6ff6;
+    background-image: linear-gradient(28deg, #26242b -14%, #424242 113%);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+  .hp-header{
+    background-color: #000;
+    border: none;
+  }
+
+  .hp-content{
+    background-image: linear-gradient(28deg, #26242b -14%, #424242 113%);
+    margin-left: auto;
+    margin-right: auto;
+    /* position: fixed;
+    right: auto;
+    left: auto; */
+    /*max-width: 400px;*/
+    width: fit-content;
+  }
+
+
+  .hp-closeButon{
+      float: right;
+      margin-right: 10px;
+      color: #43e6ee;
+      font-family: "font_AvantBold";
+      font-size: 16px;
+    font-weight: bold;
+    font-stretch: extra-expanded;
+    font-style: normal;
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+    margin-top: -25px;
+  }
+
+
+  .hp-textAlerte{
+      color: #da42bd;
+      text-align: left;
+      font-family: "font_AvantBold";
+      font-size: 12px;
+      margin-top: 50px;
+      margin-bottom: 20px;
+      margin-left: 25px;
+      margin-right: 15px;
+      max-width: 250px;
+      
+  }
+
+  
+
+  .hp-button{
+    color: var(--white);
+    font-weight: bold;
+    font-family: "font_AvantBold";
+    font-size: 14px;
+    margin-left: auto;
+    margin-right: auto;
+    text-transform: uppercase;
+  }
+
+  .hp-buttonBox{
+    width: 250px;
+    height: 60px;
+    /* margin: 6px 5px 6px 5px;
+    padding: 10px 21px 19.3px 9px; */
+    border: solid 4px #76e3ec;
+    background-color: #000;
+    /* margin-left: 35px; */
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hp-input{
+    width: 80px;
+  height: 35px;
+  border: solid 3px #8674ee;
+  background-color: #26242b;
+  margin-left: 20px;
+  margin-top: -10px;
+  }
+
+  .hp-valeurActelleBox{
+    /* width: 300px;
+    height: 40px; */
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hp-valeurActuelleLabel{
+    font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: 0.48px;
+  text-align: left;
+  color: #05a8ff;
+  font-family: "font_AvantBold";
+  }
+
+  .hp-valeurActuelle{
+    font-weight: normal;
+  color: #fff;
+  font-family: ITCAvantGardeGothicLT;
+  margin-left: 5px;
+  }
+
+  .hp-inputLabel{
+    font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: 0.48px;
+  text-align: left;
+  color: white;
+  font-family: "font_AvantBold";
+  width: fit-content;
+  }
+
+  .hp-inputBox{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+  }
+
+  .hp-alerteBox{
+    margin-top: 60px;
+    margin-bottom: 30px;
+    max-width: 250px;
+  }

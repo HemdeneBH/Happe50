@@ -1,0 +1,525 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 06-13-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+  <div class="hp-profilClient c-content-bg slds-col">
+    <div class="hp-bigTitle">{titleText}</div>
+    <div class="hp-profilClientTitle">Mon avatar</div>
+    <div class="center">
+      <div class="wrapper">
+        <div class="slider-btn-hldr slider-btn-hldr-left">
+          <button
+            data-id="left-btn"
+            class="slider-btn left-btn"
+            style="display: none"
+          >
+            <svg viewBox="0 0 256 256">
+              <polyline
+                fill="none"
+                stroke="#76e3ec"
+                stroke-width="30"
+                points="184,16 72,128 184,240"
+              ></polyline>
+            </svg>
+          </button>
+        </div>
+        <div class="inner hp-profil-carousel" onclick={getAvatar}>
+          <!-- <template for:each={listOfAvatarToDisplay} for:item="item">
+                      <div key={item.id} class="card hp-profileClient-icon">
+                          <a href="#">
+                              <img src={item.Avatar_Path__c} />
+                          </a>
+                      </div>
+                  </template> -->
+          <div class="card hp-profileClient-icon">
+            <a href="#">
+              <img src={iconFox} />
+            </a>
+          </div>
+          <div class="card hp-profileClient-icon">
+            <a href="#">
+              <img src={iconFish} />
+            </a>
+          </div>
+          <div class="card hp-profileClient-icon">
+            <a href="#">
+              <img class="small" src={iconParrot} />
+            </a>
+          </div>
+          <div class="card hp-profileClient-icon">
+            <a href="#">
+              <img src={iconCow} />
+            </a>
+          </div>
+          <div class="card hp-profileClient-icon">
+            <a href="#">
+              <img src={iconKoala} />
+            </a>
+          </div>
+          <div class="card hp-profileClient-icon">
+            <a href="#">
+              <img src={iconBear} />
+            </a>
+          </div>
+          <div class="card hp-profileClient-icon">
+            <a href="#">
+              <img src={iconCroco} />
+            </a>
+          </div>
+          <div class="card hp-profileClient-icon">
+            <a href="#">
+              <img class="big" src={iconElephant} />
+            </a>
+          </div>
+          <div class="card hp-profileClient-icon">
+            <a href="#">
+              <img src={iconRabbit} />
+            </a>
+          </div>
+          <div class="card hp-profileClient-icon">
+            <a href="#">
+              <img src={iconRat} />
+            </a>
+          </div>
+          <div class="card hp-profileClient-icon">
+            <a href="#">
+              <img src={iconReindeer} />
+            </a>
+          </div>
+          <div class="card hp-profileClient-icon">
+            <a href="#">
+              <img src={iconDog} />
+            </a>
+          </div>
+          <div class="card hp-profileClient-icon">
+            <a href="#">
+              <img src={iconDoggy} />
+            </a>
+          </div>
+          <div class="card hp-profileClient-icon">
+            <a href="#">
+              <img src={iconChick} />
+            </a>
+          </div>
+        </div>
+        <div class="slider-btn-hldr slider-btn-hldr-right">
+          <button
+            data-id="right-btn"
+            class="slider-btn right-btn"
+            style="display: block"
+          >
+            <svg viewBox="0 0 256 256">
+              <polyline
+                fill="none"
+                stroke="#76e3ec"
+                stroke-width="30"
+                points="72,16 184,128 72,240"
+              ></polyline>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="nom_et_adresse" class="hp-client-bg">
+      <div class="hp-client-tooltip">
+        <div class="hp-client-infos">
+          <p class="hp-clientName">{name}</p>
+          <p class="hp-clientRef">Réf client : {reference}</p>
+        </div>
+        <c-hp_ec_tooltip content={infoBulle}></c-hp_ec_tooltip>
+      </div>
+      <div class="hp-client-infos">
+        <p class="hp-clientName">Adresse du contrat</p>
+        <p class="hp-clientRef">
+          {adressPFContratPart1}<br />
+          {adressPFContratPart2}
+        </p>
+      </div>
+    </div>
+    <template if:true={successMessage}>
+      <div class="hp-blocConfirm blue" data-id="div-confirm-msg">
+        <div class="c-blocConfirm blue">
+          <div class="c-blocConfirm-icon blue">
+            <div class="c-blocConfirm-innerCircle">
+              <img
+                class="c-blocConfirm-img"
+                src={iconConfirm}
+                alt="confirm icon"
+              />
+            </div>
+          </div>
+          <div class="c-blocConfirm__text-wrapper">
+            <div class="c-blocConfirm__text">
+              <p class="blue">Merci ! La modification est prise en compte.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+    <!-- <template if:true={showToast}>
+          <div class="c-blocConfirm__text">
+              <c-hp_ec_v-toast message-toast={messageToast} onopenpopintoats={openVFToast}>
+              </c-hp_ec_v-toast>
+          </div>
+      </template> -->
+    <div id="mon_email" class="hp-client">
+      <div class="hp-client-infos">
+        <p class="hp-profilClientTitle">Mon Email</p>
+        <p class="hp-clientRef">{email}</p>
+        <p class="hp-clientRef">Mot de pass : D*********X</p>
+      </div>
+      <div class="hp-modify-btn">
+        <a hred="#" class="button edit" onclick={showDivProfile}>
+          <img src={iconModify} alt="modify" />
+        </a>
+      </div>
+    </div>
+    <template if:true={divProfilIsShow}>
+      <div class="profil-inputs">
+        <div class="slds-form-element hp-email">
+          <label
+            class="slds-form-element__label hp-inputProfilLabel"
+            for="hp-input-email"
+          >
+            Adresse email :
+          </label>
+          <div class="slds-form-element__control">
+            <input
+              data-id="new-email"
+              class="hp-textInput slds-input"
+              type="email"
+              id="hp-input-email"
+              placeholder="Ex : Martin@email.com"
+              required=""
+              aria-invalid="true"
+              onchange={handleEmail}
+              onblur={handleBlurEmail}
+            />
+            
+          </div>
+          <span data-id="messageEmail"></span>
+          <div class="hp-btnContainer">
+            <button
+              data-id="email-button"
+              disabled={emailDesabledBtn}
+              class="hp-firstButton"
+              onclick={emailActions}
+            >
+              VALIDER
+            </button>
+          </div>
+        </div>
+        <div class="input-50">
+          <div class="slds-form-element hp-mdp">
+            <label
+              class="slds-form-element__label hp-inputProfilLabel"
+              for="hp-input-mdp"
+            >
+              Nouveau Mot de passe :
+            </label>
+            <div class="slds-form-element__control">
+              <input
+                data-id="new-mdp"
+                onkeyup={checkMdp}
+                class="hp-textInput slds-input"
+                type="password"
+                id="hp-input-mdp"
+                placeholder="*******"
+                required=""
+                aria-describedby={messageErreurInputEmail}
+                aria-invalid="true"
+              />
+            </div>
+          </div>
+          <div class="slds-form-element hp-mdp">
+            <label
+              class="slds-form-element__label hp-inputProfilLabel"
+              for="hp-input-confirm-mdp"
+            >
+              Confirmation:
+            </label>
+            <div class="slds-form-element__control">
+              <input
+                data-id="confirm-mdp"
+                onkeyup={checkMdp}
+                class="hp-textInput slds-input"
+                type="password"
+                id="hp-input-confirm-mdp"
+                placeholder="*******"
+                required=""
+                aria-describedby={messageErreurInputEmail}
+                aria-invalid="true"
+              />
+            </div>
+          </div>
+          <span data-id="message" class="c-profil-message"></span>
+        </div>
+        <div data-id="buttonBloc" class="hp-btnContainer">
+          <button
+            class="hp-firstButton"
+            disabled={desableMdpBtn}
+            onclick={btnMdpAction}
+          >
+            VALIDER
+          </button>
+        </div>
+      </div>
+    </template>
+    <div id="mon_numero_de_telephone" class="hp-client">
+      <div class="hp-client-infos">
+        <p class="hp-profilClientTitle">Mon numéro de téléphone</p>
+        <p class="hp-clientRef">Fixe : {numFix}</p>
+        <p class="hp-clientRef">Mobile : {numMobile}</p>
+      </div>
+      <div class="hp-modify-btn">
+        <a hred="#" class="button edit" onclick={showPictosNumeros}>
+          <img src={iconModify} alt="modify" />
+        </a>
+      </div>
+    </div>
+    <template if:true={pictoNumerosIsShow}>
+      <div class="profil-inputs">
+        <div class="slds-form-element hp-email">
+          <label
+            class="slds-form-element__label hp-inputProfilLabel"
+            for="hp-input-email"
+          >
+            Fixe :
+          </label>
+          <div class="slds-form-element__control">
+            <input
+              data-id="new-fixe"
+              class="hp-textInput slds-input"
+              type="phone"
+              id="hp-input-fixe"
+              placeholder="Ex : 02345678"
+              required=""
+              aria-invalid="true"
+              onchange={handleNumFixe}
+              onblur={handleBlurNumFixe}
+            />
+          </div>
+          <span data-id="messageFixe"></span>
+          <div data-id="buttonBloc" class="hp-btnContainer">
+            <button
+              class="hp-firstButton"
+              disabled={fixeDesabledBtn}
+              onclick={numFixeAction}
+            >
+              VALIDER
+            </button>
+          </div>
+        </div>
+        <div class="slds-form-element hp-email">
+          <label
+            class="slds-form-element__label hp-inputProfilLabel"
+            for="hp-input-email"
+          >
+            Mobile :
+          </label>
+          <div class="slds-form-element__control">
+            <input
+              data-id="new-mobile"
+              class="hp-textInput slds-input"
+              type="phone"
+              id="hp-input-mobile"
+              placeholder="Ex : 067645678"
+              required=""
+              aria-describedby={messageErreurInputEmail}
+              aria-invalid="true"
+              onchange={handleNumMobile}
+              onblur={handleBlurNumMobile}
+            />
+          </div>
+          <span data-id="messageMobile"></span>
+          <div data-id="buttonBloc" class="hp-btnContainer">
+            <button
+              class="hp-firstButton"
+              disabled={mobileDesabledBtn}
+              onclick={numMobileAction}
+            >
+              VALIDER
+            </button>
+          </div>
+        </div>
+      </div>
+    </template>
+    <div id="adresse_de_facturation" class="hp-client">
+      <div class="hp-client-infos">
+        <p class="hp-profilClientTitle">Adresse de facturation</p>
+        <p class="hp-clientRef">{adressFacturationPart1}</p>
+        <p class="hp-clientRef">{adressFacturationPart2}</p>
+      </div>
+      <div class="hp-modify-btn">
+        <a hred="#" class="button edit" onclick={showPictoFacturation}>
+          <img src={iconModify} alt="modify" />
+        </a>
+      </div>
+    </div>
+    <template if:true={pictoFacturationIsShow}>
+      <div class="profil-inputs">
+        <lightning-textarea
+          label="Adresse de contact :"
+          list="valueList"
+          onchange={getSearchResult}
+          onblur={handleBluradresseFacturation}
+          class="c-profil-textarea validation"
+          message-when-value-missing="Ce champ ne peut pas être vide"
+          data-id="overview"
+          value={adressFacturation}
+          required
+        ></lightning-textarea>
+        <!-- <template if:true={displayInbox}> -->
+          <div
+            data-id="listbox"
+            class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid display-none"
+            role="listbox"
+            style="position: relative; width: 100%"
+          >
+            <div
+              style="height: auto; overflow-y: auto;"
+              class="display-none c-profil-dropdown"
+              data-id="listboxIn"
+            >
+              <ul
+                class="slds-listbox slds-listbox_vertical"
+                role="presentation"
+              >
+                <template if:false={hasComplement}>
+                  <template if:false={hasListeNumero}>
+                    <template for:each={adressesDQE} for:item="adresse">
+                      <li
+                        role="presentation"
+                        class="slds-listbox__item"
+                        key={adresse.id}
+                      >
+                        <div
+                          data-id={adresse.id}
+                          data-name={adresse.label}
+                          data-housenumber={adresse.numero}
+                          data-street={adresse.voie}
+                          data-postcode={adresse.codePostal}
+                          data-city={adresse.ville}
+                          data-citycode={adresse.idLocalite}
+                          data-listenumero={adresse.listeNumero}
+                          data-idvoie={adresse.idVoie}
+                          class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                          role="option"
+                          onclick={selectedValue}
+                        >
+                          <span class="slds-media__body">
+                            <span
+                              class="slds-listbox__option-text slds-listbox__option-text_entity"
+                              >{adresse.label}</span
+                            >
+                          </span>
+                        </div>
+                      </li>
+                    </template>
+                  </template>
+                </template>
+                <template if:false={hasComplement}>
+                  <template if:true={hasListeNumero}>
+                    <template for:each={adressesDQEList} for:item="adresse">
+                      <li
+                        role="presentation"
+                        class="slds-listbox__item"
+                        key={adresse.id}
+                      >
+                        <div
+                          data-id={adresse.id}
+                          data-name={adresse.label}
+                          data-housenumber={adresse.numero}
+                          data-street={adresse.voie}
+                          data-postcode={adresse.codePostal}
+                          data-city={adresse.ville}
+                          data-citycode={adresse.idLocalite}
+                          data-listenumero={adresse.listeNumero}
+                          data-idvoie={adresse.idVoie}
+                          class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                          role="option"
+                          onclick={selectedSecondValue}
+                        >
+                          <span class="slds-media__body">
+                            <span
+                              class="slds-listbox__option-text slds-listbox__option-text_entity"
+                              >{adresse.numero} {adresse.voie}
+                              {adresse.codePostal} {adresse.ville}</span
+                            >
+                          </span>
+                        </div>
+                      </li>
+                    </template>
+                  </template>
+                </template>
+                <template if:true={hasComplement}>
+                  <template
+                    for:each={adressesDQEComplemet}
+                    for:item="adresse"
+                  >
+                    <li
+                      role="presentation"
+                      class="slds-listbox__item"
+                      key={adresse.id}
+                    >
+                      <div
+                        data-id={adresse.id}
+                        data-name={adresse.batiment}
+                        class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                        role="option"
+                        onclick={selectedThirdValue}
+                      >
+                        <span class="slds-media__body">
+                          <span
+                            class="slds-listbox__option-text slds-listbox__option-text_entity"
+                          >
+                            {adresse.batiment}</span
+                          >
+                        </span>
+                      </div>
+                    </li>
+                  </template>
+                </template>
+              </ul>
+            </div>
+          </div>
+        <!-- </template> -->
+      </div>
+      <div data-id="buttonBloc" class="hp-btnContainer">
+        <button
+          class="hp-firstButton"
+          disabled={functionDesableBtn}
+          onclick={adresseFacturationAction}
+        >
+          VALIDER
+        </button>
+      </div>
+    </template>
+    <!--<div class="hp-link">
+      <a class="hp-link-item" onclick={showPopinCotitulaire}>
+        <span class="leftBloc">
+          Mes co-titulaires
+        </span>
+        <span class="rightBloc">
+          <span class=" chevron right"></span>
+        </span>
+      </a>
+    </div>-->
+  </div>
+  <!--<template if:true={showCotitulairePopup}>
+    <div class="hp-popup">
+      <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+        aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-scrollable_y">
+        <div class="slds-modal__container">
+          <c-hp_ec_popin-cotitulaire onopenpopincotitulaire={openPopinCotitulaire}>
+          </c-hp_ec_popin-cotitulaire>
+        </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
+  </template>-->
+</template>

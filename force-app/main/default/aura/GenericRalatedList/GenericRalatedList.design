@@ -1,0 +1,27 @@
+<design:component >
+    <design:attribute name="title" label="Title" description="Define Title" />
+     <design:attribute name="customIcon" label="Custom Icon" description="Define your custom icon" />
+    <design:attribute name="typeFieldSource" label="Field Type Source" datasource="Field Set,Fields" />
+	<design:attribute name="fieldSetName" label="Field" description="Define field set name or list field separete by comma (,)" />
+	<design:attribute name="nameFieldToLink" label="Add link to field" description="Add a link to a related objects's field"/>
+    <design:attribute name="whereClause" label="Where Clause" description="Define where clause" />
+    <design:attribute name="searchFilds" label="Search fields" description="Define field list separete by comma (,)" />
+    <design:attribute name="operator" label="OR/AND operator" description="Define the operator(Just one)" />
+    <design:attribute name="importantField" label="Important Field" description="Important Field" />
+    <design:attribute name="objectName" label="Object Name" description="Define object name" />
+    <design:attribute name="parentId" label="Parent Name" description="Define parent Name" />
+    <design:attribute name="hasEdit" label="Edit option" description="You can edit Item" />
+    <design:attribute name="hasDelete" label="Delete option" description="You can delete Item" />
+    <design:attribute name="hasNew" label="New option" description="You can add new Item" />
+    <design:attribute name="newLabel" label="New Label" description="New Label" />
+    <design:attribute name="maxItemDisplay" label="Max Item display" description="Max Item display" />
+    
+    <design:attribute name="customCreationManagement" label="Custom Creation Manager"/>
+    <design:attribute name="creationComponentName" label="Creation Component Name"/>
+    
+    <design:attribute name="listView" label="Render as a list?"/>
+    <design:attribute name="viewAll" label="Render View All?" default="true"/>
+
+    <design:attribute name="hide" label="Hide when empty?" default="false"/>
+
+</design:component>

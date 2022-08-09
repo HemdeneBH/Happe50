@@ -1,0 +1,167 @@
+.update {
+    text-align: center;
+    padding: 10px;
+    background-color: #70a731;
+    margin: auto;
+    cursor: pointer;
+    width: 60%;
+    margin-top: 5%;
+    border-radius: 5px;
+}
+.update.disable{
+    background-color: #000;
+    filter: alpha(opacity=50);
+    -moz-opacity: 0.5;
+    opacity: 0.5;
+    -khtml-opacity: 0.5;
+    pointer-events: none;
+}
+.update:hover {
+    background-color: #639924;
+}
+.update .update-button {
+    color: #FFF;
+    font-size: 15px;
+    font-weight: 500;
+}
+.media-container{
+    display: block;
+    background-color: rgb(241 241 237);
+    min-height: 100%;
+    padding-bottom: 10%;
+}
+.media-container .error-media{
+    position: absolute;
+    top: 45%;
+    width: 90%;
+    text-align: center;
+    font-size: large;
+    left: 5%;
+    color: #d12424;
+    font-weight: 500;
+}
+.media-body {
+    margin-top: 10%;
+}
+.media-label{
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.media-header{
+    background-color: #005fb2;
+}
+.media-header, .media-header.error{
+    text-align: center;
+    padding: 10px;
+}
+.media-header.error{
+    background-color: #d12424;
+}
+.media-header .title, .media-header.error .title {
+    color: #FFF;
+    font-size: 15px;
+    font-weight: bold;
+}
+input {
+    opacity: 0;
+    position: absolute;
+    z-index: 1;
+    width: 7em;
+    height: 3em;
+    cursor: pointer;
+}
+.toggle-wrapper {
+    position: relative;
+}
+.name {
+    width: 80%;
+    position: absolute;
+    font: 500 14px "Rubik", sans-serif;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+    bottom: 15px;
+    right: 15px;
+    text-align: right;
+}
+.toggle {
+    display: block;
+    text-align: center;
+  }
+  
+label.toggle-item {
+    width: 7em;
+    background: #2e394d;
+    height: 3em;
+    display: inline-block;
+    border-radius: 50px;
+    position: relative;
+    transition: all 0.3s ease;
+    transform-origin: 20% center;
+    cursor: pointer;
+}
+label.toggle-item:before {
+    width: 5em;
+    background: #2e394d;
+    height: 2em;
+    display: inline-block;
+    border-radius: 50px;
+    position: relative;
+    transition: all 0.3s ease;
+    transform-origin: 20% center;
+    cursor: pointer;
+}
+.checkcross label::before {
+    content: none;
+}
+.checkcross .check {
+    border-radius: 50%;
+    width: 2.5em;
+    height: 2.5em;
+    position: absolute;
+    background: #c34a4a;
+    transition: 0.4s ease;
+    top: 2.5px;
+    left: 4.5px;
+}
+.checkcross .check::before, .checkcross .check::after {
+    width: 25px;
+    content: '';
+    position: absolute;
+    background: #fff;
+    height: 2px;
+    top: -4px;
+    left: -5px;
+}
+.checkcross .check::before {
+    transform: rotate(-45deg) translate(-8px, 18px);
+}
+.checkcross .check::after {
+    transform: rotate(45deg) translate(18px, 8px);
+}
+  
+.checkcrossInput:checked + label .check {
+    left: 55px;
+    transform: rotate(360deg);
+    background: #8BC34A;
+}
+.checkcrossInput:checked + label .check::before , .checkcrossInput:checked + label .check::after {
+    height: 2px;
+    border-radius: 10px;
+    background: #fff;
+    transition: 0.4s ease;
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+}
+.checkcrossInput:checked + label .check::before {
+    width: 25px;
+    transform: rotate(-45deg) translate(-7px, 24px);
+}
+.checkcrossInput:checked + label .check::after {
+    width: 12px;
+    transform: rotate(45deg) translate(22px, 14px);
+}

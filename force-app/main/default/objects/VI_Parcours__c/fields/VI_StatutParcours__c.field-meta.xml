@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_StatutParcours__c</fullName>
+    <externalId>false</externalId>
+    <label>Statut du parcours</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Vente en cours</fullName>
+                <default>true</default>
+                <label>Vente en cours</label>
+            </value>
+            <value>
+                <fullName>Vente à compléter</fullName>
+                <default>false</default>
+                <label>Vente à compléter</label>
+            </value>
+            <value>
+                <fullName>CPV Envoyées: PDL/PCE connu</fullName>
+                <default>false</default>
+                <label>CPV Envoyées: PDL/PCE connu</label>
+            </value>
+            <value>
+                <fullName>CPV Envoyées: PDL/PCE non connu</fullName>
+                <default>false</default>
+                <label>CPV Envoyées: PDL/PCE non connu</label>
+            </value>
+            <value>
+                <fullName>Annulé</fullName>
+                <default>false</default>
+                <label>Annulé</label>
+            </value>
+            <value>
+                <fullName>A traiter BO</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>A traiter BO</label>
+            </value>
+            <value>
+                <fullName>CPV Délivrées</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CPV Délivrées</label>
+            </value>
+            <value>
+                <fullName>CPV Signées</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CPV Signées</label>
+            </value>
+            <value>
+                <fullName>En traitement BO</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>En traitement BO</label>
+            </value>
+            <value>
+                <fullName>Rétracté</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Rétracté</label>
+            </value>
+            <value>
+                <fullName>Vente en suspens</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Vente en suspens</label>
+            </value>
+            <value>
+                <fullName>Vente transformée</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Vente transformée</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

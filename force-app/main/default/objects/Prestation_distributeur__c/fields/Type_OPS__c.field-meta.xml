@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type_OPS__c</fullName>
+    <externalId>false</externalId>
+    <label>Type d&apos;OPS</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Recollement</fullName>
+                <default>false</default>
+                <label>Recollement</label>
+            </value>
+            <value>
+                <fullName>Online</fullName>
+                <default>false</default>
+                <label>Online</label>
+            </value>
+            <value>
+                <fullName>Réduction de puissance</fullName>
+                <default>false</default>
+                <label>Réduction de puissance</label>
+            </value>
+            <value>
+                <fullName>Demande de coupure</fullName>
+                <default>false</default>
+                <label>Demande de coupure</label>
+            </value>
+            <value>
+                <fullName>Rétablissement</fullName>
+                <default>false</default>
+                <label>Rétablissement</label>
+            </value>
+            <value>
+                <fullName>Différé</fullName>
+                <default>false</default>
+                <label>Différé</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

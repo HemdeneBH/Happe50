@@ -1,0 +1,86 @@
+.blocDemenagement {
+  box-shadow: var(--box-shadow);
+  background-image: var(--bg);
+  color: var(--text-color);
+  display: block;
+  margin: 0 15px 0 15px;
+  text-align: center;
+}
+
+.blocDemenagement:hover,
+.blocDemenagement:focus,
+.blocDemenagement:active {
+  background: var(--secondary-colour);
+  color: var(--black);
+}
+.blocDemenagement a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.blocDemenagement a:hover,
+.blocDemenagement a:focus,
+.blocDemenagement a:active {
+  color: var(--black);
+  text-decoration: none;
+}
+
+.blocDemenagement-btn {
+  font-family: var(--font-bold);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 30px;
+  width: 100%;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+}
+.blocDemenagement-btn .chevron::before {
+  border-style: solid;
+  font-size: 16px;
+  border-width: 0.15em 0.15em 0 0;
+  content: '';
+  display: inline-block;
+  height: 0.60em;
+  right: 0.15em;
+  position: absolute;
+  top: 18px;
+  transform: rotate(-45deg);
+  vertical-align: top;
+  width: 0.60em;
+}
+
+.blocDemenagement-btn .chevron.right:before {
+  top: 42%;
+  right: 30px;
+  transform: rotate(45deg);
+}
+
+@media (min-width: 1280px) {
+  /* 1440px screen and all screens larger */
+
+}
+
+@media (max-width: 1280px) {
+  /* 1280px screen and all screens smaller */
+
+}
+
+@media (max-width: 1024px) {
+
+  /* Ipad and tablets */
+
+  .blocDemenagement {
+    margin: 0 20px;
+  }
+
+}
+
+@media (max-width: 576px) {
+
+  /* mobiles */
+
+}

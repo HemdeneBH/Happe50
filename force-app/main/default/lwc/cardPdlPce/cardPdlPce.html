@@ -1,0 +1,78 @@
+<template>
+    <div class="container-card" if:true={selecteditem}>
+        <lightning-card>
+            <!-- ZZZZ{typeC} -->
+            <div class="icon-compteur">
+                <img src={imageCompteur}/>  
+            </div>
+            <h2 class="title-compteur">{getType} : {numeroContrat}</h2>
+            <div slot="actions">
+                <lightning-icon if:false={numeroContrat} icon-name="utility:vide" size="small"></lightning-icon>
+                <div if:true={numeroContrat}>
+                    <span onclick={copyPCEPDL} class="copy-number">
+                        <span style="display:none">{numeroContrat}</span>
+                        <img class="imgCopy" src="/resource/EngieCustomResources/images/Copy360.svg">
+                        <!-- <lightning-icon icon-name="utility:copy" alternative-text="copier le numéro" size="small"></lightning-icon> -->
+                    </span>
+                    <lightning-button-icon icon-name="utility:chevronright" variant="bare"
+                        alternative-text="ouvrir le détail" onclick={handleOpenRecordClick}>
+                    </lightning-button-icon>
+                    <div if:true={numCopied} class="msg-copie-num">Numéro {type} copier</div>
+                </div>
+            </div>
+        </lightning-card>
+        <section if:true={showHideFlyout} aria-describedby="dialog-body-id-77" aria-labelledby="dialog-heading-id-81"
+            class="slds-popover slds-nubbin_left-top popup-card slds-size--1-of-1 slds-m-right_xx-small" role="dialog">
+            <!-- <header class="slds-popover__header">
+                <h2 class="slds-text-heading_small" id="dialog-heading-id-81">Détail {type}</h2>
+            </header> -->
+            <div if:true={isPceFlyout} class="slds-popover__body" id="dialog-body-id-77">
+                <lightning-icon icon-name="utility:close" onclick={handleOpenRecordClick} size="x-small" class="close-icon"></lightning-icon>
+                <p class="label">PERIMETRE</p>
+                <p class="value">{flayoutData.PerimetrePCE}</p>
+                <p class="label">TYPE DE COMPTEUR</p>
+                <p class="value">{flayoutData.TypeCompteur}</p>
+                <p class="label">ETAT D'ALIMENTATION</p>
+                <p class="value">{flayoutData.etatAlimentation}</p>
+                <p class="label">TARIF D'ACHEMINEMENT</p>
+                <p class="value">{flayoutData.TA}</p>
+                <p class="label">CONSOMMATION ANNUELLE DE RÉFÉRENCE</p>
+                <p class="value" if:false={flayoutData.ConsommationAnnuelle}>0</p>                    
+                <p class="value" if:true={flayoutData.ConsommationAnnuelle}>{flayoutData.ConsommationAnnuelle}</p>
+                
+                <lightning-button variant="base" label="Numéros d'urgence"
+                        title="Numéros d'urgence" onclick={appelNumsUrgences} icon-name="utility:call"
+                        class="slds-align_absolute-center"></lightning-button>
+            </div>
+            <div if:true={isPdlFlyout} class="slds-popover__body" id="dialog-body-id-78">
+                <lightning-icon icon-name="utility:close" onclick={handleOpenRecordClick} size="x-small" class="close-icon"></lightning-icon>
+                <p class="label">PERIMETRE</p>
+                <p class="value">{flayoutData.perimetre}</p>
+                <p class="label">ETAT D'ALIMENTATION</p>
+                <p class="value">{flayoutData.etatCompteur}</p>
+                <p class="label">PUISSANCE SOUSCRITE</p>
+                <p class="value" if:true={flayoutData.puissanceSouscriteValeur}>{flayoutData.puissanceSouscriteValeur} {flayoutData.puissanceSouscriteUnite}</p>
+                <p class="value" if:false={flayoutData.puissanceSouscriteValeur}>- {flayoutData.puissanceSouscriteUnite}</p>                    
+                <p class="label">TYPE DE COMPTAGE</p>
+                <p class="value">{flayoutData.typeComptageDifferencie}</p>
+                <p class="label">TYPE DE COMPTEUR</p>
+                <p class="value">{flayoutData.typeCompteur}</p>
+                <p class="label">FORMULE TARIFAIRE D'ACHEMINEMENT</p>
+                <p class="value">{ftaCodeLibelle}</p>
+                <p class="label">NOMBRE DE CADRANS</p>
+                <p class="value">{flayoutData.numbreCadrans}</p>
+                <p class="label">NIVEAU D'OUVERTURE AUX SERVICES</p>
+                <p class="value">{flayoutData.niveauServices}</p>
+
+
+                <lightning-button variant="base" label="Numéros d'urgence"
+                        title="Numéros d'urgence" onclick={appelNumsUrgences} icon-name="utility:call"
+                        class="slds-align_absolute-center"></lightning-button>
+            </div>
+            <h2 if:true={error} class="message-error">information indisponible pour le moment.</h2>
+            <div class="exampleHolder" if:false={showSpinner}>
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </div>
+        </section>
+    </div>
+</template>

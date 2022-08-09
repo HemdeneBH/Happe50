@@ -1,0 +1,1052 @@
+public with sharing class gdfsuezComBefChpPivotPC {
+	public static DateTime parseDateTime(String nodeText){
+			String iso8601 = nodeText;
+			JSONParser parser = JSON.createParser( '{"t":"' + iso8601 + '"}');
+			parser.nextToken();
+			parser.nextValue();
+			DateTime dt = parser.getDateTimeValue();
+			//System.debug('dt: ' + dt);
+			return dt;
+		}
+	public class contextDt {
+		public String version;
+		public gdfsuezComBefChpPivotPC.contextDt_systemPath_element systemPath;
+		public Boolean allowCache;
+		private String[] version_type_info = new String[]{'version','http://gdfsuez.com/bef/chp/pivot','string','1','1','false'};
+		private String[] systemPath_type_info = new String[]{'systemPath','http://gdfsuez.com/bef/chp/pivot','','1','1','false'};
+		private String[] allowCache_type_info = new String[]{'allowCache','http://gdfsuez.com/bef/chp/pivot','boolean','0','1','false'};
+		private String[] apex_schema_type_info = new String[]{'http://gdfsuez.com/bef/chp/pivot','true','false'};
+		private String[] field_order_type_info = new String[]{'version','systemPath','allowCache'};
+		public contextDt(){
+		}
+		public contextDt(DOM.XmlNode responseNode){
+			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+			DOM.XmlNode versionNode = responseNode.getChildElement('version', 'http://gdfsuez.com/bef/chp/pivot');
+			this.version = (versionNode == null) ? null : versionNode.getText();
+			nodesParsed.add(versionNode);
+			//System.debug(this.version);
+			DOM.XmlNode systemPathNode = responseNode.getChildElement('systemPath', 'http://gdfsuez.com/bef/chp/pivot');
+			if(systemPathNode == null){
+				this.systemPath = null;
+			} else{
+				gdfsuezComBefChpPivotPC.contextDt_systemPath_element systemPathObj = new gdfsuezComBefChpPivotPC.contextDt_systemPath_element(systemPathNode);
+				nodesParsed.add(systemPathNode);
+				this.systemPath = systemPathObj;
+			}
+			//System.debug(this.systemPath);
+			DOM.XmlNode allowCacheNode = responseNode.getChildElement('allowCache', 'http://gdfsuez.com/bef/chp/pivot');
+			this.allowCache = (allowCacheNode == null) ? null : Boolean.valueOf(allowCacheNode.getText());
+			nodesParsed.add(allowCacheNode);
+			/*System.debug(this.allowCache);*/
+		}
+		public void populateXmlNode(Dom.XmlNode outerNode){
+			Dom.XmlNode versionNode = outerNode.addChildElement('version', '', '');
+			if(this.version != null){
+				versionNode.addTextNode(this.version);
+			}
+
+			gdfsuezComBefChpPivotPC.contextDt_systemPath_element systemPathObj = this.systemPath;
+			Dom.XmlNode systemPathNode = outerNode.addChildElement('systemPath', '', '');
+			if(systemPathObj != null){
+				systemPathObj.populateXmlNode(systemPathNode);
+			}
+			if(this.allowCache != null){
+			Dom.XmlNode allowCacheNode = outerNode.addChildElement('allowCache', '', '');
+				allowCacheNode.addTextNode(String.valueOf(this.allowCache));
+			}
+
+		}
+	}
+	public class contextDt_systemPath_element {
+		public gdfsuezComBefChpPivotPC.contextDt_systemPath_system_element[] system_x;
+		private String[] system_x_type_info = new String[]{'system','http://gdfsuez.com/bef/chp/pivot','','1','-1','false'};
+		private String[] apex_schema_type_info = new String[]{'http://gdfsuez.com/bef/chp/pivot','true','false'};
+		private String[] field_order_type_info = new String[]{'system_x'};
+		public contextDt_systemPath_element(){
+		}
+		public contextDt_systemPath_element(DOM.XmlNode responseNode){
+			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+			Dom.XmlNode[] system_xChildren = responseNode.getChildElements();
+			gdfsuezComBefChpPivotPC.contextDt_systemPath_system_element[] system_xList = new List<gdfsuezComBefChpPivotPC.contextDt_systemPath_system_element>();
+			if(system_xChildren == null || system_xChildren.size() == 0){
+				this.system_x = null;
+			} else{
+				for(DOM.XmlNode childNode : system_xChildren){
+					if(childNode.GetName() == 'system_x'){
+						gdfsuezComBefChpPivotPC.contextDt_systemPath_system_element Obj = new gdfsuezComBefChpPivotPC.contextDt_systemPath_system_element(childNode);
+						system_xList.Add(Obj);
+						nodesParsed.add(childNode);
+					}
+				}
+				this.system_x = system_xList;
+			}
+			//System.debug(this.system_x);
+		}
+		public void populateXmlNode(Dom.XmlNode outerNode){
+
+			gdfsuezComBefChpPivotPC.contextDt_systemPath_system_element[] system_xObj = this.system_x;
+			if(system_xObj != null){
+				for(gdfsuezComBefChpPivotPC.contextDt_systemPath_system_element element: system_xObj){
+					Dom.XmlNode system_xNode = outerNode.addChildElement('system', '', '');
+					element.populateXmlNode(system_xNode);
+				}
+			}
+		}
+	}
+	public class contextDt_systemPath_system_element {
+		public String systemId;
+		private String[] systemId_type_info = new String[]{'systemId','http://gdfsuez.com/bef/chp/pivot','string','1','1','false'};
+		private String[] apex_schema_type_info = new String[]{'http://gdfsuez.com/bef/chp/pivot','true','false'};
+		private String[] field_order_type_info = new String[]{'systemId'};
+		public contextDt_systemPath_system_element(){
+		}
+		public contextDt_systemPath_system_element(DOM.XmlNode responseNode){
+			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+			DOM.XmlNode systemIdNode = responseNode.getChildElement('systemId', 'http://gdfsuez.com/bef/chp/pivot');
+			this.systemId = (systemIdNode == null) ? null : systemIdNode.getText();
+			nodesParsed.add(systemIdNode);
+			//System.debug(this.systemId);
+		}
+		public void populateXmlNode(Dom.XmlNode outerNode){
+			Dom.XmlNode systemIdNode = outerNode.addChildElement('systemId', '', '');
+			if(this.systemId != null){
+				systemIdNode.addTextNode(this.systemId);
+			}
+		}
+	}
+	public class horodatageDt {
+		public DateTime dateDerniereMAJ;
+		public gdfsuezComBefChpPivotPC.listeValeursDt flag;
+		public gdfsuezComBefChpPivotPC.horodatageDt_valeur_element valeur;
+		private String[] dateDerniereMAJ_type_info = new String[]{'dateDerniereMAJ','http://gdfsuez.com/bef/chp/pivot','dateTime','0','1','false'};
+		private String[] flag_type_info = new String[]{'flag','http://gdfsuez.com/bef/chp/pivot','listeValeursDt','0','1','false'};
+		private String[] valeur_type_info = new String[]{'valeur','http://gdfsuez.com/bef/chp/pivot','','0','1','false'};
+		private String[] apex_schema_type_info = new String[]{'http://gdfsuez.com/bef/chp/pivot','true','false'};
+		private String[] field_order_type_info = new String[]{'dateDerniereMAJ','flag','valeur'};
+		public horodatageDt(){
+		}
+		public horodatageDt(DOM.XmlNode responseNode){
+			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+			DOM.XmlNode dateDerniereMAJNode = responseNode.getChildElement('dateDerniereMAJ', 'http://gdfsuez.com/bef/chp/pivot');
+			this.dateDerniereMAJ = (dateDerniereMAJNode == null) ? null :  gdfsuezComBefChpPivotPC.parseDateTime(dateDerniereMAJNode.getText());
+			nodesParsed.add(dateDerniereMAJNode);
+			//System.debug(this.dateDerniereMAJ);
+			DOM.XmlNode flagNode = responseNode.getChildElement('flag', 'http://gdfsuez.com/bef/chp/pivot');
+			if(flagNode == null){
+				this.flag = null;
+			} else{
+				gdfsuezComBefChpPivotPC.listeValeursDt flagObj = new gdfsuezComBefChpPivotPC.listeValeursDt(flagNode);
+				nodesParsed.add(flagNode);
+				this.flag = flagObj;
+			}
+			//System.debug(this.flag);
+			DOM.XmlNode valeurNode = responseNode.getChildElement('valeur', 'http://gdfsuez.com/bef/chp/pivot');
+			if(valeurNode == null){
+				this.valeur = null;
+			} else{
+				gdfsuezComBefChpPivotPC.horodatageDt_valeur_element valeurObj = new gdfsuezComBefChpPivotPC.horodatageDt_valeur_element(valeurNode);
+				nodesParsed.add(valeurNode);
+				this.valeur = valeurObj;
+			}
+			//System.debug(this.valeur);
+		}
+		public void populateXmlNode(Dom.XmlNode outerNode){
+			Dom.XmlNode dateDerniereMAJNode = outerNode.addChildElement('dateDerniereMAJ', '', '');
+			dateDerniereMAJNode.addTextNode((this.dateDerniereMAJ == null) ? '' : String.valueOf(this.dateDerniereMAJ));
+
+			gdfsuezComBefChpPivotPC.listeValeursDt flagObj = this.flag;
+			Dom.XmlNode flagNode = outerNode.addChildElement('flag', '', '');
+			if(flagObj != null){
+				flagObj.populateXmlNode(flagNode);
+			}
+
+			gdfsuezComBefChpPivotPC.horodatageDt_valeur_element valeurObj = this.valeur;
+			Dom.XmlNode valeurNode = outerNode.addChildElement('valeur', '', '');
+			if(valeurObj != null){
+				valeurObj.populateXmlNode(valeurNode);
+			}
+		}
+	}
+	public class horodatageDt_valeur_element {
+		public String valeurTexte;
+		public DateTime valeurDate;
+		public Double valeurDecimal;
+		public gdfsuezComBefChpPivotPC.listeValeursDt valeurListe;
+		public Boolean valeurBoolean;
+		public Integer valeurEntier;
+		private String[] valeurTexte_type_info = new String[]{'valeurTexte','http://gdfsuez.com/bef/chp/pivot','string','0','1','false'};
+		private String[] valeurDate_type_info = new String[]{'valeurDate','http://gdfsuez.com/bef/chp/pivot','dateTime','0','1','false'};
+		private String[] valeurDecimal_type_info = new String[]{'valeurDecimal','http://gdfsuez.com/bef/chp/pivot','double','0','1','false'};
+		private String[] valeurListe_type_info = new String[]{'valeurListe','http://gdfsuez.com/bef/chp/pivot','listeValeursDt','0','1','false'};
+		private String[] valeurBoolean_type_info = new String[]{'valeurBoolean','http://gdfsuez.com/bef/chp/pivot','boolean','0','1','false'};
+		private String[] valeurEntier_type_info = new String[]{'valeurEntier','http://gdfsuez.com/bef/chp/pivot','int','0','1','false'};
+		private String[] apex_schema_type_info = new String[]{'http://gdfsuez.com/bef/chp/pivot','true','false'};
+		private String[] field_order_type_info = new String[]{'valeurTexte','valeurDate','valeurDecimal','valeurListe','valeurBoolean','valeurEntier'};
+		public horodatageDt_valeur_element(){
+		}
+		public horodatageDt_valeur_element(DOM.XmlNode responseNode){
+			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+			DOM.XmlNode valeurTexteNode = responseNode.getChildElement('valeurTexte', 'http://gdfsuez.com/bef/chp/pivot');
+			this.valeurTexte = (valeurTexteNode == null) ? null : valeurTexteNode.getText();
+			nodesParsed.add(valeurTexteNode);
+			//System.debug(this.valeurTexte);
+			DOM.XmlNode valeurDateNode = responseNode.getChildElement('valeurDate', 'http://gdfsuez.com/bef/chp/pivot');
+			this.valeurDate = (valeurDateNode == null) ? null :  gdfsuezComBefChpPivotPC.parseDateTime(valeurDateNode.getText());
+			nodesParsed.add(valeurDateNode);
+			//System.debug(this.valeurDate);
+			DOM.XmlNode valeurDecimalNode = responseNode.getChildElement('valeurDecimal', 'http://gdfsuez.com/bef/chp/pivot');
+			this.valeurDecimal = (valeurDecimalNode == null) ? null : Double.valueOf(valeurDecimalNode.getText());
+			nodesParsed.add(valeurDecimalNode);
+			//System.debug(this.valeurDecimal);
+			DOM.XmlNode valeurListeNode = responseNode.getChildElement('valeurListe', 'http://gdfsuez.com/bef/chp/pivot');
+			if(valeurListeNode == null){
+				this.valeurListe = null;
+			} else{
+				gdfsuezComBefChpPivotPC.listeValeursDt valeurListeObj = new gdfsuezComBefChpPivotPC.listeValeursDt(valeurListeNode);
+				nodesParsed.add(valeurListeNode);
+				this.valeurListe = valeurListeObj;
+			}
+			//System.debug(this.valeurListe);
+			DOM.XmlNode valeurBooleanNode = responseNode.getChildElement('valeurBoolean', 'http://gdfsuez.com/bef/chp/pivot');
+			this.valeurBoolean = (valeurBooleanNode == null) ? null : Boolean.valueOf(valeurBooleanNode.getText());
+			nodesParsed.add(valeurBooleanNode);
+			//System.debug(this.valeurBoolean);
+			DOM.XmlNode valeurEntierNode = responseNode.getChildElement('valeurEntier', 'http://gdfsuez.com/bef/chp/pivot');
+			this.valeurEntier = (valeurEntierNode == null) ? null : Integer.valueOf(valeurEntierNode.getText());
+			nodesParsed.add(valeurEntierNode);
+			//System.debug(this.valeurEntier);
+		}
+		public void populateXmlNode(Dom.XmlNode outerNode){
+			Dom.XmlNode valeurTexteNode = outerNode.addChildElement('valeurTexte', '', '');
+			valeurTexteNode.addTextNode((this.valeurTexte == null) ? '' : this.valeurTexte);
+			Dom.XmlNode valeurDateNode = outerNode.addChildElement('valeurDate', '', '');
+			valeurDateNode.addTextNode((this.valeurDate == null) ? '' : String.valueOf(this.valeurDate));
+			Dom.XmlNode valeurDecimalNode = outerNode.addChildElement('valeurDecimal', '', '');
+			valeurDecimalNode.addTextNode((this.valeurDecimal == null) ? '' : String.valueOf(this.valeurDecimal));
+
+			gdfsuezComBefChpPivotPC.listeValeursDt valeurListeObj = this.valeurListe;
+			Dom.XmlNode valeurListeNode = outerNode.addChildElement('valeurListe', '', '');
+			if(valeurListeObj != null){
+				valeurListeObj.populateXmlNode(valeurListeNode);
+			}
+			Dom.XmlNode valeurBooleanNode = outerNode.addChildElement('valeurBoolean', '', '');
+			valeurBooleanNode.addTextNode((this.valeurBoolean == null) ? '' : String.valueOf(this.valeurBoolean));
+			Dom.XmlNode valeurEntierNode = outerNode.addChildElement('valeurEntier', '', '');
+			valeurEntierNode.addTextNode((this.valeurEntier == null) ? '' : String.valueOf(this.valeurEntier));
+		}
+	}
+	public class horodatageSimpleDt {
+		public DateTime dateDerniereMAJ;
+		public gdfsuezComBefChpPivotPC.listeValeursDt flag;
+		private String[] dateDerniereMAJ_type_info = new String[]{'dateDerniereMAJ','http://gdfsuez.com/bef/chp/pivot','dateTime','0','1','false'};
+		private String[] flag_type_info = new String[]{'flag','http://gdfsuez.com/bef/chp/pivot','listeValeursDt','0','1','false'};
+		private String[] apex_schema_type_info = new String[]{'http://gdfsuez.com/bef/chp/pivot','true','false'};
+		private String[] field_order_type_info = new String[]{'dateDerniereMAJ','flag'};
+		public horodatageSimpleDt(){
+		}
+		public horodatageSimpleDt(DOM.XmlNode responseNode){
+			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+			DOM.XmlNode dateDerniereMAJNode = responseNode.getChildElement('dateDerniereMAJ', 'http://gdfsuez.com/bef/chp/pivot');
+			this.dateDerniereMAJ = (dateDerniereMAJNode == null) ? null :  gdfsuezComBefChpPivotPC.parseDateTime(dateDerniereMAJNode.getText());
+			nodesParsed.add(dateDerniereMAJNode);
+			//System.debug(this.dateDerniereMAJ);
+			DOM.XmlNode flagNode = responseNode.getChildElement('flag', 'http://gdfsuez.com/bef/chp/pivot');
+			if(flagNode == null){
+				this.flag = null;
+			} else{
+				gdfsuezComBefChpPivotPC.listeValeursDt flagObj = new gdfsuezComBefChpPivotPC.listeValeursDt(flagNode);
+				nodesParsed.add(flagNode);
+				this.flag = flagObj;
+			}
+			//System.debug(this.flag);
+		}
+		public void populateXmlNode(Dom.XmlNode outerNode){
+			Dom.XmlNode dateDerniereMAJNode = outerNode.addChildElement('dateDerniereMAJ', '', '');
+			dateDerniereMAJNode.addTextNode((this.dateDerniereMAJ == null) ? '' : String.valueOf(this.dateDerniereMAJ));
+
+			gdfsuezComBefChpPivotPC.listeValeursDt flagObj = this.flag;
+			Dom.XmlNode flagNode = outerNode.addChildElement('flag', '', '');
+			if(flagObj != null){
+				flagObj.populateXmlNode(flagNode);
+			}
+		}
+	}
+	public class intervalleDt {
+		public gdfsuezComBefChpPivotPC.intervalleDt_Dates_element[] Dates;
+		private String[] Dates_type_info = new String[]{'Dates','http://gdfsuez.com/bef/chp/pivot','','1','-1','false'};
+		private String[] apex_schema_type_info = new String[]{'http://gdfsuez.com/bef/chp/pivot','true','false'};
+		private String[] field_order_type_info = new String[]{'Dates'};
+		public intervalleDt(){
+		}
+		public intervalleDt(DOM.XmlNode responseNode){
+			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+			Dom.XmlNode[] DatesChildren = responseNode.getChildElements();
+			gdfsuezComBefChpPivotPC.intervalleDt_Dates_element[] DatesList = new List<gdfsuezComBefChpPivotPC.intervalleDt_Dates_element>();
+			if(DatesChildren == null || DatesChildren.size() == 0){
+				this.Dates = null;
+			} else{
+				for(DOM.XmlNode childNode : DatesChildren){
+					if(childNode.GetName() == 'Dates'){
+						gdfsuezComBefChpPivotPC.intervalleDt_Dates_element Obj = new gdfsuezComBefChpPivotPC.intervalleDt_Dates_element(childNode);
+						DatesList.Add(Obj);
+						nodesParsed.add(childNode);
+					}
+				}
+				this.Dates = DatesList;
+			}
+			//System.debug(this.Dates);
+		}
+		public void populateXmlNode(Dom.XmlNode outerNode){
+
+			gdfsuezComBefChpPivotPC.intervalleDt_Dates_element[] DatesObj = this.Dates;
+			if(DatesObj != null){
+				for(gdfsuezComBefChpPivotPC.intervalleDt_Dates_element element: DatesObj){
+					Dom.XmlNode DatesNode = outerNode.addChildElement('Dates', '', '');
+					element.populateXmlNode(DatesNode);
+				}
+			}
+		}
+	}
+	public class intervalleDt_Dates_element {
+		public DateTime valeurDate;
+		public String operateur;
+		private String[] valeurDate_type_info = new String[]{'valeurDate','http://gdfsuez.com/bef/chp/pivot','dateTime','1','1','false'};
+		private String[] operateur_type_info = new String[]{'operateur','http://gdfsuez.com/bef/chp/pivot','valeurOpEnum','1','1','false'};
+		private String[] apex_schema_type_info = new String[]{'http://gdfsuez.com/bef/chp/pivot','true','false'};
+		private String[] field_order_type_info = new String[]{'valeurDate','operateur'};
+		public intervalleDt_Dates_element(){
+		}
+		public intervalleDt_Dates_element(DOM.XmlNode responseNode){
+			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+			DOM.XmlNode valeurDateNode = responseNode.getChildElement('valeurDate', 'http://gdfsuez.com/bef/chp/pivot');
+			this.valeurDate = (valeurDateNode == null) ? null :  gdfsuezComBefChpPivotPC.parseDateTime(valeurDateNode.getText());
+			nodesParsed.add(valeurDateNode);
+			//System.debug(this.valeurDate);
+			DOM.XmlNode operateurNode = responseNode.getChildElement('operateur', 'http://gdfsuez.com/bef/chp/pivot');
+			this.operateur = (operateurNode == null) ? null : operateurNode.getText();
+			nodesParsed.add(operateurNode);
+			//System.debug(this.operateur);
+		}
+		public void populateXmlNode(Dom.XmlNode outerNode){
+			Dom.XmlNode valeurDateNode = outerNode.addChildElement('valeurDate', '', '');
+			if(this.valeurDate != null){
+				valeurDateNode.addTextNode(String.valueOf(this.valeurDate));
+			}
+			Dom.XmlNode operateurNode = outerNode.addChildElement('operateur', '', '');
+			if(this.operateur != null){
+				operateurNode.addTextNode(this.operateur);
+			}
+		}
+	}
+	public class listeValeursDt {
+		public String idValeur;
+		public String description;
+		public String categorie;
+		public String order;
+		public String libelleCourt;
+		public String libelleLong;
+		public String actif;
+		public String langue;
+		public String code;
+		private String[] idValeur_type_info = new String[]{'idValeur','http://gdfsuez.com/bef/chp/pivot','string','0','1','false'};
+		private String[] description_type_info = new String[]{'description','http://gdfsuez.com/bef/chp/pivot','string','0','1','false'};
+		private String[] categorie_type_info = new String[]{'categorie','http://gdfsuez.com/bef/chp/pivot','string','0','1','false'};
+		private String[] order_type_info = new String[]{'order','http://gdfsuez.com/bef/chp/pivot','string','0','1','false'};
+		private String[] libelleCourt_type_info = new String[]{'libelleCourt','http://gdfsuez.com/bef/chp/pivot','string','0','1','false'};
+		private String[] libelleLong_type_info = new String[]{'libelleLong','http://gdfsuez.com/bef/chp/pivot','string','0','1','false'};
+		private String[] actif_type_info = new String[]{'actif','http://gdfsuez.com/bef/chp/pivot','string','0','1','false'};
+		private String[] langue_type_info = new String[]{'langue','http://gdfsuez.com/bef/chp/pivot','string','0','1','false'};
+		private String[] code_type_info = new String[]{'code','http://gdfsuez.com/bef/chp/pivot','string','0','1','false'};
+		private String[] apex_schema_type_info = new String[]{'http://gdfsuez.com/bef/chp/pivot','true','false'};
+		private String[] field_order_type_info = new String[]{'idValeur','description','categorie','order','libelleCourt','libelleLong','actif','langue','code'};
+		public listeValeursDt(){
+		}
+		public listeValeursDt(DOM.XmlNode responseNode){
+			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+			DOM.XmlNode idValeurNode = responseNode.getChildElement('idValeur', 'http://gdfsuez.com/bef/chp/pivot');
+			this.idValeur = (idValeurNode == null) ? null : idValeurNode.getText();
+			nodesParsed.add(idValeurNode);
+			//System.debug(this.idValeur);
+			DOM.XmlNode descriptionNode = responseNode.getChildElement('description', 'http://gdfsuez.com/bef/chp/pivot');
+			this.description = (descriptionNode == null) ? null : descriptionNode.getText();
+			nodesParsed.add(descriptionNode);
+			//System.debug(this.description);
+			DOM.XmlNode categorieNode = responseNode.getChildElement('categorie', 'http://gdfsuez.com/bef/chp/pivot');
+			this.categorie = (categorieNode == null) ? null : categorieNode.getText();
+			nodesParsed.add(categorieNode);
+			//System.debug(this.categorie);
+			DOM.XmlNode orderNode = responseNode.getChildElement('order', 'http://gdfsuez.com/bef/chp/pivot');
+			this.order = (orderNode == null) ? null : orderNode.getText();
+			nodesParsed.add(orderNode);
+			//System.debug(this.order);
+			DOM.XmlNode libelleCourtNode = responseNode.getChildElement('libelleCourt', 'http://gdfsuez.com/bef/chp/pivot');
+			this.libelleCourt = (libelleCourtNode == null) ? null : libelleCourtNode.getText();
+			nodesParsed.add(libelleCourtNode);
+			//System.debug(this.libelleCourt);
+			DOM.XmlNode libelleLongNode = responseNode.getChildElement('libelleLong', 'http://gdfsuez.com/bef/chp/pivot');
+			this.libelleLong = (libelleLongNode == null) ? null : libelleLongNode.getText();
+			nodesParsed.add(libelleLongNode);
+			//System.debug(this.libelleLong);
+			DOM.XmlNode actifNode = responseNode.getChildElement('actif', 'http://gdfsuez.com/bef/chp/pivot');
+			this.actif = (actifNode == null) ? null : actifNode.getText();
+			nodesParsed.add(actifNode);
+			//System.debug(this.actif);
+			DOM.XmlNode langueNode = responseNode.getChildElement('langue', 'http://gdfsuez.com/bef/chp/pivot');
+			this.langue = (langueNode == null) ? null : langueNode.getText();
+			nodesParsed.add(langueNode);
+			//System.debug(this.langue);
+			DOM.XmlNode codeNode = responseNode.getChildElement('code', 'http://gdfsuez.com/bef/chp/pivot');
+			this.code = (codeNode == null) ? null : codeNode.getText();
+			nodesParsed.add(codeNode);
+			//System.debug(this.code);
+		}
+		public void populateXmlNode(Dom.XmlNode outerNode){
+			if(this.idValeur!= null){
+				Dom.XmlNode idValeurNode = outerNode.addChildElement('idValeur', '', '');
+				idValeurNode.addTextNode((this.idValeur == null) ? '' : this.idValeur);
+			}
+			if(this.description != null){
+				Dom.XmlNode descriptionNode = outerNode.addChildElement('description', '', '');
+				descriptionNode.addTextNode((this.description == null) ? '' : this.description);
+			}
+			if(this.categorie != null){
+				Dom.XmlNode categorieNode = outerNode.addChildElement('categorie', '', '');
+				categorieNode.addTextNode((this.categorie == null) ? '' : this.categorie);
+			}
+			if(this.order != null){
+				Dom.XmlNode orderNode = outerNode.addChildElement('order', '', '');
+				orderNode.addTextNode((this.order == null) ? '' : this.order);
+			}
+			if(this.libelleCourt != null){
+				Dom.XmlNode libelleCourtNode = outerNode.addChildElement('libelleCourt', '', '');
+				libelleCourtNode.addTextNode((this.libelleCourt == null) ? '' : this.libelleCourt);
+			}
+			if(this.libelleLong != null){
+				Dom.XmlNode libelleLongNode = outerNode.addChildElement('libelleLong', '', '');
+				libelleLongNode.addTextNode((this.libelleLong == null) ? '' : this.libelleLong);
+			}
+			if(this.actif != null){
+				Dom.XmlNode actifNode = outerNode.addChildElement('actif', '', '');
+				actifNode.addTextNode((this.actif == null) ? '' : this.actif);
+			}
+			if(this.langue != null){
+				Dom.XmlNode langueNode = outerNode.addChildElement('langue', '', '');
+				langueNode.addTextNode((this.langue == null) ? '' : this.langue);
+			}
+			if(this.code != null){
+				Dom.XmlNode codeNode = outerNode.addChildElement('code', '', '');
+				codeNode.addTextNode((this.code == null) ? '' : this.code);
+			}
+
+		}
+	}
+	public class listeValeursParticulieresDt {
+		public String libelleCourt;
+		public String code;
+		private String[] libelleCourt_type_info = new String[]{'libelleCourt','http://gdfsuez.com/bef/chp/pivot','string','0','1','false'};
+		private String[] code_type_info = new String[]{'code','http://gdfsuez.com/bef/chp/pivot','string','1','1','false'};
+		private String[] apex_schema_type_info = new String[]{'http://gdfsuez.com/bef/chp/pivot','true','false'};
+		private String[] field_order_type_info = new String[]{'libelleCourt','code'};
+		public listeValeursParticulieresDt(){
+		}
+		public listeValeursParticulieresDt(DOM.XmlNode responseNode){
+			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+			DOM.XmlNode libelleCourtNode = responseNode.getChildElement('libelleCourt', 'http://gdfsuez.com/bef/chp/pivot');
+			this.libelleCourt = (libelleCourtNode == null) ? null : libelleCourtNode.getText();
+			nodesParsed.add(libelleCourtNode);
+			//System.debug(this.libelleCourt);
+			DOM.XmlNode codeNode = responseNode.getChildElement('code', 'http://gdfsuez.com/bef/chp/pivot');
+			this.code = (codeNode == null) ? null : codeNode.getText();
+			nodesParsed.add(codeNode);
+			//System.debug(this.code);
+		}
+		public void populateXmlNode(Dom.XmlNode outerNode){
+			Dom.XmlNode libelleCourtNode = outerNode.addChildElement('libelleCourt', '', '');
+			libelleCourtNode.addTextNode((this.libelleCourt == null) ? '' : this.libelleCourt);
+			Dom.XmlNode codeNode = outerNode.addChildElement('code', '', '');
+			if(this.code != null){
+				codeNode.addTextNode(this.code);
+			}
+		}
+	}
+	public class messageRetoursDt {
+		public gdfsuezComBefChpPivotPC.messageRetoursDt_messageRetour_element[] messageRetour;
+		private String[] messageRetour_type_info = new String[]{'messageRetour','http://gdfsuez.com/bef/chp/pivot','','1','-1','false'};
+		private String[] apex_schema_type_info = new String[]{'http://gdfsuez.com/bef/chp/pivot','true','false'};
+		private String[] field_order_type_info = new String[]{'messageRetour'};
+		public messageRetoursDt(){
+		}
+		public messageRetoursDt(DOM.XmlNode responseNode){
+			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+			Dom.XmlNode[] messageRetourChildren = responseNode.getChildElements();
+			gdfsuezComBefChpPivotPC.messageRetoursDt_messageRetour_element[] messageRetourList = new List<gdfsuezComBefChpPivotPC.messageRetoursDt_messageRetour_element>();
+			if(messageRetourChildren == null || messageRetourChildren.size() == 0){
+				this.messageRetour = null;
+			} else{
+				for(DOM.XmlNode childNode : messageRetourChildren){
+					if(childNode.GetName() == 'messageRetour'){
+						gdfsuezComBefChpPivotPC.messageRetoursDt_messageRetour_element Obj = new gdfsuezComBefChpPivotPC.messageRetoursDt_messageRetour_element(childNode);
+						messageRetourList.Add(Obj);
+						nodesParsed.add(childNode);
+					}
+				}
+				this.messageRetour = messageRetourList;
+			}
+			//System.debug(this.messageRetour);
+		}
+		public void populateXmlNode(Dom.XmlNode outerNode){
+
+			gdfsuezComBefChpPivotPC.messageRetoursDt_messageRetour_element[] messageRetourObj = this.messageRetour;
+			if(messageRetourObj != null){
+				for(gdfsuezComBefChpPivotPC.messageRetoursDt_messageRetour_element element: messageRetourObj){
+					Dom.XmlNode messageRetourNode = outerNode.addChildElement('messageRetour', '', '');
+					element.populateXmlNode(messageRetourNode);
+				}
+			}
+		}
+	}
+	public class messageRetoursDt_messageRetour_element {
+		public String id;
+		public String code;
+		public String libelle;
+		public String type_x;
+		public String source;
+		public String complement;
+		public String classe;
+		public DateTime timestamp;
+		public String affiche;
+		private String[] id_type_info = new String[]{'id','http://gdfsuez.com/bef/chp/pivot','string','0','1','false'};
+		private String[] code_type_info = new String[]{'code','http://gdfsuez.com/bef/chp/pivot','string','1','1','false'};
+		private String[] libelle_type_info = new String[]{'libelle','http://gdfsuez.com/bef/chp/pivot','string','1','1','false'};
+		private String[] type_x_type_info = new String[]{'type','http://gdfsuez.com/bef/chp/pivot','string','1','1','false'};
+		private String[] source_type_info = new String[]{'source','http://gdfsuez.com/bef/chp/pivot','string','0','1','false'};
+		private String[] complement_type_info = new String[]{'complement','http://gdfsuez.com/bef/chp/pivot','string','0','1','false'};
+		private String[] classe_type_info = new String[]{'classe','http://gdfsuez.com/bef/chp/pivot','string','0','1','false'};
+		private String[] timestamp_type_info = new String[]{'timestamp','http://gdfsuez.com/bef/chp/pivot','dateTime','0','1','false'};
+		private String[] affiche_type_info = new String[]{'affiche','http://gdfsuez.com/bef/chp/pivot','string','0','1','false'};
+		private String[] apex_schema_type_info = new String[]{'http://gdfsuez.com/bef/chp/pivot','true','false'};
+		private String[] field_order_type_info = new String[]{'id','code','libelle','type_x','source','complement','classe','timestamp','affiche'};
+		public messageRetoursDt_messageRetour_element(){
+		}
+		public messageRetoursDt_messageRetour_element(DOM.XmlNode responseNode){
+			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+			DOM.XmlNode idNode = responseNode.getChildElement('id', 'http://gdfsuez.com/bef/chp/pivot');
+			this.id = (idNode == null) ? null : idNode.getText();
+			nodesParsed.add(idNode);
+			//System.debug(this.id);
+			DOM.XmlNode codeNode = responseNode.getChildElement('code', 'http://gdfsuez.com/bef/chp/pivot');
+			this.code = (codeNode == null) ? null : codeNode.getText();
+			nodesParsed.add(codeNode);
+			//System.debug(this.code);
+			DOM.XmlNode libelleNode = responseNode.getChildElement('libelle', 'http://gdfsuez.com/bef/chp/pivot');
+			this.libelle = (libelleNode == null) ? null : libelleNode.getText();
+			nodesParsed.add(libelleNode);
+			//System.debug(this.libelle);
+			DOM.XmlNode type_xNode = responseNode.getChildElement('type', 'http://gdfsuez.com/bef/chp/pivot');
+			this.type_x = (type_xNode == null) ? null : type_xNode.getText();
+			nodesParsed.add(type_xNode);
+			//System.debug(this.type_x);
+			DOM.XmlNode sourceNode = responseNode.getChildElement('source', 'http://gdfsuez.com/bef/chp/pivot');
+			this.source = (sourceNode == null) ? null : sourceNode.getText();
+			nodesParsed.add(sourceNode);
+			//System.debug(this.source);
+			DOM.XmlNode complementNode = responseNode.getChildElement('complement', 'http://gdfsuez.com/bef/chp/pivot');
+			this.complement = (complementNode == null) ? null : complementNode.getText();
+			nodesParsed.add(complementNode);
+			//System.debug(this.complement);
+			DOM.XmlNode classeNode = responseNode.getChildElement('classe', 'http://gdfsuez.com/bef/chp/pivot');
+			this.classe = (classeNode == null) ? null : classeNode.getText();
+			nodesParsed.add(classeNode);
+			//System.debug(this.classe);
+			DOM.XmlNode timestampNode = responseNode.getChildElement('timestamp', 'http://gdfsuez.com/bef/chp/pivot');
+			this.timestamp = (timestampNode == null) ? null :  gdfsuezComBefChpPivotPC.parseDateTime(timestampNode.getText());
+			nodesParsed.add(timestampNode);
+			//System.debug(this.timestamp);
+			DOM.XmlNode afficheNode = responseNode.getChildElement('affiche', 'http://gdfsuez.com/bef/chp/pivot');
+			this.affiche = (afficheNode == null) ? null : afficheNode.getText();
+			nodesParsed.add(afficheNode);
+			//System.debug(this.affiche);
+		}
+		public void populateXmlNode(Dom.XmlNode outerNode){
+			Dom.XmlNode idNode = outerNode.addChildElement('id', '', '');
+			idNode.addTextNode((this.id == null) ? '' : this.id);
+			Dom.XmlNode codeNode = outerNode.addChildElement('code', '', '');
+			if(this.code != null){
+				codeNode.addTextNode(this.code);
+			}
+			Dom.XmlNode libelleNode = outerNode.addChildElement('libelle', '', '');
+			if(this.libelle != null){
+				libelleNode.addTextNode(this.libelle);
+			}
+			Dom.XmlNode type_xNode = outerNode.addChildElement('type', '', '');
+			if(this.type_x != null){
+				type_xNode.addTextNode(this.type_x);
+			}
+			Dom.XmlNode sourceNode = outerNode.addChildElement('source', '', '');
+			sourceNode.addTextNode((this.source == null) ? '' : this.source);
+			Dom.XmlNode complementNode = outerNode.addChildElement('complement', '', '');
+			complementNode.addTextNode((this.complement == null) ? '' : this.complement);
+			Dom.XmlNode classeNode = outerNode.addChildElement('classe', '', '');
+			classeNode.addTextNode((this.classe == null) ? '' : this.classe);
+			Dom.XmlNode timestampNode = outerNode.addChildElement('timestamp', '', '');
+			timestampNode.addTextNode((this.timestamp == null) ? '' : String.valueOf(this.timestamp));
+			Dom.XmlNode afficheNode = outerNode.addChildElement('affiche', '', '');
+			afficheNode.addTextNode((this.affiche == null) ? '' : this.affiche);
+		}
+	}
+	public class paginationDt {
+		public String pageCount;
+		public String totalCount;
+		private String[] pageCount_type_info = new String[]{'pageCount','http://gdfsuez.com/bef/chp/pivot','string3','1','1','false'};
+		private String[] totalCount_type_info = new String[]{'totalCount','http://gdfsuez.com/bef/chp/pivot','string3','0','1','false'};
+		private String[] apex_schema_type_info = new String[]{'http://gdfsuez.com/bef/chp/pivot','true','false'};
+		private String[] field_order_type_info = new String[]{'pageCount','totalCount'};
+		public paginationDt(){
+		}
+		public paginationDt(DOM.XmlNode responseNode){
+			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+			DOM.XmlNode pageCountNode = responseNode.getChildElement('pageCount', 'http://gdfsuez.com/bef/chp/pivot');
+			this.pageCount = (pageCountNode == null) ? null : pageCountNode.getText();
+			nodesParsed.add(pageCountNode);
+			//System.debug(this.pageCount);
+			DOM.XmlNode totalCountNode = responseNode.getChildElement('totalCount', 'http://gdfsuez.com/bef/chp/pivot');
+			this.totalCount = (totalCountNode == null) ? null : totalCountNode.getText();
+			nodesParsed.add(totalCountNode);
+			//System.debug(this.totalCount);
+		}
+		public void populateXmlNode(Dom.XmlNode outerNode){
+			Dom.XmlNode pageCountNode = outerNode.addChildElement('pageCount', '', '');
+			if(this.pageCount != null){
+				pageCountNode.addTextNode(this.pageCount);
+			}
+			Dom.XmlNode totalCountNode = outerNode.addChildElement('totalCount', '', '');
+			totalCountNode.addTextNode((this.totalCount == null) ? '' : this.totalCount);
+		}
+	}
+	public class refPersonneCreerDt {
+		public String idPersonne;
+		public gdfsuezComBefChpPivotPC.listeValeursDt rolePersonne;
+		private String[] idPersonne_type_info = new String[]{'idPersonne','http://gdfsuez.com/bef/chp/pivot','string','1','1','false'};
+		private String[] rolePersonne_type_info = new String[]{'rolePersonne','http://gdfsuez.com/bef/chp/pivot','listeValeursDt','1','1','false'};
+		private String[] apex_schema_type_info = new String[]{'http://gdfsuez.com/bef/chp/pivot','true','false'};
+		private String[] field_order_type_info = new String[]{'idPersonne','rolePersonne'};
+		public refPersonneCreerDt(){
+		}
+		public refPersonneCreerDt(DOM.XmlNode responseNode){
+			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+			DOM.XmlNode idPersonneNode = responseNode.getChildElement('idPersonne', 'http://gdfsuez.com/bef/chp/pivot');
+			this.idPersonne = (idPersonneNode == null) ? null : idPersonneNode.getText();
+			nodesParsed.add(idPersonneNode);
+			//System.debug(this.idPersonne);
+			DOM.XmlNode rolePersonneNode = responseNode.getChildElement('rolePersonne', 'http://gdfsuez.com/bef/chp/pivot');
+			if(rolePersonneNode == null){
+				this.rolePersonne = null;
+			} else{
+				gdfsuezComBefChpPivotPC.listeValeursDt rolePersonneObj = new gdfsuezComBefChpPivotPC.listeValeursDt(rolePersonneNode);
+				nodesParsed.add(rolePersonneNode);
+				this.rolePersonne = rolePersonneObj;
+			}
+			//System.debug(this.rolePersonne);
+		}
+		public void populateXmlNode(Dom.XmlNode outerNode){
+			Dom.XmlNode idPersonneNode = outerNode.addChildElement('idPersonne', '', '');
+			if(this.idPersonne != null){
+				idPersonneNode.addTextNode(this.idPersonne);
+			}
+
+			gdfsuezComBefChpPivotPC.listeValeursDt rolePersonneObj = this.rolePersonne;
+			Dom.XmlNode rolePersonneNode = outerNode.addChildElement('rolePersonne', '', '');
+			if(rolePersonneObj != null){
+				rolePersonneObj.populateXmlNode(rolePersonneNode);
+			}
+		}
+	}
+	public class refPersonneLireDt {
+		public String idPersonne;
+		public gdfsuezComBefChpPivotPC.listeValeursDt rolePersonne;
+		public gdfsuezComBefChpPivotPC.listeValeursDt entite;
+		public String prenom;
+		public String nom;
+		private String[] idPersonne_type_info = new String[]{'idPersonne','http://gdfsuez.com/bef/chp/pivot','string','1','1','false'};
+		private String[] rolePersonne_type_info = new String[]{'rolePersonne','http://gdfsuez.com/bef/chp/pivot','listeValeursDt','1','1','false'};
+		private String[] entite_type_info = new String[]{'entite','http://gdfsuez.com/bef/chp/pivot','listeValeursDt','0','1','false'};
+		private String[] prenom_type_info = new String[]{'prenom','http://gdfsuez.com/bef/chp/pivot','string','0','1','false'};
+		private String[] nom_type_info = new String[]{'nom','http://gdfsuez.com/bef/chp/pivot','string','0','1','false'};
+		private String[] apex_schema_type_info = new String[]{'http://gdfsuez.com/bef/chp/pivot','true','false'};
+		private String[] field_order_type_info = new String[]{'idPersonne','rolePersonne','entite','prenom','nom'};
+		public refPersonneLireDt(){
+		}
+		public refPersonneLireDt(DOM.XmlNode responseNode){
+			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+			DOM.XmlNode idPersonneNode = responseNode.getChildElement('idPersonne', 'http://gdfsuez.com/bef/chp/pivot');
+			this.idPersonne = (idPersonneNode == null) ? null : idPersonneNode.getText();
+			nodesParsed.add(idPersonneNode);
+			//System.debug(this.idPersonne);
+			DOM.XmlNode rolePersonneNode = responseNode.getChildElement('rolePersonne', 'http://gdfsuez.com/bef/chp/pivot');
+			if(rolePersonneNode == null){
+				this.rolePersonne = null;
+			} else{
+				gdfsuezComBefChpPivotPC.listeValeursDt rolePersonneObj = new gdfsuezComBefChpPivotPC.listeValeursDt(rolePersonneNode);
+				nodesParsed.add(rolePersonneNode);
+				this.rolePersonne = rolePersonneObj;
+			}
+			//System.debug(this.rolePersonne);
+			DOM.XmlNode entiteNode = responseNode.getChildElement('entite', 'http://gdfsuez.com/bef/chp/pivot');
+			if(entiteNode == null){
+				this.entite = null;
+			} else{
+				gdfsuezComBefChpPivotPC.listeValeursDt entiteObj = new gdfsuezComBefChpPivotPC.listeValeursDt(entiteNode);
+				nodesParsed.add(entiteNode);
+				this.entite = entiteObj;
+			}
+			//System.debug(this.entite);
+			DOM.XmlNode prenomNode = responseNode.getChildElement('prenom', 'http://gdfsuez.com/bef/chp/pivot');
+			this.prenom = (prenomNode == null) ? null : prenomNode.getText();
+			nodesParsed.add(prenomNode);
+			//System.debug(this.prenom);
+			DOM.XmlNode nomNode = responseNode.getChildElement('nom', 'http://gdfsuez.com/bef/chp/pivot');
+			this.nom = (nomNode == null) ? null : nomNode.getText();
+			nodesParsed.add(nomNode);
+			//System.debug(this.nom);
+		}
+		public void populateXmlNode(Dom.XmlNode outerNode){
+			Dom.XmlNode idPersonneNode = outerNode.addChildElement('idPersonne', '', '');
+			if(this.idPersonne != null){
+				idPersonneNode.addTextNode(this.idPersonne);
+			}
+
+			gdfsuezComBefChpPivotPC.listeValeursDt rolePersonneObj = this.rolePersonne;
+			Dom.XmlNode rolePersonneNode = outerNode.addChildElement('rolePersonne', '', '');
+			if(rolePersonneObj != null){
+				rolePersonneObj.populateXmlNode(rolePersonneNode);
+			}
+
+			gdfsuezComBefChpPivotPC.listeValeursDt entiteObj = this.entite;
+			Dom.XmlNode entiteNode = outerNode.addChildElement('entite', '', '');
+			if(entiteObj != null){
+				entiteObj.populateXmlNode(entiteNode);
+			}
+			Dom.XmlNode prenomNode = outerNode.addChildElement('prenom', '', '');
+			prenomNode.addTextNode((this.prenom == null) ? '' : this.prenom);
+			Dom.XmlNode nomNode = outerNode.addChildElement('nom', '', '');
+			nomNode.addTextNode((this.nom == null) ? '' : this.nom);
+		}
+	}
+	public class refPersonneMAJDt {
+		public String idPersonne;
+		public gdfsuezComBefChpPivotPC.listeValeursDt rolePersonne;
+		private String[] idPersonne_type_info = new String[]{'idPersonne','http://gdfsuez.com/bef/chp/pivot','string','1','1','false'};
+		private String[] rolePersonne_type_info = new String[]{'rolePersonne','http://gdfsuez.com/bef/chp/pivot','listeValeursDt','1','1','false'};
+		private String[] apex_schema_type_info = new String[]{'http://gdfsuez.com/bef/chp/pivot','true','false'};
+		private String[] field_order_type_info = new String[]{'idPersonne','rolePersonne'};
+		public refPersonneMAJDt(){
+		}
+		public refPersonneMAJDt(DOM.XmlNode responseNode){
+			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+			DOM.XmlNode idPersonneNode = responseNode.getChildElement('idPersonne', 'http://gdfsuez.com/bef/chp/pivot');
+			this.idPersonne = (idPersonneNode == null) ? null : idPersonneNode.getText();
+			nodesParsed.add(idPersonneNode);
+			//System.debug(this.idPersonne);
+			DOM.XmlNode rolePersonneNode = responseNode.getChildElement('rolePersonne', 'http://gdfsuez.com/bef/chp/pivot');
+			if(rolePersonneNode == null){
+				this.rolePersonne = null;
+			} else{
+				gdfsuezComBefChpPivotPC.listeValeursDt rolePersonneObj = new gdfsuezComBefChpPivotPC.listeValeursDt(rolePersonneNode);
+				nodesParsed.add(rolePersonneNode);
+				this.rolePersonne = rolePersonneObj;
+			}
+			//System.debug(this.rolePersonne);
+		}
+		public void populateXmlNode(Dom.XmlNode outerNode){
+			Dom.XmlNode idPersonneNode = outerNode.addChildElement('idPersonne', '', '');
+			if(this.idPersonne != null){
+				idPersonneNode.addTextNode(this.idPersonne);
+			}
+
+			gdfsuezComBefChpPivotPC.listeValeursDt rolePersonneObj = this.rolePersonne;
+			Dom.XmlNode rolePersonneNode = outerNode.addChildElement('rolePersonne', '', '');
+			if(rolePersonneObj != null){
+				rolePersonneObj.populateXmlNode(rolePersonneNode);
+			}
+		}
+	}
+	public class retourTraitementMessageDt {
+		public String id;
+		public String source;
+		public String complement;
+		public String libelle;
+		public String affiche;
+		public String classe;
+		public String type_x;
+		public String code;
+		public DateTime timestamp;
+		public gdfsuezComBefChpPivotPC.retourTraitementMessageDt causedBy;
+		private String[] id_type_info = new String[]{'id','http://gdfsuez.com/bef/chp/pivot','string','0','1','false'};
+		private String[] source_type_info = new String[]{'source','http://gdfsuez.com/bef/chp/pivot','string','0','1','false'};
+		private String[] complement_type_info = new String[]{'complement','http://gdfsuez.com/bef/chp/pivot','string','0','1','false'};
+		private String[] libelle_type_info = new String[]{'libelle','http://gdfsuez.com/bef/chp/pivot','string','0','1','false'};
+		private String[] affiche_type_info = new String[]{'affiche','http://gdfsuez.com/bef/chp/pivot','string','0','1','false'};
+		private String[] classe_type_info = new String[]{'classe','http://gdfsuez.com/bef/chp/pivot','string','0','1','false'};
+		private String[] type_x_type_info = new String[]{'type','http://gdfsuez.com/bef/chp/pivot','string','0','1','false'};
+		private String[] code_type_info = new String[]{'code','http://gdfsuez.com/bef/chp/pivot','string','0','1','false'};
+		private String[] timestamp_type_info = new String[]{'timestamp','http://gdfsuez.com/bef/chp/pivot','dateTime','0','1','false'};
+		private String[] causedBy_type_info = new String[]{'causedBy','http://gdfsuez.com/bef/chp/pivot','retourTraitementMessageDt','0','1','false'};
+		private String[] apex_schema_type_info = new String[]{'http://gdfsuez.com/bef/chp/pivot','true','false'};
+		private String[] field_order_type_info = new String[]{'id','source','complement','libelle','affiche','classe','type_x','code','timestamp','causedBy'};
+		public retourTraitementMessageDt(){
+		}
+		public retourTraitementMessageDt(DOM.XmlNode responseNode){
+			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+			DOM.XmlNode idNode = responseNode.getChildElement('id', null);
+			this.id = (idNode == null) ? null : idNode.getText();
+			nodesParsed.add(idNode);
+			//System.debug(this.id);
+			DOM.XmlNode sourceNode = responseNode.getChildElement('source', null);
+			this.source = (sourceNode == null) ? null : sourceNode.getText();
+			nodesParsed.add(sourceNode);
+			//System.debug(this.source);
+			DOM.XmlNode complementNode = responseNode.getChildElement('complement', null);
+			this.complement = (complementNode == null) ? null : complementNode.getText();
+			nodesParsed.add(complementNode);
+			//System.debug(this.complement);
+			DOM.XmlNode libelleNode = responseNode.getChildElement('libelle', null);
+			this.libelle = (libelleNode == null) ? null : libelleNode.getText();
+			nodesParsed.add(libelleNode);
+			//System.debug(this.libelle);
+			DOM.XmlNode afficheNode = responseNode.getChildElement('affiche', null);
+			this.affiche = (afficheNode == null) ? null : afficheNode.getText();
+			nodesParsed.add(afficheNode);
+			//System.debug(this.affiche);
+			DOM.XmlNode classeNode = responseNode.getChildElement('classe', null);
+			this.classe = (classeNode == null) ? null : classeNode.getText();
+			nodesParsed.add(classeNode);
+			//System.debug(this.classe);
+			DOM.XmlNode type_xNode = responseNode.getChildElement('type', null);
+			this.type_x = (type_xNode == null) ? null : type_xNode.getText();
+			nodesParsed.add(type_xNode);
+			//System.debug(this.type_x);
+			DOM.XmlNode codeNode = responseNode.getChildElement('code', null);
+			this.code = (codeNode == null) ? null : codeNode.getText();
+			nodesParsed.add(codeNode);
+			//System.debug(this.code);
+			DOM.XmlNode timestampNode = responseNode.getChildElement('timestamp', null);
+			this.timestamp = (timestampNode == null) ? null :  gdfsuezComBefChpPivotPC.parseDateTime(timestampNode.getText());
+			nodesParsed.add(timestampNode);
+			//System.debug(this.timestamp);
+			DOM.XmlNode causedByNode = responseNode.getChildElement('causedBy', null);
+			if(causedByNode == null){
+				this.causedBy = null;
+			} else{
+				gdfsuezComBefChpPivotPC.retourTraitementMessageDt causedByObj = new gdfsuezComBefChpPivotPC.retourTraitementMessageDt(causedByNode);
+				nodesParsed.add(causedByNode);
+				this.causedBy = causedByObj;
+			}
+			//System.debug(this.causedBy);
+		}
+		public void populateXmlNode(Dom.XmlNode outerNode){
+			Dom.XmlNode idNode = outerNode.addChildElement('id', '', '');
+			idNode.addTextNode((this.id == null) ? '' : this.id);
+			Dom.XmlNode sourceNode = outerNode.addChildElement('source', '', '');
+			sourceNode.addTextNode((this.source == null) ? '' : this.source);
+			Dom.XmlNode complementNode = outerNode.addChildElement('complement', '', '');
+			complementNode.addTextNode((this.complement == null) ? '' : this.complement);
+			Dom.XmlNode libelleNode = outerNode.addChildElement('libelle', '', '');
+			libelleNode.addTextNode((this.libelle == null) ? '' : this.libelle);
+			Dom.XmlNode afficheNode = outerNode.addChildElement('affiche', '', '');
+			afficheNode.addTextNode((this.affiche == null) ? '' : this.affiche);
+			Dom.XmlNode classeNode = outerNode.addChildElement('classe', '', '');
+			classeNode.addTextNode((this.classe == null) ? '' : this.classe);
+			Dom.XmlNode type_xNode = outerNode.addChildElement('type', '', '');
+			type_xNode.addTextNode((this.type_x == null) ? '' : this.type_x);
+			Dom.XmlNode codeNode = outerNode.addChildElement('code', '', '');
+			codeNode.addTextNode((this.code == null) ? '' : this.code);
+			Dom.XmlNode timestampNode = outerNode.addChildElement('timestamp', '', '');
+			timestampNode.addTextNode((this.timestamp == null) ? '' : String.valueOf(this.timestamp));
+
+			gdfsuezComBefChpPivotPC.retourTraitementMessageDt causedByObj = this.causedBy;
+			Dom.XmlNode causedByNode = outerNode.addChildElement('causedBy', '', '');
+			if(causedByObj != null){
+				causedByObj.populateXmlNode(causedByNode);
+			}
+		}
+	}
+	public class retourTraitementMessagesDt {
+		public gdfsuezComBefChpPivotPC.retourTraitementMessageDt[] retourTraitementMessage;
+		private String[] retourTraitementMessage_type_info = new String[]{'retourTraitementMessage','http://gdfsuez.com/bef/chp/pivot','retourTraitementMessageDt','1','-1','false'};
+		private String[] apex_schema_type_info = new String[]{'http://gdfsuez.com/bef/chp/pivot','true','false'};
+		private String[] field_order_type_info = new String[]{'retourTraitementMessage'};
+		public retourTraitementMessagesDt(){
+		}
+		public retourTraitementMessagesDt(DOM.XmlNode responseNode){
+			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+			Dom.XmlNode[] retourTraitementMessageChildren = responseNode.getChildElements();
+			gdfsuezComBefChpPivotPC.retourTraitementMessageDt[] retourTraitementMessageList = new List<gdfsuezComBefChpPivotPC.retourTraitementMessageDt>();
+			if(retourTraitementMessageChildren == null || retourTraitementMessageChildren.size() == 0){
+				this.retourTraitementMessage = null;
+			} else{
+				for(DOM.XmlNode childNode : retourTraitementMessageChildren){
+					if(childNode.GetName() == 'retourTraitementMessage'){
+						gdfsuezComBefChpPivotPC.retourTraitementMessageDt Obj = new gdfsuezComBefChpPivotPC.retourTraitementMessageDt(childNode);
+						retourTraitementMessageList.Add(Obj);
+						nodesParsed.add(childNode);
+					}
+				}
+				this.retourTraitementMessage = retourTraitementMessageList;
+			}
+			//System.debug(this.retourTraitementMessage);
+		}
+		public void populateXmlNode(Dom.XmlNode outerNode){
+
+			gdfsuezComBefChpPivotPC.retourTraitementMessageDt[] retourTraitementMessageObj = this.retourTraitementMessage;
+			if(retourTraitementMessageObj != null){
+				for(gdfsuezComBefChpPivotPC.retourTraitementMessageDt element: retourTraitementMessageObj){
+					Dom.XmlNode retourTraitementMessageNode = outerNode.addChildElement('retourTraitementMessage', '','' );
+					element.populateXmlNode(retourTraitementMessageNode);
+				}
+			}
+		}
+	}
+	public class searchControlRequestDt {
+		public String offset;
+		public String from_x;
+		private String[] offset_type_info = new String[]{'offset','http://gdfsuez.com/bef/chp/pivot','string3','1','1','false'};
+		private String[] from_x_type_info = new String[]{'from','http://gdfsuez.com/bef/chp/pivot','string3','1','1','false'};
+		private String[] apex_schema_type_info = new String[]{'http://gdfsuez.com/bef/chp/pivot','true','false'};
+		private String[] field_order_type_info = new String[]{'offset','from_x'};
+		public searchControlRequestDt(){
+		}
+		public searchControlRequestDt(DOM.XmlNode responseNode){
+			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+			DOM.XmlNode offsetNode = responseNode.getChildElement('offset', 'http://gdfsuez.com/bef/chp/pivot');
+			this.offset = (offsetNode == null) ? null : offsetNode.getText();
+			nodesParsed.add(offsetNode);
+			//System.debug(this.offset);
+			DOM.XmlNode from_xNode = responseNode.getChildElement('from', 'http://gdfsuez.com/bef/chp/pivot');
+			this.from_x = (from_xNode == null) ? null : from_xNode.getText();
+			nodesParsed.add(from_xNode);
+			//System.debug(this.from_x);
+		}
+		public void populateXmlNode(Dom.XmlNode outerNode){
+			Dom.XmlNode offsetNode = outerNode.addChildElement('offset', '', '');
+			if(this.offset != null){
+				offsetNode.addTextNode(this.offset);
+			}
+			Dom.XmlNode from_xNode = outerNode.addChildElement('from', '', '');
+			if(this.from_x != null){
+				from_xNode.addTextNode(this.from_x);
+			}
+		}
+	}
+	public class searchControlRequestHeaderDt {
+		public gdfsuezComBefChpPivotPC.searchControlRequestDt pagination;
+		public gdfsuezComBefChpPivotPC.sortDt sort_x;
+		private String[] pagination_type_info = new String[]{'pagination','http://gdfsuez.com/bef/chp/pivot','searchControlRequestDt','0','1','false'};
+		private String[] sort_x_type_info = new String[]{'sort','http://gdfsuez.com/bef/chp/pivot','sortDt','0','1','false'};
+		private String[] apex_schema_type_info = new String[]{'http://gdfsuez.com/bef/chp/pivot','true','false'};
+		private String[] field_order_type_info = new String[]{'pagination','sort_x'};
+		public searchControlRequestHeaderDt(){
+		}
+		public searchControlRequestHeaderDt(DOM.XmlNode responseNode){
+			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+			DOM.XmlNode paginationNode = responseNode.getChildElement('pagination', 'http://gdfsuez.com/bef/chp/pivot');
+			if(paginationNode == null){
+				this.pagination = null;
+			} else{
+				gdfsuezComBefChpPivotPC.searchControlRequestDt paginationObj = new gdfsuezComBefChpPivotPC.searchControlRequestDt(paginationNode);
+				nodesParsed.add(paginationNode);
+				this.pagination = paginationObj;
+			}
+			//System.debug(this.pagination);
+			DOM.XmlNode sort_xNode = responseNode.getChildElement('sort', 'http://gdfsuez.com/bef/chp/pivot');
+			if(sort_xNode == null){
+				this.sort_x = null;
+			} else{
+				gdfsuezComBefChpPivotPC.sortDt sort_xObj = new gdfsuezComBefChpPivotPC.sortDt(sort_xNode);
+				nodesParsed.add(sort_xNode);
+				this.sort_x = sort_xObj;
+			}
+			//System.debug(this.sort_x);
+		}
+		public void populateXmlNode(Dom.XmlNode outerNode){
+
+			gdfsuezComBefChpPivotPC.searchControlRequestDt paginationObj = this.pagination;
+			Dom.XmlNode paginationNode = outerNode.addChildElement('pagination', '', '');
+			if(paginationObj != null){
+				paginationObj.populateXmlNode(paginationNode);
+			}
+
+			gdfsuezComBefChpPivotPC.sortDt sort_xObj = this.sort_x;
+			Dom.XmlNode sort_xNode = outerNode.addChildElement('sort', '', '');
+			if(sort_xObj != null){
+				sort_xObj.populateXmlNode(sort_xNode);
+			}
+		}
+	}
+	public class sortDt {
+		public gdfsuezComBefChpPivotPC.sortDt_field_element[] field;
+		private String[] field_type_info = new String[]{'field','http://gdfsuez.com/bef/chp/pivot','','1','-1','false'};
+		private String[] apex_schema_type_info = new String[]{'http://gdfsuez.com/bef/chp/pivot','true','false'};
+		private String[] field_order_type_info = new String[]{'field'};
+		public sortDt(){
+		}
+		public sortDt(DOM.XmlNode responseNode){
+			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+			Dom.XmlNode[] fieldChildren = responseNode.getChildElements();
+			gdfsuezComBefChpPivotPC.sortDt_field_element[] fieldList = new List<gdfsuezComBefChpPivotPC.sortDt_field_element>();
+			if(fieldChildren == null || fieldChildren.size() == 0){
+				this.field = null;
+			} else{
+				for(DOM.XmlNode childNode : fieldChildren){
+					if(childNode.GetName() == 'field'){
+						gdfsuezComBefChpPivotPC.sortDt_field_element Obj = new gdfsuezComBefChpPivotPC.sortDt_field_element(childNode);
+						fieldList.Add(Obj);
+						nodesParsed.add(childNode);
+					}
+				}
+				this.field = fieldList;
+			}
+			//System.debug(this.field);
+		}
+		public void populateXmlNode(Dom.XmlNode outerNode){
+
+			gdfsuezComBefChpPivotPC.sortDt_field_element[] fieldObj = this.field;
+			if(fieldObj != null){
+				for(gdfsuezComBefChpPivotPC.sortDt_field_element element: fieldObj){
+					Dom.XmlNode fieldNode = outerNode.addChildElement('field', '', '');
+					element.populateXmlNode(fieldNode);
+				}
+			}
+		}
+	}
+	public class sortDt_field_element {
+		public String name;
+		public Boolean desc_x;
+		private String[] name_type_info = new String[]{'name','http://gdfsuez.com/bef/chp/pivot','string','1','1','false'};
+		private String[] desc_x_type_info = new String[]{'desc','http://gdfsuez.com/bef/chp/pivot','boolean','1','1','false'};
+		private String[] apex_schema_type_info = new String[]{'http://gdfsuez.com/bef/chp/pivot','true','false'};
+		private String[] field_order_type_info = new String[]{'name','desc_x'};
+		public sortDt_field_element(){
+		}
+		public sortDt_field_element(DOM.XmlNode responseNode){
+			Set<DOM.XmlNode> nodesParsed = new Set<DOM.XmlNode>();
+			DOM.XmlNode nameNode = responseNode.getChildElement('name', 'http://gdfsuez.com/bef/chp/pivot');
+			this.name = (nameNode == null) ? null : nameNode.getText();
+			nodesParsed.add(nameNode);
+			//System.debug(this.name);
+			DOM.XmlNode desc_xNode = responseNode.getChildElement('desc', 'http://gdfsuez.com/bef/chp/pivot');
+			this.desc_x = (desc_xNode == null) ? null : Boolean.valueOf(desc_xNode.getText());
+			nodesParsed.add(desc_xNode);
+			//System.debug(this.desc_x);
+		}
+		public void populateXmlNode(Dom.XmlNode outerNode){
+			Dom.XmlNode nameNode = outerNode.addChildElement('name', '', '');
+			if(this.name != null){
+				nameNode.addTextNode(this.name);
+			}
+			Dom.XmlNode desc_xNode = outerNode.addChildElement('desc', '', '');
+			if(this.desc_x != null){
+				desc_xNode.addTextNode(String.valueOf(this.desc_x));
+			}
+		}
+	}
+}

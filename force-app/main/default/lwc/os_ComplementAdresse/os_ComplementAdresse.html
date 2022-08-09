@@ -1,0 +1,47 @@
+<template>
+    <slot>
+        <!-- élément Texte Vlocity (surchargé) -->
+        <vlocity_cmt-input if:false={_isMasked}
+                type={_inputType}
+                class={_styleClasses.input}
+                label={jsonDef.propSetMap.label}
+                required={jsonDef.propSetMap.required}
+                max-length={_maxLength}
+                min-length={_minLength}
+                pattern={_patternVal}
+                theme={_theme}
+                tab-index={tabIndex}
+                field-level-help={_handleHelpText}
+                placeholder={_placeholder}
+                message-when-value-missing={_messageWhenValueMissing}
+                message-when-pattern-mismatch={_messageWhenPatternMismatch}
+                message-when-too-short={_messageWhenTooShort}
+                message-when-too-long={_messageWhenTooLong}
+                message-when-bad-input={_messageWhenBadInput}
+                message-when-range-overflow={_messageWhenRangeOverflow}
+                message-when-range-underflow={_messageWhenRangeUnderflow}
+                message-when-step-mismatch={_messageWhenStepMismatch}
+                message-when-type-mismatch={_messageWhenTypeMismatch}
+                value={elementValue}
+                >
+       </vlocity_cmt-input>
+       <!-- Liste de Suggestion -->
+       <div if:false={hideSuggestion} data-id="listComplementSuggested" class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid " role="listbox" style="position: relative;">
+         <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+             <template for:each={listComplementResult} for:item="complement">
+                 <li role="presentation" class="slds-listbox__item" key={complement.label}>
+                     <div data-id={complement.id} 
+                         data-label={complement.label}
+                         class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                         role="option" onclick={selectComplementValue}>
+                         <span class="slds-media__body">
+                             <span class="slds-listbox__option-text slds-listbox__option-text_entity" data-selected={complement.label} onclick={handleItemSelection}>{complement.label}</span>
+                         </span>
+                     </div>
+                 </li>
+             </template>
+         </ul>
+        </div>
+      
+    </slot>
+  </template>

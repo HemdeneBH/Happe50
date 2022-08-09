@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>54.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property type="String" name="labelPopinTitle" default="HISTORIQUE DE MES FACTURES ET PAIEMENTS"/>
+            <property type="String" name="labelPopinBouton" default="FAIRE UNE DEMANDE"/>
+            <property type="String" name="titleText" default="HISTORIQUE DE MES FACTURES"/>
+            <property type="String" name="factureLabel" default="Toutes mes factures"/>
+            <property type="String" name="paimentLabel" default="Mes paiements"/>
+            <property type="String" name="echeanceLabel" default="Mes échéances"/>
+            <property type="String" name="planApurementLabel" default="Mon plan d’apurement"/>
+            <property type="String" name="lienTarif" default="Info Tarif "/>
+            <property type="String" name="tarifURL" default="https://www.google.com "/>
+            <property type="String" name="contenuToolTip" default="Le saviez-vous? 
+                                Vous recevez un email à chaque fois qu’une nouvelle facture happe-e est disponible dans votre espace client.
+                                Vos factures sont disponibles sur votre Espace Client happ-e pendant 10 ans.
+                                Nous vous conseillons donc d’enregistrer vos factures régulièrement sur votre ordinateur."/>
+            <property type="String" name="urlHelp" default="https://www.google.com/" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

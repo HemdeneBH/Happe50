@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_DP_Projet__c</fullName>
+    <description>Champ spécifique au parcours détection de projet</description>
+    <externalId>false</externalId>
+    <label>Projet</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Projet Chauffage</fullName>
+                <default>false</default>
+                <label>Projet Chauffage</label>
+            </value>
+            <value>
+                <fullName>Projet Climatisation</fullName>
+                <default>false</default>
+                <label>Projet Climatisation</label>
+            </value>
+            <value>
+                <fullName>Projet Isolation</fullName>
+                <default>false</default>
+                <label>Projet Isolation</label>
+            </value>
+            <value>
+                <fullName>Projet Panneaux solaires</fullName>
+                <default>false</default>
+                <label>Projet Panneaux solaires</label>
+            </value>
+            <value>
+                <fullName>Projet Adoucisseur d’eau</fullName>
+                <default>false</default>
+                <label>Projet Adoucisseur d’eau</label>
+            </value>
+            <value>
+                <fullName>Projet Ballon d’eau chaude sanitaire</fullName>
+                <default>false</default>
+                <label>Projet Ballon d’eau chaude sanitaire</label>
+            </value>
+            <value>
+                <fullName>Projet Entretien</fullName>
+                <default>false</default>
+                <label>Projet Entretien</label>
+            </value>
+            <value>
+                <fullName>Emménagement</fullName>
+                <default>false</default>
+                <label>Emménagement</label>
+            </value>
+            <value>
+                <fullName>Résiliation</fullName>
+                <default>false</default>
+                <label>Résiliation</label>
+            </value>
+            <value>
+                <fullName>Déménagement</fullName>
+                <default>false</default>
+                <label>Déménagement</label>
+            </value>
+            <value>
+                <fullName>Mon Pilotage Elec</fullName>
+                <default>false</default>
+                <label>Mon Pilotage Elec</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

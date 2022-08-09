@@ -1,0 +1,65 @@
+.Engie-Duplicate-Contact .Doublons-detects .contact-item {
+    padding-right: 10px;
+}
+.Engie-Duplicate-Contact .Doublons-detects .contact-item .contact-detail {
+    margin-top: 20px;
+    border: 1px solid grey;
+}
+a svg {
+    width: 24px;
+    fill: #059ce7;
+}
+.smile-profile-box .engie-profile-warning svg {
+    fill: #c10e24;
+}
+.smile-profile-box .profile-rond {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(#00a5ed, #36cfa0);
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+.smile-profile-box .profile-rond svg {
+    width: 48px;
+    fill: #fafafa;
+    margin-top: 14px;   
+    margin-left: 9px; 
+}
+.contactName {
+    font-style: ProximaNova-Semibold;
+    font-weight: 600;
+    font-size: 24px;
+    margin-bottom: 24px;
+}
+.contactOtherInfo{
+    font-style: Helvetica;
+    font-size: 16px;
+    font-weight: normal;
+    height:160px;
+}
+.check-Message{
+    font-size: 16px!important;
+    margin-top: 37px;
+    margin-bottom: 50px;
+}
+.smile-profile-box{ 
+    margin: 10px;
+    border: 0px!important;
+    box-shadow: 0 0px 0px 0!important;   
+}
+.linkViewContact{
+    color:  #059ce7!important;
+}
+.linkContact{
+    position: absolute;bottom: 0px;
+}
+.donnees-saisi {
+    border: 3px solid #f4f6f9;
+    padding: 10px;
+}
+.titre-donnees-saisi {
+    font-weight: 600;
+}
+.text-doublon {
+    font-weight: 700;
+}

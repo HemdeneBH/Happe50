@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_WS</fullName>
+    <columns>MasterLabel</columns>
+    <columns>DeveloperName</columns>
+    <columns>suffix__c</columns>
+    <columns>Version__c</columns>
+    <columns>Description__c</columns>
+    <columns>type__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>type__c</field>
+        <operation>equals</operation>
+        <value>WS</value>
+    </filters>
+    <label>All WS</label>
+    <language>en_US</language>
+</ListView>

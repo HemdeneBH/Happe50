@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ParcoursSOL__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>@SMILE : champ utilisé uniquement dans le parcours solidarité</description>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <label>Parcours SOL</label>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,84 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 05-16-2022
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<template>
+  <div class="hp_popinMensualites">
+    <header class="slds-modal__header hp-header">
+      <h1 class="hp-bigTitle">
+        {titleText}
+      </h1>
+      <span class="hp-closeButton">
+        <a onclick={closePopin}>
+          <img class="hp-close-icon" src={iconClose} alt="close icon" />
+        </a>
+      </span>
+    </header>
+
+    <div class="hp-content">
+
+      <div class="blocMonthlyPay">
+        <div if:true={dual} class="blueBox-switch">
+          <c-hp_ec_switch-button name="offreTypeSwitch" options={typeOptions} onswitchchange={handleType}>
+          </c-hp_ec_switch-button>
+        </div>
+
+        <div class="blocMonthlyPay-title">
+          <span class="hp-label">
+            Mensualité actuelle :
+          </span>
+          
+          <span class="hp-value">
+            {montantMensuel} €
+          </span>
+        </div>
+
+        <div class="slds-form-element">
+          <label class="slds-form-element__label" for="newMonthlyPay">
+            Nouvelle mensualité :
+          </label>
+          <div class="slds-form-element__control">
+            <input type="number" data-id="newMonthlyPay" placeholder="" class={inputAmountClass} onchange={handleChangeMensualite}/>            
+          </div>
+        </div>
+        <span class="hp-bad-input"> {badInputAmount}</span>
+      </div>
+
+      <div class="blocDate">
+
+        <div class="blocDate-title">
+          <span class="hp-label">
+            Date de règlement actuelle : 
+          </span>
+          <span class="hp-value">
+            {dateMensualiteText}
+          </span>
+        </div>
+
+        <div class="slds-form-element">
+          <label class="slds-form-element__label" for="newDate">
+            Nouvelle date :
+          </label>
+          <div class="slds-form-element__control">
+            <input type="text" data-id="newDate" placeholder="" aria-describedby={errorDate} class={inputDateClass} onchange={handleChangeDate} maxlength="2" oninput={validateDateInput}/>
+          </div>
+        </div>
+        <span class="hp-bad-input">{badInputMonthly}</span>
+      </div>
+      <div class="hp-btnContainer">
+        <div class="hp-alert">
+          <span class="hp-alert-icon">
+            <img src={iconAlert} alt="alert icon" />
+          </span>
+          <span class="hp-alert-text">
+            {texteAlerte}
+          </span>
+        </div>
+        <button class="hp-secondButton" onclick={handleSubmit} disabled={deactivateButton} >{labelButton}</button>
+      </div>
+    </div>
+  </div>
+</template>

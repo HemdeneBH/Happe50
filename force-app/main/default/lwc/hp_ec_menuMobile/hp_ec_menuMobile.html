@@ -1,0 +1,30 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 07-04-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+  <div class="menuMobile">
+    <div data-id="menuContentMobile" class="hp-navigationMenu-mobile">
+
+      <lightning-vertical-navigation>
+        <nav role="navigation" class="c-verticalMenu" aria-label="">
+          <ul class="hp-nav-mobile">
+            <template for:each={menuItems} for:item="item">
+              <li key={item.id} class="slds-item hp-nav-item">
+                  <c-hp_ec_menu-item-mobile item={item} onclosemenumobile={handleCloseMenuMobile}></c-hp_ec_menu-item-mobile>
+              </li>
+            </template>
+          </ul>
+        </nav>
+      </lightning-vertical-navigation>
+    </div>
+    <c-hp_ec_bloc-demenagement></c-hp_ec_bloc-demenagement>
+    <c-hp_ec_menu-phone phonenumber={phonenumber}></c-hp_ec_menu-phone>
+    <c-hp_ec_app-download></c-hp_ec_app-download> 
+    <!-- <c-hp_ec_app-download-mobile></c-hp_ec_app-download-mobile> -->
+    <!-- <c-hp_ec_menu-phone></c-hp_ec_menu-phone> -->
+  </div>
+</template>

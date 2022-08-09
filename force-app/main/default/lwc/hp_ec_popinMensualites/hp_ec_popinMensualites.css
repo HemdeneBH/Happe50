@@ -1,0 +1,235 @@
+.hp_popinMensualites {
+  display: block;
+  width: 500px;
+  height: auto;
+  margin: 0 auto;
+  box-shadow: var(--box-shadow);
+  border: solid 30px var(--primary-colour);
+  background-image: var(--bg);
+}
+
+.hp-bigTitle {
+  text-align: left;
+  justify-self: start;
+}
+
+.hp-header {
+  background-color: var(--modal-header);
+  border: none;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  align-items: center;
+  padding: 25px 40px;
+}
+
+.hp-closeButton {
+  justify-self: end;
+}
+
+.hp-closeButton a {
+  justify-self: end;
+  color: var(--secondary-colour);
+  font-family: var(--font-bold);
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: extra-expanded;
+}
+
+.hp-content {
+  padding: 30px 40px;
+}
+
+
+.hp-alert {
+  display: grid;
+  grid-template-columns: 1fr 9fr;
+  align-items: center;
+  padding: 20px 0;
+  max-width: 250px;
+}
+
+.hp-alert-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: var(--white);
+  background: var(--rose);
+}
+
+.hp-bad-input{
+  color : var(--rose);
+  font-family: var(--font-bold);
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.07;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  padding-top: 5px;
+}
+
+.hp-alert-text {
+  padding: 0 0 0 15px;
+  color: var(--rose);
+  font-family: var(--font-bold);
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.07;
+}
+
+.hp-secondButton {
+  min-width: 250px;
+}
+
+.blueBox-switch {
+  margin: 0 10px 0 0;
+}
+
+.slds-modal {
+  top: 80px;
+}
+
+.slds-form-element {
+  display: flex;
+  margin: 5px 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.slds-input {
+  background-color: var(--bg-base);
+  border: 3px solid var(--primary-colour);
+  color: var(--text-color);
+  border-radius: 0;
+  max-width: 90px;
+  justify-self: end;
+  font-size: 14px;
+  height: 50px;
+  font-family: var(--font-regular);
+  padding-left: 5px;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.slds-input:active,
+.slds-input:focus,
+.slds-input:focus-visible {
+  outline:  1px solid var(--primary-colour);
+}
+
+.input-invalid:active,
+.input-invalid:focus,
+.input-invalid:focus-visible {
+  outline:  1px solid var(--rose);
+}
+
+.input-invalid{
+  background-color: var(--bg-base);
+  border: 3px solid var(--rose);
+  color: var(--text-color);
+  border-radius: 0;
+  max-width: 90px;
+  justify-self: end;
+  font-size: 14px;
+  height: 50px;
+  font-family: var(--font-regular);
+  padding-left: 5px;
+}
+.slds-form-element__label {
+  color: var(--text-color);
+  font-family: var(--font-bold);
+  font-size: 14px;
+  justify-self: start;
+}
+
+.hp-label {
+  color: var(--blue);
+  font-family: var(--font-bold);
+  font-size: 14px;
+}
+
+.hp-value {
+  color: var(--text-color);
+  font-family: var(--font-regular);
+  font-size: 14px;
+  font-weight: 200;
+  padding: 0 5px;
+}
+
+.blocMonthlyPay-title,
+.blocDate-title {
+  padding: 10px 0;
+  text-align: center;
+}
+
+
+
+@media (max-width: 1024px) {
+  /* Ipad and tablets */
+
+
+
+}
+
+@media (max-width: 768px) {
+  /* mobiles */
+
+}
+
+@media (max-width: 576px) {
+
+  .hp_popinMensualites{
+    width: auto;
+    height: auto;
+    border: solid 20px var(--primary-colour);
+    margin: 0 15px;
+  }
+
+  .hp-bigTitle {
+    font-size: 20px;
+  }
+
+  .hp-alertTitle {
+    font-size: 16px;
+  }
+
+  .hp-alertTitle-text {
+    padding: 0 0 0 15px;
+    font-size: 16px;
+  }
+
+  /* mobiles */
+  .hp-secondButton {
+    min-width: auto;
+  }
+
+  .hp-alert {
+    max-width: auto;
+  }
+
+  .hp-content {
+    padding: 20px;
+  }
+
+  .hp-header {
+    padding: 20px 10px 20px 20px;
+  }
+
+  .slds-input {
+    height: 40px;
+    max-width: 70px;
+  }
+
+}

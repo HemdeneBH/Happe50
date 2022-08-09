@@ -1,0 +1,86 @@
+/*lightTheme*/
+
+:host(.lightTheme) .c-content {
+    color: var(--black);
+} 
+:host(.lightTheme) .c-title  {
+    color: var(--black);
+} 
+:host(.lightTheme) .c-subtitle {
+    color: #2B97F6;
+}
+:host(.lightTheme) a.c-link, 
+:host(.lightTheme) a {
+    color: var(--light-secondary-colour);
+}
+:host(.lightTheme) .c-link a:hover{
+    color: var(--light-primary-colour);
+}  
+
+
+/*darkTheme*/
+
+:host(.darkTheme) .c-content {
+    color: var(--white);
+}
+:host(.darkTheme) .c-title {
+    color: var(--white);
+}
+:host(.darkTheme) .c-subtitle {
+    color: #05a8ff;
+} 
+:host(.darkTheme) a.c-link, 
+:host(.darkTheme) a {
+    color: var(--dark-secondary-colour);
+}
+:host(.darkTheme) .c-link a:hover{
+    color: var(--dark-primary-colour);
+} 
+
+
+.c-content{
+    padding: 30px;
+}
+
+.c-content p{
+    padding: 10px 0;
+}
+
+a.c-link {
+    padding: 10px 0;
+    font-family: "font_AvantBold";
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 0.94;
+    letter-spacing: 0.48px;
+    text-decoration: underline;
+}
+a {
+    text-decoration: underline;
+}
+.c-link a:hover{
+    text-decoration: underline;
+}
+.c-title{
+    padding: 25px 0 20px 0;
+    text-transform: uppercase;
+    font-family: "font_AvantBold";
+    font-size: 25px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: 0.75px;
+    text-align: left;
+}
+.c-subtitle {
+    font-family: "font_AvantBold";
+    padding: 10px 0;
+    font-size: 22px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: 0.66px;
+    text-align: left;
+}

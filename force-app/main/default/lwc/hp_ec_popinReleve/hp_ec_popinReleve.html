@@ -1,0 +1,178 @@
+<!--
+  @description       : 
+  @author            : Badr Eddine Belkarchi
+  @group             : 
+  @last modified on  : 07-05-2022
+  @last modified by  : Badr Eddine Belkarchi
+-->
+<template>
+  <div class="hp_popinReleve">
+    <header class="slds-modal__header hp-header">
+      <h1 class="hp-bigTitle">
+        {titlePopinReleve}
+      </h1>
+      <span class="hp-closeButton">
+        <a onclick={closePopinReleve}>
+          <img class="hp-close-icon" src={iconClose} alt="close icon" />
+        </a>
+      </span>
+    </header>
+    <div class="hp-content">
+    <template if:true={isDual}>
+      <div class="hp-content">
+        <div class="blueBox">
+          <div class="blueBox-text">
+            Je saisis ma relève :
+          </div>
+          <div class="blueBox-switch">
+            <c-hp_ec_switch-button name="offreTypeSwitch" options={typeOptions} onswitchchange={handleType}>
+            </c-hp_ec_switch-button>
+          </div>
+        </div>
+      </div>
+    </template>
+      <div class="blocPdl">
+        <div class="blocPdl-title">
+          <template if:true={isElec}>
+            <span class="hp-label">
+              N°PDL
+            </span>
+            <span class="hp-value">
+              N°{pdl}
+            </span>
+          </template>
+          <template if:true={isGaz}>
+            <span class="hp-label">
+              N°PCE
+            </span>
+            <span class="hp-value">
+              N°{pce}
+            </span>
+          </template>
+        </div>
+        <!-- <div class="blocPdl-title">
+          <span class="hp-label">
+            N°Compteur
+          </span>
+          <span class="hp-value">
+            N°123
+          </span>
+        </div> -->
+      </div>
+      <template if:false={isHPHC}>
+        <div class="lable-multi-input">
+          Je saisis ma relève
+        </div>
+        <div class="c-multi-input__container">
+          <lightning-input class="c-multi-input__bloc releve__bloc purple" placeholder="1" label="" type="number" maxlength="1"
+            data-id="BASE_0" onblur={validateIndex} min="0" max="9">
+          </lightning-input>
+          <lightning-input class="c-multi-input__bloc releve__bloc purple" placeholder="2" label="" type="number" maxlength="1"
+            data-id="BASE_1" onblur={validateIndex} min="0" max="9">
+          </lightning-input>
+          <lightning-input class="c-multi-input__bloc releve__bloc purple" placeholder="3" label="" type="number" maxlength="1"
+            data-id="BASE_2" onblur={validateIndex} min="0" max="9">
+          </lightning-input>
+          <lightning-input class="c-multi-input__bloc releve__bloc purple" placeholder="4" label="" type="number" maxlength="1"
+            data-id="BASE_3" onblur={validateIndex} min="0" max="9">
+          </lightning-input>
+          <lightning-input class="c-multi-input__bloc releve__bloc purple" placeholder="5" label="" type="number" maxlength="1"
+            data-id="BASE_4" onblur={validateIndex} min="0" max="9">
+          </lightning-input>
+          <lightning-input class="c-multi-input__bloc releve__bloc purple" placeholder="6" label="" type="number" maxlength="1"
+            data-id="BASE_5" onblur={validateIndex} min="0" max="9">
+          </lightning-input>
+        </div>
+      </template>
+    <template if:true={isHPHC}>
+      <div class="lable-multi-input">
+        Heures Pleines
+      </div>
+      <div class="c-multi-input__container">
+          <lightning-input class="c-multi-input__bloc releve__bloc purple" placeholder="1" label="" data-id="HP_0"
+            type="number" maxlength="1" onblur={validateIndex} min="0" max="9">
+          </lightning-input>
+          <lightning-input class="c-multi-input__bloc releve__bloc purple" placeholder="2" label="" data-id="HP_1"
+            type="number" maxlength="1" onblur={validateIndex} min="0" max="9" >
+          </lightning-input>
+          <lightning-input class="c-multi-input__bloc releve__bloc purple" placeholder="3" label="" data-id="HP_2"
+            type="number" maxlength="1" onblur={validateIndex} min="0" max="9" >
+          </lightning-input>
+          <lightning-input class="c-multi-input__bloc releve__bloc purple" placeholder="4" label="" data-id="HP_3"
+            type="number" maxlength="1" onblur={validateIndex} min="0" max="9">
+          </lightning-input>
+          <lightning-input class="c-multi-input__bloc releve__bloc purple" placeholder="5" label="" data-id="HP_4"
+            type="number" maxlength="1" onblur={validateIndex} min="0" max="9">
+          </lightning-input>
+          <lightning-input class="c-multi-input__bloc releve__bloc purple" placeholder="6" label="" data-id="HP_5"
+            type="number" maxlength="1" onblur={validateIndex} min="0" max="9">
+          </lightning-input>
+      </div>
+      <div class="lable-multi-input">
+        Heures Creuses
+      </div>
+      <div class="c-multi-input__container">
+          <lightning-input class="c-multi-input__bloc releve__bloc purple" placeholder="1" label="" data-id="HC_0"
+            type="number" maxlength="1" onblur={validateIndex} min="0" max="9">
+          </lightning-input>
+          <lightning-input class="c-multi-input__bloc releve__bloc purple" placeholder="2" label="" data-id="HC_1"
+            type="number" maxlength="1" onblur={validateIndex} min="0" max="9">
+          </lightning-input>
+          <lightning-input class="c-multi-input__bloc releve__bloc purple" placeholder="3" label="" data-id="HC_2"
+            type="number" maxlength="1" onblur={validateIndex} min="0" max="9">
+          </lightning-input>
+          <lightning-input class="c-multi-input__bloc releve__bloc purple" placeholder="4" label="" data-id="HC_3"
+            type="number" maxlength="1" onblur={validateIndex} min="0" max="9" >
+          </lightning-input>
+          <lightning-input class="c-multi-input__bloc releve__bloc purple" placeholder="5" label="" data-id="HC_4"
+            type="number" maxlength="1" onblur={validateIndex} min="0" max="9">
+          </lightning-input>
+          <lightning-input class="c-multi-input__bloc releve__bloc purple" placeholder="6" label="" data-id="HC_5"
+            type="number" maxlength="1" onblur={validateIndex} min="0" max="9">
+          </lightning-input>
+        </div>
+      </template>
+      <div class="hp-linkBox">
+        <a onclick={handleNavigateCustomUrl}>
+          {customUrlLabelPopinReleve}
+            <span class="chevron right"></span>
+        </a>
+    </div>
+      <!-- <div class="wrapper">
+        <div class="file-upload"><input type="file" id="uploadInputID" class="inputfile c-uploadInput__input"
+            name="upload" accept="application/pdf"><label for="uploadInputID" class="c-uploadInput__img">
+            <figure>
+              <img src={iconPhoto} class="c-file-upload-img" alt="Ou glissez-déposez la photo de votre compteur ici">
+            </figure>
+          </label>
+        </div>
+        <div class="c-file-upload__text">
+          <p class="bold">Ou glissez-déposez la photo de votre compteur ici</p>
+          <p class="c-file-upload__smallText">Moins de 25 Mo - Formats .jpeg .png .pdf
+          </p>
+        </div>
+      </div> -->
+      <template if:true={showIndexNoValidError}>
+        <div style="color: #da42bd;">
+          {messageIndexNoValidError}
+        </div>
+      </template>
+      <template if:true={showIndexError}>
+        <div style="color: #da42bd;">
+          {messageIndexError}
+        </div>
+      </template>
+      <template if:true={showAgilabKoError}>
+        <div style="color: #da42bd;">
+          Vos index n’ont pas pu être enregistrés, veuillez réessayer.
+        </div>
+      </template>
+
+      <div class="hp-btnContainer spacing-top">
+        <button class="hp-firstButton" disabled={disableValidation} onclick={handleValidation}>
+         Valider ma relève
+        </button>
+      </div>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_TypeLogementSaisieConso__c</fullName>
+    <description>Le PP choisi, en fonction du prospect au téléphone ; s&apos;il s&apos;agit d&apos;un logement Collection ou individuel</description>
+    <externalId>false</externalId>
+    <label>Type de logement</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Individuel</fullName>
+                <default>false</default>
+                <label>Individuel</label>
+            </value>
+            <value>
+                <fullName>Collectif</fullName>
+                <default>false</default>
+                <label>Collectif</label>
+            </value>
+            <value>
+                <fullName>Je ne sais pas</fullName>
+                <default>false</default>
+                <label>Je ne sais pas</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

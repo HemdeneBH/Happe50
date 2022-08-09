@@ -1,0 +1,156 @@
+<!--
+  @description       : FT2-1332/ FT2-1524 Component displayed in case record page for approval of delai de paiement by superviseur
+  @author            : FT2-AE
+  @group             : 
+  @last modified on  : 02-22-2022
+  @last modified by  : FT2-AE
+-->
+<template>
+    <div class="slds-box slds-theme_default">
+        <template if:true={isDLP4}>
+            <div class="slds-grid slds-gutters">
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="error">
+                    <h2>{label.SM_DLP_PrelevementBloque}</h2>
+                </div>
+            </div>
+        <br>  
+        </template>
+        <div>
+            <template if:true={isWaitingWS}>
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </template>
+            <div class="slds-grid slds-grid_pull-padded-medium">
+                <div class="slds-col slds-size_1-of-2 slds-p-horizontal_medium">
+                    <span style="font-weight: bold;">Montant total</span>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-p-horizontal_medium">
+                    <span>
+                        <lightning-formatted-number value={caseSM_soldeConcerneDP} format-style="decimal"
+                            minimum-fraction-digits="2"></lightning-formatted-number> €
+                    </span>
+                </div>
+            </div>
+            <div class="slds-grid slds-grid_pull-padded-medium">
+                <div class="slds-col slds-size_1-of-2 slds-p-horizontal_medium">
+                    <span style="font-weight: bold;">Catégorie</span>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-p-horizontal_medium">
+                    <span>Z1 - ENGIE</span>
+                </div>
+            </div><br>
+            <h2 class="header text-title slds-text-title_bold">Echéances</h2>
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col">
+                    <span>
+                        <label class="slds-form-element__label">Nombre</label>
+                        <select class="slds-select" name="nombreEcheance" title="Nombre" disabled={fieldsDPdisabled} onchange={handleChange}>
+                            <option value="1" selected={is1Selected}>1</option>
+                            <option value="2" selected={is2Selected}>2</option>
+                            <option value="3" selected={is3Selected}>3</option>
+                            <option value="4" selected={is4Selected}>4</option>
+                            <option value="5" selected={is5Selected}>5</option>
+                            <option value="6" selected={is6Selected}>6</option>
+                            <option value="7" selected={is7Selected}>7</option>
+                            <option value="8" selected={is8Selected}>8</option>
+                            <option value="9" selected={is9Selected}>9</option>
+                            <option value="10"  selected={is10Selected}>10</option>
+                        </select> 
+                    </span>
+                </div>
+                <div class="slds-col">
+                    <span>
+                        <lightning-input class="dateReferenceId"  type="date" name="dateReference" max={maxDate}  min={minDate} value={caseSM_DateEcheance1Val} label="Première échéance" disabled={fieldsDPdisabled} onchange={handleChange}></lightning-input>
+                    </span>
+                </div>
+            </div><br>
+            <template if:true={errorTotalAmount}>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="error">
+                        <h2>Attention : Le total des échéances doit correspondre au Montant total.</h2>
+                    </div>
+                </div>
+                <br>  
+            </template>
+            <template if:true={dpcreationerrormsg}>
+                <div class="slds-grid slds-gutters">
+                                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error"
+                                    role="alert">
+                            <h2>{dpcreationerrormsg}</h2>
+                        </div>
+                </div>
+                <br>  
+            </template>  
+            <template if:true={errorSimulationNeeded}>
+                <div class="slds-grid slds-gutters">
+                                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_warning"
+                                    role="alert">
+                            <h2>Pensez à lancer la simulation pour accéder aux boutons de gestion</h2>
+                        </div>
+                </div>
+                <br>  
+            </template>  
+            
+            <div class="slds-clearfix">
+                <div class="slds-align_absolute-center">
+                    <button class="slds-button slds-button_neutral slds-theme_shade" name="simulate" type="submit" disabled={fieldsDPdisabled} onclick={handleSimulatePlanApurement}>Lancer la simulation
+                    </button>
+                </div>
+            </div>
+            <br>
+            <div class="slds-hint-parent slds-grid slds-wrap">
+                <div class="slds-large-size_8-of-12">
+                    <span style="font-weight: bold;">Délai de paiement estimé</span>
+                </div>
+                <div style="width: 2.5%;">&nbsp;</div>
+                <div class="slds-large-size_2-of-12">
+                    <span><lightning-formatted-number value={caseSM_soldeConcerneDP} format-style="decimal" minimum-fraction-digits="2"></lightning-formatted-number> €</span>
+                </div>
+            </div>
+            <br>
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-no-row-hover">
+                <template if:true={isLoading}>
+                    <div class="demo-only demo-only_viewport" style="height:0.3rem;position:relative">
+                        <div role="status" class="slds-spinner slds-spinner_medium">
+                        <span class="slds-assistive-text">Loading</span>
+                        <div class="slds-spinner__dot-a"></div>
+                        <div class="slds-spinner__dot-b"></div>
+                        </div>
+                    </div>
+                </template>
+                <tbody>
+                    <template for:each={listEcheanceDp} for:item="echeance" for:index="index">
+                        <tr class="slds-hint-parent slds-grid slds-wrap" key={echeance} >
+                            <td class="slds-large-size_1-of-6"><span>{echeance.numEcheance}</span></td>
+                            <td data-label="Date echéance" class="slds-large-size_3-of-6" >
+                                <span>{echeance.dateEcheance}</span>
+                            </td>
+                            <td data-label="Montant échéance" class="slds-large-size_2-of-6" >
+                            <span><lightning-input class="echeanceNumber" type="number" message-when-bad-input="montant invalide." message-when-pattern-mismatch="montant invalide."  message-when-step-mismatch="montant invalide." message-when-value-missing="montant invalide." variant="label-hidden" data-index={index} value={echeance.montantEcheance} formatter="currency" step="0.01" disabled={fieldsDPdisabled} onchange={handleEcheanceValueChange} required></lightning-input></span>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+            <br>
+            <lightning-textarea name="inputDeclineReason" label="Motif de refus : " value={declineReason} disabled={fieldsDPdisabled} onchange={handleDeclineReason}></lightning-textarea>
+            <span class="errorRaisonRefus" lwc:dom="manual"></span>
+            <br>
+            <br>
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-3">
+                        <button class="slds-button slds-button_success  slds-align_absolute-center" name="approve" type="submit" disabled={boutonsDPdisabled} onclick={handleApprouver}>Approuver
+                        </button>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                        <button class="slds-button slds-button_brand  slds-align_absolute-center" name="modify" type="submit" disabled={isModifiedDisabled} onclick={handleModifier}>Modifier
+                        </button>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                        <button class="slds-button slds-button_destructive  slds-align_absolute-center" name="refuse" type="submit" disabled={boutonsDPdisabled} onclick={handleRefuser}>Refuser
+                        </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</template>

@@ -1,0 +1,67 @@
+.consumption-bar {
+    width: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+}
+
+.consumption-bar[data-active=false] {
+    opacity: 0.5;
+}
+
+.consumption-bar .track {
+    display: block;
+    height: 111px;
+    width: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    background: var(--bg-base);
+    position: relative;
+}
+
+.consumption-bar .track .subscription,
+.consumption-bar .track .tax,
+.consumption-bar .track .gas,
+.consumption-bar .track .elec,
+.consumption-bar .track .estimated,
+.consumption-bar .track .alert,
+.consumption-bar .track .price,
+.consumption-bar .track .previous {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px 0 var(--box-shadow-color);
+}
+
+.consumption-bar .track .subscription { background-color: var(--yellow); }
+.consumption-bar .track .tax { background-color: var(--orange); }
+.consumption-bar .track .gas { background-color: var(--blue); }
+.consumption-bar .track .elec { background-color: var(--primary-colour); }
+.consumption-bar .track .estimated { background-color: var(--yellow); }
+.consumption-bar .track .price { background-color: var(--primary-colour); }
+.consumption-bar .track .previous { background-color: var(--grey); }
+.consumption-bar .track .alert { background-color: var(--rose); }
+
+.total span,
+.date span {
+    display: block;
+}
+
+.total strong {
+    font-size: 16px;
+    font-family: "font_AvantBold", sans-serif;
+}
+
+.total span {
+    font-size: 12px;
+}
+
+.date {
+    text-transform: capitalize;
+    font-size: 14px;
+}

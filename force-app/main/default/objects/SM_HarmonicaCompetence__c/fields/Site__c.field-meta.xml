@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Site__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Le champs Site est un champs lockup vers l&apos;ojet compétence , ce champs est utilisé pour lier les compétences a chaque Site utilisé dans le cadre du routage par compétences .</description>
+    <externalId>false</externalId>
+    <label>Site</label>
+    <referenceTo>SM_HarmonicaSite__c</referenceTo>
+    <relationshipLabel>Compétences par site</relationshipLabel>
+    <relationshipName>competences</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

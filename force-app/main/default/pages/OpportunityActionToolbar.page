@@ -1,0 +1,11 @@
+<apex:page standardController="Opportunity" extensions="vlocity_cmt.VFPageControllerBase" showHeader="false" sidebar="false" docType="html-5.0">
+
+
+
+<apex:stylesheet value="{!URLFOR($Resource.vlocity_icons, '/css/vlocity-icons.css')}"/>
+    <apex:outputPanel rendered="{! If(or($Profile.Name=='MP_Vendeur PAP', $Profile.Name=='MP_Admin',$Profile.Name=='Administrateur système', $Profile.Name == 'MP_Management') ,true,false) }">
+        <vlocity_cmt:ActionComponent standardController="{!stdController}"  
+                            objType="Opportunity"
+                            style="Horizontal"/>
+    </apex:outputPanel>
+</apex:page>

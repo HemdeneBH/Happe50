@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HP_ActivationPrioritaire__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(NOT(ISNULL(HP_DigitalDateSave2__c)), 
+      AND(HP_Date_de_Contractualisation__c - DATEVALUE(HP_DigitalDateSave2__c) &lt;= 6, ISPICKVAL(HP_type_Souscription__c , &quot;MOVING_IN&quot;)), 
+      false
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Activation prioritaire</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

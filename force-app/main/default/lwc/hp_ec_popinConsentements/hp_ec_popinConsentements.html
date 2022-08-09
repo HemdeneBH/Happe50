@@ -1,0 +1,57 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 06-27-2022
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<template>
+
+
+  <div class="hp_container">
+
+    <header class="hp-header">
+      <h1 class="hp-bigTitle">
+        {popinconsentementstitle}
+      </h1>
+      <span class="hp-closeButton">
+        <a onclick={closePopinConsentements}>
+          <img class="hp-close-icon" src={iconClose} alt="close icon" />
+        </a>
+      </span>
+    </header>
+
+
+    <div class="hp-content">
+
+      <template for:each={consentementList} for:item="consentement">
+
+        <div key={consentement.idQuestion} class="question-item">
+          <div class="hp-questions">{consentement.libelleQuestion}</div>
+
+          <div class="hp-checkbox">
+            <input name={consentement.name} data-id={consentement.name} value={consentement.response}  type="checkbox"  onchange={consentementChanged} class="hp-toggle" checked={consentement.consent}>
+          </div>      
+        </div>
+      </template>
+
+      <div class="question-item">
+        <div class="hp-questions">{marketingLabels.optinMarketingPhrase}</div>
+
+        <div class="hp-checkbox">
+          <input name="optinMarketing" data-id="optinMarketing" value={optinMarketingResponse}  type="checkbox"  onchange={optinMarketingChange} class="hp-toggle" checked={optinMarketing}>
+        </div>      
+      </div>
+</div>
+      <div class="hp-btnContainer">
+        <div class="hp-firstButton" onclick={handleSubmit}>
+          {boutonsubmitpopinconsentement}
+        </div>
+        <div class="hp-secondButton" onclick={closePopinConsentements}>
+          Annuler
+        </div>
+    
+
+    </div>
+  </div>
+</template>

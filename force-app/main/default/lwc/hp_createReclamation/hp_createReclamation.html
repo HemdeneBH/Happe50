@@ -1,0 +1,37 @@
+<template>
+    <div class="slds-grid slds-wrap">
+        <h2 style="font-size: 1.2rem;font-weight: bold;">Escalade du cas</h2>
+        <br/><br/>
+        <lightning-record-edit-form style="width: 100%;" record-type-id={reclamationRT} object-api-name="Case" onsuccess={handleSuccess} onsubmit ={handleSubmit} >
+            <div class="slds-grid slds-gutters" >
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-input-field field-name="HP_Type__c" required>
+                    </lightning-input-field>
+
+                   
+                <lightning-input-field field-name="Priority" required>
+            </lightning-input-field>
+            <lightning-input-field field-name="HP_Numero_de_facture__c">
+            </lightning-input-field>
+           
+</div>
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-input-field field-name="HP_Motif__c" required>
+                    </lightning-input-field>
+                    <lightning-input-field field-name="HP_Comment__c" required>
+                    </lightning-input-field>
+
+                </div>
+              </div>
+          <div style="float:right">
+            <lightning-button class="slds-m-top_small" style="margin-right: 0.5rem;" onclick={closeReclamationPopupModalPopupModal}
+            label="Annuler"></lightning-button>
+            <lightning-button variant="brand" label="Créer requête" type="submit"
+            class="slds-m-top_small"></lightning-button>
+            <div class="exampleHolder" if:true={showSpinner}>
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </div>
+        </div>
+        </lightning-record-edit-form>
+</div>
+</template>

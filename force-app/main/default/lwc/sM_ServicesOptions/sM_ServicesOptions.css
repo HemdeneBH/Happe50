@@ -1,0 +1,93 @@
+.pageTitle-1{
+    font-weight: 600;
+    font-size: 24px;
+}
+.pageTitle-2{
+    font-weight: 700;
+    font-size: 24px;
+}
+.libOffre{
+    font-size: medium;
+    font-weight: 500;
+}
+
+.top-card{
+    height: 120px;
+    width: 600px;
+    border-color: lightgray;
+    display: flex;
+    flex-direction: column;
+    border-width: 1px;
+}
+
+
+.top-card-title {
+    display: flex;
+    flex-direction: row;
+}
+
+.top-card-row {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    border-width: 1px;
+    border-color: blue;
+    
+}
+
+.top-card-row-col-1{
+    flex: 2;
+    border-width: 1px;
+    border-color: black;
+    margin: 1px;
+}
+.top-card-row-col-2{
+    flex: 2;
+    border-width: 1px;
+    border-color: black;
+    margin: 1px;
+}
+.grid-col {
+    height: auto;
+    background-color: aquamarine;
+    width: 35vw;
+}
+
+.line {
+    height: 80px;
+    width: 100%;
+    border-bottom: 2px  dashed lightgray;
+}
+.line-col-1 {
+    width: 70%;
+    height: 100%;
+}
+
+.line-col-2 {
+    width: 30%;
+    height: 100%;
+}
+
+.etat {
+    height: 8px;
+    width: 8px;
+    border-radius: 4px;
+}
+
+.red {
+    background-color: red;
+}
+
+
+.green {
+    background-color: green;
+}
+
+
+.orange {
+    background-color: orange;
+}
+
+.inline {
+    display: inline;
+}

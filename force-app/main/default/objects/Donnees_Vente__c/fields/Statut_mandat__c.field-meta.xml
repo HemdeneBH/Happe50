@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Statut_mandat__c</fullName>
+    <description>STATUT_MANDAT
+à signer
+déjà signé
+signé en ligne</description>
+    <externalId>false</externalId>
+    <label>Statut mandat</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>à signer</fullName>
+                <default>false</default>
+                <label>à signer</label>
+            </value>
+            <value>
+                <fullName>déjà signé</fullName>
+                <default>false</default>
+                <label>déjà signé</label>
+            </value>
+            <value>
+                <fullName>signé en ligne</fullName>
+                <default>false</default>
+                <label>signé en ligne</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,7 @@
+.customRadioCls .slds-form-element__control .slds-radio{
+    display : inline-block !important;
+}
+
+.required-color {
+    color: rgba(188, 1, 0, 1)
+}

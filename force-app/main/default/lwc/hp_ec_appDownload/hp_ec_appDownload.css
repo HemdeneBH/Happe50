@@ -1,0 +1,70 @@
+.hp-bloc-app-happe {
+  display: flex;
+  padding: 25px 10px;
+  font-weight: bold;
+  align-items: center;
+  position: relative;
+  background-color: var(--primary-colour);
+  text-decoration: none;
+}
+
+.hp-bloc-app-happe:hover,
+.hp-bloc-app-happe:focus, 
+.hp-bloc-app-happe:active  {
+  background: var(--secondary-colour);
+  text-decoration: none;
+} 
+
+.hp-bloc-app-happe img {
+  width: 100px;
+  height: 100px;
+}
+
+.hp-bloc-app-happe p{
+  font-family: "font_AvantBold";
+  font-size: 15px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: 0.45px;
+  text-align: left;
+  padding-right: 55px;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.hp-bloc-app-happe p a{
+ text-decoration: none;
+ color: var(--white);
+}
+
+.hp-bloc-app-happe p a .chevron::before {
+  font-size: 16px;
+  border-style: solid;
+  border-width: 0.15em 0.15em 0 0;
+  content: '';
+  display: inline-block;
+  height: 0.60em;
+  right: 0.15em;
+  position: absolute;
+  top: 18px;
+  transform: rotate(-45deg);
+  vertical-align: top;
+  width: 0.60em;
+  color: var(--white);
+}
+
+.hp-bloc-app-happe p a .chevron.right:before {
+  top: 45%;
+  right: 30px;
+  transform: rotate(45deg);
+}
+.hp-bloc-app-happe-link p{
+  text-decoration: none;
+}
+.hp-bloc-app-happe-link:hover,
+.hp-bloc-app-happe-link:focus, 
+.hp-bloc-app-happe-link:active  {
+  text-decoration: none;
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Consigne__c</fullName>
+    <description>@description: champ pour la consigne Knowledge
+@projet: smile</description>
+    <externalId>false</externalId>
+    <label>Consigne</label>
+    <length>131072</length>
+    <type>Html</type>
+    <visibleLines>25</visibleLines>
+</CustomField>

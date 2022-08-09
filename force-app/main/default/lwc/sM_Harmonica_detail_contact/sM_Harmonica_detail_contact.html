@@ -1,0 +1,41 @@
+<!--
+  @description       : Afficher certaines données dans un contexte Harmonica depuis CASE et Donnees_vente__c sur l'objet Case
+  @author            : Ahmed LAAMIRI
+  @group             : SMILE
+  @lastmodifiedDate  : 08-07-2022
+  @lastmodifiedby    : Olivier MADRE
+  @us                : PI3-SMILE-FT1-5739
+-->
+<template>
+        <lightning-card title="Informations clients" icon-name="standard:client">
+                <template if:true={infosClient}>
+                        <div class="slds-m-around_medium">                                                                
+                                <p key={contactBP}><lightning-icon icon-name="standard:account" size="xx-small" title="BP"></lightning-icon> {contactBP}</p>
+                                <p key={infosClient.Civilite_client__c}><lightning-icon icon-name="standard:avatar" size="xx-small" title="Civilité"></lightning-icon> {infosClient.Civilite_client__c} {infosClient.Prenom_client__c} {infosClient.Nom_client__c}</p>
+                                <p class={dynamicClass} key={infosClient.Email_client__c}><lightning-icon icon-name="standard:email" size="xx-small" title="Email"></lightning-icon> {infosClient.Email_client__c}</p>
+                                <p key={infosClient.Telephone_client__c}><lightning-icon icon-name="standard:voice_call" size="xx-small" title="Téléphone"></lightning-icon> {infosClient.Telephone_client__c}</p>
+                                <p key={infosClient.Code_postale__c}><lightning-icon icon-name="standard:address" size="xx-small" title="Adresse"></lightning-icon> {infosClient.Numero_de_voie__c} {infosClient.Libelle_voie__c} {infosClient.Code_postale__c} {infosClient.Commune__c}</p>
+                                <div if:true={caseOriginPP}>
+                                        <lightning-icon icon-name="standard:process_exception" size="xx-small" title="MES urgente"></lightning-icon>
+
+                                        &nbsp;Mes urgente: <template if:true={infosClient.CaseId__r.MES_urgente__c}>Oui</template> <template if:false={infosClient.CaseId__r.MES_urgente__c}>Non</template>
+                                        </p>
+
+                                        <lightning-icon icon-name="standard:email_chatter" size="xx-small" title="MES urgente"></lightning-icon>
+                                                &nbsp;Maj email: <template if:true={infosClient.Maj_email__c}>Oui</template> <template if:false={infosClient.Maj_email__c}>Non</template>
+                                        </p>                                
+                                </div>
+                                <div if:false={caseType} class="slds-form-element">                                        
+                                        <lightning-icon icon-name="custom:custom18" size="xx-small" title="Adresse"></lightning-icon> E documents : <template if:true={infosClient.E_documents__c}>Oui</template> <template if:false={infosClient.E_documents__c}>Non</template>
+                                </div>
+                                <!--p key={infosClient.E_documents__c}>
+                                        <lightning-icon icon-name="custom:custom18" size="xx-small" title="Adresse"></lightning-icon> E documents <input type="checkbox"  checked={infosClient.E_documents__c} disabled />
+                                </p-->
+                                <p key={demandeService}><lightning-icon icon-name="standard:service_contract" size="xx-small" title="Demande de service"></lightning-icon> Demande de service : <template if:true={demandeService}>Oui</template> <template if:false={demandeService}>Non</template></p>
+                                <div if:true={flagStatutIban}>
+                                        <p key={infosClient.Statut_Iban__c}><lightning-icon icon-name="custom:custom17" size="xx-small" title="Statut Iban"></lightning-icon> Statut IBAN : {infosClient.Statut_Iban__c}</p>
+                                </div>
+                        </div>    
+                </template>
+        </lightning-card>    
+</template>

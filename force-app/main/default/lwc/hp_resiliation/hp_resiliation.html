@@ -1,0 +1,98 @@
+<!--
+  @File Name          : hp_resiliation.html
+  @Description        : 
+  @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
+  @Group              : 
+  @Last Modified By   : ChangeMeIn@UserSettingsUnder.SFDoc
+  @Last Modified On   : 01-14-2021
+  @Modification Log   : 
+  Ver       Date            Author      		    Modification
+  1.0    15/05/2020   ChangeMeIn@UserSettingsUnder.SFDoc     Initial Version
+-->
+
+<template>
+  <div  style="background-color: #ffffff;  border: 2px solid #f8f8f8;padding:10px;border-radius: 6px;">
+  <template if:true={currentPfc}>
+  <h1 style="font-size: 1.3rem;margin-bottom: 1rem;"><b>RESILIATION CLIENT</b></h1>
+<template if:true={firstStep}>
+    <div class="slds-grid slds-gutters">
+      <div class="slds-col slds-size_1-of-2">
+        <h1 class="slds-text-title  slds-text-title_caps slds-text-heading_large slds-text-title_bold ">ADRESSE DU LOGEMENT</h1>
+       <br/>
+        <lightning-icon icon-name="utility:home" size="x-small" style="margin-right: 1rem;"></lightning-icon>
+        {currentPfc.numeroVoie} {currentPfc.libelleVoie} {currentPfc.codePostal} {currentPfc.ville}
+      </div>
+      <div class="slds-col slds-size_1-of-2">
+    <h1 class="slds-text-title  slds-text-title_caps slds-text-heading_large slds-text-title_bold " >CONTRAT A RESILIER</h1>
+    <div style="width: 20rem;">
+    <lightning-radio-group name="contract" value={type}
+										options={optionEnergy} onchange={selectContract}
+										type="radio">
+    </lightning-radio-group>
+    <template if:true={sourceHappePicklistValues.data}>
+    <lightning-combobox name="orign" style="margin-top: 1rem;"
+															label="Origine de résiliation:"
+                              placeholder=""
+                              value={dataForm.orign} onchange={handleChange}
+															options={sourceHappePicklistValues.data.values}
+														>
+                    </lightning-combobox>
+                  </template>
+  </div>
+  </div>
+</div>
+<div if:true={selectedContrat}>
+<div class=" slds-p-top_large slds-border_top slds-size_6-of-6 slds-m-vertical_x-small slds-grid ">
+  <b class="slds-text-title  slds-text-title_caps slds-text-heading_large slds-text-title_bold save">ENREGISTRER LA DEMANDE DE RÉSILIATION POUR {energie}</b>
+</div>
+<div class=" slds-form_horizontal">
+  <lightning-input class="numAffaire" value={dataForm.businessnum} type="text" onchange={handleChange} name="businessnum" label="Numéro d'affaire:" maxlength="8"></lightning-input>
+  <lightning-input class="datePrestation" value={dataForm.prestadate} type="date" onchange={handleChange} name="prestadate" label="Date de prestation:" ></lightning-input>
+</div>
+<div class="slds-border_top">
+  <lightning-input  type="checkbox" label="Replanifier le case" name="checkcase" onchange={scheduleCase} style="margin-top: 1rem;margin-bottom: 1rem;"></lightning-input>
+</div>
+<template if:true={scheCase}>
+<div class=" slds-form_horizontal">
+  <lightning-input type="date" value={dataForm.processdate} onchange={handleChange} name="processdate"  label="Date de traitement: "></lightning-input>
+  <lightning-input type="date" value={dataForm.effectivedate} onchange={handleChange} name="effectivedate" label=" Date de résiliation :"></lightning-input>
+      <template if:true={isGaz}>
+      <lightning-input type="number" value={dataForm.gazindex} class="index" onchange={handleChange} name="gazindex" label=" Index résiliation Gaz :" message-when-pattern-mismatch="veuillez saisir des chiffres"></lightning-input>
+    </template>
+    <template if:false={isGaz}>
+      <lightning-input  type="number" value={dataForm.elecindex} class="index" name="elecindex" onchange={handleChange}  label=" Index résiliation Elec:" maxlength="6" message-when-pattern-mismatch="veuillez saisir des chiffres"></lightning-input>
+      <lightning-input  type="number" value={dataForm.hpindex} class="index" name="hpindex" onchange={handleChange} label=" Index résiliation HP:" maxlength="6" message-when-pattern-mismatch="veuillez saisir des  chiffres"></lightning-input>
+      <lightning-input  type="number" value={dataForm.hcindex} class="index" name="hcindex" onchange={handleChange}  label=" Index résiliation HC :" maxlength="6" message-when-pattern-mismatch="veuillez saisir des chiffres"></lightning-input>
+    </template>
+</div>
+</template>
+</div>
+</template>
+<template if:false={firstStep}>
+  <center style="color: deepskyblue;font-size: 1.5rem;"><h1><b>RECAPITULATIF</b></h1></center>
+  <br/>
+  <center><lightning-icon icon-name="action:approval" size="large"></lightning-icon></center>
+  <div class="slds-grid slds-gutters" style="margin-top: 2rem;">
+    <div class="slds-col slds-size_1-of-2">
+      <lightning-icon icon-name="utility:home" size="x-small" style="margin-right: 1rem;"></lightning-icon>
+      {currentPfc.numeroVoie} {currentPfc.libelleVoie} {currentPfc.codePostal} {currentPfc.ville}
+      </div>
+
+      <div class="slds-col slds-size_1-of-2">
+        {recap}
+      </div>
+  </div>
+</template>
+    <div style="text-align: right; margin-top: 2rem;">
+        <lightning-button label="Fermer résiliation" variant="brand-outline" onclick={closeResiliation} style="margin-right: 0.3rem;"></lightning-button>
+        <template if:true={firstStep}>
+           <lightning-button label="Sauvegarder" variant="brand" onclick={savegarderResiliation}></lightning-button>
+        </template>
+    </div>
+  </template>
+
+  <div class="exampleHolder" if:true={showSpinner}>
+    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+</div>
+</div>
+</template>

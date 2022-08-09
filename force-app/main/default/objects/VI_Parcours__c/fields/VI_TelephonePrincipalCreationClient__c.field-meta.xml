@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_TelephonePrincipalCreationClient__c</fullName>
+    <description>Champ de création client</description>
+    <externalId>false</externalId>
+    <label>Téléphone fixe principal</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Téléphone 1</fullName>
+                <default>true</default>
+                <label>Téléphone 1</label>
+            </value>
+            <value>
+                <fullName>Téléphone 2</fullName>
+                <default>false</default>
+                <label>Téléphone 2</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,45 @@
+.hp-push {
+  margin: 15px;
+  position: relative;
+}
+
+.cover {
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+}
+.flag {
+  display: block;
+  width: 20px;
+  height: auto;
+  position: absolute;
+  top: 0;
+  right: 40px;
+}
+
+
+@media (min-width: 1280px) {
+  /* 1440px screen and all screens larger */
+
+}
+
+@media (max-width: 1280px) {
+  /* 1280px screen and all screens smaller */
+
+}
+
+@media (max-width: 1024px) {
+
+  /* Ipad and tablets */
+  .hp-push {
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 576px) {
+  /* mobiles */
+  .flag {
+    right: 30px;
+  }
+
+}

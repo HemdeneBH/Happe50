@@ -1,0 +1,215 @@
+<template>
+
+    <!-- Affichage du bouton (Modifier / Supprimer Blocage) au cas où il n y a pas de blocage -->
+
+    <lightning-button if:true={isBlocage} variant="brand"
+       label="MODIFIER / SUPPRIMER UN BLOCAGE"
+       title="MODIFIER / SUPPRIMER UN BLOCAGE"
+       onclick={openBlocageDesRelances}
+       class="slds-m-left_x-small">
+    </lightning-button>
+
+
+    <!-- Affichage du bouton (Créer Blocage) au cas où le blocage existe -->
+
+    <lightning-button if:false={isBlocage} variant="brand"
+       label="CREER UN BLOCAGE"
+       title="CREER UN BLOCAGE"
+       onclick={openBlocageDesRelances}
+       class="slds-m-left_x-small">
+    </lightning-button>
+
+    <template if:true={openBlocageRelances}>
+
+        <!-- Ouverture de la Modal -->
+
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+        aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open blockgeCont">
+            <div class="slds-modal__container">
+            <header class="slds-modal__header slds-modal__header_empty">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                    title="Close" onclick={closeBlocageDesRelancesCNB}>
+                    <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                        size="small">
+                    </lightning-icon>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+                <h2 class="slds-text-heading_medium titleStyle">BLOCAGE DE LA RELANCE COMPTE CLIENT</h2>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium">
+
+            <!--FT2-1254 Formulaire pour un client NON bloqué-->
+
+            <div if:true={openBlocageRelancesCNB} class="slds-grid slds-gutters">
+                <div class="slds-col">
+                    <span>
+                        <div class="slds-form slds-form_stacked">
+                            <div class="center-form">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-p-horizontal--medium">
+
+                                        <div class="slds-form-element">
+                                        <lightning-combobox value={valueMotifCNB} 
+
+                                            placeholder="Sélectionnez" options={motifsOptions}
+                                            onchange={motifHandleChange} label="Motif"
+                                            class="inputValue" required>
+                                        </lightning-combobox>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="slds-p-horizontal--medium">
+                                        <lightning-input class="inputValue" type="date" readonly label ="Date de début" date-style="short" value={dateDebutCNB} onchange ={dateDebutHandleChange}></lightning-input>          
+                                    </div>
+                                    <div class="slds-p-horizontal--medium">
+                                        <lightning-input class="inputValue" type="date" required label="Date de fin" date-style="short"  value={dateFinCNB} min={dateDebutCNB} max={dateMax} onchange ={dateFinHandleChange}></lightning-input>
+                                    </div>
+
+
+
+                                    </div>
+
+                                    </br>
+                                    <!-- Cancel and Save Buttons -->
+                                    <div class="cancel-blocage">
+                                        <a class="slds-button slds-card__body_inner cancel-dossier-sol"
+
+                                            onclick={closeBlocageDesRelancesCNB}>Annuler</a>
+
+                                        <button class="slds-button slds-button_brand save-dossier-sol" onclick={saveBlocageDesRelancesCNB}>Enregistrer</button>
+
+
+                                    </div>
+                                </div>                               
+                            </div>
+                    </span>
+                </div>          
+            </div>
+
+            <!--FT2-1265 Formulaire pour un client bloqué-->
+            <div if:true={openBlocageRelancesCB} class="slds-grid slds-gutters">
+                <div class="slds-col">
+                    <span>
+                        <div class="slds-form slds-form_stacked">
+                            <div class="center-form">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-p-horizontal--medium">
+
+
+                                        <div class="slds-form-element">
+                                        <lightning-combobox value={valueMotifCB} readonly
+                                            options={motifsOptions} placeholder={valueMotifCB} 
+                                            onchange={motifHandleChange} label="Motif"
+                                            class="inputValue" required>
+                                        </lightning-combobox>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="slds-p-horizontal--medium">
+                                        <lightning-input class="inputValue" type="date" readonly required label ="Date de début" date-style="short" placeholder={dateDebutCB}  value={dateDebutCB} onchange ={dateDebutCBHandleChange}></lightning-input>
+                                    </div>
+                                    <div class="slds-p-horizontal--medium">
+                                        <lightning-input class="inputValue" type="date" readonly required label="Date de fin" date-style="short" placeholder={dateFinPlaceholderCB} value={dateFinCB} min={dateDebutCB} max={dateMax} onchange={dateFinHandleChange}></lightning-input>
+                                    </div>
+
+
+
+                                    </div>
+                                    </br>
+                                    <!-- Cancel and Delete and Modify Buttons -->
+                                    <div class="cancel-blocage">
+                                        <a class="slds-button slds-card__body_inner cancel-dossier-sol"
+                                            onclick={closeBlocageDesRelancesCB}>Annuler</a>
+                                        <button class="slds-button slds-button_outline-brand delete-blocage-sol" onclick={deleteBlocageDesRelancesCB}>Supprimer</button>&nbsp;&nbsp;
+                                        <button class="slds-button slds-button_brand modify-blocage-sol" onclick={modifyBlocageDesRelancesCB}>Modifier</button>
+                                    </div>
+
+                                </div>
+                                
+                                
+                            </div>
+                    </span>
+                </div>  
+            </div>
+
+             <!--FT2-1340 Formulaire de modification pour un client bloqué-->
+             <div if:true={openBlocageRelancesCBModification} class="slds-grid slds-gutters">
+                <div class="slds-col">
+                    <span>
+                        <div class="slds-form slds-form_stacked">
+                            <div class="center-form">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-p-horizontal--medium">                                          
+
+
+                                        <div class="slds-form-element">
+                                        <lightning-combobox value={valueMotifCB}
+                                            options={motifsOptions} placeholder={valueMotifCB} 
+                                            onchange={motifCBHandleChange} label="Motif"
+                                            class="inputValue" required>
+                                        </lightning-combobox>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="slds-p-horizontal--medium">                                          
+                                        <lightning-input class="inputValue" type="date" readonly required label ="Date de début" date-style="short" placeholder={dateDebutCB}  value={dateDebutCB} onchange ={dateDebutCBHandleChange}></lightning-input>                                                          
+                                    </div>
+
+                                    
+                                    <!-- FT2-1525 - Gestion des dates dans les formulaires blocage - Correction du bug du champ date de fin mis en évidence même s'il est rempli -->
+                                    <div if:true={dateFinRequired} class="slds-p-horizontal--medium">
+                                        <lightning-input class="inputValue" type="date" required label="Date de fin" date-style="short" placeholder={dateFinPlaceholderCB} value={dateFinCB} min={dateMin} max={dateMax} onchange={dateFinCBHandleChange}></lightning-input>
+                                    </div>
+                                    <div if:false={dateFinRequired} class="slds-p-horizontal--medium">
+                                        <lightning-input class="inputValue" type="date"  label="Date de fin" date-style="short" placeholder={dateFinPlaceholderCB} value={dateFinCB} min={dateMin} max={dateMax} onchange={dateFinCBHandleChange}></lightning-input>
+                                    </div>
+
+
+
+
+                                    </div>
+                                    </br>
+                                    <!-- Cancel and Delete and Modify Buttons -->
+                                    <div class="cancel-blocage">
+                                        <a class="slds-button slds-card__body_inner cancel-dossier-sol"
+                                            onclick={closeBlocageDesRelancesCBModification}>Annuler</a>
+
+                                        <button class="slds-button widen-button slds-button_brand modify-blocage-sol" onclick={updateBlocageDesRelancesCB}>Enregistrer les modifications</button>
+
+                                    </div>  
+                                </div>                                                
+                            </div>
+                    </span>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!--FT2-1341  Pop-up de confirmation de suppression de Blocage -->
+        <template if:true={openConfirmDeeleteModal}>
+            <section role="dialog" tabindex="-1" aria-label="Meaningful description of the modal content" 
+            aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="containerdelete">
+            
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <p>Etes vous sûr de vouloir supprimer ce blocage?</p>
+                </div>
+
+                <footer class="slds-modal__footer">
+                <button class="slds-button slds-button_outline-brand delete-blocage-sol"  onclick={noDeleteBlocageDesRelancesCB}>Non</button>
+                <button class="slds-button slds-button_brand modify-blocage-sol" onclick={yesDeleteBlocageDesRelancesCB}>Oui</button>
+                </footer>
+          </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+        </section>
+        <div if:false={openConfirmDeeleteModal} class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

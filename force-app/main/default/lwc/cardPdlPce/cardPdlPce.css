@@ -1,0 +1,108 @@
+.close-popover:hover {
+    cursor: pointer;   
+}
+
+.container-card {
+  position: relative;
+}
+
+.popover-260 {
+  height: 270px;
+}
+
+.container-card .popup-card {
+  position: absolute;
+  top: 0;
+  right: calc(-100% - 12px);
+  background-color: #e0f5ff;
+}
+
+.container-card .label {
+  font-size: 10px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #767676;
+}
+
+.container-card .value {
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: black;
+}
+
+.copy-number {
+  margin-right: 10px
+}
+
+.copy-number:hover {
+  cursor: pointer;
+}
+
+.msg-copie-num {
+  position: absolute;
+  z-index: 1;
+  top: 5px;
+  right: -110px;
+  background: #c1c0c0;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.msg-copie-num::after {
+  content: "";
+  position: absolute;
+  bottom: 9px;
+  left: -20px;
+  margin-right: -10px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent #c1c0c0 transparent transparent;
+}
+
+.exampleHolder {
+  min-height: 100px;
+}
+
+.icon-compteur {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  width: 50px;
+  height: 50px;
+}
+
+.title-compteur {
+  position: absolute;
+  top: 10px;
+  left: 50px;
+  font-size: 1.2em;
+  font-family: 'Salesforce Sans', Arial, sans-serif ! important;
+  font-size: 1.2em;
+}
+
+.imgCopy {
+  margin-left:10px; 
+  width:20px;
+  
+}
+.imgCopy:hover {
+  cursor: pointer;
+}
+
+.close-icon {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.close-icon:hover {
+  cursor: pointer;
+}

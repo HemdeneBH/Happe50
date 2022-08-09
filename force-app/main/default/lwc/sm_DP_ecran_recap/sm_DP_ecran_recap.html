@@ -1,0 +1,54 @@
+<template>
+    <lightning-card  title="">
+
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_3-of-4">
+                <!--span>1</span-->
+
+                <div class="slds-align_absolute-center"><img src={imageUrl} alt="image recapitulatif délai de paiement" /></div>   
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-box slds-theme_shade slds-align_absolute-center">
+                        <div class="slds-col">
+                            <span><lightning-icon icon-name="utility:money" size="small"></lightning-icon></span>
+                        </div>
+                        <div class="slds-col">
+                            <span><lightning-formatted-number value={montanttotal} format-style="decimal" minimum-fraction-digits="2"></lightning-formatted-number> €</span>
+                        </div>
+                        <div class="slds-col"></div>
+                        <div class="slds-col"></div>
+                        <div class="slds-col"></div>
+                        <div class="slds-col">
+                            <span><lightning-icon icon-name="utility:date_input" size="small"></lightning-icon></span>
+                        </div>
+                        <div class="slds-col">
+                            <span>
+                                <div class="slds-text-heading_small">{nombreecheance} échéance(s) <br/>Première échéance (<lightning-formatted-number value={montantpremiereecheance} format-style="decimal" minimum-fraction-digits="2"></lightning-formatted-number> €) le {datepremiereecheance}</div>
+                            </span>
+                        </div>
+                    </div>
+                </div><br/>
+                <center>
+                <div class="slds-grid slds-gutters">
+                        <div class="slds-box slds-theme_shade slds-align_absolute-center" style="height:7rem">
+                    <template if:true={articlekbrecap.data}>
+                        <lightning-formatted-rich-text value={articlekbrecap.data}>
+                        </lightning-formatted-rich-text>
+                    </template>
+                </div>
+                </div>
+            </center>
+
+            </div>
+            <div class="slds-col slds-size_1-of-4">
+                <span><img src={imagefilariane} alt="image recapitulatif délai de paiement" style="float: right;" /></span>
+            </div>
+        </div>
+
+      
+        <!--div class="slds-clearfix slds-m-right_large">
+            <div class="slds-float_right">
+                <lightning-button variant="brand" label=" OK " title="Terminer la création de DP" onclick={traceInteractionRedirection}></lightning-button>
+            </div>
+        </div-->
+    </lightning-card>
+</template>

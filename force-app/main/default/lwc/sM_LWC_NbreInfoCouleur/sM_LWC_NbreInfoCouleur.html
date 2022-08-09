@@ -1,0 +1,45 @@
+<!--
+  @File Name          : sM_LWC_NbreInfoCouleur.html
+  @Description        : Composants Compteur des InfoCouleurs non vues
+  @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
+  @Last Modified On   : 07-08-2020
+  @Ticket             : FT2-277 / Sprint 10
+  Ver       Date            Author      		    Modification
+  1.0    05/03/2020   Jihad AZAMI HASSANI     Initial Version
+-->
+<template>
+    <lightning-card title="Nombre d’informations non lues" icon-name="action:info">
+        <lightning-layout>
+            <lightning-layout-item flexibility="auto" padding="around-small">
+        <div class="slds-m-around_medium">
+            <div class="alignClassRouge1">
+                Rouge
+            </div>
+            <div class="alignClassRouge">
+                    {NbreInfoCouleurRouge.data}
+            </div>   
+        </div>
+    </lightning-layout-item>
+    <lightning-layout-item flexibility="auto" padding="around-small">
+        <div class="slds-m-around_medium">
+            <div class="alignClassBleu1">
+                Bleue  
+            </div>
+            <div class="alignClassBleu">
+                    {NbreInfoCouleurBleu.data}
+            </div>   
+        </div>
+    </lightning-layout-item>
+    <lightning-layout-item flexibility="auto" padding="around-small">
+        <div class="slds-m-around_medium">
+            <div class="alignClassViolette1">
+                Violette  
+            </div>
+            <div class="alignClassViolette">
+                    {NbreInfoCouleurViolette.data}
+            </div>   
+        </div>
+        </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+</template>

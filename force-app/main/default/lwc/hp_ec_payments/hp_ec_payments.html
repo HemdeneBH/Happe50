@@ -1,0 +1,74 @@
+<!--
+  @description       : 
+  @author            : Badr Eddine Belkarchi
+  @group             : 
+  @last modified on  : 05-13-2022
+  @last modified by  : Badr Eddine Belkarchi
+-->
+<template>
+    <div class="c-payments c-content-bg">
+        <!-- <h2 class="hp-bigTitle">Mes modes de paiement</h2> -->
+        <c-hp_ec_payment-modes 
+            titre-v1={titreV1}
+            titre-v2={titreV2}
+
+            label-moyen-paiement1={labelMoyenPaiement1}
+            label-moyen-paiement2={labelMoyenPaiement2}
+            label-moyen-paiement3={labelMoyenPaiement3}
+            label-moyen-paiement4={labelMoyenPaiement4}
+            label-moyen-paiement5={labelMoyenPaiement5}
+
+            lien-en-savoir-plus-paiement1={lienEnSavoirPlusPaiement1}
+            lien-en-savoir-plus-paiement2={lienEnSavoirPlusPaiement2}
+            lien-en-savoir-plus-paiement3={lienEnSavoirPlusPaiement3}
+            lien-en-savoir-plus-paiement4={lienEnSavoirPlusPaiement4}
+            lien-en-savoir-plus-paiement5={lienEnSavoirPlusPaiement5}
+
+            show-lien-en-savoir-plus-paiement1={showLienEnSavoirPlusPaiement1}
+            show-lien-en-savoir-plus-paiement2={showLienEnSavoirPlusPaiement2}
+            show-lien-en-savoir-plus-paiement3={showLienEnSavoirPlusPaiement3}
+            show-lien-en-savoir-plus-paiement4={showLienEnSavoirPlusPaiement4}
+            show-lien-en-savoir-plus-paiement5={showLienEnSavoirPlusPaiement5}
+
+            text-mode-paiement={textModePaiement}
+            text-date-prelevement-part1={textDatePrelevementPart1}
+            text-date-prelevement-part2={textDatePrelevementPart2}>
+        </c-hp_ec_payment-modes>
+        <!-- <p>
+            <strong>Vous bénéficiez d’une aide solidarité logement de :</strong> 250€
+        </p>
+        <p>
+            <span><strong>Crédit utilisé :</strong> 100€ |&nbsp;</span>
+            <span><strong>Crédit restant :</strong> 150€</span>
+        </p> -->
+        <button onclick={openPopin}>Open Popin</button>
+    </div>
+    <template if:true={paymentPopin}>
+        <c-hp_ec_popin-payments id-portefeuille-contrat={idPortefeuilleContrat} onclosepopin={closePopin}
+            titre-v1={titreV1}
+            titre-v2={titreV2}
+
+            label-moyen-paiement1={labelMoyenPaiement1}
+            label-moyen-paiement2={labelMoyenPaiement2}
+            label-moyen-paiement3={labelMoyenPaiement3}
+            label-moyen-paiement4={labelMoyenPaiement4}
+            label-moyen-paiement5={labelMoyenPaiement5}
+
+            lien-en-savoir-plus-paiement1={lienEnSavoirPlusPaiement1}
+            lien-en-savoir-plus-paiement2={lienEnSavoirPlusPaiement2}
+            lien-en-savoir-plus-paiement3={lienEnSavoirPlusPaiement3}
+            lien-en-savoir-plus-paiement4={lienEnSavoirPlusPaiement4}
+            lien-en-savoir-plus-paiement5={lienEnSavoirPlusPaiement5}
+
+            show-lien-en-savoir-plus-paiement1={showLienEnSavoirPlusPaiement1}
+            show-lien-en-savoir-plus-paiement2={showLienEnSavoirPlusPaiement2}
+            show-lien-en-savoir-plus-paiement3={showLienEnSavoirPlusPaiement3}
+            show-lien-en-savoir-plus-paiement4={showLienEnSavoirPlusPaiement4}
+            show-lien-en-savoir-plus-paiement5={showLienEnSavoirPlusPaiement5}
+
+            text-mode-paiement={textModePaiement}
+            text-date-prelevement-part1={textDatePrelevementPart1}
+            text-date-prelevement-part2={textDatePrelevementPart2}>
+        </c-hp_ec_popin-payments>
+    </template>
+</template>

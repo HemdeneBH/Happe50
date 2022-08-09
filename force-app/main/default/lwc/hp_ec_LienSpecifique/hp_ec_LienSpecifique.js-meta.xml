@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="titre" label="Titre" type="String" default="Je déménage"/>
+            <property name="texteDescriptif" label="Texte descriptif" type="String" default="Faire suivre mon contrat dans mon nouveau logement"/>
+            <property name="lienSpecifique" label="URL de la page" type="String" default="/"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

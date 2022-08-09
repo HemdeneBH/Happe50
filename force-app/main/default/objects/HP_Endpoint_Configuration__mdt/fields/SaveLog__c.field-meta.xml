@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SaveLog__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Permet de sauvegarder les appels dans l&apos;objet log</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>SaveLog</label>
+    <type>Checkbox</type>
+</CustomField>

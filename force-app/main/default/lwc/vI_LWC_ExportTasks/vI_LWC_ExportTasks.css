@@ -1,0 +1,24 @@
+.searchField
+{
+		width:15%;
+		position:relative; 
+		left:84%;
+}
+
+.exportButton
+{
+		position: sticky;
+    left: 85%;
+}
+
+.parent {
+		position:relative; 
+		width: 99%;
+		left:1%;
+    white-space: nowrap;
+}
+
+.child {
+    display: inline-block;
+    height: 100%;
+}

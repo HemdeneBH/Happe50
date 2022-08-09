@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Canal__c</fullName>
+    <externalId>false</externalId>
+    <label>Canal</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Smile</fullName>
+                <default>false</default>
+                <label>Smile</label>
+            </value>
+            <value>
+                <fullName>Distributeurs</fullName>
+                <default>false</default>
+                <label>Distributeurs</label>
+            </value>
+            <value>
+                <fullName>Pure players</fullName>
+                <default>false</default>
+                <label>Pure players</label>
+            </value>
+            <value>
+                <fullName>Tunnel en ligne</fullName>
+                <default>false</default>
+                <label>Tunnel en ligne</label>
+            </value>
+            <value>
+                <fullName>Mailing</fullName>
+                <default>false</default>
+                <label>Mailing</label>
+            </value>
+            <value>
+                <fullName>Store/Corner</fullName>
+                <default>false</default>
+                <label>Store/Corner</label>
+            </value>
+            <value>
+                <fullName>Télévente</fullName>
+                <default>false</default>
+                <label>Télévente</label>
+            </value>
+            <value>
+                <fullName>Vente directe</fullName>
+                <default>false</default>
+                <label>Vente directe</label>
+            </value>
+            <value>
+                <fullName>Harmonica</fullName>
+                <default>false</default>
+                <label>Harmonica</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,74 @@
+.slds-has-error .slds-form-element__help,
+.slds-required {
+  color: var(--rose) !important;
+}
+
+.slds-form-element {
+  margin: 20px 0;
+}
+
+.hp_ec_activerEspaceClient {
+  padding: 50px 40px;
+  min-height: 600px;
+  height: auto;
+  max-width: 480px;
+  box-shadow: -5px 5px 15px 0 rgba(12, 29, 38, 0.21);
+  border: solid 30px var(--primary-colour);
+  background-image: var(--light-bg);
+}
+
+
+.hp-bigTitle {
+  text-align: center;
+  color: var(--true-black);
+  text-transform: uppercase;
+  padding: 40px 0 0 0;
+  font-size: 22px;
+}
+
+.hp-logo {
+  display: flex;
+  justify-content: center;
+}
+
+.hp-logo img {
+  width: 175px;
+  height: auto;
+  object-fit: contain;
+}
+
+.hp-firstButton {
+  min-width: 210px;
+}
+
+.hp-mentionBox {
+  font-family: var(--font-regular);
+  font-weight: lighter;
+  color: var(--dark-disabled);
+  font-size: 14px;
+  text-align: left;
+  padding: 20px 0 0 0;
+}
+
+
+@media (max-width: 1024px) {
+  /* Ipad and tablets */
+  .hp_ec_activerEspaceClient {
+    padding: 40px 25px;
+    height: auto;
+    max-width: 420px;
+    border: solid 20px var(--primary-colour);
+  }
+
+  .hp-logo img {
+    width: 160px;
+  }
+
+  .hp-bigTitle {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  /* mobiles */
+}

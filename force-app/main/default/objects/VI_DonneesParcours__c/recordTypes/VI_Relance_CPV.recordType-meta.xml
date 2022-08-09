@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_Relance_CPV</fullName>
+    <active>true</active>
+    <description>Pour stocker les différentes informations concernant la relance des CPV</description>
+    <label>Relance CPV</label>
+    <picklistValues>
+        <picklist>Etape__c</picklist>
+        <values>
+            <fullName>Constitution du panier client</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Estimation de la consommation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Identification besoin</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Identification client</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Identification local</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Informations complémentaires</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Récapitulatif de l%E2%80%99offre</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Saisie des moyens de paiement</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

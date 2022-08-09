@@ -1,0 +1,26 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 06-10-2022
+  @last modified by  : Hemdene Ben Hammouda
+-->
+
+<template>
+    <section>
+        <div class="hp_container" >
+          <header>                                                                     
+            <h1 class="hp-bigTtile" >
+                {titleText}
+            </h1>
+            <a class="hp-closeButon" onclick={closePopin} >X</a>
+          </header>
+        </div>
+        <div >
+          <iframe src={buyapowaIframeLink} frameborder="0" height="900px" width="100%" ></iframe>
+          <!-- <div lwc:dom="manual"></div> -->
+          <div id="bp_error" style="display: none;" >Désolé, nous n’avons pu charger la page</div>
+          <div id="bp_div"></div>
+        </div> 
+    </section>
+</template>

@@ -1,0 +1,102 @@
+<apex:page standardStylesheets="false" showHeader="false" sidebar="false" docType="html-5.0">
+ <apex:stylesheet value="{!URLFOR($Resource.vlocity_cmt__newport, 'assets/styles/vlocity-newport-design-system.min.css')}"/> 
+    <div class="vlocity via-slds" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" ng-app="ContactSelfcare">
+          <apex:stylesheet value="{!URLFOR($Resource.vlocity_cmt__newport, 'assets/styles/vlocity-newport-design-system.min.css')}"/> 
+        <vlocity_cmt:BusinessProcessComponent strOmniScriptType="ContactSelfcare"
+                                              strOmniScriptSubType="ModificationRDV"
+                                              strOmniScriptLang="French"
+                                              previewMode="{!$CurrentPage.parameters.previewEmbedded}"
+                                              verticalMode="{!$CurrentPage.parameters.verticalMode}"
+                                              strOmniScriptId="{!$CurrentPage.parameters.designerPreviewId}"
+                                              scriptLayout="newport"
+                                              />
+        <script type="text/javascript">
+            var modules = ['vlocity-business-process'];
+            var myModule = angular.module('ContactSelfcare', modules);
+        </script>
+    <style>
+    .via-nds .mask.vlc-slds-mask .nds-spinner--brand svg circle, .via-nds .nds-spinner_brand svg circle {
+        fill: rgb(176, 173, 171);
+    }
+    .via-nds .mask.vlc-slds-mask .nds-spinner svg circle {
+        r: 9%;
+    }
+    .via-nds .mask.vlc-slds-mask .nds-spinner {
+        width: 250px;
+        text-align: center;
+    }
+    .mask.vlc-slds-mask .nds-spinner_brand.nds-spinner svg { width: 30%; }
+    .mask.vlc-slds-mask .nds-spinner_brand.nds-spinner:before {
+        content: "Veuillez patienter pendant que nous chargeons vos données";
+        font-size: 1rem;
+    }
+    .nds-container.nds-knowledge-block {
+        display: none;
+    }
+    </style>
+    <script type="text/javascript">
+        var env = "";
+        if (document.domain.startsWith("engie-dgpfr")) {
+            env = "PROD";
+        }
+        else if (document.domain.startsWith("pprd")) {
+            env = "PPRD";
+        }
+        else if (document.domain.startsWith("uat")) {
+            env = "ACC";
+        }
+        else if (document.domain.startsWith("dev")) {
+            env = "DEV";
+        }
+        else {
+            env = "unknown";
+        }
+        var url = new URL(document.URL);
+        var arr = url.pathname.split("/");
+        var resourcePrefix = arr[1];
+        tc_vars = {
+            engie_marque: 'engie_particuliers',
+            site_support: 'site',
+            site_name: 'DV-WEB',
+            env_work: env,
+            page_name: '/espace_client/modification_rdv_distrib',
+            energy_type: '',
+            user_id: ''
+        };
+</script>
+<script type="text/javascript" src="//cdn.tagcommander.com/3468/tc_ENGIE_iframe.js"></script>
+<script type="text/javascript">
+     function refreshSnippet() {
+    var c = ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.tagcommander.com/3468/tc_ENGIE_iframe.js";
+    if (0 === $("script[src\x3d'" + c + "']").length)
+        var b = document.createElement("script");
+    else
+        b = $("script[src\x3d'" + c + "']")[0],
+        b.remove(),
+        b = document.createElement("script");
+    b.type = "text/javascript";
+    b.async = !0;
+    b.src = c;
+    c = document.getElementsByTagName("script")[0];
+    c.parentNode.insertBefore(b, c)
+}
+function TAG_page_virtual(c) {
+    try {
+        tc_vars.page_name_apps_1 = c,
+        refreshSnippet()
+    } catch (b) {
+        window.console && console.log("[TC] refreshSnippet : " + b.message)
+    }
+}
+function TAG_event_custom(c, b, a) {
+    try {
+        0 != b.length && (a.tc_tagIdentifier = b,
+        tc_events_global(c, b, a))
+    } catch (f) {
+        window.console && console.log("[TC] tc_events_global : " + f.message)
+    }
+}
+        </script>
+        <vlocity_cmt:VFActionFunction />
+    </div>
+</apex:page>

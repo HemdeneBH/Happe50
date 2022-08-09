@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Activer_mediatech__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Cette coche permet d&apos;activer ou de déactiver l’envoi des enquêtes de satisfaction depuis smile</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Activer médiatech</label>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,67 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 05-06-2022
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<template>
+    <div data-id='pageContent' class="hp-demenagement c-content-bg slds-col" >
+        <div data-id='bodyContent' class="c-content">
+            <header>
+                <div class="hp-bigTitle">
+                    <span class="hp-link">
+                        <a onclick={handleNavigateToPreviousPage}>
+                            <span class="chevron left"></span>
+                        </a>
+                    </span>
+                    {title}
+                </div>
+                <h3 class="c-subtitle ">{subtitle}</h3>
+            </header>
+            <div class="slds-grid c-demenagement-container ">
+                <div class="slds-col slds-size_1-of-3 c-demenagement-bloc">
+                    <div class="icon-container">
+                        <div class="icon"></div>
+                        <div class="icon-outter-circle">
+                            <div class="icon-inner-circle">
+                            </div>
+                            <div class="icon-number">{leftStepNumber}</div>
+                        </div>
+                    </div>
+                    <div class="c-demenagement-bloc-title">{leftStepTitle}</div>
+                    <div class="c-demenagement-bloc-text">{leftStepText}</div>
+                </div>
+                <div class="slds-col slds-size_1-of-3  c-demenagement-bloc">
+                    <div class="icon-container">
+                        <div class="icon"></div>
+                        <div class="icon-outter-circle">
+                            <div class="icon-inner-circle">
+                            </div>
+                            <div class="icon-number">{centerStepNumber}</div>
+                        </div>
+                    </div>
+                    <div class="c-demenagement-bloc-title">{centerStepTitle}</div>
+                    <div class="c-demenagement-bloc-text">{centerStepText}</div>
+                </div>
+                <div class="slds-col slds-size_1-of-3 c-demenagement-bloc">
+                    <div class="icon-container">
+                        <div class="icon"></div>
+                        <div class="icon-outter-circle">
+                            <div class="icon-inner-circle">
+                            </div>
+                            <div class="icon-number">{rightStepNumber}</div>
+                        </div>
+                    </div>
+                    <div class="c-demenagement-bloc-title">{rightStepTitle}</div>
+                    <div class="c-demenagement-bloc-text">{rightStepText}</div>
+                </div>
+            </div>
+            <div class="hp-btnContainer">
+                <div class="hp-firstButton" onclick={handleSouscrirePourMonNouveauLogement}>
+                    Souscrire pour mon nouveau logement   
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

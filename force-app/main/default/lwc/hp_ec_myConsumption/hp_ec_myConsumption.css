@@ -1,0 +1,160 @@
+.consumption {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    margin: 15px;
+    padding: 32px 40px 25px;
+    min-height: 360px;
+}
+.consumption-header {
+    margin-right: 36px;
+}
+.consumption-legend {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    flex-grow: 1;
+}
+.consumption-legend li {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    margin: 2px 8px;
+}
+.consumption-legend .color-legend {
+    display: block;
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    margin: 0 10px 0 0;
+    box-shadow: 0 3px 6px 0 var(--box-shadow-color);
+}
+.consumption-legend .color-legend.subscription { background-color: var(--yellow); }
+.consumption-legend .color-legend.tax { background-color: var(--orange); }
+.consumption-legend .color-legend.gas { background-color: var(--blue); }
+.consumption-legend .color-legend.elec { background-color: var(--primary-colour); }
+.consumption-legend .color-legend.estimated { background-color: var(--yellow); }
+.consumption-legend .color-legend.previous { background-color: var(--grey); }
+.consumption-legend .color-legend.alert { background-color: var(--rose); }
+.consumption-graph {
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow: auto;
+    width: calc(100% - 220px);
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    margin-top: 19px;
+    margin-bottom: -14px;
+    padding-right: 28px;
+    padding-bottom: 14px;
+}
+.consumption-graph::-webkit-scrollbar { width: 5px; height: 5px; border-radius: 3px;}
+.consumption-graph::-webkit-scrollbar-track { background: var(--bg-plain); border-radius: 3px; }
+.consumption-graph::-webkit-scrollbar-thumb { background: var(--secondary-colour); border-radius: 3px;}
+.consumption-graph li { margin: 0 auto; }
+.consumption-graph li:first-child { margin-left: 0; }
+.consumption-graph li:last-child { margin-right: 0; }
+.consumption-filters {
+    width: 220px;
+    flex-shrink: 0;
+    margin-top: 19px;
+    padding-left: 28px;
+    border-left: 2px solid var(--grey);
+}
+.consumption-filters__header {
+    margin-top: 19px;
+    font-size: 14px;
+    line-height: 15px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.consumption-filters__header:first-child {
+    margin-top: 0;
+}
+.consumption-filters__switcher {
+    margin-bottom: 10px;
+    display: flex;
+}
+.consumption-filters__switcher c-hp_ec_switch-button {
+    width: 100%;
+    flex: 1;
+}
+.consumption-filters__input-wrapper {
+    display: flex;
+    align-items: center;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--secondary-colour);
+    font-size: 12px;
+}
+.consumption-filters__input-icon {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+    --slds-c-icon-color-foreground-default: var(--secondary-colour);
+}
+.consumption-filters__input-icon lightning-icon {
+    display: block;
+}
+.consumption-filters__input {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-width: 32px;
+    flex: 1 1 0;
+}
+.consumption-filters__input label {
+    position: relative;
+    font-size: 12px;
+    z-index: 1;
+    white-space: nowrap;
+}
+.consumption-filters__input--date {
+    position: absolute;
+    opacity: 0;
+    z-index: 0;
+}
+/* Mobile */
+@media (max-width: 1024px) {
+    .consumption {
+        margin: 10px 0;
+        min-height: auto;
+    }
+    .consumption-header {
+        width: 100%;
+    }
+    .consumption-legend {
+        width: 100%;
+        margin-top: 16px;
+        margin-left: 0;
+        order: 3;
+    }
+    .consumption-graph {
+        width: 100%;
+        padding-bottom: 24px;
+        padding-right: 0;
+        margin-bottom: 0;
+    }
+    .consumption-filters {
+        width: 100%;
+        padding-left: 0;
+        padding-top: 24px;
+        border-left: none;
+        border-top: 2px solid var(--grey);
+        order: 4;
+    }
+    .consumption-filters div {
+        width: 200px;
+    }
+}
+@media (max-width: 374px) {
+
+    .consumption {
+        display: grid;
+        padding: 25px 20px;
+    }
+}

@@ -1,0 +1,33 @@
+.padding-modify{
+    padding-right: 1rem;
+    padding-left: 1rem;
+    padding-top: 1rem;
+}
+.dispo-style {
+    border: solid;
+    text-align: center;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    height: 2.5rem;
+    vertical-align: super;
+    padding-top: 0.5rem;
+    border-width: 1.5px;
+    border-color: #AAAAAA;
+    cursor: pointer;
+}
+
+.color-selected {
+    border: solid;
+    text-align: center;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    height: 2.5rem;
+    vertical-align: super;
+    padding-top: 0.5rem;
+    border-width: 1.5px;
+    border-color: #AAAAAA;
+    background-color: rgba(66, 85, 97, 1);
+    color: white;
+}

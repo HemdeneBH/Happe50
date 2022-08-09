@@ -1,0 +1,322 @@
+*:focus {
+  outline: none;
+}
+
+.fontClassBlue{
+  color: #009de9;
+}
+
+.btn-img-size {
+		width: 42px;
+    height: 42px;
+  }
+
+  .btn-img-size-astuce{
+    width: 24px;
+    height: 27px;
+    margin-left: 100%;
+  }
+
+  .btn-img-position {
+  position: relative;
+  top: 0px;
+  left: 80px;
+}
+
+.btn-img-size-arrows{
+		width: 22px;
+		height: 27px;
+		cursor: pointer;
+}
+
+  .showImageOnHover{
+    display:none; /*by default this should hidden*/
+  }
+  
+  .hideImageOnHover{
+    display:inline-block; /*by default this should be shown*/
+  }
+  
+  .btn-outline-primary:hover:active .hideImageOnHover {
+    display:none;
+  }
+  
+  .btn-outline-primary:hover:active .showImageOnHover {
+    display: inline-block;
+  }
+  .btn-outline-primary{
+      border-color: #009de9 !important;
+      color: #009de9;
+  }
+  
+  
+  .btn-outline-primary[data-current="true"] {
+    background-color: #009de9;
+    color:#fff;
+  }
+
+  .btn-outline-primary:hover{
+    background-color: #009de9 !important;
+		color:#fff;
+  }
+  
+  .btn-outline-primary[data-current="true"] .hideImageOnHover {
+    display:none;
+  }
+  
+  .btn-outline-primary[data-current="true"] .showImageOnHover {
+    display: inline-block;
+  }
+  
+  .form-control:focus{
+    box-shadow: 0 0 0 0;
+}
+
+.form-control{
+    border-top: 0;
+    border-right: 0;
+    border-left:0;
+    border-bottom-color: rgb(227, 227, 227);
+    border-radius: 0px;
+}
+
+.form-control1{
+    border-top: 0;
+    border-right: 0;
+    border-left:0;
+    border-bottom-color: rgb(227, 227, 227);
+    border-radius: 0px;
+		border-length: 50px;
+}
+
+.form-group{
+    text-align: left;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.inputConsoAnnu{
+  border-color: transparent;
+  border-width:0px;
+  border:none;
+  border: 0;
+  box-shadow: none;
+  outline:0;
+  outline: none;
+}
+
+.input{
+  border: none;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.vi-modal-button-minus-mensualite {
+    position: absolute;
+    background: white;
+    border-color: rgba(179, 179, 179);
+    border-style: solid;
+    color: rgba(179, 179, 179);
+    font-size: 42px;
+    width: 45px;
+    height: 45px;
+    left: 57%;
+    border-radius: 50%;
+    border-width: 3px;
+    outline: none;
+}
+
+.vi-modal-button-plus-mensualite {
+    position: absolute;
+    background: white;
+    border-color: var(--cerulean);
+    border-style: solid;
+    color: var(--cerulean);
+    font-size: 32px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border-width: 3px;
+    outline: none;
+}
+
+.vi-modal-button-plus-mensualite:after {
+    content: "";
+    background: white;
+    display: block;
+    position: absolute;
+    padding-top: 100%;
+    padding-left: 100%;
+    margin-left: -16%;
+    margin-top: -50%;
+    opacity: 0;
+    transition: all 1s;
+    border-radius: 50%;
+}
+
+.vi-modal-button-plus-mensualite:active:after {
+    padding: 1;
+    margin: 1;
+    opacity: 1;
+    transition: 0s;
+}
+.vi-modal-button-minus-mensualite:after {
+    content: "";
+    /* background: white; */
+    display: block;
+    position: absolute;
+    padding-top: 100%;
+    padding-left: 100%;
+    margin-left: -16%;
+    margin-top: -50%;
+    opacity: 0;
+    transition: all 1s;
+    border-radius: 50%;
+}
+
+.vi-modal-button-minus-mensualite:active:after {
+    padding: 1;
+    margin: 1;
+    opacity: 1;
+    transition: 0s;
+}
+
+.buttonMensualiteTextPlus {
+    position: absolute;
+    top: -20%;
+    left: 25%;
+}
+
+.buttonMensualiteTextMinus {
+    position: absolute;
+    top: -42%;
+    left: 28%;
+}
+
+.vi-modal-button-plus-mensualite {
+    position: absolute;
+    background: white;
+    border-color: var(--cerulean);
+    border-style: solid;
+    color: var(--cerulean);
+    font-size: 32px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border-width: 3px;
+    outline: none;
+}
+
+.question-hover{
+  cursor: pointer;
+}
+
+.vi-modal-background {
+  background-color: rgba(0, 0, 0, 0.25);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  left: 0px;
+  top: 0px;
+  z-index: 20;
+  padding-top: 200px;
+  padding-left: 446px;
+}
+
+.vi-modal-linky {
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  height: 400px;
+  width: 50%;
+  background-color: #ffffff;
+  z-index: 30;
+}
+
+.vi-modal-hphc {
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  height: 40%;
+  width: 60%;
+  background-color: #ffffff;
+  z-index: 30;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.buttonPrecedent {
+  position: absolute;
+  left: 1%;
+  background: transparent;
+  border-color: var(--cerulean);
+  border-style: solid;
+  color: var(--cerulean);
+  font-size: 18px;
+  width: 160px;
+  height: 50px;
+  outline: none;
+}

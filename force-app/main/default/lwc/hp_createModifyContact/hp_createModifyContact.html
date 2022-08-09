@@ -1,0 +1,384 @@
+<!--
+  @File Name          : hp_createModifyContact.html
+  @Description        : 
+  @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
+  @Group              : 
+  @Last Modified By   : ChangeMeIn@UserSettingsUnder.SFDoc
+
+
+
+
+
+  @Last Modified On   : 11-04-2021
+
+
+
+
+
+
+
+  @Modification Log   : 
+  Ver       Date            Author      		    Modification
+  1.0    02/07/2020   ChangeMeIn@UserSettingsUnder.SFDoc     Initial Version
+-->
+<template>
+  <div style="padding-right:3rem;overflow-y: auto;overflow-x: hidden;">
+  <center><div class="slds-border_bottom white">
+    <h1
+        class="slds-text-heading_medium slds-m-bottom_large" style="margin-top: 0.3rem;margin-bottom: 0.3rem;font-size: 1.4rem;">
+        {titlePage}
+    </h1>
+  </div>
+</center>
+  <div class="slds-grid slds-gutters" style="padding-left: 1rem;padding-right: 1rem;margin-top: 1rem;">
+    <div class="slds-col slds-size_3-of-12">
+      <h2 class="slds-text-heading_medium slds-m-bottom_large" style="margin-bottom: 0.3rem;">Identité</h2>
+      <div>
+        <lightning-combobox label="Civilité"  name="Salutation" disabled={isModification} class="validation"
+        onchange={handleValueChange} options={salutations} placeholder="--None--" value={salutation} required>
+        </lightning-combobox>
+      </div>
+    <div>
+      <lightning-input label="Prénom" value={prenom} message-when-value-missing="Ce champ ne peut pas être vide" 
+      disabled={isModification} class="validation"
+      onchange={handlePrenom} required></lightning-input>
+    </div>
+      <div> 
+          <lightning-input label="Nom" value={nom} message-when-value-missing="Ce champ ne peut pas être vide" 
+          onchange={handleNom} disabled={isModification} class="validation"
+          required>
+      </lightning-input>
+    </div>
+<!--<h2 class="slds-text-heading_medium slds-m-bottom_large" style="margin-bottom: 0.5rem;margin-top: 1rem;">Contact</h2>
+--><div>
+  <lightning-input label="Email" value={email}  onchange={handleEmail} onblur={handleBlurEmail} class="validation" required
+  message-when-value-missing="Ce champ ne peut pas être vide"></lightning-input>
+</div>
+
+<div>
+  <span><a style="color:#be0000;" if:true={astrxShow}>*</a> Numéro de téléphone mobile</span>
+  <table style="margin-top: -1rem;"><tr></tr>
+    <td style="vertical-align: text-top;padding-top: 1.5rem; padding-right: 0.3rem;">+33</td>
+ 
+    <td>
+  <lightning-input value={numeroPortable}  class="num1 validation" style="margin-top: 1rem;" variant="label-hidden"
+   pattern="[0]?(6|7)[0-9]{8}" type="tel" 
+   message-when-pattern-mismatch="Veuillez saisir un numéro commençant par 06 ou 07 suivi de 8 chiffres" message-when-value-missing="Ce champ ne peut pas être vide"
+                    onchange={handleNumeroPortable} ></lightning-input>
+                  </td>
+                </tr></table> 
+</div>
+<div>
+  <span><a style="color:#be0000;" if:false={astrxShow}>*</a> Numéro de téléphone fixe</span>
+ <table style="margin-top: -1rem;"><tr></tr>
+   <td style="vertical-align: text-top;padding-top: 1.5rem; padding-right: 0.3rem;">+33</td>
+
+   <td>
+    <lightning-input value={numeroFixe} class="num2 validation"  style="margin-top: 1rem;" variant="label-hidden"
+    onchange={handleNumeroFixe}    pattern="[0]?([1-5]|9)[0-9]{8}" type="tel" message-when-value-missing="Ce champ ne peut pas être vide"
+    message-when-pattern-mismatch="Veuillez saisir un numéro commençant par 01 à 05 ou 09 suivi de 8 chiffres" ></lightning-input>
+
+   </td>
+ </tr></table> 
+
+
+
+</div>
+<div if:true={isModification}>
+  <span>Numéro étranger</span>
+ <table style="margin-top: -1rem;"><tr></tr>
+   <td ></td>
+
+   <td>
+
+
+    <lightning-input value={numeroEtranger}  onchange={handleNumeroEtranger} pattern="^[0-9-+\s() ]*$" message-when-pattern-mismatch="Veuillez saisir un numéro de téléphone valide" maxlength="20" class="num2 validation" type="tel" ></lightning-input>
+
+
+
+   </td>
+ </tr></table> 
+
+
+</div>
+    </div>
+    <div class="slds-col slds-size_3-of-12">
+      <h2 class="slds-text-heading_medium slds-m-bottom_large" style="margin-bottom: 0.3rem;">Adresse de contact</h2>
+      <div>
+        <lightning-radio-group name="radioGroup" class="slds-form-element__label  slds-m-bottom_medium validation"
+            label="Mode de saisie d'adresse" options={modeAdresse} value={modeSaisie} type="button"
+            onchange={handleOnChange}>
+        </lightning-radio-group>
+        <template if:true={addressAuto}>
+          <div>
+            <lightning-textarea label="Adresse de contact" list="valueList" onchange={getSearchResult} class="validation"
+            message-when-value-missing="Ce champ ne peut pas être vide" data-id="overview"
+            value={adresseActuelle} required></lightning-textarea>
+            <div data-id="listbox"
+                            class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid display-none" role="listbox"
+                            style="position: relative;width: 35rem;">
+                            <div style="height: 20rem; overflow-y: auto;" class="display-none" data-id="listboxIn">
+                            <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                <!--<template for:each={adresses} for:item="adresse">
+                                    <li role="presentation" class="slds-listbox__item" key={adresse.type}>
+                                        <div data-id={adresse.properties.id} data-name={adresse.properties.label}
+                                            data-housenumber={adresse.properties.housenumber}
+                                            data-street={adresse.properties.street}
+                                            data-postcode={adresse.properties.postcode}
+                                            data-city={adresse.properties.city}
+                                            data-citycode={adresse.properties.citycode}
+                                            class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                            role="option" onclick={selectedValue}>
+                                            <span class="slds-media__body">
+                                                <span
+                                                    class="slds-listbox__option-text slds-listbox__option-text_entity">{adresse.properties.label}</span>
+                                            </span>
+                                        </div>
+                                    </li>
+                                </template>-->
+                                <template if:false={hasComplement}>
+                                <template if:false={hasListeNumero}>
+                                <template for:each={adressesDQE} for:item="adresse">
+                                  <li role="presentation" class="slds-listbox__item" key={adresse.id}>
+                                      <div data-id={adresse.id} data-name={adresse.label}
+                                          data-housenumber={adresse.numero}
+                                          data-street={adresse.voie}
+                                          data-postcode={adresse.codePostal}
+                                          data-city={adresse.ville}
+                                          data-citycode={adresse.idLocalite}
+                                          data-listenumero={adresse.listeNumero}
+                                          data-idvoie ={adresse.idVoie}
+                                          class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                          role="option" onclick={selectedValue}>
+                                          <span class="slds-media__body">
+                                              <span
+                                                  class="slds-listbox__option-text slds-listbox__option-text_entity">{adresse.label}</span>
+                                          </span>
+                                      </div>
+                                  </li>
+                              </template>
+                            </template>
+                          </template>
+                          <template if:false={hasComplement}>
+                              <template if:true={hasListeNumero} >
+                              <template  for:each={adressesDQEList} for:item="adresse">
+                                <li role="presentation" class="slds-listbox__item" key={adresse.id}>
+                                    <div data-id={adresse.id} data-name={adresse.label}
+                                        data-housenumber={adresse.numero}
+                                        data-street={adresse.voie}
+                                        data-postcode={adresse.codePostal}
+                                        data-city={adresse.ville}
+                                        data-citycode={adresse.idLocalite}
+                                        data-listenumero={adresse.listeNumero}
+                                        data-idvoie ={adresse.idVoie}
+                                        class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                        role="option" onclick={selectedSecondValue}>
+                                        <span class="slds-media__body">
+                                            <span
+                                                class="slds-listbox__option-text slds-listbox__option-text_entity">{adresse.numero} {adresse.voie} {adresse.codePostal} {adresse.ville}</span>
+                                        </span>
+                                    </div>
+                                </li>
+                            </template>
+                          </template>
+                        </template>
+
+
+                          <template if:true={hasComplement} >
+                            <template  for:each={adressesDQEComplemet} for:item="adresse">
+                              <li role="presentation" class="slds-listbox__item" key={adresse.id}>
+                                  <div data-id={adresse.id} data-name={adresse.batiment}
+                                      class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                      role="option" onclick={selectedThirdValue}>
+                                      <span class="slds-media__body">
+                                          <span
+                                              class="slds-listbox__option-text slds-listbox__option-text_entity"> {adresse.batiment}</span>
+                                      </span>
+                                  </div>
+                              </li>
+                          </template>
+                        </template>
+
+
+                            </ul>
+                        </div>
+                        </div>
+          </div>
+        </template>
+        <template if:false={addressAuto}>
+        <div>
+            <lightning-input label="No de Voie" value={adresseChoisie.housenumber} class="validation"
+            message-when-value-missing="Ce champ ne peut pas être vide" required
+            onchange={handleNoVoie}></lightning-input>
+          <lightning-input label="Libellé de la voie" value={adresseChoisie.street} class="validation"
+          message-when-value-missing="Ce champ ne peut pas être vide" required
+              onchange={handleVoie}></lightning-input>
+          <lightning-input label="Complement adresse" value={adresseChoisie.cmpAdress} 
+              onchange={handleComplementAdresse}>
+          </lightning-input>
+          <lightning-input label="Code postal" value={adresseChoisie.postcode} class="noPostal validation" message-when-value-missing="Ce champ ne peut pas être vide" required
+               onchange={handleCodePostale}
+              maxlength="5" type="number"></lightning-input>
+              <lightning-input  label="Ville" class=" noCity validation" value={adresseChoisie.city} onchange={handleVille} message-when-value-missing="Ce champ ne peut pas être vide" required 
+              >
+          </lightning-input>
+              <div data-id="listboxx"
+                  class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid display-none"
+                  role="listbox" style="position: relative;">
+                  <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                      <template for:each={communes} for:item="commune">
+                          <li role="presentation" class="slds-listbox__item" key={commune.codeCommune}>
+                              <div data-id={commune.codeCommune} data-city={commune.ville}
+                                  class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                  role="option" onclick={selectedManuValue}>
+                                  <span class="slds-media__body">
+                                      <span
+                                          class="slds-listbox__option-text slds-listbox__option-text_entity">{commune.ville}</span>
+                                  </span>
+                              </div>
+                          </li>
+                      </template>
+                  </ul>
+              </div>
+          </div>
+        </template>
+<b>
+        <div if:true={isElecGazELD}>La ville est une entreprise locale de distribution pour le gaz et
+          l'électricité, cette adresse n'est pas compatible avec un contrat happ-e.</div>
+        <div if:false={isElecGazELD}>
+          <div if:true={isGazELD}>La ville est une entreprise locale de distribution pour le gaz, cette
+              adresse n'est pas compatible avec un contrat happ-e gaz.</div>
+          <div if:true={isElecELD}> La ville est une entreprise locale de distribution pour l'électricité,
+              cette adresse n'est pas compatible avec un contrat happ-e électricité.</div>
+      </div></b>
+    </div>
+    </div>
+    <div class="slds-col slds-size_6-of-12">
+      <h2 class="slds-text-heading_medium slds-m-bottom_large" style="margin-bottom: 0.3rem;">Consentement</h2>
+      <template for:each={consentementList} for:item="consentement" class="slds-m-bottom_xx-large">
+        <div key={consentement.idQuestion} class="slds-grid slds-gutters slds-m-top_medium ">
+          <div class="slds-col slds-size_10-of-12">
+            <span style="font-size: 0.75rem;">{consentement.libelleQuestion}</span>
+        </div>
+        <div class="slds-col slds-size_2-of-12">
+          <lightning-radio-group name={consentement.name}
+          options={yesNo} style="font-size: 0.75rem;"
+          data-id={consentement.name}
+          value={consentement.response}
+          onchange={consentementchanged}
+          type="button"></lightning-radio-group>
+        </div>
+        </div>
+        </template>
+        <section>
+					<div class="slds-grid slds-gutters slds-m-top_medium ">
+            <div class="slds-col slds-size_10-of-12">
+              <span style="font-size: 0.75rem;">{marketingLabels.stopEmailPhrase}</span>
+            </div>
+            <div class="slds-col slds-size_2-of-12">
+              <lightning-radio-group name="StopEmail"
+              options={yesNo} style="font-size: 0.75rem;"
+              data-id="StopEmail"
+              value={stopemailyes}
+              onchange={getmodifiedStopemail}
+              type="button"></lightning-radio-group>
+            </div>
+          </div>
+          <div class="slds-grid slds-gutters slds-m-top_medium ">
+            <div class="slds-col slds-size_10-of-12">
+              <span style="font-size: 0.75rem;">{marketingLabels.stopSmsPhrase}</span>
+            </div>
+            <div class="slds-col slds-size_2-of-12">
+              <lightning-radio-group name="StopSMS"
+              options={yesNo} style="font-size: 0.75rem;"
+              data-id="StopSMS"
+              value={stopsmsyes}
+              onchange={getmodifiedStopsms}
+              type="button"></lightning-radio-group>
+            </div>
+          </div>
+          <div class="slds-grid slds-gutters slds-m-top_medium ">
+            <div class="slds-col slds-size_10-of-12">
+              <span style="font-size: 0.75rem;">{marketingLabels.optinMarketingPhrase}</span>
+            </div>
+            <div class="slds-col slds-size_2-of-12">
+              <lightning-radio-group name="OptinMarketing"
+              options={yesNo} style="font-size: 0.75rem;"
+              data-id="OptinMarketing"
+              value={optinmarketingyes}
+              onchange={getmodifiedOptinmarketing}
+              type="button"></lightning-radio-group>
+            </div>
+          </div>
+        </section>
+    </div>
+  </div>
+  <section if:true={isModification} style="padding: 1rem;">
+    <h2 class="slds-text-heading_medium slds-m-bottom_large" style="margin-bottom: 0rem;">Recapitulatif</h2>
+    <div class="slds-grid slds-gutters" >
+      <div class="slds-col slds-size_5-of-12">
+    <table><tr><td>
+      <label>Souhaitez-vous recevoir une confirmation par email de ces modifications ?</label>
+    </td>
+    <td> <lightning-input class="confirmation-email slds-m-left_large" type="checkbox" value={confirmationEmail} disabled onchange={isSendEmailChecked}></lightning-input>
+    </td></tr></table>
+    </div>
+    <div class="slds-col slds-size_5-of-12">
+      <table><tr><td><label>Souhaitez-vous recevoir une confirmation par SMS de ces modifications ?</label>
+      </td>
+      <td><lightning-input class="confirmation-sms slds-m-left_large" type="checkbox" value={confirmationSMS} disabled onchange={isSendSMSChecked}></lightning-input>
+      </td></tr></table>
+    </div>
+    <div class="slds-col slds-size_2-of-12">
+      <button title="Annuler" class="svgd slds-button slds-button_neutral" type="button" style="font-size: 0.7rem;margin-left: 0.1rem; margin-right: 0.1rem;"
+      onclick={closeInterface}>Annuler</button>
+      <button title="update" class="svgd slds-button slds-button_brand" type="button" name="update" style="font-size: 0.7rem"
+        onclick={handleSubmit}>Mettre à jour</button>
+    </div>
+    </div>
+  </section>
+  <div if:false={isModification} style="float: right;margin-right: 6rem;margin-top: 1rem; margin-bottom: 3.5rem;">
+    <button title="Annuler"  type="button"   class="svgd slds-button slds-button_neutral" style="font-size: 0.7rem;margin-left: 0.1rem; margin-right: 0.1rem;"
+        onclick={closeInterface}>Annuler</button>
+        <button  title="SAUVEGARDER" class="svgd slds-button slds-button_brand" type="button" 
+        name="update" style="font-size: 0.7rem"
+        onclick={loadDoublonsContact}>Sauvegarder</button>
+  </div>
+        <div if:true={loading}>
+          <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+      </div>
+      <template if:true={doublonsPopupModal}>
+        <div class="demo-only" style="height: 640px;">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={closedoublonsPopupModal}>
+                            <lightning-icon icon-name="utility:close" size="medium">
+                            </lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Voici la liste des
+                            doublons</h2>
+                    </header>
+                    <div class="slds-grid slds-wrap" style="background: white;">
+                        <template for:each={doublonsContactList} for:item="contact">
+                            <a href="javascript:void(0)" key={contact.Id} data-id={contact.Id} onclick={linkToContact}
+                                class="slds-col slds-size_1-of-1 slds-m-left_x-large">{contact.FirstName}
+                                {contact.LastName}</a>
+                        </template>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button label="Annuler" variant="neutral" onclick={closedoublonsPopupModal}>
+                        </lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <lightning-button label="Créer un nouveau client" variant="brand" onclick={handleSubmit}>
+                        </lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+  </div>
+</template>

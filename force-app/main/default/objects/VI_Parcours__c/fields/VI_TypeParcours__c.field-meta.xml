@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_TypeParcours__c</fullName>
+    <description>Attribue au compte le type d’enseigne dans la CPV créée et qui fera le lien avec Symphonie/Amadeus pour les reporting de vente notamment</description>
+    <externalId>false</externalId>
+    <label>Type parcours</label>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>PURE PLAYERS</fullName>
+                <default>false</default>
+                <label>PURE PLAYERS</label>
+            </value>
+            <value>
+                <fullName>VENTE DIRECTE</fullName>
+                <default>false</default>
+                <label>VENTE DIRECTE</label>
+            </value>
+            <value>
+                <fullName>STORE</fullName>
+                <default>false</default>
+                <label>STORE</label>
+            </value>
+            <value>
+                <fullName>DISTRIBUTION</fullName>
+                <default>false</default>
+                <label>DISTRIBUTION</label>
+            </value>
+            <value>
+                <fullName>CORNER</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CORNER</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

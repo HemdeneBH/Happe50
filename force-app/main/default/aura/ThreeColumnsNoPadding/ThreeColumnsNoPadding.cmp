@@ -1,0 +1,20 @@
+<aura:component implements="lightning:recordHomeTemplate" access="global" description="Three columns: Middle column is 50% width, left and right are 25% widths. No padding in between.">
+    <aura:attribute name="left" type="Aura.Component[]" />
+    <aura:attribute name="main" type="Aura.Component[]" />
+    <aura:attribute name="right" type="Aura.Component[]" />
+    
+    <div>
+        <lightning:layout horizontalAlign="spread">
+            <lightning:layoutItem class="sidebarLayout leftPanel">
+                {!v.left}
+            </lightning:layoutItem>
+            <lightning:layoutItem class="mainLayout">
+                {!v.main}
+            </lightning:layoutItem>
+            <lightning:layoutItem class="sidebarLayout rightPanel">
+                {!v.right}
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+    
+</aura:component>

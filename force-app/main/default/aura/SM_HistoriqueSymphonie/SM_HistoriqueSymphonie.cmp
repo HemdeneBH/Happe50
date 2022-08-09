@@ -1,0 +1,13 @@
+<!--
+  @description       : Composant encapsulant le lwc historique des contacts symphonie
+  @author            : Mohamed Aamer
+  @last modified on  : 06-07-2022
+  @last modified by  : Mohamed Aamer
+-->
+<aura:component implements="flexipage:availableForAllPageTypes,lightning:isUrlAddressable" access="global">
+
+  <lightning:workspaceAPI aura:id="workspace" />
+  <aura:attribute name="IdPersonne" type="String" default="{!v.pageReference.state.c__idPersonne}"></aura:attribute>
+  <c:smHistoriqueSymphonie idPersonne="{!v.IdPersonne}" oncloseclicked="{!c.handleCloseSubTab}"></c:smHistoriqueSymphonie>
+  
+</aura:component>

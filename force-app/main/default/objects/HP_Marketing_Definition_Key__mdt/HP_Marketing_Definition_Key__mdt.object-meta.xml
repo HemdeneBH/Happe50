@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Marketing Definition Key</description>
+    <label>HP Marketing Definition Key</label>
+    <pluralLabel>HP Marketing Definition Keys</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

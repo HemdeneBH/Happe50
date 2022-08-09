@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Statut_du_compteur__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ISPICKVAL(Secteur_activite__c, &apos;Elec&apos;),
+IF(AND(ISPICKVAL(SI_contractuel__c, &apos;DISCO&apos;), ISPICKVAL(Type_de_compteur__c, &apos;Historique&apos;), ISBLANK(Mois_de_deploiement__c), ISPICKVAL(Niveau_d_ouverture_aux_services__c, &apos;Niveau 0&apos;)), &apos;Autre DISCO non téléopérable N0&apos;, 
+IF(AND(ISPICKVAL(SI_contractuel__c, &apos;DISCO&apos;), ISPICKVAL(Type_de_compteur__c, &apos;Historique&apos;), Not(ISBLANK(Mois_de_deploiement__c)), ISPICKVAL(Niveau_d_ouverture_aux_services__c, &apos;Niveau 0&apos;)), &apos;Prochainement Linky non téléopérable N0&apos;, 
+IF(AND(ISPICKVAL(SI_contractuel__c, &apos;DISCO&apos;), ISPICKVAL(Type_de_compteur__c, &apos;Linky&apos;), ISPICKVAL(Niveau_d_ouverture_aux_services__c, &apos;Niveau 0&apos;)), &apos;Linky DISCO non téléopérable N0&apos;, 
+IF(AND(ISPICKVAL(SI_contractuel__c, &apos;DISCO&apos;), ISPICKVAL(Type_de_compteur__c, &apos;Linky&apos;), ISPICKVAL(Niveau_d_ouverture_aux_services__c, &apos;Niveau 1&apos;)), &apos;Linky DISCO téléopérable N1&apos;, 
+IF(AND(ISPICKVAL(SI_contractuel__c, &apos;GINKO&apos;), ISPICKVAL(Type_de_compteur__c, &apos;Historique&apos;), ISBLANK(Mois_de_deploiement__c), ISPICKVAL(Niveau_d_ouverture_aux_services__c, &apos;Niveau 0&apos;)), &apos;Autre GINKO non téléopérable N0&apos;, 
+IF(AND(ISPICKVAL(SI_contractuel__c, &apos;GINKO&apos;), ISPICKVAL(Type_de_compteur__c, &apos;Historique&apos;), Not(ISBLANK(Mois_de_deploiement__c)), ISPICKVAL(Niveau_d_ouverture_aux_services__c, &apos;Niveau 0&apos;)), &apos;Prochainement Linky non téléopérable N0&apos;, 
+IF(AND(ISPICKVAL(SI_contractuel__c, &apos;GINKO&apos;), ISPICKVAL(Type_de_compteur__c, &apos;Linky&apos;), ISPICKVAL(Niveau_d_ouverture_aux_services__c, &apos;Niveau 0&apos;)), &apos;Linky GINKO non téléopérable N0&apos;, 
+IF(AND(ISPICKVAL(SI_contractuel__c, &apos;GINKO&apos;), ISPICKVAL(Type_de_compteur__c, &apos;Linky&apos;), ISPICKVAL(Niveau_d_ouverture_aux_services__c, &apos;Niveau 1&apos;)), &apos;Linky GINKO téléopérable N1&apos;, 
+IF(AND(ISPICKVAL(SI_contractuel__c, &apos;GINKO&apos;), ISPICKVAL(Type_de_compteur__c, &apos;Linky&apos;), ISPICKVAL(Niveau_d_ouverture_aux_services__c, &apos;Niveau 2&apos;)), &apos;Linky GINKO Nouvelles offres N2&apos;, 
+&apos;Inconnu, à vérifier dans SGE&apos;))))))))),
+IF(ISPICKVAL(Type_de_compteur__c, &apos;Gazpar&apos;), &apos;Communicant&apos;, 
+IF(AND(ISPICKVAL(Type_de_compteur__c, &apos;Historique&apos;), ISBLANK(Date_refus_telereleve__c)), &apos;Non Communicant&apos;, 
+IF(AND(ISPICKVAL(Type_de_compteur__c, &apos;Historique&apos;), Not(ISBLANK(Date_refus_telereleve__c))), &apos;Non Communicant refus télérelève&apos;,
+&apos;Statut inconnu. A vérifier dans OMEGA&apos;)))
+)</formula>
+    <label>Statut du compteur</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

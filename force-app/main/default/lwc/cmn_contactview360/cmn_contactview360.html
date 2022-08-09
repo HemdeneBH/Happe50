@@ -1,0 +1,305 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+
+
+
+  @last modified on  : 12-07-2021
+
+
+
+
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   07-07-2020   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+-->
+<template>
+	<div class="smile-profile-box slds-card">
+		<div class="slds-float--right" style="text-align: right; line-height: 1;">
+			<div class="slds-p-around_x-small">
+				<lightning-button-icon icon-name="action:edit" size="large" variant="bare" alternative-text="Modifier"  onclick={updateCoords}></lightning-button-icon>
+			</div>
+		<!--  utiliser l'icon' SLDS "utility:warning" a la place de ce truc -->
+		<!--	<div if:true={arequalifier} class="engie-profile-warning slds-m-top_x-small">
+				<font color="#c10e24"><svg class="slds-m-bottom_xx-small slds-m-right_xx-small" style="width: 16px;"
+						viewBox="0 0 576 512">
+						<path d="M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z" ></path>
+						</svg>
+					 A requalifier</font>
+			</div>-->
+			<div if:true={reclamationStatus} class="engie-profile-warning slds-m-top_x-small">
+				<font color="#c10e24"><svg if:true={displayIcon} class="slds-m-bottom_xx-small slds-m-right_xx-small" style="width: 16px;"
+						viewBox="0 0 576 512">
+						<path d="M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z" ></path>
+						</svg>
+						<a href="javascript:void(0);" onclick={openPopupModalReclamationCase}>{reclamationStatus}</a></font>
+
+
+			</div>
+		</div>
+		<div class="profile-rond">
+				<div class="mister">
+						<svg if:true={ismister} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41.08 45.16">
+							<g>
+								<path d="M30.71,32.33h-2l-1.84-2.68A14,14,0,0,0,31,21.34a3.21,3.21,0,0,0,2.81-3.09V14.6A3.3,3.3,0,0,0,32,12V9.62A5.36,5.36,0,0,0,32.71,4c-1.14-2.43-4.09-4-7.51-4a12.09,12.09,0,0,0-6.95,2.27c-8,.12-9.14,3.54-9.14,6.87V12A3.3,3.3,0,0,0,7.29,14.6v3.65a3.21,3.21,0,0,0,2.8,3.09,14.05,14.05,0,0,0,4.16,8.36L12.5,32.32h-2c-6.1,0-10.52,4-10.52,9.61v1.82a1.41,1.41,0,0,0,1.41,1.41,1.39,1.39,0,0,0,1-.41,1.45,1.45,0,0,0,.41-1V41.92c0-4,3.17-6.78,7.7-6.78h2.73a1.41,1.41,0,0,0,1.17-.63l2.11-3.14a8.27,8.27,0,0,0,8.08,0l2.2,3.2a1.43,1.43,0,0,0,1.16.61h2.74c4.44,0,7.55,2.79,7.55,6.79v1.82a1.41,1.41,0,0,0,2.82,0V41.94C41.08,36.28,36.81,32.33,30.71,32.33ZM29.47,8.24a1.44,1.44,0,0,0-.32.9v3.65A1.39,1.39,0,0,0,30,14.07a3.61,3.61,0,0,1,1,.67v3.51c0,.19-.57.41-1.32.41a1.42,1.42,0,0,0-1.42,1.41c0,4.31-3.43,9.52-7.69,9.52a5.86,5.86,0,0,1-3.42-1.17l-.2-.17c-.05,0-.08,0-.07,0a11,11,0,0,1-4-8.16,1.41,1.41,0,0,0-1.41-1.41c-.76,0-1.32-.22-1.32-.41v-3.5a3.09,3.09,0,0,1,1-.68,1.41,1.41,0,0,0,.83-1.28V9.14c0-1.9,0-4.05,6.79-4.05a1.46,1.46,0,0,0,.84-.28,9.36,9.36,0,0,1,5.64-2c2.3,0,4.29,1,4.95,2.4A2.84,2.84,0,0,1,29.47,8.24Z" ></path>
+							</g>
+						</svg>
+				</div>
+				<div class="madame">
+						<svg if:true={ismadame} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41.08 42.9">
+							<g>
+								<path d="M28.53,31.12l-2.6-3.37c7-1.59,9.75-6.11,10.44-7.49a1.4,1.4,0,0,0,0-1.36A41.51,41.51,0,0,1,32.84,12C31,4.38,26.56,0,20.54,0S10,4.38,8.24,12A42,42,0,0,1,4.75,18.9a1.46,1.46,0,0,0,0,1.36c.7,1.4,3.49,5.95,10.59,7.52l-2.72,3.34C6.47,31.33,0,34.06,0,39.66v1.82a1.41,1.41,0,1,0,2.82,0V39.67c0-4.18,6.4-5.73,10.43-5.73a1.42,1.42,0,0,0,1.1-.53l4.19-5.16a26.76,26.76,0,0,0,4.2,0l4,5.15a1.42,1.42,0,0,0,1.11.55c4,0,10.44,1.56,10.44,5.73v1.82a1.41,1.41,0,1,0,2.82,0V39.66C41.08,34.07,34.62,31.33,28.53,31.12Zm5-11.48c-1.22,1.95-4.69,5.86-13,5.86S8.8,21.59,7.59,19.64c1-1.7,3-5.25,3.39-7,.7-3,3-9.84,9.56-9.84S29.4,9.7,30.1,12.66C30.5,14.39,32.5,17.94,33.49,19.64Z" ></path>
+							</g>
+						</svg>
+				</div>
+				<div class="other">
+						<svg if:true={isother} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46.97 44.25">
+							<g>
+								<path d="M36.6,31.41h-2l-2-2.89a12.87,12.87,0,0,0,3.83-8.44,2.83,2.83,0,0,0,1.41-2.74V13.69a2.78,2.78,0,0,0-1.83-3V8.23c0-2.91-.75-5.09-2.22-6.48S30.49-.13,27.9,0a1.37,1.37,0,0,0-1,.47,1.4,1.4,0,0,0-.35,1s0,.06,0,.09A7.71,7.71,0,0,0,22.65.29c-.65,0-6.44-.32-9,.67-4.24,1.65-4.57,6-4.57,7.27V11a3.3,3.3,0,0,0-1.82,2.65v3.65a3.37,3.37,0,0,0,2.34,3A14.16,14.16,0,0,0,14.14,29L12.5,31.41h-2C4.42,31.41,0,35.45,0,41v1.82a1.41,1.41,0,0,0,2.82,0V41c0-4,3.17-6.79,7.7-6.79h2.73a1.42,1.42,0,0,0,1.18-.63l2-3.05a8.16,8.16,0,0,0,8.06-.25l2.28,3.32a1.43,1.43,0,0,0,1.17.61h2.73c4.44,0,7.55,2.79,7.55,6.79v1.82a1.41,1.41,0,0,0,2.82,0V41a9.22,9.22,0,0,0-2.6-6.62A6.55,6.55,0,0,1,44.15,41v1.82a1.41,1.41,0,1,0,2.82,0V41C47,35.36,42.71,31.41,36.6,31.41ZM28.74,13.28h.4c0,.1,0,.25,0,.4v3.65c0,.36-.07.41-.07.41a1.41,1.41,0,0,0-1.41,1.41c0,4.4-3.22,9.52-7.36,9.52s-7.93-5.24-7.93-9.52A1.41,1.41,0,0,0,11,17.75a1.35,1.35,0,0,1-.86-.41V13.83a3.28,3.28,0,0,1,1-.67,1.43,1.43,0,0,0,.83-1.29V8.23c0-2.16,1.8-4.87,4.11-5.13A35.9,35.9,0,0,1,22.48,3a5.37,5.37,0,0,1,4.85,5.27v3.64A1.41,1.41,0,0,0,28.74,13.28ZM28.06,2.84c1.79-.09,3,.22,3.82,1s1.34,2.32,1.34,4.42v3.65a1.41,1.41,0,0,0,1.41,1.41H35v4.05a1.7,1.7,0,0,1,0,.25A1.42,1.42,0,0,0,33.67,19a10.17,10.17,0,0,1-3.24,7.71,1.09,1.09,0,0,0-.3.36l-.44.74a1.42,1.42,0,0,0,.06,1.51l1.45,2.11H28.72l-2-2.9a14,14,0,0,0,3.71-8.28A3.13,3.13,0,0,0,32,17.34V13.69a2.78,2.78,0,0,0-1.82-3V8.23A8.19,8.19,0,0,0,28,2.85Z" ></path>
+							</g>
+						</svg>
+				</div>
+		</div>
+		<div>
+			<ul class="slds-text-body_small slds-p-around_small">
+					<li><b>{firstname} {lastname}</b> 
+						<span style="margin-left: 0.8rem;">
+							<lightning-button-icon icon-name="action:edit" size="small" variant="bare" alternative-text="Modifier"  onclick={openEditNameClient}></lightning-button-icon>
+						</span>
+					</li>
+					<li if:true={hprefclient} class="slds-p-bottom_small"><b style="text-transform: capitalize;">{hprefclient}</b><b if:true={hpisHPClient}> - Client happ-e <c-hp_anciennete-client idtiers={idClient} contactid={recordId}></c-hp_anciennete-client> <c-hp_has-offre-stay idtiers={idClient}></c-hp_has-offre-stay></b></li>
+					<li if:true={refclient} class="slds-p-bottom_small"><b style="text-transform: capitalize;">{refclient}</b><b if:true={segmentmarketing}> - {segmentmarketing}</b></li>
+					<!--<li if:true={isinternaute}><lightning-button label='Espace client' icon-name="action:web_link"  onclick={navigateToEC}></lightning-button></li> -->
+					<li if:true={becomesinternaute}>EC en cours</li>
+					<!--<li if:true={notinternaute} class="profile-details"><a href="#" style="color:#059ce7;">Créer l'espace client</a></li>-->
+					<li class="slds-p-top_small">{numvoierue}</li>
+					<li if:true={complementadresse}>{complementadresse}</li>
+					<li class="slds-p-bottom_small">{mailingpostalcode} {mailingcity}</li>
+					<!--Bug : no phone if no email  SMIL-1390 pkt 11 et 12 -->
+					<!--<li class="emailp" if:true={emailprincipal}>{emailprincipal}</li>-->
+					<li if:true={hpemail}>{hpemail}</li>
+					<li if:true={offline} >
+						<span style="color:#e70505;">Offline</span>
+					</li> 
+					<li if:false={offline} >
+						<a onclick={openAgilabSpace}>Espace client Agilab</a>
+					</li> 
+					<!--<li if:true={telfixeprincipal}>{telfixeprincipal}</li>-->
+					<li if:true={hpphone}>{hpphone}</li>
+					<!--<li if:true={mobileprincipal}>{mobileprincipal}</li>-->
+					<li if:true={hpmobilephone}>{hpmobilephone}</li>
+					<li if:true={hpnumeroEtranger}>{hpnumeroEtranger}</li>
+				</ul>
+			</div>
+			
+			<template if:true={sharedURL}>
+				<hr>
+				<div>
+					<b>Parrainage</b>
+					<p style="font-size: 0.75rem;">URL de parrainage : {sharedURL}</p>
+				</div>
+			</template>
+			<template if:true={globalScore}>
+
+			
+			<a href="javascript:void(0);"  style="font-size: 0.75rem;" onclick={openNoteSatisfaction}>CSAT : {globalScore}/5 - Dernière : {dernierScore}/5</a>
+		</template>
+	</div>
+		
+
+		<template if:true={updateClientPopupModal}>
+			<div class="demo-only" style="height: 640px;">
+				<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+					aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+					<div class="slds-modal__container" style="max-width: 100rem;width: 90%;">
+
+
+						<header class="slds-modal__header">
+							<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+								title="Close" onclick={updateClientPopupModalPopupModal}>
+								<lightning-icon icon-name="utility:close" size="medium">
+								</lightning-icon>
+								<span class="slds-assistive-text">Close</span>
+							</button>
+						</header>
+						<div class="slds-grid slds-wrap" style="background: white; padding-bottom: 1rem;">
+							<c-hp_create-modify-contact recordid={recordId} style="width:100%" oncloseupdate={closeUpdateInfo}>
+								</c-hp_create-modify-contact>
+
+ 
+						</div>
+					</div>
+				</section>
+				<div class="slds-backdrop slds-backdrop_open"></div>
+			</div>
+		</template>
+
+
+		<template if:true={showReclamationCase}>
+			<div class="demo-only" style="height: 640px;">
+				<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+					<div class="slds-modal__container" style="max-width: 75rem;width: 90%;">
+						<header class="slds-modal__header">
+							<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closePopupModalReclamationCase}>
+								<lightning-icon icon-name="utility:close" size="medium">
+								</lightning-icon>
+								<span class="slds-assistive-text">Close</span>
+							</button>
+							<h2>Création d’une réclamation pour le client {firstname} {lastname}</h2>
+		
+						</header>
+						<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+							<div class="slds-grid slds-wrap">
+								<lightning-accordion class="example-accordion" style="width: 100%;" active-section-name="reclamationList">
+		
+									<lightning-accordion-section name="reclamationList" label="Liste des réclamations">
+										<table class="slds-table slds-table_cell-buffer slds-table_bordered">
+											<thead>
+											  <tr class="slds-line-height_reset">
+												<th class="" scope="col">
+												  <div class="slds-truncate">Numéro de la requête</div>
+												</th>
+												<th class="" scope="col">
+		
+												  <div class="slds-truncate">Statut</div>
+												</th>
+												<th class="" scope="col">
+												  <div class="slds-truncate">Type Happe</div>
+												</th>
+												<th class="" scope="col">
+												  <div class="slds-truncate">Motif de la requête</div>
+		
+												</th>
+												<th class="" scope="col">
+												  <div class="slds-truncate">Priorité</div>
+												</th>
+												<th class="" scope="col">
+		
+												  <div class="slds-truncate">Numéro de la facture</div>
+												</th>
+		
+												<th class="" scope="col">
+												  <div class="slds-truncate">Date de Creation</div>
+												</th>
+											  </tr>
+											</thead>
+											<tbody>
+												<template if:true={reclamationCaseList}>
+												<template for:each={reclamationCaseList} for:item="caseItem">
+		
+		
+											  <tr class="slds-hint-parent" key={caseItem.Id}>
+												<th data-label="Opportunity Name" scope="row">
+												  <div class="slds-truncate">
+													<a href="javascript:void(0);" data-id={caseItem.Id} onclick={openReclamationCase}>{caseItem.CaseNumber}</a>
+												  </div>
+												</th>
+		
+												<td data-label="Prospecting">
+												  <div class="slds-truncate">{caseItem.Status}</div>
+												</td>
+												<td data-label="Amount">
+												  <div class="slds-truncate">{caseItem.HP_Type__c}</div>
+												</td>
+												<td data-label="Motif">
+												  <div class="slds-truncate">{caseItem.Reason}</div>
+												</td>
+												<td data-label="Confidence">
+												  <div class="slds-truncate">{caseItem.Priority}</div>
+												</td>
+												<td data-label="Close Date">
+												  <div class="slds-truncate">{caseItem.HP_Numero_de_facture__c}</div>
+												</td>
+		
+												<td data-label="Confidence">
+													<div class="slds-truncate">{caseItem.CreatedDate}</div>
+												  </td>
+											  </tr>
+											  </template>
+											</template>
+											</tbody>
+										</table>
+									</lightning-accordion-section>
+									<lightning-accordion-section name="createReclamation" label="Créer une nouvelle réclamation">
+					<lightning-record-edit-form record-type-id={reclamationRT} object-api-name="Case" onsuccess={handleSuccess} onsubmit ={handleSubmit} >
+						<div class="slds-grid slds-gutters" style="height: 20rem;">
+							<div class="slds-col slds-size_1-of-2">
+		
+							  <lightning-input-field field-name="HP_Type__c" required>
+							  </lightning-input-field>
+							<lightning-input-field field-name="Priority" required>
+						</lightning-input-field>
+						<lightning-input-field field-name="HP_Numero_de_facture__c">
+						</lightning-input-field>
+		</div>
+							<div class="slds-col slds-size_1-of-2">
+							  <lightning-input-field field-name="HP_Motif__c" required>
+							  </lightning-input-field>
+							  <lightning-input-field field-name="HP_Comment__c" required>
+								</lightning-input-field>
+							</div>
+						  </div>
+		
+					  <div style="float:right">
+						<lightning-button class="slds-m-top_small" style="margin-right: 0.5rem;" onclick={closePopupModalReclamationCase}
+						label="Annuler"></lightning-button>
+						<lightning-button variant="brand" label="Créer requête" type="submit"
+						class="slds-m-top_small"></lightning-button>
+						<div class="exampleHolder" if:true={showSpinner}>
+							<lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+						</div>
+					</div>
+		
+					</lightning-record-edit-form>
+					</lightning-accordion-section>
+					</lightning-accordion>
+						</div>
+						</div>
+		
+					</div>
+				</section>
+				<div class="slds-backdrop slds-backdrop_open"></div>
+			</div>
+			</template>
+
+
+
+
+
+
+			<template if:true={showNoteSafisfaction}>
+				<div class="demo-only" style="height: 640px;">
+					<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+						<div class="slds-modal__container" style="max-width: 75rem;width: 90%;">
+							<header class="slds-modal__header">
+								<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closePopupNoteSatisfactionCase}>
+									<lightning-icon icon-name="utility:close" size="medium">
+									</lightning-icon>
+									<span class="slds-assistive-text">Close</span>
+								</button>
+								<h2 style="font-size: 1.3rem;">Satisfaction client</h2>
+			
+							</header>
+							<div class="slds-modal__content slds-p-around_medium">
+								<div class="slds-grid slds-wrap">
+									
+									<c-hp_note-satisfaction contactid={recordId}></c-hp_note-satisfaction>
+							</div>
+							<div style="text-align: end;">
+								<lightning-button variant="brand" class="slds-m-top_small" style="margin-right: 0.5rem;" onclick={closePopupNoteSatisfactionCase}
+								label="Fermer"></lightning-button>
+								
+								</div>
+							</div>
+							
+						</div>
+					</section>
+					<div class="slds-backdrop slds-backdrop_open">
+
+						
+					</div>
+				</div>
+				</template>
+</template>

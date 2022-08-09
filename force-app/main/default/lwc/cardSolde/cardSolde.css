@@ -1,0 +1,104 @@
+.active {
+  color: #19a546;
+}
+
+.enCours {
+  color: #ff7f1d;
+}
+
+.prevContract {
+  color: #c1c0c0;
+  line-height: 1;
+  position: absolute;
+  bottom: 0;
+  padding-right: 5px;
+  width: 100%;
+  padding-right: 30px;
+}
+
+.bloc-card {
+  height: 184px;
+}
+
+.position-right {
+  right: 0;
+}
+
+.close-popover:hover {
+  cursor: pointer;
+}
+
+.container-card {
+  position: relative;
+}
+
+.popover-260 {
+  height: 270px;
+}
+
+.container-card .popup-card {
+  position: absolute;
+  top: 0;
+  right: calc(-100% - 12px);
+  background-color: #e0f5ff;
+}
+
+.container-card .label {
+  font-size: 10px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #767676;
+}
+
+.container-card .value {
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: black;
+}
+
+.solde-card {
+  font-weight: 500;
+  font-size: 25px;
+}
+
+.negatif-solde {
+  color: #1E90FF;
+}
+.null-solde {
+  color: #000000;
+}
+.positif-solde {
+  color: #c10e24;
+}
+
+.recouvrement {
+  height: 16px;
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #c10e24;
+  margin-left: 10px;
+}
+
+.title-solde {
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.icon-action {
+    margin-left: 10px;
+}
+
+.icon-action:hover {
+    cursor: pointer;
+}

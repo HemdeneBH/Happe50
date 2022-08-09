@@ -1,0 +1,29 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 02-04-2022
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<template>
+    <div data-id="container" class="hp-monContrat c-content-bg slds-col">
+        <div data-id="title" class="hp-bigTitle">{titleText}</div>
+        <div class="hp-contractTitle">{titleContrat}</div>
+        <div if:true={contractList}>
+            <template for:each={contractList} for:item="contract" >
+                <div key={contract.id} >
+                    <span class="hp-contractInfo">{contract.idXdata}</span>
+                </div>
+            </template>
+        </div>
+
+        <div data-id="buttonBloc" class="hp-btnContainer">
+            <div class="hp-firstButton" onclick={handleVoirContract}>
+                {voirContractButtonLabel}
+            </div>
+            <div class="hp-secondButton" onclick={handleJustificatif}>
+                {justificatifButtonLabel}
+            </div>
+        </div>
+    </div>
+</template>

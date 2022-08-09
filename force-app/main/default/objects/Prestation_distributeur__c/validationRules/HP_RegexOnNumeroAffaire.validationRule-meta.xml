@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HP_RegexOnNumeroAffaire</fullName>
+    <active>false</active>
+    <description>Le numéro d’affaire doit être sur 8 caractères alphanumériques. Contrôle bloquant si c’est pas respecté</description>
+    <errorConditionFormula>AND(
+OR($RecordType.Name = &quot;HP_ModifyTechnicalProperties&quot;,$RecordType.Name = &quot;HP_PrestationDistributeur&quot; ),
+NOT(
+AND(
+LEN( Numero_affaire_distributeur__c ) = 8,
+REGEX( Numero_affaire_distributeur__c , &quot;^[a-zA-Z0-9_]*$&quot;)))
+)</errorConditionFormula>
+    <errorDisplayField>Numero_affaire_distributeur__c</errorDisplayField>
+    <errorMessage>Le numéro d’affaire doit être sur 8 caractères alphanumériques. Espace et caractères spéciaux non autorisés.</errorMessage>
+</ValidationRule>

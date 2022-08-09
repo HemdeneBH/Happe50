@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prestataire_du_responsable__c</fullName>
+    <description>@Description: Champ à récupérer de la fiche utilisateur du owner de l&apos;intervention.
+@Project: Smile</description>
+    <externalId>false</externalId>
+    <formula>TEXT(Owner:User.Prestataire__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Prestataire du responsable</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

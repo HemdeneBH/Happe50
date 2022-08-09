@@ -1,0 +1,50 @@
+.container {
+    font-size: 13px;
+    color: #343434;
+    background-color: #f8fbfe !important;
+    text-align: center;
+
+    width: 100%;
+    position: relative;
+
+}
+h1 {
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+}
+.titre-jour {
+    height: 40px;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.creneau {
+    padding: 5px 10px;
+}
+.engie-arrow {
+    height: fit-content;
+    margin: .75rem;
+    border-radius: 50%;
+    width: 30px;
+    height: 29px;
+    text-align: center;
+    padding-top: 3px;
+    margin-top: 5px;
+    border: 1px solid white;
+}
+.engie-arrow:not(.active) {
+    fill: #858585;
+}
+.engie-arrow.active {
+    fill: #059ce7;
+}
+.engie-arrow.active:hover {
+    cursor: pointer;
+    border: 1px solid #059ce7;
+    box-shadow: 0px 1px 2px lightgrey;
+}
+.engie-arrow:focus {
+    outline: none;
+}

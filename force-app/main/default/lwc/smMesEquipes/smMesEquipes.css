@@ -1,0 +1,95 @@
+html, body {
+  height: 100%;
+  margin: 0px;
+}
+.container {
+  background-color: white;
+  height: 100%;
+}
+.no-team, .error-team{
+  width: 100%;
+  height: inherit;
+  text-align: center;
+  font-size: x-large;
+  display: table-cell;
+  vertical-align: middle;
+}
+.vl{
+  border-right: 5px solid #629abb;
+  position: absolute;
+  left: 32.5%;
+  height: inherit;
+}
+  h2 {
+    font-size: 26px;
+    text-align: center;
+    padding: 15px 0;
+  }
+  .site{
+    color: brown;
+  }
+  .teams{
+    margin-top: 20px;
+  }
+  .teams .team-elem{
+    border: 1px solid;
+    border-radius: 20px;
+    text-align: center;
+    margin: 2%;
+    height: 60px;
+    width: 120px;
+    display: inline-block;
+  }
+  .teams .team-elem .title{
+    font-size: large;
+    position: absolute;
+    text-align: center;
+    width: inherit;
+    height: inherit;
+    line-height: 55px;
+    display: block;
+  }
+  .teams .team-elem .constitute{
+    position: absolute;
+    font-size: large;
+    opacity: 0;
+    text-align: center;
+    width: inherit;
+    height: inherit;
+    margin-top: 0px;
+    border-radius: 20px;
+    transition: all 1s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    cursor: pointer;
+    display: block;
+  }
+  .teams .team-elem.selected {
+    background-color: #57971d;
+    color: white;
+    border-color: #0c5004;
+    font-weight: 500;
+  }
+  .teams .team-elem:hover .constitute{
+    opacity: 1;
+    margin-top: -1px;
+    margin-left: -1px;
+    border: 1px solid;
+    border-color: #62369b;
+    background: rgb(1 118 211);
+    color: white;
+  }
+  .teams .team-elem:hover .title{
+    opacity: 0;
+  }
+  .global-search {
+    width: 60%;
+    margin: auto;
+    text-align: center;
+  }
+  .checkControl{
+    display: none;
+  }
+  .navTeams{
+    background-color: white;
+    padding: 0 20px;
+    width: 100%;
+  }

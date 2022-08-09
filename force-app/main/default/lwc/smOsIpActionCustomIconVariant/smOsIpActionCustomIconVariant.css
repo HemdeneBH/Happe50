@@ -1,0 +1,10 @@
+.engie-smile-buttonlink {
+    --sds-c-button-text-color:  #0176D3	;
+    --sds-c-button-text-color-hover: #014486;
+}
+.engie-smile-buttonlink:hover {
+  text-decoration: underline;
+}
+.engie-smile-cntleft {
+  justify-content: left;
+}

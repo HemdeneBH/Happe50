@@ -1,0 +1,116 @@
+.pageTitle{
+    font-weight: bold;
+    font-size: 20px;
+}
+.addressTitle{
+    font-size: 10px;
+}
+.tableListPa{
+    height: 45px;
+    border: solid 1px #979797;
+    background-color: #767f85;
+    table-layout: fixed;
+    width: 129px;                                           
+    color: #ffffff;
+}
+table tr td:first-child::before {
+    min-width: 1em;
+    margin-right: 0.5em;
+}
+table tr{
+    border: 1px solid #ddd;
+}
+.grayBackground{
+    background-color:#e6ebec
+}
+.brand {
+    background-color: #059ce7;    
+}
+.slds-button-neutral {
+   color: white;
+    border-color:white;
+}
+td,th {
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+    text-align: -internal-center;
+    width:1.5rem;
+    height:45px;
+    padding: 1%;
+}
+.card-with-border{
+    border:2px solid;
+    border-radius: 5px;
+    border-color: #e0e0e0;
+    padding: 20px;
+}
+.boldRed{
+    font-size: 14px;
+    font-weight:bold;
+    color: #D21404;
+}
+.boldGreen{
+    font-size: 14px;
+    font-weight:bold;
+    color: #03C04A;
+}
+.pagination {
+    display: inline-block;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #f2f2f2;
+}
+.pagination:hover {
+    cursor: pointer;
+}
+.selected-page {
+    color: #ffffff;
+    background-color: rgb(84,105,141);
+}
+.redFont {
+    color: #c10e24;
+}
+.greenFont {
+    color: #19a546;
+}
+.lignePaiement{
+    background-color:rgba(54, 207, 160, 0.1);
+}
+.active-filters-container{
+    padding:10px;
+    margin-bottom: 15px;
+}
+.table-icon{
+    position:relative;
+    bottom:15px;
+    right:-90%
+}
+.container-filter {
+    padding-left: 10px;
+}
+.container-filter:hover {
+    cursor: pointer;
+}
+.container-th {
+    position: relative;
+}
+.container-th .popup-card-cat {
+    position: absolute;
+    top: 14px;
+    right: calc(-100% - 80px);
+    width:150%
+}
+.container-th .popup-card-motif {
+    position: absolute;
+    top: 12px;
+    right: calc(-100% - -25px);
+}
+.close-icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+.modalBody {
+    position: relative;
+}

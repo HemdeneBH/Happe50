@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_Estimation_conso_elec_HP__c</fullName>
+    <description>Estimation Elec HP ou ST remontée par le flux Octopus</description>
+    <externalId>false</externalId>
+    <label>Estimation consommation elec HP</label>
+    <precision>16</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

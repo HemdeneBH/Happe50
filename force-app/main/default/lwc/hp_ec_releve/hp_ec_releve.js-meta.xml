@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property type="String" name="title" label="Titre" default="Ma relève"/>
+
+            <property type="String" name="textProchainePeriodeGaz"  default="Date de la prochaine relève gaz :"/>
+            <property type="String" name="textProchainePeriodeElec" default="Date de la prochaine relève élec :"/>
+            <property type="String" name="textPeriodeEnCoursGaz"    default="Relève gaz à effectuer avant le :"/>
+            <property type="String" name="textPeriodeEnCoursElec"   default="Relève élec à effectuer avant le :"/>
+            <property type="String" name="textPeriodeEnCoursResiliation"  default="Relève résiliation à effectuer avant le :"/>
+
+
+            <property name="titlePopinReleve" label="Titre de la popin relève" type="String" default="Ma Relève"></property>
+            <property name="messageIndexError" label="Message erreur si index inférieur à la précédente relève" type="String" default="Index saisi est inférieur au relevé précédent."></property>
+            <property name="messageIndexNoValidError" label="Message erreur si la forme d'index saise est erronée." type="String" default="La forme d'index saise est erronée."></property>
+            <property name="customUrlPopinReleve" label="Lien customisable de la popin relève" type="String" default="http://google.com"></property>
+            <property name="customUrlLabelPopinReleve" label="Label lien customisable de la popin relève" type="String" default="Où trouver ces informations?"></property>
+
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

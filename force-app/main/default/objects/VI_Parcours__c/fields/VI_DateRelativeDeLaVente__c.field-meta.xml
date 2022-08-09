@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_DateRelativeDeLaVente__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( /*du jour*/ 
+			OR(
+			    	AND(/*&amp; Vente en cours de signature*/
+			    					  TEXT(VI_TypeDeVente__c) == &quot;Vente en cours de signature&quot;,
+		    						  VI_DateVenteEnCoursDeSignature__c == TODAY()
+		    		),
+								AND(/*&amp; Vente brute*/
+			    					  TEXT(VI_TypeDeVente__c) == &quot;Vente brute&quot;,
+		    						  VI_DateVenteBrute__c == TODAY()
+		    		),
+								AND(/*&amp; Vente nette*/
+			    					  TEXT(VI_TypeDeVente__c) == &quot;Vente nette&quot;,
+		    						  VI_DateVenteNette__c == TODAY()
+		    		)		
+			),&quot;Du jour&quot;, 
+				
+				
+	  IF( /* De la semaine*/
+			OR(
+			    	AND(/*&amp; Vente en cours de signature*/
+			    					  TEXT(VI_TypeDeVente__c) == &quot;Vente en cours de signature&quot;,
+		    						  MOD(FLOOR((VI_DateVenteEnCoursDeSignature__c - DATE(YEAR(VI_DateVenteEnCoursDeSignature__c),01,01))/7),52)+1 == MOD(FLOOR( (TODAY() - DATE(YEAR(TODAY()),01,01))/7),52)+1
+		    		),
+								AND(/*&amp; Vente brute*/
+			    					  TEXT(VI_TypeDeVente__c) == &quot;Vente brute&quot;,
+		    						  MOD(FLOOR((VI_DateVenteBrute__c - DATE(YEAR(VI_DateVenteBrute__c),01,01))/7),52)+1 == MOD(FLOOR( (TODAY() - DATE(YEAR(TODAY()),01,01))/7),52)+1
+		    		),
+								AND(/*&amp; Vente nette*/
+			    					  TEXT(VI_TypeDeVente__c) == &quot;Vente nette&quot;,
+		    						  MOD(FLOOR((VI_DateVenteNette__c - DATE(YEAR(VI_DateVenteNette__c),01,01))/7),52)+1 == MOD(FLOOR( (TODAY() - DATE(YEAR(TODAY()),01,01))/7),52)+1
+		    		)			
+   ),&quot;De la semaine&quot;,
+							
+		      IF( /* Du mois*/
+			        OR(
+	        		    	AND(/*&amp; Vente en cours de signature*/
+			    	        				  TEXT(VI_TypeDeVente__c) == &quot;Vente en cours de signature&quot;,
+		            						   TEXT(MONTH(VI_DateVenteEnCoursDeSignature__c)) ==  TEXT(MONTH(TODAY()))
+		            		),
+			        					AND(/*&amp; Vente en cours de signature*/
+			    			        		  TEXT(VI_TypeDeVente__c) == &quot;Vente brute&quot;,
+        		    						   TEXT(MONTH(VI_DateVenteBrute__c)) ==  TEXT(MONTH(TODAY()))
+		            		),
+		        						AND(/*&amp; Vente en cours de signature*/
+			    			        		  TEXT(VI_TypeDeVente__c) == &quot;Vente nette&quot;,
+		    	        					  TEXT(MONTH(VI_DateVenteNette__c)) ==  TEXT(MONTH(TODAY()))
+		            		)			
+          ),&quot;Du mois&quot;,	
+											
+				
+	&quot;Autre&quot;)))</formula>
+    <label>Date relative de la vente</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

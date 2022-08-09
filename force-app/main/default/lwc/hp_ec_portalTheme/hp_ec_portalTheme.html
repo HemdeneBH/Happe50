@@ -1,0 +1,53 @@
+<!--
+  @description       : 
+  @author            : Clément Bauny
+  @group             : 
+  @last modified on  : 04-04-2022
+  @last modified by  : Clément Bauny
+-->
+<!--<template>
+    <div class="grid-container">
+      <header data-f6-region style={headerStyle}>
+          <slot name="header"></slot>
+      </header>
+      <section data-f6-region style={sectionStyle}>
+          <slot></slot>
+      </section>
+      <footer data-f6-region style={footerStyle}>
+          <slot name="footer"></slot>
+      </footer>
+     </div>
+  </template>
+-->
+
+<template>
+    <div class="c-global" data-id='globalContent' onopenpopin={openPopin} onclosepopin={closePopin}>
+        <div class="c-body" data-id='bodyContent'>
+            <div class="headerMobile">
+                <slot name="headerMobile" class={theme}></slot>
+            </div>
+            <div class="grid-container">
+                <div class="c-body__container">
+                <section class="menu c-content-bg">
+                    <slot name="menu"></slot>
+                </section>
+                <div class="content">
+                    <header class="header">
+                        <slot name="header" class={theme}></slot>
+                    </header>
+                    <main class="main">
+                        <slot class={theme} ></slot>
+                    </main>
+                </div>
+            </div>
+            <div class="footer_bg">
+                <footer class="footer">
+                    <slot name="footer" class={theme}></slot>
+                </footer>
+            </div>
+        </div>
+        
+        </div>
+        <c-hp_ec_popins ></c-hp_ec_popins>
+    </div>
+</template>

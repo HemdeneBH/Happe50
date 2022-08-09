@@ -1,0 +1,117 @@
+.hp_popinProfil {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  box-shadow: var(--box-shadow);
+  background-image: var(--bg);
+}
+
+
+.menu-list-profil {
+  display: inline-block;
+  background: var(--bg-plain);
+  width: 100%;
+  color: var(--text-color);
+  border-top: 20px solid var(--bg-plain);
+  border-bottom: 10px solid var(--primary-colour);
+  text-align: center;
+}
+.menu-list-profil li {
+  line-height: 3em;
+}
+
+.menu-list-profil li, .menu-list-profil li a {
+  font-family: var(--font-bold);
+  width: 100%;
+  color: var(--text-color);
+  font-size: 18px;
+  font-weight: bold;
+  display: block;
+  text-align: center;
+  position: relative;
+  -webkit-transition: background 0.1s ease-in-out;
+  -moz-transition: background 0.1s ease-in-out;
+  transition: background 0.1s ease-in-out;
+  text-decoration: none;
+  background: var(--bg-plain);
+}
+
+.menu-list-profil li:active, .menu-list-profil li a:active,
+.menu-list-profil li:hover, .menu-list-profil li a:hover, 
+.menu-list-profil li:focus, .menu-list-profil li a:hover {
+  background: var(--secondary-colour);
+  color: var(--true-black);
+}
+
+.c-menuListProfil-item a:before {
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  text-indent: 0em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 1.4em;
+  -webkit-font-smoothing: antialiased;
+  text-decoration: none;
+}
+
+.c-menuListProfil-item .chevron::before {
+  border-style: solid;
+  font-size: 16px;
+  border-width: 0.15em 0.15em 0 0;
+  content: '';
+  display: inline-block;
+  height: 0.60em;
+  right: 0.15em;
+  position: absolute;
+  top: 21px;
+  transform: rotate(-45deg);
+  vertical-align: top;
+  width: 0.60em;
+}
+
+.c-menuListProfil-item .chevron.right:before {
+  right: 30px;
+  transform: rotate(45deg);
+}
+
+
+@media (min-width: 1280px) {
+
+  .menu-list-profil {
+    display: none;
+  }
+}
+
+
+
+/* MOBILE */
+/* ------------------------------------------------------------------------ */
+@media (max-width: 1024px) {
+
+
+
+
+}
+
+@media (max-width: 1024px) {
+  /* Ipad and tablets */
+
+
+
+}
+
+@media (max-width: 768px) {
+  /* mobiles */
+
+}
+
+@media (max-width: 576px) {
+
+
+ 
+}

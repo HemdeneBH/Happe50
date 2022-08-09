@@ -1,0 +1,59 @@
+{
+  "appPageId" : "7e89266e-f5a3-4029-bb48-38a8a732ab93",
+  "componentName" : "community_layout:sldsFlexibleLayout",
+  "id" : "d598e2cb-0d05-43c0-9c3f-492c6b0dbe89",
+  "label" : "Mon espace parrain",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "backgroundImageConfig" : "",
+        "backgroundImageOverlay" : "rgba(0,0,0,0)",
+        "sectionConfig" : "{\"UUID\":\"2030d1b1-5d67-42c8-bf03-2cd16e03622a\",\"columns\":[{\"UUID\":\"3412425d-f427-49ab-8619-be1938eb9b2b\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}"
+      },
+      "componentName" : "community_layout:section",
+      "id" : "2030d1b1-5d67-42c8-bf03-2cd16e03622a",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : { },
+          "componentName" : "c:hp_ec_popinIframe",
+          "id" : "d4c7cbc4-1514-402f-855f-3317d3cd88dd",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "3412425d-f427-49ab-8619-be1938eb9b2b",
+        "regionLabel" : "Column 1",
+        "regionName" : "col1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "scopedBrandingSetId" : null,
+      "type" : "component"
+    } ],
+    "id" : "1666ba60-0442-4b6c-94ab-d6335ef12513",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "pageTitle" : "Mon espace parrain",
+        "recordId" : "{!recordId}"
+      },
+      "componentName" : "community_builder:seoAssistant",
+      "id" : "248f6fc0-a20f-4a9d-af4b-ae8f3a0f7d90",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "1d83383f-4243-4105-93a6-c2343175797a",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "bpHmsKcRsRJVAxsjPUCXd7yA8oGvLt",
+  "type" : "view",
+  "viewType" : "custom-mon-espace-parrain"
+}

@@ -1,0 +1,33 @@
+<template>
+        <template if:true ={showFactureComponent}>
+            <div class="hp-mesFactures c-content-bg slds-col">
+                <div class="hp-bigTitle">{title}</div>
+                <template for:each={factureExtraiteList} for:item="facture">
+                    <div key={facture.reference} class="hp-factures-items">
+                        <a href={facture.url}  class="leftBloc">
+                            {facture.libelle}
+                            <span class="chevron right"></span>  
+                        </a>
+                    <span class="hp-icon-download rightBloc">
+                        <a href={facture.url}>
+                        <img src ={iconDownload} alt="modify"/>
+                        </a>
+                    </span>
+                </div>
+
+                </template>
+                 
+                 <template if:true={showVoirplusBtn}>
+
+                    <div class="btnVoirplus">
+                        <span class="voir-plus-de-factures">
+                            Voir plus de factures
+                        </span>
+    
+                    </div>
+
+                </template>
+            </div>
+        </template>
+                
+</template>

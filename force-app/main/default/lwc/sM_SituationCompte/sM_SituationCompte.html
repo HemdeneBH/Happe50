@@ -1,0 +1,321 @@
+<!--
+  @description       : 
+  @author            : FT2-AE
+  @group             : 
+  @last modified on  : 05-10-2022
+  @last modified by  : FT2-AE
+-->
+<template>
+    <div class="slds-m-bottom_xx-large" style="margin:0 -30px">
+        <lightning-card>
+            <!-- Tableau des Factures/Reglements-->
+            <div class="slds-p-around_large slds-clearfix">
+                <div if:true={hasFilters}>
+                    <div class="active-filters-container">
+                        <strong>Filtres actifs - <a onclick={resetFilters}>Rénitialiser les
+                                filtres</a></strong><br /><br />
+                        <template for:each={filters} for:item="filter">
+                            <span key={filter.value} class="slds-badge slds-badge_lightest">
+                                <div if:true={filter.alternativeTitle}>{filter.alternativeTitle}</div>
+                                <div if:false={filter.alternativeTitle}>{filter.value}</div>
+                                <span class="slds-badge__icon slds-badge__icon_right">
+                                    <span class="slds-icon_container slds-icon-utility-moneybag slds-current-color"
+                                        title="Enlever">
+                                        <lightning-icon icon-name="utility:close" size="x-small"
+                                            alternative-text="Enlever" title="Enlever" data-value={filter.value}
+                                            data-column={filter.column} onclick={filterTagClose}></lightning-icon>
+                                    </span>
+                                </span>
+                            </span>
+                        </template>
+                    </div>
+                </div>
+                <table style="padding:0 -10px">
+                    <thead>
+                        <tr class="tableListPa">
+                            <th class="container-th" scope="col">
+                                <span>TYPE DE PIÈCE</span>
+                                <span class="container-filter" if:false={showFilterIcon}>
+                                    <lightning-icon icon-name="utility:filterList" variant="inverse" size="xx-small"
+                                        alternative-text="Filtre" data-filtre="type" onclick={toggleFilter}>
+                                    </lightning-icon>
+                                </span>
+                                <section if:true={filterVisiblility.type} aria-describedby="dialog-body-id-78"
+                                    aria-labelledby="dialog-heading-id-81"
+                                    class="slds-popover slds-nubbin_left-top popup-card-cat slds-size--1-of-1 slds-m-right_xx-small"
+                                    role="dialog">
+                                    <div class="slds-popover__body" id="dialog-body-id-78" >
+                                        <lightning-checkbox-group name="Checkbox Group" options={filtreOptions.type}
+                                            value={filtreValues.type} onchange={handleFilterChange} data-filtre="type">
+                                        </lightning-checkbox-group>
+                                        <lightning-icon data-filtre="type" icon-name="utility:close"
+                                            onclick={toggleFilter} size="x-small" class="close-icon"></lightning-icon>
+                                    </div>
+                                </section>
+                            </th>
+                            <th class="" scope="col">
+                                <span>DATE D'ÉMISSION DE FACTURE</span>
+                                <div if:false={noData} class="table-icon">
+                                    <span if:true={orderColumn.DEF.isAsc}>
+                                        <lightning-icon icon-name="utility:up" variant="inverse" size="xx-small"
+                                            alternative-text="Trier par" data-orderby="DEF" data-order="asc"
+                                            onclick={orderHandler}></lightning-icon>
+                                    </span>
+                                    <span if:false={orderColumn.DEF.isAsc}>
+                                        <lightning-icon icon-name="utility:down" variant="inverse" size="xx-small"
+                                            alternative-text="Trier par" data-orderby="DEF" data-order="desc"
+                                            onclick={orderHandler}></lightning-icon>
+                                    </span>
+                                </div>
+                            </th>
+                            <th class="" scope="col">
+                                DATE DE LIMITE DE PAIEMENT
+                            </th>
+                            <th class="container-th" scope="col">
+                                <span>LIBELLÉ DE FACTURE</span>
+                                <span class="container-filter" if:false={showFilterIcon}>
+                                    <lightning-icon icon-name="utility:filterList" variant="inverse" size="xx-small"
+                                        alternative-text="Filtre" data-filtre="libFacture" onclick={toggleFilter}>
+                                    </lightning-icon>
+                                </span>
+                                <section if:true={filterVisiblility.libFacture} aria-describedby="dialog-body-id-78"
+                                    aria-labelledby="dialog-heading-id-82"
+                                    class="slds-popover slds-nubbin_left-top popup-card-cat slds-size--1-of-1 slds-m-right_xx-small"
+                                    role="dialog">
+                                    <div class="slds-popover__body" id="dialog-body-id-79" >
+                                        <lightning-checkbox-group name="Checkbox Group"
+                                            options={filtreOptions.libFacture} value={filtreValues.libFacture}
+                                            onchange={handleFilterChange} data-filtre="libFacture">
+                                        </lightning-checkbox-group>
+                                        <lightning-icon data-filtre="libFacture" icon-name="utility:close"
+                                            onclick={toggleFilter} size="x-small" class="close-icon"></lightning-icon>
+                                    </div>
+                                </section>
+                            </th>
+                            <th class="" scope="col">
+                                <span>DATE DE RÈGLEMENT</span>
+                                <div if:false={noData} class="table-icon">
+                                    <span if:true={orderColumn.DR.isAsc}>
+                                        <lightning-icon icon-name="utility:up" variant="inverse" size="xx-small"
+                                            alternative-text="Trier par" data-orderby="DR" data-order="asc"
+                                            onclick={orderHandler}></lightning-icon>
+                                    </span>
+                                    <span if:false={orderColumn.DR.isAsc}>
+                                        <lightning-icon icon-name="utility:down" variant="inverse" size="xx-small"
+                                            alternative-text="Trier par" data-orderby="DR" data-order="desc"
+                                            onclick={orderHandler}></lightning-icon>
+                                    </span>
+                                </div>
+                            </th>
+                            <th class="container-th" scope="col">
+                                <span>TYPE DE RÈGLEMENT</span>
+                                <span class="container-filter" if:false={showFilterIcon}>
+                                    <lightning-icon icon-name="utility:filterList" variant="inverse" size="xx-small"
+                                        alternative-text="Filtre" data-filtre="typeReg" onclick={toggleFilter}>
+                                    </lightning-icon>
+                                </span>
+                                <section if:true={filterVisiblility.typeReg} aria-describedby="dialog-body-id-78"
+                                    aria-labelledby="dialog-heading-id-83"
+                                    class="slds-popover slds-nubbin_left-top popup-card-cat slds-size--1-of-1 slds-m-right_xx-small"
+                                    role="dialog">
+                                    <div class="slds-popover__body" id="dialog-body-id-80" >
+                                        <lightning-checkbox-group name="Checkbox Group" options={filtreOptions.typeReg}
+                                            value={filtreValues.typeReg} onchange={handleFilterChange}
+                                                                data-filtre="typeReg"></lightning-checkbox-group>
+                                        <lightning-icon data-filtre="typeReg" icon-name="utility:close"
+                                            onclick={toggleFilter} size="x-small" class="close-icon"></lightning-icon>
+                                    </div>
+                                </section>
+                            </th>
+                            <!--FT2-1644 Colonne dans laquelle une icône “i” est visible pour la pièce de type de règlement - Prélèvement EP -->
+                            <th class="slds-text-align_center" scope="col">
+                                INFORMATION
+                            </th>
+                            <th class="" scope="col">
+                                STATUT DE RÈGLEMENT
+                            </th>
+                            <th class="" scope="col">
+                                DÉBIT
+                            </th>
+                            <th class="" scope="col">
+                                CRÉDIT
+                            </th>
+
+                            <!--<th class="" scope="col">
+                                SOLDE
+                            </th>-->
+
+                            <th class="" scope="col">
+                                N° DE FACTURE
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr if:true={noData}>
+                            <td colspan="11" style="text-align: center;">
+                                Pas de données à afficher!
+                            </td>
+                        </tr>
+                        <template for:each={currentPage} for:item="tableDetails" for:index="index">
+                            <tr key={tableDetails.numItem} class={tableDetails.classCSS}>
+                                <td data-label="Type de pièce">
+                                    {tableDetails.typePiece}
+                                </td>
+                                <td data-label="Date d'émission">
+                                    <lightning-formatted-date-time value={tableDetails.dateComptable} day="2-digit"
+                                        month="2-digit" year="numeric"></lightning-formatted-date-time>
+                                </td>
+                                <td data-label="Date limite de paiement">
+                                    <lightning-formatted-date-time value={tableDetails.dateDEcheance} day="2-digit"
+                                        month="2-digit" year="numeric"></lightning-formatted-date-time>
+                                </td>
+                                <td data-label="Libellé de facture">
+                                    {tableDetails.typeCalcul}
+                                </td>
+                                <td data-label="Date de règlement">
+                                    <lightning-formatted-date-time value={tableDetails.dateReglement} day="2-digit"
+                                        month="2-digit" year="numeric"></lightning-formatted-date-time>
+                                </td>
+                                <td data-label="Type de règlement">
+                                    {tableDetails.typeReglement}
+                                </td>
+                                <!--FT2-1644 Colonne dans laquelle une icône “i” est visible pour la pièce de type de règlement - Prélèvement EP -->
+                                <td data-label="Information" class="slds-text-align_center">
+                                    <!--FT2-1599 -> [Situation de compte]-Motif de rejet de prélèvement - Passage du motif et date de rejet en paramètres de openInfoModal-->
+                                    <!--FT2-1651 Situation de compte-RSSI-Cryptage IBAN 2/3 : Affichage de la pop up pour la pièce comptable EP -->
+                                    <lightning-button-icon if:true={tableDetails.isPrel} icon-name="utility:info"
+                                        variant="bare" onclick={openInfoModal} data-datereglement={tableDetails.dateReglement}
+                                        data-montanttotal={tableDetails.montantTotal} data-typepiece="isprel"></lightning-button-icon>
+                                    <!--FT2-1600 Statut du Chèque-RC -Motif de rejet des chèques de remboursement - Passage du motif et date de rejet en paramètres de openInfoModal-->
+                                    <lightning-button-icon if:true={tableDetails.isRC} icon-name="utility:info"
+                                        variant="bare" onclick={openInfoModal} data-daterejet={tableDetails.dateRejet}
+                                        data-motifrejet={tableDetails.motifRejet} data-typepiece="isrc"></lightning-button-icon>
+                                </td>
+                                <td data-label="Statut de règlement">
+                                    <template if:true={tableDetails.paiementRejete}>
+                                        <span class="redFont">{tableDetails.statutReglement}</span>
+                                    </template>
+                                    <template if:false={tableDetails.paiementRejete}>
+                                        <span class="greenFont">{tableDetails.statutReglement}</span>
+                                    </template>
+                                </td>
+                                <td data-label="Débit">
+                                    <template if:true={tableDetails.isDebit}>
+                                        {tableDetails.montantTotal} €
+                                    </template>
+                                </td>
+                                <td data-label="Crédit">
+                                    <template if:false={tableDetails.isDebit}>
+                                        {tableDetails.montantTotal} €
+                                    </template>
+                                </td>
+
+
+                                <!--
+
+                                <td data-label="Solde">
+                                    <template if:true={tableDetails.isFacture}>
+                                    {tableDetails.montantTotal} €
+                                    </template>
+                                </td>
+
+                                -->
+
+                                <td data-label="N° de facture">
+                                    <template if:true={tableDetails.factureLink}>
+                                        <a href={tableDetails.factureLink}
+                                            target="_blank">{tableDetails.numeroFacture}</a>
+                                    </template>
+                                    <template if:false={tableDetails.factureLink}>
+                                    {tableDetails.numeroFacture}
+                                    </template>
+                                </td>
+                            </tr>
+                        </template>
+                        
+                        <!--FT2-1599 -> [Situation de compte]-Motif de rejet de prélèvement-->
+                        <!--Affichage de la popup des informations sur le prélèvement-->
+                        <template if:true={showInfoModal}>
+                            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                                aria-describedby="modal-content-id-1"
+                                class="slds-modal slds-fade-in-open scroll-section">
+                                <div class="slds-modal__container">
+
+                                    <!-- modal header start -->
+                                    <header class="slds-modal__header slds-modal__header_empty">
+                                        <button
+                                            class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                            title="Close" onclick={closeInfoModal}>
+                                            <lightning-icon icon-name="utility:close" alternative-text="close"
+                                                variant="inverse" size="small">
+                                            </lightning-icon>
+                                            <span class="slds-assistive-text">Close</span>
+                                        </button>
+                                        </br><strong>
+                                            <!--FT2-1600 personnalisation du header pour la pièce comptable chèque de remboursement-->
+                                            <h2 if:true={typePieceIsPrel} class="slds-text-heading_medium">Informations sur le prélévement
+                                            </h2>                                            
+                                            <h2 if:true={typePieceIsRC} class="slds-text-heading_medium">Informations sur le chèque de remboursement
+                                            </h2>
+                                        </strong></br>
+                                    </header>
+
+                                    <!-- modal body start -->
+                                    <div class="slds-modal__content slds-p-around_medium modalBody">
+                                        <div class="slds-p-around_medium" if:true={showSpinnerIban}>
+                                            <lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass"></lightning-spinner>
+                                        </div>
+                                        <strong>
+                                            <h2 if:true={IbanCrypted} class="slds-text-heading_small">N° IBAN: {IbanCrypted} </h2>
+                                        </strong></br>    
+                                        <!--Affichage de la date de rejet si elle existe-->
+                                        <strong>
+                                            <h2 if:true={dateRejetExists} class="slds-text-heading_small">Date
+                                                de
+                                                rejet: {dateRejetPrel}</h2>
+                                        </strong></br>
+
+                                        <!--Affichage du motif de rejet s'il existe-->
+                                        <strong>
+                                            <h2 if:true={motifRejetExists} class="slds-text-heading_small">Motif
+                                                de
+                                                rejet: {motifRejetPrel}</h2>
+                                        </strong>
+                                    </div>
+
+                                    <!-- modal footer start-->
+                                    <footer class="slds-modal__footer"
+                                        style="background-color:white; border-color:white">
+                                        <div class="button-footer slds-form-element" style="text-align: right">
+                                            <!--Affichage du bouton Fermer faisant appel à closeInfoModal pour fermer la popup-->
+                                            <button class="slds-button slds-button_brand slds-card__body_inner"
+                                                onclick={closeInfoModal}>Fermer</button>
+                                        </div>
+                                    </footer>
+
+                                </div>
+                            </section>
+                        </template>
+                    </tbody>
+                </table>
+                
+                <div class="slds-text-align_center slds-m-top_small">
+                    <template for:each={paginationIndex} for:item="pageElement" for:index="index">
+                        <div key={pageElement.number} class="pagination selected-page" data-page={index}
+                            onclick={pagination} if:true={pageElement.selected}>{pageElement.number}</div>
+                        <div key={pageElement.number} class="pagination" data-page={index} onclick={pagination}
+                            if:false={pageElement.selected}>{pageElement.number}</div>
+                    </template>
+                </div>             
+                
+                <div class="exampleHolder" if:false={showSpinner}>
+                    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                </div>
+            </div>
+
+            <!--FT2-1599 -> [Situation de compte]-Motif de rejet de prélèvement-->
+            <!--Mise de l'arrière plan en gris quand la popup des informations sur le prélèvement est ouverte-->
+            <div if:true={showInfoModal} class="slds-backdrop slds-backdrop_open"></div>
+        </lightning-card>
+    </div>
+</template>

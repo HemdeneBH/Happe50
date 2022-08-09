@@ -1,0 +1,22 @@
+<template>
+    <div class="slds-m-top_xx-large">
+        <lightning-card title="Prélèvements" icon-name="standard:partner_fund_allocation">
+                <lightning-datatable
+                    key-field="id"
+                    data={AllPrelevements}
+                    columns={colPrelevement}
+                    max-row-selection="0">
+                </lightning-datatable>
+        </lightning-card>
+    </div>
+    <div class="slds-m-top_xx-large">
+        <lightning-card title="Etat des prélèvements demandés">
+            <lightning-datatable 
+                key-field="id"
+                data={AllRefusPrelevements}
+                columns={colRefusPrelevement}
+                max-row-selection="0">
+            </lightning-datatable>
+        </lightning-card>
+    </div>
+</template>

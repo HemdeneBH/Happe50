@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Date_de_la_session_pr_visionnelle__c</fullName>
+    <description>Date à laquelle la session est effectivement réalisée</description>
+    <externalId>false</externalId>
+    <label>Date de la session (prévisionnelle)</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

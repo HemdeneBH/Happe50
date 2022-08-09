@@ -1,0 +1,562 @@
+{
+  "activeBrandingSetId" : "da1b6833-2243-4db9-941a-add31e4d5154",
+  "customCSS" : "",
+  "developerName" : "byo",
+  "id" : "7ce7efd6-00ed-46a5-ac8c-0fcee785ee51",
+  "label" : "Build Your Own (LWR)",
+  "layouts" : {
+    "Inner" : "0f46a0b8-4b91-4e4b-8077-fd169c187288",
+    "PFlC31YDquY3kutKC990xhLaNFbuiZ" : "2610fbc3-4e69-43b7-8efd-4afb65f1d9f0",
+    "ServiceNotAvailable" : "a6316646-3651-4de2-90af-dfdccd341d16",
+    "bpHmsKcRsRJVAxsjPUCXd7yA8oGvLt" : "48939b22-ecea-471c-88ea-af93607e47da"
+  },
+  "type" : "theme",
+  "views" : [ {
+    "componentAttributes" : { },
+    "componentName" : "community_byo:scopedHeaderAndFooter",
+    "id" : "0f46a0b8-4b91-4e4b-8077-fd169c187288",
+    "label" : "Scoped Header and Footer",
+    "regions" : [ {
+      "components" : [ {
+        "componentAttributes" : {
+          "backgroundImageConfig" : "",
+          "backgroundImageOverlay" : "rgba(0,0,0,0)",
+          "sectionConfig" : "{\"UUID\":\"bdddbf84-53b2-4457-a36d-2beb38f4ca97\",\"columns\":[{\"UUID\":\"556e8ee6-dbcb-4d3e-b7a1-4b70315a9e87\",\"columnName\":\"Column 1\",\"columnKey\":\"headerSection\",\"columnWidth\":\"12\",\"seedComponents\":null}]}"
+        },
+        "componentName" : "community_layout:section",
+        "id" : "bdddbf84-53b2-4457-a36d-2beb38f4ca97",
+        "regions" : [ {
+          "id" : "556e8ee6-dbcb-4d3e-b7a1-4b70315a9e87",
+          "regionLabel" : "Theme Header",
+          "regionName" : "headerSection",
+          "renditionMap" : { },
+          "type" : "region"
+        } ],
+        "renditionMap" : { },
+        "scopedBrandingSetId" : null,
+        "type" : "component"
+      } ],
+      "id" : "c9227228-78f8-4881-bf1e-34c27707d2b0",
+      "regionName" : "header",
+      "type" : "region"
+    }, {
+      "components" : [ {
+        "componentAttributes" : {
+          "sectionConfig" : "{\"UUID\":\"55a86b8e-697b-48b1-ab68-a8f795f9e5b3\",\"columns\":[{\"UUID\":\"20724566-059b-463f-8a25-3eed5ba45deb\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}"
+        },
+        "componentName" : "dxp_layout:columns",
+        "id" : "55a86b8e-697b-48b1-ab68-a8f795f9e5b3",
+        "regions" : [ {
+          "id" : "20724566-059b-463f-8a25-3eed5ba45deb",
+          "regionLabel" : "Column 1",
+          "regionName" : "col1",
+          "renditionMap" : { },
+          "type" : "region"
+        } ],
+        "renditionMap" : { },
+        "type" : "component"
+      } ],
+      "id" : "51c63fe1-6d34-4028-b96e-4b367fcb7b79",
+      "regionName" : "footer",
+      "type" : "region"
+    } ],
+    "type" : "view"
+  }, {
+    "componentAttributes" : { },
+    "componentName" : "community_layout:simpleThemeLayout",
+    "id" : "a6316646-3651-4de2-90af-dfdccd341d16",
+    "label" : "Service Not Available Theme Layout",
+    "regions" : [ {
+      "id" : "310bc0b8-908f-48e2-bba3-584a52b65982",
+      "regionName" : "header",
+      "type" : "region"
+    }, {
+      "id" : "43e09c38-43a2-40c5-b653-c3175ee36ebe",
+      "regionName" : "footer",
+      "type" : "region"
+    } ],
+    "type" : "view"
+  }, {
+    "componentAttributes" : { },
+    "componentName" : "c:hp_ec_portalTheme",
+    "id" : "48939b22-ecea-471c-88ea-af93607e47da",
+    "label" : "HP Client Portal",
+    "regions" : [ {
+      "components" : [ {
+        "componentAttributes" : {
+          "sectionConfig" : "{\"UUID\":\"de24c071-bc1c-41c7-9028-07fa8cbd201c\",\"columns\":[{\"UUID\":\"0a14beaa-5489-4f7e-963b-1e5fa3952426\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}"
+        },
+        "componentName" : "dxp_layout:columns",
+        "id" : "de24c071-bc1c-41c7-9028-07fa8cbd201c",
+        "regions" : [ {
+          "components" : [ {
+            "componentAttributes" : {
+              "disconnectLabel" : "Me déconnecter",
+              "helpLabel" : "Aide & Contact"
+            },
+            "componentName" : "c:hp_ec_header",
+            "id" : "2adc80df-24c9-4a33-98af-25bff1a6c31e",
+            "renditionMap" : { },
+            "type" : "component"
+          } ],
+          "id" : "0a14beaa-5489-4f7e-963b-1e5fa3952426",
+          "regionLabel" : "Column 1",
+          "regionName" : "col1",
+          "renditionMap" : { },
+          "type" : "region"
+        } ],
+        "renditionMap" : { },
+        "type" : "component"
+      } ],
+      "id" : "eef4422e-6560-46d4-a903-2bac2981431b",
+      "regionName" : "header",
+      "type" : "region"
+    }, {
+      "components" : [ {
+        "componentAttributes" : {
+          "backgroundImageConfig" : "",
+          "backgroundImageOverlay" : "rgba(0,0,0,0)",
+          "sectionConfig" : "{\"UUID\":\"ed76c0fb-f240-4f1f-9c5e-d1bdc098740f\",\"columns\":[{\"UUID\":\"dbda4669-81d3-4ed9-873a-a4f82b9a1881\",\"columnName\":\"Column 1\",\"columnKey\":\"footerSection\",\"columnWidth\":\"12\",\"seedComponents\":null}]}"
+        },
+        "componentName" : "community_layout:section",
+        "id" : "ed76c0fb-f240-4f1f-9c5e-d1bdc098740f",
+        "regions" : [ {
+          "components" : [ {
+            "componentAttributes" : {
+              "copyrightMention" : "© happ-e"
+            },
+            "componentName" : "c:hp_ec_footer",
+            "id" : "aedd7996-1f25-4eab-9e9f-c1e07525e1bc",
+            "renditionMap" : { },
+            "type" : "component"
+          } ],
+          "id" : "dbda4669-81d3-4ed9-873a-a4f82b9a1881",
+          "regionLabel" : "Column 1",
+          "regionName" : "footerSection",
+          "renditionMap" : { },
+          "type" : "region"
+        } ],
+        "renditionMap" : { },
+        "scopedBrandingSetId" : null,
+        "type" : "component"
+      } ],
+      "id" : "f3408b7b-373c-46a6-9258-3c4b06d07e58",
+      "regionName" : "footer",
+      "type" : "region"
+    }, {
+      "id" : "f8bfe043-b8cf-4302-bbb3-05ef24ea64ea",
+      "regionName" : "default",
+      "type" : "region"
+    }, {
+      "components" : [ {
+        "componentAttributes" : {
+          "sectionConfig" : "{\"UUID\":\"ea5eff87-68af-44cd-a149-b33ddfee640d\",\"columns\":[{\"UUID\":\"48aec850-e129-4569-a5f3-0702b7f081cd\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}"
+        },
+        "componentName" : "dxp_layout:columns",
+        "id" : "ea5eff87-68af-44cd-a149-b33ddfee640d",
+        "regions" : [ {
+          "components" : [ {
+            "componentAttributes" : {
+              "menuMessage" : "SAVE.YOUR.ENERGY.",
+              "menuName" : "HP Client Portal Menu",
+              "phoneNumber" : "09 77 420 410"
+            },
+            "componentName" : "c:hp_ec_menu",
+            "id" : "03adc409-7c78-4223-9877-7d09023c700d",
+            "renditionMap" : { },
+            "type" : "component"
+          } ],
+          "id" : "48aec850-e129-4569-a5f3-0702b7f081cd",
+          "regionLabel" : "Column 1",
+          "regionName" : "col1",
+          "renditionMap" : { },
+          "type" : "region"
+        } ],
+        "renditionMap" : { },
+        "type" : "component"
+      } ],
+      "id" : "9c2d1a11-c3dd-40dc-8b10-0fd6289eeda6",
+      "regionName" : "menu",
+      "type" : "region"
+    }, {
+      "components" : [ {
+        "componentAttributes" : {
+          "sectionConfig" : "{\"UUID\":\"03eef05a-b02a-46db-9caf-4b6227207634\",\"columns\":[{\"UUID\":\"b6ce5178-01ac-4606-869d-dd7b2dee7972\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}"
+        },
+        "componentName" : "dxp_layout:columns",
+        "id" : "03eef05a-b02a-46db-9caf-4b6227207634",
+        "regions" : [ {
+          "components" : [ {
+            "componentAttributes" : { },
+            "componentName" : "c:hp_ec_myConsumption",
+            "id" : "8d6ed70b-82c8-4147-8bff-e269faaf9c7f",
+            "renditionMap" : { },
+            "type" : "component"
+          }, {
+            "componentAttributes" : { },
+            "componentName" : "c:hp_ec_disconnect",
+            "id" : "0704a903-b29a-4eea-bb47-3ad923399053",
+            "renditionMap" : { },
+            "type" : "component"
+          }, {
+            "componentAttributes" : {
+              "sectionConfig" : "{\"UUID\":\"69f753b3-499e-477e-84cb-5b61766c2ee3\",\"columns\":[{\"UUID\":\"dd52825b-73e9-46a0-850d-66d1ebcf94a2\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}"
+            },
+            "componentName" : "dxp_layout:columns",
+            "id" : "69f753b3-499e-477e-84cb-5b61766c2ee3",
+            "regions" : [ {
+              "components" : [ {
+                "componentAttributes" : {
+                  "sectionConfig" : "{\"UUID\":\"e904a4f6-41a1-47e6-b694-a199de386f87\",\"columns\":[{\"UUID\":\"3b490f9a-6d26-4499-932b-8cd8f69ac1b4\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"6\",\"seedComponents\":[]},{\"UUID\":\"49a0e1a8-59b8-49a5-9b86-201d363201bc\",\"columnName\":\"Column 2\",\"columnKey\":\"d5f7b\",\"columnWidth\":\"6\",\"seedComponents\":[]}]}"
+                },
+                "componentName" : "dxp_layout:columns",
+                "id" : "e904a4f6-41a1-47e6-b694-a199de386f87",
+                "regions" : [ {
+                  "components" : [ {
+                    "componentAttributes" : {
+                      "charteLabel" : "Charte de confidentialité",
+                      "charteURL" : "https://www.google.com",
+                      "consentementLabel" : "Mes consentements",
+                      "donneesCollectesLabel" : "Voir mes données collectées",
+                      "titre" : "Mes données personnelles"
+                    },
+                    "componentName" : "c:hp_ec_donneesPersonnelles",
+                    "id" : "f700f3cc-1327-40e8-ab8c-3f41d0ff2b09",
+                    "renditionMap" : { },
+                    "type" : "component"
+                  } ],
+                  "id" : "3b490f9a-6d26-4499-932b-8cd8f69ac1b4",
+                  "regionLabel" : "Column 1",
+                  "regionName" : "col1",
+                  "renditionMap" : { },
+                  "type" : "region"
+                }, {
+                  "id" : "49a0e1a8-59b8-49a5-9b86-201d363201bc",
+                  "regionLabel" : "Column 2",
+                  "regionName" : "d5f7b",
+                  "renditionMap" : { },
+                  "type" : "region"
+                } ],
+                "renditionMap" : { },
+                "type" : "component"
+              }, {
+                "componentAttributes" : {
+                  "sectionConfig" : "{\"UUID\":\"e4aaf401-bd00-4306-85fc-303d58f15496\",\"columns\":[{\"UUID\":\"545c97d0-7463-4c59-af58-7c5ac5ce9792\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}"
+                },
+                "componentName" : "dxp_layout:columns",
+                "id" : "e4aaf401-bd00-4306-85fc-303d58f15496",
+                "regions" : [ {
+                  "id" : "545c97d0-7463-4c59-af58-7c5ac5ce9792",
+                  "regionLabel" : "Column 1",
+                  "regionName" : "col1",
+                  "renditionMap" : { },
+                  "type" : "region"
+                } ],
+                "renditionMap" : { },
+                "type" : "component"
+              }, {
+                "componentAttributes" : {
+                  "centerStepNumber" : 2,
+                  "centerStepText" : "Vos informations actuelles seront rassemblées pour vous faciliter cette démarche.",
+                  "centerStepTitle" : "Simplification",
+                  "leftStepNumber" : 1,
+                  "leftStepText" : "Pour changer d’adresse, il vous suffit de souscrire à nouveau chez happ-e.",
+                  "leftStepTitle" : "Souscription",
+                  "rightStepNumber" : 3,
+                  "rightStepText" : "Votre ancien contrat sera automatiquement remplacé par le nouveau.",
+                  "rightStepTitle" : "Nouveau contrat",
+                  "subtitle" : "Faire suivre mon contrat dans mon nouveau logement :",
+                  "title" : "Je déménage"
+                },
+                "componentName" : "c:hp_ec_demenagement",
+                "id" : "f391896f-aaa1-421c-9644-9176dfb3869d",
+                "renditionMap" : { },
+                "type" : "component"
+              } ],
+              "id" : "dd52825b-73e9-46a0-850d-66d1ebcf94a2",
+              "regionLabel" : "Column 1",
+              "regionName" : "col1",
+              "renditionMap" : { },
+              "type" : "region"
+            } ],
+            "renditionMap" : { },
+            "type" : "component"
+          }, {
+            "componentAttributes" : {
+              "sectionConfig" : "{\"UUID\":\"a5d8185e-5511-40b0-9104-03e970ca84e9\",\"columns\":[{\"UUID\":\"c87e26f7-cd38-41c5-be19-1ed552e3e92e\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"4\",\"seedComponents\":[]},{\"UUID\":\"bfd2a42d-80a4-44d4-be56-4dd482510a2c\",\"columnName\":\"Column 2\",\"columnKey\":\"465c9\",\"columnWidth\":\"8\",\"seedComponents\":[]}]}"
+            },
+            "componentName" : "dxp_layout:columns",
+            "id" : "a5d8185e-5511-40b0-9104-03e970ca84e9",
+            "regions" : [ {
+              "components" : [ {
+                "componentAttributes" : {
+                  "justificatifButtonLabel" : "JUSTIFICATIF DOMICILE",
+                  "titleText" : "MON CONTRAT",
+                  "voirContractButtonLabel" : "VOIR MON CONTRAT"
+                },
+                "componentName" : "c:hp_ec_monContrat",
+                "id" : "46888d77-f3b2-403d-b75d-da4adb964ff7",
+                "renditionMap" : { },
+                "type" : "component"
+              }, {
+                "componentAttributes" : {
+                  "alerteMensualites" : "Modifier vos mensualités peut entrainer régularisation de prix",
+                  "modifierMensualitesBoutton" : "Modifier",
+                  "titreDatePaiement" : "Date de paiement",
+                  "titreMensualites" : "Mes mensualités",
+                  "titreMontantMensuel" : "Montant mensuel"
+                },
+                "componentName" : "c:hp_ec_mensualites",
+                "id" : "eb2012e5-ea85-46d8-a438-7c227422e118",
+                "renditionMap" : { },
+                "type" : "component"
+              }, {
+                "componentAttributes" : { },
+                "componentName" : "c:hp_ec_chequeEnergie",
+                "id" : "9a43bd9f-dbbd-42bc-8d01-20a9c7db325c",
+                "renditionMap" : { },
+                "type" : "component"
+              } ],
+              "id" : "c87e26f7-cd38-41c5-be19-1ed552e3e92e",
+              "regionLabel" : "Column 1",
+              "regionName" : "col1",
+              "renditionMap" : { },
+              "type" : "region"
+            }, {
+              "components" : [ {
+                "componentAttributes" : {
+                  "dateReglementPersonnaliseLabel" : "Date de règlement personnalisée",
+                  "depanExpressLabel" : "Dépan’Express",
+                  "depanExpressURL" : "www.google.com",
+                  "factureEnLigneLabel" : "Ma facture en ligne",
+                  "modePaiementLabel" : "Mode de paiement",
+                  "optionVertElecLabel" : "Option Vertélec+ happ-e",
+                  "titleText" : "Mes options et services",
+                  "voirOptionsLabel" : "Voir toutes les options",
+                  "voirOptionsURL" : "www.google.com"
+                },
+                "componentName" : "c:hp_ec_optionsServices",
+                "id" : "df19c982-2e7f-4ad8-852c-124b6c2f6f51",
+                "renditionMap" : { },
+                "type" : "component"
+              }, {
+                "componentAttributes" : {
+                  "sectionConfig" : "{\"UUID\":\"6a37650d-63e2-4e8c-a665-9873aee8f413\",\"columns\":[{\"UUID\":\"60b27596-329b-49e9-9424-4963508e5b3b\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"6\",\"seedComponents\":[]},{\"UUID\":\"b2ab87e7-01bb-4678-87d7-5f9833a6297b\",\"columnName\":\"Column 2\",\"columnKey\":\"ede0f\",\"columnWidth\":\"6\",\"seedComponents\":[]}]}"
+                },
+                "componentName" : "dxp_layout:columns",
+                "id" : "6a37650d-63e2-4e8c-a665-9873aee8f413",
+                "regions" : [ {
+                  "components" : [ {
+                    "componentAttributes" : {
+                      "title" : "Mon Statut"
+                    },
+                    "componentName" : "c:hp_ec_statusComponent",
+                    "id" : "2b763654-11bf-4d2f-9e80-49d2dcd0569e",
+                    "renditionMap" : { },
+                    "type" : "component"
+                  } ],
+                  "id" : "60b27596-329b-49e9-9424-4963508e5b3b",
+                  "regionLabel" : "Column 1",
+                  "regionName" : "col1",
+                  "renditionMap" : { },
+                  "type" : "region"
+                }, {
+                  "components" : [ {
+                    "componentAttributes" : {
+                      "title" : "Mes Documents"
+                    },
+                    "componentName" : "c:hp_ec_myDocuments",
+                    "id" : "e27facaa-8569-4d57-8945-134d449df836",
+                    "renditionMap" : { },
+                    "type" : "component"
+                  } ],
+                  "id" : "b2ab87e7-01bb-4678-87d7-5f9833a6297b",
+                  "regionLabel" : "Column 2",
+                  "regionName" : "ede0f",
+                  "renditionMap" : { },
+                  "type" : "region"
+                } ],
+                "renditionMap" : { },
+                "type" : "component"
+              }, {
+                "componentAttributes" : { },
+                "componentName" : "c:hp_ec_disconnect",
+                "id" : "5ec02fbc-27a9-496a-837c-4326ed8e2ceb",
+                "renditionMap" : { },
+                "type" : "component"
+              }, {
+                "componentAttributes" : {
+                  "sectionConfig" : "{\"UUID\":\"79e0dab1-06cd-4798-8e21-5c4c199d2724\",\"columns\":[{\"UUID\":\"ec6b786d-64b9-49e0-8700-f733625c78e9\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}"
+                },
+                "componentName" : "dxp_layout:columns",
+                "id" : "79e0dab1-06cd-4798-8e21-5c4c199d2724",
+                "regions" : [ {
+                  "components" : [ {
+                    "componentAttributes" : { },
+                    "componentName" : "c:hp_ec_releve",
+                    "id" : "31a42b6e-f1a1-4086-b2f6-6a9c5d7d72c2",
+                    "renditionMap" : { },
+                    "type" : "component"
+                  } ],
+                  "id" : "ec6b786d-64b9-49e0-8700-f733625c78e9",
+                  "regionLabel" : "Column 1",
+                  "regionName" : "col1",
+                  "renditionMap" : { },
+                  "type" : "region"
+                } ],
+                "renditionMap" : { },
+                "type" : "component"
+              } ],
+              "id" : "bfd2a42d-80a4-44d4-be56-4dd482510a2c",
+              "regionLabel" : "Column 2",
+              "regionName" : "465c9",
+              "renditionMap" : { },
+              "type" : "region"
+            } ],
+            "renditionMap" : { },
+            "type" : "component"
+          } ],
+          "id" : "b6ce5178-01ac-4606-869d-dd7b2dee7972",
+          "regionLabel" : "Column 1",
+          "regionName" : "col1",
+          "renditionMap" : { },
+          "type" : "region"
+        } ],
+        "renditionMap" : { },
+        "type" : "component"
+      } ],
+      "id" : "fc6550ad-1b24-46fa-9118-db35775e52e8",
+      "regionName" : "main",
+      "type" : "region"
+    }, {
+      "id" : "3184f789-0e84-4c4d-bb08-bc118e7e00ab",
+      "regionName" : "footer_bg",
+      "type" : "region"
+    }, {
+      "components" : [ {
+        "componentAttributes" : {
+          "disconnectLabel" : "Me déconnecter",
+          "helpLabel" : "Aide & Contact"
+        },
+        "componentName" : "c:hp_ec_headerMobile",
+        "id" : "4038668d-7279-4031-b896-53a0708f231b",
+        "regions" : [ {
+          "id" : "15d77662-ae51-4361-a8f1-924202bf6f61",
+          "regionName" : "menuMobile",
+          "type" : "region"
+        } ],
+        "renditionMap" : { },
+        "type" : "component"
+      } ],
+      "id" : "efeb4dc3-d8ae-484e-a446-831169c4017a",
+      "regionName" : "headerMobile",
+      "type" : "region"
+    }, {
+      "id" : "80ca5440-4781-4dfe-82e3-6f73c1acb493",
+      "regionName" : "menuMobile",
+      "type" : "region"
+    }, {
+      "components" : [ {
+        "componentAttributes" : { },
+        "componentName" : "c:hp_ec_disconnect",
+        "id" : "48b376b4-68f6-492f-a463-f1331b1c5f4c",
+        "renditionMap" : { },
+        "type" : "component"
+      }, {
+        "componentAttributes" : {
+          "sectionConfig" : "{\"UUID\":\"091cfa54-af96-45dc-9e21-683caeca95af\",\"columns\":[{\"UUID\":\"a543702e-e22a-4ee8-86fd-6d24d1f6a915\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}"
+        },
+        "componentName" : "dxp_layout:columns",
+        "id" : "091cfa54-af96-45dc-9e21-683caeca95af",
+        "regions" : [ {
+          "id" : "a543702e-e22a-4ee8-86fd-6d24d1f6a915",
+          "regionLabel" : "Column 1",
+          "regionName" : "col1",
+          "renditionMap" : { },
+          "type" : "region"
+        } ],
+        "renditionMap" : { },
+        "type" : "component"
+      } ],
+      "id" : "f7fff25e-b74b-40a7-b674-99e04fc1b0f8",
+      "regionName" : "offre",
+      "type" : "region"
+    } ],
+    "type" : "view"
+  }, {
+    "componentAttributes" : { },
+    "componentName" : "c:hp_ec_portalThemeStatic",
+    "id" : "2610fbc3-4e69-43b7-8efd-4afb65f1d9f0",
+    "label" : "HP Client Portal Static",
+    "regions" : [ {
+      "components" : [ {
+        "componentAttributes" : {
+          "backgroundImageConfig" : "",
+          "backgroundImageOverlay" : "rgba(0,0,0,0)",
+          "sectionConfig" : "{\"UUID\":\"c7eea3af-0f4e-4594-9448-409ce2dccf00\",\"columns\":[{\"UUID\":\"b0218c41-fe66-4903-adbb-a230d1f87be6\",\"columnName\":\"Column 1\",\"columnKey\":\"headerSection\",\"columnWidth\":\"12\",\"seedComponents\":null}]}"
+        },
+        "componentName" : "community_layout:section",
+        "id" : "c7eea3af-0f4e-4594-9448-409ce2dccf00",
+        "regions" : [ {
+          "components" : [ {
+            "componentAttributes" : {
+              "disconnectLabel" : "Me déconnecter",
+              "helpLabel" : "Aide & Contact"
+            },
+            "componentName" : "c:hp_ec_header",
+            "id" : "5bd266a0-e061-4adb-ae09-47b664917568",
+            "renditionMap" : { },
+            "type" : "component"
+          } ],
+          "id" : "b0218c41-fe66-4903-adbb-a230d1f87be6",
+          "regionLabel" : "Theme Header",
+          "regionName" : "headerSection",
+          "renditionMap" : { },
+          "type" : "region"
+        } ],
+        "renditionMap" : { },
+        "scopedBrandingSetId" : null,
+        "type" : "component"
+      } ],
+      "id" : "a58d734b-a44f-40eb-8129-0cfa5efd9c34",
+      "regionName" : "header",
+      "type" : "region"
+    }, {
+      "components" : [ {
+        "componentAttributes" : {
+          "backgroundImageConfig" : "",
+          "backgroundImageOverlay" : "rgba(0,0,0,0)",
+          "sectionConfig" : "{\"UUID\":\"e18502b5-eb4a-4730-813d-f3655d732830\",\"columns\":[{\"UUID\":\"650e78ac-c9e9-444f-bbf9-51214dc085a2\",\"columnName\":\"Column 1\",\"columnKey\":\"footerSection\",\"columnWidth\":\"12\",\"seedComponents\":null}]}"
+        },
+        "componentName" : "community_layout:section",
+        "id" : "e18502b5-eb4a-4730-813d-f3655d732830",
+        "regions" : [ {
+          "id" : "650e78ac-c9e9-444f-bbf9-51214dc085a2",
+          "regionLabel" : "Theme Footer",
+          "regionName" : "footerSection",
+          "renditionMap" : { },
+          "type" : "region"
+        } ],
+        "renditionMap" : { },
+        "scopedBrandingSetId" : null,
+        "type" : "component"
+      } ],
+      "id" : "971955c6-2731-4ead-b45f-6770d937f4f6",
+      "regionName" : "footer",
+      "type" : "region"
+    }, {
+      "id" : "36aec9fd-718c-4a4a-92a1-d13d5bb9e0c4",
+      "regionName" : "menu",
+      "type" : "region"
+    }, {
+      "id" : "575810e1-b35f-498a-a716-7d8c2e1d8257",
+      "regionName" : "main",
+      "type" : "region"
+    }, {
+      "id" : "ae0cce16-905b-4d22-a369-874eea6720b4",
+      "regionName" : "footerBlank",
+      "type" : "region"
+    } ],
+    "type" : "view"
+  } ]
+}

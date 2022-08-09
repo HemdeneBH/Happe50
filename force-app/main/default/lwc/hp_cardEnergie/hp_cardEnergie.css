@@ -1,0 +1,83 @@
+.active {
+    color: #19a546;
+  }
+  
+  .enCours {
+    color: #ff7f1d;
+  }
+  
+  .prevContract {
+    color: #c1c0c0;
+    line-height: 1;
+    position: absolute;
+    bottom: 0;
+    padding-right: 5px;
+    width: 100%;
+    padding-right: 30px;
+  }
+  
+  .bloc-card {
+    height: 200px;
+  }
+  
+  .position-right {
+      right: 0;
+  }
+  
+  .close-popover:hover {
+      cursor: pointer;   
+  }
+  
+  .container-card {
+    position: relative;
+  }
+  
+  .container-card .popup-card {
+    position: absolute;
+    top: 0;
+    right: calc(-100% - 12px);
+    background-color: #e0f5ff;
+  }
+  
+  .container-card .label {
+    font-size: 10px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #767676;
+  }
+  
+  .container-card .value {
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: black;
+  }
+  
+  .display-block {
+    display: block;
+  }
+  
+  .icon-energie {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 55px;
+    height: 55px;
+  }
+  .display-none{
+    display: none;
+  }
+  
+  .title-energie {
+    position: absolute;
+    top: 10px;
+    left: 55px;
+    width: 10rem;
+    font-size: 0.8rem;
+}

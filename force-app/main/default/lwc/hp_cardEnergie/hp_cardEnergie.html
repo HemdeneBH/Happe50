@@ -1,0 +1,124 @@
+<!--
+  @File Name          : hp_cardEnergie.html
+  @Description        : 
+  @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
+  @Group              : 
+  @Last Modified By   : ChangeMeIn@UserSettingsUnder.SFDoc
+  @Last Modified On   : 09-17-2020
+  @Modification Log   : 
+  Ver       Date            Author      		    Modification
+  1.0    02/04/2020   ChangeMeIn@UserSettingsUnder.SFDoc     Initial Version
+-->
+<template>
+  <lightning-card  class="container-card">
+    <div class="icon-energie">
+        <img src={iconEnergie}/>   
+    </div>
+    <template if:true={apiActiveContratInfo}>
+    <h2 class="title-energie">{apiActiveContratInfo.offre}</h2>
+    </template>
+    <div slot="actions">
+      <lightning-button-icon if:false={apiActiveContratInfo} icon-name="utility:survey" variant="bare"></lightning-button-icon>
+      <lightning-button-icon if:true={apiActiveContratInfo} icon-name="utility:chevronright" variant="bare"
+          alternative-text="Open record" onclick={handleOpenRecordClick}>
+      </lightning-button-icon>
+  </div>
+  <div class="bloc-card" style="padding-left:0.5rem"> 
+    <div
+        class="slds-m-around_medium  engie-card-contrat-body slds-card__body via-slds-card__body slds-theme--default slds-grid">
+        <div class="slds-size--1-of-2 slds-p-right_xx-small contrat ">
+            <div if:true={apiActiveContratInfo}>
+                <div class="slds-truncate slds-text-heading--label">Statut</div>
+                <div class="enCours slds-truncate">{apiActiveContratInfo.libelleStatutCrm}</div>
+                <div class="slds-truncate">{apiActiveContratInfo.dateDebutValidite}</div>
+            </div>
+            <a href="javascript:void(0)" if:true={souscriptionMigrationLabel} 
+
+            onclick={redirectSouscriptionMigration} style="font-size: 0.7rem;">{souscriptionMigrationLabel}</a>
+
+        </div>
+        <div class="slds-size--1-of-2 slds-p-right_xx-small">
+            <a href="javascript:void(0)" if:true={souscriptionId} onclick={redirectSouscription} style="font-size: 0.7rem;">Détail souscription</a>
+           <!-- <lightning-button if:true={souscriptionId} variant="base" label="Détail souscription"
+                title="Détail souscription" onclick={redirectSouscription}
+                class="display-block slds-m-left_x-small"></lightning-button>-->
+            <lightning-button if:false={apiActiveContratInfo} variant="base" label="Souscrire"
+                title="s'inscrire à une offre" icon-name="utility:add"
+                class="display-block slds-m-left_x-small"></lightning-button>
+            <lightning-button if:true={prestationEnCours} variant="base" label="OPS en cours"
+                title="Afficher OPS en cours" icon-name="utility:info" onclick={openOPS}
+                class="display-block slds-m-left_x-small"></lightning-button>
+        </div>
+        <div if:true={apiDesactiveContratInfo} class="prevContract slds-size--1-of-1 slds-p-bottom_x-small slds-p-right_xx-small">
+            <div class="slds-tile slds-text-heading--label">{desableContractStatus}</div>
+            <div class="slds-m-bottom_xx-small">{apiDesactiveContratInfo.offre}</div>
+            <div class="slds-m-bottom_xx-small"> du <lightning-formatted-date-time value={apiDesactiveContratInfo.dateDebutValidite} day="2-digit"  month="2-digit" year="numeric" ></lightning-formatted-date-time> au  <lightning-formatted-date-time value={apiDesactiveContratInfo.dateFinValidite} day="2-digit"  month="2-digit" year="numeric" ></lightning-formatted-date-time> </div>
+        </div>
+        </div>
+        <div if:true={prestationDistributeur} style="font-size: 0.7rem;" class="slds-size--1-of-1 slds-p-bottom_x-small slds-m-around_medium prestation-distributeur">
+            OPS - {prestationDistributeur.Situation_de_vente__c} <template if:true={prestationDistributeur.Date_de_prestation__c}><br/> le </template> {prestationDistributeur.Date_de_prestation__c} : {prestationDistributeur.Statut__c}
+          <br/><br/>
+          </div>
+    </div></div>
+    <template if:true={showHideFlyout}>
+    <section aria-describedby="dialog-body-id-77" aria-labelledby="dialog-heading-id-81"
+    class="slds-popover slds-nubbin_left-top popup-card slds-size--1-of-1 slds-m-right_xx-small" role="dialog">
+    <header class="slds-popover__header">
+        <h2 class="slds-text-heading_small" id="dialog-heading-id-81">Détail {title}</h2>
+    </header>   
+    <template if:true={dataIsLoaded}>   
+      <template if:false={isError}>       
+    <div if:true={isgaz} class="slds-popover__body" id="dialog-body-id-77">
+        <p class="label">CONSOMMATION ANNUELLE ESTIMEE (CAE)</p>
+        <p class="value">{flyoutData.consoEstimee} KWh</p>
+        <p class="label">PLAGE DE CONSOMMATION</p>
+        <p class="value">{flyoutData.gazPlageConso}</p>
+        <p class="label">DATE DE RECONDUCTION</p>
+        <p class="value">{flyoutData.dateReconduction}</p>
+        <p class="label">PRIX DE L'ABONNEMENT</p>
+        <p class="value">{flyoutData.aboTtc} € TTC ({flyoutData.aboHt} € HT)</p>
+        <p class="label">PRIX DU KWH</p>
+        <template for:each={flyoutData.consos} for:item="prix">
+            <p class="value" key={prix.typeConso}>{prix.consoTtc} € TTC ({prix.consoHt} € HT)</p>
+        </template>
+        <p class="label">POURCENTAGE EN COURS</p>
+        <p class="value">{flyoutData.reductionEnCours} %</p>
+        <p class="label">Co-contractant</p>
+        <template if:true={cocontractant}> 
+          <p class="value">{cocontractant.prenom} {cocontractant.nom}</p>
+          </template>
+    </div>
+    <div if:true={iselec} class="slds-popover__body" id="dialog-body-id-78">
+        <p class="label">PUISSANCE</p>
+        <p class="value">{flyoutData.elecPuissance} KWh</p>
+        <p class="label">CONSOMMATION ANNUELLE ESTIMEE (CAE)</p>
+        <p class="value">{flyoutData.consoEstimee} KWh</p>
+        <p class="label">TYPE DE COMPTAGE</p>
+        <p class="value">{flyoutData.elecTypeComptage}</p>
+        <p class="label">DATE DE RECONDUCTION</p>
+        <p class="value">{flyoutData.dateReconduction}</p>
+        <p class="label">PRIX DE L'ABONNEMENT</p>
+        <p class="value">{flyoutData.aboTtc} € TTC ({flyoutData.aboHt} € HT)</p>
+        <p class="label">PRIX DU KWH</p>
+        <template for:each={flyoutData.consos} for:item="prix">
+            <p class="value" key={prix.typeConso}>{prix.typeConso} {prix.consoTtc} € TTC ({prix.consoHt} € HT)</p>
+        </template>
+        <p class="label">POURCENTAGE EN COURS</p>
+        <p class="value">{flyoutData.reductionEnCours} %</p>
+        <p class="label">Co-contractant</p>
+        <template if:true={possedeCocontractant}> 
+        <p class="value">{_pfcdata.prtefeuilleContrat.xdataCoPersonne.data.prenom} {_pfcdata.prtefeuilleContrat.xdataCoPersonne.data.nom}</p>
+        </template>
+    </div>
+  </template>
+    <div if:true={isError} class="slds-popover__body" id="dialog-body-id-79">
+        <p class="value">{flyoutData.error}</p>
+    </div>
+  </template>  
+    <div class="exampleHolder" if:false={dataIsLoaded}>
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </div>
+</section>
+</template>
+</lightning-card>
+</template>

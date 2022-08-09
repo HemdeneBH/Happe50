@@ -1,0 +1,470 @@
+.btn-img-size {
+		width: 42px;
+    height: 42px;
+  }
+
+  .btn-img-size-astuce{
+    width: 24px;
+    height: 27px;
+    margin-left: 100%;
+  }
+
+.btn-img-size-arrows{
+		width: 22px;
+		height: 27px;
+		cursor: pointer;
+}
+
+  .showImageOnHover{
+    display:none; /*by default this should hidden*/
+  }
+  
+  .hideImageOnHover{
+    display:inline-block; /*by default this should be shown*/
+  }
+  
+  .btn-outline-primary:hover:active .hideImageOnHover {
+    display:none;
+  }
+  
+  .btn-outline-primary:hover:active .showImageOnHover {
+    display: inline-block;
+  }
+  .btn-outline-primary{
+      border-color: rgba(0, 157, 233, 1) !important;
+			color:rgba(0, 157, 233, 1) !important;
+  }
+  
+  
+  .btn-outline-primary[data-current="true"] {
+    background-color: #009de9;
+    color:#fff !important;
+  }
+  
+  .btn-outline-primary:hover{
+    background-color: #009de9 !important;
+			 color:#fff !important;
+  }
+  
+  .btn-outline-primary[data-current="true"] .hideImageOnHover {
+    display:none;
+  }
+  
+  .btn-outline-primary[data-current="true"] .showImageOnHover {
+    display: inline-block;
+  }
+  
+  .form-control:focus{
+    box-shadow: 0 0 0 0;
+}
+
+.form-control{
+    border-top: 0;
+    border-right: 0;
+    border-left:0;
+    border-bottom-color: rgb(227, 227, 227);
+    border-radius: 0px;
+}
+
+.form-group{
+    text-align: left;
+}
+
+
+.lato-normal-sonic-silver-18px {
+  color: rgba(117,117,117,1.0);
+  font-family: "Lato", Helvetica, Arial, serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.table-with-filtering {
+  background-color: transparent;
+  flex-shrink: 0;
+  height: auto;
+  letter-spacing: 0px;
+  line-height: 32px;
+  min-height: 32px;
+  min-width: 210px;
+  text-align: center;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.x2 {
+  background-color: transparent;
+  flex-shrink: 0;
+  height: auto;
+  letter-spacing: 0px;
+  line-height: 17px;
+  min-height: 17px;
+  min-width: 11px;
+  text-align: center;
+  white-space: nowrap;
+  width: auto;
+}
+
+.lato-normal-log-cabin-14px {
+  color:rgba(33, 33, 33, 1);
+  font-family: "Lato", Helvetica, Arial, serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.rectangle-copy {
+		background-color: transparent;
+		flex-shrink: 0;
+		height: 32px;
+		width: 32px;
+		cursor: pointer;
+}
+
+.rectangle-copy:hover {
+  background-color: rgba(0, 157, 233, 1);
+		color:#fff;
+}
+
+.rectangle-click {
+		background-color: rgba(0, 157, 233, 1) !important;
+		color:#fff !important;
+}
+.x2 {
+  background-color: transparent;
+		flex-shrink: 0;
+		letter-spacing: 0px;
+		text-align: center;
+		white-space: nowrap;
+		cursor: pointer;
+}
+
+.adresse {
+background-color: transparent;
+font-family: "Lato", Helvetica, Arial, serif;
+color: rgba(33, 33, 33, 1);
+height: auto;
+left: 0px;
+line-height: 19px;
+position: absolute;
+text-align: left;
+top: 0px;
+white-space: nowrap;
+width: auto;
+}
+
+.textbody-left {
+font-family: "Lato", Helvetica, Arial, serif;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+}
+
+.overlap-group {
+background-color: transparent;
+flex-shrink: 0;
+height: 34px;
+position: relative;
+width: 105px;
+}
+.listtext-copy-8 {
+align-items: center;
+background-color: white;
+display: inline-flex;
+flex-direction: row;
+flex-shrink: 0;
+height: 48px;
+justify-content: flex-start;
+min-width: 270px;
+padding: 0 20px;
+width: auto;
+}
+.listtext-copy-8:hover {
+background-color: whitesmoke;
+
+}
+
+.consentement-client{
+  font-family: "Lato", Helvetica, Arial, serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  position: relative;
+		z-index: 0;
+}
+
+ .slds-popover__body{
+    background: #FF0000 !important; /* background color */
+    color: #444444; /* text color */
+}
+
+.group-2 {
+  align-items: flex-start;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  height: auto;
+  float: left;
+  justify-content: flex-start;
+  min-height: 46px;
+  width: 64px;
+	margin-bottom: 1rem;
+}
+
+.group {
+  align-items: flex-start;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  height: auto;
+  justify-content: flex-start;
+  min-height: 25px;
+	margin-left: 100px;
+  width: auto;
+	margin-bottom: 1rem;
+}
+
+
+.label-text-small-act {
+  background-color: transparent;
+  flex-shrink: 0;
+  height: auto;
+  letter-spacing: 0px;
+  line-height: 12px;
+  margin-top: 6px; 
+  min-height: 12px;
+  min-width: 236px;
+  text-align: left;
+  white-space: nowrap;
+  width: auto;
+}
+
+.lato-normal-monza-12px {
+  color: rgba(204, 0, 51, 1);
+  font-family: "Lato", Helvetica, Arial, serif;
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 400;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+
+.astuce-pour-augmen {
+  letter-spacing: 0px;
+  line-height: 19px;
+  min-height: 57px;
+  text-align: left;
+  width: 70%;
+}
+.lato-bold-tuatara-12px {
+  color: rgba(52, 52, 52, 1);
+  font-family: "Lato", Helvetica, Arial, serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+}
+.span2 {
+  font-family: "Lato", Helvetica, Arial, serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.redColor{
+    fill : red;
+}
+.iconContainer{
+    width : 50px;
+    height:50px;
+    display:inline-block;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* Start DDPCM - 371 */
+
+.VisualisationCase-hover{
+  cursor: pointer;
+}
+
+.vi-modal-background {
+  background-color: rgba(0, 0, 0, 0.25);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  left: 0px;
+  top: 0px;
+  z-index: 20;
+  padding-top: 200px;
+  padding-left: 446px;
+}
+
+.vi-modal-VisualisationCase {
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  height: 400px;
+  width: 66%;
+  background-color: #ffffff;
+  z-index: 7000;
+}
+
+.sizeIcon {
+  height:100px !important;
+  width: 100px !important;
+}
+
+.THIS.buttonIcon_dataTable svg {
+  fill : yellow !important;
+  height: 100% !important;
+  width: 100px !important;
+  margin: 0;
+}
+
+
+/* End DDPCM - 371 */
+
+.nocopy {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+ }
+
+.WarningIcon {
+  color : salmon ;
+}
+
+.buttonPrecedent {
+  position: absolute;
+    left: 1%;
+    background: transparent;
+    border-color: var(--cerulean);
+    border-style: solid;
+    color: var(--cerulean);
+    font-size: 18px;
+    width: 160px;
+    height: 50px;
+    outline: none;
+}
+
+.buttonSuivant {
+  position: absolute;
+  left: 84%;
+  background: var(--cerulean);
+  border-color: var(--cerulean);
+  border-style: solid;
+  color: white;
+  font-size: 18px;
+  width: 160px;
+  height: 50px;
+  outline: none;
+}
+.my-custom-scrollbar {
+  position: relative;
+  height: 200px;
+  overflow: auto;
+  }
+.table-wrapper-scroll-y {
+display: block;
+}
+
+/* Start DDPCM - 671 */
+.THIS.TypeCompteur{
+  background-image: url(@salesforce/resourceUrl/EngieCommunityResources/EngieAssets/pictures/LOGO_LINKY.png);
+  background-repeat: no-repeat;
+  background-size: 30px;
+  background-position: center;
+  color: rgb(204, 232, 33);
+  font-weight: bold;
+}
+/* End DDPCM - 671 */
+
+.rechercheParAdresseClientChoisiSpinner{
+  display: block;
+  top: -11%;
+	z-index: unset;
+  background-color:transparent;
+}
+
+.rechercheParAdresseClientNonChoisiSpinner{
+  display: block;
+  top: -14%;
+	z-index: unset;
+  background-color:transparent;
+}
+
+.rechercheParPDLPCESpinner{
+  display: block;
+  top: 55%;
+	z-index: unset;
+  background-color:transparent;
+}

@@ -1,0 +1,35 @@
+<template>
+    <lightning-card title="Login octopus">
+        <lightning-button label="Configurer" slot="actions" onclick={updateStateCnx}></lightning-button>
+
+        <!--
+        <div class="slds-grid slds-gutters slds-m-around_medium">
+        <div class="slds-col">
+            <lightning-input type="text" label="Login Symphonie" name="logname" value={username} onchange={handleUserChange}></lightning-input>
+        </div>
+        <div class="slds-col">
+            <lightning-input type="password" label="Password" name="passwd" value="Voir la configuration" onchange={handlePassChange}></lightning-input>
+        </div>
+        </div>
+    -->
+
+    <ul class="slds-list_horizontal">
+        <li>
+        <lightning-icon if:true={loginres.loginok} slot="media"  icon-name="action:approval"></lightning-icon>
+        <lightning-icon if:false={loginres.loginok} slot="media"  icon-name="action:close" ></lightning-icon>
+        </li>
+        <li class="slds-text-heading_medium slds-p-left_large">{loginres.resultStr}</li>
+    </ul>
+
+        <div class="slds-m-around_small slds-text-body_small">{loginres.resultMsg}</div>
+        
+<div slot="footer" class="slds-text-align_center">
+<div>Pour configurer l'authentification SAP, cliquez sur le bouton.</div>
+<div>Ensuite si le Named Credential "AuthOctopus" est présent, , cliquez sur "Edit".</div>
+<div>Sinon cliquez sur "New" pour créer et configurer "AuthOctopus"</div>
+<div>(user : votre nom d'utilisateur Salesforce, username : votre login SAP, password : votre mot de passe SAP)</div>
+</div>
+
+</lightning-card>
+    
+    </template>

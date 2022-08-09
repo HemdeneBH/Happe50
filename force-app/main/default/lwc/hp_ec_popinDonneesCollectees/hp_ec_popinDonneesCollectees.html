@@ -1,0 +1,47 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 01-24-2022
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<template>
+  <div class="hp_container">
+
+    <header class="slds-modal__header hp-header">
+      <h1 class="hp-bigTitle">
+        {popindonneescollecteestitle}
+      </h1>
+      <span class="hp-closeButton">
+        <a onclick={closePopinDonneesCollectees}>
+          <img class="hp-close-icon" src={iconClose} alt="close icon" />
+        </a>
+      </span>
+    </header>
+
+    <div class="hp-content">
+      <div class="hp-textExplicatif">
+        <p>
+          {popindonneescollecteestexteexplicatif}
+        </p>
+       
+      </div>
+      <div class="hp-alert">
+        <span class="hp-alert-icon">
+          <img src={iconAlert} alt="alert icon" />
+        </span>
+        <span class="hp-alert-text">
+          {popindonneescollecteesmessageerreur}
+        </span>
+      </div>
+      
+        <div class="hp-btnContainer">
+          <div class="hp-secondButton" onclick={handleCreerDossier}>
+            {popindonneescollecteeslibellebouton}
+          </div>
+        </div>
+
+    </div>
+  </div>
+
+</template>

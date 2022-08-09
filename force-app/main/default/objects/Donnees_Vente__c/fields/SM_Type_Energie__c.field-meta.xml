@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_Type_Energie__c</fullName>
+    <externalId>false</externalId>
+    <label>Type d&apos;énergie</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Gaz</fullName>
+                <default>false</default>
+                <label>Gaz</label>
+            </value>
+            <value>
+                <fullName>Elec</fullName>
+                <default>false</default>
+                <label>Elec</label>
+            </value>
+            <value>
+                <fullName>Dual</fullName>
+                <default>false</default>
+                <label>Dual</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

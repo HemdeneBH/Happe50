@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_TECH_TelephonePrincipal__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+				NOT(VI_Contact__r.TechMobilePrincipale__c == null),
+				VI_Contact__r.TechMobilePrincipale__c,
+				VI_Contact__r.TechFixePrincipale__c 
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>TECH Telephone principal</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

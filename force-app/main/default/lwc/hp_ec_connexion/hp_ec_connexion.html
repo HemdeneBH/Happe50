@@ -1,0 +1,98 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 05-02-2022
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<template>
+    <div class="hp_container">
+        <div class="hp-connexion">
+            <template if:false={showAppDownload}>
+            <div class="hp-content">
+                <div class="hp-logo">
+                    <img src={blackLogo}>
+                </div>
+                <div class="hp-bigTitle">
+                    {titreConnexion}
+                </div>
+                
+                <div class="slds-form-element hp-email">
+                    <label class="slds-form-element__label hp-inputLabel" for="hp-input-email">
+                       {labelInputEmail}  
+                    </label>
+                    <div class="slds-form-element__control">
+                        <input class="hp-textInput slds-input" type="email" id="hp-input-email"
+                            placeholder={placeHolderInputEmail} required="" aria-describedby={messageErreurInputEmail}
+                            aria-invalid="true" onchange={handleEmailChange}/>
+                    </div>
+                </div>
+
+                <div class="slds-form-element hp-mdp">
+                    <label class="slds-form-element__label hp-inputLabel" for="hp-input-mdp">
+                       {labelInputMDP}  
+                    </label>
+                    <div class="slds-form-element__control">
+                        <input class="hp-textInput slds-input" type="password" id="hp-input-mdp"
+                            placeholder={placeHolderInputMDP} required="" aria-describedby={messageErreurInputEmail}
+                            aria-invalid="true" onchange={handlePasswordChange}/>
+                    </div>
+                </div>
+            
+                <div if:true={showSocialLogin} class="hp-restConnected">
+                    <input type="checkbox" class="checkbox-restConnected" data-id="checkbox-restConnected">
+                    <label for="checkbox-restConnected">{labelResterConnecte} </label>
+                </div> 
+                <template if:true={showError}>
+                    <div class="hp-error">
+                        {errorMessage}
+                    </div>
+                </template>
+             
+                <div class="hp-btnContainer">
+                    <div class="hp-firstButton" onclick={handleSubmit}>
+                       {labelBoutonPrimaire}
+                    </div>
+                </div>
+                <div class="hp-link">
+                    <a onclick={handleForgotPassword}>{labelMDPOoublie} </a>
+                </div>
+                <div class="hp-link">
+                    <a onclick={handleResendActivation}>{labelEmailActivation} </a>
+                </div>
+                <template if:true={showSocialLogin}>
+                    <div class="hp-btnConnexions">
+                        <p>Ou je me connecte avec </p>
+                        <div class="hp-btnContainer">
+                            <div class="hp-facebook">
+                                <a>
+                                    <img src={facebookLogo}>
+                                </a>
+                            </div>
+                            <div class="hp-google">
+                                <a>
+                                    <img src={googleLogo}>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
+        <template if:true={showAppDownload}>
+            <c-hp_ec_popin-app onclosepopinapp={closePopinApp} liengoogleplay={lienGooglePlay} lienappstore={lienAppStore}>
+            </c-hp_ec_popin-app>
+        </template>
+        </div>
+        <div data-id='appDownload'>
+            <div class={cssClass} onclick={openPopinApp}>
+              <img src={logoApp} alt="app logo" />
+              <p>
+                <a>{labelLienAppMobile} 
+                  <span class="chevron right"></span>
+                </a>
+              </p>
+            </div>
+          </div>
+    </div>
+</template>

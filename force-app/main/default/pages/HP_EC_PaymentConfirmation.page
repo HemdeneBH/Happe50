@@ -1,0 +1,9 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 05-24-2022
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<apex:page controller="HP_EC_PaymentRedirection" action="{!urlRedirection}">
+</apex:page>

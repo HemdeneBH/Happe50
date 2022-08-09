@@ -1,0 +1,109 @@
+<template>
+    <div class="slds-m-left_large slds-m-right_large slds-m-bottom_large" style="padding-left: 10px;padding-right: 10px;">
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_2-of-4">
+                <div class="slds-form-element__label"><span class="required-color">* </span>Code postal</div>
+                <lightning-input onfocusout={closeTabsAdressManuelle} type="number" data-id="codePostal" variant="label-hidden" list="valueList" message-when-value-missing=" " onchange={changeCodePostal} onclick={checkListCodesPostaux} value={omniJsonData.postcodeOct} required></lightning-input>
+                <!-- <div if:true={isCodePostalFieldEmpty} role="alert" class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error">
+                    <h2>Veuillez saisir un code postal.</h2>
+                </div> -->
+                <div if:true={isCodePostalFieldEmpty} class="slds-has-error">
+                    <div class="slds-form-element__help">Veuillez saisir un code postal.</div>
+                </div>
+                <div data-id="listCodesPostauxSuggested" class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid slds-hide" role="listbox" style="position: relative;">
+                    <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                        <template for:each={listCodesPostaux} for:item="zipCode">
+                            <li role="presentation" class="slds-listbox__item" key={zipCode}>
+                                <div data-value={zipCode}
+                                    class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                    role="option" onclick={selectCodePostalValue}>
+                                    <span class="slds-media__body">
+                                        <span class="slds-listbox__option-text slds-listbox__option-text_entity">{zipCode}</span>
+                                    </span>
+                                </div>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </div>
+            <div class="slds-col slds-size_2-of-4">
+                <div class="slds-form-element__label"><span class="required-color">* </span>Ville</div>
+                <lightning-input onfocusout={closeTabsAdressManuelle} data-id="ville" variant="label-hidden" list="valueList" message-when-value-missing=" " onchange={changeVille} onclick={checkListVille} value={omniJsonData.cityOct} required></lightning-input>
+                <!-- <div if:true={isCityFieldEmpty} role="alert" class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error">
+                    <h2>Veuillez saisir une ville.</h2>
+                </div> -->
+                <div if:true={isCityFieldEmpty} class="slds-has-error">
+                    <div class="slds-form-element__help">Veuillez saisir une ville.</div>
+                </div>
+                <div data-id="listVillesSuggested" class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid slds-hide" role="listbox" style="position: relative;">
+                    <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                        <template for:each={listVilles} for:item="ville">
+                            <li role="presentation" class="slds-listbox__item" key={ville}>
+                                <div data-value={ville}
+                                    class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                    role="option" onclick={selectVilleValue}>
+                                    <span class="slds-media__body">
+                                        <span class="slds-listbox__option-text slds-listbox__option-text_entity">{ville}</span>
+                                    </span>
+                                </div>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </div>
+            
+            
+        </div>
+        <div class="slds-grid slds-gutters" if:false={secondStep}>
+            <div class="slds-col slds-size_2-of-1 slds-m-top_x-small">
+                <lightning-button variant="success" label="Valider" title="Valider" disabled={disabled} onclick={setNextStep}></lightning-button>
+            </div>
+        </div>
+        <div class="slds-grid slds-gutters" if:true={secondStep}>
+            <div class="slds-col slds-size_1-of-6">
+                <div class="slds-form-element__label">N° de la voie</div>
+                <lightning-input onfocusout={closeTabsAdressManuelle} data-id="numeroRue" variant="label-hidden" list="valueList" message-when-value-missing=" " onchange={changeNumero} onclick={checkListNumero} value={omniJsonData.housenumberOct}></lightning-input>
+                <div data-id="listNumerosSuggested" class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid slds-hide" role="listbox" style="position: relative;">
+                    <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                        <template for:each={listNumeros} for:item="numero">
+                            <li role="presentation" class="slds-listbox__item" key={numero.numeroVoie}>
+                                <div data-value={numero.numeroVoie}
+                                    class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                    role="option" onclick={selectNumeroValue}>
+                                    <span class="slds-media__body">
+                                        <span class="slds-listbox__option-text slds-listbox__option-text_entity">{numero.numeroVoie}</span>
+                                    </span>
+                                </div>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </div>
+            <div class="slds-col slds-size_5-of-6">
+                <div class="slds-form-element__label"><span class="required-color">* </span>Nom de la voie</div>
+                <lightning-input onfocusout={closeTabsAdressManuelle} data-id="rue" variant="label-hidden" list="valueList" message-when-value-missing=" " onchange={changeRue} value={omniJsonData.streetOct} required></lightning-input>
+                <!-- <div if:true={isStreetFieldEmpty} role="alert" class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error">
+                    <h2>Veuillez saisir un nom de la voie.</h2>
+                </div> -->
+                <div if:true={isStreetFieldEmpty} class="slds-has-error">
+                    <div class="slds-form-element__help">Veuillez saisir un nom de la voie.</div>
+                </div>
+                <div data-id="listRuesSuggested" class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid slds-hide" role="listbox" style="position: relative;">
+                    <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                        <template for:each={listRues} for:item="rue">
+                            <li role="presentation" class="slds-listbox__item" key={rue.codePostal}>
+                                <div data-value={rue.libelleVoie}
+                                    class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                    role="option" onclick={selectRueValue}>
+                                    <span class="slds-media__body">
+                                        <span class="slds-listbox__option-text slds-listbox__option-text_entity">{rue.libelleVoie}</span>
+                                    </span>
+                                </div>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div> 
+</template>

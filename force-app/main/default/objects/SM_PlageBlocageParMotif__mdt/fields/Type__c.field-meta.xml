@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type__c</fullName>
+    <description>@SMILE: type de blocage</description>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <label>Type de blocage</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Relance</fullName>
+                <default>false</default>
+                <label>Relance</label>
+            </value>
+            <value>
+                <fullName>Facture</fullName>
+                <default>false</default>
+                <label>Facture</label>
+            </value>
+            <value>
+                <fullName>Prelevement</fullName>
+                <default>false</default>
+                <label>Prelevement</label>
+            </value>
+            <value>
+                <fullName>Decaissement</fullName>
+                <default>false</default>
+                <label>Decaissement</label>
+            </value>
+            <value>
+                <fullName>Facturation</fullName>
+                <default>false</default>
+                <label>Facturation</label>
+            </value>
+            <value>
+                <fullName>Encaissement</fullName>
+                <default>false</default>
+                <label>Encaissement</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

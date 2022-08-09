@@ -1,0 +1,56 @@
+<template>
+    <lightning-card class="slds-m-bottom_large">
+
+       <div class="slds-m-left_large slds-text-heading_medium slds-text-title_bold">SYNTHÈSE DES BLOCAGES</div>
+
+       <br/>			                        
+       <div class="slds-p-around_large" >
+          ADRESSE DU LOGEMENT
+          <div class="slds-grid slds-wrap">
+             <div>
+                <lightning-icon icon-name="utility:home" size="small" alternative-text="Home">
+                </lightning-icon>
+                &nbsp;&nbsp;
+             </div>
+             <div>
+                <p>{numeroVoie}&nbsp;{libelleVoie} </p>
+                <p>{complementAdresse}</p>
+                <p>{codePostal}&nbsp;{ville}</p>
+             </div>
+          </div>
+       </div>
+       <div class="slds-p-around_large">
+          <article class="slds-card">
+             <table  class="tableListPa">
+                <tr class="tableListPaTr">
+                   <th scope="col" >&nbsp;&nbsp;&nbsp;TYPE DE BLOCAGE</th>
+                   <th scope="col">DATE DE DÉBUT</th>
+                   <th scope="col" >DATE DE FIN</th>
+                   <th scope="col" >MOTIF</th>
+                </tr>
+             </table>
+             <template if:false={NoBlocage}>
+                <template for:each={listBlocage} for:item='item'>
+                   <table  class="customTabStyle" key={index}>
+                      <tr style="width: 129px;" >
+                         <th scope="col" >&nbsp;&nbsp;&nbsp;{item.type}</th>
+                         <th scope="col" >{item.dateDebut}</th>
+                         <th scope="col" >{item.dateFin}</th>
+                         <th scope="col" >{item.motif}</th>
+                      </tr>
+                   </table>
+                </template>
+             </template>
+             <template if:true={NoBlocage}>
+                <footer class="slds-card__footer" >
+                   Aucun blocage pour ce client.
+                </footer>
+             </template>
+             <div class="buttonContainer" >                
+                <button class="slds-button slds-button_neutral closeButton" onclick={closeBlocageLWCTab}>Fermer la
+                    page</button>               
+             </div>
+          </article>
+       </div>
+    </lightning-card>
+ </template>

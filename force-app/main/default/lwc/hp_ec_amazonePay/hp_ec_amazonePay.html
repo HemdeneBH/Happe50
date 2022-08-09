@@ -1,0 +1,23 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 06-07-2022
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<template>
+    <form method="POST" data-id="amazonePayForm" enctype="application/x-www-form-urlencoded" action="https://payments.amazon.fr/checkout/initiate">
+        <input data-id="payloadJSON" type="hidden" name="payloadJSON" value={payloadJSON}>
+        <input data-id="signature" type="hidden" name="signature" value={signature}>
+        <input data-id="publicKeyId" type="hidden" name="publicKeyId" value={publicKeyId}>
+        <input data-id="algorithm" type="hidden" name="algorithm" value="AMZN-PAY-RSASSA-PSS">
+        <input data-id="ledgerCurrency" type="hidden" name="ledgerCurrency" value="EUR">
+        <input data-id="checkoutLanguage" type="hidden" name="checkoutLanguage" value="fr_FR">
+        <input data-id="merchantId" type="hidden" name="merchantId" value="A1CGM8RVR4O6KL">
+        <input data-id="productType" type="hidden" name="productType" value="PayOnly">
+        <input data-id="environment" type="hidden" name="environment" value="SANDBOX">
+        <input data-id="merchantDomain" type="hidden" name="merchantDomain" value="agilab-recette.myengie.com">
+        <input data-id="origin_url" type="hidden" name="origin_url" value="https://agilab-recette.myengie.com/espace-client/492878?tab=factures">
+        <input data-id="viewType" type="hidden" name="viewType" value="redirectView">
+      </form>
+</template>

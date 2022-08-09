@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property type="String" name="copyrightMention" default="© happ-e"/>
+            <property type="String" name="mentionLabel" default="Mention légales"/>
+            <property type="String" name="lienMention" default="#"/>
+            <property type="String" name="label" default="CGV"/>
+            <property type="String" name="lienCGV" default="#"/>
+            <property type="ContentReference" name="contentLegals" label="Content Legals"/>
+            <property type="ContentReference" name="socialNetworks" label="Social Networks" filter="cms_image"/>
+            <property type="String" name="tagCommander" default="https://cdn.tagcommander.com/1677/tc_Happe_12.js" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

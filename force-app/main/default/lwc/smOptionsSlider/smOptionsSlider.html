@@ -1,0 +1,10 @@
+<template  >
+    <div class="container" >
+        <div if:false={active}>
+            <lightning-slider  value=0 disabled></lightning-slider>
+        </div>
+        <div if:true={active}>
+            <lightning-slider min="5" step="5" value={initVal} onchange={handleChange} ></lightning-slider>
+        </div>
+    </div>
+    </template>

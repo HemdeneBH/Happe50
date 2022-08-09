@@ -1,0 +1,271 @@
+<template>
+    <div class="container-card">
+        <lightning-card>
+            <div class="icon-energie">
+                <img src={iconCard} />
+            </div>
+            <h2 class="title-energie">{getTitle}</h2>
+            <div slot="actions">
+                <lightning-button-icon if:false={contratactif} icon-name="utility:vide" variant="bare">
+                </lightning-button-icon>
+                <lightning-button-icon if:true={contratactif} icon-name="utility:chevronright" variant="bare"
+                    alternative-text="Open record" onclick={handleOpenRecordClick}>
+                </lightning-button-icon>
+            </div>
+            <div class="slds-m-around_medium bloc-card engie-card-contrat-body slds-card__body via-slds-card__body slds-theme--default slds-grid"
+                if:true={selecteditem.errorContratWs}>
+                <h2 class="message-error">information indisponible pour le moment.</h2>
+            </div>
+            <div if:false={selecteditem.errorContratWs}
+                class="slds-m-around_medium bloc-card engie-card-contrat-body slds-card__body via-slds-card__body slds-theme--default slds-grid">
+                <div class="slds-size--1-of-2 slds-p-right_xx-small">
+                    <div if:true={contratactif}>
+                        <div class="slds-truncate slds-text-heading--label">Statut</div>
+                        <div class="active slds-truncate statut-text" if:true={condition}>
+                            <!-- {contratactif.statut} -->
+                            Activé
+                        </div>
+                        <div class="enCours slds-truncate statut-text" if:false={condition}>{statut}</div>
+                        <div class="slds-truncate date-text" if:false={isResilie}>{contratactif.dateDebutContrat}</div>
+                        <div class="slds-truncate date-text" if:true={isResilie}>     {contratactif.dateDemenagementSouhaitee}</div>
+                    </div>
+                    <div if:true={isPrestGaz}>
+                        <div class="date-text">{OPSGazLibelle}</div>
+                        <span class="date-text">{datePrestationGaz}</span>
+                    </div>
+                    <div if:true={isPrestElec}>
+                        <div class="date-text">{OPSElecLibelle}</div>
+                        <span class="date-text">{datePrestationElec}</span>
+                    </div>
+                </div>
+                <div class="slds-size--1-of-2 slds-p-right_xx-small">
+                    <lightning-button if:true={condition} variant="base" label="Envie de changer"
+                        title="Changer d'offre" onclick={handleNeedChange} icon-name="standard:output"
+                        class="display-block slds-m-left_x-small"></lightning-button>
+                    <lightning-button if:false={contratactif} variant="base" label="Souscrire"
+                        title="s'inscrire à une offre" onclick={NavigationSouscrire} icon-name="utility:add"
+                        class="display-block slds-m-left_x-small"></lightning-button>
+                    <lightning-button if:true={isActionOPSElec} variant="base" label={libelleOPSElec}
+                        title="Afficher OPS en cours Elec" onclick={NavigationOPS} icon-name="utility:info"
+                        class="display-block slds-m-left_x-small"></lightning-button>
+                    <lightning-button if:true={isActionOPSGaz} variant="base" label={libelleOPSGaz}
+                        title="Afficher OPS en cours Gaz" onclick={NavigationOPS} icon-name="utility:info"
+                        class="display-block slds-m-left_x-small"></lightning-button>
+                </div>
+                <div if:true={contratinactif}
+                    class="prevContract slds-size--1-of-1 slds-p-bottom_x-small slds-p-right_xx-small">
+                    <div if:false={ancienneOffre} class="slds-tile slds-text-heading--label">OFFRE RESILIEE</div>
+                    <!--Added by RJM (FT2-998) -->
+                    <div if:true={ancienneOffre} class="slds-tile slds-text-heading--label">ANCIENNE OFFRE</div>
+                    <!---->
+                    <div class="slds-m-bottom_xx-small date-text">{contratinactif.libelleOffre}</div>
+                    <div class="slds-m-bottom_xx-small date-text"> du {contratinactif.dateDebutContrat} au
+                        {contratinactif.dateFinContrat}</div>
+                </div>
+                <div class="exampleHolder" if:false={showSpinner}>
+                    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                </div>
+            </div>
+        </lightning-card>
+        <section if:true={showHideFlyout} aria-describedby="dialog-body-id-77" aria-labelledby="dialog-heading-id-81"
+            class="slds-popover slds-nubbin_left-top popup-card slds-size--1-of-1 slds-m-right_xx-small popover-260"
+            role="dialog">
+            <!-- GAZ -->
+            <div if:true={isGazFlyout} class="slds-popover__body" id="dialog-body-id-77">
+                <lightning-icon icon-name="utility:close" onclick={handleOpenRecordClick} size="x-small"
+                    class="close-icon"></lightning-icon>
+                <p class="label">CONSOMMATION ANNUELLE ESTIMÉE (CAE)</p>
+                <p class="value" if:true={flayoutData.consoAnnuEstimeeGaz}>{flayoutData.consoAnnuEstimeeGaz} kWh</p>
+                <p class="value" if:false={flayoutData.consoAnnuEstimeeGaz}>-</p>
+                <p class="label">PLAGE DE CONSOMMATION</p>
+                <p class="value" if:true={flayoutData.codePlageConsoLabel}>{flayoutData.codePlageConsoLabel}</p>
+                <p class="value" if:false={flayoutData.codePlageConsoLabel}>-</p>
+                <div if:false={isOffreTradeOFF}>
+                    <p class="label">PRIX DE L'ABONNEMENT</p>
+                    <p class="value" if:true={flayoutData.aboGaz}>{flayoutData.aboGaz}</p>
+                    <p class="value" if:false={flayoutData.aboGaz}>-</p>
+                    <p class="label">PRIX DU kWh</p>
+                    <p class="value" if:true={isConsoGaz}>{flayoutData.mapConsoGazByTypeComptage.consoGaz} </p>
+                    <p class="value" if:false={isConsoGaz}>-</p>
+                </div>
+                <div class="slds-grid slds-wrap" if:true={isOffreTradeOFF}>
+                    <div class="divOffre slds-size_1-of-1 slds-grid slds-grid_align-spread">
+                        <div>
+                            <div class="lowRight " id="lowRight_Gaz">
+                                <div class="slds-form-element" style="margin:0">
+                                    <div>
+                                        <div class="consoZone">
+                                            <div class="consoHeader" onclick={toggle}>
+                                                <span class="strongText">ABONNEMENT {flayoutData.aboGaz}</span>
+                                                <span class="consoHeaderRight"><img
+                                                        src="/resource/EngieCustomResources/images/expand-arrow-down-icon.png"
+                                                        alt=" " style="width:15px; height:15px" /></span>
+                                                <span class="consoHeaderRight" style="display:none"><img
+                                                        src="/resource/EngieCustomResources/images/expand-arrow-up-icon.png"
+                                                        alt=" " style="width:15px; height:15px;" /></span>
+                                            </div>
+                                            <div class="consoBody" style="display:none">
+                                                <div if:true={flayoutData.mapConsoGazByTypeComptage.Fourniture_abo}>
+                                                    ABONNEMENT FOURNITURE
+                                                    {flayoutData.mapConsoGazByTypeComptage.Fourniture_abo}</div><br />
+                                                <div if:true={flayoutData.mapConsoGazByTypeComptage.Acheminement_abo}>
+                                                    ABONNEMENT ACHEMINEMENT
+                                                    {flayoutData.mapConsoGazByTypeComptage.Acheminement_abo}</div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="consoZone">
+                                            <div class="consoHeader" onclick={toggle}>
+                                                <span if:true={flayoutData.consoGaz}
+                                                    class="strongText">{flayoutData.consoGaz} </span>
+                                                <span class="consoHeaderRight"><img
+                                                        src="/resource/EngieCustomResources/images/expand-arrow-down-icon.png"
+                                                        alt=" " style="width:15px; height:15px" /></span>
+                                                <span class="consoHeaderRight" style="display:none"><img
+                                                        src="/resource/EngieCustomResources/images/expand-arrow-up-icon.png"
+                                                        alt=" " style="width:15px; height:15px" /></span>
+                                            </div>
+                                            <!-- A revoir  -->
+                                            <div class="consoBody" style="display:none">
+                                                <div if:true={flayoutData.mapConsoGazByTypeComptage.Fourniture_conso}>
+                                                    PRIX PAR kWh FOURNITURE</div>
+                                                <div if:true={flayoutData.mapConsoGazByTypeComptage.Fourniture_conso}>
+                                                    {flayoutData.mapConsoGazByTypeComptage.Fourniture_conso}</div><br />
+                                                <div if:true={flayoutData.mapConsoGazByTypeComptage.Acheminement_conso}>
+                                                    PRIX PAR kWh ACHEMINEMENT</div>
+                                                <div if:true={flayoutData.mapConsoGazByTypeComptage.Acheminement_conso}>
+                                                    {flayoutData.mapConsoGazByTypeComptage.Acheminement_conso}</div>
+                                                <br />
+                                                <div if:true={flayoutData.mapConsoGazByTypeComptage.OBLIGATIONS}>
+                                                    OBLIGATIONS</div>
+                                                <div if:true={flayoutData.mapConsoGazByTypeComptage.OBLIGATIONS}>
+                                                    {flayoutData.mapConsoGazByTypeComptage.OBLIGATIONS}</div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div style="clear:both"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- OPTION GAZ VERT+ -->
+                <div if:true={contratservicegazvert}>
+                    <br>
+                    <p class="label">OPTION GAZ VERT+ : {contratservicegazvertpourcent}%</p>
+                    <p class="value-active" if:true={getContratServiceGazVertInfo}>{contratservicegazvert.statut}</p>
+                    <p class="value-en-cours" if:false={getContratServiceGazVertInfo}>{contratservicegazvert.statut}</p>
+                </div>
+            </div>
+            <!-- ELEC -->
+            <div if:true={isElecFlyout} class="slds-popover__body" id="dialog-body-id-78">
+                <lightning-icon icon-name="utility:close" onclick={handleOpenRecordClick} size="x-small"
+                    class="close-icon"></lightning-icon>
+                <p class="label">PUISSANCE</p>
+                <p class="value">{PuissanceContrat}</p>
+                <p class="label">TYPE DE COMPTAGE</p>
+                <p class="value">{TypeComptageContrat}</p>
+                <p class="label">FORMULE TARIFAIRE D'ACHEMINEMENT</p>
+                <p class="value" if:true={flayoutData.FTALibelle}>{FTALib}</p>
+                <p class="value" if:false={flayoutData.FTALibelle}>-</p>
+                <div if:false={isOffreTradeOFF}>
+                    <p class="label">PRIX DE L'ABONNEMENT</p>
+                    <p class="value" if:true={flayoutData.aboElec}>{flayoutData.aboElec}</p>
+                    <p class="value" if:false={flayoutData.aboElec}>-</p>
+                    <p class="label">PRIX DU kWh</p>
+                    <p class="value" if:true={isBase}>{BaseFormatElec} </p>
+                    <p class="value" if:true={isHP}>{HPFormatElec} </p>
+                    <p class="value" if:true={isHC}>{HCFormatElec} </p>
+                    <p class="value" if:true={isWE}>{WEFormatElec} </p>
+                    <p class="value" if:true={isNotPrixRemiseElec}>-</p>                   
+                </div>
+
+                <div class="slds-grid slds-wrap" if:true={isOffreTradeOFF}>
+                    <div class="divOffre slds-size_1-of-1 slds-grid slds-grid_align-spread">
+                        <div>
+                            <div class="lowRight " id="lowRight">
+                                <div class="slds-form-element" style="margin:0">
+                                    <div>
+                                        <div class="consoZone">
+                                            <div class="consoHeader" onclick={toggle}>
+                                                <span class="strongText">ABONNEMENT {flayoutData.aboElec1}/an
+                                                    {flayoutData.aboElec2}</span>
+                                                <span class="consoHeaderRight"><img
+                                                        src="/resource/EngieCustomResources/images/expand-arrow-down-icon.png"
+                                                        alt=" " style="width:15px; height:15px" /></span>
+                                                <span class="consoHeaderRight" style="display:none"><img
+                                                        src="/resource/EngieCustomResources/images/expand-arrow-up-icon.png"
+                                                        alt=" " style="width:15px; height:15px;" /></span>
+                                            </div>
+                                            <div class="consoBody" style="display:none">
+                                                <div if:true={flayoutData.mapConsoByTypeComptage.Fourniture}> ABONNEMENT
+                                                    {flayoutData.mapConsoByTypeComptage.Fourniture}</div><br />
+                                                <div if:true={flayoutData.mapConsoByTypeComptage.Acheminement}>
+                                                    ABONNEMENT {flayoutData.mapConsoByTypeComptage.Acheminement}</div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="consoZone">
+                                            <div class="consoHeader" onclick={toggle}>
+                                                <span if:true={flayoutData.consoElec}
+                                                    class="strongText">{flayoutData.consoElec} </span>
+                                                <span class="consoHeaderRight"><img
+                                                        src="/resource/EngieCustomResources/images/expand-arrow-down-icon.png"
+                                                        alt=" " style="width:15px; height:15px" /></span>
+                                                <span class="consoHeaderRight" style="display:none"><img
+                                                        src="/resource/EngieCustomResources/images/expand-arrow-up-icon.png"
+                                                        alt=" " style="width:15px; height:15px" /></span>
+
+                                            </div>
+                                            <div class="consoBody" style="display:none">
+                                                <div if:true={isHCHPORANDWE_}>PRIX PAR kWh Fourniture</div>
+                                                <div if:true={flayoutData.mapConsoByTypeComptage.Base_}>{Base_}</div>
+                                                <div if:true={flayoutData.mapConsoByTypeComptage.HP_}>{HP_}</div>
+                                                <div if:true={flayoutData.mapConsoByTypeComptage.HC_}>{HC_}</div>
+                                                <div if:true={flayoutData.mapConsoByTypeComptage.WE_}>{WE_}</div><br />
+                                                <div if:true={isHCHPORANDWE}>PRIX PAR kWh Acheminement</div>
+                                                <div if:true={flayoutData.mapConsoByTypeComptage.Base}>{BaseFormatElec}
+                                                </div>
+                                                <div if:true={flayoutData.mapConsoByTypeComptage.HCB}>{HCBFormatElec}
+                                                </div>
+                                                <div if:true={flayoutData.mapConsoByTypeComptage.HPB}>{HPBFormatElec}
+                                                </div>
+                                                <div if:true={flayoutData.mapConsoByTypeComptage.HCH}>{HCHFormatElec}
+                                                </div>
+                                                <div if:true={flayoutData.mapConsoByTypeComptage.HPH}>{HPHFormatElec}
+                                                </div>
+                                                <div if:true={flayoutData.mapConsoByTypeComptage.HP}>{HPFormatElec}
+                                                </div>
+                                                <div if:true={flayoutData.mapConsoByTypeComptage.HC}>{HCFormatElec}
+                                                </div>
+                                                <div if:true={flayoutData.mapConsoByTypeComptage.WE}>{WEFormatElec}
+                                                </div><br />
+                                                <div if:true={flayoutData.mapConsoByTypeComptage.OBLIGATIONS}>
+                                                    {OBLIGATIONSFormat}</div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div style="clear:both"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- OPTION ELEC VERT+ -->
+                <div if:true={contratserviceelecvert}>
+                    <br>
+                    <p class="label">OPTION ELEC VERT+</p>
+                    <p class="value-active" if:true={getContratServiceElecVertInfo}>{contratserviceelecvert.statut}</p>
+                    <p class="value-en-cours" if:false={getContratServiceElecVertInfo}>{contratserviceelecvert.statut}</p>
+                </div>
+                <!-- <h2 if:false={isOffreTradeOFF} class="message-error">information indisponible pour le moment.</h2> -->
+            </div>
+            <h2 if:true={error} class="message-error">information indisponible pour le moment.</h2>
+            <div class="exampleHolder" if:false={showSpinnerFlyout}>
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </div>
+        </section>
+    </div>
+</template>

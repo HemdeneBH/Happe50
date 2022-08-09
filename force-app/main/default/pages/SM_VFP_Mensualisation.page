@@ -1,0 +1,29 @@
+<!--
+  @File Name          : SM_VFP_Prelevement.page
+  @Description        : 
+
+  Ver       Date            Author      		    Modification
+  1.0    18/03/2020    Jihad AZAMI HASSANI         Initial Version
+-->
+<apex:page standardStylesheets="false" showHeader="false" sidebar="false" docType="html-5.0">
+	<apex:includeScript value="/support/console/47.0/integration.js"/>  
+<div class="vlocity via-slds" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" ng-app="Mensualisation">
+		<vlocity_cmt:BusinessProcessComponent strOmniScriptType="smileContact"
+			strOmniScriptSubType="mens"
+			strOmniScriptLang="French"
+			previewMode="{!$CurrentPage.parameters.previewEmbedded}"
+			verticalMode="{!$CurrentPage.parameters.verticalMode}"
+			strOmniScriptId="{!$CurrentPage.parameters.designerPreviewId}"
+			scriptLayout="lightning"
+			/>
+		<script type="text/javascript">
+			var modules = ['vlocity-business-process'];
+			var myModule = angular.module('Mensualisation', modules);
+			
+			sforce.console.disableTabClose(true, false);
+		</script>
+
+        
+    </div>
+    <vlocity_cmt:VFActionFunction /> 
+</apex:page>

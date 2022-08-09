@@ -1,0 +1,15 @@
+<template>
+    <p class="visually-hidden">Step {active} of {total}</p>
+    <ul class="steps" aria-hidden="true">
+        <template iterator:it={steps}>
+            <template if:false={it.value.active}>
+                <li key={it.value.id} class="step" if:false={it.value.alert}></li>
+                <li key={it.value.id} class="step alert" if:true={it.value.alert}></li>
+            </template>
+            <template if:true={it.value.active}>
+                <li key={it.value.id} class="step active" if:false={it.value.alert}></li>
+                <li key={it.value.id} class="step active alert" if:true={it.value.alert}></li>
+            </template>
+        </template>
+    </ul>
+</template>

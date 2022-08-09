@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Marketshot_Parcours_reprendre</fullName>
+    <booleanFilter>(1 OR 2)</booleanFilter>
+    <columns>NAME</columns>
+    <columns>VI_NomCompletClientCPV__c</columns>
+    <columns>VI_CodePostalRechercheLocal__c</columns>
+    <columns>VI_CommuneRechercheLocal__c</columns>
+    <columns>VI_Mobile1Client__c</columns>
+    <columns>VI_Email1Client__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>VI_StatutCasePartnerCommunity__c</field>
+        <operation>equals</operation>
+        <value>Vente à completer</value>
+    </filters>
+    <filters>
+        <field>VI_StatutParcours__c</field>
+        <operation>equals</operation>
+        <value>Vente à compléter</value>
+    </filters>
+    <label>Parcours Interrompus</label>
+</ListView>

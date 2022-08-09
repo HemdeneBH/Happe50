@@ -1,0 +1,27 @@
+<!--
+  @description       :  HP_LiveAgent_ThankYouMessage.page
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 02-15-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<apex:page showHeader="false" standardStylesheets="false">
+<!-- Begin Default Content REMOVE THIS -->
+<style>
+.info-review{
+    font-size: 0.9rem;
+    font-family: "Raleway", sans-serif;
+    margin:0;
+    }
+h2.mainTitle{
+    display:none
+    }
+</style>
+<apex:pageBlock title="Merci">
+    <apex:form >
+        <span class="info-review">L'équipe happ-e vous remercie pour le temps que vous avez consacré a notre enquête de satisfaction.</span><br />
+    </apex:form>
+</apex:pageBlock>
+
+<!-- End Default Content REMOVE THIS -->
+</apex:page>

@@ -1,0 +1,175 @@
+.active {
+    color: #19a546;
+}
+
+.prevContract {
+    color: #c1c0c0;
+    line-height: 1;
+    position: absolute;
+    bottom: 0;
+    padding-right: 5px;
+    width: 100%;
+}
+
+.bloc-card {
+    height: 190px;
+}
+
+.slds-tabs_scoped__link {
+    max-width: 200px ! important;
+    width: 200px ! important;
+    line-height: initial ! important;
+    height: 50px ! important;
+    padding: 10px 20px ! important;
+}
+
+.slds-tabs_scoped__item{
+    max-width: 30% ! important;
+}
+
+.header-container-emmenagement-adresses {
+    width: 100%;
+    position: relative;
+}
+.header-container {
+    border: 0;
+    display: block;
+    width: calc( 100% - 72px );
+    background-color: #fff;
+}
+
+.long-list {
+    width: calc( 100% - 122px );
+}
+
+.second-list-adresses-length {
+    background-color: #fff;
+    height: 72px;
+    width: 50px;
+    display: inline-block;
+    position: absolute;
+    right: 72px;
+    top: 0;
+    padding-top: 15px;
+    text-align: center;
+}
+
+.second-list-adresses-length:hover {
+    cursor: pointer;
+}
+
+.second-list-adresses {
+    position: absolute;
+    z-index: 1;
+    top: 80px;
+    right: 0;
+    background: white;
+    border: 1px solid #c1c0c0;
+}
+
+.second-list-adresses::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    right: 87px;
+    margin-left: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent #fff;
+}
+
+.container-second-adresse-item:not(:last-child) {
+    border-bottom: 1px solid #c1c0c0;
+}
+
+.second-adresse-item {
+    padding: 10px 20px;
+}
+
+.second-adresse-item:hover {
+    cursor: pointer;
+}
+
+.header-container-adresses {
+    /* position: fixed; */
+    left: 0px;
+    right: 72px;
+    
+}
+
+.header-container-adresses .header-bloc-adresse {
+    height: 72px;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: normal;
+    font-style: normal;
+    font-family: Helvetica;
+    padding: 10px 20px;
+    border-right: solid 1px #eeeeee;
+}
+
+.header-container-emmenagement {
+    height: 72px;
+    width: 72px;
+    text-align: center;
+    background-color: #fff;
+    border-left: solid 1px #eeeeee;
+    line-height: 72px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.header-container-emmenagement:hover {
+    cursor: pointer;
+}
+
+.header-container-adresses .header-bloc-adresse:hover {
+    cursor: pointer;
+}
+
+.selected {
+    background-color: #c1c0c0;
+    border-color: #c1c0c0;
+}
+
+.body-container {
+    padding: 10px;
+    background-color: #c1c0c0;
+    min-height: 630px;
+}
+.displayData {
+    height: 25rem; 
+    overflow-x: hidden; 
+    overflow-x: auto; 
+    text-align:justify; 
+    width: 80rem;
+}
+.hide {
+    display: none;
+}
+
+
+
+
+
+/*Vlocity*/
+/* .engie-header-houses .slds-tabs_default__nav .slds-tabs_default__item , 
+.engie-header-dropdown .slds-tabs_default__item .slds-tabs_default__link {
+    color: #000000;
+}
+
+.engie-header-houses .slds-tabs_default__nav .slds-tabs_default__item, 
+.engie-header-dropdown .slds-tabs_default__item .slds-tabs_default__link {
+    color: #000000;
+}
+.engie-header-houses .slds-tabs_default__nav .slds-tabs_default__item.engie-logement-inactif  , 
+.engie-header-dropdown .slds-tabs_default__item .slds-tabs_default__link.engie-logement-inactif  {
+    color: red;
+}
+
+.engie-header-houses .slds-tabs_default__nav .slds-tabs_default__item.slds-is-active  , 
+.engie-header-dropdown .slds-tabs_default__item.slds-is-active  {
+    background-color: rgb(196, 192, 192);
+    border-color: black;
+} */

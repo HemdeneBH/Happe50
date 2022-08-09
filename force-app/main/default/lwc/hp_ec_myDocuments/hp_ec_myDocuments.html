@@ -1,0 +1,71 @@
+<!--
+  @description       : 
+  @author            : Clément Bauny
+  @group             : 
+  @last modified on  : 07-04-2022
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<template>
+  <div class="hp-mesDocuments c-content-bg slds-col">
+        <div class="hp-bigTitle">{title}</div>
+        <template if:true={displayElec}>
+          <div class="hp-documents-items">
+            <a class="leftBloc" href={cpvUrlElec} target="_blank">
+              Mon contrat électricité
+              <span class="chevron right"></span>  
+            </a>
+            <span class="hp-icon-download rightBloc">
+              <a href={cpvUrlElec} target="_blank">
+                <img src ={iconDownload} alt="modify"/>
+              </a>
+            </span>
+          </div>
+      </template>
+      <template if:true={displayGaz}>
+        <div class="hp-documents-items">
+          <a class="leftBloc" href={cpvUrlGaz} target="_blank">
+            Mon contrat gaz
+            <span class="chevron right"></span>  
+          </a>
+          <span class="hp-icon-download rightBloc">
+            <a href={cpvUrlGaz} target="_blank">
+              <img src ={iconDownload} alt="modify"/>
+            </a>
+          </span>
+        </div>
+      </template>
+        <div class="hp-documents-items">
+          <a class="leftBloc">
+            Justificatif de domicile
+            <span class="chevron right"></span>  
+          </a>
+          <span class="hp-icon-download rightBloc" onclick={downloadJustificatifDomicile}>
+            <!--<a href="" target="_blank">-->
+              <img src ={iconDownload} alt="modify"/>
+            <!--</a>-->
+          </span>
+        </div>
+        <div class="hp-documents-items">
+          <a class="leftBloc" href={mandatUrl} target="_blank">
+            Mandat SEPA
+            <span class="chevron right"></span>  
+          </a>
+          <span class="hp-icon-download rightBloc">
+            <a href={mandatUrl} target="_blank">
+              <img src ={iconDownload} alt="modify"/>
+            </a>
+          </span>
+        </div>
+        <div class="hp-documents-items">
+          <a class="leftBloc" href={cgvUrl} target="_blank">
+            CGV
+            <span class="chevron right"></span>  
+          </a>
+          <span class="hp-icon-download rightBloc">
+            <a href={cgvUrl} target="_blank">
+              <img src ={iconDownload} alt="modify"/>
+            </a>
+          </span>
+        </div>
+  </div>
+</template>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Naissance_assure__c</fullName>
+    <description>Date de naissance de l&apos;assuré (assurance facture)</description>
+    <externalId>false</externalId>
+    <label>Date de naissance de l&apos;assuré</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

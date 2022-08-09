@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>sync_Event_Log</fullName>
+    <columns>CREATED_DATE</columns>
+    <columns>NAME</columns>
+    <columns>flux__c</columns>
+    <columns>inputdat__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>greaterThan</operation>
+        <value>1/1/2020 12:00 AM</value>
+    </filters>
+    <filters>
+        <field>NAME</field>
+        <operation>notContain</operation>
+        <value>Pas de idLocal correct</value>
+    </filters>
+    <filters>
+        <field>flux__c</field>
+        <operation>contains</operation>
+        <value>data</value>
+    </filters>
+    <label>sync Event Log 2020 (Hors Id Local)</label>
+</ListView>

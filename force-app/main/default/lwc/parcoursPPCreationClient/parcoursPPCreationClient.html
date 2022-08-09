@@ -1,0 +1,384 @@
+<template>
+	<template if:false={loaded}>
+		<div class="exampleHolder">
+			<lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+		</div>
+	</template>
+	<template if:true={loaded}>
+		<div class="container" style="margin-bottom: 70px">
+			<div class="row">
+				<h1 class="col-lg-12 text-center" style="margin-top: 50px;">Création Client</h1>
+			</div>
+			<div class="row">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-1 text-center"></div>
+						<div class="col-lg-10 text-center">
+							<div class="container"
+								style="    border: 1px solid;border-radius: 16px;border-color: rgba(0, 157, 233, 1);">
+								<div class="row" style="margin-top:10px">
+									<div class="col-lg-1 text-center"></div>
+									<p class="col-lg-10 text-left title">Identité</p>
+									<div class="col-lg-1 text-center"></div>
+								</div>
+								<div class="row" style="margin-top:10px ;">
+									<div class="col-lg-3 text-center text-titleCivilite">Civilité:*</div>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" oninput={handleCreateClientChange} type="radio"
+											name="Civilité" id="Monsieur" value="Monsieur" checked={monsieurChoisi}>
+										<label class="form-check-label" for="Monsieur">Monsieur</label>
+									</div>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" oninput={handleCreateClientChange} type="radio"
+											name="Civilité" id="Madame" value="Madame" checked={madameChoisi}>
+										<label class="form-check-label" for="Madame">Madame</label>
+									</div>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" oninput={handleCreateClientChange} type="radio"
+											name="Civilité" id="Co-Titulaire" value="Co-titulaire"
+											checked={coTitulaireChoisi}>
+										<label class="form-check-label" for="Co-Titulaire">Co-Titulaire</label>
+									</div>
+								</div>
+								<div class="row" style="margin-top:10px">
+									<div class="col-lg-1 text-center"></div>
+									<div class="col-lg-5 text-center">
+										<form onsubmit={onFormSubmit}>
+											<div class="form-group form-check-label">
+												<label for="Nom">Nom*</label>
+												<input type="text" oninput={handleCreateClientChange}
+													class="form-control" name="Nom" placeholder=""
+													value={_parcours.VI_NomClient__c}>
+											</div>
+										</form>
+									</div>
+									<div class="col-lg-5 text-center">
+										<form onsubmit={onFormSubmit}>
+											<div class="form-group form-check-label">
+												<label for="Prénom">Prénom*</label>
+												<input type="text" oninput={handleCreateClientChange}
+													class="form-control" name="Prénom" placeholder=""
+													value={_parcours.VI_PrenomClient__c}>
+											</div>
+										</form>
+									</div>
+									<div class="col-lg-1 text-center"></div>
+								</div>
+								<span class="errorMessage NomCivErrorMessage"></span>
+								<div class="row" style="margin-top:10px">
+									<div class="col-lg-1 text-center"></div>
+									<p class="col-lg-10 text-left title">Emails</p>
+									<div class="col-lg-1 text-center"></div>
+								</div>
+								<div class="row" style="margin-top:10px">
+									<div class="col-lg-1 text-center"></div>
+									<div class="form-check">
+										<input class="form-check-input" id="RefusEmail"
+											oninput={handleCreateClientChange} type="checkbox"
+											value={_parcours.VI_RefusEmailCreationClient__c} name="RefusEmail"
+											checked={_parcours.VI_RefusEmailCreationClient__c}>
+										<label class="form-check-label" for="RefusEmail">
+											Refus Email
+										</label>
+									</div>
+									<div class="col-lg-1 text-center"></div>
+								</div>
+								<template if:true={emailAccepte}>
+									<div class="row" style="margin-top:10px">
+										<div class="col-lg-1 text-center"></div>
+										<div class="col-lg-5 text-center">
+											<form onsubmit={onFormSubmit}>
+												<div class="form-group form-check-label">
+													<label for="Email1">Email 1</label>
+													<input oninput={handleCreateClientChange} type="text"
+														class="form-control" name="Email1" placeholder=""
+														value={_parcours.VI_Email1Client__c}>
+												</div>
+											</form>
+										</div>
+										<div class="col-lg-5 text-center">
+											<form onsubmit={onFormSubmit}>
+												<div class="form-group form-check-label">
+													<label for="Email2">Email 2</label>
+													<input oninput={handleCreateClientChange} type="text"
+														class="form-control" name="Email2" placeholder=""
+														value={_parcours.VI_Email2Client__c}>
+												</div>
+											</form>
+										</div>
+									</div>
+									<div class="row" style="margin-top:10px ;">
+										<div class="col-lg-4 text-title">Email Principal:</div>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="radio"
+												oninput={handleCreateClientChange} name="Email" data-id="Email1Radio"
+												id="Email1Radio" value="Email 1" checked={email1choisi}
+												disabled={disabledEmail1Choisi}>
+											<label class="form-check-label" for="Email1Radio">Email 1</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="radio"
+												oninput={handleCreateClientChange} name="Email" data-id="Email2Radio"
+												id="Email2Radio" value="Email 2" checked={email2choisi}
+												disabled={disabledEmail2Choisi}>
+											<label class="form-check-label" for="Email2Radio">Email 2</label>
+										</div>
+									</div>
+								</template>
+								<span class="errorMessage refusEmailErrorMessageId"></span>
+								<br>
+								<span class="errorMessage wrongEmailErrorMessage"></span>
+								<br>
+								<div class="col-lg-1 text-center"></div>
+								<div class="row" style="margin-top:10px">
+									<div class="col-lg-1 text-center"></div>
+									<p class="col-lg-10 text-left title">Téléphones Portables</p>
+									<div class="col-lg-1 text-center"></div>
+								</div>
+								<div class="row" style="margin-top:10px">
+									<div class="col-lg-1 text-center"></div>
+									<div class="form-check">
+										<input class="form-check-input" id="RefusTéléphones" type="checkbox"
+											value={_parcours.VI_RefusMobile__c} name="RefusTelephones"
+											oninput={handleCreateClientChange} checked={_parcours.VI_RefusMobile__c}>
+										<label class="form-check-label" for="RefusTéléphones">
+											Refus Téléphone Portable
+										</label>
+									</div>
+									<div class="col-lg-1 text-center"></div>
+								</div>
+								<template if:true={telephoneAccepte}>
+									<div class="row" style="margin-top:10px">
+										<div class="col-lg-1 text-center"></div>
+										<div class="col-lg-5 text-center">
+											<form onsubmit={onFormSubmit}>
+												<div class="form-group form-check-label">
+													<label for="Mobile1">Téléphone Portable 1</label>
+													<input oninput={handleCreateClientChange} type="number"
+														onwheel={removeNumberScroll} class="form-control" name="Mobile1"
+														data-id="Mobile1" placeholder=""
+														value={_parcours.VI_Mobile1Client__c}>
+												</div>
+											</form>
+										</div>
+										<div class="col-lg-5 text-center">
+											<form onsubmit={onFormSubmit}>
+												<div class="form-group form-check-label">
+													<label for="Mobile2">Téléphone Portable 2</label>
+													<input oninput={handleCreateClientChange} type="number"
+														onwheel={removeNumberScroll} class="form-control" name="Mobile2"
+														data-id="Mobile2" placeholder=""
+														value={_parcours.VI_Mobile2Client__c}>
+												</div>
+											</form>
+										</div>
+									</div>
+
+									<div class="row" style="margin-top:10px ;">
+										<div class="col-lg-4 text-title">Téléphone Portable Principal:</div>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" oninput={handleCreateClientChange}
+												type="radio" name="MobilePrincipale" data-id="Téléphone1Radio"
+												id="Téléphone1Radio" value="Mobile 1" checked={mobile1choisi}
+												disabled={disabledMobile1Choisi}>
+											<label class="form-check-label" for="Téléphone1Radio">Téléphone Portable
+												1</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" oninput={handleCreateClientChange}
+												type="radio" name="MobilePrincipale" data-id="Téléphone2Radio"
+												id="Téléphone2Radio" value="Mobile 2" checked={mobile2choisi}
+												disabled={disabledMobile2Choisi}>
+											<label class="form-check-label" for="Téléphone2Radio">Téléphone Portable
+												2</label>
+										</div>
+									</div>
+								</template>
+								<span class="errorMessage mobileErrorMessage"></span>
+								<br>
+								<div class="row" style="margin-top:10px">
+									<div class="col-lg-1 text-center"></div>
+									<p class="col-lg-10 text-left title">Téléphones Fixes</p>
+									<div class="col-lg-1 text-center"></div>
+								</div>
+								<div class="row" style="margin-top:10px">
+									<div class="col-lg-1 text-center"></div>
+									<div class="form-check">
+										<input class="form-check-input" id="RefusTéléphonesFixe" type="checkbox"
+											value={_parcours.VI_RefusTelephoneCreationClient__c}
+											name="RefusTelephonesFixe" oninput={handleCreateClientChange}
+											checked={_parcours.VI_RefusTelephoneCreationClient__c}>
+										<label class="form-check-label" for="RefusTéléphonesFixe">
+											Refus Téléphone Fixe
+										</label>
+									</div>
+									<div class="col-lg-1 text-center"></div>
+								</div>
+								<template if:true={telephoneFixeAccepte}>
+									<div class="row" style="margin-top:10px">
+										<div class="col-lg-1 text-center"></div>
+										<div class="col-lg-5 text-center">
+											<form onsubmit={onFormSubmit}>
+												<div class="form-group form-check-label">
+													<label for="Telephone1">Téléphone Fixe 1</label>
+													<input type="number" onwheel={removeNumberScroll}
+														class="form-control" name="Telephone1"
+														oninput={handleCreateClientChange} placeholder=""
+														value={_parcours.VI_TelephoneFixe1Client__c}
+														data-id="Telephone1">
+												</div>
+											</form>
+										</div>
+										<div class="col-lg-5 text-center">
+											<form onsubmit={onFormSubmit}>
+												<div class="form-group form-check-label">
+													<label for="Telephone2">Téléphone Fixe 2</label>
+													<input oninput={handleCreateClientChange} type="number"
+														onwheel={removeNumberScroll} class="form-control"
+														name="Telephone2" placeholder="" data-id="Telephone2"
+														value={_parcours.VI_TelephoneFixe2Client__c}>
+												</div>
+											</form>
+										</div>
+									</div>
+									<div class="row" style="margin-top:10px ;">
+										<div class="col-lg-4 text-title">Téléphone Fixe Principal:</div>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" oninput={handleCreateClientChange}
+												type="radio" name="TéléphoneFixe" data-id="TéléphoneFixe1Radio"
+												id="TéléphoneFixe1Radio" value="Téléphone 1" checked={fixe1choisi}
+												disabled={disabledFixe1Choisi}>
+											<label class="form-check-label" for="TéléphoneFixe1Radio">Téléphone Fixe
+												1</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" oninput={handleCreateClientChange}
+												type="radio" name="TéléphoneFixe" data-id="TéléphoneFixe2Radio"
+												id="TéléphoneFixe2Radio" value="Téléphone 2" checked={fixe2choisi}
+												disabled={disabledFixe2Choisi}>
+											<label class="form-check-label" for="TéléphoneFixe2Radio">Téléphone Fixe
+												2</label>
+										</div>
+									</div>
+								</template>
+								<span class="errorMessage phoneErrorMessage"></span>
+								<br>
+								<span class="errorMessage fixeErrorMessage"></span>
+								<br>
+								<div class="row" style="margin-top:10px">
+									<div class="col-lg-1 text-center"></div>
+									<p class="col-lg-10 text-left title">Adresse de facturation</p>
+									<div class="col-lg-1 text-center"></div>
+								</div>
+								<div class="row">
+									<div class="col-lg-1 text-center"></div>
+									<div class="col-lg-5 text-center">
+										<form onsubmit={onFormSubmit}>
+											<div class="form-group form-check-label">
+												<label for="Adresse">Adresse</label>
+												<input oninput={handleCreateClientChange} type="text"
+													class="form-control" name="Adresse" placeholder=""
+													data-id="adresse">
+												<div data-id="listAdressesSuggested"
+													class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid slds-hide "
+													role="listbox" style="position: relative;">
+													<ul class="slds-listbox slds-listbox_vertical" role="presentation">
+														<template for:each={listAddresses} for:item="adresse">
+															<li role="option" class="slds-listbox__item" key={adresse}>
+																<div data-value={adresse} data-label={adresse.label}
+																	data-numero={adresse.numero}
+																	data-voie={adresse.voie}
+																	data-codepostal={adresse.codePostal}
+																	data-ville={adresse.ville}
+																	class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta  listtext-copy-8"
+																	role="option" onclick={selectAdresse}>
+																	<div class="overlap-group">
+																		<div class="adresse textbody-left">
+																			{adresse.numero}
+																			{adresse.voie}</div><br>
+																		<div
+																			class="input-t text12-white-left text12-bluecorpo-left">
+																			{adresse.codePostal} {adresse.ville}</div>
+																	</div>
+																</div>
+															</li>
+														</template>
+													</ul>
+												</div>
+											</div>
+											<div class="form-group form-check-label">
+												<label for="Code Postal">Code Postal*</label>
+												<input oninput={handleCreateClientChange} type="number"
+													onwheel={removeNumberScroll} class="form-control" name="CodePostal"
+													placeholder="" value={_parcours.VI_CodePostalClient__c}
+													data-id="codePostal">
+											</div>
+										</form>
+									</div>
+									<div class="col-lg-5 text-center">
+										<form onsubmit={onFormSubmit}>
+											<div class="group-2 form-check-label">
+												<label for="N°">N°*</label>
+												<input oninput={handleCreateClientChange} type="text"
+													class="form-control" name="Num" placeholder=""
+													value={_parcours.VI_Numero_de_la_rue__c} data-id="num">
+											</div>
+											<div class="group form-check-label">
+												<label for="rue">Rue*</label>
+												<input oninput={handleCreateClientChange} type="text"
+													class="form-control" name="Rue" placeholder=""
+													value={_parcours.VI_RueCreationClient__c} data-id="rue">
+											</div>
+											<div class="form-group form-check-label">
+												<label for="Commune">Commune*</label>
+												<input oninput={handleCreateClientChange} type="text"
+													class="form-control" name="Commune" placeholder=""
+													value={_parcours.VI_CommuneClient__c} onclick={checkListVille}
+													data-id="ville">
+												<div data-id="listVillesSuggested"
+													class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid slds-hide"
+													role="listbox" style="position: relative;">
+													<ul class="slds-listbox slds-listbox_vertical"
+														role="presentation">
+														<template for:each={mesVilles} for:item="ville">
+															<li role="presentation" class="slds-listbox__item "
+																key={ville}>
+																<div data-value={ville}
+																	class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta  listtext-copy-8"
+																	role="option" onclick={selectVilleValue}>
+																	<span class="overlap-group">
+																		<span
+																			class="adresse textbody-left">{ville}</span>
+																	</span>
+																</div>
+															</li>
+														</template>
+													</ul>
+												</div>
+											</div>
+										</form>
+									</div>
+									<div class="col-lg-1 text-center"></div>
+								</div>
+								<span class="errorMessage AdresseErrorMessage"></span>
+							</div>
+							<div class="col-lg-1 text-center"></div>
+						</div>
+					</div>
+					<div class="col-lg-1 text-center"></div>
+				</div>
+				<div class="container">
+					<div class="row" style="margin-top:10px">
+						<div class="col-lg-5 text-center"></div>
+						<button type="button" class="col-lg-2 btn" onclick={creerClient} style="height: 44px;width: 200px;
+												color: #fff;background-color: rgba(0, 153, 52, 1);
+												border-color: rgba(0, 153, 52, 1);border-radius:0">
+							<p class="font-class-2">Enregister</p>
+						</button>
+						<div class="col-lg-5 text-center"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</template>
+</template>

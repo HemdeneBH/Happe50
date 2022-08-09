@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type__c</fullName>
+    <description>@Description: Type d&apos;intervention
+@Project: Smile</description>
+    <externalId>false</externalId>
+    <label>Type</label>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>MO11</fullName>
+                <default>false</default>
+                <label>Inversion PDL / PCE</label>
+            </value>
+            <value>
+                <fullName>MO12</fullName>
+                <default>false</default>
+                <label>Je n&apos;arrive pas à contractualiser une vente (Direction Commerciale)</label>
+            </value>
+            <value>
+                <fullName>MO09</fullName>
+                <default>false</default>
+                <label>Je n&apos;arrive pas à contractualiser une vente (Service Client)</label>
+            </value>
+            <value>
+                <fullName>MO05</fullName>
+                <default>false</default>
+                <label>Je n&apos;arrive pas à créer le contrat pour le client</label>
+            </value>
+            <value>
+                <fullName>MO02</fullName>
+                <default>false</default>
+                <label>Le client a déjà été facturé</label>
+            </value>
+            <value>
+                <fullName>MO01</fullName>
+                <default>false</default>
+                <label>Le client est non facturé depuis plus de 2 mois</label>
+            </value>
+            <value>
+                <fullName>MO15</fullName>
+                <default>false</default>
+                <label>Le client est non facturé depuis plus de 2 mois (Paiement)</label>
+            </value>
+            <value>
+                <fullName>MO10</fullName>
+                <default>false</default>
+                <label>Le client se rétracte et il est déjà facturé</label>
+            </value>
+            <value>
+                <fullName>MO06</fullName>
+                <default>false</default>
+                <label>Le client signale un problème sur son espace client</label>
+            </value>
+            <value>
+                <fullName>MO04</fullName>
+                <default>false</default>
+                <label>Le solde de la facture est incohérent</label>
+            </value>
+            <value>
+                <fullName>MO03</fullName>
+                <default>false</default>
+                <label>Les relevés de compteur sont absents dans nos outils</label>
+            </value>
+            <value>
+                <fullName>MO07</fullName>
+                <default>false</default>
+                <label>Le statut du contrat est incohérent</label>
+            </value>
+            <value>
+                <fullName>MO16</fullName>
+                <default>false</default>
+                <label>Le statut du contrat est incohérent (Assistance Technique)</label>
+            </value>
+            <value>
+                <fullName>MO08</fullName>
+                <default>false</default>
+                <label>Mon client souhaite une facture pour les 2 énergies</label>
+            </value>
+            <value>
+                <fullName>MO13</fullName>
+                <default>false</default>
+                <label>Ré-escalade support Engie</label>
+            </value>
+            <value>
+                <fullName>MO14</fullName>
+                <default>false</default>
+                <label>Ré-escalade Tréso complexe</label>
+            </value>
+            <value>
+                <fullName>MO17</fullName>
+                <default>false</default>
+                <label>Le statut du contrat est incohérent (CHO)</label>
+            </value>
+            <value>
+                <fullName>MO18</fullName>
+                <default>false</default>
+                <label>Escalade Direction Commerciale N1 vers N2</label>
+            </value>
+            <value>
+                <fullName>Blocage sur MES/RES/CHO</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Blocage sur MES/RES/CHO</label>
+            </value>
+            <value>
+                <fullName>Contestation d’index distributeur/factures</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Contestation d’index distributeur/factures</label>
+            </value>
+            <value>
+                <fullName>IRIS</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>IRIS</label>
+            </value>
+            <value>
+                <fullName>Inversion PDL</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Inversion PDL</label>
+            </value>
+            <value>
+                <fullName>Je ne reçois pas mes factures</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Je ne reçois pas mes factures</label>
+            </value>
+            <value>
+                <fullName>POC Omni-channel</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>POC Omni-channel</label>
+            </value>
+            <value>
+                <fullName>Rétractation complexe</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Rétractation complexe</label>
+            </value>
+            <value>
+                <fullName>Situation compte/règlement/remboursement</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Situation compte/règlement/remboursement</label>
+            </value>
+            <value>
+                <fullName>Traitement BO simple</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Traitement BO simple</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

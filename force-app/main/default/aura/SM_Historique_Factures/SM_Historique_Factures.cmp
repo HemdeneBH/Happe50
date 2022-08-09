@@ -1,0 +1,37 @@
+<aura:component implements="flexipage:availableForAllPageTypes,lightning:isUrlAddressable,force:hasRecordId" access="global">
+   <lightning:workspaceAPI aura:id="workspace" />
+   <aura:handler value="{!this}" name="init" action="{!c.init}"/>
+   <aura:attribute name="recordId" type="String" default="{!v.pageReference.state.c__recordId}"></aura:attribute>
+   <aura:attribute name="libelleVoie" type="String" default="{!v.pageReference.state.c__libelleVoie}"></aura:attribute>
+   <aura:attribute name="ville" type="String" default="{!v.pageReference.state.c__ville}"></aura:attribute>
+   <aura:attribute name="complementAdresse" type="String" default="{!v.pageReference.state.c__complementAdresse}"></aura:attribute>
+   <aura:attribute name="numeroVoie" type="String" default="{!v.pageReference.state.c__numeroVoie}"></aura:attribute>
+   <aura:attribute name="codePostal" type="String" default="{!v.pageReference.state.c__codePostal}"></aura:attribute>
+   <aura:attribute name="NoCompteContrat" type="String" default="{!v.pageReference.state.c__NoCompteContrat}"></aura:attribute>
+   <aura:attribute name="NoCompteContratMaj" type="String" default="{!v.pageReference.state.c__NoCompteContratMaj}"></aura:attribute>
+   <aura:attribute name="IdBusinessPartner" type="String" default="{!v.pageReference.state.c__IdBusinessPartner}"></aura:attribute>
+   <aura:attribute name="IdPortefeuilleContrat" type="String" default="{!v.pageReference.state.c__IdPortefeuilleContrat}"></aura:attribute>
+   <aura:attribute name="dateTechniqueProchaineFacture" type="String" default="{!v.pageReference.state.c__dateTechniqueProchaineFacture}"></aura:attribute>
+   <aura:attribute name="dateReelleProchaineFacture" type="String" default="{!v.pageReference.state.c__dateReelleProchaineFacture}"></aura:attribute>
+   <aura:attribute name="uniteReleveElec" type="String" default="{!v.pageReference.state.c__uniteReleveElec}"></aura:attribute>
+   <aura:attribute name="uniteReleveGaz" type="String" default="{!v.pageReference.state.c__uniteReleveGaz}"></aura:attribute>
+   <aura:attribute name="pdl" type="String" default="{!v.pageReference.state.c__pdl}"></aura:attribute>
+   <aura:attribute name="pce" type="String" default="{!v.pageReference.state.c__pce}"></aura:attribute>
+   <aura:attribute name="AccountId" type="String" default="{!v.pageReference.state.c__AccountId}"></aura:attribute>
+   <aura:attribute name="solde" type="String" default="{!v.pageReference.state.c__solde}"></aura:attribute>
+   <aura:attribute name="DLP" type="String" default="{!v.pageReference.state.c__DLP}"></aura:attribute>
+   <aura:attribute name="soldeColor" type="String" default="{!v.pageReference.state.c__soldeColor}"></aura:attribute>
+   <aura:attribute name="EnqSat" type="String" default="{!v.pageReference.state.c__EnqSat}"></aura:attribute>
+
+    
+   <c:sM_HistoriqueFactures recordId="{!v.recordId}" libelleVoie="{!v.libelleVoie}" ville="{!v.ville}" 
+      complementAdresse="{!v.complementAdresse}" NoCompteContratMaj="{!v.NoCompteContratMaj}"
+      numeroVoie="{!v.numeroVoie}" codePostal="{!v.codePostal}" NoCompteContrat="{!v.NoCompteContrat}" 
+      IdBusinessPartner="{!v.IdBusinessPartner}" IdPortefeuilleContrat="{!v.IdPortefeuilleContrat}" dateReelleProchaineFacture="{!v.dateReelleProchaineFacture}" 
+      pce="{!v.pce}" pdl="{!v.pdl}" dateTechniqueProchaineFacture="{!v.dateTechniqueProchaineFacture}" uniteReleveElec="{!v.uniteReleveElec}" uniteReleveGaz="{!v.uniteReleveGaz}" 
+      solde="{!v.solde}" DLP="{!v.DLP}" soldeColor="{!v.soldeColor}" oncloseclicked="{!c.handleFilterChange}" AccountId="{!v.AccountId}" 
+      onopenInteraction="{!c.openInteraction}" onopenSituationCompte="{!c.openSituationCompte}" EnqSat="{!v.EnqSat}" >
+      
+   </c:sM_HistoriqueFactures>	
+
+</aura:component>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Nombre_de_vue__c</fullName>
+    <description>Permet de comptabiliser le nombre de vues</description>
+    <externalId>false</externalId>
+    <label>Nombre de vues</label>
+    <summaryForeignKey>Nombre_de_vue__c.Info_Couleur__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

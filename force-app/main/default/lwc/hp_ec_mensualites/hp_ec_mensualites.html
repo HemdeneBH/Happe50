@@ -1,0 +1,73 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 07-07-2022
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<template >
+    <template if:true={showMe}>
+        <div class="hp-mensualites c-content-bg slds-col">
+            <div class="hp-bigTitle">
+                {titreMensualites}
+            </div>
+            <template if:false={showError}>
+                <div class="hp-bloc">
+                    <div class="title">
+                        {titreMontantMensuel}
+                    </div>
+                    <div class="subtitle">
+                        {montantMensuel}
+                    </div>
+                </div>
+                <div class="hp-bloc">
+                    <div class="title">
+                        {titreDatePaiement}
+                    </div>
+                    <div class="subtitle">
+                        {datePaiementText}
+                    </div>
+                </div>
+                <div class="hp-btnContainer">
+                    <div class="hp-alert">
+                        <span class="hp-alert-icon">
+                            <img src={iconAlert} alt="alert icon" />
+                        </span>
+                        <span class="hp-alert-text">
+                            {alerteMensualites}
+                        </span>
+                    </div>
+                    <div class="hp-secondButton" onclick={handleChange}>
+                        {modifierMensualitesBoutton}
+                    </div>
+                </div>
+            </template>
+            <template if:true={showError}>
+                <div class="hp-bloc">
+                    <div class="title">
+                        {messageErreur}
+                    </div>
+                </div>
+            </template>
+        </div>
+
+        <template if:true={showPopin}>
+            <div class="hp-popup">
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                    aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <c-hp_ec_popin-mensualites onclosepopinmensualites={closePopin} 
+                                                    montantelec={montantElec}
+                                                    montantgaz={montantGaz}
+                                                    dual={isDual}
+                                                    datemensualite={jourPrelevement}
+                                                    pftcid={idPortefeuilleContrat}
+                                                    contactid={contactId}>
+                        </c-hp_ec_popin-mensualites>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </div>
+        </template>
+    </template>
+</template>

@@ -1,0 +1,872 @@
+<apex:page docType="html-5.0" showHeader="false" sidebar="false" controller="SM_AP72_WAVECaseHandler" action="{!init}" >
+<!-- applyHtmlTag="false" applyBodyTag="false" -->
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title> Service Wave Case Actions </title>
+
+    <!-- Add this here for SLDS -->
+    <apex:slds />
+
+    <style type="text/css">
+        .tabPanel {
+            width: 100%;
+            height: 570px;
+            padding: 15px;
+        }
+
+        .slds-form-element__label {
+            margin-top: 20px;
+        }
+
+        .buttonsArea {
+            width: 100%;
+            height: 60px;
+            border-top-style: solid;
+            border-top-width: 1px;
+            border-top-color: #d9dce7;
+            position: absolute;
+            bottom: 0px;
+        }
+
+        .cancelButton {
+            width: 120px;
+            height: 35px;
+            border-style: solid;
+            border-width: 1px;
+            padding: 7px;
+            float: right;
+            margin-right: 20px;
+            text-align: center;
+            margin-top: 14px;
+            font-size: 14px;
+            border-radius: 5px;
+            border-color: #d8dde6;
+            font-weight: 400;
+            cursor: pointer;
+        }
+
+        .okayButton {
+            width: 120px;
+            height: 35px;
+            border-style: solid;
+            border-width: 1px;
+            padding: 7px;
+            float: right;
+            margin-right: 20px;
+            text-align: center;
+            margin-top: 14px;
+            font-size: 14px;
+            border-radius: 5px;
+            border-color: #d8dde6;
+            background-color: #0070d2;
+            color: white;
+            font-weight: 400;
+            cursor: pointer;
+        }
+
+        .addFieldButton {
+            margin: 0 auto;
+            width: 80%;
+            height: 32px;
+            border-style: solid;
+            border-width: 1px;
+            padding: 5px;
+            text-align: center;
+            font-size: 14px;
+            border-radius: 5px;
+            border-color: #d8dde6;
+            background-color: #0070d2;
+            color: white;
+            font-weight: 400;
+            cursor: pointer;
+        }
+
+    .updateFieldButton {
+      float: left;
+      width: 20%;
+      height: 32px;
+      border-style: solid;
+      border-width: 1px;
+      padding: 5px;
+      text-align: center;
+      font-size: 14px;
+      border-radius: 5px;
+      border-color: #d8dde6;
+      background-color: #0070d2;
+      color: white;
+      font-weight: 400;
+      cursor: pointer;
+      margin-top: 42px;
+      margin-left: 7px;
+    }
+
+    .updateFieldSection {
+      width: 100%;
+      height: auto;
+    }
+
+    </style>
+</head>
+
+<body>
+<div class="slds-scope">
+
+
+    <div class="slds-page-header">
+        <div class="slds-media">
+            <div class="slds-media__figure">
+                <span class="slds-icon_container slds-icon-standard-opportunity" title="Description of icon when needed">
+                    <img src="{!$Resource.SM_WAVEcaseIcon}" style="width: 40px; height: 40px; display: block;"></img>
+                </span>
+            </div>
+            <div class="slds-media__body">
+                <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Case - Actions">Case</h1>
+                <p class="slds-text-body_small slds-line-height_reset">Einstein Analytics - Bulk Actions</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slds-grid" style="height: 700px;">
+        <div class="slds-col" style="width: 60%; padding: 20px;">
+            <div class="slds-box slds-box--small slds-theme--shade" style="width: 100%; height: 100%;">
+                <div class="slds-tabs--default" data-aljs="tabs">
+                    <ul class="slds-tabs--default__nav" role="tablist">
+                        <li class="slds-tabs--default__item slds-text-heading--label" title="Item One" role="presentation">
+                            <a class="slds-tabs--default__link" href="#" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" data-aljs-show="tab-default-1">Cases</a>
+                        </li>
+                    </ul>
+                    <div id="tab-default-1" class="slds-tabs--default__content" role="tabpanel">
+                        <!-- Case Table -->
+                        <div style="width: 100%; height: 570px; overflow: scroll;">
+                        <table class="slds-table slds-table--bordered slds-table--cell-buffer" id="caseTable">
+                            <thead>
+                                <tr class="slds-text-title--caps">
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Opportunity Name">Case Number</div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Account Name">Account</div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Close Date">Type</div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Close Date">Owner</div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Close Date">Priority</div>
+                                    </th>
+                                    <!-- <th scope="col">
+                                        <div class="slds-truncate" title="Close Date">CSAT</div>
+                                    </th> -->
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Close Date">Status</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="caseTableBody">
+                                <!-- Cases will go here -->
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-col" style="width: 40%; padding: 20px;">
+            <div class="slds-box slds-box--small slds-theme--shade" style="width: 100%; height: 100%;">
+                <div class="slds-tabs--default" data-aljs="tabs">
+                    <ul class="slds-tabs--default__nav" role="tablist">
+                        <li class="slds-tabs--default__item slds-text-heading--label" title="Item One" role="presentation">
+                            <a class="slds-tabs--default__link" href="#" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" data-aljs-show="tab-default-1">New Opportunity</a>
+                        </li>
+                        <li class="slds-tabs--default__item slds-text-heading--label" title="Item Two" role="presentation">
+                            <a class="slds-tabs--default__link" href="#" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-2" data-aljs-show="tab-default-2">Email</a>
+                        </li>
+                        <li class="slds-tabs--default__item slds-text-heading--label" title="Item Three" role="presentation">
+                            <a class="slds-tabs--default__link" href="#" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-4" data-aljs-show="tab-default-4">Update</a>
+                        </li>
+                        <li class="slds-tabs--default__item slds-text-heading--label" title="Item Three" role="presentation">
+                            <a class="slds-tabs--default__link" href="#" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-5" data-aljs-show="tab-default-5">Assign</a>
+                        </li>
+                    </ul>
+                    <div id="tab-default-1" class="slds-tabs--default__content " role="tabpanel">
+                        <div class="tabPanel">
+                            <!-- New Opportunity -->
+                            <div class="slds-form-element" style="margin-top: 10px;">
+                                <label class="slds-form-element__label" for="oppName" style="margin-top: -10px;">Opportunity Name</label>
+                                <div class="slds-form-element__control">
+                                    <input type="text" id="oppName" class="slds-input"/>
+                                </div>
+                            </div>
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="select-01">Stage</label>
+                                <div class="slds-form-element__control">
+                                    <div class="slds-select_container">
+                                        <select class="slds-select" id="oppStage">
+                                            <apex:repeat value="{!myOppStatus}" var="obj" id="oppStatusRepeat">
+                                                <option value="{!obj}">{!obj}</option>
+                                            </apex:repeat>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-form--stacked">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label" for="date">Close Date</label>
+                                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon--right">
+                                        <svg aria-hidden="true" class="slds-input__icon slds-icon-text-default">
+                                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#event"></use>
+                                        </svg>
+                                        <input id="oppCloseDate" class="slds-input" type="text" placeholder="Pick a Date" label="Close Date" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="oppType">Type</label>
+                                <div class="slds-form-element__control">
+                                    <div class="slds-select_container">
+                                        <select class="slds-select" id="oppType">
+                                            <apex:repeat value="{!myOppTypes}" var="obj">
+                                                <option value="{!obj}">{!obj}</option>
+                                            </apex:repeat>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="oppAmount">Amount</label>
+                                <div class="slds-form-element__control">
+                                    <input type="text" id="oppAmount" class="slds-input"/>
+                                </div>
+                            </div>
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="oppRecordType">Record Type</label>
+                                <div class="slds-form-element__control">
+                                    <div class="slds-select_container">
+                                        <select class="slds-select" id="oppRecordType">
+                                            <apex:repeat value="{!myOppRecordTypes}" var="obj">
+                                                <option value="{!obj}">{!obj}</option>
+                                            </apex:repeat>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="buttonsArea">
+                            <div class="okayButton" onclick="createMyOpportunities()">Submit</div>
+                            <div class="cancelButton">Cancel</div>
+                        </div>
+                    </div>
+                    <div id="tab-default-2" class="slds-tabs--default__content " role="tabpanel">
+                        <div class="tabPanel">
+                            <!-- Email -->
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="emailSubject">Subject</label>
+                                <div class="slds-form-element__control">
+                                    <input type="text" id="emailSubject" class="slds-input"/>
+                                </div>
+                            </div>
+                            <div style="width: 100%; height: 60px; margin-top: 10px;">
+                                <div style="width: 25%; float: left; padding: 8px; text-align: center;">Insert Field</div>
+                                <div style="width: 45%; float: left;">
+                                    <div class="slds-form-element">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-select_container">
+                                                <select class="slds-select" id="emailFieldSelect">
+                                                    <option value="[Account]">Account</option>
+                                                    <option value="[CaseNumber]">Case Number</option>
+                                                    <option value="[CaseOwner]">Case Owner</option>
+                                                    <option value="[ContactName]">Contact Name</option>
+                                                    <option value="[Subject]">Subject</option>
+                                                    <option value="[Status]">Status</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="width: 25%; float: left;">
+                                    <div class="addFieldButton" onclick="insertFieldInEmailSubject()">Insert</div>
+                                </div>
+                            </div>
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="input-unique-id">Body</label>
+                                <div class="slds-form-element__control">
+                                    <textarea id="emailBody" class="slds-textarea" style="width: 100%;" rows="6"></textarea>
+                                </div>
+                            </div>
+                            <div style="width: 100%; height: auto; margin-top: 10px;">
+                                <div style="width: 25%; float: left; padding: 8px; text-align: center;">Insert Field</div>
+                                <div style="width: 45%; float: left;">
+                                    <div class="slds-form-element">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-select_container">
+                                                <select class="slds-select" id="bodyFieldSelect">
+                                                    <option value="[Account]">Account</option>
+                                                    <option value="[CaseNumber]">Case Number</option>
+                                                    <option value="[CaseOwner]">Case Owner</option>
+                                                    <option value="[ContactName]">Contact</option>
+                                                    <option value="[Subject]">Subject</option>
+                                                    <option value="[Status]">Status</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="width: 25%; float: left;">
+                                    <div class="addFieldButton" onclick="insertFieldInEmailBody()">Insert</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="buttonsArea">
+                            <div class="okayButton" onclick="EmailSend()">Send</div>
+                            <div class="cancelButton">Cancel</div>
+                        </div>
+                    </div>
+                    
+                    <div id="tab-default-4" class="slds-tabs--default__content " role="tabpanel">
+                        <div class="tabPanel">
+                            <!-- Update -->
+                            <div class="updateFieldSection">
+                                <div class="slds-form-element" style="width: 70%; float: left;">
+                                    <label class="slds-form-element__label" for="updateEscalated">Escalate</label>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-select_container">
+                                            <select class="slds-select" id="updateEscalated">
+                                                <option value="Escalate Cases">Escalate Cases</option>
+                                                <option value="Remove from Escalated">Remove from Escalated</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="updateFieldButton" onclick="escalateUpdate()">Update</div>
+                            </div>
+                            <div class="updateFieldSection">
+                                <div class="slds-form-element" style="width: 70%; float: left;">
+                                    <label class="slds-form-element__label" for="updatePriority">Priority</label>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-select_container">
+                                            <select class="slds-select" id="updatePriority">
+                                                <apex:repeat value="{!casePriorityPL}" var="obj">
+                                                    <option value="{!obj}">{!obj}</option>
+                                                </apex:repeat>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="updateFieldButton" onclick="priorityUpdate()">Update</div>
+                            </div>
+                            <div class="updateFieldSection">
+                                <div class="slds-form-element" style="width: 70%; float: left;">
+                                    <label class="slds-form-element__label" for="updateStatus">Status</label>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-select_container">
+                                            <select class="slds-select" id="updateStatus">
+                                                <apex:repeat value="{!caseStatusPL}" var="obj">
+                                                    <option value="{!obj}">{!obj}</option>
+                                                </apex:repeat>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="updateFieldButton" onclick="statusUpdate()">Update</div>
+                            </div>
+                            <div class="updateFieldSection">
+                                <div class="slds-form-element" style="width: 70%; float: left;">
+                                    <label class="slds-form-element__label" for="updateType">Type</label>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-select_container">
+                                            <select class="slds-select" id="updateType">
+                                                <apex:repeat value="{!caseTypePL}" var="obj">
+                                                    <option value="{!obj}">{!obj}</option>
+                                                </apex:repeat>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="updateFieldButton" onclick="typeUpdate()">Update</div>
+                            </div>
+                            <div class="updateFieldSection">
+                                <div class="slds-form-element" style="width: 70%; float: left;">
+                                    <label class="slds-form-element__label" for="updateRecordType">Record Type</label>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-select_container">
+                                            <select class="slds-select" id="updateRecordType">
+                                                <apex:repeat value="{!caseRecordTypes}" var="obj">
+                                                    <option value="{!obj}">{!obj}</option>
+                                                </apex:repeat>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="updateFieldButton" onclick="recordTypeUpdate()">Update</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-default-5" class="slds-tabs--default__content " role="tabpanel">
+                        <div class="tabPanel">
+                            <!-- Assign -->
+                            <div style="width: 100%; height: auto; padding: 20px; text-align: center;">
+                                <p>Choose the User or Queue you would like the Cases assigned to</p>
+                            </div>
+                            <div style="width: 100%; height: 50px;">
+                                <div style="width: 20%; float: left; text-align: center; display: table-cell;">
+                                    <label class="slds-form-element__label" for="emailSubject" style="margin-top: 7px;">Owner</label>
+                                </div>
+                                <div style="width: 40%; float: left;">
+                                <div class="slds-form-element" style="padding-left: 10px; padding-right: 10px;">
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-select_container">
+                                            <select class="slds-select" id="assignSelect1" onchange="usersQueueSelectChanged()">
+                                                <option value="User">User</option>
+                                                <option value="Queue">Queue</option>
+                                                <option value="Partner User">Partner User</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <div style="width: 40%; float: left;">
+                                <div class="slds-form-element" style="padding-left: 10px; padding-right: 10px;">
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-select_container">
+                                            <select class="slds-select" id="assignSelect2">
+                                                <option value="idValue">nameValue</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="buttonsArea">
+                            <div class="okayButton" onclick="reAssignCases()">Assign</div>
+                            <div class="cancelButton">Cancel</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Popup Modal for Opps -->
+    <div class="demo-only" style="height: 640px; display: none;" id="myOppModal">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                        <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                        </svg>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">New Opportunities</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1" style="overflow-y: scroll;">
+                <table class="slds-table slds-table--bordered slds-table--cell-buffer" id="oppTable">
+                    <thead>
+                        <tr class="slds-text-title--caps">
+                            <th scope="col">
+                                <div class="slds-truncate" title="Opportunity">Opportunity</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Type">Type</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Stage">Stage</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="oppTableBody">
+                        <!-- Opps will go here -->
+                    </tbody>
+                </table>
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_brand" onclick="closeOppModal()">Close</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
+
+    <!-- NORMAL TOAST -->
+    <div class="slds-notify_container" id="normalToast" style="display: none; margin-top: 20px;">
+        <div class="slds-notify slds-notify--toast" role="alert">
+            <span class="slds-assistive-text">Info</span>
+            <button class="slds-button slds-button--icon-inverse slds-notify__close">
+                <svg aria-hidden="true" class="slds-button__icon slds-button__icon--large">
+                    <use xmlns:xlink="/assets/icons/utility-sprite/svg/symbols.svg#close" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                </svg>
+                <span class="slds-assistive-text">Close</span>
+            </button>
+            <div class="notify__content" style="text-align: center;">
+                <h2 class="slds-text-heading--small" id="normalToastText" style="text-align: center;"></h2>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="{!$Resource.SM_WAVE_Scriptjs}"></script>
+
+    <script>
+    
+    var cases = [];
+    var casesId = [];
+    var caseNumbers = [];
+
+    var standardUsers;
+    var queues;
+    var partnerUsers;
+    var customerUsers;
+
+    $(document).ready(function() {
+        $('[data-aljs="tabs"]').tabs();
+        $('#oppCloseDate').datepicker();
+
+        getAllQueues();
+        getStandardUsers();
+        getCustomerUsers();
+        getPartnerUsers();
+    });
+
+    $(function() {
+        $.ajaxSetup({
+            headers: {"Authorization": 'Bearer {!$Api.Session_ID}'}
+        });
+        setTimeout(getCasesIdFromQuery, 1000);
+    });
+
+    function getCasesIdFromQuery() {
+        var query = {};
+        query.statements = "{!JSENCODE(query)}";
+        var queryObj = {query: query.statements};
+        console.log('query===>'+JSON.stringify(queryObj)) ;
+        $.ajax({
+            type: 'POST',
+            url: '/services/data/v39.0/wave/query',
+            data: JSON.stringify(queryObj),
+            contentType: 'application/json',
+            success: function(data) {
+                var tmpCases = data.results.records;
+                for(var i = 0; i < tmpCases.length; i++) {
+                    var record = data.results.records[i];
+                    console.log('Record : ' + record.CaseId__c);
+                    casesId.push(record.CaseId__c);
+                }
+                getMyCasesfromIds();
+            },
+        });
+    }
+
+    function getMyCasesfromIds() {
+        SM_AP72_WAVECaseHandler.getMyCasesfromIds(casesId, function(result) {
+            console.log('query 2 casesId__c : ===>'+ casesId) ;
+            cases = [];
+            for(var i = 0; i < result.length; i++) {
+                cases.push(result[i]);
+                console.log('result[i] : ' + result[i].Id);
+                
+            }
+            buildTheCasesTable(cases);
+        });
+    }
+
+    function buildTheCasesTable(myCases) {
+        var caseTableBody = $('#caseTableBody');
+        caseTableBody.html('');
+        var tableBody = '';
+
+        for(var i = 0; i < myCases.length; i++) {
+            console.log('cases=>'+myCases[i]) ;
+            //Jalal ARIB 19/09/2019
+            // Bug affichage des cases sur analytics
+            if (myCases[i].AccountId !='') {
+                var tableRow = '<tr>' +
+                '<td>' +
+                '<a href="/' + myCases[i].Id + '" target="_blank"><div class="slds-truncate">' + myCases[i].CaseNumber + '</div></a>' +
+                '</td>' +
+                '<td>' +
+                '<a href="/' + myCases[i].AccountId + '" target="_blank"><div class="slds-truncate"></div></a>' +
+                '</td>' +
+                '<td>' +
+                '<div class="slds-truncate">' + myCases[i].Type + '</div>' +
+                '</td>' +
+                '<td>' +
+                '<div class="slds-truncate">' + myCases[i].Owner.Name + '</div>' +
+                '</td>' +
+                '<td>' +
+                '<div class="slds-truncate">' + myCases[i].Priority + '</div>' +
+                '</td>' +
+                '<td>' +
+                '<div class="slds-truncate">' + myCases[i].Status + '</div>' +
+                '</td>' +
+                '</tr>';
+            }
+            else{
+                var tableRow = '<tr>' +
+                '<td>' +
+                '<a href="/' + myCases[i].Id + '" target="_blank"><div class="slds-truncate">' + myCases[i].CaseNumber + '</div></a>' +
+                '</td>' +
+                '<td>' +
+                '<a href="/' + myCases[i].AccountId + '" target="_blank"><div class="slds-truncate">' + myCases[i].Account.Name + '</div></a>' +
+                '</td>' +
+                '<td>' +
+                '<div class="slds-truncate">' + myCases[i].Type + '</div>' +
+                '</td>' +
+                '<td>' +
+                '<div class="slds-truncate">' + myCases[i].Owner.Name + '</div>' +
+                '</td>' +
+                '<td>' +
+                '<div class="slds-truncate">' + myCases[i].Priority + '</div>' +
+                '</td>' +
+                '<td>' +
+                '<div class="slds-truncate">' + myCases[i].Status + '</div>' +
+                '</td>' +
+                '</tr>';
+            } 
+            tableBody = tableBody + tableRow;
+        }
+        caseTableBody.html(tableBody);
+        console.log('tableBody:'+tableBody);
+    }
+
+    function insertFieldInEmailSubject() {
+        var txt = $("#emailSubject");
+        var caretPos = txt[0].selectionStart;
+        var textAreaTxt = txt.val();
+        var txtToAdd = $('#emailFieldSelect').val();
+        txt.val(textAreaTxt.substring(0, caretPos) + txtToAdd + textAreaTxt.substring(caretPos) );
+    }
+
+    function insertFieldInEmailBody() {
+        var txt = $("#emailBody");
+        var caretPos = txt[0].selectionStart;
+        var textAreaTxt = txt.val();
+        var txtToAdd = $('#bodyFieldSelect').val();
+        txt.val(textAreaTxt.substring(0, caretPos) + txtToAdd + textAreaTxt.substring(caretPos) );
+    }
+
+    function EmailSend() {
+        showToastMessage('Sending Emails');
+        var subject = $('#emailSubject').val();
+        var body = $('#emailBody').val();
+        body = body.replace(/\n\r?/g, '<br />');
+        SM_AP72_WAVECaseHandler.sendEmails(subject, body, cases, function(result) {
+            // console.log(result);
+            showToastMessage('Emails sent successfully');
+            $('#emailSubject').val('');
+            $('#emailBody').val('');
+        });
+    }
+
+    function getStandardUsers() {
+        SM_AP72_WAVECaseHandler.getStandardUsers(function(result) {
+            standardUsers = result;
+            setAssignSelectForUsers(result);
+            // console.log('standard users: ' , standardUsers);
+        });
+    }
+
+    function getPartnerUsers() {
+        SM_AP72_WAVECaseHandler.getPartnerUsers(function(result) {
+            partnerUsers = result;
+        });
+    }
+
+    function getCustomerUsers() {
+        SM_AP72_WAVECaseHandler.getCustomerUsers(function(result) {
+            customerUsers = result;
+        });
+    }
+
+    function getAllQueues() {
+        SM_AP72_WAVECaseHandler.getAllQueues(function(result) {
+            queues = result;
+        });
+    }
+
+    function setAssignSelectForUsers(myUsers) {
+        var assignSelect2 = $('#assignSelect2');
+        assignSelect2.html('');
+        var selectBody = '';
+
+        for(var i = 0; i < myUsers.length; i++) {
+            var selectRow = '<option value="' + myUsers[i].Id + '">' + myUsers[i].Name  + '</option>';
+            selectBody = selectBody + selectRow;
+        }
+        assignSelect2.html(selectBody);
+    }
+
+    function setAssignSelectForQueue() {
+        var assignSelect2 = $('#assignSelect2');
+        assignSelect2.html('');
+        var selectBody = '';
+
+        for(var i = 0; i < queues.length; i++) {
+            var selectRow = '<option value="' + queues[i].Id + '">' + queues[i].Name + '</option>';
+            selectBody = selectBody + selectRow;
+        }
+        assignSelect2.html(selectBody);
+    }
+
+    function usersQueueSelectChanged() {
+        var selectValue = $('#assignSelect1').val();
+
+        if(selectValue == 'Queue') {
+            setAssignSelectForQueue();
+        } else if(selectValue == 'User') {
+            setAssignSelectForUsers(standardUsers);
+        } else if(selectValue == 'Partner User') {
+            setAssignSelectForUsers(partnerUsers);
+        } else {
+            setAssignSelectForUsers(customerUsers);
+        }
+    }
+
+    function reAssignCases() {
+        showToastMessage('Assigning Cases');
+        var usrId = $('#assignSelect2').val();
+        SM_AP72_WAVECaseHandler.reAssign(usrId, cases, function(result) {
+            getMyCases();
+            if(result == 'worked!') {
+                showToastMessage('Cases assigned succesfully');
+              } else {
+                showToastMessage('This User or Queue cannot be assigned Cases');
+            }
+        });
+    }
+
+    function showToastMessage(str) {
+        var toast = $('#normalToast');
+        var toastText = $('#normalToastText');
+
+        toastText.html(str);
+        toast.fadeIn( "slow", function() {
+            setTimeout(function() {
+                toast.fadeOut( "slow", function() {
+                });
+            }, 3000);
+        });
+    }
+
+    function createMyOpportunities() {
+        showToastMessage('Creating New Opportunities');
+        var oppName = $('#oppName').val();
+        var oppStage = $('#oppStage').val();
+        var oppCloseDate = $('#oppCloseDate').val();
+
+        var oppType = $('#oppType').val();
+        var oppAmount = $('#oppAmount').val();
+        var oppRecordType = $('#oppRecordType').val();
+
+        if(oppAmount == '' || oppAmount == null) {
+            oppAmount = 0;
+        }
+
+        SM_AP72_WAVECaseHandler.createMyOpps(cases, oppName, oppStage, oppCloseDate, oppType, oppAmount, oppRecordType, function(result) {
+            //console.log('Opps : ' , result);
+            buildTheOppsTable(result);
+        });
+    }
+
+    function buildTheOppsTable(myOpps) {
+        var oppTableBody = $('#oppTableBody');
+        oppTableBody.html('');
+        var tableBody = '';
+
+        for(var i = 0; i < myOpps.length; i++) {
+            var tableRow = '<tr>' +
+            '<td>' +
+            '<a href="/' + myOpps[i].Id + '" target="_blank"><div class="slds-truncate">' + myOpps[i].Name + '</div></a>' +
+            '</td>' +
+            '<td>' +
+            '<div class="slds-truncate">' + myOpps[i].Type + '</div>' +
+            '</td>' +
+            '<td>' +
+            '<div class="slds-truncate">' + myOpps[i].StageName + '</div>' +
+            '</td>' +
+            '</tr>';
+            tableBody = tableBody + tableRow;
+        }
+        oppTableBody.html(tableBody);
+        $('#myOppModal').css('display', 'block');
+        clearOppForm();
+    }
+
+    function closeOppModal() {
+        $('#myOppModal').css('display', 'none');
+    }
+
+    function clearOppForm() {
+        $('#oppName').val('');
+        $('#oppCloseDate').val('');
+        $('#oppAmount').val('');
+    }
+
+    function escalateUpdate() {
+        showToastMessage('Updating Case Escalation')
+        var str = $('#updateEscalated').val();
+        SM_AP72_WAVECaseHandler.updateEscalateCase(str, cases, function(result) {
+            //console.log('escalateUpdate : ' + result);
+            showToastMessage('Case Escalation Updated');
+            getMyCases();
+        });
+    }
+
+    function priorityUpdate() {
+        showToastMessage('Updating Case Priority')
+        var str = $('#updatePriority').val();
+        SM_AP72_WAVECaseHandler.updatePriorityCase(str, cases, function(result) {
+            //console.log('priorityUpdate : ' + result);
+            showToastMessage('Case Priority updated to ' + str);
+            getMyCases();
+        });
+    }
+
+    function statusUpdate() {
+        showToastMessage('Updating Case Status')
+        var str = $('#updateStatus').val();
+        SM_AP72_WAVECaseHandler.updateStatusCase(str, cases, function(result) {
+            //console.log('statusUpdate : ' + result);
+            showToastMessage('Case Status updated to ' + str);
+            getMyCases();
+        });
+    }
+
+    function typeUpdate() {
+        showToastMessage('Updating Case Type')
+        var str = $('#updateType').val();
+        SM_AP72_WAVECaseHandler.updateTypeCase(str, cases, function(result) {
+            //console.log('typeUpdate : ' + result);
+            showToastMessage('Case Type updated to ' + str);
+            getMyCases();
+        });
+    }
+
+    function recordTypeUpdate() {
+        showToastMessage('Updating Case Record Type')
+        var str = $('#updateRecordType').val();
+        SM_AP72_WAVECaseHandler.updateRecordTypeCase(str, cases, function(result) {
+            //console.log('recordTypeUpdate : ' + result);
+            showToastMessage('Case Record Type updated to ' + str);
+            getMyCases();
+        });
+    }
+
+    </script>
+   </div> 
+</body>
+</html>
+
+</apex:page>

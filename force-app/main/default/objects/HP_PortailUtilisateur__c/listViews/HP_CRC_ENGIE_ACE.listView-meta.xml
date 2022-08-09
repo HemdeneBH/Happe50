@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HP_CRC_ENGIE_ACE</fullName>
+    <booleanFilter>1 OR 2</booleanFilter>
+    <columns>Login__c</columns>
+    <columns>GaiaId__c</columns>
+    <columns>NAME</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Canal__c</columns>
+    <columns>Prestataire__c</columns>
+    <columns>Nom__c</columns>
+    <columns>Prenom__c</columns>
+    <columns>Sgut2Statut__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Canal__c</field>
+        <operation>equals</operation>
+        <value>CRC-ENGIE</value>
+    </filters>
+    <filters>
+        <field>Canal__c</field>
+        <operation>contains</operation>
+        <value>Cellule</value>
+    </filters>
+    <label>CRC-ENGIE &amp; ACE</label>
+    <sharedTo>
+        <roleAndSubordinatesInternal>HP_HAPPE</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SMILE_Equipe__c</fullName>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <label>SMILE Equipe</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Equipe Dunkerque Arvato DGP</fullName>
+                <default>true</default>
+                <label>Equipe Dunkerque Arvato DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe Casablanca COMDATA DGP</fullName>
+                <default>false</default>
+                <label>Equipe Casablanca COMDATA DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe FES Sitel Group DGP</fullName>
+                <default>false</default>
+                <label>Equipe FES Sitel Group DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe Guimaraes Armatis DGP</fullName>
+                <default>false</default>
+                <label>Equipe Guimaraes Armatis DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe Caen Armatis DGP</fullName>
+                <default>false</default>
+                <label>Equipe Caen Armatis DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe Nancy Sitel Group DGP</fullName>
+                <default>false</default>
+                <label>Equipe Nancy Sitel Group DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe La Rochelle Sitel Group DGP</fullName>
+                <default>false</default>
+                <label>Equipe La Rochelle Sitel Group DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe MarcqEnBaroeul COMDATA DGP</fullName>
+                <default>false</default>
+                <label>Equipe MarcqEnBaroeul COMDATA DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe Soissons COMDATA DGP</fullName>
+                <default>false</default>
+                <label>Equipe Soissons COMDATA DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe Porto Armatis DGP</fullName>
+                <default>false</default>
+                <label>Equipe Porto Armatis DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe Marrakech Arvato DGP</fullName>
+                <default>false</default>
+                <label>Equipe Marrakech Arvato DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe Casablanca Arvato DGP</fullName>
+                <default>false</default>
+                <label>Equipe Casablanca Arvato DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe Lyon Téléperformance DGP</fullName>
+                <default>false</default>
+                <label>Equipe Lyon Téléperformance DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe Tunis Téléperformance DGP</fullName>
+                <default>false</default>
+                <label>Equipe Tunis Téléperformance DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe Chaumont Arvato DGP</fullName>
+                <default>false</default>
+                <label>Equipe Chaumont Arvato DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe 1 Premium Metz DGP</fullName>
+                <default>false</default>
+                <label>Equipe 1 Premium Metz DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe 1 Premium Quimper DGP</fullName>
+                <default>false</default>
+                <label>Equipe 1 Premium Quimper DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe 1 EM/DM Dunkerque DGP</fullName>
+                <default>false</default>
+                <label>Equipe 1 EM/DM Dunkerque DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe Tunis Armatis DGP</fullName>
+                <default>false</default>
+                <label>Equipe Tunis Armatis DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe Dakar Arvato DGP</fullName>
+                <default>false</default>
+                <label>Equipe Dakar Arvato DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe Montreuil DEAFI DGP</fullName>
+                <default>false</default>
+                <label>Equipe Montreuil DEAFI DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe Dakar Sitel Group DGP</fullName>
+                <default>false</default>
+                <label>Equipe Dakar Sitel Group DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe CNF Accenture Ebene DGP</fullName>
+                <default>false</default>
+                <label>Equipe CNF Accenture Ebene DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe Moka Euro CRM DGP</fullName>
+                <default>false</default>
+                <label>Equipe Moka Euro CRM DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe 1 reco clt résiliés Contentia DGP</fullName>
+                <default>false</default>
+                <label>Equipe 1 reco clt résiliés Contentia DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe 2 reco clt résiliés Contentia DGP</fullName>
+                <default>false</default>
+                <label>Equipe 2 reco clt résiliés Contentia DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe 3 reco clt résiliés Contentia DGP</fullName>
+                <default>false</default>
+                <label>Equipe 3 reco clt résiliés Contentia DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe 1 recouv clt résiliés Effico DGP</fullName>
+                <default>false</default>
+                <label>Equipe 1 recouv clt résiliés Effico DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe 1 recouv clt actifs Gayssot DGP</fullName>
+                <default>false</default>
+                <label>Equipe 1 recouv clt actifs Gayssot DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe 1 recouv clt actifs GERI DGP</fullName>
+                <default>false</default>
+                <label>Equipe 1 recouv clt actifs GERI DGP</label>
+            </value>
+            <value>
+                <fullName>EQUIPE 1 PREMIUM LA BAULE DGP</fullName>
+                <default>false</default>
+                <label>EQUIPE 1 PREMIUM LA BAULE DGP</label>
+            </value>
+            <value>
+                <fullName>Equipe Casablanca Arvato</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Equipe Casablanca Arvato</label>
+            </value>
+            <value>
+                <fullName>Equipe Dakar Arvato</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Equipe Dakar Arvato</label>
+            </value>
+            <value>
+                <fullName>Equipe Dakar Sitel Group</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Equipe Dakar Sitel Group</label>
+            </value>
+            <value>
+                <fullName>Equipe FES Sitel Group</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Equipe FES Sitel Group</label>
+            </value>
+            <value>
+                <fullName>Equipe La Rochelle Sitel Group</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Equipe La Rochelle Sitel Group</label>
+            </value>
+            <value>
+                <fullName>Equipe Marrakech Arvato</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Equipe Marrakech Arvato</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

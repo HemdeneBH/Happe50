@@ -1,0 +1,82 @@
+<!--
+  @description       : [VUE 360] Affichage des statuts des services affinitaires et des options Week-end (WE)
+  Ver   Date         Author                               Modification
+  1.0   05-07-20222   Nourelimane SMOUNI  FT3-1749
+-->
+<template>
+  
+    <lightning-card >
+        <div class="slds-p-around_x-large" style="width: 700 ;">
+            <h2 class="pageTitle-1">Services et options </h2>
+            <div class="top-card  slds-p-around_x-small  slds-m-top_large slds-border_top slds-border_left slds-border_right slds-border_bottom">
+                <h2 class="top-card-title slds-p-left_xxx-small">
+                    <div>
+                        <span if:true={civilite}>{civilite}</span>&nbsp;
+                        <span if:true={nom}>{nom}</span>&nbsp;
+                        <span if:true={prenom}>{prenom}</span></div>
+
+                </h2>
+                <div class="top-card-row slds-p-top_x-small">
+                    
+                    <div class="top-card-row-col-1">
+                        <div>
+                            <lightning-icon class = "slds-p-left_none slds-c-icon-color-foreground: black;" icon-name="utility:home" size="x-small" alternative-text="Home">
+                            </lightning-icon>
+                            <span class="slds-p-left_x-small">{numRue}&nbsp;{rue}</span><br>
+                            <span class="slds-p-left_large">{complementAdresse}</span><br>
+                            <span class="slds-p-left_large">{codePostal}&nbsp;{ville}</span>
+                            
+                            
+                        </div>
+                    </div>
+                    <div class="top-card-row-col-2">
+                        <div>
+                            <lightning-icon icon-name="utility:people" size="x-small" alternative-text="Home">
+                            </lightning-icon> 
+                             <span class="slds-p-left_x-small">{email}</span><br>
+                            <span class="slds-p-left_large">{telDomicile}</span>
+                          
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-grid slds-gutters slds-p-left_x-large  slds-p-right_x-large slds-p-bottom_x-large">
+            <div class="slds-col slds-size_5-of-12 slds-p-right_medium">
+                
+              <div>
+                <h2 class="pageTitle-2">Services</h2>  
+               <template for:each={listServices} for:index="index" for:item="service">
+                    <div key={service.idContrat} class="line slds-p-vertical_small">
+                        <div class="line-col-1 slds-m-top_small">
+                            <span  class="libOffre slds-text-heading_small slds-text-color_default" if:true={service.libOffre}>
+                                {service.libOffre}
+                            </span> 
+                            <div class="slds-text-body_small slds-p-top_xx-small">                 
+                                <span if:true={service.etatContrat.libEtat}>
+                                    {service.etatContrat.libEtat}&nbsp;</span>  
+                                    <span if:true={service.dateEffet}>
+                                       le &nbsp;{service.dateEffet}
+                                    </span>
+                                    <span if:true={service.dateResiliation}>
+                                       le &nbsp;{service.dateResiliation}
+                                    </span>
+                            </div>  
+                        </div> 
+                    </div>  
+                 </template>
+                        
+              </div>
+            </div>
+            
+            <div class="slds-col  slds-size_7-of-12 slds-p-horizontal_medium">
+                
+            </div>
+          </div >
+         
+      
+    </lightning-card>      
+    
+            
+</template>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GAZ_telereleve_obligatoire__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Etat_du_compteur__c=$Label.SM_CL08_EtatCompteur_non_coupe &amp;&amp; TEXT(Type_de_compteur__c)=$Label.SM_CL07_Type_compteur_Gazpar, 
+IF(Etat_PDL__c=$Label.SM_CL09_Etat_PDL_libre &amp;&amp; !DGI__c ,true, 
+IF(Etat_PDL__c=$Label.SM_CL09_Etat_PDL_non_libre &amp;&amp; !MHS_en_cours__c &amp;&amp; !DGI__c , true , 
+IF(Etat_PDL__c=$Label.SM_CL09_Etat_PDL_non_libre &amp;&amp; MHS_en_cours__c &amp;&amp; !DGI__c &amp;&amp; (TODAY()-Date_Derniere_Telereleve__c&lt;5), true , false 
+))),false)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>GAZ_telereleve_obligatoire</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

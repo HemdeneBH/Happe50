@@ -1,0 +1,73 @@
+{
+  "appPageId" : "7e89266e-f5a3-4029-bb48-38a8a732ab93",
+  "componentName" : "community_layout:sldsFlexibleLayout",
+  "id" : "53d6ef64-51b6-4d0f-bd23-332fa6e6591b",
+  "label" : "Register",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "backgroundImageConfig" : "",
+        "backgroundImageOverlay" : "rgba(0,0,0,0)",
+        "sectionConfig" : "{\"UUID\":\"db5c59a3-33b7-4204-8403-78dd7f042223\",\"columns\":[{\"UUID\":\"92dd6276-cb0d-4fd0-a621-ac02690c9794\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}"
+      },
+      "componentName" : "community_layout:section",
+      "id" : "db5c59a3-33b7-4204-8403-78dd7f042223",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "labelInputConfirmationMDP" : "Confirmer mon mot de passe :",
+            "labelInputEmail" : "Adresse email associée :",
+            "labelInputIdentite" : "Identité associée :",
+            "labelInputMDP" : "Mot de passe :",
+            "messageConfirmation" : "Succès",
+            "messageConfirmationIncorrecte" : "Les deux mot de passe saisi ne correspondent pas",
+            "messageErreurActivationExpiree" : "Le lien utilisé pour activer votre espace client n'est plus valable, veuillez renouveler votre demande",
+            "messageErreurInputEmail" : "Mauvais Format d'Email",
+            "messageFormatIncorrecte" : "Le mot de passe doit être 8 caractères minimum et doit contenir au moins une miniscule, une majiscule, un chiffre et un caractère spéciale",
+            "placeHolderInputEmail" : "martin.dupont@gmail.com",
+            "placeHolderInputIdentite" : "Martin DUPONT",
+            "placeHolderInputMDP" : "Mot de passe",
+            "titreActiverEspaceClient" : "Activer mon espace client"
+          },
+          "componentName" : "c:hp_ec_activation",
+          "id" : "5de0f0e6-8a17-4653-a0c8-ed5f3ffe8119",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "92dd6276-cb0d-4fd0-a621-ac02690c9794",
+        "regionLabel" : "Column 1",
+        "regionName" : "col1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "scopedBrandingSetId" : null,
+      "type" : "component"
+    } ],
+    "id" : "5044b7d7-e0b4-402b-97ce-a842477d8074",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "pageTitle" : "Register",
+        "recordId" : "{!recordId}"
+      },
+      "componentName" : "community_builder:seoAssistant",
+      "id" : "1101ef1c-59a6-4ffa-9822-31feac63a701",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "73502550-afca-4af6-b365-d8508942e76d",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "PFlC31YDquY3kutKC990xhLaNFbuiZ",
+  "type" : "view",
+  "viewType" : "self-register"
+}

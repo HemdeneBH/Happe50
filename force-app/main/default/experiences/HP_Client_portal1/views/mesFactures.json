@@ -1,0 +1,146 @@
+{
+  "appPageId" : "7e89266e-f5a3-4029-bb48-38a8a732ab93",
+  "componentName" : "community_layout:sldsFlexibleLayout",
+  "id" : "573cacec-d044-450b-ab0e-8c199a2aa67c",
+  "label" : "Mes factures",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "backgroundImageConfig" : "",
+        "backgroundImageOverlay" : "rgba(0,0,0,0)",
+        "sectionConfig" : "{\"UUID\":\"47335409-1a87-403e-8908-77ead9c243fa\",\"columns\":[{\"UUID\":\"b2639cea-8b75-4339-a832-b18edcb9ece4\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"4\",\"seedComponents\":[]},{\"UUID\":\"dda7767e-53e8-47a6-a26c-ecbcbe99fa19\",\"columnName\":\"Column 2\",\"columnKey\":\"32b3d\",\"columnWidth\":\"4\",\"seedComponents\":[]},{\"UUID\":\"70cc00bd-332f-4da1-8b6e-c68f2e4fc4e4\",\"columnName\":\"Column 3\",\"columnKey\":\"18a23\",\"columnWidth\":\"4\",\"seedComponents\":[]}]}"
+      },
+      "componentName" : "community_layout:section",
+      "id" : "47335409-1a87-403e-8908-77ead9c243fa",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "confirmationSoldeRegle" : "Vous avez déjà régler votre facture",
+            "crediteur" : "Solde  en votre faveur qui sera déduit de votre prochaine facture",
+            "debiteur" : "A payer avant le ",
+            "debiteurRetard" : "En retard depuit le ",
+            "firstButton" : "PAYER PAR CARTE.",
+            "messageRemerciement" : "Merci d'avoire rejoint happ_e",
+            "secondButton" : "MA DERNIERE FACTURE.",
+            "titleText" : "MON SOLDE "
+          },
+          "componentName" : "c:hp_ec_solde",
+          "id" : "d9169776-b63f-469d-9256-6416c0447c43",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "b2639cea-8b75-4339-a832-b18edcb9ece4",
+        "regionLabel" : "Column 1",
+        "regionName" : "col1",
+        "renditionMap" : { },
+        "type" : "region"
+      }, {
+        "components" : [ {
+          "componentAttributes" : {
+            "alerteMensualites" : "Modifier vos mensualités peut entrainer régularisation de prix",
+            "modifierMensualitesBoutton" : "Modifier",
+            "paramGlobale" : "Annuel ",
+            "titreDatePaiement" : "Date de paiement",
+            "titreMensualites" : "Mes mensualités",
+            "titreMontantMensuel" : "Montant mensuel"
+          },
+          "componentName" : "c:hp_ec_mensualites",
+          "id" : "09ebffe6-21f9-4037-806b-50a6a8ebf849",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "dda7767e-53e8-47a6-a26c-ecbcbe99fa19",
+        "regionLabel" : "Column 2",
+        "regionName" : "32b3d",
+        "renditionMap" : { },
+        "type" : "region"
+      }, {
+        "components" : [ {
+          "componentAttributes" : {
+            "title" : "Mes Documents"
+          },
+          "componentName" : "c:hp_ec_myDocuments",
+          "id" : "e172d952-5ec7-4174-b826-495769c93025",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "70cc00bd-332f-4da1-8b6e-c68f2e4fc4e4",
+        "regionLabel" : "Column 3",
+        "regionName" : "18a23",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "scopedBrandingSetId" : null,
+      "type" : "component"
+    }, {
+      "componentAttributes" : {
+        "backgroundImageConfig" : "",
+        "backgroundImageOverlay" : "rgba(0,0,0,0)",
+        "sectionConfig" : "{\"UUID\":\"f963f923-de68-4ba8-b7c1-8beeb74cc914\",\"columns\":[{\"UUID\":\"554f8a1a-9b96-4ee1-87c7-9d5a290f9d23\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"8\",\"seedComponents\":[]},{\"UUID\":\"42df1e45-f343-4ebc-876f-9ed23cf14e04\",\"columnName\":\"Column 2\",\"columnKey\":\"659c3\",\"columnWidth\":\"4\",\"seedComponents\":[]}]}"
+      },
+      "componentName" : "community_layout:section",
+      "id" : "f963f923-de68-4ba8-b7c1-8beeb74cc914",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : { },
+          "componentName" : "c:hp_ec_payments",
+          "id" : "d9a82e64-da81-46b5-8052-487966b61cde",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "554f8a1a-9b96-4ee1-87c7-9d5a290f9d23",
+        "regionLabel" : "Column 1",
+        "regionName" : "col1",
+        "renditionMap" : { },
+        "type" : "region"
+      }, {
+        "components" : [ {
+          "componentAttributes" : { },
+          "componentName" : "c:hp_ec_chequeEnergie",
+          "id" : "925799f1-7f1d-41a3-bfe4-e18897ed146d",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "42df1e45-f343-4ebc-876f-9ed23cf14e04",
+        "regionLabel" : "Column 2",
+        "regionName" : "659c3",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "scopedBrandingSetId" : null,
+      "type" : "component"
+    } ],
+    "id" : "6c855373-7f4f-4a7a-89ad-d7b9c435b943",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "pageTitle" : "Mes factures",
+        "recordId" : "{!recordId}"
+      },
+      "componentName" : "community_builder:seoAssistant",
+      "id" : "02128aa3-ae15-4bf2-bf49-4c7665037b2a",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "bf8a7b0a-f98c-46df-9b28-2b94ca50b344",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "bpHmsKcRsRJVAxsjPUCXd7yA8oGvLt",
+  "type" : "view",
+  "viewType" : "custom-mes-factures-et-paiements"
+}

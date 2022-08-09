@@ -1,0 +1,15 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 08-20-2021
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<aura:component implements="lightning:isUrlAddressable,flexipage:availableForAllPageTypes" access="global" >
+
+    <lightning:workspaceAPI aura:id="workspace" />
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <aura:attribute type="String" name="currentFacture"/>
+    <aura:attribute type="String" name="consommationData"/>
+    <c:hp_detailsFacture label="Détails Facture" currentFacture="{!v.currentFacture}" consommationData="{!v.consommationData}"/>
+</aura:component>

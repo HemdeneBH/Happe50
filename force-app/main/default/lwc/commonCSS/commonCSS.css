@@ -1,0 +1,22 @@
+@font-face {
+    font-family: 'itc_avant_garde_gothic';
+    src: url(/resource/HP_EC_AvantRegular);    
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'itc_avant_garde_gothic_ltbold';
+    src: url(/resource/HP_EC_AvantBold);    
+    font-weight: bold;
+    font-style: normal;
+}
+
+body {
+    font-family: 'itc_avant_garde_gothic';
+    font-weight: normal;
+}
+
+/* light variables */
+:host{
+    --none: none;
+  }

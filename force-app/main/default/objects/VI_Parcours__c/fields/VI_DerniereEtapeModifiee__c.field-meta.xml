@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_DerniereEtapeModifiee__c</fullName>
+    <description>Champ alimenté automatiquement quand le PP souhaite reprendre le parcours plus tard. (confirmation Bouton &quot;Reprendre le parcours plus tard&quot;).</description>
+    <externalId>false</externalId>
+    <label>Dernière étape modifiée</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Etape 1 - Choix de la situation</fullName>
+                <default>false</default>
+                <label>Etape 1 - Choix de la situation</label>
+            </value>
+            <value>
+                <fullName>Etape 1 - Choix de l&apos;énergie</fullName>
+                <default>false</default>
+                <label>Etape 1 - Choix de l&apos;énergie</label>
+            </value>
+            <value>
+                <fullName>Etape 2 - Identification client</fullName>
+                <default>false</default>
+                <label>Etape 2 - Identification client</label>
+            </value>
+            <value>
+                <fullName>Etape 3 - Identification local</fullName>
+                <default>false</default>
+                <label>Etape 3 - Identification local</label>
+            </value>
+            <value>
+                <fullName>Etape 4 - Estimation de la consommation</fullName>
+                <default>false</default>
+                <label>Etape 4 - Estimation de la consommation</label>
+            </value>
+            <value>
+                <fullName>Etape 5 - Constitution du panier client</fullName>
+                <default>false</default>
+                <label>Etape 5 - Constitution du panier client</label>
+            </value>
+            <value>
+                <fullName>Etape 6 - Informations complémentaires</fullName>
+                <default>false</default>
+                <label>Etape 6 - Informations complémentaires</label>
+            </value>
+            <value>
+                <fullName>Etape 7 - Saisie des moyens de paiement</fullName>
+                <default>false</default>
+                <label>Etape 7 - Saisie des moyens de paiement</label>
+            </value>
+            <value>
+                <fullName>Etape 8 - Récapitulatif de la souscription</fullName>
+                <default>false</default>
+                <label>Etape 8 - Récapitulatif de la souscription</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

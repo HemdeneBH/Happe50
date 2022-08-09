@@ -1,0 +1,82 @@
+<!--
+  @description       : 
+  @author            : Vincent Albiser
+  @group             : 
+  @last modified on  : 01-05-2022
+  @last modified by  : Hemdene Ben Hammouda
+  Modifications Log 
+  Ver   Date         Author            Modification
+  1.0   07-10-2020   Vincent Albiser   Initial Version
+-->
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId" controller ="HP_SM072_Okta_Users_Manager">
+    <aura:attribute name ="operation" type="String"/>
+    <aura:attribute name ="deletion" type="Boolean"/>
+    <aura:attribute name ="creation" type="Boolean"/>
+    <aura:attribute name ="modification" type="Boolean"/>
+    <aura:attribute name ="newPass" type="String"/>
+    <aura:attribute name ="error" type="Boolean" default="true"/>
+   
+    <aura:html tag="style">
+        .cuf-content {
+        padding: 0 0rem !important;
+        }
+        .slds-p-around--medium {
+        padding: 0rem !important;
+        }       
+        .slds-modal__content{
+        overflow-y:hidden !important;
+        height:unset !important;
+        max-height:unset !important;
+        }
+    </aura:html>
+
+    <force:recordData aura:id="recordHandler"
+    recordId="{!v.recordId}"
+    fields="Id"/>
+
+     <!--Modal Header--> 
+     <div class="modal-header slds-modal__header slds-size_1-of-1">
+        <aura:if isTrue="{!v.deletion}"> <h4 class="title slds-text-heading--small">Suppression Utilisateur Portail </h4>
+        </aura:if> 
+        <aura:if isTrue="{!v.modification}"> <h4 class="title slds-text-heading--small">Modification Mot de passe</h4> </aura:if>  
+        <aura:if isTrue="{!v.creation}"> <h4 class="title slds-text-heading--small">Création d'un utilisateur portail</h4>   </aura:if> 
+    </div>
+    <!--End Modal Header--> 
+   
+     <!--Modal Body-->  
+     <div class="slds-modal__content slds-p-around_medium slds-align_absolute-center slds-size_1-of-1 slds-is-relative">
+        <form class="slds-form--stacked">
+            <aura:if isTrue="{!v.modification}">
+                <div class="slds-is-relative">
+                    Entrez ici le nouveau mot de passe (ne pas toucher à l'ancien situé sur la fiche de l'utilisateur)
+                </div>
+                <lightning:recordEditForm aura:id="form" class="slds-align_absolute-center"  recordId="{!v.recordId}" objectApiName="HP_PortailUtilisateur__c" onsubmit="{!c.submitPassword}">
+                    <lightning:inputField fieldName="Password__c" value="{!v.newPass}" />             
+                    <lightning:button variant="brand" class="slds-align_absolute-center" label="Valider" type="submit" />
+                </lightning:recordEditForm>
+            </aura:if>
+            <aura:if isTrue="{!v.deletion}">
+                <lightning:recordEditForm aura:id="form" class="slds-align_absolute-center"  recordId="{!v.recordId}" objectApiName="HP_PortailUtilisateur__c" >
+                    <div class="slds-is-relative">
+                        Êtes-vous sûr de vouloir supprimer cet utilisateur ? 
+                        <lightning:button variant="brand"  label="Oui" onclick="{!c.submitYes}" />
+                        <lightning:button variant="brand"  label="Non" onclick="{!c.submitNo}" />
+                    </div>
+                </lightning:recordEditForm>
+            </aura:if>
+            <aura:if isTrue="{!v.creation}">
+                <div class="slds-is-relative">
+                    <lightning:spinner  variant="brand" lass="slds-show backgroundSpinner" size="small" />
+                </div>  
+            </aura:if>
+            <div class="slds-is-relative">
+                <lightning:spinner aura:id="Spinner" class="slds-hide" variant="brand" lass="slds-show backgroundSpinner" size="small" />
+            </div>   
+        </form> 
+       
+    </div>
+    <!--End of Modal Body-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> 
+   
+ 
+</aura:component>

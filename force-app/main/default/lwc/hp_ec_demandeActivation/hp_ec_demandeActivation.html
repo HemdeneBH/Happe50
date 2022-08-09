@@ -1,0 +1,46 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 04-25-2022
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<template>
+    <div class="hp_container">
+        <div class="hp-demandeActivation">
+            <div class="hp-content">
+                <div class="hp-logo">
+                    <img src={blackLogo}>
+                </div>
+                <div class="hp-bigTitle">
+                    {titreNouveauMotDePasse}
+                </div>
+                <div if:true={showSuccessMessage} class="hp-success">
+                    {messageConfirmation}
+                </div>
+                <div class="slds-form-element hp-emailBox">
+                    <label class="slds-form-element__label hp-inputLabel" for="hp-input-email">
+                        {labelInputEmail}
+                    </label>
+                    <div class="slds-form-element__control">
+                        <input class="hp-textInput slds-input" 
+                            type="email" 
+                            data-id="hp-input-email"
+                            placeholder={placeHolderInputEmail}  
+                            aria-describedby="hp-input-email-error"
+                            onchange={handleEmailInput}/>
+                    </div>
+                </div>
+                <div if:true={showError} class="hp-bad-input">{errorMessage}</div>
+                <div class="hp-btnContainer">
+                    <div class="hp-firstButton" onclick={handleSendEmail}>
+                        Valider
+                    </div>
+                </div>
+                <div class="hp-mentionBox">
+                    {texteMention}
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

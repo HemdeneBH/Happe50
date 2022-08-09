@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_GazkWhHTPanierClient__c</fullName>
+    <description>Champ pour affichage du détail du prix du gaz au kWh HT</description>
+    <externalId>false</externalId>
+    <label>Gaz kWh HT</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

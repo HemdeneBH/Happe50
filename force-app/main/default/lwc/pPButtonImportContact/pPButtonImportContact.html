@@ -1,0 +1,46 @@
+<template>
+    
+    <button class="slds-button slds-button--brand actionButton uiButton" onclick={openModalBttnImport} aria-live="off" type="button" aria-label="" data-aura-rendered-by="5:1325;a" data-aura-class="uiButton">
+        <span class=" label bBody" style="font-weight: bold;" dir="ltr" data-aura-rendered-by="10:1325;a">Importer des Contacts</span>
+    </button>
+
+    <lightning-card  icon-name="action:join_group" title="Import de Contacts" if:true={isModalBttnImportOpen} class="vi-modal-BttnImportOpen container">
+        <!--<div class="row">
+            <div class="col-lg-2 text-center">
+                <img title="Close" onclick={closeModalBttnImport} style="cursor:pointer;margin-top: 20px;" src={closeImage} />
+            </div>
+        </div>-->
+        <div style="margin-left: 10%;">
+            <div>
+                <lightning-input label="" name="file uploader" onchange={handleFilesChange} type="file" ></lightning-input>
+            </div>
+            <br/>
+            
+            <div class="slds-text-body_regular" style="margin-left: 5%;">{fileName}
+            </div>
+            <br/>
+
+            <template if:false={loaded}>
+                <div class="exampleHolder">
+                    <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+                </div>
+            </template>
+
+            <div if:true={showError} class="slds-text-body_regular slds-text-color_error vi-modal-content-error" style="margin-left: 5%;margin-right: 15%;white-space: pre;">
+                {insertError}
+            </div>
+            <br/>
+            <button class="slds-button slds-button--brand actionButton uiButton" onclick={handleSave} aria-live="off" type="button" aria-label="" data-aura-rendered-by="5:1325;a" data-aura-class="uiButton">
+                <span class=" label bBody" dir="ltr" data-aura-rendered-by="10:1325;a">Importer des Contacts</span>
+            </button>
+        </div>
+        <br/>
+        <br/>
+    </lightning-card>
+
+    <!--<lightning-button label="Importer des Contacts" title="BttnImport" onclick={openModalBttnImport} class="uploadFileButton"></lightning-button>-->
+
+    <!-- "Fond grisé" des popups -->
+    <div onclick={closeModalBttnImport} class="vi-modal-background" if:true={isModalOpenBackgroundBttnImport}></div>
+
+</template>

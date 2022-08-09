@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Typologie_Informations__c</fullName>
+    <description>@description: permet de distinguer entre les différents types d&apos;informations à communiquer au conseiller
+@projet: smile</description>
+    <externalId>false</externalId>
+    <label>Typologie Informations</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Info Bleue</fullName>
+                <default>false</default>
+                <label>Info Bleue</label>
+            </value>
+            <value>
+                <fullName>Information Urgente</fullName>
+                <default>false</default>
+                <label>Information Urgente</label>
+            </value>
+            <value>
+                <fullName>Info dédiée</fullName>
+                <default>false</default>
+                <label>Info dédiée</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

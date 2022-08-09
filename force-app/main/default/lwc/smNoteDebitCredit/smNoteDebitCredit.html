@@ -1,0 +1,83 @@
+<template>
+    <lightning-card class="slds-m-bottom_large">
+        <div class="slds-m-left_large slds-text-heading_medium slds-text-title_bold"> SYNTHESE DES NOTES DEBIT / CREDIT</div><br/><br/>	
+        <div class="slds-m-horizontal_medium">  
+            <table >
+                <thead>
+                    <tr class="tableListPa">
+                        <th scope="col" class="slds-size_1-of-9" >&nbsp;&nbsp;ENERGIE</th>
+                        <th scope="col" class="slds-size_1-of-9">NOTE</th>
+                        <th scope="col" class="slds-size_1-of-9">TYPE</th>
+                        <th scope="col" class="slds-size_1-of-9">SOUS-TYPE</th>
+                        <th scope="col" class="slds-size_1-of-9">MONTANT TTC</th>
+                        <th scope="col" class="slds-size_1-of-9">DATE DE SAISIE</th>
+                        <th scope="col" class="slds-size_1-of-9">STATUT</th>
+
+                        <th scope="col" class="slds-size_1-of-9">DATE DE VALIDATION</th>
+
+                        <th scope="col" class="slds-size_1-of-9">COMMENTAIRE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={listnotdebcred} for:item='item'>
+                            <tr key={item.dateSaisie} class="tableListPaTr">
+                                    <td >
+                                        <c-sm_energielogo energie={item.energie}></c-sm_energielogo>
+                                    </td>
+                                    <td>
+                                         {item.typeNote}
+                                    </td>
+                                    <td>
+                                         {item.typeAjustement}
+                                    </td>
+                                    <td>
+                                         {item.libelleArticle}     
+                                    </td>
+                                    <td>
+                                         {item.montantTTC} €
+                                    </td>
+                                    <td>
+                                         {item.dateSaisie}
+                                    </td>
+                                    <td>
+                                         {item.statut}
+                                    </td>
+                                    <td>
+                                        <c-sm_notedebitcreditalert datevalidation={item.dateValidation} statut={item.statut}></c-sm_notedebitcreditalert>{item.dateValidation}
+                                    </td>
+                                    <td>
+                                         {item.commentaire}
+                                    </td>
+                            </tr>
+                    </template>
+                </tbody>
+            </table><br/>
+            <template if:false={listnotdebcred}>
+                <div>
+                    <em>Aucune note de débit / crédit pour ce client</em> 
+                </div><br>
+            </template>
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col">
+                    <span>
+                        <lightning-input type="checkbox" label="Appel interrompu - Tracer
+                        l'interaction" name="inputAppelInterrompu" onchange={handlePause}
+                            disabled={disableInteraction}></lightning-input>
+                    </span>
+                </div>
+                <div class="slds-col">
+                    <span>
+                        <lightning-input class="slds-float_right" type="checkbox" label="J'ai répondu à la demande du
+                                    client" name="inputReponduDemande" onchange={handleInteraction}
+                                disabled={disableInteraction}></lightning-input>
+                    </span>
+                </div>
+        </div><br>
+        <div class="slds-m-bottom_xx-large buttonContainer">
+            <lightning-button variant="base" label="Fermer la page" title="Fermer la page" class="slds-m-right_x-large" onclick={closeTab}></lightning-button>
+            <lightning-button variant="brand" label="Suivant" title="Suivant" onclick={caseNavigate}
+                             disabled={nextDisabled}></lightning-button>
+        </div>
+        </div>
+    </lightning-card>
+</template>

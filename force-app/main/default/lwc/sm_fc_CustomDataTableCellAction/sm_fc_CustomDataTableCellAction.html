@@ -1,0 +1,16 @@
+<!--
+  @description       : Cellule qui contient le lien permettant de passer à l'étape suivante dans payeur divergent
+  @author            : AE
+  @group             : FT2
+  @last modified on  : 09-23-2021
+  @last modified by  : AE 
+-->
+<template>
+    <div if:true={cellData} class="tableRowCell">
+        <!--vlocity_cmt-navigate-action target-type="Web Page" target-name={rowData.Id} replace use-href>
+            <p>Séléctionner comme payeur </p>
+        </vlocity_cmt-navigate-action-->
+        <!-- FT2-1464 : Ajout Payeur Divergent: écran d’attribution des rôles -->
+        <p><a onclick={handleClick} data-row-data={sRowData}>Séléctionner comme payeur </a></p>
+    </div>
+</template>

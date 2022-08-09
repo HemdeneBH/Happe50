@@ -1,0 +1,96 @@
+.visually-hidden {
+    clip: rect(0 0 0 0); 
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap; 
+    width: 1px;
+}
+
+.steps {
+    display: flex;
+    align-items: center;
+    justify-content: stretch;
+    position: relative;
+    overflow: visible;
+    padding: 23px 28px;
+    margin: 0 60px;
+}
+
+.step {
+    position: relative;
+    height: 13px;
+    flex: 1 0 auto;
+    border-radius: 6.5px;
+    background: var(--bg-base);
+}
+
+.step:first-child {
+    width: 0;
+    flex-grow: 0;
+}
+
+.step::before,
+.step::after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    border-radius: 50%;
+    transform: translate(50%, -50%);
+    background-color: var(--bg-base);
+    z-index: 2;
+}
+
+:host.lightTheme .step:not(.active, .alert),
+:host.lightTheme .step:not(.active, .alert)::before,
+:host.lightTheme .step:not(.active, .alert)::after {
+    background-color: var(--grey);
+}
+
+.step::before {
+    width: 33px;
+    height: 33px;
+}
+
+.step::after {
+    width: 57px;
+    height: 57px;
+    opacity: 0.3;
+}
+
+.step.active,
+.step.active::before,
+.step.active::after {
+    background-color: var(--blue);
+}
+
+.step.alert::before,
+.step.alert::after {
+    background-color: var(--rose);
+}
+
+@media (max-width: 1024px) {
+    .steps {
+        padding: 13px 18px;
+        margin: 0;
+    }
+
+    .step {
+        height: 10px;
+        border-radius: 5px;
+    }
+
+    .step::before {
+        width: 21px;
+        height: 21px;
+    }
+
+    .step::after {
+        width: 35px;
+        height: 35px;
+        opacity: 0.3;
+    }
+}

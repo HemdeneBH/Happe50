@@ -1,0 +1,74 @@
+<!--
+  @description       : 
+  @author            : Badr Eddine Belkarchi
+  @group             : 
+  @last modified on  : 06-09-2022
+  @last modified by  : Badr Eddine Belkarchi
+-->
+<template>
+    <template if:true={showReleveComponent}>
+        <div data-id='pageContent' class="hp-releve c-content-bg slds-col">
+            <div class="hp-bigTitle">
+                Ma relève
+            </div>
+            <template if:true={isProcessFinished}>
+                <template if:true={dateProchainePeriodeGaz}>
+                    <div class="hp-releveTitle">
+                        {textProchainePeriodeGaz}
+                        <span class="blue hp-date">{dateProchainePeriodeGaz}</span>
+                    </div>
+                </template>
+                <template if:true={dateProchainePeriodeElec}>
+                    <div class="hp-releveTitle">
+                        {textProchainePeriodeElec}
+                        <span class="purple hp-date">{dateProchainePeriodeElec}</span>
+                    </div>
+                </template>
+
+                <template if:true={showPeriodeEnCoursGaz}>
+                    <div class="hp-releveTitle">
+                        {textPeriodeEnCoursGaz}
+                        <span class="rose hp-date">{datePeriodeEnCoursGaz}</span>
+                    </div>
+                </template>
+                <template if:true={showPeriodeEnCoursElec}>
+                    <div class="hp-releveTitle">
+                        {textPeriodeEnCoursElec}
+                        <span class="rose hp-date">{datePeriodeEnCoursElec}</span>
+                    </div>
+                </template>
+                <template if:true={datePeriodeEnCoursResiliation}>
+                    <div class="hp-releveTitle">
+                        {textPeriodeEnCoursResiliation}
+                        <span class="rose hp-date">{datePeriodeEnCoursResiliation}</span>
+                    </div>
+                </template>
+
+                <template if:true={showConfirmationIndex}>
+                    <c-hp_ec_bloc_blue confirmationdate={confirmation_date}></c-hp_ec_bloc_blue>
+                </template>
+
+                <template if:true={isPeriodeAR}>
+                    <c-hp_ec_bloc_rose 
+                        idclient={idClient} 
+                        isperiodeargaz={isPeriodeAR_Gaz}
+                        isperiodearelec={isPeriodeAR_Elec} 
+                        contractgaz={contractGaz} 
+                        contractelec={contractElec}
+                        typecomptage={typeComptage} 
+                        pdl={pdl} 
+                        pce={pce} 
+                        lastestindexelec={latest_index_elec}
+                        lastestindexhpelec={latest_indexhp_elec}
+                        latestindexgaz={latest_index_gaz} 
+                        title-popin-releve={titlePopinReleve}
+                        message-index-error={messageIndexError}
+                        custom-url-popin-releve={customUrlPopinReleve}
+                        custom-url-label-popin-releve={customUrlLabelPopinReleve} 
+                        onenvoieindexevent={hanldeEnvoieIndexEvent}>
+                    </c-hp_ec_bloc_rose>
+                </template>
+            </template>
+        </div>
+    </template>
+</template>

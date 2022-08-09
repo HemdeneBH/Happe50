@@ -1,0 +1,81 @@
+<template>
+    <div class="slds-box slds-theme_default">
+        <!-- HEADER -->
+        <div class="slds-text-heading_medium slds-m-left_xx-large slds-m-vertical_x-large">
+            <b>SERVICES GRATUITS</b>
+        </div>
+        <!-- BODY -->
+        <div class="slds-grid">
+            <!-- BODY : FACTURE EN LIGNE -->
+            <div class="slds-grid_vertical slds-size_5-of-12 slds-m-left_xx-large">
+                <!-- FACTURE EN LIGNE : CARD -->
+                <div class="slds-size_8-of-12">
+                    <lightning-card>
+                        <h1 slot="title"><b>FACTURE EN LIGNE</b></h1>
+                        <lightning-input slot="actions" disabled={customerAreaUnavailable} checked={felStatus} type="toggle" message-toggle-active="" message-toggle-inactive="" onchange={handleSetFelStatus}></lightning-input>
+                        <div class="slds-p-left_medium">
+                            <a name="felKnowledgeLink" class="smile-blue-text" onclick={handleGetKnowledge}>Plus d'infos et Mentions légales</a>
+                        </div>
+                        <lightning-spinner if:true={felSpinner} alternative-text="Chargement" size="small"></lightning-spinner>
+                    </lightning-card>
+                </div>
+                <!-- FACTURE EN LIGNE : INFORMATION -->
+                <div if:true={customerAreaUnavailable} class="slds-size_8-of-12 slds-box slds-m-top_medium smile-blue-box">
+                    <h1><b>FACTURE EN LIGNE INDISPONIBLE</b></h1>
+                    <p>Aucun Espace Client n'est actif pour le client sélectionné.</p>
+                </div>
+                <!-- FACTURE EN LIGNE : ERREUR RETOUR WEBSERVICE -->
+
+                <div if:true={felError} class="slds-size_8-of-12 slds-box slds-m-top_medium smile-red-box">
+
+                    <h1><b>Une erreur est survenue. Contactez votre administrateur.</b></h1>
+                    <p>{felErrorMessage}</p>
+                </div>
+                <!-- FACTURE EN LIGNE : KNOWLEDGE -->
+                <div if:true={displayFelInstruction} class="slds-clearfix slds-box slds-m-top_medium smile-border-radius">
+                    <lightning-button-icon variant="container" name="felKnowledgeLink" class="slds-float_right" icon-name="utility:close" onclick={handleCloseKnowledge}></lightning-button-icon>
+                    <lightning-formatted-rich-text value={felInstruction}>
+                    </lightning-formatted-rich-text>
+                </div>
+            </div>
+            <!-- SPACING -->
+            <div class="slds-grid_vertical slds-size_1-of-12"></div>
+            <!-- BODY : E-DOCUMENTS -->
+            <div class="slds-grid_vertical slds-size_5-of-12">
+                <!-- E-DOCUMENTS : CARD -->
+                <div class="slds-size_8-of-12">
+                    <lightning-card>
+                        <h1 slot="title"><b>E-DOCUMENTS</b></h1>
+                        <lightning-input slot="actions" disabled={noEmail} checked={eDocumentStatus} type="toggle" message-toggle-active="" message-toggle-inactive="" onchange={handleSetEdocumentStatus}></lightning-input>
+                        <div class="slds-p-left_medium">
+                            <a name="eDocumentKnowledgeLink" class="smile-blue-text" onclick={handleGetKnowledge}>Plus d'infos et Mentions légales</a>
+                        </div>
+                        <lightning-spinner if:true={eDocumentSpinner} alternative-text="Chargement" size="small"></lightning-spinner>
+                    </lightning-card>
+                </div>
+                <!-- E-DOCUMENTS : INFORMATION -->
+                <div if:true={noEmail} class="slds-size_8-of-12 slds-box slds-m-top_medium smile-blue-box">
+                    <h1><b>E-DOCUMENT INDISPONIBLE</b></h1>
+                    <p>Renseignez une adresse e-mail de contact pour pouvoir activer le service.</p>
+                </div>
+                <!-- E-DOCUMENTS : ERREUR RETOUR WEBSERVICE -->
+
+                <div if:true={eDocumentError} class="slds-size_8-of-12 slds-box slds-m-top_medium smile-red-box">
+
+                    <h1><b>Une erreur est survenue. Contactez votre administrateur.</b></h1>
+                    <p>{eDocumentErrorMessage}</p>
+                </div>
+                <!-- E-DOCUMENTS : KNOWLEDGE -->
+                <div if:true={displayEDocumentInstruction} class="slds-clearfix slds-box slds-m-top_medium smile-border-radius">
+                    <lightning-button-icon variant="container" name="eDocumentKnowledgeLink" class="slds-float_right" icon-name="utility:close" onclick={handleCloseKnowledge}></lightning-button-icon>
+                    <lightning-formatted-rich-text value={eDocumentInstruction}>
+                    </lightning-formatted-rich-text>
+                </div>
+            </div>
+        </div>
+        <!-- FOOTER -->
+        <div class="slds-clearfix">
+            <a class="slds-float_right smile-blue-text" onclick={handleCloseFreeServicesTab}>Fermer la page</a>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,392 @@
+<template>
+	<!---->
+	<!--_________________________________________________________________________________________________________________________-->
+	<!--|                                        Section du bouton "transférer l'appel"                                         |-->
+	<!--|_______________________________________________________________________________________________________________________|-->
+	<!---->
+	<!--
+	<div class="vi-round-btn vi-round-btn-1" data-toggle="modal" data-target="#CommentsModal" onclick={openModal1}>
+		<span>Transferer l'appel </span>
+		<img src={phonecallImage} />
+	</div>
+	
+	<div if:true={isModal1Open} class="vi-modal vi-modal-top">
+		
+		<header class="vi-modal-header">
+			<img title="Close" onclick={closeModal1} class="vi-close-btn" src={closeImage} />
+			Ajouter un commentaire
+		</header>
+		
+		<div style="border: none;" class="vi-modal-content vi-modal-content-1">
+			
+			<div class="vi-modal-message">
+				Vous allez transferer ce dossier à un conseiller Engie pour une mise en service d’urgence
+			</div>
+			<textarea placeholder="Taper votre commentaire ici..." class="font-class-1 vi-comment-input"
+				onchange={changeCommentaireTransfert}>
+							{commentTransfert}
+					</textarea>
+		</div>
+		
+		<img src={triangleImage} class="vi-triangle-top" />
+		
+		<footer style="border: none;" class="vi-modal-footer vi-modal-footer-transfert">
+			<button class='vi-modal-white-btn vi-modal-width-166-btn' onclick={closeModal1} title="Annuler">
+				Retour au parcours
+			</button>
+			<button class='vi-modal-blue-btn vi-modal-width-114-btn' onclick={transferer} title="Transferer">
+				Transferer
+			</button>
+		</footer>
+	</div>
+	-->
+
+	<!---->
+	<!-- ________________________________________________________________________________________________________________________-->
+	<!--|                                        Section du bouton "Commenter"                                                  |-->
+	<!--|_______________________________________________________________________________________________________________________|-->
+	<!---->
+	<div class="vi-round-btn vi-round-btn-2" data-toggle="modal" data-target="#CommentsModal" onclick={openModal2}>
+		<span>Rédiger un commentaire</span>
+		<img src={commentaireImage} />
+	</div>
+	<!-- Popup du bouton commenter-->
+	<div if:true={isModal2Open} class="vi-modal vi-modal-top">
+		<!--Header-->
+		<header class="vi-modal-header">
+			<img title="Close" onclick={closeModal2} class="vi-close-btn" src={closeImage} />
+			Ajouter un commentaire
+		</header>
+		<!-- Corps de la popup -->
+		<div style="border: none;" class="vi-modal-content vi-modal-content-2">
+			<!-- Lightning textarea pour gérer la valeur avec le paramètre JS 'comment ' value={comment}  -->
+			<textarea placeholder="Taper votre commentaire ici..." class="font-class-1 vi-comment-input"
+				onchange={changeCommentaire}>
+							{comment}
+					</textarea>
+		</div>
+		<!-- Flèche latérale -->
+		<img src={triangleImage} class="vi-triangle" />
+		<!-- Footer -->
+		<footer style="border: none;" class="vi-modal-footer vi-modal-footer-comment">
+			<button class='vi-modal-white-btn vi-modal-width-166-btn' onclick={closeModal2} title="Annuler">
+				Retour au parcours
+			</button>
+			<button class='vi-modal-blue-btn vi-modal-width-114-btn' onclick={writeComments} title="Soumettre">
+				Soumettre
+			</button>
+		</footer>
+	</div>
+	<!---->
+	<!--__________________________________________________________________________________________________________________________-->
+	<!--|                                        Section du bouton "Reprendre plus tard"                                         |-->
+	<!--|________________________________________________________________________________________________________________________|-->
+	<!---->
+	<div class="vi-round-btn vi-round-btn-3" data-toggle="modal" data-target="#CommentsModal" onclick={openModal3}>
+		<img src={chronoImage} />
+		<span>Reprendre plus tard </span>
+	</div>
+
+	<!-- Popup du bouton "Reprendre plus tard"-->
+	<div if:true={isModal3Open} class="vi-modal vi-modal-center">
+		<!--Header-->
+		<header class="vi-modal-header" onclick={hideDropdownList}>
+			<img title="Close" onclick={closeModal3} class="vi-close-btn" src={closeImage} />
+			Reprendre le parcours plus tard
+		</header>
+		<!-- Corps de la popup -->
+		<div class="vi-modal-content" onclick={hideDropdownList}>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-1" style="padding-left: 0; padding-bottom: 10px;">
+						<img src={checkedImage} if:true={planATask} class="vi-checked" onclick={check} />
+						<div class="vi-modal-checkbox" onclick={check} if:false={planATask}></div>
+						<!--if:false={planATask}-->
+					</div>
+					<div class="col-lg-5">
+						<label class="vi-modal-label vi-modal-checkbox-label">Planifier une tâche</label>
+					</div>
+					<template if:true={planTaskaskValidation}>
+						<p class="label-text-small-act lato-normal-monza-12px">Veuillez cocher la case "Planifier une
+							tâche"</p>
+					</template>
+				</div>
+			</div>
+		</div>
+		<div class="vi-modal-content" if:true={planATask} onclick={hideDropdownList} style="padding-top : 15px;">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-7" style="padding-left: 0;">
+						<form>
+							<div class="form-group">
+								<label class="vi-modal-label">Date d'échéance*</label>
+								<lightning-input type="date" id="date-echeance" name="DateContrat"
+									style="margin-top: -12px;"
+									message-when-bad-input="Veuillez renseigner une date avec le format jj/mm/aaaa"
+									date-style="short" data-id="date-echeance" placeholder="jj/mm/aaaa"
+									onchange={changeDate} title="time-input value={date}">
+								</lightning-input>
+								<!-- <input type="date" class="form-control" id="date-echeance" required onchange={changeDate} placeholder="Date d'échéance" title="time-input value={date}"> -->
+								<template if:true={dateValidation}>
+									<p class="label-text-small-act lato-normal-monza-12px">Veuillez remplir la date
+										d'échéance.</p>
+								</template>
+								<template if:true={dateAnterieur}>
+									<p class="label-text-small-act lato-normal-monza-12px">Merci de renseigner une date
+										d'échéance supérieure ou égale à la date du jour.</p>
+								</template>
+							</div>
+						</form>
+					</div>
+					<div class="col-lg-5" style="padding-right: 0;">
+						<form>
+							<div class="form-group" title="parent2">
+								<label class="vi-modal-label">Heure d'échéance*</label>
+								<input type="text" class="form-control" title="time-input" onchange={changeTime}
+									value={time}>
+								<div class="vi-dropdown-arrow" onclick={openList}>
+									<p>
+										>
+									</p>
+								</div>
+								<div if:true={showDropdown} title="parent1" class="slds-dropdown slds-dropdown_length-5" style="overflow: auto;" onblur={hideDropdown}>
+									<div title="08:00" onclick={selectValue} class="vi-dropdown-list-element">08:00
+									</div>
+									<div title="08:30" onclick={selectValue} class="vi-dropdown-list-element">08:30
+									</div>
+									<div title="09:00" onclick={selectValue} class="vi-dropdown-list-element">09:00
+									</div>
+									<div title="09:30" onclick={selectValue} class="vi-dropdown-list-element">09:30
+									</div>
+									<div title="10:00" onclick={selectValue} class="vi-dropdown-list-element">10:00
+									</div>
+									<div title="10:30" onclick={selectValue} class="vi-dropdown-list-element">10:30
+									</div>
+									<div title="11:00" onclick={selectValue} class="vi-dropdown-list-element">11:00
+									</div>
+									<div title="11:30" onclick={selectValue} class="vi-dropdown-list-element">11:30
+									</div>
+									<div title="12:00" onclick={selectValue} class="vi-dropdown-list-element">12:00
+									</div>
+									<div title="12:30" onclick={selectValue} class="vi-dropdown-list-element">12:30
+									</div>
+									<div title="13:00" onclick={selectValue} class="vi-dropdown-list-element">13:00
+									</div>
+									<div title="13:30" onclick={selectValue} class="vi-dropdown-list-element">13:30
+									</div>
+									<div title="14:00" onclick={selectValue} class="vi-dropdown-list-element">14:00
+									</div>
+									<div title="14:30" onclick={selectValue} class="vi-dropdown-list-element">14:30
+									</div>
+									<div title="15:00" onclick={selectValue} class="vi-dropdown-list-element">15:00
+									</div>
+									<div title="15:30" onclick={selectValue} class="vi-dropdown-list-element">15:30
+									</div>
+									<div title="16:00" onclick={selectValue} class="vi-dropdown-list-element">16:00
+									</div>
+									<div title="16:30" onclick={selectValue} class="vi-dropdown-list-element">16:30
+									</div>
+									<div title="17:00" onclick={selectValue} class="vi-dropdown-list-element">17:00
+									</div>
+									<div title="17:30" onclick={selectValue} class="vi-dropdown-list-element">17:30
+									</div>
+									<div title="18:00" onclick={selectValue} class="vi-dropdown-list-element">18:00
+									</div>
+									<div title="18:30" onclick={selectValue} class="vi-dropdown-list-element">18:30
+									</div>
+									<div title="19:00" onclick={selectValue} class="vi-dropdown-list-element">19:00
+									</div>
+									<div title="19:30" onclick={selectValue} class="vi-dropdown-list-element">19:30
+									</div>
+									<div title="20:00" onclick={selectValue} class="vi-dropdown-list-element">20:00
+									</div>
+								</div>
+								<template if:true={timeValidation}>
+									<p class="label-text-small-act lato-normal-monza-12px">Veuillez remplir l'heure</p>
+								</template>
+								<template if:true={timeAnterieur}>
+									<p class="label-text-small-act lato-normal-monza-12px" style="width:90%">Merci de
+										sélectionner une heure d'échéance qui n’est pas encore passée</p>
+								</template>
+								<template if:true={notWorkingHour}>
+									<p class="label-text-small-act lato-normal-monza-12px">Merci de renseigner une 
+										heure comprise entre 8h et 20h</p>
+								</template>
+								<template if:true={timeWrongFormat}>
+									<p class="label-text-small-act lato-normal-monza-12px" style="width:90%">Merci de
+										renseigner un format valide (hh:mm) pour l’heure d’échéance</p>
+								</template>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12" style="padding-right: 0; padding-left: 0;">
+						<form>
+							<div class="form-group">
+								<label class="vi-modal-label">Description</label>
+								<input type="text" class="form-control" placeholder="Décrivez votre tâche"
+									onchange={changeDescription} value={description}>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="vi-modal-content" onclick={hideDropdownList}>
+			<textarea placeholder="Taper votre commentaire ici..." class="font-class-1 vi-comment-input"
+				onchange={changeCommentaireTask}>
+							{commentTask}
+					</textarea>
+		</div>
+		<!-- Flèche latérale -->
+		<img src={triangleImage} class="vi-triangle" onclick={hideDropdownList} />
+		<div class="vi-modal-warning" if:true={isUncomplete}>
+			<p class="label-text-small-act lato-normal-monza-12px" style="width: 94%">
+				Merci de renseigner la date et l’heure d'échéance pour planifier une tâche et valider la reprise du
+				parcours plus tard.
+			</p>
+		</div>
+
+
+		<!-- Footer -->
+		<footer style="border: none;" class="vi-modal-footer vi-modal-footer-delay" onclick={hideDropdownList}>
+			<button class='vi-modal-white-btn vi-modal-width-166-btn' onclick={closeModal3} title="Annuler">
+				Retour au parcours
+			</button>
+			<template if:true={planATask}>
+				<button class='vi-modal-blue-btn vi-modal-width-190-btn' onclick={planTask} title="Soumettre">
+					Reprendre plus tard
+				</button>
+			</template>
+			<template if:false={planATask}>
+				<button class='vi-modal-blue-btn vi-modal-width-190-btn' onclick={reprendrePlutard} title="Soumettre">
+					Reprendre plus tard
+				</button>
+			</template>
+		</footer>
+	</div>
+	<!---->
+	<!--_________________________________________________________________________________________________________________________-->
+	<!--|                                        Section du bouton "Supprimer"                                                  |-->
+	<!--|_______________________________________________________________________________________________________________________|-->
+	<!---->
+	<div class="vi-round-btn vi-round-btn-4" data-toggle="modal" data-target="#CommentsModal" onclick={openModal4}>
+		<img src={supprImage} />
+		<span>Annuler </span>
+	</div>
+	<!-- Popup du bouton "Supprimer"-->
+	<div if:true={isModal4Open} class="vi-modal vi-modal-bottom">
+		<!--Header-->
+		<header class="vi-modal-header">
+			<img title="Close" onclick={closeModal4} class="vi-close-btn" src={closeImage} /> Annuler le parcours
+		</header>
+		<!-- Corps de la popup -->
+		<div class="vi-modal-content">
+			<div class="container">
+				<form>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-lg-12" style="padding-right: 0; padding-left: 0;">
+								<div class="form-group">
+									<label class="vi-modal-label">Sélectionner un motif d'annulation</label>
+
+									<div class="form-control" onchange={changeMotif} onclick={openList}>{motifJS}</div>
+									<div class="vi-dropdown-arrow" onclick={openList}>
+										<p>
+											>
+										</p>
+									</div>
+									<div if:true={showDropdown} title="parent1" class="vi-dropdown">
+										<template for:each={MotifPicklistValues.data.values} for:item="motif">
+											<div title={motif.value} key={motif.value} onclick={selectMotif}
+												class="vi-dropdown-list-element">{motif.value}</div>
+										</template>
+									</div>
+									<template if:true={motifRequired}>
+										<p class="label-text-small-act lato-normal-monza-12px">Veuillez saisir un motif
+											pour annuler le parcours</p>
+									</template>
+									<!-- Start - DDPCM 105 -->
+									<template if:true={commentRequired}>
+										<p class="label-text-small-act lato-normal-monza-12px">Merci de préciser la raison
+											 de l’annulation du parcours dans la zone de commentaire ci-dessous</p>
+									</template>
+									<!-- END - DDPCM 105 -->
+								</div>
+							</div>
+						</div>
+						<!--<div class="row">
+								<div class="col-lg-1" style="padding-right: 0; padding-left: 0;">
+									<div class="vi-radio" onclick={selectRegie}>
+										<div class="vi-radio-checked" if:true={isRegie}></div>
+									</div>
+								</div>
+								<div class="col-lg-3" style="padding-right: 0; padding-left: 0;">
+									<div class="vi-modal-label" onclick={selectRegie}>
+										Régie
+									</div>
+								</div>
+								<div class="col-lg-1" style="padding-right: 0; padding-left: 0;">
+									<div class="vi-radio" onclick={selectTempo}>
+										<div class="vi-radio-checked" if:true={isTempo}></div>
+									</div>
+								</div>
+								<div class="col-lg-3" style="padding-right: 0; padding-left: 0;">
+									<div class="vi-modal-label" onclick={selectTempo}>
+										Tempo
+									</div>
+								</div>
+							</div> -->
+					</div>
+				</form>
+			</div>
+			<!-- Lightning textarea pour gérer la valeur avec le paramètre JS 'comment ' value={comment}  -->
+			<textarea placeholder="Taper votre commentaire ici..." class="font-class-1 vi-comment-input"
+				onchange={changeCommentaireAnnulation}>
+						{commentAnnulation}
+				</textarea>
+		</div>
+		<!-- Flèche latérale -->
+		<img src={triangleImage} class="vi-triangle" />
+		<!-- Footer -->
+		<footer style="border: none;" class="vi-modal-footer vi-modal-footer-cancel">
+			<button class='vi-modal-white-btn vi-modal-width-166-btn' onclick={closeModal4} title="Annuler">
+				Retour au parcours
+			</button>
+			<button class='vi-modal-blue-btn vi-modal-width-169-btn' onclick={cancelParcours} title="Soumettre">
+				Annuler le parcours
+			</button>
+		</footer>
+	</div>
+
+	<!---->
+	<!--_________________________________________________________________________________________________________________________-->
+	<!--|                                        Section du bouton "Aide"                                                  |-->
+	<!--|_______________________________________________________________________________________________________________________|-->
+	<!---->
+	<div class="vi-round-btn vi-round-btn-5" data-toggle="modal" data-target="#CommentsModal" onclick={openModal5}>
+		<img src={aideImage} />
+		<span>Aide</span>
+	</div>
+	<!-- Popup du bouton "Supprimer"-->
+	<div if:true={isModal5Open} class="vi-modal-5 vi-modal-bottom">
+		<!--Header-->
+		<header class="vi-modal-header-5">
+			<img title="Close" onclick={closeModal5} class="vi-close-btn-5" src={closeImage} />{titreScript}
+		</header>
+		<!-- Corps de la popup -->
+
+		<div class="vi-modal-content-5-Script">
+
+			<lightning-formatted-rich-text value={firstString}></lightning-formatted-rich-text>
+			<br>
+			<lightning-formatted-rich-text value={secondString}></lightning-formatted-rich-text>
+			<br>
+		</div>
+		<img src={triangleImage} class="vi-triangle-aide" />
+	</div>
+
+	<!-- "Fond grisé" des popups -->
+	<div class="vi-modal-background" if:true={isModalOpen} onclick={closeAllModal}></div>
+</template>

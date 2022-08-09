@@ -1,0 +1,301 @@
+.creer-dossier-sol{
+    font-weight: 700;
+    color: #006dcc;
+    
+}
+.faire-demande{
+    font-size: 15px;
+    font-weight: bold;
+}
+.button-faire-demande{
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #006dcc;
+    border-color: #006dcc;
+}
+.pageTitle{
+    font-weight: bold;
+    font-size: 20px;
+}
+.addressTitle{
+    font-size: 10px;
+}
+
+.tableListPa{
+    height: 45px;
+    border: solid 1px #979797;
+    background-color: #767f85;
+    table-layout: fixed;
+    width: 40px;                                           
+    color: #ffffff;
+}
+.tableListHead{
+    height: 45px;
+    table-layout: fixed;
+    width: 40px;                                           
+    color: #181616;
+    border: solid 1px #7c7b7b;
+    margin-left: auto;
+
+}
+.tableListFirst{
+    height: 45px;
+    border: solid 1px #979797;
+    background-color: #e5e5e5;
+    table-layout: fixed;
+    width: 40px;                                           
+    color: #ffffff;
+    font-size: 20px;
+}
+.tableBody{
+    border: solid 1px #7c7b7b;
+    table-layout: fixed;
+    width: 40px;                                           
+    color: #1f1d1d;
+    font-size: 15px;
+    height:30px; 
+    text-align: center;
+}
+span.form-required {
+    display:none !important;
+ }
+table tr td:first-child::before {
+    min-width: 1em;
+    margin-right: 0.5em;
+}
+.grayBackground{
+    background-color:#e6ebec
+}
+
+
+.brand {
+    background-color: #059ce7;    
+}
+.slds-button-neutral {
+   color: white;
+    border-color:white;
+}
+
+td,th {
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+    text-align: -internal-center;
+    width:1.5rem;
+    height:45px;
+    padding: 1%;
+}
+.row-selected {
+  
+  outline: none;
+  cursor: pointer;
+  background: #e0f5ff;
+}
+
+.w{
+    background-color: #f8f8f8;
+    padding: 20px;
+    }
+    .slds-dl_inline__label{
+    
+        font-weight: bold;
+        
+    }
+    .Theader{
+        background-color: #777e86;
+        color: white;
+        font-size: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .Theader:hover{
+
+        background-color: #777e86;
+        color: black;
+    }
+    .slds-dl_inline__label .slds-dl_inline__detail{
+
+        font-size: 10px;
+
+    }
+    h1{
+        font-family: Lato, sans-serif;
+        font-style: normal;
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 29px;
+    }
+    h2{
+        font-family: Lato, sans-serif;
+        font-style: normal;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 16px;
+        margin-bottom: 10px;
+    }
+    dd,dt{
+
+        margin-bottom: 5px;
+       
+    }
+
+
+.slds-progress__item.slds-is-completed .slds-progress__marker_icon, .slds-progress__item.slds-is-completed .slds-progress__marker--icon {
+    color:rgb(75, 202, 129);
+   
+} 
+
+.slds-progress {
+
+    margin-left: 25px;
+    margin-top: 10px;
+    max-width: 85%;
+   
+
+}
+
+.text-color {
+    color: rgb(0, 109, 204);
+    text-decoration: underline;
+}
+
+.click-action:hover {
+    cursor: pointer;
+}
+.slds-modal__container {
+    max-width: 80rem !important;
+
+    width: 70% !important;
+}
+
+.containerdelete{
+    max-width: 80rem !important;
+    width: 40% !important;
+    margin: auto;
+    margin-top: 400px;
+
+}
+
+.slds-text-heading_medium {
+    font-family: Lato, sans-serif;
+    font-style: SemiBold;
+    font-size: 20px;
+    line-height: 24px;
+    line-height: 100%;
+    text-align: center;
+    vertical-align: Top;
+    margin-top: 23px;
+    color: #343434;
+}
+
+.commentTextarea{
+    height: 400px;;
+    font-family: Lato, sans-serif;
+    size: 14px;
+}
+.button-footer {
+    float: right;
+    font-family: Lato, sans-serif;
+    font-style: Regular;
+    text-Align: left;
+    vertical-align: top;
+    bottom: 20px;
+    
+}
+
+.save-dossier-sol{
+    font-size: 15px;
+    color: white ;
+    background-color:#36CFA0;
+    border-color: #36CFA0;
+    border-radius: 2px;
+    width: 116px;
+    height: 40px;
+}
+
+.etape{
+    font-family: Lato, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+
+.delete-blocage-sol{
+    font-size: 15px;
+    color: #36CFA0 ;
+    background-color:white;
+    border-color: #36CFA0;
+    border-radius: 2px;
+    width: 100px;
+    height: 40px;
+}
+
+.modify-blocage-sol{
+    font-size: 15px;
+    color: white ;
+    background-color:#36CFA0;
+    border-color: #36CFA0;
+    border-radius: 2px;
+    width: 100px;
+    height: 40px;
+}
+
+
+.cancel-dossier-sol{
+    font-size: 13px;  
+    color:#059CE7;
+}
+
+.cancel-blocage{
+    font-size: 13px;  
+    color:#059CE7;
+    width:350px;
+}
+
+
+.inputValue{
+    font-family: Lato, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.slds-textarea {
+    height: 12rem;
+}
+
+.caract {
+    font-family: Lato, sans-serif;
+    font-size: 14px;
+}
+
+.center-form {
+
+    padding-left: 25%;
+    padding-right: 25%;
+
+}
+
+.blockgeCont {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tebleDimentions{
+    width: 95%;
+    margin-left:auto;
+    margin-right: auto;
+}
+
+.slds-modal__content{
+    overflow: visible;
+    overflow-y: visible;
+}
+
+.scroll-section{
+    height: 87%;
+}
+
+.widen-button{
+    width: 250px;
+}

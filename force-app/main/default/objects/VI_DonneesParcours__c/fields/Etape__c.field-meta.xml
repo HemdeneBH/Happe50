@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Etape__c</fullName>
+    <description>Champ pour saisir l&apos;étape à laquelle correspond l&apos;information dynamique</description>
+    <externalId>false</externalId>
+    <label>Etape</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Identification besoin</fullName>
+                <default>false</default>
+                <label>Identification besoin</label>
+            </value>
+            <value>
+                <fullName>Identification client</fullName>
+                <default>false</default>
+                <label>Identification client</label>
+            </value>
+            <value>
+                <fullName>Identification local</fullName>
+                <default>false</default>
+                <label>Identification local</label>
+            </value>
+            <value>
+                <fullName>Estimation de la consommation</fullName>
+                <default>false</default>
+                <label>Estimation de la consommation</label>
+            </value>
+            <value>
+                <fullName>Constitution du panier client</fullName>
+                <default>false</default>
+                <label>Constitution du panier client</label>
+            </value>
+            <value>
+                <fullName>Informations complémentaires</fullName>
+                <default>false</default>
+                <label>Informations complémentaires</label>
+            </value>
+            <value>
+                <fullName>Saisie des moyens de paiement</fullName>
+                <default>false</default>
+                <label>Saisie des moyens de paiement</label>
+            </value>
+            <value>
+                <fullName>Récapitulatif de l’offre</fullName>
+                <default>false</default>
+                <label>Récapitulatif de l’offre</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

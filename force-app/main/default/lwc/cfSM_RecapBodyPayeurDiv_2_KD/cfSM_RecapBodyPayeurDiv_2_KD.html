@@ -1,0 +1,80 @@
+<template>
+            <div class="slds-grid slds-wrap slds-is-relative ">
+            <div if:false={cardLoaded} class="slds-is-absolute vloc-loader_override" style="height: 100%; width: 100%; min-height:50px; background: white; z-index: 99;">
+  <div>
+   <vlocity_cmt-spinner
+      variant="brand"
+      alternative-text="Loading content..."
+      size="medium"
+      theme="slds"
+      ></vlocity_cmt-spinner>
+  </div>
+</div>
+            <template if:false={hasPermission}>
+              You don't have required permissions to view this card.
+            </template>
+            <template if:true={hasPermission}>
+              <template if:true={hasRecords}>
+                        <template for:each={_records} for:item="record" for:index="rindex">
+                            <vlocity_cmt-flex-card-state if:true={record}  key={record._flex.uniqueKey} data-recordid={record.Id} record={record} data-statue="true"  data-index="0" data-rindex={rindex} class="cf-vlocity-state-0 cf-vlocity-state slds-size_12-of-12"  tracking-obj={_childCardTrackingObj} >
+      <div if:true={cardLoaded} class="slds-grid slds-wrap slds-card slds-p-around_x-small slds-m-bottom_x-small" style="">
+          <div data-style-id="state0element0" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element0_child"  record={record}  card={card}  collapsed-by-default="false"  collapsible="false"  label="Block"  theme="slds" ><div class="slds-grid slds-wrap">
+          <div data-style-id="state0element0block_element0" class="" data-rindex={rindex} style=""><vlocity_cmt-flex-icon data-style-id="state0element0block_element0_child"     record={record}  card={card}  data-conditions='\{"group":[{"group":[{"field":"facture","id":"state-new-condition-14","operator":"==","type":"custom","value":"true"},{"field":"relance","id":"state-new-condition-32","logicalOperator":"||","operator":"==","type":"custom","value":"true"}],"id":"state-new-group-15"}],"id":"state-condition-object","isParent":true}'  extraclass="slds-icon-standard-default"  icon-name="standard:default"  icon-type="Custom"  imgsrc="https://engiedgpfr--devsmchevr--c.visualforce.com/resource/1637786888000/userCard"  size="medium"  variant="default"  theme="slds"  ></vlocity_cmt-flex-icon>
+      </div><div data-style-id="state0element0block_element1" class="" data-rindex={rindex} style=""><vlocity_cmt-output-field data-style-id="state0element0block_element1_child"     record={record}  card={card}  data-conditions='\{"group":[{"group":[{"field":"facture","id":"state-new-condition-0","operator":"==","type":"custom","value":"true"},{"field":"relance","id":"state-new-condition-18","logicalOperator":"||","operator":"==","type":"custom","value":"true"}],"id":"state-new-group-1"}],"id":"state-condition-object","isParent":true}'  merge-field="%3Cdiv%3E%7BFirstName%7D%20%7BLastName%7D%3C/div%3E%0A%3Cdiv%3E%7BNo_Voie__c%7D%20%7BMailingStreet%7D%3C/div%3E%0A%3Cdiv%3E%7BMailingPostalCode%7D%20%7BMailingCity%7D%3C/div%3E"  theme="slds"  ></vlocity_cmt-output-field>
+      </div><div data-style-id="state0element0block_element2" class="" data-rindex={rindex} style=""><vlocity_cmt-flex-icon data-style-id="state0element0block_element2_child"     record={record}  card={card}  data-conditions='\{"group":[{"field":"payeur","id":"state-new-condition-0","operator":"==","type":"custom","value":"true"}],"id":"state-condition-object","isParent":true}'  extraclass="slds-icon-standard-default"  icon-name="bank"  icon-type="Custom"  imgsrc="https://engiedgpfr--devsmchevr--c.visualforce.com/resource/1637787013000/creditCard?"  size="medium"  variant="default"  theme="slds"  ></vlocity_cmt-flex-icon>
+      </div><div data-style-id="state0element0block_element3" class="" data-rindex={rindex} style=""><vlocity_cmt-output-field data-style-id="state0element0block_element3_child"     record={record}  card={card}  data-conditions='\{"group":[{"field":"payeur","id":"state-new-condition-7","operator":"==","type":"custom","value":"true"}],"id":"state-condition-object","isParent":true}'  merge-field="%3Cdiv%3E%3Cspan%20style=%22font-size:%2012pt;%22%3E%3Cstrong%3E%7BnomBanque%7D%3C/strong%3E%3C/span%3E%3C/div%3E%0A%3Cdiv%3E%7Biban1%7D%20...%20...%20%7Biban2%7D%3C/div%3E"  theme="slds"  ></vlocity_cmt-output-field>
+      </div><div data-style-id="state0element0block_element4" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element0block_element4_child"  record={record}  card={card}  collapsed-by-default="false"  collapsible="false"  label="Block"  theme="slds" ><div class="slds-grid slds-wrap">
+          
+        </div></vlocity_cmt-block>
+    </div><div data-style-id="state0element0block_element5" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element0block_element5_child"  record={record}  card={card}  collapsed-by-default="false"  collapsible="false"  label="Block"  theme="slds" ><div class="slds-grid slds-wrap">
+          <div data-style-id="state0element0block_element5block_element0" class="" data-rindex={rindex} style=""><vlocity_cmt-output-field data-style-id="state0element0block_element5block_element0_child"     record={record}  card={card}  merge-field="%3Cdiv%20class=%22slds-text-align_center%22%3E%3Cstrong%3ER&ocirc;les%20%3C/strong%3E:%20%7BrolePayeur%7D%20%7Bslash1%7D%20%7BroleRelance%7D%20%7Bslash2%7D%20%7BroleFacture%7D%3C/div%3E"  theme="slds"  ></vlocity_cmt-output-field>
+      </div>
+        </div></vlocity_cmt-block>
+    </div>
+        </div></vlocity_cmt-block>
+    </div>
+        </div>
+      </vlocity_cmt-flex-card-state>
+                        </template>
+                      </template>
+                      <template if:false={hasRecords}>
+                            <vlocity_cmt-flex-card-state  record={record} data-statue="false"  data-index="0" data-rindex={rindex} class="cf-vlocity-state-0 cf-vlocity-state slds-size_12-of-12"  tracking-obj={_childCardTrackingObj} >
+      <div if:true={cardLoaded} class="slds-grid slds-wrap slds-card slds-p-around_x-small slds-m-bottom_x-small" style="">
+          <div data-style-id="state0element0" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element0_child"  record={record}  card={card}  collapsed-by-default="false"  collapsible="false"  label="Block"  theme="slds" ><div class="slds-grid slds-wrap">
+          <div data-style-id="state0element0block_element0" class="" data-rindex={rindex} style=""><vlocity_cmt-flex-icon data-style-id="state0element0block_element0_child"     record={record}  card={card}  data-conditions='\{"group":[{"group":[{"field":"facture","id":"state-new-condition-14","operator":"==","type":"custom","value":"true"},{"field":"relance","id":"state-new-condition-32","logicalOperator":"||","operator":"==","type":"custom","value":"true"}],"id":"state-new-group-15"}],"id":"state-condition-object","isParent":true}'  extraclass="slds-icon-standard-default"  icon-name="standard:default"  icon-type="Custom"  imgsrc="https://engiedgpfr--devsmchevr--c.visualforce.com/resource/1637786888000/userCard"  size="medium"  variant="default"  theme="slds"  ></vlocity_cmt-flex-icon>
+      </div><div data-style-id="state0element0block_element1" class="" data-rindex={rindex} style=""><vlocity_cmt-output-field data-style-id="state0element0block_element1_child"     record={record}  card={card}  data-conditions='\{"group":[{"group":[{"field":"facture","id":"state-new-condition-0","operator":"==","type":"custom","value":"true"},{"field":"relance","id":"state-new-condition-18","logicalOperator":"||","operator":"==","type":"custom","value":"true"}],"id":"state-new-group-1"}],"id":"state-condition-object","isParent":true}'  merge-field="%3Cdiv%3E%7BFirstName%7D%20%7BLastName%7D%3C/div%3E%0A%3Cdiv%3E%7BNo_Voie__c%7D%20%7BMailingStreet%7D%3C/div%3E%0A%3Cdiv%3E%7BMailingPostalCode%7D%20%7BMailingCity%7D%3C/div%3E"  theme="slds"  ></vlocity_cmt-output-field>
+      </div><div data-style-id="state0element0block_element2" class="" data-rindex={rindex} style=""><vlocity_cmt-flex-icon data-style-id="state0element0block_element2_child"     record={record}  card={card}  data-conditions='\{"group":[{"field":"payeur","id":"state-new-condition-0","operator":"==","type":"custom","value":"true"}],"id":"state-condition-object","isParent":true}'  extraclass="slds-icon-standard-default"  icon-name="bank"  icon-type="Custom"  imgsrc="https://engiedgpfr--devsmchevr--c.visualforce.com/resource/1637787013000/creditCard?"  size="medium"  variant="default"  theme="slds"  ></vlocity_cmt-flex-icon>
+      </div><div data-style-id="state0element0block_element3" class="" data-rindex={rindex} style=""><vlocity_cmt-output-field data-style-id="state0element0block_element3_child"     record={record}  card={card}  data-conditions='\{"group":[{"field":"payeur","id":"state-new-condition-7","operator":"==","type":"custom","value":"true"}],"id":"state-condition-object","isParent":true}'  merge-field="%3Cdiv%3E%3Cspan%20style=%22font-size:%2012pt;%22%3E%3Cstrong%3E%7BnomBanque%7D%3C/strong%3E%3C/span%3E%3C/div%3E%0A%3Cdiv%3E%7Biban1%7D%20...%20...%20%7Biban2%7D%3C/div%3E"  theme="slds"  ></vlocity_cmt-output-field>
+      </div><div data-style-id="state0element0block_element4" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element0block_element4_child"  record={record}  card={card}  collapsed-by-default="false"  collapsible="false"  label="Block"  theme="slds" ><div class="slds-grid slds-wrap">
+          
+        </div></vlocity_cmt-block>
+    </div><div data-style-id="state0element0block_element5" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element0block_element5_child"  record={record}  card={card}  collapsed-by-default="false"  collapsible="false"  label="Block"  theme="slds" ><div class="slds-grid slds-wrap">
+          <div data-style-id="state0element0block_element5block_element0" class="" data-rindex={rindex} style=""><vlocity_cmt-output-field data-style-id="state0element0block_element5block_element0_child"     record={record}  card={card}  merge-field="%3Cdiv%20class=%22slds-text-align_center%22%3E%3Cstrong%3ER&ocirc;les%20%3C/strong%3E:%20%7BrolePayeur%7D%20%7Bslash1%7D%20%7BroleRelance%7D%20%7Bslash2%7D%20%7BroleFacture%7D%3C/div%3E"  theme="slds"  ></vlocity_cmt-output-field>
+      </div>
+        </div></vlocity_cmt-block>
+    </div>
+        </div></vlocity_cmt-block>
+    </div>
+        </div>
+      </vlocity_cmt-flex-card-state>
+                      </template>
+            </template>
+            <template if:true={hasError}>
+            {error}
+            </template>
+            
+      <vlocity_cmt-action action-wrapperclass="slds-hide" re-render-flyout class="action-trigger slds-col" onupdateos={updateOmniscript} onselectcards={updateSelectedCards} onsetvalue={updateAction}>
+      
+      </vlocity_cmt-action>
+  
+            <vlocity_cmt-action class="execute-action" re-render-flyout action-wrapperclass="slds-hide" onupdateos={updateOmniscript} onselectcards={updateSelectedCards} onsetvalue={updateAction}>
+            
+            </vlocity_cmt-action>
+            </div>
+          </template>

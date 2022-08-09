@@ -1,0 +1,188 @@
+<template>
+    <div class="hp-popup hp-messages-popin">
+        <section
+            role="dialog"
+            tabindex="-1"
+            aria-labelledby="modal-heading-01"
+            aria-modal="true"
+            aria-describedby="modal-content-id-1"
+            class="slds-modal slds-fade-in-open messages-modal"
+        >
+            <div class="hp-messages-popin__container slds-modal__container">
+                <div class="hp-container">
+                    <header class="slds-modal__header hp-header">
+                        <h1 class="hp-bigTitle">{titleText}</h1>
+                        <span class="hp-closeButton">
+                        <a onclick={closePopin}>
+                            <img class="hp-close-icon" src={iconClose} alt="close" />
+                        </a>
+                        </span>
+                    </header>
+                    <template if:false={newMessage}>
+                        <div class="messages-header">
+                            <div class="desktop-only">
+                                <ul class="tabs">
+                                    <li if:false={showMessages} class="tab"><a href="#messages" onclick={handleShowMessages}>Messages</a></li>
+                                    <li if:true={showMessages} class="tab active"><a href="#messages" onclick={handleShowMessages}>Messages</a></li>
+                                    <li if:false={showChat} class="tab"><a href="#chat" onclick={handleShowChat}>Chat</a></li>
+                                    <li if:true={showChat} class="tab active"><a href="#chat" onclick={handleShowChat}>Chat</a></li>
+                                    <li if:false={showCalls} class="tab"><a href="#calls" onclick={handleShowCalls}>Appels</a></li>
+                                    <li if:true={showCalls} class="tab active"><a href="#calls" onclick={handleShowCalls}>Appels</a></li>
+                                </ul>
+                            </div>
+                            <div class="select mobile-only">
+                                <select onchange={handleSelectChange}>
+                                    <option value="messages" if:false={showMessages}>Messages</option>
+                                    <option value="messages" if:true={showMessages} selected >Messages</option>
+                                    <option value="chat" if:false={showChat}>Chat</option>
+                                    <option value="chat " if:true={showChat} selected>Chat</option>
+                                    <option value="calls" if:false={showCalls}>Appels</option>
+                                    <option value="calls" if:true={showCalls} selected>Appels</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hp-content">
+                            <div class="hp-wrapper" if:true={showMessages}>
+                                <ul id="messages" class="messages-list" >
+                                    <template for:each={messages} for:item="message">
+                                        <li key={message.id}>
+                                            <c-hp_ec_message
+                                                message={message}
+                                                ontogglemessage={handleToggleMessage}
+                                                onnewmessage={handleNewMessage}
+                                            ></c-hp_ec_message>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                            <div class="hp-wrapper" if:true={showChat}>
+                                <ul class="chat-sessions">
+                                    <template for:each={chatSessions} for:item="chat">
+                                        <li key={chat.id} class="chat">
+                                            <button class="chat__toggle hp-link" onclick={handleToggleChat} data-id={chat.id}>
+                                                <span class="chat__icon">
+                                                    <lightning-icon icon-name="utility:engage" size="medium"></lightning-icon>
+                                                </span>
+                                                <span class="chat__info">
+                                                    <p class="chat__agent">{chat.agent}</p>
+                                                    <p class="chat__date">Chat du {chat.date}</p>
+                                                </span>
+                                                <span class="chevron right" if:false={chat.open}></span>
+                                                <span class="chevron down" if:true={chat.open}></span>
+                                            </button>
+                                            <div class="chat__content" if:true={chat.open}>
+                                                <div class="chat__content-wrapper">
+                                                    <p class="chat__content-info">Chat démarré à : {chat.date}</p>
+                                                    <p class="chat__content-info">Origine du chat : {chat.origin}</p>
+                                                    <p class="chat__content-info">Agent : {chat.agent}</p>
+                                                    <ul>
+                                                        <template for:each={chat.content} for:item="message">
+                                                            <li key={message.id} class="chat__message">
+                                                                <span class="received" if:false={message.sent}>
+                                                                    ( {message.time} ) {chat.agent} :&nbsp;
+                                                                </span>
+                                                                <span class="sent" if:true={message.sent}>
+                                                                    ( {message.time} )&nbsp;
+                                                                </span>
+                                                                {message.content}
+                                                            </li>
+                                                        </template>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                            <div class="hp-wrapper" if:true={showCalls}>
+                                <ul class="calls">
+                                    <template for:each={calls} for:item="call">
+                                        <li key={call.id} class="call">
+                                            <p class="call__category">{call.category}</p>
+                                            <p class="call__duration">Durée : {call.duration}</p>
+                                            <p class="call__date">{call.date}</p>
+                                            <p class="call__content">{call.content}</p>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="hp-footer messages-footer" if:true={showMessages}>
+                            <button class="c-btn" onclick={handleNewMessage}>Envoyer un nouveau message</button>
+                        </div>
+                        <div class="hp-footer calls-footer" if:true={showChat}>
+                            <button onclick={handleChatClick} class="c-btn">Démarrer un nouveau chat</button>
+                        </div>
+                        <div class="hp-footer calls-footer" if:true={showCalls}>
+                            <p>Appeler mon conseiller :</p>
+                            <a class="c-btn c-btn--primary" href="tel:09 77 420 410">09 77 420 410</a>
+                        </div>
+                    </template>
+                    <div class="new-message" if:true={newMessage}>
+                        <div class="hp-content">
+                            <h2 class="new-message__header">
+                                <button onclick={handleNewMessage}>
+                                    <lightning-icon icon-name="utility:chevronleft" size="small"></lightning-icon>
+                                </button>
+                                <span>Nouveau message</span>
+                            </h2>
+                            <div class="hp-wrapper">
+                                <div class="new-message__content">
+                                    <div class="message-sent" if:true={messageSent} >
+                                        <span class="img">
+                                            <img src={iconTick} />
+                                        </span>
+                                        <p>Votre message a bien été envoyé.</p>
+                                        <p>Nous y répondrons dans les meilleurs délais :)</p>
+                                    </div>
+                                    <form>
+                                        <div class="form-row">
+                                            <label for="object">Objet de ma demande:</label>
+                                            <select id="object">
+                                                <option>Suivi de consommation</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-row">
+                                            <label for="message">Mon message:</label>
+                                            <textarea id="message"></textarea>
+                                        </div>
+                                        <div class="form-row files">
+                                            <template for:each={files} for:item="file">
+                                                <div class="file" key={file.id}>
+                                                    <lightning-icon icon-name="utility:attach" size="x-small"></lightning-icon>
+                                                    <span>{file.name}</span>
+                                                    <button onclick={handleDeleteFile} data-id={file.id} if:false={messageSent}>
+                                                        <lightning-icon icon-name="utility:close" size="x-small"></lightning-icon>
+                                                        <span class="visually-hidden">Delete file</span>
+                                                    </button>
+                                                </div>
+                                            </template>
+                                            <label for="file" if:false={messageSent}>
+                                                <span>Ajouter une pièce jointe</span>
+                                                <lightning-icon icon-name="utility:add" size="x-small"></lightning-icon>
+                                            </label>
+                                            <input type="file" id="file" onchange={handleNewFile} if:false={messageSent} />
+                                            <p if:false={messageSent} >
+                                                Moins de 25 Mo<br/>
+                                                Formats .jpeg .png .pdf
+                                            </p>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="new-message__footer hp-footer">
+                            <button class="c-btn" onclick={handleMessageSent} if:false={messageSent}>
+                                Envoyer
+                            </button>
+                            <button class="c-btn c-btn--outline" onclick={handleNewMessage} if:true={messageSent}>
+                                Retour à l'historique
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open messages-backdrop"></div>
+    </div>
+</template>

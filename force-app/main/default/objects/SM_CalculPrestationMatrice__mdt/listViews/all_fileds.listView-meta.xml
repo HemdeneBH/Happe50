@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>all_fileds</fullName>
+    <columns>Choix_Proc_Egal_Repri_MHS__c</columns>
+    <columns>Code_prestation__c</columns>
+    <columns>ConsommationSansfournisseur__c</columns>
+    <columns>Date_refus_telereleve__c</columns>
+    <columns>DGI__c</columns>
+    <columns>Etat_compteur__c</columns>
+    <columns>Etat_PDL_PCE__c</columns>
+    <columns>Express__c</columns>
+    <columns>Fraude__c</columns>
+    <columns>Libelle_code_prestation__c</columns>
+    <columns>MHs_en_cours__c</columns>
+    <columns>Secteur_activite__c</columns>
+    <columns>Situation_de_vente__c</columns>
+    <columns>Type_de_compteur__c</columns>
+    <columns>MasterLabel</columns>
+    <filterScope>Everything</filterScope>
+    <label>all fileds</label>
+    <language>en_US</language>
+</ListView>

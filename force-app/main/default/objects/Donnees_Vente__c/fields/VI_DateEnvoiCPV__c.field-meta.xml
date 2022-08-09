@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_DateEnvoiCPV__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( /*CASE PARTNER CO*/
+    ISPICKVAL(CaseId__r.Origin,&quot;Partner Community&quot;),
+      Parcours__r.VI_Date_envoi_email__c,
+      null
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>A compléter avec les autres canaux</inlineHelpText>
+    <label>Date d&apos;envoi CPV</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

@@ -1,0 +1,16 @@
+<!--
+  @File Name          : HP_CreationFicheClientComp.cmp
+  @Description        : 
+  @Author             : Mohamed Aamer
+  @Group              : 
+  @Last Modified By   : Mouhamadoune Coulibaly
+  @Last Modified On   : 07/02/2020 à 14:12:58
+  @Modification Log   : 
+  Ver       Date            Author      		    Modification
+  1.0    20/12/2019   Mohamed Aamer     Initial Version
+-->
+<aura:component implements="force:lightningQuickActionWithoutHeader,lightning:isUrlAddressable,flexipage:availableForAllPageTypes" access="global">
+  <aura:handler value="{!this}" name="init" action="{!c.init}"/>
+  <lightning:workspaceAPI aura:id="workspace"/>
+  <c:hp_CreationFicheClient oncloseclicked="{!c.handleFilterChange}"/>
+</aura:component>

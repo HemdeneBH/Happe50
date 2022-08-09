@@ -1,0 +1,44 @@
+{
+  "appPageId" : "7e89266e-f5a3-4029-bb48-38a8a732ab93",
+  "componentName" : "community_layout:sldsFlexibleLayout",
+  "id" : "5104da90-6f4a-4db7-bc96-a39afed787d5",
+  "label" : "Service Not Available",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "backgroundImageConfig" : "",
+        "backgroundImageOverlay" : "rgba(0,0,0,0)",
+        "sectionConfig" : "{\"UUID\":\"6ff1484f-e898-4f94-a191-3ab049890bd5\",\"columns\":[{\"UUID\":\"be74d46e-8356-4b5f-8808-ce2074776eb0\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}"
+      },
+      "componentName" : "community_layout:section",
+      "id" : "6ff1484f-e898-4f94-a191-3ab049890bd5",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "richTextValue" : "<div style=\"display: flex; \n            align-items: center;\n            justify-content: center;\n            flex-direction: column; \n            background-color: #000000; \n            background-image: url('/sfsites/c/resource/HP_EC_BG_stars');\n            position: relative;\n            min-height: 100vh;\n            margin-top: 0;\n            margin-bottom: 0;\">\n    <div style=\"max-width: 450px; \n                border: 30px solid #604ee1;\n                background-image: linear-gradient(49deg, #e5ebf5 23%, #fff 97%);\n                box-shadow: -5px 5px 15px 0 rgba(12, 29, 38, 0.21);\n                padding: 30px;\">\n        <h1 style=\"text-align: center;\n                   margin: 20px 0 30px 0;\">\n            <img alt =\"Happe\" src=\"/sfsites/c/resource/HP_EC_black_logo\"/>\n        </h1>\n        <h2><b style=\"font-family:'font_AvantBold';\n            font-size: 25px;\n            text-transform: uppercase;\">\n            Maintenance en cours</b>\n        </h2>\n        <p style=\"font-family:'font_AvantRegular';\n            font-size: 18px; \n            padding: 20px 0;\">\n            Votre Espace Client est actuellement en maintenance. Nous déployons tous les efforts nécessaires pour le rendre à nouveau disponible et vous offrir une meilleure expérience.\n        </p>\n    </div>\n    <div style=\"background-image: url('/sfsites/c/resource/HP_EC_footer_dark');\n                background-color: #26242b;\n                width: 100%;\n                margin-bottom: 0;\n                position: absolute;\n                height: 125px;\n                bottom: 0;\">\n    </div>\n</div>"
+          },
+          "componentName" : "community_builder:htmlEditor",
+          "id" : "255a04c3-a374-41ed-83f4-18c2c940ed34",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "be74d46e-8356-4b5f-8808-ce2074776eb0",
+        "regionLabel" : "Column 1",
+        "regionName" : "col1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "scopedBrandingSetId" : null,
+      "type" : "component"
+    } ],
+    "id" : "c4eec857-3849-46ee-9cc3-16525870462c",
+    "regionName" : "content",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "ServiceNotAvailable",
+  "type" : "view",
+  "viewType" : "service-not-available"
+}

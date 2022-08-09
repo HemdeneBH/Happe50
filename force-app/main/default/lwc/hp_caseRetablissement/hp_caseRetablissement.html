@@ -1,0 +1,46 @@
+<!--
+  @description       : 
+  @author            : Badr Eddine Belkarchi
+  @group             : 
+  @last modified on  : 03-21-2022
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<template>
+    <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+        <div class="slds-modal__container" style="width:53rem">
+            <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Fermer"
+                    onclick={closeRetablissement}>
+                    <lightning-icon icon-name="utility:close" size="medium">
+                    </lightning-icon>
+                    <span class="slds-assistive-text">Fermer</span>
+                </button>
+                <h1 class="slds-text-heading_medium slds-m-bottom_large"
+                    style="margin-top: 0.3rem;margin-bottom: 0.3rem;font-size: 1.4rem;">
+                    Rétablissement
+                </h1>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <div class="slds-align_absolute-center" style="height: 180px;">
+                    <lightning-combobox
+                        name="Origine de la demande"
+                        label="Origine de la demande"
+                        placeholder="Choisir l’origine"
+                        value={comboboxValue}
+                        onchange={handleComboboxChange}
+                        options={originOptions}
+                    >
+                    </lightning-combobox>
+                    <lightning-input class="slds-p-left_xx-large" type="checkbox" label="Rétablissement urgent" onchange={handleCheckboxChange} ></lightning-input>
+                </div>
+            </div>
+            <div class="slds-modal__footer">
+                <button class="slds-button slds-button_neutral" onclick={closeRetablissement}>Annuler</button>
+                <button class="slds-button slds-button_brand" onclick={validateRetablissement}>Valider</button>
+                <div if:true={showSpinner}>
+                    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>

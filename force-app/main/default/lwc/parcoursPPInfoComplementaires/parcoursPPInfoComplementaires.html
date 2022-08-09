@@ -1,0 +1,684 @@
+<template>
+    <div class="container" style="margin-bottom: 70px" data-id="infoComp">
+        <div class="row">
+            <h1 class="col-lg-12 text-center" style="margin-top: 50px;">Informations complémentaires</h1>
+        </div>
+        <!--<div class="row">
+            <div class="col-lg-12 text-center" style="margin-top: 30px;">
+
+                <p class="font-class-1">Quelle est la date de démarrage du contrat ?</p>
+
+            </div>
+        </div>-->
+        <div class="row" style="margin-top:10px;">
+            <div class="col-lg-4 text-center mt-3"></div>
+            <div class="col-lg-4 form-group text-center">
+                <label class="font-class-3">Date de début du contrat</label>
+                <lightning-input type="date" id="date-echeance" name="DateContrat" class="dateField"
+                    message-when-bad-input="Veuillez renseigner une date avec le format dd/MM/yyyy" date-style="short"
+                    data-id="date-echeance" placeholder="jj/mm/aaaa" onchange={handleInfosComplementairesChange}
+
+                    value={date} min={dateMinimumContratFormatDate} max={dateMaximumContratFormatDate}>
+
+                </lightning-input>
+            </div>
+            <div class="col-lg-4 text-center"></div>
+        </div>
+        <!--template if:true={dateAnterieur}>
+            <div class="row">
+                <div class="col-lg-12 form-group text-center">
+                    <p class="label-text-small-act lato-normal-monza-12px">Vous ne pouvez pas saisir une date antérieure
+                        à
+                        la date du jour.</p>
+                </div>
+            </div>
+        </template-->
+        <div class="row" style="margin-top:10px;">
+            <div class="col-lg-3 text-center"></div>
+            <div class="col-lg-6">
+                <div class="row" style="margin-top:10px">
+                    <div class="col-lg-2 text-center">
+                        <img class="btn-img-size-important" src={iconInformation}>
+                    </div>
+                    <div class="col-lg-10 text-left">
+                        <label class="form-check-label">
+                            <b>Important :</b> cette date dépend des délais de prise en charge du distributeur d’énergie
+                            (ENEDIS pour l’électricité, GRDF pour le gaz).
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 text-center"></div>
+        </div>
+				<template if:true={isEM}>
+						<div class="row" style="margin-top:10px">
+								<div class="col-lg-4 text-center"></div>
+								<div class="col-lg-4 text-center">
+										<div class="form-check">
+												<div class="row" style="margin-top:10px">
+														<div class="col-lg-2 text-center">
+                                                            <input class="form-check-input ml-3" id="MiseEnServiceUrgenteId"
+                                                                    style="height: 60%;-webkit-transform:scale(1.5);" type="checkbox"
+                                                                    oninput={handleInfosComplementairesChange} checked={miseAJourUrgente}
+                                                                    name="MiseEnServiceUrgente">
+																<!--value={_record.VI_InfosCompl_MiseEnServiceUrgente__c}
+																checked={_record.VI_InfosCompl_MiseEnServiceUrgente__c} -->
+														</div>
+														<div class="col-lg-10 text-center">
+																<label class="font-class-3" for="MiseEnServiceUrgenteId">Mise en service urgente</label>
+														</div>
+												</div>
+										</div>
+								</div>
+								<div class="col-lg-4 text-center"></div>
+						</div>
+				</template>
+        <div class="row" style="margin-top:10px">
+            <div class="col-lg-4 text-center"></div>
+            <div class="col-lg-4 text-center">
+                <div class="form-check">
+                    <div class="row" style="margin-top:10px">
+                        <div class="col-lg-2 text-center">
+                            <input id="PremièreMiseEnService" class="form-check-input ml-3"
+                                style="height: 60%;-webkit-transform:scale(1.5);" type="checkbox"
+                                oninput={handleInfosComplementairesChange}
+                                value={_record.VI_InfosCompl_PremiereMiseEnService__c}
+                                checked={_record.VI_InfosCompl_PremiereMiseEnService__c} name="PremiereMiseEnService">
+                        </div>
+                        <div class="col-lg-10 text-center">
+                            <label class="font-class-3" for="PremièreMiseEnService">Première mise en service</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 text-center"></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 text-center"></div>
+            <div class="col-lg-8 text-center" style="margin-top: 30px;">
+                <p class="font-class-1">En renseignant maintenant les relevés de compteur, le client évite
+                    d’éventuels frais de déplacements d’un technicien et accelère la mise
+                    en place de sa souscription</p>
+            </div>
+            <div class="col-lg-2 text-center"></div>
+        </div>
+        <div class="row" style="margin-top:10px">
+            <div class="col-lg-3 text-center"></div>
+            <div class="col-lg-6 text-center">
+                <div class="row" style="margin-top:10px">
+                    <div class="col-lg-2 text-right">
+                        <img class="btn-img-size-astuce " src={Astuce}>
+                    </div>
+                    <div class="col-lg-10 text-left">
+                        <p class="astuce-pour-augmen lato-bold-tuatara-12px">
+                            <span class="span1"><b>Astuce : </b></span>
+                            <span class="span2">
+                                ces données se trouvent sur le compteur</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 text-center"></div>
+        </div>
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-lg-12 text-center justify-content-center">
+                <button type="button" class="btn btn-outline-primary" onclick={handleButtonClick} data-id="infoReleve"
+                    data-current={HasReleveCompteur}>
+                    <div onclick={handleButtonClick} class="mb-4" data-id="infoReleve">
+                        <span class="showImageOnHover" onclick={handleButtonClick} data-id="infoReleveBleu">
+                            <img class="btn-img-size " src={infoReleveBlanc} onclick={handleButtonClick}
+                                data-id="infoReleve">
+                        </span>
+                        <span class="hideImageOnHover" onclick={handleButtonClick} data-id="infoReleveBlanc">
+                            <img class="btn-img-size " src={infoReleveBleu} onclick={handleButtonClick}
+                                data-id="infoReleve">
+                        </span>
+                    </div>
+
+                    <p class="font-class-1" onclick={handleButtonClick} data-id="infoReleve">Saisir les relevés</p>
+                </button>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-lg-12 text-center">
+                <span style="cursor:pointer;color: rgba(0, 157, 233, 1);font-size:20px;text-decoration: underline;"
+                    onclick={handleInfosComplementairesChange} data-id="passerEtape"
+                    data-current="Passer cette étape">Continuer sans les relevés
+                </span>
+            </div>
+        </div>
+        <template if:true={HasReleveCompteur}>
+            <div class="row" data-id="RelevesCompteur">
+                <h1 class="col-lg-12 text-center" style="margin-top: 50px;">Vos relevés de compteur</h1>
+            </div>
+            <template if:true={isElectricite}>
+                <div class="row mt-5">
+                    <div class="col-lg-3 text-center"></div>
+                    <div class="col-lg-6 text-center">
+                        <div class="row">
+                            <div class="col-lg-9 text-right">
+                                <p class="font-class-4">
+                                    Où relever mon compteur électrique
+                                </p>
+                            </div>
+                            <div class="col-lg-3 text-left">
+                                <img style="height:20px" class="question-hover" src={iconQuestion}
+                                    onclick={openModalElec}>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 text-center"></div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 text-center"></div>
+                    <div class="col-lg-6 text-center">
+                        <div class="container"
+                            style="    border: 1px solid;border-radius: 16px;border-color: rgba(0, 157, 233, 1);">
+                            <div class="row mb-5" style="margin-top:10px">
+                                <div class="col-lg-12 text-center">
+                                    <p class="font-class-1" style="color: rgba(0, 157, 233, 1)">Compteur électrique</p>
+                                </div>
+                            </div>
+                            <div class="row mb-5" style="margin-top:10px">
+                                <div class="col-lg-1 text-left"></div>
+                                <div class="col-lg-2 text-left">
+                                    <label class="switch">
+                                        <input type="checkbox" data-id="HP/HC" name="HP/HC" data-current={isHPHC}
+                                            onclick={handleHPHCClick} value={_record.VI_InfosCompl_HP_HC__c}
+                                            checked={_record.VI_InfosCompl_HP_HC__c}>
+                                        <span class="slider round"></span>
+                                        <!--span class="input-group-addon font-class-1 text-left"
+                                        style="margin-left: 80px;margin-right: 30px;">HP/HC</span-->
+                                    </label>
+                                </div>
+                                <div class="col-lg-1 text-left font-class-1 mt-1">HP/HC</div>
+                                <div class="col-lg-9 text-left"></div>
+                            </div>
+                            <template if:false={isHPHC}>
+                                <div class="row mb-5" style="margin-top:10px">
+                                    <div class="col-lg-1 text-left"></div>
+                                    <div class="col-lg-10 text-left" style="border-bottom-width: 1px;
+                            border-bottom-color:  rgb(227, 227, 227);
+                            border-bottom-style: solid;">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-10">
+
+                                                    <template if:false={redLabelIndexElec}>
+                                                        <label for="VotreIndex1">Heures Simples (base)</label>
+                                                        <br /><br />
+                                                    </template>
+                                                    <template if:true={redLabelIndexElec}>
+                                                        <label for="VotreIndex1" class="font-class-1"
+                                                            style="font-size: 100%; color: rgba(255,0,0)">
+                                                            Heures Simples (base)</label>
+                                                        <br /><br />
+                                                    </template>
+
+                                                    <input type="number" data-id="IndexElec1"
+                                                        onwheel={removeNumberScroll}
+                                                        style="padding-left:1%;border-top:0;border-bottom:0;border-left:0;border-right:0;-moz-appearance:textfield;"
+                                                        placeholder="00000" name="VotreIndex1"
+                                                        oninput={handleInfosComplementairesChange}
+                                                        onkeydown={handleDecimal}
+                                                        value={_record.VI_InfosCompl_IndexElec__c}
+                                                        class="font-class-1"></input>
+                                                </div>
+                                                <div class="col-lg-2" style="align-self: flex-end;">
+                                                    <span class="font-class-1">kWh</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1 text-left"></div>
+                                </div>
+
+                            </template>
+                            <template if:true={isHPHC}>
+                                <div class="row mb-5" style="margin-top:10px">
+                                    <div class="col-lg-1 text-left"></div>
+                                    <div class="col-lg-10 text-left" style="border-bottom-width: 1px;
+                            border-bottom-color:  rgb(227, 227, 227);
+                            border-bottom-style: solid;">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-10">
+
+                                                    <template if:false={redLabelHP}>
+                                                        <label for="HeuresPleines">Heures pleines</label>
+                                                        <br /><br />
+                                                    </template>
+                                                    <template if:true={redLabelHP}>
+                                                        <label for="HeuresPleines" class="font-class-1"
+                                                            style="font-size: 100%; color: rgba(255,0,0)">
+                                                            Heures pleines</label>
+                                                        <br /><br />
+                                                    </template>
+
+                                                    <input type="number" data-id="HeuresPleines1"
+                                                        onwheel={removeNumberScroll}
+                                                        style="padding-left:1%;border-top:0;border-bottom:0;border-left:0;border-right:0;-moz-appearance:textfield;"
+                                                        placeholder="00000" name="HeuresPleines"
+                                                        oninput={handleInfosComplementairesChange}
+                                                        onkeydown={handleDecimal}
+                                                        value={_record.VI_InfosCompl_HeuresPleinesElec__c}
+                                                        class="font-class-1"></input>
+                                                </div>
+                                                <div class="col-lg-2" style="align-self: flex-end;">
+                                                    <span class="font-class-1">kWh</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1 text-left"></div>
+                                </div>
+                                <div class="row mb-5" style="margin-top:10px">
+                                    <div class="col-lg-1 text-left"></div>
+                                    <div class="col-lg-10 text-left" style="border-bottom-width: 1px;
+                            border-bottom-color:  rgb(227, 227, 227);
+                            border-bottom-style: solid;">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-10">
+
+                                                    <template if:false={redLabelHC}>
+                                                        <label for="HeuresCreuses">Heures creuses</label>
+                                                        <br /><br />
+                                                    </template>
+                                                    <template if:true={redLabelHC}>
+                                                        <label for="HeuresCreuses" class="font-class-1"
+                                                            style="font-size: 100%; color: rgba(255,0,0)">
+                                                            Heures creuses</label>
+                                                        <br /><br />
+                                                    </template>
+
+                                                    <input type="number" data-id="HeuresCreuses1"
+                                                        onwheel={removeNumberScroll}
+                                                        style="padding-left:1%;border-top:0;border-bottom:0;border-left:0;border-right:0;-moz-appearance:textfield;"
+                                                        placeholder="00000" name="HeuresCreuses"
+                                                        oninput={handleInfosComplementairesChange}
+                                                        onkeydown={handleDecimal}
+                                                        value={_record.VI_InfosCompl_HeuresCreusesElec__c}
+                                                        class="font-class-1"></input>
+                                                </div>
+                                                <div class="col-lg-2" style="align-self: flex-end;">
+                                                    <span class="font-class-1">kWh</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1 text-left"></div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 text-center"></div>
+                </div>
+            </template>
+            <template if:true={isGaz}>
+                <div class="row mt-5">
+                    <div class="col-lg-3 text-center"></div>
+                    <div class="col-lg-6 text-center">
+                        <div class="row">
+                            <div class="col-lg-9 text-right">
+                                <p class="font-class-4">
+                                    Où relever mon compteur gaz
+                                </p>
+                            </div>
+                            <div class="col-lg-3 text-left">
+                                <img style="height:20px" class="question-hover" src={iconQuestion}
+                                    onclick={openModalGaz}>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 text-center"></div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 text-center"></div>
+                    <div class="col-lg-6 text-center">
+                        <div class="container"
+                            style="    border: 1px solid;border-radius: 16px;border-color: rgba(0, 157, 233, 1);">
+                            <div class="row mb-5" style="margin-top:10px">
+                                <div class="col-lg-12 text-center">
+                                    <p class="font-class-1" style="color: rgba(0, 157, 233, 1)">Compteur Gaz</p>
+                                </div>
+                            </div>
+                            <div class="row mb-5" style="margin-top:10px">
+                                <div class="col-lg-1 text-left"></div>
+                                <div class="col-lg-10 text-left" style="border-bottom-width: 1px;
+                                border-bottom-color:  rgb(227, 227, 227);
+                                border-bottom-style: solid;">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-10">
+
+                                                <template if:false={redLabelIndexGaz}>
+                                                    <label for="VotreIndex2">Votre Index</label>
+                                                    <br /><br />
+                                                </template>
+                                                <template if:true={redLabelIndexGaz}>
+                                                    <label for="VotreIndex2" class="font-class-1"
+                                                        style="font-size: 100%; color: rgba(255,0,0)">
+                                                        Votre Index</label>
+                                                    <br /><br />
+                                                </template>
+
+                                                <input type="number" data-id="IndexGaz1" onwheel={removeNumberScroll}
+                                                    style="padding-left:1%;border-top:0;border-bottom:0;border-left:0;border-right:0;-moz-appearance:textfield;"
+                                                    placeholder="00000" name="VotreIndex2"
+                                                    oninput={handleInfosComplementairesChange} onkeydown={handleDecimal}
+                                                    value={_record.VI_InfosCompl_IndexGaz__c}
+                                                    class="font-class-1"></input>
+                                            </div>
+                                            <div class="col-lg-2" style="align-self: flex-end;">
+                                                <span class="font-class-1">m<sup>3</sup></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-1 text-left"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 text-center"></div>
+                </div>
+            </template>
+            <template if:true={isGazEtElectricite}>
+                <div class="row mt-5">
+                    <div class="col-lg-1 text-center"></div>
+                    <div class="col-lg-5 text-center">
+                        <div class="row">
+                            <div class="col-lg-9 text-right">
+                                <p class="font-class-4">
+                                    Où relever mon compteur électrique
+                                </p>
+                            </div>
+                            <div class="col-lg-3 text-left">
+                                <img style="height:20px" class="question-hover" src={iconQuestion}
+                                    onclick={openModalElec}>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 text-center">
+                        <div class="row">
+                            <div class="col-lg-9 text-right">
+                                <p class="font-class-4">
+                                    Où relever mon compteur gaz
+                                </p>
+                            </div>
+                            <div class="col-lg-3 text-left">
+                                <img style="height:20px" class="question-hover" src={iconQuestion}
+                                    onclick={openModalGaz}>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 text-center"></div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1 text-center"></div>
+                    <div class="col-lg-5 text-center">
+                        <div class="container"
+                            style="    border: 1px solid;border-radius: 16px;border-color: rgba(0, 157, 233, 1);">
+                            <div class="row mb-5" style="margin-top:10px">
+                                <div class="col-lg-12 text-center">
+                                    <p class="font-class-1" style="color: rgba(0, 157, 233, 1)">Compteur électrique</p>
+                                </div>
+                            </div>
+                            <div class="row mb-5" style="margin-top:10px">
+                                <div class="col-lg-1 text-left"></div>
+                                <div class="col-lg-2 text-left">
+                                    <label class="switch">
+                                        <input type="checkbox" data-id="HP/HC" name="HP/HC" data-current={isHPHC}
+                                            onclick={handleHPHCClick} value={_record.VI_InfosCompl_HP_HC__c}
+                                            checked={_record.VI_InfosCompl_HP_HC__c}>
+                                        <span class="slider round"></span>
+                                        <!--span class="input-group-addon font-class-1 text-left"
+                                        style="margin-left: 80px;margin-right: 30px;">HP/HC</span-->
+                                    </label>
+                                </div>
+                                <div class="col-lg-1 text-left font-class-1 mt-1">HP/HC</div>
+                                <div class="col-lg-9 text-left"></div>
+                            </div>
+                            <template if:false={isHPHC}>
+                                <div class="row mb-5" style="margin-top:10px">
+                                    <div class="col-lg-1 text-left"></div>
+                                    <div class="col-lg-10 text-left" style="border-bottom-width: 1px;
+                            border-bottom-color:  rgb(227, 227, 227);
+                            border-bottom-style: solid;">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-10">
+
+                                                    <template if:false={redLabelIndexElec}>
+                                                        <label for="VotreIndex1">
+                                                            Heures Simples
+                                                            (base)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                    </template>
+                                                    <template if:true={redLabelIndexElec}>
+                                                        <label for="VotreIndex1" class="font-class-1"
+                                                            style="font-size: 100%; color: rgba(255,0,0)">
+                                                            Heures Simples
+                                                            (base)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                    </template>
+
+                                                    <input type="number" data-id="IndexElec2"
+                                                        onwheel={removeNumberScroll}
+                                                        style="border-top:0;border-bottom:0;border-left:0;border-right:0;-moz-appearance:textfield;"
+                                                        placeholder="00000" name="VotreIndex1"
+                                                        oninput={handleInfosComplementairesChange}
+                                                        onkeydown={handleDecimal}
+                                                        value={_record.VI_InfosCompl_IndexElec__c}
+                                                        class="font-class-1"></input>
+                                                </div>
+                                                <div class="col-lg-2" style="align-self: flex-end;">
+                                                    <span class="font-class-1">kWh</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1 text-left"></div>
+                                </div>
+                            </template>
+                            <template if:true={isHPHC}>
+                                <div class="row mb-5" style="margin-top:10px">
+                                    <div class="col-lg-1 text-left"></div>
+                                    <div class="col-lg-10 text-left" style="border-bottom-width: 1px;
+                            border-bottom-color:  rgb(227, 227, 227);
+                            border-bottom-style: solid;">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-10">
+
+                                                    <template if:false={redLabelHP}>
+                                                        <label for="HeuresPleines">
+                                                            Heures
+                                                            pleines&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                    </template>
+                                                    <template if:true={redLabelHP}>
+                                                        <label for="HeuresPleines" class="font-class-1"
+                                                            style="font-size: 100%; color: rgba(255,0,0)">
+                                                            Heures
+                                                            pleines&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                    </template>
+
+                                                    <input type="number" data-id="HeuresPleines2"
+                                                        onwheel={removeNumberScroll}
+                                                        style="border-top:0;border-bottom:0;border-left:0;border-right:0;-moz-appearance:textfield;"
+                                                        placeholder="00000" name="HeuresPleines"
+                                                        oninput={handleInfosComplementairesChange}
+                                                        onkeydown={handleDecimal}
+                                                        value={_record.VI_InfosCompl_HeuresPleinesElec__c}
+                                                        class="font-class-1"></input>
+                                                </div>
+                                                <div class="col-lg-2" style="align-self: flex-end;">
+                                                    <span class="font-class-1">kWh</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1 text-left"></div>
+                                </div>
+                                <div class="row mb-5" style="margin-top:10px">
+                                    <div class="col-lg-1 text-left"></div>
+                                    <div class="col-lg-10 text-left" style="border-bottom-width: 1px;
+                            border-bottom-color:  rgb(227, 227, 227);
+                            border-bottom-style: solid;">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-10">
+
+                                                    <template if:false={redLabelHC}>
+                                                        <label for="HeuresCreuses">
+                                                            Heures
+                                                            creuses&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                    </template>
+                                                    <template if:true={redLabelHC}>
+                                                        <label for="HeuresCreuses" class="font-class-1"
+                                                            style="font-size: 100%; color: rgba(255,0,0)">
+                                                            Heures
+                                                            creuses&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                    </template>
+
+                                                    <input type="number" data-id="HeuresCreuses2"
+                                                        onwheel={removeNumberScroll}
+                                                        style="border-top:0;border-bottom:0;border-left:0;border-right:0;-moz-appearance:textfield;"
+                                                        placeholder="00000" name="HeuresCreuses"
+                                                        oninput={handleInfosComplementairesChange}
+                                                        onkeydown={handleDecimal}
+                                                        value={_record.VI_InfosCompl_HeuresCreusesElec__c}
+                                                        class="font-class-1"></input>
+                                                </div>
+                                                <div class="col-lg-2" style="align-self: flex-end;">
+                                                    <span class="font-class-1">kWh</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1 text-left"></div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 text-center">
+                        <div class="container"
+                            style="    border: 1px solid;border-radius: 16px;border-color: rgba(0, 157, 233, 1);">
+                            <div class="row mb-5" style="margin-top:10px">
+                                <div class="col-lg-12 text-center">
+                                    <p class="font-class-1" style="color: rgba(0, 157, 233, 1)">Compteur Gaz</p>
+                                </div>
+                            </div>
+                            <div class="row mb-5" style="margin-top:10px">
+                                <div class="col-lg-1 text-left"></div>
+                                <div class="col-lg-10 text-left" style="border-bottom-width: 1px;
+                            border-bottom-color:  rgb(227, 227, 227);
+                            border-bottom-style: solid;">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-10">
+
+                                                <template if:false={redLabelIndexGaz}>
+                                                    <label for="VotreIndex2">
+                                                        Votre Index&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                </template>
+                                                <template if:true={redLabelIndexGaz}>
+                                                    <label for="VotreIndex2" class="font-class-1"
+                                                        style="font-size: 100%; color: rgba(255,0,0)">
+                                                        Votre Index&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                </template>
+
+                                                <input type="number" data-id="IndexGaz2" onwheel={removeNumberScroll}
+                                                    style="border-top:0;border-bottom:0;border-left:0;border-right:0;-moz-appearance:textfield;"
+                                                    placeholder="00000" name="VotreIndex2"
+                                                    oninput={handleInfosComplementairesChange} onkeydown={handleDecimal}
+                                                    value={_record.VI_InfosCompl_IndexGaz__c}
+                                                    class="font-class-1"></input>
+                                            </div>
+                                            <div class="col-lg-2" style="align-self: flex-end;">
+                                                <span class="font-class-1">m<sup>3</sup></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-1 text-left"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 text-center"></div>
+                </div>
+            </template>
+            <template if:true={showErrorMessage}>
+                <div class="row">
+                    <div class="col-lg-12 form-group text-center">
+                        <p class="label-text-small-act lato-normal-monza-12px">
+                            Merci de renseigner tous les champs avec un format correct pour valider la saisie des champs
+                            de relevé de compteur.
+                        </p>
+                    </div>
+                </div>
+            </template>
+            <div class="row mt-4" style="margin-top:10px">
+                <div class="col-lg-4 text-center"></div>
+                <button type="button" class="col-lg-4 btn" style="height: 44px;width: 260px;color: #fff;
+                background-color: rgba(0, 153, 52, 1);
+                border-color: rgba(0, 153, 52, 1);border-radius:0" onclick={handleContinuer}>
+                    <p class="font-class-2">Suivant</p>
+                </button>
+                <div class="col-lg-4 text-center"></div>
+            </div>
+            <!--template if:true={stepsdone}>
+                <div class="row">
+                    <div class="col-lg-12 form-group text-center">
+                        <p class="label-text-small-act lato-normal-monza-12px">
+                            Il faut compléter toutes les étapes précédentes pour accéder au récapitulatif de la
+                            souscription
+                        </p>
+                    </div>
+                </div>
+            </template-->
+        </template>
+        <div style="position: absolute;height:10%;width: 100%;bottom: -150px;left: 0%;">
+            <button onclick={handlePrecedent} class="buttonPrecedent">Précédent</button>
+        </div>
+    </div>
+
+    <div if:true={isModalGazOpen} class="vi-modal-gaz container">
+        <div class="row">
+            <div class="col-lg-10 text-center"></div>
+            <div class="col-lg-2 text-center">
+                <img title="Close" onclick={closeModalGaz} style="cursor:pointer;margin-top: 20px;" src={closeImage} />
+            </div>
+        </div>
+        <div class="row">
+            <p class="col-lg-12 text-center font-class-5" style="margin-top: 20px;">Comment relever mon compteur gaz?
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <img style="margin-top: 20px;
+                " src={infosGaz} />
+            </div>
+        </div>
+    </div>
+
+    <div if:true={isModalElecOpen} class="vi-modal-gaz container">
+        <div class="row">
+            <div class="col-lg-10 text-center"></div>
+            <div class="col-lg-2 text-center">
+                <img title="Close" onclick={closeModalElec} style="cursor:pointer;margin-top: 20px;" src={closeImage} />
+            </div>
+        </div>
+        <div class="row">
+            <p class="col-lg-12 text-center font-class-5" style="margin-top: 20px;">Comment relever mon compteur
+                électrique?
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <img style="margin-top: 20px;" src={infosElec} />
+            </div>
+        </div>
+    </div>
+    <!-- "Fond grisé" des popups -->
+    <div onclick={closeModalGaz} class="vi-modal-background" if:true={isModalOpenBackgroundGaz}></div>
+    <div onclick={closeModalElec} class="vi-modal-background" if:true={isModalOpenBackgroundElec}></div>
+</template>

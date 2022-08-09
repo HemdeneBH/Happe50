@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EmailRisque__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Ce champ est un flag qui sera renseigné par le TEL. 
+Si la checkbox est à true cela signifie que le mail renseigné par le client n&apos;est pas valide</description>
+    <externalId>false</externalId>
+    <label>Email Risque</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,40 @@
+<!--
+  @description       : 
+  @author            : Badr Eddine Belkarchi
+  @group             : 
+  @last modified on  : 04-29-2022
+  @last modified by  : Badr Eddine Belkarchi
+-->
+<template>
+    <div data-id='pageContent' class={theme}>
+        <div class="hp-coordonneesBancaires c-content-bg slds-col">
+            <div class="hp-bigTitle">{title}</div>
+
+            <template if:true={isPrelevement}>
+                <div class="hp-bloc">
+                    <div class="title">Mon IBAN :</div>
+                    <div class="soustitle">{IBAN}</div>
+                </div>
+            </template>
+
+            <div class="hp-bloc">
+                <div class="title">Modalité de paiement :</div>
+                <div class="subtitle">{modePaiement}</div>
+            </div>
+
+            <template if:true={isPrelevement}>
+            <div class="hp-link">
+                <a class="hp-modifPaiement" onclick={handleNavigationToMesFactures}>
+                    <span class="leftBloc">
+                        Modifier mon moyen de paiement
+                    </span>
+                    <span class="rightBloc">
+                        <span class=" chevron right"></span>
+                    </span>  
+                </a>
+            </div>
+            </template>
+            
+        </div>
+    </div>
+</template>

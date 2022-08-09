@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HasElementTypeToLwcTemplateMapping__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Checked if the OmniScript has an Element Type To LWC Component Mapping defined. We will not copy the whole Mapping due to text length.</description>
+    <externalId>false</externalId>
+    <label>Has Top Level LWC Override</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

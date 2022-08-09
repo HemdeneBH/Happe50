@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Premier_raccordement__c</fullName>
+    <externalId>false</externalId>
+    <label>Premier raccordement</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>oui</fullName>
+                <default>false</default>
+                <label>oui</label>
+            </value>
+            <value>
+                <fullName>non</fullName>
+                <default>false</default>
+                <label>non</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

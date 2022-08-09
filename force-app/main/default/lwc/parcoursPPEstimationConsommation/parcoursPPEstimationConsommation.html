@@ -1,0 +1,1570 @@
+<template>
+	<div class="container" style="margin-bottom: 70px" data-id="topPage">
+
+		<div class="row">
+
+			<h1 class="col-lg-12 text-center" style="margin-top: 50px;">Estimation tarifaire</h1>
+			
+		</div>
+		<div class="row">
+			<div class="col-lg-12 text-center" style="margin-top: 30px;">
+				<p class="font-class-1">Besoin de voir votre mensualité?</p>
+				<p class="font-class-1">Estimez votre budget pour éviter les mauvaises surprises</p>
+			</div>
+		</div>
+		<br />
+		<div class="row" style="margin-top: 20px;">
+			<div class="col-lg-2"></div>
+			<div class="col-lg-4 text-center justify-content-center">
+				<button type="button" class="btn btn-outline-primary" onclick={handleButtonClick}
+					data-id="Connais ma consommation" data-current={isConnaisMaConso}>
+					<div style="position:relative" onclick={handleButtonClick} class="mb-4"
+						data-id="Connais ma consommation">
+						<span class="showImageOnHover" onclick={handleButtonClick} data-id="Connais ma consommation">
+							<img class="btn-img-size" src={MaConsommationEnergie_Blanc} onclick={handleButtonClick}
+								data-id="Connais ma consommation">
+						</span>
+						<span class="hideImageOnHover" onclick={handleButtonClick} data-id="Connais ma consommation">
+							<img class="btn-img-size" src={MaConsommationEnergie_Bleu} onclick={handleButtonClick}
+								data-id="Connais ma consommation">
+						</span>
+					</div>
+					<p class="font-class-1" onclick={handleButtonClick} data-id="Connais ma consommation">Saisir la
+						consommation d'énergie</p>
+				</button>
+			</div>
+			<div class="col-lg-4 text-center justify-content-center">
+				<button type="button" class="btn btn-outline-primary" onclick={handleButtonClick}
+					data-id="Souhaite estimer" data-current={isSouhaiteEstimer}>
+					<div style="position:relative" onclick={handleButtonClick} class="mb-4" data-id="Souhaite estimer">
+						<span class="showImageOnHover" onclick={handleButtonClick} data-id="Souhaite estimer">
+							<img class="btn-img-size " src={FaireUneEstimation_Blanc} onclick={handleButtonClick}
+								data-id="Souhaite estimer">
+						</span>
+						<span class="hideImageOnHover" onclick={handleButtonClick} data-id="Souhaite estimer">
+							<img class="btn-img-size " src={FaireUneEstimation_Bleu} onclick={handleButtonClick}
+								data-id="Souhaite estimer">
+						</span>
+					</div>
+					<p class="font-class-1" onclick={handleButtonClick} data-id="Souhaite estimer">Estimer la
+						consommation d'énergie</p>
+				</button>
+			</div>
+		</div>
+		<div class="row" style="margin-top: 20px;">
+			<div class="col-lg-12 text-center">
+				<span style="cursor:pointer;color: rgba(0, 157, 233, 1);font-size:20px;text-decoration: underline;"
+					onclick={handleButtonClick} data-id="passerEtape" data-current="Passer cette étape">Passer cette
+					étape</span>
+			</div>
+		</div>
+		<br /><br />
+
+		<template if:true={isConnaisMaConso}>
+
+			<template if:true={isElectricite}>
+
+				<div class="slds-m-vertical_medium">
+					<div class="row">
+						<div class="container">
+							<div class="row">
+								<div class="col-lg-3 text-center"></div>
+								<div class="col-lg-6 text-center">
+									<div class="container"
+										style="    border: 1px solid;border-radius: 16px;border-color: rgba(0, 157, 233, 1);">
+										<div class="text-left">
+											<br /><br />
+											<span
+												style="margin-left: 30px;margin-right: 30px;color: rgba(0, 157, 233, 1);font-size:30px;">Consommation
+												d'électricité</span>
+											<br /><br />
+										</div>
+										<div class="text-left">
+											<p class="font-class-1" style="margin-left: 30px;margin-right: 30px;">Quelle
+												est votre consommation</p>
+											<p class="font-class-1" style="margin-left: 30px;margin-right: 30px;">
+												annuelle électrique?</p>
+											<br /><br />
+											<br /><br />
+											<div class="text-left">
+												<p class="font-class-1" style="margin-left: 30px;margin-right: 30px;">
+													Avez-vous l'option heures</p>
+												<p class="font-class-1" style="margin-left: 30px;margin-right: 30px;">
+													pleines/heures creuses?</p>
+											</div>
+
+											<!--div class="row mb-5" style="margin-top:10px">
+													<div class="col-lg-1 text-left"></div>
+													<div  class="col-lg-10 text-left">	
+															<label class="switch">
+																	<input type="checkbox" data-id="HP/HC" name="HP/HC" data-current={isHPHC} onclick={handleButtonClick} 
+																				 value={_record.VI_SaisieConsommationElec_HP_HC__c} checked={_record.VI_SaisieConsommationElec_HP_HC__c}>
+																	<span class="slider round"></span>
+																	<span class="input-group-addon font-class-1 text-left" style="margin-left: 80px;margin-right: 30px;">HP/HC</span>
+															</label>
+													</div>
+											</div-->
+
+											<div class="row mb-5" style="margin-top:10px">
+												<div class="col-lg-1 text-left"></div>
+												<div class="col-lg-2 text-left">
+													<label class="switch">
+														<input type="checkbox" data-id="HP/HC" name="HP/HC"
+															data-current={isHPHC} onclick={handleButtonClick}
+															value={_record.VI_SaisieConsommationElec_HP_HC__c}
+															checked={_record.VI_SaisieConsommationElec_HP_HC__c}>
+														<span class="slider round"></span>
+														<!--span class="input-group-addon font-class-1 text-left" style="margin-left: 80px;margin-right: 30px;">HP/HC</span-->
+													</label>
+												</div>
+												<div class="col-lg-1 text-left font-class-1 mt-1">HP/HC</div>
+												<div class="col-lg-9 text-left"></div>
+											</div>
+
+
+											<template if:true={isHPHC}>
+
+												<div class="row mb-5" style="margin-top:10px">
+													<div class="col-lg-1 text-left"></div>
+													<div class="col-lg-10 text-left" style="border-bottom-width: 1px;
+												border-bottom-color:  rgb(227, 227, 227); border-bottom-style: solid;">
+														<div class="form-group">
+															<div class="row">
+																<div class="col-lg-10">
+																	<template if:false={redLabelHP}>
+																		<label for="HeuresPleines">Heures
+																			pleines*</label>
+																	</template>
+																	<template if:true={redLabelHP}>
+																		<label for="HeuresPleines"
+																			style="color: rgba(255,0,0)">Heures
+																			pleines*</label>
+																	</template>
+																	<br />
+																	<input type="number" onkeydown={handleDecimal}
+																		style="border-top:0;border-bottom:0;border-left:0;border-right:0;"
+																		onwheel={removeNumberScroll}
+																		placeholder="000000" name="HeuresPleines"
+																		data-id="IndexHP"
+																		oninput={handleSaisieConsoElec}
+																		value={_record.VI_SaisieConsommationHeuresPleines__c}
+																		class="font-class-1"></input>
+																</div>
+																<div class="col-lg-2" style="align-self: flex-end;">
+																	<span class="font-class-1">kWh</span>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="col-lg-1 text-left"></div>
+												</div>
+												<div class="row mb-5" style="margin-top:10px">
+													<div class="col-lg-1 text-left"></div>
+													<div class="col-lg-10 text-left" style="border-bottom-width: 1px;
+												border-bottom-color:  rgb(227, 227, 227); border-bottom-style: solid;">
+														<div class="form-group">
+															<div class="row">
+																<div class="col-lg-10">
+
+																	<template if:false={redLabelHC}>
+																		<label for="HeuresCreuses">Heures
+																			creuses*</label>
+																	</template>
+																	<template if:true={redLabelHC}>
+																		<label for="HeuresCreuses"
+																			style="color: rgba(255,0,0)">Heures
+																			creuses*</label>
+																	</template>
+
+																	<br />
+																	<input type="number" onkeydown={handleDecimal}
+																		style="border-top:0;border-bottom:0;border-left:0;border-right:0;"
+																		onwheel={removeNumberScroll}
+																		placeholder="000000" name="HeuresCreuses"
+																		data-id="IndexHC"
+																		oninput={handleSaisieConsoElec}
+																		value={_record.VI_SaisieConsommationHeuresCreuses__c}
+																		class="font-class-1"></input>
+																</div>
+																<div class="col-lg-2" style="align-self: flex-end;">
+																	<span class="font-class-1">kWh</span>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="col-lg-1 text-left"></div>
+												</div>
+
+												<br /><br />
+
+												<!-- Start DDPCM - 1004 -->
+												<div class="text-left">
+													<p class="font-class-1" style="margin-left: 30px;margin-right: 30px;">Disposez-vous d'un
+														compteur communicant pour l'électricité ?</p>
+												</div>
+
+												<div class="row mb-5" style="margin-top:10px">
+													<div class="col-lg-1 text-left"></div>
+													<div class="col-lg-2 text-left">
+														<label class="switch">
+															<input type="checkbox" data-id="compteurLinky" name="compteurLinky" data-current={iscompteurLinky}
+																onclick={handleSaisieConsoElec}
+																value={_record.VI_CompteurCommunicantLinkySaisieConso__c}
+																checked={_record.VI_CompteurCommunicantLinkySaisieConso__c}>
+															<span class="slider round"></span>
+														</label>
+													</div>
+													<div class="col-lg-5 text-left font-class-1 mt-1">Compteur Linky™</div>
+													<div class="col-lg-4 text-left"></div>
+												</div>
+
+												<br /><br />
+												<!-- End DDPCM - 1004 -->
+
+												<div class="text-left">
+													<p class="font-class-1"
+														style="margin-left: 30px;margin-right: 30px;">Quelle est la
+														puissance de votre</p>
+													<p class="font-class-1"
+														style="margin-left: 30px;margin-right: 30px;">compteur
+														d'électricité?</p>
+												</div>
+												<br /><br />
+												<div class="text-left">
+													<template if:false={redLabelPuissanceCompteur}>
+														<label style="margin-left: 30px;margin-right: 30px;">Puissance
+											compteur d'électricité*</label>
+													</template>
+													<template if:true={redLabelPuissanceCompteur}>
+														<label
+															style="margin-left: 30px;margin-right: 30px;color: rgba(255,0,0)">
+															Puissance compteur d'électricité*</label>
+													</template>
+												</div>
+												<div class="form-group">
+													<select class="form-control"
+														style="margin-left: 10px;margin-right: 30px"
+														data-id="PuissanceCompteur" name="PuissanceCompteur"
+														data-current={isPuissanceCompteur}
+														oninput={handleSaisieConsoElec} onchange={handleSelect}
+														selected={_record.VI_PuissanceCompteurElecSaisieConso__c}
+														value={_record.VI_PuissanceCompteurElecSaisieConso__c}>
+														<option selected disabled hidden>
+															{_record.VI_PuissanceCompteurElecSaisieConso__c}</option>
+														<option>6</option>
+														<option>9</option>
+														<option>12</option>
+														<option>15</option>
+														<option>18</option>
+														<option>24</option>
+														<option>30</option>
+														<option>36</option>
+													</select>
+												</div>
+											</template>
+
+											<template if:false={isHPHC}>
+
+												<div class="row mb-5" style="margin-top:10px">
+													<div class="col-lg-1 text-left"></div>
+													<div class="col-lg-10 text-left" style="border-bottom-width: 1px;
+												border-bottom-color:  rgb(227, 227, 227); border-bottom-style: solid;">
+														<div class="form-group">
+															<div class="row">
+																<div class="col-lg-10">
+																	<template if:false={redLabelHP}>
+																		<label
+																			for="HeuresPleines">Heures pleines*</label>
+																	</template>
+																	<template if:true={redLabelHP}>
+																		<label for="HeuresPleines"
+																			style="color: rgba(255,0,0)">Heures
+																			pleines*</label>
+																	</template>
+																	<br />
+																	<input type="number" onkeydown={handleDecimal}
+																		style="border-top:0;border-bottom:0;border-left:0;border-right:0;"
+																		onwheel={removeNumberScroll}
+																		placeholder="000000" name="HeuresPleines"
+																		oninput={handleSaisieConsoElec}
+																		data-id="IndexHP"
+																		value={_record.VI_SaisieConsommationHeuresPleines__c}
+																		class="font-class-1"></input>
+																</div>
+																<div class="col-lg-2" style="align-self: flex-end;">
+																	<span class="font-class-1">kWh</span>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="col-lg-1 text-left"></div>
+												</div>
+
+												<br /><br />
+
+												<!-- Start DDPCM - 1004 -->
+												<div class="text-left">
+													<p class="font-class-1" style="margin-left: 30px;margin-right: 30px;">Disposez-vous d'un
+														compteur communicant pour l'électricité ?</p>
+												</div>
+
+												<div class="row mb-5" style="margin-top:10px">
+													<div class="col-lg-1 text-left"></div>
+													<div class="col-lg-2 text-left">
+														<label class="switch">
+															<input type="checkbox" data-id="compteurLinky" name="compteurLinky" data-current={iscompteurLinky}
+																onclick={handleSaisieConsoElec}
+																value={_record.VI_CompteurCommunicantLinkySaisieConso__c}
+																checked={_record.VI_CompteurCommunicantLinkySaisieConso__c}>
+															<span class="slider round"></span>
+														</label>
+													</div>
+													<div class="col-lg-5 text-left font-class-1 mt-1">Compteur Linky™</div>
+													<div class="col-lg-4 text-left"></div>
+												</div>
+
+												<br /><br />
+												<!-- End DDPCM - 1004 -->
+
+												<div class="text-left">
+													<p class="font-class-1"
+														style="margin-left: 30px;margin-right: 30px;">Quelle est la
+														puissance de votre</p>
+													<p class="font-class-1"
+														style="margin-left: 30px;margin-right: 30px;">compteur
+														d'électricité?</p>
+												</div>
+												<br /><br />
+												<div class="text-left">
+													<template if:false={redLabelPuissanceCompteur}>
+														<label style="margin-left: 30px;margin-right: 30px;">Puissance
+											compteur d'électricité*</label>
+													</template>
+													<template if:true={redLabelPuissanceCompteur}>
+														<label
+															style="margin-left: 30px;margin-right: 30px;color: rgba(255,0,0)">
+															Puissance compteur d'électricité*</label>
+													</template>
+												</div>
+												<div class="form-group">
+													<select class="form-control"
+														style="margin-left: 10px;margin-right: 30px"
+														data-id="PuissanceCompteur" name="PuissanceCompteur"
+														data-current={isPuissanceCompteur}
+														oninput={handleSaisieConsoElec}
+														selected={_record.VI_PuissanceCompteurElecSaisieConso__c}
+														value={_record.VI_PuissanceCompteurElecSaisieConso__c}>
+														<option selected disabled hidden>
+															{_record.VI_PuissanceCompteurElecSaisieConso__c}</option>
+														<option>3</option>
+														<option>6</option>
+														<option>9</option>
+														<option>12</option>
+														<option>15</option>
+														<option>18</option>
+														<option>24</option>
+														<option>30</option>
+														<option>36</option>
+													</select>
+												</div>
+											</template>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</template>
+
+			<template if:true={isGaz}>
+
+				<div class="slds-m-vertical_medium">
+					<div class="row">
+						<div class="container">
+							<div class="row">
+								<div class="col-lg-3 text-center"></div>
+								<div class="col-lg-6 text-center">
+									<div class="container"
+										style="    border: 1px solid;border-radius: 16px;border-color: rgba(0, 157, 233, 1);">
+										<div class="text-left">
+											<br /><br />
+											<span
+												style="margin-left: 30px;margin-right: 30px;color: rgba(0, 157, 233, 1);font-size:30px;">Consommation
+												de gaz</span>
+											<br /><br />
+										</div>
+										<div class="text-left">
+											<p class="font-class-1" style="margin-left: 30px;margin-right: 30px;">Quelle
+												est votre consommation annuelle en gaz?</p>
+										</div>
+
+										<div class="row mb-5" style="margin-top:10px">
+											<div class="col-lg-1 text-left"></div>
+											<div class="col-lg-10 text-left" style="border-bottom-width: 1px; 
+																border-bottom-color:  rgb(227, 227, 227); border-bottom-style: solid;">
+												<div class="form-group">
+													<div class="row">
+														<div class="col-lg-10">
+															<template if:false={redLabelGaz}>
+																<label for="ConsommationAnnuelGaz">Consommation annuelle
+																	en gaz*</label>
+															</template>
+															<template if:true={redLabelGaz}>
+																<label for="ConsommationAnnuelGaz"
+																	style="color: rgba(255,0,0)">Consommation annuelle
+																	en gaz*</label>
+															</template>
+															<input type="number" onkeydown={handleDecimal}
+																placeholder="000000" name="ConsommationAnnuelGaz"
+																onwheel={removeNumberScroll} data-id="IndexGaz"
+																oninput={handleSaisieConsoElec}
+																value={_record.VI_ConsommationGazKwHSaisieConso__c}
+																class="font-class-1 inputConsoAnnu"></input>
+														</div>
+														<div class="col-lg-2" style="align-self: flex-end;">
+															<span class="font-class-1">kWh</span>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="col-lg-1 text-left"></div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</template>
+
+			<template if:true={isGazEtElectricite}>
+
+				<div class="row">
+					<div class="col-lg-1 text-center"></div>
+					<div class="col-lg-5 text-center">
+						<div class="container"
+							style="    border: 1px solid;border-radius: 16px;border-color: rgba(0, 157, 233, 1);">
+							<div class="row mb-5" style="margin-top:10px">
+								<div class="col-lg-12 text-center">
+									<br /><br />
+									<p class="font-class-1" style="color: rgba(0, 157, 233, 1)">Consommation
+										d'électricité</p>
+								</div>
+							</div>
+
+							<div class="text-left">
+								<p class="font-class-1" style="margin-left: 30px;margin-right: 30px;">Avez-vous l'option
+									heures pleines / heures creuses?</p>
+							</div>
+
+							<!--div class="row mb-5" style="margin-top:10px">
+						<div class="col-lg-1 text-left"></div>
+                      <div class="col-lg-11 text-left">
+                          <label class="switch">
+						<input type="checkbox" data-id="HP/HC" name="HP/HC" data-current={isHPHC} onclick={handleButtonClick}
+							value={_record.VI_SaisieConsommationElec_HP_HC__c} checked={_record.VI_SaisieConsommationElec_HP_HC__c}>
+						<span class="slider round"></span>
+						<span class="input-group-addon font-class-1 text-left"
+							style="margin-left: 80px;margin-right: 30px;">HP/HC</span>
+                           </label>
+                      </div>
+				</div-->
+
+							<div class="row mb-5" style="margin-top:10px">
+								<div class="col-lg-1 text-left"></div>
+								<div class="col-lg-2 text-left">
+									<label class="switch">
+										<input type="checkbox" data-id="HP/HC" name="HP/HC" data-current={isHPHC}
+											onclick={handleButtonClick}
+											value={_record.VI_SaisieConsommationElec_HP_HC__c}
+											checked={_record.VI_SaisieConsommationElec_HP_HC__c}>
+										<span class="slider round"></span>
+										<!--span class="input-group-addon font-class-1 text-left" style="margin-left: 80px;margin-right: 30px;">HP/HC</span-->
+									</label>
+								</div>
+								<div class="col-lg-1 text-left font-class-1 mt-1">HP/HC</div>
+								<div class="col-lg-9 text-left"></div>
+							</div>
+
+							<template if:true={isHPHC}>
+
+								<div class="row mb-5" style="margin-top:10px">
+									<div class="col-lg-1 text-left"></div>
+									<div class="col-lg-10 text-left" style="border-bottom-width: 1px;
+                        	border-bottom-color:  rgb(227, 227, 227); border-bottom-style: solid;">
+										<div class="form-group">
+											<div class="row">
+												<div class="col-lg-10">
+													<template if:false={redLabelHP}>
+														<label for="HeuresPleines">Heures pleines*</label>
+													</template>
+													<template if:true={redLabelHP}>
+														<label for="HeuresPleines" style="color: rgba(255,0,0)">Heures
+															pleines*</label>
+													</template>
+													<input type="number" onkeydown={handleDecimal}
+														style="border-top:0;border-bottom:0;border-left:0;border-right:0;"
+														placeholder="000000" name="HeuresPleines" data-id="IndexHP"
+														oninput={handleSaisieConsoElec} onwheel={removeNumberScroll}
+														value={_record.VI_SaisieConsommationHeuresPleines__c}
+														class="font-class-1"></input>
+												</div>
+												<div class="col-lg-2" style="align-self: flex-end;">
+													<span class="font-class-1">kWh</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-1 text-left"></div>
+								</div>
+								<div class="row mb-5" style="margin-top:10px">
+									<div class="col-lg-1 text-left"></div>
+									<div class="col-lg-10 text-left" style="border-bottom-width: 1px;
+                         	border-bottom-color:  rgb(227, 227, 227); border-bottom-style: solid;">
+										<div class="form-group">
+											<div class="row">
+												<div class="col-lg-10">
+													<template if:false={redLabelHC}>
+														<label for="HeuresCreuses">Heures creuses*</label>
+													</template>
+													<template if:true={redLabelHC}>
+														<label for="HeuresCreuses" style="color: rgba(255,0,0)">Heures
+															creuses*</label>
+													</template>
+													<input type="number" onkeydown={handleDecimal}
+														style="border-top:0;border-bottom:0;border-left:0;border-right:0;"
+														placeholder="000000" name="HeuresCreuses" data-id="IndexHC"
+														oninput={handleSaisieConsoElec} onwheel={removeNumberScroll}
+														value={_record.VI_SaisieConsommationHeuresCreuses__c}
+														class="font-class-1"></input>
+												</div>
+												<div class="col-lg-2" style="align-self: flex-end;">
+													<span class="font-class-1">kWh</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-1 text-left"></div>
+								</div>
+
+								<br /><br />
+
+								<!-- Start DDPCM - 1004 -->
+								<div class="text-left">
+									<p class="font-class-1" style="margin-left: 30px;margin-right: 30px;">Disposez-vous d'un
+										compteur communicant pour l'électricité ?</p>
+								</div>
+	
+								<div class="row mb-5" style="margin-top:10px">
+									<div class="col-lg-1 text-left"></div>
+									<div class="col-lg-2 text-left">
+										<label class="switch">
+											<input type="checkbox" data-id="compteurLinky" name="compteurLinky" data-current={iscompteurLinky}
+												onclick={handleButtonClick}
+												value={_record.VI_CompteurCommunicantLinkySaisieConso__c}
+												checked={_record.VI_CompteurCommunicantLinkySaisieConso__c}>
+											<span class="slider round"></span>
+										</label>
+									</div>
+									<div class="col-lg-5 text-left font-class-1 mt-1">Compteur Linky™</div>
+									<div class="col-lg-4 text-left"></div>
+								</div>
+								
+								<br /><br />
+								<!-- End DDPCM - 1004 -->
+
+								<div class="text-left">
+									<p class="font-class-1" style="margin-left: 30px;margin-right: 30px;">Quelle est la
+										puissance de votre compteur d'électricité?</p>
+								</div>
+								<br /><br />
+								<div class="text-left">
+									<template if:false={redLabelPuissanceCompteur}>
+										<label style="margin-left: 30px;margin-right: 30px;">Puissance
+											compteur d'électricité*</label>
+									</template>
+									<template if:true={redLabelPuissanceCompteur}>
+										<label  style="margin-left: 30px;margin-right: 30px;color: rgba(255,0,0)">Puissance
+											compteur d'électricité*</label>
+									</template>
+								</div>
+								<div class="form-group">
+									<select class="form-control" style="margin-left: 10px;margin-right: 30px"
+										data-id="PuissanceCompteur" name="PuissanceCompteur"
+										data-current={isPuissanceCompteur} oninput={handleSaisieConsoElec}
+										selected={_record.VI_PuissanceCompteurElecSaisieConso__c}
+										value={_record.VI_PuissanceCompteurElecSaisieConso__c}>
+										<option selected disabled hidden>
+											{_record.VI_PuissanceCompteurElecSaisieConso__c}</option>
+										<option>6</option>
+										<option>9</option>
+										<option>12</option>
+										<option>15</option>
+										<option>18</option>
+										<option>24</option>
+										<option>30</option>
+										<option>36</option>
+									</select>
+								</div>
+							</template>
+
+							<template if:false={isHPHC}>
+
+								<div class="row mb-5" style="margin-top:10px">
+									<div class="col-lg-1 text-left"></div>
+									<div class="col-lg-10 text-left" style="border-bottom-width: 1px;
+                        	border-bottom-color:  rgb(227, 227, 227); border-bottom-style: solid;">
+										<div class="form-group">
+											<div class="row">
+												<div class="col-lg-10">
+													<template if:false={redLabelHP}>
+														<label for="HeuresPleines">Heures pleines*</label>
+													</template>
+													<template if:true={redLabelHP}>
+														<label for="HeuresPleines" style="color: rgba(255,0,0)">Heures
+															pleines*</label>
+													</template>
+													<input type="number" onkeydown={handleDecimal}
+														style="border-top:0;border-bottom:0;border-left:0;border-right:0;"
+														placeholder="000000" name="HeuresPleines" data-id="IndexHP"
+														oninput={handleSaisieConsoElec} onwheel={removeNumberScroll}
+														value={_record.VI_SaisieConsommationHeuresPleines__c}
+														class="font-class-1"></input>
+												</div>
+												<div class="col-lg-2" style="align-self: flex-end;">
+													<span class="font-class-1">kWh</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-1 text-left"></div>
+								</div>
+
+								<br /><br />
+								<!-- Start DDPCM - 1004 -->
+								<div class="text-left">
+									<p class="font-class-1" style="margin-left: 30px;margin-right: 30px;">Disposez-vous d'un
+										compteur communicant pour l'électricité ?</p>
+								</div>
+	
+								<div class="row mb-5" style="margin-top:10px">
+									<div class="col-lg-1 text-left"></div>
+									<div class="col-lg-2 text-left">
+										<label class="switch">
+											<input type="checkbox" data-id="compteurLinky" name="compteurLinky" data-current={iscompteurLinky}
+												onclick={handleButtonClick}
+												value={_record.VI_CompteurCommunicantLinkySaisieConso__c}
+												checked={_record.VI_CompteurCommunicantLinkySaisieConso__c}>
+											<span class="slider round"></span>
+										</label>
+									</div>
+									<div class="col-lg-5 text-left font-class-1 mt-1">Compteur Linky™</div>
+									<div class="col-lg-4 text-left"></div>
+								</div>
+								
+								<br /><br />
+								<!-- End DDPCM - 1004 -->
+								<div class="text-left">
+									<p class="font-class-1" style="margin-left: 30px;margin-right: 30px;">Quelle est la
+										puissance de votre compteur d'électricité?</p>
+								</div>
+								<br /><br />
+								<div class="text-left">
+									<template if:false={redLabelPuissanceCompteur}>
+										<label style="margin-left: 30px;margin-right: 30px;">Puissance
+											compteur d'électricité*</label>
+									</template>
+									<template if:true={redLabelPuissanceCompteur}>
+										<label
+											style="margin-left: 30px;margin-right: 30px;color: rgba(255,0,0)">Puissance
+											compteur d'électricité*</label>
+									</template>
+								</div>
+								<div class="form-group">
+									<select class="form-control" style="margin-left: 10px;margin-right: 30px"
+										data-id="PuissanceCompteur" name="PuissanceCompteur"
+										data-current={isPuissanceCompteur} oninput={handleSaisieConsoElec}
+										selected={_record.VI_PuissanceCompteurElecSaisieConso__c}
+										value={_record.VI_PuissanceCompteurElecSaisieConso__c}>
+										<option selected disabled hidden>
+											{_record.VI_PuissanceCompteurElecSaisieConso__c}</option>
+										<template if:false={isHPHC}></template>
+										<option>3</option>
+										<option>6</option>
+										<option>9</option>
+										<option>12</option>
+										<option>15</option>
+										<option>18</option>
+										<option>24</option>
+										<option>30</option>
+										<option>36</option>
+									</select>
+								</div>
+							</template>
+
+
+						</div>
+
+					</div>
+
+
+					<div class="col-lg-5 text-center">
+						<div class="container"
+							style="    border: 1px solid;border-radius: 16px;border-color: rgba(0, 157, 233, 1);">
+							<div class="row mb-5" style="margin-top:10px">
+								<div class="col-lg-12 text-center">
+									<br /><br />
+									<p class="font-class-1" style="color: rgba(0, 157, 233, 1)">Consommation de gaz</p>
+								</div>
+							</div>
+
+							<div class="text-left">
+								<p class="font-class-1" style="margin-left: 30px;margin-right: 30px;">Quelle est votre
+									consommation annuelle en gaz?</p>
+							</div>
+
+							<div class="row mb-5" style="margin-top:10px">
+								<div class="col-lg-1 text-left"></div>
+								<div class="col-lg-10 text-left" style="border-bottom-width: 1px; 
+													border-bottom-color:  rgb(227, 227, 227); border-bottom-style: solid;">
+									<div class="form-group">
+										<div class="row">
+
+											<div class="col-lg-10">
+												<template if:false={redLabelGaz}>
+													<label for="ConsommationAnnuelGaz">Consommation annuelle en
+														gaz*</label>
+												</template>
+												<template if:true={redLabelGaz}>
+													<label for="ConsommationAnnuelGaz"
+														style="color: rgba(255,0,0)">Consommation annuelle en
+														gaz*</label>
+												</template>
+												<input type="number"
+													style="border-top:0;border-bottom:0;border-left:0;border-right:0;"
+													onkeydown={handleDecimal} placeholder="000000"
+													name="ConsommationAnnuelGaz" onwheel={removeNumberScroll}
+													data-id="IndexGaz" oninput={handleSaisieConsoElec}
+													value={_record.VI_ConsommationGazKwHSaisieConso__c}
+													class="font-class-1"></input>
+											</div>
+											<div class="col-lg-2" style="align-self: flex-end;">
+												<span class="font-class-1">kWh</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-1 text-left"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-1 text-center"></div>
+
+
+				</div>
+			</template>
+
+		</template>
+
+		<template if:true={isSouhaiteEstimer}>
+
+			<div class="slds-m-vertical_medium">
+				<div class="row">
+					<div class="container">
+						<div class="row">
+							<!--div class="col-lg-4 text-center"></div>
+					<div class="col-lg-12 text-left"-->
+
+							<!--div class="col-lg-12 text-center"></div-->
+							<div class="col-lg-10 text-centre" style="margin: 0 auto;">
+
+								<div class="container"
+									style="border: 1px solid;border-radius: 16px;border-color: rgba(0, 157, 233, 1);">
+									<br /><br />
+									<br /><br />
+									
+									<form onsubmit={onFormSubmit}>
+										<div class="form-group">
+											<div class="input-group">
+												<template if:false={redLabelTypeLogement}>
+													<label for="TypeDeLogement" class="font-class-1"
+														style="margin-left: 40px;margin-right: 30px;">Vous habitez dans :* </label>
+												</template>
+												<template if:true={redLabelTypeLogement}>
+													<label for="TypeDeLogement" class="font-class-1"
+														style="margin-left: 40px;margin-right: 30px;color: rgba(255,0,0)">
+														Vous habitez dans :* </label>
+												</template>
+												<span>
+													<input type="radio" data-id="TypeDeLogement" id="TypeMaison" name="TypeDeLogement"
+														data-current={TypeDeLogement} onclick={handleEstimer} value="Individuel"
+														checked={isTypeMaison}>
+													<label for="TypeMaison" class="font-class-1"
+														style="margin-left: 10px;margin-right: 30px;">une maison</label>
+													<input type="radio" data-id="TypeDeLogement" id="TypeAppartement" name="TypeDeLogement"
+														data-current={TypeDeLogement} onclick={handleEstimer} value="Collectif"
+														checked={isTypeAppartement}>
+													<label for="TypeAppartement" class="font-class-1"
+														style="margin-left: 10px;margin-right: 30px;">un appartement</label>
+												</span>
+											</div>
+										</div>
+									</form>
+
+									<br /><br />
+
+									<form onsubmit={onFormSubmit}>
+										<div class="form-group">
+											<div class="input-group">
+												<template if:false={redLabelTypeResidence}>
+													<span class="input-group-addon font-class-1 text-right"
+														style="margin-left: 40px;margin-right: 80px;">Ce logement est votre
+														résidence :* </span>
+												</template>
+												<template if:true={redLabelTypeResidence}>
+													<span class="input-group-addon font-class-1 text-right"
+														style="margin-left: 40px;margin-right: 80px;color: rgba(255,0,0)">Ce
+														logement est votre résidence :* </span>
+												</template>
+												<span>
+													<input type="radio" data-id="TypeResidence" id="TypeResidencePrincipale" name="TypeResidence"
+														data-current={TypeResidence} onclick={handleEstimer} value="Principale"
+														checked={isResidencePrincipale}>
+													<label for="TypeResidencePrincipale" class="font-class-1"
+														style="margin-left: 10px;margin-right: 30px;">Principale</label>
+			
+													<input type="radio" data-id="TypeResidence" id="TypeResidenceSecondaire" name="TypeResidence"
+														data-current={TypeResidence} onclick={handleEstimer} value="Secondaire"
+														checked={isResidenceSecondaire}>
+													<label for="TypeResidenceSecondaire" class="font-class-1"
+														style="margin-left: 10px;margin-right: 30px;">Secondaire</label>
+												</span>
+											</div>
+										</div>
+									</form>
+									
+									<br /><br />
+
+									<form onsubmit={onFormSubmit}>
+										<div class="form-group">
+											<div class="input-group">
+												<template if:false={redLabelSurfaceLogement}>
+													<label for="Surface" class="font-class-1"
+														style="margin-left: 40px;margin-right: 10px;">
+														La surface de votre logement est de :*</label>
+												</template>
+												<template if:true={redLabelSurfaceLogement}>
+													<label for="Surface" class="font-class-1"
+														style="margin-left: 40px;margin-right: 10px;color: rgba(255,0,0)">
+														La surface de votre logement est de :* </label>
+												</template>
+												<lightning-helptext style="position: relative;z-index: 0;"
+													content="Minimum de la surface à renseigner : 1 m²">
+												</lightning-helptext>
+												<input type="number" min="0"
+													style="margin-left: 20px;margin-right: 20px;text-align:center;width:80px;font-size: 20px;"
+													class="form-control" name="Surface" onwheel={removeNumberScroll}
+													onkeydown={handleDecimal} data-id="Surface" oninput={handleEstimer}
+													placeholder="" value={_record.VI_SurfaceLogementSaisieConso__c}>
+												<span class="input-group-addon font-class-1 text-right"
+													style="margin-left: 0px;margin-right: 30px;">m²</span>
+
+											</div>
+											
+										</div>
+									</form>
+
+									<br /><br />
+
+									<form onsubmit={onFormSubmit}>
+										<div class="form-group">
+											<div class="input-group">
+												<!-- <template if:false={redLabelNombreOccupant}>
+					 <label for="NombreOccupants" class="font-class-1" style="margin-left: 40px;margin-right: 30px;">Combien êtes-vous à occuper ce logement?*</label>
+					</template>
+					<template if:true={redLabelNombreOccupant}>
+					 <label for="NombreOccupants" class="font-class-1" style="margin-left: 40px;margin-right: 30px;color: rgba(255,0,0)">Combien êtes-vous à occuper ce logement?*</label>
+					</template>
+					<span class="input-group-addon vi-modal-container-mensualite-button">
+					 <button class="vi-modal-button-minus-mensualite"><span class="buttonMensualiteTextMinus">-</span></button
+						<label class="vi-modal-button-minus-mensualite"  onclick={handleMinus}> <span class="buttonMensualiteTextMinus">-</span></label>
+					</span>
+
+					<input type="number" style="margin-left: 35px;margin-right: 40px;text-align:center;width: 60px;" class="form-control1" name="NombreOccupants" onwheel={removeNumberScroll}
+						data-id="NombreOccupants"  oninput={handleEstimer} placeholder="1" value={_record.VI_NombreOccupantLogementSaisieConso__c}>
+			<label class="vi-modal-button-plus-mensualite" onclick={handlePlus}> <span class="buttonMensualiteTextPlus">+</span></label> -->
+												<template if:false={redLabelNombreOccupant}>
+													<label for="NombreOccupants" class="font-class-1"
+														style="margin-left: 40px;margin-right: 30px;">Combien êtes-vous
+														à occuper ce logement?</label>
+												</template>
+												<template if:true={redLabelNombreOccupant}>
+													<label for="NombreOccupants" class="font-class-1"
+														style="margin-left: 40px;margin-right: 30px;color: rgba(255,0,0)">Combien
+														êtes-vous à occuper ce logement?</label>
+												</template>
+												<div style="padding-left:30px">
+													<div>
+														<template if:false={colorGreyMinus}>
+															<button onclick={handleMinus} onkeydown={handleDecimal}
+																class="vi-modal-button-minus-mensualite"
+																style="border-color: var(--cerulean);color: var(--cerulean)">
+																<span
+																	class="buttonMensualiteTextMinus">-</span></button>
+														</template>
+														<template if:true={colorGreyMinus}>
+															<button onclick={handleMinus} onkeydown={handleDecimal}
+																class="vi-modal-button-minus-mensualite"
+																style="border-color: rgba(179, 179, 179);color: rgba(179, 179, 179)">
+																<span
+																	class="buttonMensualiteTextMinus">-</span></button>
+														</template>
+														<input type="string"
+															style="margin-left: 55px;margin-right: 10px;text-align:center;width:100px;font-size: 20px;background-color:white;"
+															class="form-control1" name="NombreOccupants"
+															onwheel={removeNumberScroll} onkeydown={handleDecimal}
+															data-id="NombreOccupants" oninput={handleEstimer}
+															placeholder="1"
+															value={StringNombreOccupantLogementSaisieConso}
+															disabled>
+														<template if:false={colorGreyPlus}>
+															<button onclick={handlePlus} onkeydown={handleDecimal}
+																class="vi-modal-button-plus-mensualite"
+																style="border-color: var(--cerulean);color: var(--cerulean)">
+																<span class="buttonMensualiteTextPlus">+</span></button>
+														</template>
+														<template if:true={colorGreyPlus}>
+															<button onclick={handlePlus} onkeydown={handleDecimal}
+																class="vi-modal-button-plus-mensualite"
+																style="border-color: rgba(179, 179, 179);color: rgba(179, 179, 179)">
+																<span class="buttonMensualiteTextPlus">+</span></button>
+														</template>
+
+													</div>
+												</div>
+											</div>
+										</div>
+									</form>
+
+									<br /><br />
+
+									<form onsubmit={onFormSubmit}>
+										<div class="form-group">
+											<div class="input-group">
+												<template if:false={redLabelAnneeConstruction}>
+													<label for="AnneeConstruction" class="font-class-1"
+														style="margin-left: 40px;margin-right: 30px;">Quelle est l'année de construction ?</label>
+												</template><template if:true={redLabelAnneeConstruction}>
+													<label for="AnneeConstruction" class="font-class-1"
+														style="margin-left: 10px;margin-right: 30px;color: rgba(255,0,0)">Quelle
+														est l’année de construction? </label>
+												</template>
+												<select class="form-control"
+													style="margin-left: 40px;margin-right: 30px;font-size: 20px;"
+													data-id="AnneeConstruction" name="AnneeConstruction"
+													oninput={handleEstimer}
+													selected={_record.VI_AnneeConstructionLogementSaisieConso__c}
+													value={_record.VI_AnneeConstructionLogementSaisieConso__c}>
+													<option selected disabled hidden>
+														{_record.VI_AnneeConstructionLogementSaisieConso__c}</option>
+													<option>Je ne sais pas</option>
+													<option>Avant 1975</option>
+													<option>Entre 1975 et 1988</option>
+													<option>Entre 1989 et 1999</option>
+													<option>Entre 2000 et 2005</option>
+													<option>Après 2005</option>
+												</select>
+											</div>
+										</div>
+									</form>
+
+									<br /><br />
+
+									<template if:true={isGaz}>
+										<form onsubmit={onFormSubmit}>
+											<div class="form-group">
+												<div class="input-group">
+													<template if:false={redLabelGazPar}>
+														<label for="OptionGazPar" class="font-class-1"
+															style="margin-left: 40px;margin-right: 30px;">Disposez-vous d'un compteur communicant pour le gaz (GazPar) ?</label>
+													</template>
+													<template if:true={redLabelGazPar}>
+														<label for="OptionGazPar" class="font-class-1"
+															style="margin-left: 40px;margin-right: 30px;color: rgba(255,0,0)">Disposez-vous d'un compteur communicant pour le gaz (GazPar) ?</label>
+													</template>
+													<div class="text-left">
+														<img onclick={openModalGazPar} class="question-hover" style="height:20px" src={iconQuestion} />
+													</div>
+													<div class="col-lg-2"></div>
+													<br>
+													<select class="form-control"
+														style="margin-left: 40px;margin-right: 30px;font-size: 20px;" data-id="OptionGazPar"
+														name="OptionGazPar" oninput={handleEstimer}
+														selected={_record.VI_SaisieEstimationConsoElec_GazPar__c}
+														value={_record.VI_SaisieEstimationConsoElec_GazPar__c}>
+														<option selected disabled hidden>
+															{_record.VI_SaisieEstimationConsoElec_GazPar__c}</option>
+														<option>Je ne sais pas</option>
+														<option>Oui</option>
+														<option>Non</option>
+													</select>
+												</div>
+											</div>
+										</form>
+
+										<br /><br />
+
+										<form onsubmit={onFormSubmit}>
+											<template if:false={redLabelUtilisationGaz}>
+												<label for="UtilisationGaz" class="font-class-1"
+													style="margin-left: 40px;margin-right: 30px;">Vous utilisez
+													du gaz pour :*</label>
+											</template>
+											<template if:true={redLabelUtilisationGaz}>
+												<label for="UtilisationGaz" class="font-class-1"
+													style="margin-left: 40px;margin-right: 30px;color: rgba(255,0,0)">Vous utilisez
+													du gaz pour :*</label>
+											</template>
+											<div class="row" style="margin-top:10px">
+												<div class="col-lg-4 form-group text-center">
+													<input type="checkbox" data-id="ChauffageIndividuelGaz" id="ChauffageIndividuelGaz1" name="ChauffageIndividuelGaz"
+														onclick={handleEstimer}
+														style="margin-left: 40px;margin-right: 30px;"
+														value={ChauffageIndividuelGazSaisieConso}
+														checked={ChauffageIndividuelGazSaisieConso}>
+													<label for="ChauffageIndividuelGaz1"><img class="btn-img-size" src={imgChauffage_Bleu}></label>
+													<br /><br />
+													<div class="font-class-1 text-centre"
+													style="margin-left: 40px;margin-right: 0px;">
+													<label for="ChauffageIndividuelGaz1">Chauffage individuel</label></div>
+												</div>
+												<div class="col-lg-4 form-group text-center">
+													<input type="checkbox" data-id="CuisineGaz" id="CuisineGaz1" name="CuisineGaz"
+														onclick={handleEstimer}
+														style="margin-left: 40px;margin-right: 30px;"
+														value={CuisineGazSaisieConso}
+														checked={CuisineGazSaisieConso}>
+													<label for="CuisineGaz1"><img class="btn-img-size" src={imgCuisine}></label>
+													<br /><br />
+													<div class="font-class-1 text-centre"
+														style="margin-left: 40px;margin-right: 0px;"><label for="CuisineGaz1">Cuisine</label></div>
+												</div>
+												<div class="col-lg-4 form-group text-center">
+													<input type="checkbox" data-id="EauChaudeGaz" id="EauChaudeGaz1" name="EauChaudeGaz"
+														onclick={handleEstimer}
+														style="margin-left: 40px;margin-right: 30px;"
+														value={EauChaudeGazSaisieConso}
+														checked={EauChaudeGazSaisieConso}>
+													<label for="EauChaudeGaz1"><img class="btn-img-size" src={imgEauChaude_Bleu}></label>
+													<br /><br />
+													<div class="font-class-1 text-centre" style="margin-left: 40px;margin-right: 0px;">
+														<label for="EauChaudeGaz1">Eau chaude</label>
+													</div>
+												</div>
+											</div>
+										</form>
+										
+										<br /><br />
+
+									</template>
+
+									<template if:true={isElectricite}>
+										<form onsubmit={onFormSubmit}>
+											<div class="form-group">
+												<div class="input-group">
+													<template if:false={redLabelLinky}>
+														<label for="OptionLinky" class="font-class-1"
+															style="margin-left: 40px;margin-right: 30px;">Disposez-vous d'un compteur communicant pour l'électricité (compteur Linky TM) ?</label>
+													</template>
+													<template if:true={redLabelLinky}>
+														<label for="OptionLinky" class="font-class-1"
+															style="margin-left: 40px;margin-right: 30px;color: rgba(255,0,0)">Disposez-vous d'un compteur communicant pour l'électricité (compteur Linky TM) ?</label>
+													</template>
+													<div class="text-left">
+														<img onclick={openModalLinky} class="question-hover" style="height:20px" src={iconQuestion} />
+													</div>
+													<!--<lightning-helptext"
+													content="Linky™ est un compteur nouvelle génération dit Communicant : Il peut recevoir et envoyer des informations sans l'intervention physique d'un technicien.">
+													</lightning-helptext>-->
+													<select class="form-control"
+														style="margin-left: 40px;margin-right: 30px;font-size: 20px;" data-id="OptionLinky"
+														name="OptionLinky" oninput={handleEstimer}
+														selected={_record.VI_SaisieEstimationConsoElec_Linky__c}
+														value={_record.VI_SaisieEstimationConsoElec_Linky__c}>
+														<option selected disabled hidden>
+															{_record.VI_SaisieEstimationConsoElec_Linky__c}</option>
+														<option>Je ne sais pas</option>
+														<option>Oui</option>
+														<option>Non</option>
+													</select>
+												</div>
+											</div>
+										</form>
+
+										<br /><br />
+																				
+										<form onsubmit={onFormSubmit}>
+											<template if:false={redLabelUtilisationElec}>
+												<label for="UtilisationElec" class="font-class-1"
+													style="margin-left: 40px;margin-right: 30px;">Vous utilisez
+													de l'électricité pour : (Optionnel)</label>
+											</template>
+											<template if:true={redLabelUtilisationElec}>
+												<label for="UtilisationElec" class="font-class-1"
+													style="margin-left: 40px;margin-right: 30px;color: rgba(255,0,0)">Vous utilisez
+													de l'électricité pour : (Optionnel)</label>
+											</template>
+											<div class="row" style="margin-top:10px">
+												<div class="col-lg-4 form-group text-center">
+													<input type="checkbox" data-id="ChauffageIndividuelElec" id="ChauffageIndividuelElec1" name="ChauffageIndividuelElec"
+														onclick={handleEstimer}
+														style="margin-left: 40px;margin-right: 30px;"
+														value={ChauffageIndividuelElecSaisieConso}
+														checked={ChauffageIndividuelElecSaisieConso}>
+														<label for="ChauffageIndividuelElec1"><img class="btn-img-size" src={imgChauffage_Bleu}></label>
+													<br /><br />
+													<div class="font-class-1 text-centre"
+													style="margin-left: 40px;margin-right: 0px;"> 
+													<label for="ChauffageIndividuelElec1">Chauffage individuel</label></div>
+												</div>
+												<div class="col-lg-4 form-group text-center">
+													<input type="checkbox" data-id="CuisineElec" id="CuisineElec1" name="CuisineElec"
+														onclick={handleEstimer}
+														style="margin-left: 40px;margin-right: 30px;"
+														value={CuisineElecSaisieConso}
+														checked={CuisineElecSaisieConso}>
+													<label for="CuisineElec1"><img class="btn-img-size" src={imgCuisine}></label>
+													<br /><br />
+													<div class="font-class-1 text-centre"
+														style="margin-left: 40px;margin-right: 0px;">
+														<label for="CuisineElec1">Cuisine</label></div>
+												</div>
+												<div class="col-lg-4 form-group text-center">
+													<input type="checkbox" data-id="EauChaudeElec" id="EauChaudeElec1" name="EauChaudeElec"
+														onclick={handleEstimer}
+														style="margin-left: 40px;margin-right: 30px;"
+														value={EauChaudeElecSaisieConso}
+														checked={EauChaudeElecSaisieConso}>
+													<label for="EauChaudeElec1"><img class="btn-img-size" src={imgEauChaude_Bleu}></label>
+													<br /><br />
+													<div class="font-class-1 text-centre"
+														style="margin-left: 40px;margin-right: 0px;">
+														<label for="EauChaudeElec1">Eau chaude</label></div>
+												</div>
+											</div>
+										</form>
+										
+										<br /><br />
+									</template>
+
+									<template if:true={isGazEtElectricite}>
+										<form onsubmit={onFormSubmit}>
+											<div class="form-group">
+												<div class="input-group">
+													<template if:false={redLabelLinky}>
+														<label for="OptionLinky" class="font-class-1"
+															style="margin-left: 40px;margin-right: 30px;">Disposez-vous d'un compteur communicant pour l'électricité (compteur Linky TM) ?</label>
+													</template>
+													<template if:true={redLabelLinky}>
+														<label for="OptionLinky" class="font-class-1"
+															style="margin-left: 40px;margin-right: 30px;color: rgba(255,0,0)">Disposez-vous d'un compteur communicant pour l'électricité (compteur Linky TM) ?</label>
+													</template>
+													<div class="text-left">
+														<img onclick={openModalLinky} class="question-hover" style="height:20px" src={iconQuestion} />
+													</div>
+													<!--<lightning-helptext"
+													content="Linky™ est un compteur nouvelle génération dit Communicant : Il peut recevoir et envoyer des informations sans l'intervention physique d'un technicien.">
+													</lightning-helptext>-->
+													<select class="form-control"
+														style="margin-left: 40px;margin-right: 30px;font-size: 20px;" data-id="OptionLinky"
+														name="OptionLinky" oninput={handleEstimer}
+														selected={_record.VI_SaisieEstimationConsoElec_Linky__c}
+														value={_record.VI_SaisieEstimationConsoElec_Linky__c}>
+														<option selected disabled hidden>
+															{_record.VI_SaisieEstimationConsoElec_Linky__c}</option>
+														<option>Je ne sais pas</option>
+														<option>Oui</option>
+														<option>Non</option>
+													</select>
+												</div>
+											</div>
+										</form>
+										<br /><br />
+										<form onsubmit={onFormSubmit}>
+											<div class="form-group">
+												<div class="input-group">
+													<template if:false={redLabelGazPar}>
+														<label for="OptionGazPar" class="font-class-1"
+															style="margin-left: 40px;margin-right: 30px;">Disposez-vous d'un compteur communicant pour le gaz (GazPar) ?</label>
+													</template>
+													<template if:true={redLabelGazPar}>
+														<label for="OptionGazPar" class="font-class-1"
+															style="margin-left: 40px;margin-right: 30px;color: rgba(255,0,0)">Disposez-vous d'un compteur communicant pour le gaz (GazPar) ?</label>
+													</template>
+													<div class="text-left">
+														<img onclick={openModalGazPar} class="question-hover" style="height:20px" src={iconQuestion} />
+													</div>
+													<div class="col-lg-2"></div>
+													<br>
+													<select class="form-control"
+														style="margin-left: 40px;margin-right: 30px;font-size: 20px;" data-id="OptionGazPar"
+														name="OptionGazPar" oninput={handleEstimer}
+														selected={_record.VI_SaisieEstimationConsoElec_GazPar__c}
+														value={_record.VI_SaisieEstimationConsoElec_GazPar__c}>
+														<option selected disabled hidden>
+															{_record.VI_SaisieEstimationConsoElec_GazPar__c}</option>
+														<option>Je ne sais pas</option>
+														<option>Oui</option>
+														<option>Non</option>
+													</select>
+												</div>
+											</div>
+										</form>
+										<br /><br />
+										<form onsubmit={onFormSubmit}>
+											<template if:false={redLabelUtilisationGaz}>
+												<label for="UtilisationGaz" class="font-class-1"
+													style="margin-left: 40px;margin-right: 30px;">Vous utilisez
+													du gaz pour :*</label>
+											</template>
+											<template if:true={redLabelUtilisationGaz}>
+												<label for="UtilisationGaz" class="font-class-1"
+													style="margin-left: 40px;margin-right: 30px;color: rgba(255,0,0)">Vous utilisez
+													du gaz pour :*</label>
+											</template>
+											<div class="row" style="margin-top:10px">
+												<div class="col-lg-4 form-group text-center">
+													<input type="checkbox" data-id="ChauffageIndividuelGaz" id="ChauffageIndividuelGaz2" 
+														name="ChauffageIndividuelGaz"
+														onclick={handleEstimer}
+														style="margin-left: 40px;margin-right: 30px;"
+														value={ChauffageIndividuelGazSaisieConso}
+														checked={ChauffageIndividuelGazSaisieConso}
+														disabled={DisabledChauffageIndividuelGaz}>												
+													<template if:false={greyLabelChauffageGaz}>
+														<label for="ChauffageIndividuelGaz2"><img class="btn-img-size" src={imgChauffage_Bleu}></label>
+														<br /><br />
+														<div class="font-class-1 text-centre" style="margin-left: 40px;margin-right: 0px;">
+														<label for="ChauffageIndividuelGaz2">Chauffage individuel</label></div>
+													</template>
+													<template if:true={greyLabelChauffageGaz}>
+														<label for="ChauffageIndividuelGaz2"><img class="btn-img-size" src={imgChauffage_Gris}></label>
+														<br /><br />
+														<div class="font-class-1 text-centre"
+														style="margin-left: 40px;margin-right: 0px;color: rgba(127,127,127)">
+														<label for="ChauffageIndividuelGaz2">Chauffage individuel</label></div>
+													</template>
+												</div>
+												<div class="col-lg-4 form-group text-center">
+													<input type="checkbox" data-id="CuisineGaz" id="CuisineGaz2" name="CuisineGaz"
+														onclick={handleEstimer}
+														style="margin-left: 40px;margin-right: 30px;"
+														value={CuisineGazSaisieConso}
+														checked={CuisineGazSaisieConso}>
+														<label for="CuisineGaz2"><img class="btn-img-size" src={imgCuisine}></label>
+													<br /><br />
+													<div class="font-class-1 text-centre"
+														style="margin-left: 40px;margin-right: 0px;">
+														<label for="CuisineGaz2">Cuisine</label></div>
+												</div>
+												<div class="col-lg-4 form-group text-center">
+													<input type="checkbox" data-id="EauChaudeGaz" id="EauChaudeGaz2" name="EauChaudeGaz"
+														onclick={handleEstimer}
+														style="margin-left: 40px;margin-right: 30px;"
+														value={EauChaudeGazSaisieConso}
+														checked={EauChaudeGazSaisieConso}
+														disabled={DisabledEauChaudeGaz}>
+														<template if:false={greyLabelEauChaudeGaz}>
+															<label for="EauChaudeGaz2"><img class="btn-img-size" src={imgEauChaude_Bleu}></label>
+															<br /><br />
+															<div class="font-class-1 text-centre"
+																style="margin-left: 40px;margin-right: 0px;">
+																<label for="EauChaudeGaz2">Eau chaude</label></div>
+														</template>
+														<template if:true={greyLabelEauChaudeGaz}>
+															<label for="EauChaudeGaz2"><img class="btn-img-size" src={imgEauChaude_Gris}></label></div>
+															<br /><br />
+															<div class="font-class-1 text-centre"
+															style="margin-left: 40px;margin-right: 0px;color: rgba(127,127,127)">
+															<label for="EauChaudeGaz2">Eau chaude</label></div>
+														</template>
+												</div>
+											</div>
+										</form>
+										
+										<br /><br />
+										
+										<form onsubmit={onFormSubmit}>
+											<template if:false={redLabelUtilisationElec}>
+												<label for="UtilisationElec" class="font-class-1"
+													style="margin-left: 40px;margin-right: 30px;">Vous utilisez
+													de l'électricité pour : (Optionnel)</label>
+											</template>
+											<template if:true={redLabelUtilisationElec}>
+												<label for="UtilisationElec" class="font-class-1"
+													style="margin-left: 40px;margin-right: 30px;color: rgba(255,0,0)">Vous utilisez
+													de l'électricité pour : (Optionnel)</label>
+											</template>
+											<div class="row" style="margin-top:10px">
+												<div class="col-lg-4 form-group text-center">
+													<input type="checkbox" data-id="ChauffageIndividuelElec" id="ChauffageIndividuelElec2" name="ChauffageIndividuelElec"
+														onclick={handleEstimer}
+														style="margin-left: 40px;margin-right: 30px;"
+														value={ChauffageIndividuelElecSaisieConso}
+														checked={ChauffageIndividuelElecSaisieConso}
+														disabled={DisabledChauffageIndividuelElec}>
+													<template if:false={greyLabelChauffageElec}>
+														<label for="ChauffageIndividuelElec2"><img class="btn-img-size" src={imgChauffage_Bleu}></label>
+														<br /><br />
+														<div class="font-class-1 text-centre"
+														style="margin-left: 40px;margin-right: 0px;">
+														<label for="ChauffageIndividuelElec2">Chauffage individuel</label></div>
+													</template>
+													<template if:true={greyLabelChauffageElec}>
+														<label for="ChauffageIndividuelElec2"><img class="btn-img-size" src={imgChauffage_Gris}></label>
+														<br /><br />
+														<div class="font-class-1 text-centre"
+														style="margin-left: 40px;margin-right: 0px;color: rgba(127,127,127)">
+														<label for="ChauffageIndividuelElec2">Chauffage individuel</label></div>
+													</template>
+												</div>
+												<div class="col-lg-4 form-group text-center">
+													<input type="checkbox" data-id="CuisineElec" id="CuisineElec2" name="CuisineElec"
+														onclick={handleEstimer}
+														style="margin-left: 40px;margin-right: 30px;"
+														value={CuisineElecSaisieConso}
+														checked={CuisineElecSaisieConso}>
+													<label for="CuisineElec2"><img class="btn-img-size" src={imgCuisine}></label>
+													<br /><br />
+													<div class="font-class-1 text-centre"
+														style="margin-left: 40px;margin-right: 0px;">
+														<label for="CuisineElec2">Cuisine</label></div>
+												</div>
+												<div class="col-lg-4 form-group text-center">
+													<input type="checkbox" data-id="EauChaudeElec" id="EauChaudeElec2" name="EauChaudeElec"
+														onclick={handleEstimer}
+														style="margin-left: 40px;margin-right: 30px;"
+														value={EauChaudeElecSaisieConso}
+														checked={EauChaudeElecSaisieConso}
+														disabled={DisabledEauChaudeElec}>
+														<template if:false={greyLabelEauChaudeElec}>
+															<label for="EauChaudeElec2"><img class="btn-img-size" src={imgEauChaude_Bleu}></label>
+															<br /><br />
+															<div class="font-class-1 text-centre"
+																style="margin-left: 40px;margin-right: 0px;">
+																<label for="EauChaudeElec2">Eau chaude</label></div>
+														</template>
+														<template if:true={greyLabelEauChaudeElec}>
+															<label for="EauChaudeElec2"><img class="btn-img-size" src={imgEauChaude_Gris}></label>
+															<br /><br />
+															<div class="font-class-1 text-centre"
+															style="margin-left: 40px;margin-right: 0px;color: rgba(127,127,127)">
+															<label for="EauChaudeElec2">Eau chaude</label></div>
+														</template>
+												</div>
+											</div>
+										</form>
+										
+										<br /><br />
+										
+									</template>
+
+									<template if:false={isGaz}>
+										<form onsubmit={onFormSubmit}>
+											<div class="form-group">
+												<div class="input-group">
+													<template if:false={redLabelElec_HP_HC}>
+														<label for="OptionHPHC" class="font-class-1"
+															style="margin-left: 40px;margin-right: 30px;">Utilisez-vous
+															l’option HP / HC ? </label>
+													</template>
+													<template if:true={redLabelElec_HP_HC}>
+														<label for="OptionHPHC" class="font-class-1"
+															style="margin-left: 40px;margin-right: 30px;color: rgba(255,0,0)">Utilisez-vous
+															l’option HP / HC ? </label>
+													</template>
+													<div class="text-left">
+														<img style="height:20px" class="question-hover" src={iconQuestion} onclick={openModalHPHC}>
+													</div>
+													<select class="form-control"
+														style="margin-left: 10px;margin-right: 30px;font-size: 20px;"
+														data-id="OptionHPHC" name="OptionHPHC"
+														oninput={handleEstimer}
+														selected={_record.VI_SaisieEstimationConsoElec_HP_HC__c}
+														value={_record.VI_SaisieEstimationConsoElec_HP_HC__c}>
+														<option selected disabled hidden>
+															{_record.VI_SaisieEstimationConsoElec_HP_HC__c}</option>
+														<option>Je ne sais pas</option>
+														<option>Oui</option>
+														<option>Non</option>
+													</select>
+												</div>
+											</div>
+										</form>
+										
+										<br /><br />
+
+										<form onsubmit={onFormSubmit}>
+											<div class="font-class-1 text-left"
+												style="margin-left: 40px;margin-right: 80px;">Quels éléments
+												électroménagers utilisez-vous ? (Optionnel)</div>
+											<br />
+											<div class="row" style="margin-top:10px">
+												<div class="col-lg-3 form-group text-center">
+													<input type="checkbox" data-id="Congelateur" id="Congelateur" name="Congelateur"
+														onclick={handleEstimer}
+														style="margin-left: 40px;margin-right: 30px;"
+														value={_record.VI_CongelateurElecSaisieConso__c}
+														checked={_record.VI_CongelateurElecSaisieConso__c}>
+													<label for="Congelateur"><img class="btn-img-size" src={imgCongelateur}></label>
+													<br /><br />
+													<div class="font-class-1 text-centre"
+														style="margin-left: 40px;margin-right: 0px;">
+														<label for="Congelateur">Congélateur</label></div>
+												</div>
+												<div class="col-lg-3 form-group text-center">
+													<input type="checkbox" data-id="SecheLinge" id="SecheLinge" name="SecheLinge"
+														onclick={handleEstimer}
+														style="margin-left: 40px;margin-right: 30px;"
+														value={_record.VI_SecheLingeElecSaisieConso__c}
+														checked={_record.VI_SecheLingeElecSaisieConso__c}>
+													<label for="SecheLinge"><img class="btn-img-size" src={imgSecheLinge}></label>
+													<br /><br />
+													<div class="font-class-1 text-centre"
+														style="margin-left: 40px;margin-right: 0px;">
+														<label for="SecheLinge">Sèche-linge</label></div>
+												</div>
+												<div class="col-lg-3 form-group text-center">
+													<input type="checkbox" data-id="LaveLinge" id="LaveLinge" name="LaveLinge"
+														onclick={handleEstimer}
+														style="margin-left: 40px;margin-right: 30px;"
+														value={_record.VI_LaveLingeElecSaisieConso__c}
+														checked={_record.VI_LaveLingeElecSaisieConso__c}>
+													<label for="LaveLinge"><img class="btn-img-size" src={imgLaveLinge}></label>
+													<br /><br />
+													<div class="font-class-1 text-centre"
+														style="margin-left: 40px;margin-right: 0px;">
+														<label for="LaveLinge">Lave-linge</label></div>
+												</div>
+												<div class="col-lg-3 form-group text-center">
+													<input type="checkbox" data-id="LaveVaisselle" id="LaveVaisselle" name="LaveVaisselle"
+														onclick={handleEstimer}
+														style="margin-left: 40px;margin-right: 30px;"
+														value={_record.VI_LaveVaisselleElecSaisieConso__c}
+														checked={_record.VI_LaveVaisselleElecSaisieConso__c}>
+													<label for="LaveVaisselle"><img class="btn-img-size" src={imgLaveVaisselle}></label>
+													<br /><br />
+													<div class="font-class-1 text-centre"
+														style="margin-left: 50px;margin-right: 0px;">
+														<label for="LaveVaisselle">Lave-vaisselle</label>
+													</div>
+												</div>
+											</div>
+										</form>
+									</template>
+
+									<br /><br />
+
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</template>
+
+		<template if:true={displayError}>
+			<div class="row">
+				<div class="col-lg-12 text-center" style="margin-top: 30px; color: rgba(255,0,0)">
+					<p class="font-class-1">{ErrorMessage}</p>
+				</div>
+			</div>
+
+		</template>
+
+
+		<div style="position: absolute;height:10%;width: 100%;bottom: -150px;left: 0%;">
+			<button onclick={handlePrecedent} class="buttonPrecedent">Précédent</button>
+		</div>
+
+		<div class="row mt-4" style="margin-top:10px">
+			<div class="col-lg-4 text-center"></div>
+			<button type="button" class="col-lg-4 btn" style="height: 44px;width: 260px;color: #fff;
+                    background-color: rgba(0, 153, 52, 1);
+                    border-color: rgba(0, 153, 52, 1);border-radius:0" onclick={handleSuivant}>
+				<p class="font-class-2">Suivant</p>
+			</button>
+			<div class="col-lg-4 text-center"></div>
+		</div>
+
+		<template if:true={displayErrorIdent}>
+			<div class="row">
+				<div class="col-lg-12 text-center" style="margin-top: 30px; color: rgba(255,0,0)">
+					<p class="font-class-1">{ErrorMessageIdent}</p>
+				</div>
+			</div>
+
+		</template>
+
+		<div if:true={isModalLinkyOpen} class="vi-modal-linky container">
+			<div class="row">
+				<div class="col-lg-10 text-center"></div>
+				<div class="col-lg-2 text-center">
+					<img title="Close" onclick={closeModalLinky} style="cursor:pointer;margin-top: 20px;" src={closeImage} />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12 text-center">
+					<img style="margin-top: 20px" src={imgLinky} />
+				</div>
+				<p class="col-lg-12 text-center font-class-5" style="margin-top: 20px;">Linky™ est un compteur nouvelle génération dit Communicant :
+					 Il peut recevoir et envoyer des informations sans l'intervention physique d'un technicien.</p>
+			</div>
+		</div>
+
+		<!-- Start EVOL DDPCM 860 -->
+		<div if:true={isModalGazParOpen} class="vi-modal-linky container">
+			<div class="row">
+				<div class="col-lg-10 text-center"></div>
+				<div class="col-lg-2 text-center">
+					<img title="Close" onclick={closeModalGazPar} style="cursor:pointer;margin-top: 20px;" src={closeImage} />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12 text-center">
+					<img style="margin-top: 20px" src={imgGazPar} />
+				</div>
+				<p class="col-lg-12 text-center font-class-5" style="margin-top: 20px;">GAZPAR est le compteur de gaz naturel communicant, installé par le gestionnaire du réseau public de distribution GRDF.</p>
+			</div>
+		</div>
+		<!-- Start EVOL DDPCM 860 -->
+	
+		<div if:true={isModalHPHCOpen} class="vi-modal-hphc container">
+			<div class="row">
+				<div class="col-lg-10 text-center"></div>
+				<div class="col-lg-2 text-center">
+					<img title="Close" onclick={closeModalHPHC} style="cursor:pointer;margin-top: 20px;" src={closeImage} />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12 text-center">
+					<img style="margin-top: 20px;" src={imgCompteurHPHC} />
+				</div>
+			</div>
+		</div>
+
+		<!-- "Fond grisé" des popups -->
+		<div onclick={closeModalLinky} class="vi-modal-background" if:true={isModalOpenBackgroundLinky}></div>
+		<!-- Start EVOL DDPCM 860 -->
+		<div onclick={closeModalGazPar} class="vi-modal-background" if:true={isModalOpenBackgroundGazPar}></div>
+		<!-- Start EVOL DDPCM 860 -->
+		<div onclick={closeModalHPHC} class="vi-modal-background" if:true={isModalOpenBackgroundHPHC}></div>
+
+	</div>
+</template>

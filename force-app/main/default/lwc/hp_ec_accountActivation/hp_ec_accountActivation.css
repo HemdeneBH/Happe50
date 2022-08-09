@@ -1,0 +1,113 @@
+.account-activation {
+    margin: 15px;
+    padding: 32px 40px 25px;
+}
+
+.hp-bigTitle {
+    margin-bottom: 42px;
+}
+
+.c-btn {
+    font-size: 17px;
+    line-height: 22px;
+    letter-spacing: 0.51px;
+    padding: 14px 12px 15px;
+    font-family: var(--font-bold);
+    text-transform: uppercase;
+}
+
+.c-btn--outline {
+    border: 4px solid var(--secondary-colour);
+    background-color: var(--bg-base);
+    color: var(--text-color);
+}
+
+.c-btn--outline:hover,
+.c-btn--outline:focus {
+    border-color: var(--text-color);
+}
+
+.activation-steps {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 -5px;
+}
+
+.activation-steps .step {
+    text-align: center;
+    font-size: 16px;
+    line-height: 20px;
+    min-width: 0;
+    width: 200px;
+    margin-top: 20px;
+}
+
+.activation-steps .step h3 {
+    font-family: var(--font-bold);
+}
+
+.activation-steps .step h3 span {
+    display: inline-block;
+}
+
+.activation-steps .step.active h3 {
+    color: var(--blue);
+}
+
+.activation-steps .step.alert h3 {
+    color: var(--rose);
+}
+
+.activation-steps .step p {
+    width: 187px;
+    margin: 0 auto;
+}
+
+.activation-steps .step span {
+    display: block;
+    margin: 0 auto;
+}
+
+.activation-steps .step .c-btn {
+    margin-top: 16px;
+}
+
+@media (max-width: 1280px) {
+  
+}
+
+@media (max-width: 1024px) {
+
+    .account-activation {
+        margin: 10px 0;
+    }
+
+    .hp-bigTitle {
+        margin-bottom: 25px;
+    }
+
+    .activation-steps {
+        display: block;
+        margin: 0;
+    }
+
+    .activation-steps .step {
+        text-align: left;
+        padding: 0;
+        min-width: 0;
+        width: 100%;
+    }
+
+    .activation-steps .step h3 span {
+        display: inline;
+    }
+
+    .activation-steps .step p {
+        width: 100%;
+        margin: 0;
+    }
+
+    .activation-steps .step .c-btn {
+        margin-top: 18px;
+    }
+}

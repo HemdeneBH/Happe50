@@ -1,0 +1,21 @@
+.hp-bloc-nav-phone a{
+  color: var(--text-color);
+}
+
+.hp-bloc-nav-phone{
+  color: var(--text-color);
+  border-top: solid 2px var(--bg-base);
+}
+
+
+.hp-bloc-nav-phone{
+  font-family: var(--font-bold);
+  font-size: 20px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.25;
+  letter-spacing: 0.6px;
+  text-align: center;
+  padding: 10px 0;
+}

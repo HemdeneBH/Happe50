@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sous_type__c</fullName>
+    <description>@Description: Ce champ complète le Type d&apos;intervention
+@Project: Smile</description>
+    <externalId>false</externalId>
+    <label>Sous-type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Type__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>SM31</fullName>
+                <default>false</default>
+                <label>Recherche de règlement</label>
+            </value>
+            <value>
+                <fullName>SM18</fullName>
+                <default>false</default>
+                <label>Activation manuelle du contrat</label>
+            </value>
+            <value>
+                <fullName>SM19</fullName>
+                <default>false</default>
+                <label>Anomalie PDL</label>
+            </value>
+            <value>
+                <fullName>SM15</fullName>
+                <default>false</default>
+                <label>Contrat Ok Symphonie mais pas à la bonne date / bonne puissance / FTA KO</label>
+            </value>
+            <value>
+                <fullName>SM32</fullName>
+                <default>false</default>
+                <label>Ecarts comptable</label>
+            </value>
+            <value>
+                <fullName>SM09</fullName>
+                <default>false</default>
+                <label>Ecart sur remboursement</label>
+            </value>
+            <value>
+                <fullName>SM26</fullName>
+                <default>false</default>
+                <label>Erreur de prix</label>
+            </value>
+            <value>
+                <fullName>SM03</fullName>
+                <default>false</default>
+                <label>Facture de régularisation absente ou en erreur (problèmes UR, rythme de facturation)</label>
+            </value>
+            <value>
+                <fullName>SM11</fullName>
+                <default>false</default>
+                <label>Facture incohérente vs GRD ou CPV (problème entre GRD et nos intégrations)</label>
+            </value>
+            <value>
+                <fullName>SM30</fullName>
+                <default>false</default>
+                <label>J&apos;ai appliqué un mode opératoire mais cela ne fonctionne pas</label>
+            </value>
+            <value>
+                <fullName>SM01</fullName>
+                <default>false</default>
+                <label>Le client a déjà reçu une facture</label>
+            </value>
+            <value>
+                <fullName>SM23</fullName>
+                <default>false</default>
+                <label>Le client a été coupé par erreur / il nous alerte d&apos;une inversion PDL/PCE</label>
+            </value>
+            <value>
+                <fullName>SM06</fullName>
+                <default>false</default>
+                <label>Le client conteste son index</label>
+            </value>
+            <value>
+                <fullName>SM16</fullName>
+                <default>false</default>
+                <label>Le client est résilié mais recoit toujours des factures</label>
+            </value>
+            <value>
+                <fullName>SM17</fullName>
+                <default>false</default>
+                <label>Le client n&apos;a jamais reçu de facture et l&apos;OPS de MES est soldée sur le portail distributeur</label>
+            </value>
+            <value>
+                <fullName>SM02</fullName>
+                <default>false</default>
+                <label>Le client n&apos;a jamais reçu de facture et l&apos;OPS de MES n&apos;est pas soldée sur le portail distributeur</label>
+            </value>
+            <value>
+                <fullName>SM08</fullName>
+                <default>false</default>
+                <label>Le client n&apos;a pas accès à son suivi de conso et les index ne sont pas intégrés dans l&apos;outil</label>
+            </value>
+            <value>
+                <fullName>SM22</fullName>
+                <default>false</default>
+                <label>Le client se rétracte et il est déjà facturé</label>
+            </value>
+            <value>
+                <fullName>SM25</fullName>
+                <default>false</default>
+                <label>Le contrat a été fait sur le mauvais PDL / PCE</label>
+            </value>
+            <value>
+                <fullName>SM14</fullName>
+                <default>false</default>
+                <label>Le contrat n&apos;est pas répliqué (contrat modif en cours)</label>
+            </value>
+            <value>
+                <fullName>SM24</fullName>
+                <default>false</default>
+                <label>Le distributeur nous signale une inversion PDL / PCE</label>
+            </value>
+            <value>
+                <fullName>SM05</fullName>
+                <default>false</default>
+                <label>Les relevés de compteur sont absents dans nos outils</label>
+            </value>
+            <value>
+                <fullName>SM12</fullName>
+                <default>false</default>
+                <label>Le statut du contrat est en « résiliation en cours » (statut différent des portails et ISU)</label>
+            </value>
+            <value>
+                <fullName>SM29</fullName>
+                <default>false</default>
+                <label>Mise à jour de commune (SR12)</label>
+            </value>
+            <value>
+                <fullName>SM28</fullName>
+                <default>false</default>
+                <label>Passage en FTCDS</label>
+            </value>
+            <value>
+                <fullName>SM10</fullName>
+                <default>false</default>
+                <label>Présence d&apos;un écart entre les factures et les paiements enregistrés</label>
+            </value>
+            <value>
+                <fullName>SM07</fullName>
+                <default>false</default>
+                <label>Problème sur la transformation de la PC</label>
+            </value>
+            <value>
+                <fullName>SM04</fullName>
+                <default>false</default>
+                <label>Promo non appliquée</label>
+            </value>
+            <value>
+                <fullName>SM21</fullName>
+                <default>false</default>
+                <label>Propale création / transformation</label>
+            </value>
+            <value>
+                <fullName>SM20</fullName>
+                <default>false</default>
+                <label>Regroupement PDL</label>
+            </value>
+            <value>
+                <fullName>SM33</fullName>
+                <default>false</default>
+                <label>Remboursements</label>
+            </value>
+            <value>
+                <fullName>SM13</fullName>
+                <default>false</default>
+                <label>Statut non cohérent avec présence d’un successeur (statut différent de « Résil. En cours ») - Date de résiliation identique à la MES du successeur</label>
+            </value>
+            <value>
+                <fullName>SM27</fullName>
+                <default>false</default>
+                <label>Transformation impossible</label>
+            </value>
+            <value>
+                <fullName>SM34</fullName>
+                <default>false</default>
+                <label>Escalade Direction Commerciale N1 vers N2</label>
+            </value>
+            <value>
+                <fullName>Blocage sur MES et CHF</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Blocage sur MES et CHF</label>
+            </value>
+            <value>
+                <fullName>CHO</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CHO</label>
+            </value>
+            <value>
+                <fullName>Mensualisation</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Mensualisation</label>
+            </value>
+            <value>
+                <fullName>Résiliation</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Résiliation</label>
+            </value>
+            <value>
+                <fullName>Situation de compte complexe</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Situation de compte complexe</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>MO16</controllingFieldValue>
+            <controllingFieldValue>MO17</controllingFieldValue>
+            <controllingFieldValue>MO07</controllingFieldValue>
+            <valueName>SM15</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO08</controllingFieldValue>
+            <controllingFieldValue>MO12</controllingFieldValue>
+            <valueName>SM20</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO13</controllingFieldValue>
+            <valueName>SM30</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO13</controllingFieldValue>
+            <valueName>SM29</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO13</controllingFieldValue>
+            <valueName>SM28</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO14</controllingFieldValue>
+            <valueName>SM31</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO14</controllingFieldValue>
+            <valueName>SM32</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO14</controllingFieldValue>
+            <valueName>SM33</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO18</controllingFieldValue>
+            <valueName>SM34</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO11</controllingFieldValue>
+            <valueName>SM23</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO11</controllingFieldValue>
+            <valueName>SM25</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO11</controllingFieldValue>
+            <valueName>SM24</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO12</controllingFieldValue>
+            <controllingFieldValue>MO07</controllingFieldValue>
+            <valueName>SM19</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO12</controllingFieldValue>
+            <valueName>SM26</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO12</controllingFieldValue>
+            <valueName>SM27</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO09</controllingFieldValue>
+            <valueName>SM21</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO05</controllingFieldValue>
+            <valueName>SM07</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO02</controllingFieldValue>
+            <valueName>SM03</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO02</controllingFieldValue>
+            <valueName>SM04</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO01</controllingFieldValue>
+            <valueName>SM01</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO01</controllingFieldValue>
+            <controllingFieldValue>MO15</controllingFieldValue>
+            <valueName>SM17</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO01</controllingFieldValue>
+            <valueName>SM02</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO10</controllingFieldValue>
+            <valueName>SM22</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO06</controllingFieldValue>
+            <valueName>SM08</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO04</controllingFieldValue>
+            <valueName>SM09</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO04</controllingFieldValue>
+            <valueName>SM06</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO04</controllingFieldValue>
+            <valueName>SM10</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO03</controllingFieldValue>
+            <valueName>SM05</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO07</controllingFieldValue>
+            <valueName>SM18</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO07</controllingFieldValue>
+            <valueName>SM11</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO07</controllingFieldValue>
+            <valueName>SM16</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO07</controllingFieldValue>
+            <valueName>SM14</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO07</controllingFieldValue>
+            <valueName>SM12</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MO07</controllingFieldValue>
+            <valueName>SM13</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

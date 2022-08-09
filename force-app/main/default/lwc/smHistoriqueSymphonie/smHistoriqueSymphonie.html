@@ -1,0 +1,463 @@
+<!-- sldsValidatorIgnore -->
+<!--
+  @description       : 
+  @author            : Mohamed Aamer
+  @last modified on  : 07-07-2022
+  @last modified by  : Mohamed Aamer
+-->
+<template>
+  
+  <div class="backdrop" onclick={hideFilters}></div>
+  <div class="container">
+    <div class="exampleHolder" if:true={showSpinner}>
+      <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </div>
+      <div class="header">
+          <div class="slds-text-heading_large title">{label.HistoriqueTitle}</div>
+          <div class="details"> {nbrDemandes} demandes effectuées du {fromDate} au {todayToShow}</div>
+      </div>
+      <div class="body">
+        <table class="slds-grid slds-wrap slds-table slds-table_striped slds-table_cell-buffer slds-table_bordered">
+            <thead class="slds-col slds-size_1-of-1">
+              <tr class="slds-grid slds-wrap">
+                <th class="slds-col slds-size_1-of-12" scope="col">
+                  <div title="Création" class="padding-top-10">
+                    <span class="title">création</span>
+                    <span class="filter-button" onclick={showFilterCreation}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15">;
+                        <use xlink:href={svgURL}></use>
+                      </svg>
+                    </span>
+                    <div class="filter-block creation">
+                      <div class="container-popup">
+                        <div class="slds-form-element">
+                          <div class="slds-form-element__control slds-input-has-fixed-addon">
+                            <span class="slds-form-element__addon" id="fixed-text-addon-pre">Du</span>
+                            <input type="text" data-id="creation-input-du" placeholder="12/12/2021" aria-labelledby="fixed-text-label fixed-text-addon-pre fixed-text-addon-post" class="slds-input" />
+                          </div>
+                        </div>
+                        <div class="slds-form-element">
+                          <div class="slds-form-element__control slds-input-has-fixed-addon">
+                            <span class="slds-form-element__addon" id="fixed-text-addon-pre1">Au</span>
+                            <input type="text" data-id="creation-input-au" placeholder="12/12/2022" aria-labelledby="fixed-text-label fixed-text-addon-pre fixed-text-addon-post" class="slds-input" />
+                          </div>
+                        </div>
+                        <div class="actions">
+                          <span class="slds-text-link_faux reset-link" onclick={resetFilters}>Réinitialiser</span>
+                          <button class="slds-button slds-button_brand background-color-Blue border-bleu" onclick={updateFilterCreation}>Appliquer</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </th>
+                <th class="slds-col slds-size_1-of-12" scope="col">
+                  <div title="heure" class="padding-top-10">
+                    <span class="title"></span>
+                  </div>
+                </th>
+                <th class="slds-col slds-size_1-of-12" scope="col">
+                  <div title="Canal" class="padding-top-10">
+                    <span class="title">canal</span>
+                    <span class="filter-button" onclick={showFilterCanal}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15">;
+                        <use xlink:href={svgURL}></use>
+                      </svg>
+                    </span>
+                    <div class="filter-block canal">
+                      <div class="container-popup">
+                        <div class="slds-form-element">
+                          <div class="slds-form-element__control">
+                            <div class="slds-checkbox">
+                              <input type="checkbox" name="options" id="checkbox-sms" data-id="checkbox-sms" value="sms"/>
+                              <label class="slds-checkbox__label" for="checkbox-sms">
+                                <span class="slds-checkbox_faux"></span>
+                                <span class="slds-form-element__label">SMS</span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="slds-form-element">
+                          <div class="slds-form-element__control">
+                            <div class="slds-checkbox">
+                              <input type="checkbox" name="options" id="checkbox-portail" data-id="checkbox-portail" value="portail"/>
+                              <label class="slds-checkbox__label" for="checkbox-portail">
+                                <span class="slds-checkbox_faux"></span>
+                                <span class="slds-form-element__label">Portail</span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="slds-form-element">
+                          <div class="slds-form-element__control">
+                            <div class="slds-checkbox">
+                              <input type="checkbox" name="options" id="checkbox-backoffice" data-id="checkbox-backoffice" value="back office"/>
+                              <label class="slds-checkbox__label" for="checkbox-backoffice">
+                                <span class="slds-checkbox_faux"></span>
+                                <span class="slds-form-element__label">Back office</span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="slds-form-element">
+                          <div class="slds-form-element__control">
+                            <div class="slds-checkbox">
+                              <input type="checkbox" name="options" id="checkbox-email" data-id="checkbox-email" value="e-mail"/>
+                              <label class="slds-checkbox__label" for="checkbox-email">
+                                <span class="slds-checkbox_faux"></span>
+                                <span class="slds-form-element__label">Email</span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="slds-form-element">
+                          <div class="slds-form-element__control">
+                            <div class="slds-checkbox">
+                              <input type="checkbox" name="options" id="checkbox-partenaire" data-id="checkbox-partenaire" value="partenaire"/>
+                              <label class="slds-checkbox__label" for="checkbox-partenaire">
+                                <span class="slds-checkbox_faux"></span>
+                                <span class="slds-form-element__label">Partenaire</span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="slds-form-element">
+                          <div class="slds-form-element__control">
+                            <div class="slds-checkbox">
+                              <input type="checkbox" name="options" id="checkbox-courrier" data-id="checkbox-courrier" value="courrier"/>
+                              <label class="slds-checkbox__label" for="checkbox-courrier">
+                                <span class="slds-checkbox_faux"></span>
+                                <span class="slds-form-element__label">Courrier</span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="slds-form-element">
+                          <div class="slds-form-element__control">
+                            <div class="slds-checkbox">
+                              <input type="checkbox" name="options" id="checkbox-telephone" data-id="checkbox-telephone" value="téléphone"/>
+                              <label class="slds-checkbox__label" for="checkbox-telephone">
+                                <span class="slds-checkbox_faux"></span>
+                                <span class="slds-form-element__label">Téléphone</span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="actions">
+                          <span class="slds-text-link_faux reset-link" onclick={resetFilters}>Réinitialiser</span>
+                          <button class="slds-button slds-button_brand background-color-Blue border-bleu" onclick={updateFilterCanal}>Appliquer</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </th>
+                <th class="slds-col slds-size_1-of-12" scope="col">
+                  <div title="Statut" class="padding-top-10">
+                    <span class="title">statut</span>
+                    <span class="filter-button" onclick={showFilterStatut}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15">;
+                        <use xlink:href={svgURL}></use>
+                      </svg>
+                    </span>
+                    <div class="filter-block statut">
+                      <div class="container-popup">
+                        <div class="slds-form-element">
+                          <div class="slds-form-element__control">
+                            <div class="slds-checkbox">
+                              <input type="checkbox" name="options" data-id="checkbox-atraiter" id="checkbox-atraiter" value="A traiter"/>
+                              <label class="slds-checkbox__label" for="checkbox-atraiter">
+                                <span class="slds-checkbox_faux"></span>
+                                <span class="slds-form-element__label">A traiter</span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="slds-form-element">
+                          <div class="slds-form-element__control">
+                            <div class="slds-checkbox">
+                              <input type="checkbox" name="options" data-id="checkbox-encours" id="checkbox-encours" value="En cours"/>
+                              <label class="slds-checkbox__label" for="checkbox-encours">
+                                <span class="slds-checkbox_faux"></span>
+                                <span class="slds-form-element__label">En cours</span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="slds-form-element">
+                          <div class="slds-form-element__control">
+                            <div class="slds-checkbox">
+                              <input type="checkbox" name="options" data-id="checkbox-enattente" id="checkbox-enattente" value="En attente"/>
+                              <label class="slds-checkbox__label" for="checkbox-enattente">
+                                <span class="slds-checkbox_faux"></span>
+                                <span class="slds-form-element__label">En attente</span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="slds-form-element">
+                          <div class="slds-form-element__control">
+                            <div class="slds-checkbox">
+                              <input type="checkbox" name="options" data-id="checkbox-termine" id="checkbox-termine" value="Terminé"/>
+                              <label class="slds-checkbox__label" for="checkbox-termine">
+                                <span class="slds-checkbox_faux"></span>
+                                <span class="slds-form-element__label">Terminé</span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="actions">
+                          <span class="slds-text-link_faux reset-link" onclick={resetFilters}>Réinitialiser</span>
+                          <button class="slds-button slds-button_brand background-color-Blue border-bleu" onclick={updateFilterStatut}>Appliquer</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </th>
+                <th class="slds-col slds-size_2-of-12" scope="col">
+                  <div title="Activité" class="padding-top-10">
+                    <span class="title">activité</span>
+                    <span class="filter-button" onclick={showFilterActivite}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15">;
+                        <use xlink:href={svgURL}></use>
+                      </svg>
+                    </span>
+                    <div class="filter-block activite">
+                      <div class="container-popup">
+                        <template for:each={filterActivites} for:item="filterAct">
+                          <div key={filterAct.id} class="slds-form-element">
+                            <div class="slds-form-element__control">
+                              <div class="slds-checkbox">
+                                <input type="checkbox" name="options" id={filterAct.activite} data-id={filterAct.idActivite} value={filterAct.activite}/>
+                                <label class="slds-checkbox__label" for={filterAct.activite}>
+                                  <span class="slds-checkbox_faux"></span>
+                                  <span class="slds-form-element__label">{filterAct.activite}</span>
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </template>
+                        
+                        <div class="actions">
+                          <span class="slds-text-link_faux reset-link" onclick={resetFilters}>Réinitialiser</span>
+                          <button class="slds-button slds-button_brand background-color-Blue border-bleu" onclick={updateFilterActivite}>Appliquer</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </th>
+                <th class="slds-col slds-size_1-of-12" scope="col" style="width: 8.333333%;">
+                  <div title="Pièce-jointe" class="padding-top-10">
+                    <span class="title">pièce-jointe</span>
+                    <span class="filter-button" onclick={showFilterPJ}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15">;
+                        <use xlink:href={svgURL}></use>
+                      </svg>
+                    </span>
+                    <div class="filter-block piece-jointe">
+                      <div class="container-popup">
+                        <div class="slds-form-element">
+                          <div class="slds-form-element__control">
+                            <div class="slds-checkbox">
+                              <input type="checkbox" name="options" id="checkbox-sanspj" data-id="checkbox-sanspj" value="checkbox-sanspj"/>
+                              <label class="slds-checkbox__label" for="checkbox-sanspj">
+                                <span class="slds-checkbox_faux"></span>
+                                <span class="slds-form-element__label">Sans pièce-jointe</span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="slds-form-element">
+                          <div class="slds-form-element__control">
+                            <div class="slds-checkbox">
+                              <input type="checkbox" name="options" id="checkbox-avecpj" data-id="checkbox-avecpj" value="checkbox-avecpj"/>
+                              <label class="slds-checkbox__label" for="checkbox-avecpj">
+                                <span class="slds-checkbox_faux"></span>
+                                <span class="slds-form-element__label">Avec pièce-jointe(s)</span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="actions">
+                          <span class="slds-text-link_faux reset-link" onclick={resetFilters}>Réinitialiser</span>
+                          <button class="slds-button slds-button_brand background-color-Blue border-bleu" onclick={updateFilterPJ}>Appliquer</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </th>
+                <th class="slds-col slds-size_5-of-12" scope="col">
+                  <div title="Commentaire" class="padding-top-10">
+                    <span class="title">commentaire</span>
+                    <span class="filter-button" onclick={showFilterComment}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15">;
+                        <use xlink:href={svgURL}></use>
+                      </svg>
+                    </span>
+                    <div class="filter-block comment">
+                      <div class="container-popup">
+                        <div class="slds-form-element">
+                          <div class="slds-grid slds-wrap slds-form-element__control slds-input-has-fixed-addon">
+                            <span class="slds-form-element__addon slds-col" id="label-commentaire" style="    margin-bottom: 10px;margin-left: 0;">Filtrer par mot(s) clé</span>
+                            <input type="text" data-id="text-commentaire" placeholder="Ex: Lorem ipsum" aria-labelledby="fixed-text-label fixed-text-addon-pre fixed-text-addon-post" class="slds-input" />
+                          </div>
+                        </div>
+                        <div class="actions">
+                          <span class="slds-text-link_faux reset-link" onclick={resetFilters}>Réinitialiser</span>
+                          <button class="slds-button slds-button_brand background-color-Blue border-bleu" onclick={updateFilterCommentaire}>Appliquer</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody class="slds-col slds-size_1-of-1" data-label="tbody">
+              <template if:true={noResult}>
+                <div class="slds-notify slds-notify_alert slds-alert_warning" role="alert" style="margin-top: 20px;">
+                  <lightning-icon icon-name="utility:warning" size="x-small" alternative-text="alerte" title="alerte">
+                  </lightning-icon>
+                  <h2 style="margin-left: 10px;">{label.NoContacts}</h2>
+                </div>
+              </template>
+              <template if:true={noResultSoFar}>
+                <div class="slds-notify slds-notify_alert slds-alert_warning" role="alert" style="margin-top: 20px;">
+                  <lightning-icon icon-name="utility:warning" size="x-small" alternative-text="alerte" title="alerte">
+                  </lightning-icon>
+                  <h2 style="margin-left: 10px;">{label.NoContactsSoFar}</h2>
+                </div>
+              </template>
+              <template if:true={noResultFilter}>
+                <div class="slds-notify slds-notify_alert slds-alert_warning" role="alert" style="margin-top: 20px;">
+                  <lightning-icon icon-name="utility:warning" size="x-small" alternative-text="alerte" title="alerte">
+                  </lightning-icon>
+                  <h2 style="margin-left: 10px;">{label.NoContactsFilter}
+                    <a href="#">{label.ErraseFilter}</a>
+                  </h2>
+                </div>
+              </template>
+              <template if:true={errorGetDemandes}>
+                <div class="slds-notify slds-notify_alert slds-alert_error" role="alert" style="margin-top: 20px;">
+                  <lightning-icon icon-name="utility:error" size="x-small" alternative-text="erreur" title="erreur">
+                  </lightning-icon>
+                  <h2 style="margin-left: 10px;">{label.ErrorLoadingContacts}
+                    <a href="#" onclick={getDemandes}>{label.Reessayer}</a>
+                  </h2>
+                </div>
+              </template>
+              <template for:each={listeDemandes} for:item="demande">
+                <tr key={demande.id} data-coment-id={demande.id} class="slds-grid slds-wrap" onclick={openDemandeDetails}>
+                  <th data-label="Création" scope="row" class="slds-col slds-size_1-of-12">
+                    <div class="slds-truncate" title={demande.dateCreation}>{demande.dateCreation}</div>
+                  </th>
+                  <td data-label="Heure" scope="row" class="slds-col slds-size_1-of-12">
+                    <div class="slds-truncate" title={demande.heureCreation}>{demande.heureCreation}</div>
+                  </td>
+                  <td data-label="Canal" class="slds-col slds-size_1-of-12">
+                    <div class="slds-truncate" title={demande.canal}>{demande.canal}</div>
+                  </td>
+                  <td data-label="Statut" class="slds-col slds-size_1-of-12">
+                    <div class="slds-truncate" title={demande.statut}>{demande.statut}</div>
+                  </td>
+                  <td data-label="Activité" class="slds-col slds-size_2-of-12">
+                    <div class="slds-truncate" title={demande.activite}>{demande.activite}</div>
+                  </td>
+                  <td data-label="Pièce-jointe" class="slds-col slds-size_1-of-12" style="width: 8.333333%;">
+                    <div class="slds-truncate" title="Pièce-jointe">
+                      <template if:true={demande.isURLExist}>
+                        <a href={demande.pj} target="_blank" onclick={cancelDetailModal}>
+                          <lightning-icon class="color-blue" icon-name="utility:attach" size="small" alternative-text="attach" title={demande.pj}>
+                          </lightning-icon>
+                        </a>
+                      </template>
+                    </div>
+                  </td>
+                  <td data-label='Commentaire' data-demande-id={demande.id} class="slds-col slds-size_5-of-12 commentaire"
+                  onmouseover={showCommentDetails} onmouseleave={hideCommentDetails}>
+                    <div class="slds-grid">
+                      <div class="slds-grid slds-has-flexi-truncate">
+                        <p class="slds-truncate" title={demande.commentaire}>{demande.commentaire}</p>
+                      </div>
+                    </div>
+                    <div class="commentaire-details">
+                      <div class={demande.commentaireClass}>
+                        <p class="commentaire-text">{demande.commentaire}</p>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                
+              </template>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="footer">
+      <div class="slds-text-align_left" if:true={showAllDemandesBtn}>
+        <button class="slds-button slds-button_neutral color-blue" onclick={getAllDemandes}>Afficher toutes les demandes</button>
+      </div>
+
+      <div class="slds-text-align_right">
+        <button class="slds-button slds-button_neutral color-blue" onclick={scrollTop}>
+          <lightning-icon class="color-blue" icon-name="utility:chevronup" size="xx-small" alternative-text="up" title="up" style="margin-right: 5px;">
+          </lightning-icon>Retourner en haut
+        </button>
+        <button class="slds-button slds-button_brand background-color-Blue border-bleu" onclick={closeSubTab}>Fermer</button>
+        </div>
+    </div>
+  </div>
+  <template if:true={isShowDemandeDetails}>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header modal-header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeDemandeDetails}>
+                    <lightning-icon icon-name="utility:close"
+                        alternative-text="close"
+                        variant="inverse"
+                        size="small" ></lightning-icon>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+                <h2 class="slds-text-heading_medium slds-hyphenate" style="font-size: large;">Détail du contact</h2>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium" style="padding: 25px;padding-top: 0px;">
+              <div class="slds-form-element slds-form-element_readonly border-none">
+                <span class="slds-form-element__label font-weight-700">Par : </span>
+                <div class="slds-form-element__control inline-block">
+                  <div class="slds-form-element__static">{demandeDetails.zOrigin}</div>
+                </div>
+              </div>
+              <div class="slds-form-element slds-form-element_readonly border-none">
+                <span class="slds-form-element__label font-weight-700">Marketing : </span>
+                <div class="slds-form-element__control inline-block">
+                  <div class="slds-form-element__static" style="text-transform: uppercase;">{demandeDetails.marketing}</div>
+                </div>
+              </div>
+              <div class="slds-form-element slds-form-element_readonly border-none">
+                <span class="slds-form-element__label font-weight-700">Traitement planifié du : </span>
+                <div class="slds-form-element__control inline-block">
+                  <div class="slds-form-element__static">--</div>
+                </div>
+                <span class="slds-form-element__label font-weight-700" style="margin-left: 20%;">au : </span>
+                <div class="slds-form-element__control inline-block">
+                  <div class="slds-form-element__static">--</div>
+                </div>
+              </div>
+              <div class="slds-form-element slds-form-element_readonly border-none">
+                <span class="slds-form-element__label font-weight-700">Responsable : </span>
+                <div class="slds-form-element__control inline-block">
+                  <div class="slds-form-element__static">{demandeDetails.responsable}</div>
+                </div>
+              </div>
+              <div class="slds-form-element slds-form-element_readonly border-none">
+                <span class="slds-form-element__label font-weight-700">Commentaire : </span>
+                <div class="slds-form-element__control">
+                  <div class="slds-form-element__static comment-style">{demandeDetails.commentaire}</div>
+                </div>
+              </div>
+            </div>
+            <footer class="slds-modal__footer modal-footer">
+                <button class="slds-button slds-button_brand background-color-Blue border-bleu" onclick={closeDemandeDetails} title="Fermer">Fermer</button>
+            </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+  </template>
+</template>

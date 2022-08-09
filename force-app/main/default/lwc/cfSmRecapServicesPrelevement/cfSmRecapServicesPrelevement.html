@@ -1,0 +1,116 @@
+<template>
+            <div class="slds-grid slds-wrap slds-is-relative ">
+            <div if:false={cardLoaded} class="slds-is-absolute vloc-loader_override" style="height: 100%; width: 100%; min-height:50px; background: white; z-index: 99;">
+  <div>
+   <vlocity_cmt-spinner
+      variant="brand"
+      alternative-text="Loading content..."
+      size="medium"
+      theme="slds"
+      ></vlocity_cmt-spinner>
+  </div>
+</div>
+            <template if:false={hasPermission}>
+              You don't have required permissions to view this card.
+            </template>
+            <template if:true={hasPermission}>
+              <template if:true={hasRecords}>
+                        <template for:each={_records} for:item="record" for:index="rindex">
+                            <vlocity_cmt-flex-card-state if:true={record}  key={record._flex.uniqueKey} data-recordid={record.Id} record={record} data-statue="true"  data-index="0" data-rindex={rindex} class="cf-vlocity-state-0 cf-vlocity-state slds-size_12-of-12 "  tracking-obj={_childCardTrackingObj} >
+      <div if:true={cardLoaded} class="slds-grid slds-wrap " style="background-color:#D8EFFA;     : #ccc 1px solid; 
+      min-height:200px;   ">
+          <div data-style-id="state0element0" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element0_child"  record={record}  card={card}  collapsed-by-default="false"  collapsible="false"  label="Block"  theme="slds" ><div class="slds-grid slds-wrap">
+          
+        </div></vlocity_cmt-block>
+    </div><div data-style-id="state0element1" class="" data-rindex={rindex} style=""><vlocity_cmt-flex-icon data-style-id="state0element1_child"     record={record}  card={card}  color="#000000"  extraclass=""  icon-name="utility:standard_objects"  icon-type="Salesforce SVG"  imgsrc=""  size="small"  variant="default"  theme="slds"  ></vlocity_cmt-flex-icon>
+      </div><div data-style-id="state0element2" class="" data-rindex={rindex} style=""><vlocity_cmt-output-field data-style-id="state0element2_child"     record={record}  card={card}  merge-field="%3Cdiv%3E%3Cspan%20style=%22font-size:%2012pt;%22%3E%3Cstrong%3ESERVICES%20SOUSCRITS%3C/strong%3E%3C/span%3E%3C/div%3E"  theme="slds"  ></vlocity_cmt-output-field>
+      </div><div data-style-id="state0element3" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element3_child"  record={record}  card={card}  collapsed-by-default="false"  collapsible="false"  label="Block"  theme="slds" ><div class="slds-grid slds-wrap">
+          
+        </div></vlocity_cmt-block>
+    </div><div data-style-id="state0element4" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element4_child"  record={record}  card={card}  collapsed-by-default="false"  collapsible="false"  label="Block"  theme="slds" ><div class="slds-grid slds-wrap">
+          
+        </div></vlocity_cmt-block>
+    </div><div data-style-id="state0element5" class="" data-rindex={rindex} style=""><vlocity_cmt-output-field data-style-id="state0element5_child"     record={record}  card={card}  data-conditions='\{"group":[{"field":"felActivatedHere","id":"state-new-condition-0","operator":"==","type":"custom","value":"true"}],"id":"state-condition-object","isParent":true}'  merge-field="%3Cdiv%3E%3Cspan%20style=%22font-size:%2012pt;%22%3E%3Cstrong%3EFacture%20en%20ligne%3C/strong%3E%3C/span%3E%3C/div%3E%0A%3Cdiv%3E&nbsp;%3C/div%3E%0A%3Cdiv%3EGRATUIT%3C/div%3E"  theme="slds"  ></vlocity_cmt-output-field>
+      </div><div data-style-id="state0element6" class="" data-rindex={rindex} style=""><vlocity_cmt-output-field data-style-id="state0element6_child"     record={record}  card={card}  data-conditions='\{"group":[{"field":"eDocActivatedHere","id":"state-new-condition-0","operator":"==","type":"custom","value":"true"}],"id":"state-condition-object","isParent":true}'  merge-field="%3Cdiv%3E%3Cspan%20style=%22font-size:%2012pt;%22%3E%3Cstrong%3Ee-Document%3C/strong%3E%3C/span%3E%3C/div%3E%0A%3Cdiv%3E&nbsp;%3C/div%3E%0A%3Cdiv%3EGRATUIT%3C/div%3E"  theme="slds"  ></vlocity_cmt-output-field>
+      </div><div data-style-id="state0element7" class="" data-rindex={rindex} style=""><vlocity_cmt-output-field data-style-id="state0element7_child"     record={record}  card={card}  data-conditions='\{"group":[{"field":"IsEspaceClientCree","id":"state-new-condition-0","operator":"==","type":"custom","value":"true"}],"id":"state-condition-object","isParent":true}'  merge-field="%3Cdiv%3E%3Cspan%20style=%22font-size:%2012pt;%22%3E%3Cstrong%3EEspace%20client%3C/strong%3E%3C/span%3E%3C/div%3E%0A%3Cdiv%3E&nbsp;%3C/div%3E%0A%3Cdiv%3EOUI%3C/div%3E"  theme="slds"  ></vlocity_cmt-output-field>
+      </div><div data-style-id="state0element8" class="" data-rindex={rindex} style=""><vlocity_cmt-output-field data-style-id="state0element8_child"     record={record}  card={card}  data-conditions='\{"group":[{"field":"IsEspaceClientEnCours","id":"state-new-condition-0","operator":"==","type":"custom","value":"true"}],"id":"state-condition-object","isParent":true}'  merge-field="%3Cdiv%3E%3Cspan%20style=%22font-size:%2012pt;%22%3E%3Cstrong%3EEspace%20client%3C/strong%3E%3C/span%3E%3C/div%3E%0A%3Cdiv%3E&nbsp;%3C/div%3E%0A%3Cdiv%3EEn%20cours%20d'activation%3C/div%3E"  theme="slds"  ></vlocity_cmt-output-field>
+      </div><div data-style-id="state0element9" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element9_child"  record={record}  card={card}  collapsed-by-default="false"  collapsible="false"  data-conditions='\{"group":[{"field":"felActivatedHere","id":"state-new-condition-0","operator":"!=","type":"custom","value":"true"}],"id":"state-condition-object","isParent":true}'  label="Block"  theme="slds" ><div class="slds-grid slds-wrap">
+          
+        </div></vlocity_cmt-block>
+    </div><div data-style-id="state0element10" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element10_child"  record={record}  card={card}  collapsed-by-default="false"  collapsible="false"  data-conditions='\{"group":[{"field":"eDocActivatedHere","id":"state-new-condition-9","operator":"!=","type":"custom","value":"true"}],"id":"state-condition-object","isParent":true}'  label="Block"  theme="slds" ><div class="slds-grid slds-wrap">
+          
+        </div></vlocity_cmt-block>
+    </div><div data-style-id="state0element11" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element11_child"  record={record}  card={card}  collapsed-by-default="false"  collapsible="false"  data-conditions='\{"group":[{"field":"IsEspaceClientCree","id":"state-new-condition-18","operator":"!=","type":"custom","value":"true"},{"field":"IsEspaceClientEnCours","id":"state-new-condition-8","logicalOperator":"&&","operator":"!=","type":"custom","value":"true"}],"id":"state-condition-object","isParent":true}'  label="Block"  theme="slds" ><div class="slds-grid slds-wrap">
+          
+        </div></vlocity_cmt-block>
+    </div><div data-style-id="state0element12" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element12_child"  record={record}  card={card}  collapsed-by-default="false"  collapsible="false"  label="Block"  theme="slds" ><div class="slds-grid slds-wrap">
+          
+        </div></vlocity_cmt-block>
+    </div>
+        </div>
+      </vlocity_cmt-flex-card-state>
+                        </template>
+                      </template>
+                      <template if:false={hasRecords}>
+                            <vlocity_cmt-flex-card-state  record={record} data-statue="false"  data-index="0" data-rindex={rindex} class="cf-vlocity-state-0 cf-vlocity-state slds-size_12-of-12 "  tracking-obj={_childCardTrackingObj} >
+      <div if:true={cardLoaded} class="slds-grid slds-wrap " style="background-color:#D8EFFA;     : #ccc 1px solid; 
+      min-height:200px;   ">
+          <div data-style-id="state0element0" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element0_child"  record={record}  card={card}  collapsed-by-default="false"  collapsible="false"  label="Block"  theme="slds" ><div class="slds-grid slds-wrap">
+          
+        </div></vlocity_cmt-block>
+    </div><div data-style-id="state0element1" class="" data-rindex={rindex} style=""><vlocity_cmt-flex-icon data-style-id="state0element1_child"     record={record}  card={card}  color="#000000"  extraclass=""  icon-name="utility:standard_objects"  icon-type="Salesforce SVG"  imgsrc=""  size="small"  variant="default"  theme="slds"  ></vlocity_cmt-flex-icon>
+      </div><div data-style-id="state0element2" class="" data-rindex={rindex} style=""><vlocity_cmt-output-field data-style-id="state0element2_child"     record={record}  card={card}  merge-field="%3Cdiv%3E%3Cspan%20style=%22font-size:%2012pt;%22%3E%3Cstrong%3ESERVICES%20SOUSCRITS%3C/strong%3E%3C/span%3E%3C/div%3E"  theme="slds"  ></vlocity_cmt-output-field>
+      </div><div data-style-id="state0element3" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element3_child"  record={record}  card={card}  collapsed-by-default="false"  collapsible="false"  label="Block"  theme="slds" ><div class="slds-grid slds-wrap">
+          
+        </div></vlocity_cmt-block>
+    </div><div data-style-id="state0element4" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element4_child"  record={record}  card={card}  collapsed-by-default="false"  collapsible="false"  label="Block"  theme="slds" ><div class="slds-grid slds-wrap">
+          
+        </div></vlocity_cmt-block>
+    </div><div data-style-id="state0element5" class="" data-rindex={rindex} style=""><vlocity_cmt-output-field data-style-id="state0element5_child"     record={record}  card={card}  data-conditions='\{"group":[{"field":"felActivatedHere","id":"state-new-condition-0","operator":"==","type":"custom","value":"true"}],"id":"state-condition-object","isParent":true}'  merge-field="%3Cdiv%3E%3Cspan%20style=%22font-size:%2012pt;%22%3E%3Cstrong%3EFacture%20en%20ligne%3C/strong%3E%3C/span%3E%3C/div%3E%0A%3Cdiv%3E&nbsp;%3C/div%3E%0A%3Cdiv%3EGRATUIT%3C/div%3E"  theme="slds"  ></vlocity_cmt-output-field>
+      </div><div data-style-id="state0element6" class="" data-rindex={rindex} style=""><vlocity_cmt-output-field data-style-id="state0element6_child"     record={record}  card={card}  data-conditions='\{"group":[{"field":"eDocActivatedHere","id":"state-new-condition-0","operator":"==","type":"custom","value":"true"}],"id":"state-condition-object","isParent":true}'  merge-field="%3Cdiv%3E%3Cspan%20style=%22font-size:%2012pt;%22%3E%3Cstrong%3Ee-Document%3C/strong%3E%3C/span%3E%3C/div%3E%0A%3Cdiv%3E&nbsp;%3C/div%3E%0A%3Cdiv%3EGRATUIT%3C/div%3E"  theme="slds"  ></vlocity_cmt-output-field>
+      </div><div data-style-id="state0element7" class="" data-rindex={rindex} style=""><vlocity_cmt-output-field data-style-id="state0element7_child"     record={record}  card={card}  data-conditions='\{"group":[{"field":"IsEspaceClientCree","id":"state-new-condition-0","operator":"==","type":"custom","value":"true"}],"id":"state-condition-object","isParent":true}'  merge-field="%3Cdiv%3E%3Cspan%20style=%22font-size:%2012pt;%22%3E%3Cstrong%3EEspace%20client%3C/strong%3E%3C/span%3E%3C/div%3E%0A%3Cdiv%3E&nbsp;%3C/div%3E%0A%3Cdiv%3EOUI%3C/div%3E"  theme="slds"  ></vlocity_cmt-output-field>
+      </div><div data-style-id="state0element8" class="" data-rindex={rindex} style=""><vlocity_cmt-output-field data-style-id="state0element8_child"     record={record}  card={card}  data-conditions='\{"group":[{"field":"IsEspaceClientEnCours","id":"state-new-condition-0","operator":"==","type":"custom","value":"true"}],"id":"state-condition-object","isParent":true}'  merge-field="%3Cdiv%3E%3Cspan%20style=%22font-size:%2012pt;%22%3E%3Cstrong%3EEspace%20client%3C/strong%3E%3C/span%3E%3C/div%3E%0A%3Cdiv%3E&nbsp;%3C/div%3E%0A%3Cdiv%3EEn%20cours%20d'activation%3C/div%3E"  theme="slds"  ></vlocity_cmt-output-field>
+      </div><div data-style-id="state0element9" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element9_child"  record={record}  card={card}  collapsed-by-default="false"  collapsible="false"  data-conditions='\{"group":[{"field":"felActivatedHere","id":"state-new-condition-0","operator":"!=","type":"custom","value":"true"}],"id":"state-condition-object","isParent":true}'  label="Block"  theme="slds" ><div class="slds-grid slds-wrap">
+          
+        </div></vlocity_cmt-block>
+    </div><div data-style-id="state0element10" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element10_child"  record={record}  card={card}  collapsed-by-default="false"  collapsible="false"  data-conditions='\{"group":[{"field":"eDocActivatedHere","id":"state-new-condition-9","operator":"!=","type":"custom","value":"true"}],"id":"state-condition-object","isParent":true}'  label="Block"  theme="slds" ><div class="slds-grid slds-wrap">
+          
+        </div></vlocity_cmt-block>
+    </div><div data-style-id="state0element11" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element11_child"  record={record}  card={card}  collapsed-by-default="false"  collapsible="false"  data-conditions='\{"group":[{"field":"IsEspaceClientCree","id":"state-new-condition-18","operator":"!=","type":"custom","value":"true"},{"field":"IsEspaceClientEnCours","id":"state-new-condition-8","logicalOperator":"&&","operator":"!=","type":"custom","value":"true"}],"id":"state-condition-object","isParent":true}'  label="Block"  theme="slds" ><div class="slds-grid slds-wrap">
+          
+        </div></vlocity_cmt-block>
+    </div><div data-style-id="state0element12" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element12_child"  record={record}  card={card}  collapsed-by-default="false"  collapsible="false"  label="Block"  theme="slds" ><div class="slds-grid slds-wrap">
+          
+        </div></vlocity_cmt-block>
+    </div>
+        </div>
+      </vlocity_cmt-flex-card-state>
+                      </template>
+            </template>
+            <template if:true={hasError}>
+            {error}
+            </template>
+            
+      <vlocity_cmt-action action-wrapperclass="slds-hide" re-render-flyout class="action-trigger slds-col" onupdateos={updateOmniscript} onselectcards={updateSelectedCards} onsetvalue={updateAction}>
+      
+      </vlocity_cmt-action>
+  
+            <vlocity_cmt-action class="execute-action" re-render-flyout action-wrapperclass="slds-hide" onupdateos={updateOmniscript} onselectcards={updateSelectedCards} onsetvalue={updateAction}>
+            
+            </vlocity_cmt-action>
+            </div>
+          </template>

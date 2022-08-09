@@ -1,0 +1,14 @@
+<design:component label="Recherche SOSL HP" >
+	<design:attribute name="title"
+                      label="Titre" />
+    <design:attribute name="icon"
+                      label="Icone" />
+    <design:attribute name="showBorder"
+                      label="Cadre?" />
+    <design:attribute name="query"
+                      label="Recherche SOSL"
+                      description="Expression FIND... valide.
+                                   Attention à la volumétrie et à la sécurité (pas de contrôle d'habilitation)!" />
+    <design:attribute name="showQuery"
+                      label="Afficher SOSL?" />
+</design:component>

@@ -1,0 +1,112 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 12-06-2021
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<apex:page controller="HP_VF_FicheAidePDF_Controller" renderAs="pdf"  
+		   applyHtmlTag="false" showHeader="false" cache="true" readOnly="true" >
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+            <style>
+                @page {
+                    size: a4 portrait;    
+                    
+                }   
+                div.container{
+                    border: 1px solid black;
+                    padding-left: 2px;    
+                    padding-right: 2px;
+                    padding-bottom: 5px;
+                    padding-top: 5px;
+                    margin-top: 5px;
+                    margin-bottom: 5px;
+                }    
+                div.title{
+                    text-align: center;
+                    font-weight: bold;
+                    font-size: 28px;
+                    color:rgb(102, 80, 227);
+                    padding-bottom: 2px;
+
+                }
+                .smallTitle{
+                    font-weight: bold;
+                    max-width: 600px;
+                    display: table-cell;
+                }
+                .contentStyle{
+                    display: table-cell;
+                }
+                div.sectionHeader{
+                    text-decoration: underline;
+                    font-weight: bold;
+                    padding-left: 2px;  
+                }
+                div.lastBloc{
+                    background-color: rgb(102, 80, 227);
+                    height: 25px;
+                    width: 100%;
+                }     
+            </style>
+        </head>
+        <apex:image url="{!$Resource.HP_Logo_Happe}" width="133" height="76"/>
+        <div class="title"> Fiche de Renseignements</div>
+        <div class="container">
+            <apex:panelGrid columns="2" id="generalSection" cellspacing="10px" columnClasses="smallTitle,contentStyle" width="100%">
+                <apex:outputText value="Nom / Prénom : "  id="nameLabel"></apex:outputText>
+                <apex:outputText value="{!nameText}" escape="false" id="nameValue"></apex:outputText>
+                <apex:outputText value="Réf. Client : "  id="refClientLabel"></apex:outputText>
+                <apex:outputText value="{!idClientText}" escape="false" id="refClientValue"></apex:outputText>
+                <apex:outputText value="Situation de compte au : " ></apex:outputText>
+                <apex:outputText value="{!situationCompteText}" escape="false" > </apex:outputText>
+                <apex:outputText value="Montant dû à date :" ></apex:outputText>
+                <apex:outputText value="{!montantDuText}" escape="false" ></apex:outputText>
+                <apex:outputText value="Date de la prochaine facture : " ></apex:outputText>
+                <apex:outputText value="{!dateNextInvoiceText}" escape="false" > </apex:outputText>
+            </apex:panelGrid>
+        </div>
+        <br/>
+        <div class="container">
+            <div class="sectionHeader">
+                <apex:outputText value="Plan d’apurement"></apex:outputText>
+            </div>
+            <apex:panelGrid columns="2" cellspacing="10px" columnClasses="smallTitle,contentStyle" width="75%">
+                <apex:outputText value="Prélèvement en cours : " ></apex:outputText>
+                <apex:outputText value="{!prelevementEnCoursText}" escape="false" ></apex:outputText>
+                <apex:outputText value="Date et montants des derniers règlements : " ></apex:outputText>
+                <apex:outputText value="{!dateMontantsText}" escape="false" ></apex:outputText>
+                <apex:outputText value="Client mensualisé : " ></apex:outputText>
+                <apex:outputText value="{!clientMensualiseText}" escape="false" ></apex:outputText>
+            </apex:panelGrid> 
+        </div>
+        <br/>
+        <div class="container">
+            <div class="sectionHeader">
+                <apex:outputText value="Plan d’apurement"></apex:outputText>
+            </div>
+            <apex:panelGrid columns="2" cellspacing="10px" columnClasses="smallTitle,contentStyle" width="50%">
+                <apex:outputText value="Plan d’apurement : " ></apex:outputText>
+                <apex:outputText value="{!planApurementText}" escape="false" ></apex:outputText>
+                <apex:outputText value="Montant total plan d’apurement :" ></apex:outputText>
+                <apex:outputText value="{!montantTotalPlanApurementText}" escape="false" ></apex:outputText>
+                <apex:outputText value="Solde plan d’apurement : " ></apex:outputText>
+                <apex:outputText value="{!soldePlanApurementText}" escape="false" ></apex:outputText>
+            </apex:panelGrid>  
+        </div>
+        <br/>
+        <br/>
+        <hr/>
+        <div>
+            <p class="smallTitle">Observations </p>
+            <p>
+                Cette fiche de renseignements est destinée à compléter le dossier de demande d’aide sociale.
+                La délivrance de cette fiche ne préjuge en rien l’attribution ultérieure d’une aide financière par les services sociaux.
+                A réception de la demande d’aide FSL, le client bénéficie des dispositions du décret 2008-780 du 13/08/08.                
+            </p>
+        </div>
+        <div class="lastBloc"></div>
+    </html>
+</apex:page>

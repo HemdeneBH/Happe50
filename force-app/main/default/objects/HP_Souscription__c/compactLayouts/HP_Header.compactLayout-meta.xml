@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HP_Header</fullName>
+    <fields>Name</fields>
+    <fields>HP_type_Souscription__c</fields>
+    <fields>HP_Type_Energie__c</fields>
+    <fields>HP_Date_Origine__c</fields>
+    <fields>HP_NumPDL__c</fields>
+    <fields>HP_NumberPCE__c</fields>
+    <label>HP Header</label>
+</CompactLayout>

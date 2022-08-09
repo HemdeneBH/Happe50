@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Actif__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Sont &quot;Actives&quot; les info couleur défilant deans le carousel</description>
+    <externalId>false</externalId>
+    <label>Actif</label>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

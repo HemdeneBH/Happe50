@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_TECH_VenteEtUserSiteInterne__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+				AND(
+        /*La vente provient d&apos;un site interne */
+								ISPICKVAL(Owner:User.Contact.VI_Site_Prestataire__r.VI_Type__c, &quot;Interne&quot;),
+								/*l&apos;utilisateur partenaire connecté appartient à un site interne */
+								$User.VI_TypeSitePrestataireContactPartenaire__c == &quot;Interne&quot;
+				),
+				true,
+				false
+)</formula>
+    <label>TECH Vente et user site interne</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

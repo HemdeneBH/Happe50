@@ -1,0 +1,2137 @@
+<template>
+	<template if:false={loaded}>
+		<div class="exampleHolder">
+			<lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+		</div>
+	</template>
+	<template if:true={loaded}>
+		<div data-id="mainDivId" class="container" style="margin-bottom: 10px;position:relative">
+			<div class="row" style="position: relative;">
+				<h1 class="col-lg-12 text-center" style="margin-top: 60px;">Constitution du panier client</h1>
+			</div>
+			<div class="row" style="position: relative;">
+				<div class="col-lg-12 text-center" style="margin-top: 40px;">
+					<p class="title2">Offre Principale</p>
+				</div>
+			</div>
+			<div class="row" style="margin-top: 30px;position: relative;">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-1"></div>
+						<div class="col-lg-10">
+							<div data-id="offrePrincipalDivId" class={offerPousseClass} style={offerPousseStyle}>
+								<div data-id="offrePrincipalHeaderDivId" class={divStylePousse}>
+									<h2 class="col-lg-12 text-center gazTitle">{offreObjectoffrePousseelibelle}</h2>
+								</div>
+								<div class="row">
+									<div class="col-lg-5">
+										<div class="gazContent">
+											<div class="text-center">
+												<strong>
+													<span if:true={totalPriceNotEgalZeroPousse}
+														data-id="OffrePousseTotalPriceId"
+														class={totalPricePousseDiv}>{offrePousseTotalPrice}</span>
+													<span if:true={totalPriceNotEgalZeroPousse}
+														data-id="OffrePousseTotalPriceDeviceId"
+														class={TotalPriceDevicePousse}>€ / mois</span>
+												</strong>
+											</div>
+											<div class={totalPriceNullClass}
+												style="position: absolute;top: 16%;left:0;right: 0%;font-size:23px;"
+												if:true={isPousseMensuNot0}>
+												<span>{ajustMensPousseNum}% </span>
+												<span
+													style="color: rgba(99, 99, 99, 0.473);text-decoration: line-through;">{offrePousseTotalPriceInitValue}€</span>
+											</div>
+											<div class={textIfPriceNullClass} style="position: relative;">
+												<div class="slds-grid slds-gutters">
+													<div class="slds-col slds-size_1-of-12">
+														<span data-id="checkImgId1"
+															class={imagePousseClass}>&#10003;</span>
+													</div>
+													<div class="slds-col slds-size_1-of-12"></div>
+													<div class="slds-col slds-size_10-of-12">
+														<lightning-formatted-rich-text style="text-align: left;"
+															value={Description_Offre_Principale1}>
+														</lightning-formatted-rich-text>
+													</div>
+												</div>
+												<br>
+												<div class="slds-grid slds-gutters">
+													<div class="slds-col slds-size_1-of-12">
+														<span data-id="checkImgId2"
+															class={imagePousseClass}>&#10003;</span>
+													</div>
+													<div class="slds-col slds-size_1-of-12"></div>
+													<div class="slds-col slds-size_10-of-12">
+														<lightning-formatted-rich-text style="text-align: left;"
+															value={Description_Offre_principale_2}>
+														</lightning-formatted-rich-text>
+													</div>
+												</div>
+											</div>
+											<div class={ajusterNullTotalPriceClass}
+												style="position: relative;margin-top:27px;">
+												<!-- Start DDPCM - 1126 Autres Canaux -->
+												<template if:false={isAutresCanaux}>
+												<!-- End DDPCM - 1126 Autres Canaux -->
+													<span if:true={totalPriceNotEgalZeroPousse}
+														data-id="OffrePousseButtonAjustId" class={ajusterButtonPousseClass}
+														style="cursor: pointer;" onclick={openModalMensualite}>Ajuster mes mensualités</span>
+												<!-- Start DDPCM - 1126 Autres Canaux -->
+												</template>
+												<!-- End DDPCM - 1126 Autres Canaux -->
+											</div>
+											<div class="text-center" style="position: relative;margin-top:13%;">
+												<button data-id="OffrePousseButtonChoisirId"
+													onclick={choixOffrePrincipale}
+													class={choisirButtonPousseClass}>{buttonLabelPousse}</button>
+											</div>
+											<br><br>
+										</div>
+									</div>
+									<div class="col-lg-7">
+										<div class="text-center" style="position: relative;top: 5%;">
+											<strong><span style="font-size: 24px;">Détail du prix</span></strong>
+										</div>
+										<br>
+										<template if:false={offreObject.isTradeOffPoussee}>
+											<template if:false={isHPHC}>
+												<div data-id="prixElecPousseId" class={ElecDivPousseClass}
+													if:true={isElecPousseNotNull}>
+													<div style="position: relative;height: 37%;width: 100%;top: 2%;">
+														<template if:true={isDualPousse}>
+															<img data-id="OffrePousseImgId"
+																style="position: absolute;top: 25%;left: 20%;height: 35px;width: 20px;"
+																src={imageOffrePousseElec}>
+															<strong><span data-id="OffrePousseElecId"
+																	class={tableHeaderPousseClass}
+																	style="position: absolute;top: 25%;left: 30%;">Électricité
+																	- {offreObject.offrePoussee.prixElec.prixMensuel} €
+																	TTC</span></strong>
+														</template>
+														<template if:false={isDualPousse}>
+															<img data-id="OffrePousseImgId"
+																style="position: absolute;top: 25%;left: 36%;height: 35px;width: 20px;"
+																src={imageOffrePousseElec}>
+															<strong><span data-id="OffrePousseElecId"
+																	class={tableHeaderPousseClass}
+																	style="position: absolute;top: 25%;left: 45%;">Électricité
+																</span></strong>
+														</template>
+													</div>
+													<div data-id="OffrePousseElecTraitId" class={traitPousseClass}
+														style="position: relative;height: 3px;width: 90%;left:5%;top: 2%;">
+													</div>
+													<div style="position: relative;height: 30%;width: 100%;top: 2%;">
+														<div style="position: absolute;left: 5%;top: 20%;">
+															<span style="color: black;font-size: 18px;">Abonnement
+																annuel</span>
+														</div>
+														<div style="position: absolute;left: 45%;top: 20%;">
+															<span data-id="offrePousseElecAbboAnnuTTCId"
+																style="color: black;font-size: 18px;">{offreObjectoffrePousseprixElecAboTTC}</span>
+															<span style="color: black;font-size: 18px;">€ TTC</span>
+														</div>
+														<div style="position: absolute;left: 73%;top: 20%;">
+															<span data-id="offrePousseElecAbboAnnuHTId"
+																style="color: black;font-size: 18px;">{offreObjectoffrePousseprixElecAboHT}</span>
+															<span style="color: black;font-size: 18px;">€ HT</span>
+														</div>
+													</div>
+													<div data-id="OffrePousseElecTrait2Id" class={traitPousseClass}
+														style="position: relative;height: 1px;width: 90%;left:5%;top: 2%;">
+													</div>
+													<div style="position: relative;height: 30%;width: 100%;top: 2%;">
+														<div style="position: absolute;left: 5%;top: 20%;">
+															<span
+																style="top: 10%;color: black;font-size: 18px;">kWh</span>
+														</div>
+														<div style="position: absolute;left: 45%;top: 20%;">
+															<span data-id="offrePousseElecKwhTTCId"
+																style="top: 10%;color: black;font-size: 18px;">{offreObjectoffrePousseprixElecCoTTC}</span>
+															<span style="top: 10%;color: black;font-size: 18px;">€
+																TTC</span>
+														</div>
+														<div style="position: absolute;left: 73%;top: 20%;">
+															<span data-id="offrePousseElecKwhHTId"
+																style="top: 10%;color: black;font-size: 18px;">{offreObjectoffrePousseprixElecCoHT}</span>
+															<span style="top: 10%;color: black;font-size: 18px;">€
+																HT</span>
+														</div>
+													</div>
+												</div>
+											</template>
+											<template if:true={isHPHC}>
+												<div data-id="prixElecPousseId" class={ElecDivPousseClass}
+													if:true={isElecPousseNotNull}>
+													<div style="position: relative;height: 30%;width: 100%;">
+														<template if:true={isDualPousse}>
+															<img data-id="OffrePousseImgId"
+																style="position: absolute;top: 25%;left: 20%;height: 35px;width: 20px;"
+																src={imageOffrePousseElec}>
+															<strong><span data-id="OffrePousseElecId"
+																	class={tableHeaderPousseClass}
+																	style="position: absolute;top: 25%;left: 30%;">Électricité
+																	- {offreObject.offrePoussee.prixElec.prixMensuel} €
+																	TTC</span></strong>
+														</template>
+														<template if:false={isDualPousse}>
+															<img data-id="OffrePousseImgId"
+																style="position: absolute;top: 25%;left: 36%;height: 35px;width: 20px;"
+																src={imageOffrePousseElec}>
+															<strong><span data-id="OffrePousseElecId"
+																	class={tableHeaderPousseClass}
+																	style="position: absolute;top: 25%;left: 45%;">Électricité
+																</span></strong>
+														</template>
+													</div>
+													<div data-id="OffrePousseElecTraitId" class={traitPousseClass}
+														style="position: relative;height: 3px;width: 90%;left:5%;top: 2%;">
+													</div>
+													<div style="position: relative;height: 22%;width: 100%;top: 2%;">
+														<div style="position: absolute;left: 5%;top: 20%;">
+															<span style="color: black;font-size: 18px;">Abonnement
+																annuel</span>
+														</div>
+														<div style="position: absolute;left: 45%;top: 20%;">
+															<span data-id="offrePousseElecAbboAnnuTTCId"
+																style="color: black;font-size: 18px;">{offreObjectoffrePousseprixElecAboTTC}</span>
+															<span style="color: black;font-size: 18px;">€ TTC</span>
+														</div>
+														<div style="position: absolute;left: 73%;top: 20%;">
+															<span data-id="offrePousseElecAbboAnnuHTId"
+																style="color: black;font-size: 18px;">{offreObjectoffrePousseprixElecAboHT}</span>
+															<span style="color: black;font-size: 18px;">€ HT</span>
+														</div>
+													</div>
+													<div data-id="OffrePousseElecTrait2Id" class={traitPousseClass}
+														style="position: relative;height: 1px;width: 90%;left:5%;top: 2%;">
+													</div>
+													<div style="position: relative;height: 22%;width: 100%;top: 2%;">
+														<div style="position: absolute;left: 5%;top: 20%;">
+															<span style="top: 10%;color: black;font-size: 18px;">kWh
+																Heures Pleines</span>
+														</div>
+														<div style="position: absolute;left: 45%;top: 20%;">
+															<span data-id="offrePousseElecKwhTTCId"
+																style="top: 10%;color: black;font-size: 18px;">{offreObjectoffrePousseprixElecCoTTC}</span>
+															<span style="top: 10%;color: black;font-size: 18px;">€
+																TTC</span>
+														</div>
+														<div style="position: absolute;left: 73%;top: 20%;">
+															<span data-id="offrePousseElecKwhHTId"
+																style="top: 10%;color: black;font-size: 18px;">{offreObjectoffrePousseprixElecCoHT}</span>
+															<span style="top: 10%;color: black;font-size: 18px;">€
+																HT</span>
+														</div>
+													</div>
+													<div data-id="OffrePousseElecTrait3Id" class={traitPousseClass}
+														style="position: relative;height: 1px;width: 90%;left:5%;top: 2%;">
+													</div>
+													<div
+														style="position: relative;height: 25%;width: 100%;top: 2%;bottom: 2%;">
+														<div style="position: absolute;left: 5%;top: 20%;">
+															<span style="top: 20%;color: black;font-size: 18px;">kWh
+																Heures Creuses</span>
+														</div>
+														<div style="position: absolute;left: 45%;top: 20%;">
+															<span data-id="offrePousseElecKwhTTCId"
+																style="top: 20%;color: black;font-size: 18px;">{offreObjectoffrePousseprixElecCoTTCHC}</span>
+															<span style="top: 20%;color: black;font-size: 18px;">€
+																TTC</span>
+														</div>
+														<div style="position: absolute;left: 73%;top: 20%;">
+															<span data-id="offrePousseElecKwhHTId"
+																style="top: 20%;color: black;font-size: 18px;">{offreObjectoffrePousseprixElecCoHTHC}</span>
+															<span style="top: 20%;color: black;font-size: 18px;">€
+																HT</span>
+														</div>
+													</div>
+												</div>
+											</template>
+											<br>
+											<div data-id="prixGazPousseId" class={gazPrixGazDivPousseClass}
+												if:true={isGazPousseNotNull}>
+												<div style="position: relative;height: 37%;width: 100%;top: 2%;">
+													<template if:true={isDualPousse}>
+														<img style="position: absolute;top: 25%;left: 26%;height: 35px;width: 20px;"
+															src={imageOffrePousseGaz} data-id="OffrePousseGazImageId">
+														<strong><span data-id="OffrePousseGazId"
+																class={tableHeaderPousseClass}
+																style="position: absolute;top: 25%;left: 36%;">Gaz -
+																{offreObject.offrePoussee.prixGaz.prixMensuel} €
+																TTC</span></strong>
+													</template>
+													<template if:false={isDualPousse}>
+														<img style="position: absolute;top: 25%;left: 36%;color: var(--cerulean);height: 35px;width: 20px;"
+															src={imageOffrePousseGaz} data-id="OffrePousseGazImageId">
+														<strong><span data-id="OffrePousseGazId"
+																class={tableHeaderPousseClass}
+																style="position: absolute;top: 25%;left: 45%;">Gaz</span></strong>
+													</template>
+												</div>
+												<div data-id="OffrePousseGazTraitId" class={traitGazPousseClass}>
+												</div>
+												<div style="position: relative;height: 30%;width: 100%;top: 2%;">
+													<div style="position: absolute;left: 5%;top: 20%;">
+														<span style="color: black;font-size: 18px;">Abonnement
+															annuel</span>
+													</div>
+													<div style="position: absolute;left: 45%;top: 20%;">
+														<span data-id="offrePousseGazAbboAnnuTTCId"
+															style="color: black;font-size: 18px;">{offreObjectoffrePousseprixGazAboTTC}</span>
+														<span style="color: black;font-size: 18px;">€ TTC</span>
+													</div>
+													<div style="position: absolute;left: 73%;top: 20%;">
+														<span data-id="offrePousseGazAbboAnnuHTId"
+															style="color: black;font-size: 18px;">{offreObjectoffrePousseprixGazAboHT}</span>
+														<span style="color: black;font-size: 18px;">€ HT</span>
+													</div>
+												</div>
+												<div data-id="OffrePousseGazTrait2Id" class={traitPousseClass}
+													style="position: relative;height: 1px;width: 90%;left:5%;top: 2%;">
+												</div>
+												<div style="position: relative;height: 30%;width: 100%;top: 2%;">
+													<div style="position: absolute;left: 5%;top: 20%;">
+														<span style="top: 10%;color: black;font-size: 18px;">kWh</span>
+													</div>
+													<div style="position: absolute;left: 45%;top: 20%;">
+														<span data-id="offrePousseGazKwhTTCId"
+															style="top: 10%;color: black;font-size: 18px;">{offreObjectoffrePousseprixGazCoTTC}</span>
+														<span style="top: 10%;color: black;font-size: 18px;">€
+															TTC</span>
+													</div>
+													<div style="position: absolute;left: 73%;top: 20%;">
+														<span data-id="offrePousseGazKwhHTId"
+															style="top: 10%;color: black;font-size: 18px;">{offreObjectoffrePousseprixGazCoHT}</span>
+														<span style="top: 10%;color: black;font-size: 18px;">€ HT</span>
+													</div>
+												</div>
+											</div>
+										</template>
+										<template if:true={offreObject.isTradeOffPoussee}>
+											<template if:false={isHPHC}>
+												<div data-id="prixElecPousseId" class={ElecDivPousseClass}
+													if:true={isElecPousseNotNull}>
+													<div style="position: relative;height: 37%;width: 100%;top: 2%;">
+														<template if:true={isDualPousse}>
+															<img data-id="OffrePousseImgId"
+																style="position: absolute;top: 25%;left: 20%;height: 35px;width: 20px;"
+																src={imageOffrePousseElec}>
+															<strong><span data-id="OffrePousseElecId"
+																	class={tableHeaderPousseClass}
+																	style="position: absolute;top: 25%;left: 30%;">Électricité
+																	- {offreObject.offrePoussee.prixElec.prixMensuel} €
+																	TTC</span></strong>
+														</template>
+														<template if:false={isDualPousse}>
+															<img data-id="OffrePousseImgId"
+																style="position: absolute;top: 25%;left: 36%;height: 35px;width: 20px;"
+																src={imageOffrePousseElec}>
+															<strong><span data-id="OffrePousseElecId"
+																	class={tableHeaderPousseClass}
+																	style="position: absolute;top: 25%;left: 45%;">Électricité
+																</span></strong>
+														</template>
+													</div>
+
+													<div data-id="OffrePousseElecTraitId" class={traitPousseClass}
+														style="position: relative;height: 3px;width: 90%;left:5%;">
+													</div>
+													<div class="container">
+														<div class="row">
+															<div class="col-3">
+																Offre Référence
+															</div>
+															<div class="col-3" style="padding:0">
+																Prix de marché
+															</div>
+															<div class="col-2" style="padding:0">
+																Plages temporelles
+															</div>
+															<div class="col-2" style="padding:0">
+																HTT
+															</div>
+															<div class="col-2" style="padding:0">
+																TTC
+															</div>
+														</div>
+
+														<div class="row">
+															<div data-id="OffrePousseGazTrait2Id"
+																class={traitPousseClass}
+																style="position: relative;height: 1px;width: 90%;left:5%;top: 2%;z-index:1">
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-3" style="align-self: center;">
+																Abonnement (en €/an)
+															</div>
+															<div class="col-3">
+																<div class="row">
+																	Fourniture
+																</div>
+																<div class="row">
+																	Acheminement
+																</div>
+																<div class="row">
+																	<b>Total Abonnement</b>
+																</div>
+															</div>
+															<div class="col-2">
+
+															</div>
+															<div class="col-2">
+																<div class="row">
+																	{offreObjectoffrePousseprixElecAboHT2} 
+																</div>
+																<div class="row">
+																	{offreObjectoffrePousseeprixElecAboACHHT}
+																</div>
+																<div class="row">
+																	<b>{offreObjectoffrePousseeprixElecTOTABHT}</b>
+																</div>
+
+															</div>
+															<div class="col-2">
+																<div class="row">
+																	{offreObjectoffrePousseprixElecAboTTC2}
+																</div>
+																<div class="row">
+																	{offreObjectoffrePousseeprixElecAboACHTTC}
+																</div>
+																<div class="row">
+																	<b>{offreObjectoffrePousseeprixElecTOTAB}</b>
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div data-id="OffrePousseGazTrait2Id"
+																class={traitPousseClass}
+																style="position: relative;height: 1px;width: 90%;left:5%;top: 2%;z-index:1">
+															</div>
+														</div>
+														<div class="row greyBackground">
+															<div class="col-3" style="align-self: center;">
+																Prix par kWh (en €/kWh)
+															</div>
+															<div class="col-3">
+																<div class="row">
+																	Fourniture
+																</div>
+																<div class="row">
+																	Acheminement
+																</div>
+																<div class="row" if:true={isAcheminementHPHCPoussee}>
+																	Acheminement
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	Acheminement
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	Acheminement
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	Acheminement
+																</div>
+																<div class="row">
+																	Obligations
+																</div>
+																<div class="row">
+																	<b>Total indicatif <br/>Prix par kWh</b>
+																</div>
+															</div>
+															<div class="col-2">
+																<div class="row">
+																	&nbsp;
+																</div>
+																<div class="row" if:true={isAcheminementBasePoussee}>
+																	&nbsp;
+																</div>
+																<div class="row" if:true={isAcheminementHPHCPoussee}>
+																	HC
+																</div>
+																<div class="row" if:true={isAcheminementHPHCPoussee}>
+																	HP
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	HC Basse
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	HP Basse
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	HC Haute
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	HP Haute
+																</div>
+																<div class="row">
+																	&nbsp;
+																</div>
+																<div class="row">
+																	&nbsp;
+																</div>
+															</div>
+															<div class="col-2">
+																<div class="row">
+																	{offreObjectoffrePousseprixElecCoHT}
+																</div>
+																<div class="row" if:true={isAcheminementBasePoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHHT}
+																</div>
+																<div class="row" if:true={isAcheminementHPHCPoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHHCHT}
+																</div>
+																<div class="row" if:true={isAcheminementHPHCPoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHHT}
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHHCBHT}
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHHPBHT}
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHHCHHT}
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHHPHHT}
+																</div>
+																<div class="row">
+																	{offreObjectoffrePousseeprixElecObHT}
+																</div>
+																<div class="row">
+																	<b>{offreObjectoffrePousseeprixElecTOTCOHT}</b>
+																</div>
+															</div>
+															<div class="col-2">
+																<div class="row">
+																	{offreObjectoffrePousseprixElecCoTTC}
+																</div>
+																<div class="row" if:true={isAcheminementBasePoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHTTC}
+																</div>
+																<div class="row" if:true={isAcheminementHPHCPoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHHCTTC}
+																</div>
+																<div class="row" if:true={isAcheminementHPHCPoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHTTC}
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHHCBTTC}
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHHPBTTC}
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHHCHTTC}
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHHPHTTC}
+																</div>
+																<div class="row">
+																	{offreObjectoffrePousseeprixElecObTTC}
+																</div>
+																<div class="row">
+																	<b>{offreObjectoffrePousseeprixElecTOTCO}</b>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</template>
+											<template if:true={isHPHC}>
+												<div data-id="prixElecPousseId" class={ElecDivPousseClass}
+													if:true={isElecPousseNotNull}>
+													<div style="position: relative;height: 30%;width: 100%;">
+														<template if:true={isDualPousse}>
+															<img data-id="OffrePousseImgId"
+																style="position: absolute;top: 25%;left: 20%;height: 35px;width: 20px;"
+																src={imageOffrePousseElec}>
+															<strong><span data-id="OffrePousseElecId"
+																	class={tableHeaderPousseClass}
+																	style="position: absolute;top: 25%;left: 30%;">Électricité
+																	- {offreObject.offrePoussee.prixElec.prixMensuel} €
+																	TTC</span></strong>
+														</template>
+														<template if:false={isDualPousse}>
+															<img data-id="OffrePousseImgId"
+																style="position: absolute;top: 25%;left: 36%;height: 35px;width: 20px;"
+																src={imageOffrePousseElec}>
+															<strong><span data-id="OffrePousseElecId"
+																	class={tableHeaderPousseClass}
+																	style="position: absolute;top: 25%;left: 45%;">Électricité
+																</span></strong>
+														</template>
+													</div>
+													<div data-id="OffrePousseGazTraitId" class={traitGazPousseClass}>
+													</div>
+													<div class="container">
+														<div class="row">
+															<div class="col-3">
+																Offre Référence
+															</div>
+															<div class="col-3" style="padding:0">
+																Prix de marché
+															</div>
+															<div class="col-2" style="padding:0">
+																Plages temporelles
+															</div>
+															<div class="col-2" style="padding:0">
+																HTT
+															</div>
+															<div class="col-2" style="padding:0">
+																TTC
+															</div>
+														</div>
+
+														<div class="row">
+															<div data-id="OffrePousseGazTrait2Id"
+																class={traitPousseClass}
+																style="position: relative;height: 1px;width: 90%;left:5%;top: 2%;z-index:1">
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-3" style="align-self: center;">
+																Abonnement (en €/an)
+															</div>
+															<div class="col-3">
+																<div class="row">
+																	Fourniture
+																</div>
+																<div class="row">
+																	Acheminement
+																</div>
+																<div class="row">
+																	<b>Total Abonnement</b>
+																</div>
+															</div>
+															<div class="col-2">
+
+															</div>
+															<div class="col-2">
+																<div class="row">
+																	{offreObjectoffrePousseprixElecAboHT2} 
+																</div>
+																<div class="row">
+																	{offreObjectoffrePousseeprixElecAboACHHT}
+																</div>
+																<div class="row">
+																	<b>{offreObjectoffrePousseeprixElecTOTABHT}</b>
+																</div>
+
+															</div>
+															<div class="col-2">
+																<div class="row">
+																	{offreObjectoffrePousseprixElecAboTTC2}
+																</div>
+																<div class="row">
+																	{offreObjectoffrePousseeprixElecAboACHTTC}
+																</div>
+																<div class="row">
+																	<b>{offreObjectoffrePousseeprixElecTOTAB}</b>
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div data-id="OffrePousseGazTrait2Id"
+																class={traitPousseClass}
+																style="position: relative;height: 1px;width: 90%;left:5%;top: 2%;z-index:1">
+															</div>
+														</div>
+														<div class="row greyBackground">
+															<div class="col-3" style="align-self: center;">
+																Prix par kWh (en €/kWh)
+															</div>
+															<div class="col-3">
+																<div class="row">
+																	Fourniture
+																</div>
+																<div class="row">
+																	Fourniture
+																</div>
+																<div class="row">
+																	Acheminement
+																</div>
+																<div class="row" if:true={isAcheminementHPHCPoussee}>
+																	Acheminement
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	Acheminement
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	Acheminement
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	Acheminement
+																</div>
+																<div class="row">
+																	Obligations
+																</div>
+																<div class="row">
+																	<b>Total indicatif <br/>Prix par kWh</b>
+																</div>
+															</div>
+															<div class="col-2">
+																<div class="row">
+																	HC
+																</div>
+																<div class="row">
+																	HP
+																</div>
+																<div class="row" if:true={isAcheminementBasePoussee}>
+																	&nbsp;
+																</div>
+																<div class="row" if:true={isAcheminementHPHCPoussee}>
+																	HC
+																</div>
+																<div class="row" if:true={isAcheminementHPHCPoussee}>
+																	HP
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	HC Basse
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	HP Basse
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	HC Haute
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	HP Haute
+																</div>
+																<div class="row">
+																	&nbsp;
+																</div>
+																<div class="row">
+																	&nbsp;
+																</div>
+															</div>
+															<div class="col-2">
+																<div class="row">
+																	{offreObjectoffrePousseprixElecCoHTHC}
+																</div>
+																<div class="row">
+																	{offreObjectoffrePousseprixElecCoHT}
+																</div>
+																<div class="row" if:true={isAcheminementBasePoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHHT}
+																</div>
+																<div class="row" if:true={isAcheminementHPHCPoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHHCHT}
+																</div>
+																<div class="row" if:true={isAcheminementHPHCPoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHHT}
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHHCBHT}
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHHPBHT}
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHHCHHT}
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHHPHHT}
+																</div>
+																<div class="row">
+																	{offreObjectoffrePousseeprixElecObHT}
+																</div>
+																<div class="row">
+																	<b>{offreObjectoffrePousseeprixElecTOTCOHT}</b>
+																</div>
+															</div>
+															<div class="col-2" if={isAcheminementBasePoussee}>
+																<div class="row">
+																	{offreObjectoffrePousseprixElecCoTTCHC}
+																</div>
+																<div class="row">
+																	{offreObjectoffrePousseprixElecCoTTC}
+																</div>
+																<div class="row" if:true={isAcheminementBasePoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHTTC}
+																</div>
+																<div class="row" if:true={isAcheminementHPHCPoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHHCTTC}
+																</div>
+																<div class="row" if:true={isAcheminementHPHCPoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHTTC}
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHHCBTTC}
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHHPBTTC}
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHHCHTTC}
+																</div>
+																<div class="row"
+																	if:true={isAcheminement4QuadrantPoussee}>
+																	{offreObjectoffrePousseeprixElecCoACHHPHTTC}
+																</div>
+																<div class="row">
+																	{offreObjectoffrePousseeprixElecObTTC}
+																</div>
+																<div class="row">
+																	<b>{offreObjectoffrePousseeprixElecTOTCO}</b>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</template>
+											<br>
+											<div data-id="prixGazPousseId" class={gazPrixGazDivPousseClass}
+												if:true={isGazPousseNotNull} style={gazTop}>
+												<div style="position: relative;height: 37%;width: 100%;top: 6%;">
+													<template if:true={isDualPousse}>
+														<img style="position: absolute;top: 25%;left: 26%;color: var(--cerulean);height: 35px;width: 20px;"
+															src={imageOffrePousseGaz} data-id="OffrePousseGazImageId">
+														<strong><span data-id="OffrePousseGazId"
+																class={tableHeaderPousseClass}
+																style="position: absolute;top: 25%;left: 36%;">Gaz -
+																{offreObject.offrePoussee.prixGaz.prixMensuel} €
+																TTC</span></strong>
+													</template>
+													<template if:false={isDualPousse}>
+														<img style="position: absolute;top: 25%;left: 36%;color: var(--cerulean);height: 35px;width: 20px;"
+															src={imageOffrePousseGaz} data-id="OffrePousseGazImageId">
+														<strong><span data-id="OffrePousseGazId"
+																class={tableHeaderPousseClass}
+																style="position: absolute;top: 25%;left: 45%;">Gaz</span></strong>
+													</template>
+												</div>
+												<div data-id="OffrePousseGazTraitId" class={traitGazPousseClass}>
+												</div>
+												<div class="container">
+													<div class="row">
+														<div class="col-3">
+															Offre Référence
+														</div>
+														<div class="col-3" style="padding:0">
+															Prix de marché
+														</div>
+														<div class="col-3" style="padding:0">
+															HTT
+														</div>
+														<div class="col-3" style="padding:0">
+															TTC
+														</div>
+													</div>
+													<div class="row">
+														<div data-id="OffrePousseGazTrait2Id" class={traitPousseClass}
+															style="position: relative;height: 1px;width: 90%;left:5%;top: 2%;z-index:1">
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-3" style="align-self: center;">
+															Abonnement (en €/an)
+														</div>
+														<div class="col-3">
+															<div class="row">
+																Fourniture
+															</div>
+															<div class="row">
+																Acheminement
+															</div>
+															<div class="row">
+																<b>Total Abonnement</b>
+															</div>
+														</div>
+														<div class="col-3">
+															<div class="row">
+																{offreObjectoffrePousseprixGazAboHT2}
+															</div>
+															<div class="row">
+																{offreObjectoffrePousseprixGazAboACHHT}
+															</div>
+															<div class="row">
+																<b>{offreObjectoffrePousseprixGazTOTABHT}</b>
+															</div>
+
+														</div>
+														<div class="col-3">
+															<div class="row">
+																{offreObjectoffrePousseprixGazAboTTC2}
+															</div>
+															<div class="row">
+																{offreObjectoffrePousseprixGazAboACHTTC}
+															</div>
+															<div class="row">
+																<b>{offreObjectoffrePousseprixGazTOTAB}</b>
+															</div>
+														</div>
+													</div>
+													<div class="row">
+														<div data-id="OffrePousseGazTrait2Id" class={traitPousseClass}
+															style="position: relative;height: 1px;width: 90%;left:5%;top: 2%;z-index:1">
+														</div>
+													</div>
+													<div class="row greyBackground">
+														<div class="col-3" style="align-self: center;">
+															Prix par kWh (en €/kWh)
+														</div>
+														<div class="col-3">
+															<div class="row">
+																Fourniture
+															</div>
+															<div class="row">
+																Acheminement
+															</div>
+															<div class="row">
+																Obligations
+															</div>
+															<div class="row">
+																<b>Total indicatif <br/>Prix par kWh</b>
+															</div>
+														</div>
+														<div class="col-3">
+															<div class="row">
+																{offreObjectoffrePousseprixGazCoHT}
+															</div>
+															<div class="row">
+																{offreObjectoffrePousseprixGazCoACHHT}
+															</div>
+															<div class="row">
+																{offreObjectoffrePousseprixGazObHT}
+															</div>
+															<div class="row">
+																<b>{offreObjectoffrePousseprixGazTOTCOHT}</b>
+															</div>
+														</div>
+														<div class="col-3">
+															<div class="row">
+																{offreObjectoffrePousseprixGazCoTTC}
+															</div>
+															<div class="row">
+																{offreObjectoffrePousseprixGazCoACHTTC}
+															</div>
+															<div class="row">
+																{offreObjectoffrePousseprixGazObTTC}
+															</div>
+															<div class="row">
+																<b>{offreObjectoffrePousseprixGazTOTCO}</b>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</template>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<template if:false={isOffreDeRepliNotNull}>
+				<br>
+				<br>
+				<br>
+				<br>
+			</template>
+			<template if:true={isOffreDeRepliNotNull}>
+				<div class={positionOffreRepli}>
+					<div class="col-lg-12 text-center">
+						<span onclick={hideRepli} class="title2">Offre de repli </span>
+						<img onclick={hideRepli} class="optionsButton" src={optionDropImage} data-id="imageRepliId"
+							style={imageRepliStyle}>
+					</div>
+				</div>
+				<template if:true={isRepliOpen}>
+					<div class="row" style="margin-top: 4%;position: relative;margin-bottom:10%">
+						<div class="container">
+							<div class="row">
+								<div class="col-lg-1"></div>
+								<div class="col-lg-10">
+									<div data-id="offreRepliDivId" class={offerRepliClass} style={offerStyle}>
+										<div data-id="offreRepliHeaderDivId" class={divStyle}>
+											<h2 class="col-lg-12 text-center gazTitle">{offreObjectoffreDeReplislibelle}
+											</h2>
+										</div>
+										<div class="row">
+											<div class="col-lg-5">
+												<div class="gazContent">
+													<div class="text-center">
+														<strong>
+															<span if:true={totalPriceNotEgalZeroRepli}
+																data-id="OffreRepliTotalPriceId"
+																class={totalPriceDiv}>{offreRepliTotalPrice}</span>
+															<span if:true={totalPriceNotEgalZeroRepli}
+																data-id="OffreRepliTotalPriceDeviceId"
+																class={TotalPriceDevice}>€ /
+																mois</span>
+														</strong>
+													</div>
+													<div class="text-center"
+														style="position: absolute;top: 16%;left:0;right: 0%;font-size:23px;"
+														if:true={isRepliMensuNot0}>
+														<span>{ajustMensRepliNum}% </span>
+														<span
+															style="color: rgba(99, 99, 99, 0.473);text-decoration: line-through;">{offreRepliTotalPriceInitValue}€</span>
+													</div>
+													<div class={textIfPriceNullRepliClass} style="position: relative;">
+														<div class="slds-grid slds-gutters">
+															<div class="slds-col slds-size_1-of-12">
+																<span data-id="checkImgId3"
+																	class={imageClass}>&#10003;</span>
+															</div>
+															<div class="slds-col slds-size_1-of-12"></div>
+															<div class="slds-col slds-size_10-of-12">
+																<lightning-formatted-rich-text style="text-align: left;"
+																	value={Description_Offre_Repli_1}>
+																</lightning-formatted-rich-text>
+															</div>
+														</div>
+														<br>
+														<div class="slds-grid slds-gutters">
+															<div class="slds-col slds-size_1-of-12">
+																<span data-id="checkImgId4"
+																	class={imageClass}>&#10003;</span>
+															</div>
+															<div class="slds-col slds-size_1-of-12"></div>
+															<div class="slds-col slds-size_10-of-12">
+																<lightning-formatted-rich-text style="text-align: left;"
+																	value={Description_Offre_Repli_2}>
+																</lightning-formatted-rich-text>
+															</div>
+														</div>
+													</div>
+													<!-- Start DDPCM - 1126 Autres Canaux -->
+													<template if:false={isAutresCanaux}>
+													<!-- End DDPCM - 1126 Autres Canaux -->
+														<div class={ajusterNullTotalPriceRepliClass}
+															style="position: relative;margin-top:27px;">
+															<span if:true={totalPriceNotEgalZeroRepli}
+																onclick={openModalMensualiteRepli}
+																data-id="OffreRepliButtonAjustId" class={ajusterButtonClass}
+																style="cursor: pointer;">Ajuster
+																mes mensualités</span>
+														</div>
+													<!-- Start DDPCM - 1126 Autres Canaux -->
+													</template>
+													<!-- End DDPCM - 1126 Autres Canaux -->
+													<div class="text-center" style="position: relative;margin-top:13%;">
+														<button onclick={choixOffreReppli}
+															data-id="OffreRepliButtonChoisirId"
+															class={choisirButtonClass}>{buttonLabelRepli}</button>
+													</div>
+													<br><br>
+												</div>
+											</div>
+											<div class="col-lg-7 mb-4">
+												<div class="text-center" style="position: relative;top: 5%;">
+													<strong><span style="font-size: 24px;">Détail du
+															prix</span></strong>
+												</div>
+												<br>
+												<template if:false={offreObject.isTradeOffRepli}>
+													<template if:false={isHPHC}>
+														<div class={ElecDivClass} data-id="prixElecRepliId"
+															if:true={isElecRepliNotNull}>
+															<div
+																style="position: relative;height: 37%;width: 100%;top: 2%;">
+																<template if:true={isDualRepli}>
+																	<img style="position: absolute;top: 25%;left: 20%;color: var(--cerulean);height: 35px;width: 20px;"
+																		src={imageOffreRepliElec}
+																		data-id="OffreRepliElecImageId">
+																	<strong><span data-id="OffreRepliElecId"
+																			class={tableHeaderClass}
+																			style="position: absolute;top: 25%;left: 30%;">Électricité
+																			-
+																			{offreObject.offreDeReplis.prixElec.prixMensuel}
+																			€ TTC</span></strong>
+																</template>
+																<template if:false={isDualRepli}>
+																	<img style="position: absolute;top: 25%;left: 36%;color: var(--cerulean);height: 35px;width: 20px;"
+																		src={imageOffreRepliElec}
+																		data-id="OffreRepliElecImageId">
+																	<strong><span data-id="OffreRepliElecId"
+																			class={tableHeaderClass}
+																			style="position: absolute;top: 25%;left: 45%;">Électricité</span></strong>
+																</template>
+															</div>
+															<div class={traitClass} data-id="OffreRepliElecTraitId"
+																style="position: relative;height: 3px;width: 90%;left:5%;top: 2%;">
+															</div>
+															<div
+																style="position: relative;height: 30%;width: 100%;top: 2%;">
+																<div style="position: absolute;left: 5%;top: 20%;">
+																	<span
+																		style="color: black;font-size: 18px;">Abonnement
+																		annuel</span>
+																</div>
+																<div style="position: absolute;left: 45%;top: 20%;">
+																	<span data-id="offreRepliElecAboAnnuTTCId"
+																		style="color: black;font-size: 18px;">{offreObjectoffreDeReplisprixElecAboTTC}</span>
+																	<span style="color: black;font-size: 18px;">€
+																		TTC</span>
+																</div>
+																<div style="position: absolute;left: 73%;top: 20%;">
+																	<span data-id="offreRepliElecAboAnnuHTId"
+																		style="color: black;font-size: 18px;">{offreObjectoffreDeReplisprixElecAboHT}</span>
+																	<span style="color: black;font-size: 18px;">€
+																		HT</span>
+																</div>
+															</div>
+															<div class={traitClass} data-id="OffreRepliElecTrait2Id"
+																style="position: relative;height: 1px;width: 90%;left:5%;top: 2%;">
+															</div>
+															<div
+																style="position: relative;height: 30%;width: 100%;top: 2%;">
+																<div style="position: absolute;left: 5%;top: 20%;">
+																	<span
+																		style="top: 10%;color: black;font-size: 18px;">kWh</span>
+																</div>
+																<div style="position: absolute;left: 45%;top: 20%;">
+																	<span data-id="offreRepliElecKwhTTCId"
+																		style="top: 10%;color: black;font-size: 18px;">{offreObjectoffreDeReplisprixElecCoTTC}</span>
+																	<span
+																		style="top: 10%;color: black;font-size: 18px;">€
+																		TTC</span>
+																</div>
+																<div style="position: absolute;left: 73%;top: 20%;">
+																	<span data-id="offreRepliElecKwhHTId"
+																		style="top: 10%;color: black;font-size: 18px;">{offreObjectoffreDeReplisprixElecCoHT}</span>
+																	<span
+																		style="top: 10%;color: black;font-size: 18px;">€
+																		HT</span>
+																</div>
+															</div>
+														</div>
+													</template>
+													<template if:true={isHPHC}>
+														<div class={ElecDivClass} data-id="prixElecRepliId"
+															if:true={isElecRepliNotNull}>
+															<div
+																style="position: relative;height: 30%;width: 100%;top: 2%;">
+																<template if:true={isDualRepli}>
+																	<img style="position: absolute;top: 25%;left: 20%;color: var(--cerulean);height: 35px;width: 20px;"
+																		src={imageOffreRepliElec}
+																		data-id="OffreRepliElecImageId">
+																	<strong><span data-id="OffreRepliElecId"
+																			class={tableHeaderClass}
+																			style="position: absolute;top: 25%;left: 30%;">Électricité
+																			-
+																			{offreObject.offreDeReplis.prixElec.prixMensuel}
+																			€ TTC</span></strong>
+																</template>
+																<template if:false={isDualRepli}>
+																	<img style="position: absolute;top: 25%;left: 36%;color: var(--cerulean);height: 35px;width: 20px;"
+																		src={imageOffreRepliElec}
+																		data-id="OffreRepliElecImageId">
+																	<strong><span data-id="OffreRepliElecId"
+																			class={tableHeaderClass}
+																			style="position: absolute;top: 25%;left: 45%;">Électricité</span></strong>
+																</template>
+															</div>
+															<div class={traitClass} data-id="OffreRepliElecTraitId"
+																style="position: relative;height: 3px;width: 90%;left:5%;top: 2%;">
+															</div>
+															<div
+																style="position: relative;height: 22%;width: 100%;top: 2%;">
+																<div style="position: absolute;left: 5%;top: 20%;">
+																	<span
+																		style="color: black;font-size: 18px;">Abonnement
+																		annuel</span>
+																</div>
+																<div style="position: absolute;left: 45%;top: 20%;">
+																	<span data-id="offreRepliElecAboAnnuTTCId"
+																		style="color: black;font-size: 18px;">{offreObjectoffreDeReplisprixElecAboTTC}</span>
+																	<span style="color: black;font-size: 18px;">€
+																		TTC</span>
+																</div>
+																<div style="position: absolute;left: 73%;top: 20%;">
+																	<span data-id="offreRepliElecAboAnnuHTId"
+																		style="color: black;font-size: 18px;">{offreObjectoffreDeReplisprixElecAboHT}</span>
+																	<span style="color: black;font-size: 18px;">€
+																		HT</span>
+																</div>
+															</div>
+															<div class={traitClass} data-id="OffreRepliElecTrait2Id"
+																style="position: relative;height: 1px;width: 90%;left:5%;top: 2%;">
+															</div>
+															<div
+																style="position: relative;height: 22%;width: 100%;top: 2%;">
+																<div style="position: absolute;left: 5%;top: 20%;">
+																	<span
+																		style="top: 10%;color: black;font-size: 18px;">kWh
+																		Heures Pleines</span>
+																</div>
+																<div style="position: absolute;left: 45%;top: 20%;">
+																	<span data-id="offreRepliElecKwhTTCId"
+																		style="top: 10%;color: black;font-size: 18px;">{offreObjectoffreDeReplisprixElecCoTTC}</span>
+																	<span
+																		style="top: 10%;color: black;font-size: 18px;">€
+																		TTC</span>
+																</div>
+																<div style="position: absolute;left: 73%;top: 20%;">
+																	<span data-id="offreRepliElecKwhHTId"
+																		style="top: 10%;color: black;font-size: 18px;">{offreObjectoffreDeReplisprixElecCoHT}</span>
+																	<span
+																		style="top: 10%;color: black;font-size: 18px;">€
+																		HT</span>
+																</div>
+															</div>
+															<div class={traitClass} data-id="OffreRepliElecTrait3Id"
+																style="position: relative;height: 1px;width: 90%;left:5%;top: 2%;z-index:1">
+															</div>
+															<div
+																style="position: relative;height: 25%;width: 100%;top: 2%;">
+																<div style="position: absolute;left: 5%;top: 20%;">
+																	<span
+																		style="top: 10%;color: black;font-size: 18px;">kWh
+																		Heures Creuses</span>
+																</div>
+																<div style="position: absolute;left: 45%;top: 20%;">
+																	<span data-id="offreRepliElecKwhTTCId"
+																		style="top: 10%;color: black;font-size: 18px;">{offreObjectoffreDeReplisprixElecCoTTCHC}</span>
+																	<span
+																		style="top: 10%;color: black;font-size: 18px;">€
+																		TTC</span>
+																</div>
+																<div style="position: absolute;left: 73%;top: 20%;">
+																	<span data-id="offreRepliElecKwhHTId"
+																		style="top: 10%;color: black;font-size: 18px;">{offreObjectoffreDeReplisprixElecCoHTHC}</span>
+																	<span
+																		style="top: 10%;color: black;font-size: 18px;">€
+																		HT</span>
+																</div>
+															</div>
+														</div>
+													</template>
+													<br>
+													<div class={gazPrixGazDivClass} data-id="prixGazRepliId"
+														if:true={isGazRepliNotNull}>
+														<div
+															style="position: relative;height: 37%;width: 100%;top: 2%;">
+															<template if:true={isDualRepli}>
+																<img style="position: absolute;top: 25%;left: 26%;color: var(--cerulean);height: 35px;width: 20px;"
+																	src={imageOffreRepliGaz}
+																	data-id="OffreRepliGazImageId">
+																<strong><span data-id="OffreRepliGazId"
+																		class={tableHeaderClass}
+																		style="position: absolute;top: 25%;left: 36%;">Gaz
+																		-
+																		{offreObject.offreDeReplis.prixGaz.prixMensuel}
+																		€ TTC</span></strong>
+															</template>
+															<template if:false={isDualRepli}>
+																<img style="position: absolute;top: 25%;left: 36%;color: var(--cerulean);height: 35px;width: 20px;"
+																	src={imageOffreRepliGaz}
+																	data-id="OffreRepliGazImageId">
+																<strong><span data-id="OffreRepliGazId"
+																		class={tableHeaderClass}
+																		style="position: absolute;top: 25%;left: 45%;">Gaz</span></strong>
+															</template>
+														</div>
+														<div data-id="OffreRepliGazTraitId" class={traitGazClass}>
+														</div>
+														<div
+															style="position: relative;height: 30%;width: 100%;top: 2%;">
+															<div style="position: absolute;left: 5%;top: 20%;">
+																<span style="color: black;font-size: 18px;">Abonnement
+																	annuel</span>
+															</div>
+															<div style="position: absolute;left: 45%;top: 20%;">
+																<span data-id="offreRepliGazAboAnnuTTCId"
+																	style="color: black;font-size: 18px;">{offreObjectoffreDeReplisprixGazAboTTC}</span>
+																<span style="color: black;font-size: 18px;">€ TTC</span>
+															</div>
+															<div style="position: absolute;left: 73%;top: 20%;">
+																<span data-id="offreRepliGazAboAnnuHTId"
+																	style="color: black;font-size: 18px;">{offreObjectoffreDeReplisprixGazAboHT}</span>
+																<span style="color: black;font-size: 18px;">€ HT</span>
+															</div>
+														</div>
+														<div data-id="OffreRepliGazTrait2Id" class={traitClass}
+															style="position: relative;height: 1px;width: 90%;left:5%;top: 2%;">
+														</div>
+														<div
+															style="position: relative;height: 30%;width: 100%;top: 2%;">
+															<div style="position: absolute;left: 5%;top: 20%;">
+																<span
+																	style="top: 10%;color: black;font-size: 18px;">kWh</span>
+															</div>
+															<div style="position: absolute;left: 45%;top: 20%;">
+																<span data-id="offreRepliGazKwhTTCId"
+																	style="top: 10%;color: black;font-size: 18px;">{offreObjectoffreDeReplisprixGazCoTTC}</span>
+																<span style="top: 10%;color: black;font-size: 18px;">€
+																	TTC</span>
+															</div>
+															<div style="position: absolute;left: 73%;top: 20%;">
+																<span data-id="offreRepliGazKwhHTId"
+																	style="top: 10%;color: black;font-size: 18px;">{offreObjectoffreDeReplisprixGazCoHT}</span>
+																<span style="top: 10%;color: black;font-size: 18px;">€
+																	HT</span>
+															</div>
+														</div>
+													</div>
+												</template>
+												<template if:true={offreObject.isTradeOffRepli}>
+													<template if:false={isHPHC}>
+														<div class={ElecDivClass} data-id="prixElecRepliId"
+															if:true={isElecRepliNotNull}>
+															<div
+																style="position: relative;height: 37%;width: 100%;top: 2%;">
+																<template if:true={isDualRepli}>
+																	<img style="position: absolute;top: 25%;left: 20%;color: var(--cerulean);height: 35px;width: 20px;"
+																		src={imageOffreRepliElec}
+																		data-id="OffreRepliElecImageId">
+																	<strong><span data-id="OffreRepliElecId"
+																			class={tableHeaderClass}
+																			style="position: absolute;top: 25%;left: 30%;">Électricité
+																			-
+																			{offreObject.offreDeReplis.prixElec.prixMensuel}
+																			€ TTC</span></strong>
+																</template>
+																<template if:false={isDualRepli}>
+																	<img style="position: absolute;top: 25%;left: 36%;color: var(--cerulean);height: 35px;width: 20px;"
+																		src={imageOffreRepliElec}
+																		data-id="OffreRepliElecImageId">
+																	<strong><span data-id="OffreRepliElecId"
+																			class={tableHeaderClass}
+																			style="position: absolute;top: 25%;left: 45%;">Électricité</span></strong>
+																</template>
+															</div>
+															<div class={traitClass} data-id="OffreRepliElecTraitId"
+																style="position: relative;height: 3px;width: 90%;left:5%;">
+															</div>
+															<div class="container">
+																<div class="row">
+																	<div class="col-3">
+																		Offre Référence
+																	</div>
+																	<div class="col-3" style="padding:0">
+																		Prix de marché
+																	</div>
+																	<div class="col-2" style="padding:0">
+																		Plages temporelles
+																	</div>
+																	<div class="col-2" style="padding:0">
+																		HTT
+																	</div>
+																	<div class="col-2" style="padding:0">
+																		TTC
+																	</div>
+																</div>
+																<div class="row">
+																	<div class={traitClass}
+																		data-id="OffreRepliElecTraitId"
+																		style="position: relative;height: 1px;width: 90%;left:5%;top: 2%;z-index:1">
+																	</div>
+																</div>
+																<div class="row">
+																	<div class="col-3" style="align-self: center;">
+																		Abonnement (en €/an)
+																	</div>
+																	<div class="col-3">
+																		<div class="row">
+																			Fourniture
+																		</div>
+																		<div class="row">
+																			Acheminement
+																		</div>
+																		<div class="row">
+																			<b>Total Abonnement</b>
+																		</div>
+																	</div>
+																	<div class="col-2">
+
+																	</div>
+																	<div class="col-2">
+																		<div class="row">
+																			{offreObjectoffreDeReplisprixElecAboHT2}
+																		</div>
+																		<div class="row">
+																			{offreObjectoffreDeReplisprixElecAboACHHT}
+																		</div>
+																		<div class="row">
+																			<b>{offreObjectoffreDeReplisprixElecTOTABHT}</b>
+																		</div>
+
+																	</div>
+																	<div class="col-2">
+																		<div class="row">
+																			{offreObjectoffreDeReplisprixElecAboTTC2}
+																		</div>
+																		<div class="row">
+																			{offreObjectoffreDeReplisprixElecAboACHTTC}
+																		</div>
+																		<div class="row">
+																			<b>{offreObjectoffreDeReplisprixElecTOTAB}</b>
+																		</div>
+																	</div>
+																</div>
+																<div class="row">
+																	<div class={traitClass}
+																		data-id="OffreRepliElecTraitId"
+																		style="position: relative;height: 1px;width: 90%;left:5%;top: 2%;z-index:1">
+																	</div>
+																</div>
+																<div class="row greyBackground">
+																	<div class="col-3" style="align-self: center;">
+																		Prix par kWh (en €/kWh)
+																	</div>
+																	<div class="col-3">
+																		<div class="row">
+																			Fourniture
+																		</div>
+																		<div class="row">
+																			Acheminement
+																		</div>
+																		<div class="row" if:true={isAcheminementHPHC}>
+																			Acheminement
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			Acheminement
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			Acheminement
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			Acheminement
+																		</div>
+																		<div class="row">
+																			Obligations
+																		</div>
+																		<div class="row">
+																			<b>Total indicatif <br/>Prix par kWh</b>
+																		</div>
+																	</div>
+																	<div class="col-2">
+																		<div class="row">
+																			&nbsp;
+																		</div>
+																		<div class="row" if:true={isAcheminementBase}>
+																			&nbsp;
+																		</div>
+																		<div class="row" if:true={isAcheminementHPHC}>
+																			HC
+																		</div>
+																		<div class="row" if:true={isAcheminementHPHC}>
+																			HP
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			HC Basse
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			HP Basse
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			HC Haute
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			HP Haute
+																		</div>
+																		<div class="row">
+																			&nbsp;
+																		</div>
+																		<div class="row">
+																			&nbsp;
+																		</div>
+																	</div>
+																	<div class="col-2">
+																		<div class="row">
+																			{offreObjectoffreDeReplisprixElecCoHT}
+																		</div>
+																		<div class="row" if:true={isAcheminementBase}>
+																			{offreObjectoffreDeReplisprixElecCoACHHT}
+																		</div>
+																		<div class="row" if:true={isAcheminementHPHC}>
+																			{offreObjectoffreDeReplisprixElecCoACHHCHT}
+																		</div>
+																		<div class="row" if:true={isAcheminementHPHC}>
+																			{offreObjectoffreDeReplisprixElecCoACHHT}
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			{offreObjectoffreDeReplisprixElecCoACHHCBHT}
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			{offreObjectoffreDeReplisprixElecCoACHHPBHT}
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			{offreObjectoffreDeReplisprixElecCoACHHCHHT}
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			{offreObjectoffreDeReplisprixElecCoACHHPHHT}
+																		</div>
+																		<div class="row">
+																			{offreObjectoffreDeReplisprixElecObHT}
+																		</div>
+																		<div class="row">
+																			<b>{offreObjectoffreDeReplisprixElecTOTCOHT}</b>
+																		</div>
+																	</div>
+																	<div class="col-2" if={isAcheminementBase}>
+																		<div class="row">
+																			{offreObjectoffreDeReplisprixElecCoTTC}
+																		</div>
+																		<div class="row" if:true={isAcheminementBase}>
+																			{offreObjectoffreDeReplisprixElecCoACHTTC}
+																		</div>
+																		<div class="row" if:true={isAcheminementHPHC}>
+																			{offreObjectoffreDeReplisprixElecCoACHHCTTC}
+																		</div>
+																		<div class="row" if:true={isAcheminementHPHC}>
+																			{offreObjectoffreDeReplisprixElecCoACHTTC}
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			{offreObjectoffreDeReplisprixElecCoACHHCBTTC}
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			{offreObjectoffreDeReplisprixElecCoACHHPBTTC}
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			{offreObjectoffreDeReplisprixElecCoACHHCHTTC}
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			{offreObjectoffreDeReplisprixElecCoACHHPHTTC}
+																		</div>
+																		<div class="row">
+																			{offreObjectoffreDeReplisprixElecObTTC}
+																		</div>
+																		<div class="row">
+																			<b>{offreObjectoffreDeReplisprixElecTOTCO}</b>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</template>
+													<template if:true={isHPHC}>
+														<div class={ElecDivClass} data-id="prixElecRepliId"
+															if:true={isElecRepliNotNull}>
+															<div style="position: relative;height: 30%;width: 100%;">
+																<template if:true={isDualRepli}>
+																	<img style="position: absolute;top: 25%;left: 20%;color: var(--cerulean);height: 35px;width: 20px;"
+																		src={imageOffreRepliElec}
+																		data-id="OffreRepliElecImageId">
+																	<strong><span data-id="OffreRepliElecId"
+																			class={tableHeaderClass}
+																			style="position: absolute;top: 25%;left: 30%;">Électricité
+																			-
+																			{offreObject.offreDeReplis.prixElec.prixMensuel}
+																			€ TTC</span></strong>
+																</template>
+																<template if:false={isDualRepli}>
+																	<img style="position: absolute;top: 25%;left: 36%;color: var(--cerulean);height: 35px;width: 20px;"
+																		src={imageOffreRepliElec}
+																		data-id="OffreRepliElecImageId">
+																	<strong><span data-id="OffreRepliElecId"
+																			class={tableHeaderClass}
+																			style="position: absolute;top: 25%;left: 45%;">Électricité</span></strong>
+																</template>
+															</div>
+															<div class="row">
+																<div class={traitClass} data-id="OffreRepliElecTraitId"
+																	style="position: relative;height: 3px;width: 90%;left:5%;">
+																</div>
+															</div>
+															<div class="container">
+																<div class="row">
+																	<div class="col-3">
+																		Offre Référence
+																	</div>
+																	<div class="col-3" style="padding:0">
+																		Prix de marché
+																	</div>
+																	<div class="col-2" style="padding:0">
+																		Plages temporelles
+																	</div>
+																	<div class="col-2" style="padding:0">
+																		HTT
+																	</div>
+																	<div class="col-2" style="padding:0">
+																		TTC
+																	</div>
+																</div>
+																<div class="row">
+																	<div data-id="OffreRepliGazTrait2Id"
+																		class={traitClass}
+																		style="position: relative;height: 1px;width: 90%;left:5%;top: 2%;z-index:1">
+																	</div>
+																</div>
+																<div class="row">
+																	<div class="col-3" style="align-self: center;">
+																		Abonnement (en €/an)
+																	</div>
+																	<div class="col-3">
+																		<div class="row">
+																			Fourniture
+																		</div>
+																		<div class="row">
+																			Acheminement
+																		</div>
+																		<div class="row">
+																			<b>Total Abonnement</b>
+																		</div>
+																	</div>
+																	<div class="col-2">
+
+																	</div>
+																	<div class="col-2">
+																		<div class="row">
+																			{offreObjectoffreDeReplisprixElecAboHT2}
+																		</div>
+																		<div class="row">
+																			{offreObjectoffreDeReplisprixElecAboACHHT}
+																		</div>
+																		<div class="row">
+																			<b>{offreObjectoffreDeReplisprixElecTOTABHT}</b>
+																		</div>
+
+																	</div>
+																	<div class="col-2">
+																		<div class="row">
+																			{offreObjectoffreDeReplisprixElecAboTTC2}
+																		</div>
+																		<div class="row">
+																			{offreObjectoffreDeReplisprixElecAboACHTTC}
+																		</div>
+																		<div class="row">
+																			<b>{offreObjectoffreDeReplisprixElecTOTAB}</b>
+																		</div>
+																	</div>
+																</div>
+																<div class="row">
+																	<div data-id="OffreRepliGazTrait2Id"
+																		class={traitClass}
+																		style="position: relative;height: 1px;width: 90%;left:5%;top: 2%;z-index:1">
+																	</div>
+																</div>
+																<div class="row greyBackground">
+																	<div class="col-3" style="align-self: center;">
+																		Prix par kWh (en €/kWh)
+																	</div>
+																	<div class="col-3">
+																		<div class="row">
+																			Fourniture
+																		</div>
+																		<div class="row">
+																			Fourniture
+																		</div>
+																		<div class="row">
+																			Acheminement
+																		</div>
+																		<div class="row" if:true={isAcheminementHPHC}>
+																			Acheminement
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			Acheminement
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			Acheminement
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			Acheminement
+																		</div>
+																		<div class="row">
+																			Obligations
+																		</div>
+																		<div class="row">
+																			<b>Total indicatif <br/>Prix par kWh</b>
+																		</div>
+																	</div>
+																	<div class="col-2">
+																		<div class="row" >
+																			HC
+																		</div>
+																		<div class="row">
+																			HP
+																		</div>
+																		<div class="row" if:true={isAcheminementBase}>
+																			&nbsp;
+																		</div>
+																		<div class="row" if:true={isAcheminementHPHC}>
+																			HC
+																		</div>
+																		<div class="row" if:true={isAcheminementHPHC}>
+																			HP
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			HC Basse
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			HP Basse
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			HC Haute
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			HP Haute
+																		</div>
+																		<div class="row">
+																			&nbsp;
+																		</div>
+																		<div class="row">
+																			&nbsp;
+																		</div>
+																	</div>
+																	<div class="col-2">
+																		<div class="row">
+																			{offreObjectoffreDeReplisprixElecCoHTHC}
+																		</div>
+																		<div class="row" if:true={isHPHC}>
+																			{offreObjectoffreDeReplisprixElecCoHT}
+																		</div>
+																		<div class="row" if:true={isAcheminementBase}>
+																			{offreObjectoffreDeReplisprixElecCoACHHT}
+																		</div>
+																		<div class="row" if:true={isAcheminementHPHC}>
+																			{offreObjectoffreDeReplisprixElecCoACHHCHT}
+																		</div>
+																		<div class="row" if:true={isAcheminementHPHC}>
+																			{offreObjectoffreDeReplisprixElecCoACHHT}
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			{offreObjectoffreDeReplisprixElecCoACHHCBHT}
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			{offreObjectoffreDeReplisprixElecCoACHHPBHT}
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			{offreObjectoffreDeReplisprixElecCoACHHCHHT}
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			{offreObjectoffreDeReplisprixElecCoACHHPHHT}
+																		</div>
+																		<div class="row">
+																			{offreObjectoffreDeReplisprixElecObHT}
+																		</div>
+																		<div class="row">
+																			<b>{offreObjectoffreDeReplisprixElecTOTCOHT}</b>
+																		</div>
+																	</div>
+																	<div class="col-2" if={isAcheminementBase}>
+																		<div class="row">
+																			{offreObjectoffreDeReplisprixElecCoTTCHC}
+																		</div>
+																		<div class="row" if:true={isHPHC}>
+																			{offreObjectoffreDeReplisprixElecCoTTC}
+																		</div>
+																		<div class="row" if:true={isAcheminementBase}>
+																			{offreObjectoffreDeReplisprixElecCoACHTTC}
+																		</div>
+																		<div class="row" if:true={isAcheminementHPHC}>
+																			{offreObjectoffreDeReplisprixElecCoACHHCTTC}
+																		</div>
+																		<div class="row" if:true={isAcheminementHPHC}>
+																			{offreObjectoffreDeReplisprixElecCoACHTTC}
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			{offreObjectoffreDeReplisprixElecCoACHHCBTTC}
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			{offreObjectoffreDeReplisprixElecCoACHHPBTTC}
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			{offreObjectoffreDeReplisprixElecCoACHHCHTTC}
+																		</div>
+																		<div class="row"
+																			if:true={isAcheminement4Quadrant}>
+																			{offreObjectoffreDeReplisprixElecCoACHHPHTTC}
+																		</div>
+																		<div class="row">
+																			{offreObjectoffreDeReplisprixElecObTTC}
+																		</div>
+																		<div class="row">
+																			<b>{offreObjectoffreDeReplisprixElecTOTCO}</b>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</template>
+													<br>
+													<div class={gazPrixGazDivClass} data-id="prixGazRepliId"
+														style={gazTopRepli} if:true={isGazRepliNotNull}>
+														<div
+															style="position: relative;height: 37%;width: 100%;top: 2%;">
+															<template if:true={isDualRepli}>
+																<img style="position: absolute;top: 25%;left: 26%;color: var(--cerulean);height: 35px;width: 20px;"
+																	src={imageOffreRepliGaz}
+																	data-id="OffreRepliGazImageId">
+																<strong><span data-id="OffreRepliGazId"
+																		class={tableHeaderClass}
+																		style="position: absolute;top: 25%;left: 36%;">Gaz
+																		-
+																		{offreObject.offreDeReplis.prixGaz.prixMensuel}
+																		€ TTC</span></strong>
+															</template>
+															<template if:false={isDualRepli}>
+																<img style="position: absolute;top: 25%;left: 36%;color: var(--cerulean);height: 35px;width: 20px;"
+																	src={imageOffreRepliGaz}
+																	data-id="OffreRepliGazImageId">
+																<strong><span data-id="OffreRepliGazId"
+																		class={tableHeaderClass}
+																		style="position: absolute;top: 25%;left: 45%;">Gaz</span></strong>
+															</template>
+														</div>
+														<div data-id="OffreRepliGazTraitId" class={traitGazClass}>
+														</div>
+														<div class="container">
+															<div class="row">
+																<div class="col-3">
+																	Offre Référence
+																</div>
+																<div class="col-3" style="padding:0">
+																	Prix de marché
+																</div>
+																<div class="col-3" style="padding:0">
+																	HTT
+																</div>
+																<div class="col-3" style="padding:0">
+																	TTC
+																</div>
+															</div>
+															<div class="row">
+																<div data-id="OffreRepliGazTrait2Id" class={traitClass}
+																	style="position: relative;height: 1px;width: 90%;left:5%;top: 2%;z-index:1">
+																</div>
+															</div>
+															<div class="row">
+																<div class="col-3" style="align-self: center;">
+																	Abonnement (en €/an)
+																</div>
+																<div class="col-3">
+																	<div class="row">
+																		Fourniture
+																	</div>
+																	<div class="row">
+																		Acheminement
+																	</div>
+																	<div class="row">
+																		<b>Total Abonnement</b>
+																	</div>
+																</div>
+																<div class="col-3">
+																	<div class="row">
+																		{offreObjectoffreDeReplisprixGazAboHT2}
+																	</div>
+																	<div class="row">
+																		{offreObjectoffreDeReplisprixGazAboACHHT}
+																	</div>
+																	<div class="row">
+																		<b>{offreObjectoffreDeReplisprixGazTOTABHT}</b>
+																	</div>
+																</div>
+																<div class="col-3">
+																	<div class="row">
+																		{offreObjectoffreDeReplisprixGazAboTTC2}
+																	</div>
+																	<div class="row">
+																		{offreObjectoffreDeReplisprixGazAboACHTTC}
+																	</div>
+																	<div class="row">
+																		<b>{offreObjectoffreDeReplisprixGazTOTAB}</b>
+																	</div>
+																</div>
+															</div>
+															<div class="row">
+																<div data-id="OffreRepliGazTrait2Id" class={traitClass}
+																	style="position: relative;height: 1px;width: 90%;left:5%;top: 2%;z-index:1">
+																</div>
+															</div>
+															<div class="row greyBackground">
+																<div class="col-3" style="align-self: center;">
+																	Prix par kWh (en €/kWh)
+																</div>
+																<div class="col-3">
+																	<div class="row">
+																		Fourniture
+																	</div>
+																	<div class="row">
+																		Acheminement
+																	</div>
+																	<div class="row">
+																		Obligations
+																	</div>
+																	<div class="row">
+																		<b>Total indicatif <br/>Prix par kWh</b>
+																	</div>
+																</div>
+																<div class="col-3">
+																	<div class="row">
+																		{offreObjectoffreDeReplisprixGazCoHT}
+																	</div>
+																	<div class="row">
+																		{offreObjectoffreDeReplisprixGazCoACHHT}
+																	</div>
+																	<div class="row">
+																		{offreObjectoffreDeReplisprixGazObHT}
+																	</div>
+																	<div class="row">
+																		<b>{offreObjectoffreDeReplisprixGazTOTCOHT}</b>
+																	</div>
+																</div>
+																<div class="col-3">
+																	<div class="row">
+																		{offreObjectoffreDeReplisprixGazCoTTC}
+																	</div>
+																	<div class="row">
+																		{offreObjectoffreDeReplisprixGazCoACHTTC}
+																	</div>
+																	<div class="row">
+																		{offreObjectoffreDeReplisprixGazObTTC}
+																	</div>
+																	<div class="row">
+																		<b>{offreObjectoffreDeReplisprixGazTOTCO}</b>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</template>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</template>
+			</template>
+			<br>
+			<br>
+			<br>
+			<br>
+			<div style="position: absolute;height: 100px;width: 100%;bottom: -150px;left: 0%;">
+				<button onclick={handlePrecedent} class="buttonPrecedent">Précédent</button>
+				<button onclick={handleFinalValiderParcour} class="buttonSuivant">Suivant</button>
+			</div>
+		</div>
+
+		<div if:true={isModalMensualiteOpen} class="vi-modal-mensualite container">
+			<!--Header-->
+			<div class="vi-modal-header-mensualite">
+				<img title="Close" onclick={closeModalMensualite} class="vi-close-btn-mensualite" src={closeImage} />
+				<span style="position: absolute;top: 35%;left: 17%;">Ajuster vos mensualités jusqu’à +/- 10%</span>
+			</div>
+			<div class="vi-modal-container-mensualite">
+				<div class="vi-modal-container-mensualite-button">
+					<button disabled={showButtonMoinsPousse} onclick={buttonMoinsAction}
+						class={viModalButtonMinusMensualitePousse}><span
+							class="buttonMensualiteTextMinus">-</span></button>
+					<div class="vi-modal-container-mensualite-button-trait"></div>
+					<!-- Start DDPCM-169 -->
+					<template if:true={isOrange}>
+						<Strong>
+							<span data-id="modalPousseTotalPriceId" class="vi-modal-container-mensualite-button-text1"
+								style="color:rgb(228,118,0);">{offrePousseTotalPriceVarRounded} € TTC /
+								mois</span>
+						</Strong>
+						<Strong><span class="vi-modal-container-mensualite-button-text2">11 mensualités /
+								an</span></Strong>
+					</template>
+					<template if:true={isBlue}>
+						<Strong>
+							<span data-id="modalPousseTotalPriceId" class="vi-modal-container-mensualite-button-text1"
+								style="color: var(--cerulean);">{offrePousseTotalPriceVarRounded} € TTC /
+								mois</span>
+						</Strong>
+						<Strong><span class="vi-modal-container-mensualite-button-text2">11 mensualités /
+								an</span></Strong>
+					</template>
+					<template if:true={isGreen}>
+						<Strong>
+							<span data-id="modalPousseTotalPriceId" class="vi-modal-container-mensualite-button-text1"
+								style="color:rgb(0,153,52);">{offrePousseTotalPriceVarRounded} € TTC /
+								mois</span>
+						</Strong>
+						<Strong><span class="vi-modal-container-mensualite-button-text2">11 mensualités /
+								an</span></Strong>
+					</template>
+					<!-- End DDPCM-169 -->
+					<button disabled={showButtonPlusPousse} onclick={buttonPlusAction}
+						class={viModalButtonPlusMensualitePousse}><span
+							class="buttonMensualiteTextPlus">+</span></button>
+				</div>
+				<template if:true={isOrange}>
+					<div class="vi-modal-container-mensualite-astuce orangeBorder">
+						<span class="vi-modal-container-mensualite-border-text">
+							D'après nos calculs, cette mensualité risque de générer une facture de régulation avec un
+							montant élevé.
+						</span>
+					</div>
+				</template>
+				<template if:true={isBlue}>
+					<div class="vi-modal-container-mensualite-astuce blueBorder">
+						<span class="vi-modal-container-mensualite-border-text">
+							D'après nos calculs, cette mensualité devrait vous permettre d'avoir la facture de
+							régulation la plus petite possible le 12 ème mois.
+						</span>
+					</div>
+				</template>
+				<template if:true={isGreen}>
+					<div class="vi-modal-container-mensualite-astuce greenBorder">
+						<span class="vi-modal-container-mensualite-border-text">
+							D'après nos calculs, cette mensualité vous permettra d'avoir une facture de régulation avec
+							un montant faible.
+						</span>
+					</div>
+				</template>
+				<br>
+				<br>
+				<!-- End DDPCM-169 -->
+			</div>
+			<div class="vi-modal-footer-mensualite">
+				<button onclick={validerMensuPousse} class='vi-modal-btn-mensualite'>
+					Valider les mensualités
+				</button>
+			</div>
+		</div>
+		<div if:true={isModalMensualiteRepliOpen} class="vi-modal-mensualite-repli container">
+			<!--Header-->
+			<div class="vi-modal-header-mensualite">
+				<img title="Close" onclick={closeModalMensualiteRepli} class="vi-close-btn-mensualite"
+					src={closeImage} />
+				<span style="position: absolute;top: 35%;left: 17%;">Ajuster vos mensualités jusqu’à +/- 10%</span>
+			</div>
+			<div class="vi-modal-container-mensualite">
+				<div class="vi-modal-container-mensualite-button">
+					<button disabled={showButtonMoinsRepli} onclick={buttonMoinsActionRepli}
+						class={viModalButtonMinusMensualiteRepli}>
+						<span class="buttonMensualiteTextMinus">-</span>
+					</button>
+					<div class="vi-modal-container-mensualite-button-trait"></div>
+					<!-- Start DDPCM-169 -->
+					<template if:true={isOrange}>
+						<Strong>
+							<span data-id="modalPousseTotalPriceId" class="vi-modal-container-mensualite-button-text1"
+								style="color:rgb(228,118,0);">{offreRepliTotalPriceVarRounded} € TTC /
+								mois</span>
+						</Strong>
+						<Strong><span class="vi-modal-container-mensualite-button-text2">11 mensualités /
+								an</span></Strong>
+					</template>
+					<template if:true={isBlue}>
+						<Strong>
+							<span data-id="modalPousseTotalPriceId" class="vi-modal-container-mensualite-button-text1"
+								style="color: var(--cerulean);">{offreRepliTotalPriceVarRounded} € TTC /
+								mois</span>
+						</Strong>
+						<Strong><span class="vi-modal-container-mensualite-button-text2">11 mensualités /
+								an</span></Strong>
+					</template>
+					<template if:true={isGreen}>
+						<Strong>
+							<span data-id="modalPousseTotalPriceId" class="vi-modal-container-mensualite-button-text1"
+								style="color:rgb(0,153,52);">{offreRepliTotalPriceVarRounded} € TTC /
+								mois</span>
+						</Strong>
+						<Strong><span class="vi-modal-container-mensualite-button-text2">11 mensualités /
+								an</span></Strong>
+					</template>
+					<!-- End DDPCM-169 -->
+					<button disabled={showButtonPlusRepli} onclick={buttonPlusActionRepli}
+						class={viModalButtonPlusMensualiteRepli}>
+						<span class="buttonMensualiteTextPlus">+</span>
+					</button>
+				</div>
+				<!-- Start DDPCM-169 -->
+				<template if:true={isOrange}>
+					<div class="vi-modal-container-mensualite-astuce orangeBorder">
+						<span class="vi-modal-container-mensualite-border-text">
+							D'après nos calculs, cette mensualité risque de générer une facture de régulation avec un
+							montant élevé.
+						</span>
+					</div>
+				</template>
+				<template if:true={isBlue}>
+					<div class="vi-modal-container-mensualite-astuce blueBorder">
+						<span class="vi-modal-container-mensualite-border-text">
+							D'après nos calculs, cette mensualité devrait vous permettre d'avoir la facture de
+							régulation la plus petite possible le 12 ème mois.
+						</span>
+					</div>
+				</template>
+				<template if:true={isGreen}>
+					<div class="vi-modal-container-mensualite-astuce greenBorder">
+						<span class="vi-modal-container-mensualite-border-text">
+							D'après nos calculs, cette mensualité vous permettra d'avoir une facture de régulation avec
+							un montant faible.
+						</span>
+					</div>
+				</template>
+				<br>
+				<br>
+				<!-- End DDPCM-169 -->
+			</div>
+			<div class="vi-modal-footer-mensualite">
+				<button onclick={validerMensuRepli} class='vi-modal-btn-mensualite'>
+					Valider les mensualités
+				</button>
+			</div>
+		</div>
+		<!-- "Fond grisé" des popups -->
+		<div onclick={closeAllModalMensualite} class="vi-modal-background" if:true={isModalOpen}></div>
+
+		<div if:true={isLoaderOn}>
+			<div class="cm-spinner"></div>
+			<div class="loader"></div>
+		</div>
+	</template>
+</template>

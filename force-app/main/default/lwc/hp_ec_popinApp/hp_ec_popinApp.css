@@ -1,0 +1,171 @@
+.hp-popinFrame{
+  display: block;
+  margin: 0 auto;
+  min-height: 600px;
+  height: auto;
+  max-width: 480px;
+}
+.hp-popinApp {
+  padding: 50px 40px;
+  height: auto;
+  box-shadow: -5px 5px 15px 0 rgba(12, 29, 38, 0.21);
+  border: solid 30px var(--primary-colour);
+  background-image: var(--light-bg);
+}
+
+.hp-subTitle {
+  font-family: var(--font-regular);
+  font-size: 16px;
+  color: var(--true-black);
+  text-align: center;
+  padding: 30px 0 0 0;
+}
+
+.hp-slogan {
+  color: var(--primary-colour);
+  font-family: var(--font-bold);
+  font-size: 22px;
+  text-align: center;
+}
+
+.hp-googlePlay,
+.hp-appStore {
+  padding: 10px 0;
+}
+
+.hp-bigTitle {
+  text-align: center;
+  color: var(--true-black);
+  text-transform: uppercase;
+  padding: 40px 0 0 0;
+  font-size: 22px;
+  text-align: center;
+}
+
+.hp-logo {
+  display: flex;
+  justify-content: center;
+}
+
+.hp-logo img {
+  width: 175px;
+}
+
+.hp-closeButton {
+  position: relative;
+}
+
+.hp_imgcontainer {
+  padding: 30px 0;
+  display: grid;
+  justify-content: center;
+}
+
+.hp-closeButton a {
+  position: absolute;
+  top: -25px;
+  right: -10px;
+  border-radius: 50%;
+  border:  1px solid var transparent;
+  padding: 2px;
+}
+
+.hp-closeButton a:hover,
+.hp-closeButton a:focus,
+.hp-closeButton a:active {
+  border:  1px solid var(--primary-colour);
+}
+
+
+.hp-bloc-app-happe {
+  display: flex;
+  padding: 25px 10px;
+  font-weight: bold;
+  align-items: center;
+  position: relative;
+  background-color: var(--secondary-colour);
+  box-shadow: var(--dark-box-shadow);
+  max-width: 480px;
+}
+
+.hp-bloc-app-happe img {
+  width: 100px;
+  height: 100px;
+}
+
+.hp-bloc-app-happe p{
+  font-family: "font_AvantBold";
+  font-size: 15px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: 0.45px;
+  text-align: left;
+  padding-right: 55px;
+  color: var(--white);
+}
+
+.hp-bloc-app-happe p a{
+ text-decoration: none;
+ color: var(--white);
+}
+
+.hp-bloc-app-happe p a .chevron::before {
+  font-size: 16px;
+  border-style: solid;
+  border-width: 0.15em 0.15em 0 0;
+  content: '';
+  display: inline-block;
+  height: 0.60em;
+  right: 0.15em;
+  position: absolute;
+  top: 18px;
+  transform: rotate(-45deg);
+  vertical-align: top;
+  width: 0.60em;
+  color: var(--white);
+}
+
+.hp-bloc-app-happe p a .chevron.right:before {
+  top: 45%;
+  right: 30px;
+}
+
+@media (max-width: 1024px) {
+  /* Ipad and tablets */
+  .hp-bloc-app-happe  {
+    max-width: 420px;
+  }
+ 
+}
+
+@media (max-width: 576px) { 
+      /* mobiles */
+      
+}
+
+@media (max-width: 1024px) {
+
+  /* Ipad and tablets */
+  .hp-popinApp {
+    padding: 40px 25px;
+    height: auto;
+    max-width: 420px;
+    border: solid 20px var(--primary-colour);
+  }
+
+  .hp-logo img {
+    width: 160px;
+  }
+
+  .hp-bigTitle {
+    font-size: 20px;
+  }
+
+}
+
+@media (max-width: 576px) {
+
+
+}

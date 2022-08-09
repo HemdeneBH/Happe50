@@ -1,0 +1,3 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" >
+	<c:sM_Harmonica_detail_contact recordId="{!v.recordId}"></c:sM_Harmonica_detail_contact>
+</aura:component>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Category__c</fullName>
+    <description>@SMILE categories</description>
+    <externalId>false</externalId>
+    <label>Catégorie</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>ZAK</fullName>
+                <default>false</default>
+                <label>Akio</label>
+            </value>
+            <value>
+                <fullName>ZBO</fullName>
+                <default>false</default>
+                <label>Back office</label>
+            </value>
+            <value>
+                <fullName>ZSM</fullName>
+                <default>false</default>
+                <label>SMS</label>
+            </value>
+            <value>
+                <fullName>URL</fullName>
+                <default>false</default>
+                <label>Web</label>
+            </value>
+            <value>
+                <fullName>INT</fullName>
+                <default>false</default>
+                <label>E-mail</label>
+            </value>
+            <value>
+                <fullName>TEL</fullName>
+                <default>false</default>
+                <label>Tél. domicile</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Situation_de_vente__c</fullName>
+    <description>Pemet de déterminer la situation de vente du parcours depuis lequel le conseiller effectue une creation d&apos;OPS</description>
+    <externalId>false</externalId>
+    <label>Situation de vente</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Emménagement</fullName>
+                <default>false</default>
+                <label>Emménagement</label>
+            </value>
+            <value>
+                <fullName>Changement de fournisseur</fullName>
+                <default>false</default>
+                <label>Changement de fournisseur</label>
+            </value>
+            <value>
+                <fullName>Changement d&apos;offre</fullName>
+                <default>false</default>
+                <label>Changement d&apos;offre</label>
+            </value>
+            <value>
+                <fullName>Resiliation</fullName>
+                <default>false</default>
+                <label>Resiliation</label>
+            </value>
+            <value>
+                <fullName>Restauration</fullName>
+                <default>false</default>
+                <label>Restauration</label>
+            </value>
+            <value>
+                <fullName>Rétablissement</fullName>
+                <default>false</default>
+                <label>Rétablissement</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

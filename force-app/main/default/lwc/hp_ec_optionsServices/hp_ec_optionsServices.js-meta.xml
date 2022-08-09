@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property type="String" name="titleText" default="Mes options et services"/>
+            <property type="String" name="optionVertElecLabel" default="Option Vertélec+ happ-e"/>
+            <property type="String" name="dateReglementPersonnaliseLabel" default="Date de règlement personnalisée"/>
+            <property type="String" name="modePaiementLabel" default="Mode de paiement"/>
+            <property type="String" name="factureEnLigneLabel" default="Ma facture en ligne"/>
+            <property type="String" name="depanExpressLabel" default="Dépan’Express"/>
+            <property type="String" name="depanExpressURL" default="www.google.com"/>
+            <property type="String" name="voirOptionsURL" default="www.google.com"/>
+            <property type="String" name="voirOptionsLabel" default="Voir toutes les options"/>
+            <property type="String" name="titrePopinOptionVerte" default="Option Vertélec+ happ-e"/>
+            <property type="String" name="texteAlertePopinOptionVerte" default="Les frais s’élèvent à 3€ / mois."/>
+            <property type="String" name="texteIntroductifPopinOptionVerte" default="Optez pour l'énergie verte"/>
+            <property type="String" name="textExplicatifPopinOptionVerte" default="Cependant, si vous préférez vous pouvez toujours basculer."/>
+            <property type="String" name="labelBouttonPopinOptionVerteActif" default="Activer"/>
+            <property type="String" name="labelBouttonPopinOptionVerteInactif" default="Désactiver"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,2 @@
+<apex:page controller="VI_SM040_RedirectionDocusign" action="{!redirectURL}">
+</apex:page>

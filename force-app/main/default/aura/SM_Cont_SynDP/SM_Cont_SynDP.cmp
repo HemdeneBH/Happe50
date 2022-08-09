@@ -1,0 +1,27 @@
+<aura:component implements="flexipage:availableForAllPageTypes,lightning:isUrlAddressable,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+   <lightning:workspaceAPI aura:id="workspace" />
+    <!--<aura:handler value="{!this}" name="init" action="{!c.init}"/>-->
+
+    <aura:attribute name="libelleVoie" type="String" default="{!v.pageReference.state.c__libelleVoie}"></aura:attribute>
+    <aura:attribute name="ville" type="String" default="{!v.pageReference.state.c__ville}"></aura:attribute>
+    <aura:attribute name="complementAdresse" type="String" default="{!v.pageReference.state.c__complementAdresse}"></aura:attribute>
+    <aura:attribute name="numeroVoie" type="String" default="{!v.pageReference.state.c__numeroVoie}"></aura:attribute>
+    <aura:attribute name="codePostal" type="String" default="{!v.pageReference.state.c__codePostal}"></aura:attribute>
+    <aura:attribute name="IdBusinessPartner" type="String" default="{!v.pageReference.state.c__IdBusinessPartner}"></aura:attribute>
+    <aura:attribute name="solde" type="String" default="{!v.pageReference.state.c__solde}"></aura:attribute>
+    <aura:attribute name="soldeFormat" type="String" default="{!v.pageReference.state.c__soldeFormat}"></aura:attribute>
+    <aura:attribute name="NoCompteContrat" type="String" default="{!v.pageReference.state.c__NoCompteContrat}"></aura:attribute>
+    <aura:attribute name="AccountId" type="String" default="{!v.pageReference.state.c__AccountId}"></aura:attribute>
+    <aura:attribute name="recordId" type="String" default="{!v.pageReference.state.c__recordId}"></aura:attribute>
+    <aura:attribute name="nomInstitutBancaire" type="String" default="{!v.pageReference.state.c__nomInstitutBancaire}"></aura:attribute>
+    <aura:attribute name="iBAN" type="String" default="{!v.pageReference.state.c__iBAN}"></aura:attribute>
+    <aura:attribute name="EnqSat" type="String" default="{!v.pageReference.state.c__EnqSat}"></aura:attribute>
+
+    <!-- FT2-1687 RECOMMIT Délai de paiement - sauvegarde des infos nécessaires à la validation du superviseur (Récupération de la DLP) -->
+    <aura:attribute name="transformDateEcheance" type="String" default="{!v.pageReference.state.c__transformDateEcheance}"></aura:attribute>
+
+     <c:sM_Syn_DP recordId="{!v.recordId}" libelleVoie="{!v.libelleVoie}" ville="{!v.ville}" complementAdresse="{!v.complementAdresse}" solde="{!v.solde}" onopenInteraction="{!c.openInteraction}" oncloseclicked="{!c.handleFilterChange}"
+     numeroVoie="{!v.numeroVoie}" codePostal="{!v.codePostal}" transformDateEcheance="{!v.transformDateEcheance}" AccountId="{!v.AccountId}" IdBusinessPartner="{!v.IdBusinessPartner}" NoCompteContrat="{!v.NoCompteContrat}"  soldeFormat="{!v.soldeFormat}"  nomInstitutBancaire="{!v.nomInstitutBancaire}" iBAN="{!v.iBAN}" EnqSat="{!v.EnqSat}" oncloseDPTabEvent="{!c.handlecloseDPTabEvent}"/>	
+
+     
+</aura:component>

@@ -1,0 +1,129 @@
+.slds-accordion__summary {
+    float:right!important;
+}
+.slds-template__container{
+    background-color: white;
+}
+.slds-accordion__list-item{
+    border-top:0px!important;
+}
+.grayBackground{
+    background-color:#e6ebec}
+.tableListPa{
+    height: 45px;
+    border: solid 1px #979797;
+    background-color: #767f85;table-layout: fixed;
+}
+.tableListPaTr{
+    width: 129px;                                           
+    color: #ffffff;
+}
+th {
+    width:1.5rem
+}
+.slds-card__footer{
+    text-align: left;margin-top: 0px;font-size: 18px;
+}
+.circle {
+  /*  height: 40px;
+    width: 40px;
+    background-color: #36cfa0;
+    border-radius: 50%;
+    display: inline-block;*/
+    width: 30px;
+    height: 30px;
+    background: #36cfa0;
+    border-radius: 50%
+  }
+  .redCross {
+   /* color: #c10e24;
+    font-family: cursive;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;*/
+    background: red;
+    height: 30px;
+    position: relative;
+    width: 7px;
+  }
+  .redCross:after {
+    background: red;
+    content: "";
+    height: 6px;
+    left: -11.25px;
+    position: absolute;
+    top: 11.25px;
+    width: 30px;
+  }
+.redCrossDiv{
+    transform: rotate(45deg);
+    width: fit-content;
+    margin-left: 11.25px;
+}
+table {
+
+
+    counter-reset: rowNumber-1;
+}
+table tr {
+    counter-increment: rowNumber;
+}
+table tr td:first-child::before {
+    content: counter(rowNumber);
+    min-width: 1em;
+    margin-right: 0.5em;
+}
+.triangle{
+    color: #f90;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 30px solid #f90;
+}
+.buttonContainer{
+    display: inline-block;
+    text-align: right;
+    width: 100%;
+}
+.slds-button {
+    background-color: #059ce7;
+    color: white;
+    border-color:white;
+    height: 40px;
+}
+.closeButton {
+    background-color: white!important;
+    color: #059ce7!important;
+    border-color:white!important;
+    height: 40px;
+}
+.divInfo {
+    background-color: rgba(5, 156, 231, 0.1)!important;
+    color: black!important;
+    border-color:white!important;
+    height: 40px;
+}
+.btn-ok {
+    width: 130px;
+}
+.grayBackground{font-size: 1.1em;}
+.customTabStyle{
+    height: 45px;
+    table-layout: fixed;
+    font-size: 15px;
+}
+.divErrorPA {
+    background-color: rgba(193, 14, 36, 0.1)!important;
+    color: black!important;
+    border-color: rgba(193, 14, 36, 0.1)!important;
+   padding-top: 10px;
+   padding-bottom: 10px;
+}
+
+.filarianeRight{
+    float: right;
+}

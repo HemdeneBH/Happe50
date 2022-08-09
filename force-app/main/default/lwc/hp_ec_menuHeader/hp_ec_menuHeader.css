@@ -1,0 +1,105 @@
+.c-menuHeader{
+    display: block;
+}
+.hp-nav-logo {
+  text-align: center;
+  padding: 40px 15px;
+}
+.hp-nav-logo img {
+  width: 165px;
+  height: auto;
+  filter: var(--filter);
+}
+
+.hp-nav-profile-icon-container {
+  display: flex;
+  justify-content: center;
+  padding: 30px 20px 20px 20px;
+}
+
+.hp-nav-profile-icon{
+  display: flex;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  align-content: center;
+  align-items: center;
+  background-color: var(--bg-plain);
+  border: var(--border-profil);
+  -webkit-background-clip: padding-box; /* for Safari */
+  background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+}
+
+.hp-nav-profile-icon span img{
+  object-fit: contain;
+  width: 60px;
+  height: auto;
+  max-height: 70px;
+}
+
+.hp-nav-title {
+    font-family: var(--font-bold);
+    color: var(--primary-colour);
+    font-size: 26px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.15;
+    letter-spacing: 0.78px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .hp-clientName, 
+  .hp-clientRef {
+    color: var(--text-color);
+  }
+
+  .hp-client {
+    display: grid;
+    grid-template-columns: 9fr 1fr;
+    align-items: center;
+  }
+
+  .hp-clientName{
+    font-family: var(--font-bold);
+    font-size: 18px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: 0.54px;
+    text-align: left;
+    padding-left: 35px;
+  }
+
+  .hp-clientRef {
+    font-size: 14px;
+    font-weight: 200;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: 0.48px;
+    text-align: left;
+    padding-left: 35px;
+  }
+  .hp-modify-btn img{
+    width: 20px;
+    height: auto;
+    margin: 5px;
+  }
+  .hp-modify-btn{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    margin-right: 15px;
+    background-color: var(--bg-base);
+    border: 2px solid transparent;
+    cursor: pointer;
+  }
+  .hp-modify-btn:hover,
+  .hp-modify-btn:active,
+  .hp-modify-btn:focus {
+    border: 2px solid var(--secondary-colour);
+  }

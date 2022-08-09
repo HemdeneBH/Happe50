@@ -1,0 +1,207 @@
+/*@Auhtor: MKC
+*@Description: Appel du webService CoordonneesBancaires_v2
+*@CreatedDate: 19/10/2018
+*@LastModified: RJM 23/07/2020
+*/
+global class SM_AP33_CoordonneesBancaires implements vlocity_cmt.VlocityOpenInterface {
+  /*@Auhtor: MKC
+  *@Description: Appel du webService des différentes méthodes du webService
+  *@CreatedDate: 19/10/2018
+  *@LastModified: RJM 23/07/2020
+  */
+  global Boolean invokeMethod(String methodName, Map < String, Object > inputMap, Map < String, Object > outMap, Map < String, Object > options) {
+    System.debug('*** input : ' + inputMap);
+    Map<String, Object> blocksMap = new Map<String, Object> ();
+    Map<String, Object> displayMap = new Map<String, Object> ();
+    List <Object> listtemp = new List <Object>();
+    if (methodName.equals('creerCB')) {
+      try {
+
+        creerCB(inputMap, outMap, options);
+        SM_AP52_BanquesApiService.getInstitutBanqueByIBAN(inputMap, outMap, null);
+        // FT2-1483 Parcours payeur divergent
+        Boolean isPayeurDiv = false;
+        if(inputMap.get('isPayeurDivFormule')!= null){
+          isPayeurDiv = (Boolean) inputMap.get('isPayeurDivFormule');   
+        }
+           
+        // FT2-1483 Parcours payeur divergent
+        if(isPayeurDiv ==true){
+        outMap.put('selectedElementPayeur', true);  
+        outMap.put('coordAddedPayeurDivergent', true);
+        outMap.put('idPersonne', inputMap.get('idPersonneFormule'));
+        outMap.put('IbanNumber',  inputMap.get('IbanNumber'));  
+        outMap.put('libelle1Payeur', 'N° IBAN: ' + inputMap.get('IbanNumber'));
+        outMap.put('libelle2Payeur', 'Nom de la banque: ' + outMap.get('nomInstitutBancaire') + ' ,Titulaire du compte: ' + getTitualaireCompte(inputMap));
+        outMap.put('NombanquePayeur', outMap.get('nomInstitutBancaire'));
+                  
+      }
+      else{
+        outMap.put('coordAdded', true);
+        outMap.put('idPersonne', inputMap.get('idPersonneFormule'));
+        outMap.put('IbanNumber',  inputMap.get('IbanNumber'));
+        outMap.put('libelle1', 'N° IBAN: ' + inputMap.get('IbanNumber'));
+        outMap.put('libelle2', 'Nom de la banque: ' + outMap.get('nomInstitutBancaire') + ' ,Titulaire du compte: ' + getTitualaireCompte(inputMap));
+        outMap.put('Nombanque', outMap.get('nomInstitutBancaire'));
+
+      }
+        //23/07/2020 RJM : FT2-713 
+        
+        //
+
+        //  outMap.put('idCoordonneeBancaire','0306502365-0002') ;
+      } catch (Exception e) {
+        system.debug(e.getStackTraceString());
+        throw new IOException(e.getMessage());
+      }
+    }
+    return true;
+  }
+
+  public static String getTitualaireCompte(Map < String, Object > inputMap){
+     String titulaireCompte;
+     //if ( (Boolean)inputMap.get('TitulaireCompteCheckbox')) {
+     System.debug('TitulaireCompte'+inputMap.get('TitulaireCompte'));
+       titulaireCompte = (String) inputMap.get('TitulaireCompte');
+     /*}else {
+       titulaireCompte = (String) inputMap.get('TitulaireCompteFormula');  
+     }*/
+     return titulaireCompte;
+  }
+
+  /*@Auhtor: MKC
+  *@Description: appel de la méthode pour la créationd de coordonnées bancaires
+  *@CreatedDate: 19/10/2018
+  *@LastModified: MHA 03/01/2019
+  *@LastModified: GNE 10/02/2019
+  */
+  public static void creerCB(Map < String, Object > inputMap, Map < String, Object > outMap, Map < String, Object > options) {
+
+
+     System.debug('idPersonneFormule'+inputMap.get('idPersonneFormule'));
+
+    String idPersonne = (String) inputMap.get('idPersonneFormule');
+
+    if (idPersonne == null || idPersonne.length() == 0) {
+      throw new IOException('id personne non trouvée dans l OS ');
+    }
+
+    if (inputMap.get('IbanNumber') == null || ((String) inputMap.get('IbanNumber')).length() == 0) {
+      throw new IOException('le champ numéro Iban est vide veuillez le saisir !');
+    }
+    String titulaireCompte = getTitualaireCompte(inputMap);
+    
+
+    if (titulaireCompte == null || titulaireCompte == '') {
+      throw new IOException('le champ titulaire du compte est vide veuillez le saisir !');
+    }
+
+    /*if (inputMap.get('TitulaireCompte') == null || ((String) inputMap.get('TitulaireCompte')).length() == 0) {
+      throw new IOException('le champ titulaire du compte est vide veuillez le saisir !');
+    }*/
+
+
+
+
+    //Context
+    gdfsuezBefCalypsoCoordonneesbancaires.contextDt octx = initContext('Smile', '2.0');
+    SM_OCTOPUS__c octopusCS = SM_OCTOPUS__c.getOrgDefaults();
+
+
+    //gdfsuezComBefChpCalypsoGestionprele.GestionPrelevementPort
+    gdfsuezBefCalypsoCoordonneesbancaires.Dependency port = new gdfsuezBefCalypsoCoordonneesbancaires.Dependency();
+    port.clientCertName_x = octopusCS.certName__c;
+    SM_WS_Suffix__mdt suffixs = [select id, suffix__c from SM_WS_Suffix__mdt where developername = 'CoordonneesBancaires_v2' limit 1];
+    port.endpoint_x = octopusCS.endpoint__c + suffixs.suffix__c;
+    port.timeout_x = 60000;
+    port.inputHttpHeaders_x = new Map < String, String > {
+      'Content-Type' => 'text/xml;charset=utf-8'
+    };
+
+    /// input ******
+    //
+    //gdfsuezComBefChpCalypsoGestionprele.coordonneeBancaireDt
+    gdfsuezBefCalypsoCoordonneesbancaires.creerCoordonneesBancairesInputDt coordonneesBancairesInput = new gdfsuezBefCalypsoCoordonneesbancaires.creerCoordonneesBancairesInputDt();
+    coordonneesBancairesInput.coordonneesBancaires = new gdfsuezBefCalypsoCoordonneesbancaires.coordonneesBancairesDt();
+    coordonneesBancairesInput.coordonneesBancaires.iban = ((String) inputMap.get('IbanNumber')).trim(); //'FR7612607000099501973863230';
+    //coordonneesBancairesInput.bban = getBban;
+    //coordonneesBancairesInput.coordonneesBancaires.titulaireCompte = (String) inputMap.get('TitulaireCompte'); //'testCompte';
+    coordonneesBancairesInput.coordonneesBancaires.titulaireCompte = titulaireCompte;
+    coordonneesBancairesInput.idPersonne = idPersonne; // '300014091' ;
+
+
+
+    // gdfsuezComBefChpCalypsoGestionprele.demanderPrelevementResponse_element
+    gdfsuezBefCalypsoCoordonneesbancaires.creerCoordonneesBancairesResponse_element response = new gdfsuezBefCalypsoCoordonneesbancaires.creerCoordonneesBancairesResponse_element();
+
+    String responseCodeCreerCB;
+    String responseLibelleCreerCB;
+
+    try {
+      System.debug('*** request : ' + coordonneesBancairesInput);
+
+      if (test.isRunningTest()) {
+        Test.setMock(WebServiceMock.class, new gdfsuezBefCalypsoCoordonneesbancMockImpl());
+      }
+
+      response = port.CreerCoordonneesBancaires(coordonneesBancairesInput, octx);
+
+      responseCodeCreerCB = response.messageRetours.messageRetour[0].code;
+      responseLibelleCreerCB = response.messageRetours.messageRetour[0].libelle;
+
+      system.debug('reponse : ' + response);
+      system.debug('responseCodeCreerCB : ' + responseCodeCreerCB);
+      system.debug('responseLibelleCreerCB : ' + responseLibelleCreerCB);
+      if (!responseCodeCreerCB.equals('OCTOPUS_CreerCB_01')) {
+        throw new IOException('Coordonnées bancaires invalides :' + responseLibelleCreerCB);
+      }
+      outMap.put('idCoordonneeBancaire', response.creerCoordonneesBancairesOutput.idCoordonneeBancaire) ;
+
+      //FT2-1638 -[Payeur divergent] - choix des roles avant les coob -> Ajout de "idCoordonneeBancairePayeur" à l'Output
+      outMap.put('idCoordonneeBancairePayeur', response.creerCoordonneesBancairesOutput.idCoordonneeBancaire) ;
+
+    } catch (Exception e) {
+      if (test.isRunningTest()) {
+        return;
+      }
+      System.debug('*** Error when calling WS : ' + e);
+      system.debug(e.getStackTraceString());
+      throw new IOException(e.getMessage());
+    }
+
+    //   outMap.put('responseCodeCreerCB',responseCodeCreerCB);
+    // outMap.put('responseLibelleCreerCB',responseLibelleCreerCB);
+
+  }
+
+  /*@Auhtor: MKC
+  *@Description: initialisation du contexte
+  *@CreatedDate: 19/10/2018
+  *@LastModified: MHA 03/01/2019
+  */
+  public static gdfsuezBefCalypsoCoordonneesbancaires.contextDt initContext(String application, String version) {
+    // Créer le contexte d'appel, à créer avec une méthode pour tout les appels octopus
+    gdfsuezBefCalypsoCoordonneesbancaires.system_element osource = new gdfsuezBefCalypsoCoordonneesbancaires.system_element();
+    osource.systemId = application;
+    gdfsuezBefCalypsoCoordonneesbancaires.contextDt octx = new gdfsuezBefCalypsoCoordonneesbancaires.contextDt();
+    octx.version = version;
+    //  octx.allowCache = false ;
+    octx.systemPath = new gdfsuezBefCalypsoCoordonneesbancaires.systemPath_element();
+    octx.systemPath.system_x = new gdfsuezBefCalypsoCoordonneesbancaires.system_element[] {
+      osource
+    };
+    return octx;
+  }
+
+  /*@Auhtor: MKC
+  *@Description: gestion des erreurs
+  *@CreatedDate: 19/10/2018
+  *@LastModified: MHA 03/01/2019
+  */
+  public class IOException extends Exception {
+
+
+  }
+
+
+}

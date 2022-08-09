@@ -1,0 +1,35 @@
+<!--
+  @description       : 
+  @author            : Badr Eddine Belkarchi
+  @group             : 
+  @last modified on  : 02-20-2022
+  @last modified by  : Badr Eddine Belkarchi
+-->
+<template>
+    <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+        <div class="slds-modal__container" style="width:53rem">
+            <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Fermer"
+                    onclick={closeInversionPDL}>
+                    <lightning-icon icon-name="utility:close" size="medium">
+                    </lightning-icon>
+                    <span class="slds-assistive-text">Fermer</span>
+                </button>
+                <h1 class="slds-text-heading_medium slds-m-bottom_large"
+                    style="margin-top: 0.3rem;margin-bottom: 0.3rem;font-size: 1.4rem;">
+                    Inversion de PDL
+                </h1>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <p class="slds-align_absolute-center">Êtes-vous sûr de vouloir enregistrer une inversion de PDL ?</p>
+            </div>
+            <div class="slds-modal__footer">
+                <button class="slds-button slds-button_neutral" onclick={closeInversionPDL}>Annuler</button>
+                <button class="slds-button slds-button_brand" onclick={validateInversionPDL}>Valider</button>
+                <div if:true={showSpinner}>
+                    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>

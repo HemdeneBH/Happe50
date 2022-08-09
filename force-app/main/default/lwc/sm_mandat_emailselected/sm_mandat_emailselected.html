@@ -1,0 +1,12 @@
+<template>
+    <div class="slds-m-bottom_xx-small slds-show_inline-block slds-size_12-of-12 slds-medium-size_12-of-12">
+        <lightning-combobox
+            name="combobox"
+            label={jsonDef.propSetMap.label}
+            value={elementValue}
+            placeholder="Selectionnez une valeur"
+            options={options}
+            onchange={handleChange}>
+        </lightning-combobox>
+    </div>
+</template>

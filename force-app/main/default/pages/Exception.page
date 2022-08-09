@@ -1,0 +1,37 @@
+<apex:page showHeader="false" title="Modifier le rendez vous" cache="false">
+<!--
+<h1>Veuillez cliquer pour accéder à la page</h1>
+<div><button onclick="goBack()">Modifier le rendez vous</button></div>
+-->
+
+ <p style="text-align:center; font-size:1.5em"><strong>D&eacute;sol&eacute;, nous rencontrons un probl&egrave;me technique</strong></p> 
+         <p style="text-align:center;font-size:1.125em">Les techniciens sont injoignables :(</p>
+      
+        
+<div class="nds-size_1-of-1">
+
+
+        
+        <div class="nds-form-element__control">
+
+            <p style="text-align:center;">
+
+                <apex:image url="{!URLFOR($Resource.selfcareImages,'/selfcareImages/problem_technique.png')}"/>
+
+            </p>
+            
+        </div>
+        
+        <p style="text-align: center;">Veuillez r&eacute;essayer plus tard et privil&eacute;gier le navigateur Chrome.</p>
+            <p style="text-align: center;">Si le probl&egrave;me persiste, n'h&eacute;sitez pas &agrave; nous joindre par&nbsp;<span style="color: #343434;">t&eacute;l&eacute;phone aux </span></p>
+            <p style="text-align: center;"><span style="color: #343434;">horaires indiqu&eacute;es.</span></p>
+</div>
+
+
+<script>
+function goBack() {
+window.history.go(-1); 
+}
+</script>
+
+</apex:page>

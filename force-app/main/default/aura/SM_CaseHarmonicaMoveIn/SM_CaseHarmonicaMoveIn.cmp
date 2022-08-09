@@ -1,0 +1,7 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" controller="SM_CaseHarmonicaMoveIn_controller">
+    <lightning:workspaceAPI aura:id="workspace"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <a class="divbtn" onclick="{! c.openMovein }" aura:id="linkmv">
+        <img src="/resource/EngieCustomResources/images/ajout_logement.svg" style="height:50px;width:100px;border-width:0px;"/>
+    </a>
+</aura:component>

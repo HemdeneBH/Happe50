@@ -1,0 +1,68 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 05-10-2021
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   05-03-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+-->
+<template>
+  <lightning-card title="Nombre d’informations non lues" icon-name="action:priority">
+    <lightning-button-icon  icon-name="utility:refresh" slot="actions" onclick={refreshComponent}></lightning-button-icon>
+    <div class="slds-table--header-fixed_container" style="height:300px;">
+        <div class="slds-scrollable_y" style="height:100%;">
+      <table class="slds-table slds-table_bordered slds-table--header-fixed slds-table_fixed-layout">
+          <thead>
+              <tr class="slds-line-height_reset">
+                  <th class="" scope="col">
+                      <div class="slds-truncate slds-cell-fixed" style="width: 75px;" title="Date de création">Date de création</div>
+                  </th>
+                  <th class="" scope="col">
+                      <div class="slds-truncate slds-cell-fixed"  title="Nom">Nom</div>
+                  </th>
+                  <th class="" scope="col">
+                      <div class="slds-truncate slds-cell-fixed" title="Couleur">Couleur</div>
+                  </th>
+                  <th class="" scope="col">
+                      <div class="slds-truncate slds-cell-fixed" title="Active">Active</div>
+                  </th>
+                  <th class="" scope="col">
+                      <div class="slds-truncate slds-cell-fixed" title="Date de validité">Date de validité</div>
+                  </th>
+              </tr>
+          </thead>
+          <tbody>
+              <template for:each={data} for:item="info">
+                  <tr key={info.Id}>
+                      <th scope="col">
+                        <div>
+                        <lightning-formatted-date-time value={info.CreatedDate}></lightning-formatted-date-time>
+                        </div>
+                      </th>
+                      <th scope="col">
+                          <div  class="slds-truncate" title={info.Name}>
+                            <a data-infoid={info.Id} onclick={handleClick}>{info.Name}</a>
+                          </div>
+                      </th>
+                      <th scope="col">
+                          <div>{info.Couleur__c}</div>
+                      </th>
+                      <th scope="col">
+                          <div>{info.Active__c}</div>
+                      </th>
+                      <th scope="col">
+                          <div>
+                              <lightning-formatted-date-time value={info.Date_de_validit__c}></lightning-formatted-date-time>
+                          </div>
+                      </th>
+                  </tr>
+              </template>
+          </tbody>
+      </table>
+      </div>
+      </div>
+
+      </lightning-card>
+  </template>

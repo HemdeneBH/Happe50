@@ -1,0 +1,168 @@
+<!--
+  @description       : 
+  @author            : ZAATOUCHE Younes
+  @group             : 
+    @last modified on  : 07-12-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <div class="hp-popup hp-history-popin">
+        <section
+            role="dialog"
+            tabindex="-1"
+            aria-labelledby="modal-heading-01"
+            aria-modal="true"
+            aria-describedby="modal-content-id-1"
+            class="slds-modal slds-fade-in-open history-modal"
+        >
+            <div class="hp-history-popin__container slds-modal__container">
+                <div class="hp-container">
+                    <header class="slds-modal__header hp-header">
+                        <h1 class="hp-bigTitle">{titleText}</h1>
+                        <span class="hp-closeButton">
+                        <a onclick={closePopinHisToriqueFacturePaiement}>
+                            <img class="hp-close-icon" src={iconClose} alt="close" />
+                        </a>
+                        </span>
+                    </header>
+                    <div class="history-header">
+                        <div class="desktop-only">
+                            <ul class="tabs">
+                                <li if:false={showInvoices} class="tab"><a href="#invoices" onclick={handleShowInvoices}>Mes factures</a></li>
+                                <li if:true={showInvoices} class="tab active"><a href="#invoices" onclick={handleShowInvoices}>Mes factures</a></li>
+                                
+                                <li if:false={showPayments} class="tab"><a href="#payments" onclick={handleShowPayments}>Mes paiements</a></li>
+                                <li if:true={showPayments} class="tab active"><a href="#payments" onclick={handleShowPayments}>Mes paiements</a></li>
+                                <template if:true={modePaiementIsAnuel}>
+                                    <li if:false={showSchedules} class="tab"><a href="#schedules" onclick={handleShowSchedules}>Mes échéances</a></li>
+                                    <li if:true={showSchedules} class="tab active"><a href="#schedules" onclick={handleShowSchedules}>Mes échéances</a></li>
+                                 </template>
+                                <template if:true={containPlansApurement}>
+                                    <li if:false={showClearancePlans} class="tab"><a href="#clearance-plans" onclick={handleShowClearancePlans}>Mon plan d'apurement</a></li>
+                                    <li if:true={showClearancePlans} class="tab active"><a href="#clearance-plans" onclick={handleShowClearancePlans}>Mon plan d'apurement</a></li>
+                                </template>
+                            </ul>
+                        </div>
+                        <div class="select mobile-only">
+                            <select onchange={handleSelectChange}>
+                                <option if:false={showInvoices} value="invoices">Mes factures</option>
+                                <option if:true={showInvoices}  value="invoices" selected >Mes factures</option>
+                                <option if:false={showPayments} value="payments">Mes paiements</option>
+                                <option if:true={showPayments}  value="payments" selected >Mes paiements</option>
+                                <option if:false={showSchedules} value="schedules">Mes échéances</option>
+                                <option if:true={showSchedules}  value="schedules" selected >Mes échéances</option>
+                                <option if:false={showClearancePlans} value="clearance-plans">Mon plan d'apurement</option>
+                                <option if:true={showClearancePlans}  value="clearance-plans" selected >Mon plan d'apurement</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="hp-content">
+                        <div class="hp-wrapper">
+                            <div if:true={showInvoices} id="invoices">
+                                <ul class="invoices">
+                                    <template for:each={invoices} for:item="invoice">
+                                        <li key={invoice.ref_facture} class="invoice" data-new={invoice.ouverture_cb}>
+                                            <span class="invoice__icon" style={styleIconFile}></span>
+                                            <div class="invoice__content">
+                                                <p class="invoice__info">
+                                                    <template if:true={invoice.retard}>
+                                                        <strong class="retard__invoice__type">{invoice.typeFact} - {invoice.enrg}</strong>
+                                                    </template>
+                                                    <template if:false={invoice.retard}>
+                                                        <strong class="invoice__type">{invoice.typeFact} - {invoice.enrg}</strong>
+                                                    </template>
+                                                    <span class="invoice__name">{invoice.ref_facture} du {invoice.date_limite_de_paiement}</span>
+                                                </p>
+                                                <p class="invoice__price">{invoice.montant_ttc}€</p>
+                                            </div>
+                                            <a href={invoice.link} class="invoice__file" target="_blank">
+                                                <span class="invoice__file-icon" style={styleIconDownload}></span>
+                                                <span class="visually-hidden">Télécharger</span>
+                                            </a>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                            <div if:true={showPayments} id="payments">
+                                <ul class="payments">
+                                    <template for:each={payments} for:item="payment">
+                                        <li 
+                                            key={payment.ref_paiement}
+                                            class="payment"
+                                            data-type={payment.type_paiement}
+                                        >
+                                            <span class="payment__icon" style={styleIconEuro}></span>
+                                            <div class="payment__content">
+                                                <p class="payment__info">
+                                                    <strong class="payment__name">{payment.type}-{payment.enrg}</strong>
+                                                    <span class="payment__description">{payment.ref_paiement} du {payment.date_paiement}</span>
+                                                </p>
+                                                <p class="payment__price">{payment.montant_ttc}€</p>
+                                                <div class="payment__action">
+                                                    <button  class="payment__button">Payer</button>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                            <div if:true={showSchedules} id="schedules">
+                                <ul class="schedules">
+                                    <template for:each={schedules} for:item="schedule">
+                                        <li key={schedule.reference} class="schedule" data-new={schedule.type_decheance}>
+                                            <span class="schedule__icon" style={styleIconFile}></span>
+                                            <div class="schedule__content">
+                                                <p class="schedule__info">
+                                                    <strong class="schedule__type">Echéancier-{schedule.enrg}</strong>
+                                                    <span class="schedule__name">n° {schedule.id_document_agilab}</span>
+                                                </p>
+                                            </div>
+                                            <a href={schedule.url_document} class="schedule__file" target="_blank">
+                                                <span class="schedule__file-icon" style={styleIconDownload}></span>
+                                                <span class="visually-hidden">Télécharger</span>
+                                            </a>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                            <div if:true={showClearancePlans} id="clearance">
+                                <ul class="clearance-plans">
+                                    <template for:each={clearancePlans} for:item="clearance">
+                                        <li key={clearance.id_plan_apurement} class="clearance" data-new={clearance.type_plan_apurement}>
+                                            <span class="clearance__icon" style={styleIconFile}></span>
+                                            <div class="clearance__content">
+                                                <p class="clearance__info">
+                                                    <strong class="clearance__type">Plan d’apurement-[{clearance.refFact}]</strong>
+                                                    <span class="clearance__name">{clearance.id_plan_apurement} du {clearance.date_creation}</span>
+                                                </p>
+                                                <p class="clearance__price">{clearance.montant}€</p>
+                                            </div>
+                                            <a href={clearance.link} class="clearance__file" target="_blank">
+                                                <span class="clearance__file-icon" style={styleIconDownload}></span>
+                                                <span class="visually-hidden">Télécharger</span>
+                                            </a>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                            <c-hp_ec_tooltip
+                            content={contenuToolTip}
+                            ></c-hp_ec_tooltip>
+                        </div>
+                    </div>
+                    <div class="hp-footer">
+                        <p>Besoin d’un remboursement, d’un délai de 
+                            paiement, d’un plan d’apurement…? 
+                            Contactez votre conseiller par email.
+                        </p>
+                        <button class="hp-firstButton" onclick={handleContactClick}>
+                            {popinBoutton}
+                        </button>
+                        <p aria-hidden="true"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open history-backdrop"></div>
+    </div>
+</template>

@@ -1,0 +1,327 @@
+<template>
+    <div class="slds-p-around_large">
+        <h6 class="addressTitle">ADRESSE DU LOGEMENT</h6>
+        <div class="slds-grid slds-wrap"> 
+            <div class="slds-size--1-of-3 slds-grid slds-wrap">
+                <div>
+                <lightning-icon
+                icon-name="utility:home"
+                size="x-small"
+                alternative-text="Home">
+                </lightning-icon> &nbsp;&nbsp;</div>
+                <div>
+                <p>{omniJsonData.num}&nbsp;{omniJsonData.rue} </p>
+                <p>{omniJsonData.cplt}</p>
+                <p>{omniJsonData.cp}&nbsp;{omniJsonData.ville}</p>
+                </div>
+            </div>
+            <div class="slds-size--1-of-4 slds-grid slds-wrap"></div>
+            <div class="slds-size--1-of-4 slds-grid slds-wrap">
+                <p if:true={isOPSGaz}>N° PCE : {omniJsonData.numeroPointDeLivraison} </p>
+                <p if:true={isOPSElec}>N° PDL : {omniJsonData.numeroPointDeLivraison} </p>
+            </div>
+        </div>                
+    </div>
+        <div>
+            <h1 style="font-size: 20px;
+            padding-left: 1%;font-weight: bold;">OPS EN COURS ({opsDetailsEnCoursList.length})
+            <a if:true={plus2OPS} style="padding-left:1%;font-size: 12px" onclick={handleAction}>{titleLink}
+                <img if:false={isClicked} src='/resource/EngieCustomResources/images/downchevron.svg' style="margin-left:1%" width="10px" >
+                <img if:true={isClicked} src='/resource/EngieCustomResources/images/downchevron.svg' style="transform:rotate(180deg);margin-left:1%" width="10px" ></a>
+        </h1>
+        <div class="slds-grid slds-wrap slds-size--1-of-1">
+        <template for:each={opsListRestric} for:item="ops" for:index="index">
+            <div key={ops.Id} class="slds-size--1-of-2" >
+                <div style="border-style: solid;
+                margin: 10px;
+                border-width: 1px;
+                border-radius: 6px;
+                border-color: #e2e2e2;">
+                <h2 style="font-size: 16px;font-weight: bold;text-align:center;margin-top:5%">{ops.nom}</h2>
+                <h2 style="font-size: 16px;font-weight: bold;text-align:center">{ops.prix} € TTC </h2>
+                <br/> 
+                <div class="slds-grid slds-size--1-of-1" >
+                    <div class="slds-col slds-size--1-of-5" style="padding-right:2%">
+                        <img if:true={isOPSGaz} src='/resource/EngieCustomResources/images/contrat_GAZ.svg'  style="width: 130%;
+                        max-width: 130%;">
+                        <img if:true={isOPSElec} src='/resource/EngieCustomResources/images/contrat_ELEC.svg'  style="width: 130%;
+                        max-width: 130%;">
+                    </div>
+                    <div class="slds-col slds-size--2-of-4" style="border-left-style : solid;border-color:rgb(218, 218, 218);border-left-width: 2px;padding-left:2%">
+                       <div if:true={ops.dateRDV} style="font-size: 13px;"><b>{ops.dateRDV}</b></div>
+                       <div if:false={ops.dateRDV}><br/></div>
+                       <div if:true={ops.creneau} style="font-size: 13px;">{ops.creneau}</div>
+                       <div if:false={ops.creneau}><br/></div>
+                       <br/>
+                        <div if:true={ops.presence} style="font-size: 13px;"><b>{ops.presence}</b>
+                            <span if:true={ops.conditionPresence} onclick={displayMessageRestrictedList} class="infoImage" data-key={index}>
+                            <img src='/resource/EngieCustomResources/images/if_information.svg' width="20px" style="margin-left:2%">
+                            </span>
+                            <br/>
+                            <br/>  
+                        </div>
+                        <div if:false={ops.presence} style="font-size: 13px;">
+                            <br/> 
+                            <br/> 
+                        </div>
+                       <br/>
+                       <div if:true={ops.commentaire} style="font-size: 13px;">{ops.commentaire}</div>
+                       <div if:false={ops.commentaire}><br/></div>
+                       <br/>
+                    </div>
+                    <div class="slds-col slds-size--1-of-4">
+                        <div if:true={ops.show} class="infoMessage" style="width:140px">Le compteur n'est pas accessible. La présence du client est obligatoire.</div>   
+                    </div>
+                </div>
+                <br/>
+                <div style="padding-left:15%">
+                    <h2>Pour modifier uniquement les données du contact,</h2>
+                    <a if:true={isOPSGaz} href="https://portailfournisseur.grdf.fr/login#pce-releves" >Aller sur le site du gestionnaire de réseau<img src='/resource/EngieCustomResources/images/IconeOuverture.svg' style="margin-left:2%"></a>
+                    <a if:true={isOPSElec} href="https://sge.gdfsuez.net/sgePortail/sso/my.policy" >Aller sur le site du gestionnaire de réseau<img src='/resource/EngieCustomResources/images/IconeOuverture.svg' style="margin-left:2%"></a>
+                </div>
+                <br/>
+                <div class="slds-grid slds-size--1-of-1"> 
+                    <div class="slds-col slds-size--1-of-4" style="margin-left:12%;"> 
+                        <h3 style="font-size: 13px;color:rgb(212, 208, 208)">REF.EXTERNE</h3>
+                        <h3 style="font-size: 13px;">{ops.idDistrib}<span onclick={copyRefRestrictedList} data-name="Externe" data-key={index}>
+                            <span style="display:none">{ops.idDistrib}</span>
+                            <img class="imgCopy" src="/resource/EngieCustomResources/images/Copy360.svg" >
+                        </span></h3>
+                    </div>
+                    <div class="slds-col slds-size--1-of-12">
+                        <div if:true={ops.numCopiedExterne} class="infoMessage2" style="width:60px">Copiée!</div>   
+                    </div>
+                    <div class="slds-col slds-size--1-of-4" style="margin-left:13%;"> 
+                        <h3 style="font-size: 13px;color:rgb(212, 208, 208)">REF.FOURNISSEUR</h3>
+                        <h3 style="font-size: 13px;">{ops.idFournisseur}<span onclick={copyRefRestrictedList} data-name="Fournisseur" data-key={index}> 
+                            <span style="display:none">{ops.idFournisseur}</span>
+                            <img class="imgCopy" src="/resource/EngieCustomResources/images/Copy360.svg" >
+                        </span></h3>
+                    </div>
+                    <div class="slds-col slds-size--1-of-12">
+                        <div if:true={ops.numCopiedFournisseur} class="infoMessage3" style="width:60px">Copiée!</div>   
+                    </div>
+                </div>
+                <br/>
+                <div if:true={ops.fraisInter} style="margin: 6%;padding: 5%;background-color: #ffb75d;border-radius: 8px;">
+                    <h2>INTERVENTION DANS MOINS DE 2 JOURS OUVRES</h2>
+                    <br/>
+                    <h2 if:true={isOPSElec}>Toute modification entraînera des frais de 18,02 € TTC</h2>
+                    <h2 if:true={isOPSGaz}>Toute modification entraînera des frais de 20,03 € TTC</h2>
+                    <h2 if:true={isOPSGaz}>Attention : si la modification est demandée la veille du rendez-vous après 15h, les frais seront de 35,18 € TTC.</h2>
+                </div>
+                <div if:false={ops.fraisInter}>
+                   <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                </div>
+                <div class="slds-grid slds-size--1-of-1">
+                    <div class="slds-col slds-size--1-of-2" style="margin-left:6%">    
+                        <lightning-button variant="brand-outline" label="ANNULER LE RDV" onclick={openAnnulationOPSRestric} data-key={index}></lightning-button>
+                </div>
+                <div class="slds-col slds-size--1-of-2">    
+                    <lightning-button variant="brand" label="MODIFIER LE RDV" onclick={openModifOPSRestric} data-key={index}></lightning-button>
+
+                </div>
+                </div>
+
+                <br/>
+            </div>  
+        </div>
+        </template>
+        <template if:true={isClicked} for:each={opsListFull} for:item="ops" for:index="index">
+            <div key={ops.Id} class="slds-size--1-of-2" >
+                <div style="border-style: solid;
+                margin: 10px;
+                border-width: 1px;
+                border-radius: 6px;
+                border-color: #e2e2e2;">
+                <h2 style="font-size: 16px;font-weight: bold;text-align:center;margin-top:5%">{ops.nom}</h2>
+                <h2 style="font-size: 16px;font-weight: bold;text-align:center">{ops.prix} € TTC </h2>
+                <br/> 
+                <div class="slds-grid slds-size--1-of-1" >
+                    <div class="slds-col slds-size--1-of-5" style="padding-right:2%">
+                        <img if:true={isOPSGaz} src='/resource/EngieCustomResources/images/contrat_GAZ.svg'  style="width: 130%;
+                        max-width: 130%;">
+                        <img if:true={isOPSElec} src='/resource/EngieCustomResources/images/contrat_ELEC.svg'  style="width: 130%;
+                        max-width: 130%;">
+                    </div>
+                    <div class="slds-col slds-size--2-of-4" style="border-left-style : solid;border-color:rgb(218, 218, 218);border-left-width: 2px;padding-left:2%">
+                       <div if:true={ops.dateRDV} style="font-size: 13px;"><b>{ops.dateRDV}</b></div>
+                       <div if:false={ops.dateRDV}><br/></div>
+                       <div if:true={ops.creneau} style="font-size: 13px;">{ops.creneau}</div>
+                       <div if:false={ops.creneau}><br/></div>
+                       <br/>
+                        <div if:true={ops.presence} style="font-size: 13px;"><b>{ops.presence}</b>
+                            <span if:true={ops.conditionPresence} onclick={displayMessageopsListFull} class="infoImage" data-key={index}>
+                            <img src='/resource/EngieCustomResources/images/if_information.svg' width="20px" style="margin-left:2%">
+                            </span>
+                            <br/>
+                            <br/>  
+                        </div>
+                        <div if:false={ops.presence} style="font-size: 13px;">
+                            <br/> 
+                            <br/> 
+                        </div>
+                       <br/>
+                       <div if:true={ops.commentaire} style="font-size: 13px;">{ops.commentaire}</div>
+                       <div if:false={ops.commentaire}></div>
+                       <br/>
+                    </div>
+                    <div class="slds-col slds-size--1-of-4">
+                        <div if:true={ops.show} class="infoMessage" style="width:140px">Le compteur n'est pas accessible. La présence du client est obligatoire.</div>   
+                    </div>
+                </div>
+                <br/>
+                <div style="padding-left:15%">
+                    <h2>Pour modifier uniquement les données du contact,</h2>
+                    <a if:true={isOPSGaz} href="https://portailfournisseur.grdf.fr/login#pce-releves" >Aller sur le site du gestionnaire de réseau<img src='/resource/EngieCustomResources/images/IconeOuverture.svg' style="margin-left:2%"></a>
+                    <a if:true={isOPSElec} href="https://sge.gdfsuez.net/sgePortail/sso/my.policy" >Aller sur le site du gestionnaire de réseau<img src='/resource/EngieCustomResources/images/IconeOuverture.svg' style="margin-left:2%"></a>
+                </div>
+                <br/>
+                <div class="slds-grid slds-size--1-of-1"> 
+                    <div class="slds-col slds-size--1-of-4" style="margin-left:12%;"> 
+                        <h3 style="font-size: 13px;color:rgb(212, 208, 208)">REF.EXTERNE</h3>
+                        <h3 style="font-size: 13px;">{ops.idDistrib} <span onclick={copyRefFullList} data-name="Externe" data-key={index}>
+                            <span style="display:none">{ops.idDistrib}</span>
+                            <img class="imgCopy" src="/resource/EngieCustomResources/images/Copy360.svg" >
+                        </span></h3>
+                    </div>
+                    <div class="slds-col slds-size--1-of-12">
+                        <div if:true={ops.numCopiedExterne} class="infoMessage2Bis" style="width:60px">Copiée!</div>   
+                    </div>
+                    <div class="slds-col slds-size--1-of-4" style="margin-left:13%;"> 
+                        <h3 style="font-size: 13px;color:rgb(212, 208, 208)">REF.FOURNISSEUR</h3>
+                        <h3 style="font-size: 13px;">{ops.idFournisseur}<span onclick={copyRefFullList} data-name="Fournisseur" data-key={index}>
+                            <span style="display:none">{ops.idFournisseur}</span>
+                            <img class="imgCopy" src="/resource/EngieCustomResources/images/Copy360.svg" title="Copier REF Fourn" >
+                        </span></h3>
+                    </div>
+                    <div class="slds-col slds-size--1-of-12">
+                        <div if:true={ops.numCopiedFournisseur} class="infoMessage3Bis" style="width:60px">Copiée!</div>   
+                    </div>
+                </div>
+                <br/>
+                <div if:true={ops.fraisInter} style="margin: 6%;padding: 5%;background-color: #ffb75d;border-radius: 8px;">
+                    <h2>INTERVENTION DANS MOINS DE 2 JOURS OUVRES</h2>
+                    <br/>
+                    <h2 if:true={isOPSElec}>Toute modification entraînera des frais de 18,02 € TTC</h2>
+                    <h2 if:true={isOPSGaz}>Toute modification entraînera des frais de 20,03 € TTC</h2>
+                    <h2 if:true={isOPSGaz}>Attention : si la modification est demandée la veille du rendez-vous après 15h, les frais seront de 35,18 € TTC.</h2>
+                </div>
+                <div if:false={ops.fraisInter}>
+                   <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                </div>
+                <div class="slds-grid slds-size--1-of-1">
+                    <div class="slds-col slds-size--1-of-2" style="margin-left:6%">    
+                        <lightning-button variant="brand-outline" label="ANNULER LE RDV" onclick={openAnnulationOPSFull} data-key={index} ></lightning-button>
+                </div>
+                <div class="slds-col slds-size--1-of-2">    
+                    <lightning-button variant="brand" label="MODIFIER LE RDV" onclick={openModifOPSFull} data-key={index}></lightning-button>
+
+                </div>
+                </div>
+
+                <br/>
+            </div>  
+        </div>
+        </template>
+    </div>
+    </div>
+<br/>
+    <div>
+        <h1 style="font-size: 20px;
+        padding-left: 1%;font-weight: bold;">OPS TERMINEES ({omniJsonData.nbreOPSTerminees})
+        <a if:true={opsTermineesExists} style="padding-left:1%;font-size: 12px" onclick={handleActionTerminee}>{titleLinkTerminee}
+            <img if:false={isClickedTerminee} src='/resource/EngieCustomResources/images/downchevron.svg' style="margin-left:1%" width="10px" >
+            <img if:true={isClickedTerminee} src='/resource/EngieCustomResources/images/downchevron.svg' style="transform:rotate(180deg);margin-left:1%" width="10px" ></a>
+    </h1>
+    <div class="slds-grid slds-wrap slds-size--1-of-1">
+    <template if:true={isClickedTerminee} for:each={opsDetailsTermineesList} for:item="ops" for:index="index">
+        <div key={ops.Id} class="slds-size--1-of-2" >
+            <div style="border-style: solid;
+            margin: 10px;
+            border-width: 1px;
+            border-radius: 6px;
+            border-color: #e2e2e2;">
+            <h2 style="font-size: 16px;font-weight: bold;text-align:center;margin-top:5%">{ops.nom}</h2>
+            <h2 style="font-size: 16px;font-weight: bold;text-align:center">{ops.prix} € TTC </h2>
+            <br/> 
+            <div class="slds-grid slds-size--1-of-1" >
+                <div class="slds-col slds-size--1-of-5" style="padding-right:2%">
+                    <img if:true={isOPSGaz} src='/resource/EngieCustomResources/images/gazGris.svg'  style="width: 55%;
+                    max-width: 130%;
+                    margin-left: 35%;
+                    margin-top: 12%;">
+                    <img if:true={isOPSElec} src='/resource/EngieCustomResources/images/elecGris.svg'  style="width: 55%;
+                    max-width: 130%;
+                    margin-left: 35%;
+                    margin-top: 12%;">
+                </div>
+                <div class="slds-col slds-size--2-of-4" style="border-left-style : solid;border-color:rgb(218, 218, 218);border-left-width: 2px;padding-left:2%">
+                   <div if:true={ops.dateRDV} style="font-size: 13px;"><b>{ops.dateRDV}</b></div>
+                   <div if:false={ops.dateRDV}><br/></div>
+                   <div if:true={ops.creneau} style="font-size: 13px;">{ops.creneau}</div>
+                   <div if:false={ops.creneau}><br/></div>
+                   <br/>
+                    <div if:true={ops.presence} style="font-size: 13px;"><b>{ops.presence}</b>
+                        <br/>
+                        <br/>  
+                    </div>
+                    <div if:false={ops.presence} style="font-size: 13px;">
+                        <br/> 
+                        <br/> 
+                    </div>
+                   <br/>
+                   <div if:true={ops.commentaire} style="font-size: 13px;">{ops.commentaire}</div>
+                   <div if:false={ops.commentaire}><br/></div>
+                   <br/>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="slds-grid slds-size--1-of-1"> 
+                <div class="slds-col slds-size--1-of-4" style="margin-left:12%;"> 
+                    <h3 style="font-size: 13px;color:rgb(212, 208, 208)">REF.EXTERNE</h3>
+                    <h3 style="font-size: 13px;">{ops.idDistrib}<span onclick={copyRefRestrictedList} data-name="Externe" data-key={index}>
+                        <span style="display:none">{ops.idDistrib}</span>
+                        <img class="imgCopy" src="/resource/EngieCustomResources/images/Copy360.svg" >
+                    </span></h3>
+                </div>
+                <div class="slds-col slds-size--1-of-12">
+                    <div if:true={ops.numCopiedExterne} class="infoMessage2" style="width:60px">Copiée!</div>   
+                </div>
+                <div class="slds-col slds-size--1-of-4" style="margin-left:13%;"> 
+                    <h3 style="font-size: 13px;color:rgb(212, 208, 208)">REF.FOURNISSEUR</h3>
+                    <h3 style="font-size: 13px;">{ops.idFournisseur}<span onclick={copyRefRestrictedList} data-name="Fournisseur" data-key={index}> 
+                        <span style="display:none">{ops.idFournisseur}</span>
+                        <img class="imgCopy" src="/resource/EngieCustomResources/images/Copy360.svg" >
+                    </span></h3>
+                </div>
+                <div class="slds-col slds-size--1-of-12">
+                    <div if:true={ops.numCopiedFournisseur} class="infoMessage3" style="width:60px">Copiée!</div>   
+                </div>
+            </div>
+            <br/>
+        </div>  
+    </div>
+    </template>
+</div>
+</div>
+</template>

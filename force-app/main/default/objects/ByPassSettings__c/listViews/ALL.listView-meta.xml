@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ALL</fullName>
+    <columns>SETUP_OWNER_NAME</columns>
+    <columns>Workflow__c</columns>
+    <columns>ValidationRule__c</columns>
+    <columns>ProcessBuilder__c</columns>
+    <columns>AccountTrigger__c</columns>
+    <columns>CaseTrigger__c</columns>
+    <columns>ContactTrigger__c</columns>
+    <columns>EmailMessageTrigger__c</columns>
+    <columns>EventTrigger__c</columns>
+    <columns>HP_ContactTrigger__c</columns>
+    <columns>PrestationDistributeurTrigger__c</columns>
+    <columns>BatchApexErrorEventTrigger__c</columns>
+    <columns>AccountContactRelationTrigger__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>ALL</label>
+    <language>en_US</language>
+</ListView>

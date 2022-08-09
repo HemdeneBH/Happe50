@@ -1,0 +1,90 @@
+<template>
+    <div class="hp-popup hp-contact-popin">
+        <section
+                role="dialog"
+                tabindex="-1"
+                aria-labelledby="modal-heading-01"
+                aria-modal="true"
+                aria-describedby="modal-content-id-1"
+                class="slds-modal slds-fade-in-open contact-modal"
+        >
+            <div class="hp-contact-popin__container slds-modal__container">
+                <div class="hp-container">
+                    <header class="slds-modal__header hp-header">
+                        <h1 class="hp-bigTitle">{titleText}</h1>
+                        <span class="hp-closeButton">
+                            <a onclick={closePopin}>
+                                <img class="hp-close-icon" src={iconClose} alt="close" />
+                            </a>
+                        </span>
+                    </header>
+                    <div class="hp-wrapper">
+                        <div class="hp-content">
+                            <h2 class="hp-title">Derniers messages</h2>
+                            <ul class="messaging-list">
+                                <template for:each={messages} for:item="message">
+                                    <li key={message.id}>
+                                        <button class="hp-link" onclick={handleMessageClick} data-id={message.id}>
+                                            <span class="icon-mail"><img src={iconMail} alt="" /></span>
+                                            <span class="text">{message.title}</span>
+                                            <span class="chevron right"></span>
+                                        </button>
+                                    </li>
+                                </template>
+                            </ul>
+                            <div class="c-btn-wrapper">
+                                <button class="c-btn c-btn--secondary" onclick={handleMessageClick}>Voir ma messagerie</button>
+                            </div>
+
+                        </div>
+                        <div class="hp-content">
+                            <div class="tooltip-wrapper">
+                                <h2 class="hp-title">Urgence</h2>
+                                    <c-hp_ec_tooltip 
+                                        content="<p>Fuite ou odeur de gaz,<br/> coupure d’électricité,<br/> besoin de dépannage ?<br/> Contactez-nous !</p>"
+                                    >
+                                    </c-hp_ec_tooltip>
+                            </div>
+                            <ul class="emergency-list">
+                                <li>
+                                    <button class="c-btn c-btn--primary">J’ai une urgence électricité</button>
+                                </li>
+                                <li>
+                                    <button class="c-btn c-btn--blue">J’ai une urgence gaz</button>
+                                </li>
+                                <li>
+                                    <button class="c-btn c-btn--grey">Je souhaite contacter happ-e</button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="hp-content">
+                            <h2 class="hp-title">FAQ</h2>
+                            <form class="faq-search">
+                                <div class="slds-form-element">
+                                    <div class="slds-form-element__control">
+                                        <input type="text" id="search" placeholder="Rechercher dans la FAQ" class="slds-input" />
+                                    </div>
+                                    <button type="submit">
+                                        <lightning-icon
+                                            icon-name="utility:search"
+                                            size="small"
+                                            class="search-icon"
+                                            alternative-text="Search"
+                                            title="Search"
+                                        ></lightning-icon>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <button class="c-btn c-btn--chat" onclick={handleChatClick}>
+                            <span class="icon-chat" style={styleIconChat}></span>
+                            <span class="text">Ouvrir le chat</span>
+                            <lightning-icon icon-name="utility:chevronup" size="small"></lightning-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open contact-backdrop"></div>
+    </div>
+</template>

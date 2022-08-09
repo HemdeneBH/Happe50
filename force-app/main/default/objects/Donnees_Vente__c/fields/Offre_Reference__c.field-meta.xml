@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Offre_Reference__c</fullName>
+    <description>Offre Référence, cette compétence sera requise si au moins l’un des champs “Code offre gaz; Code offre elec; Code offre pack”est non null.</description>
+    <externalId>false</externalId>
+    <formula>OR(
+  Code_offre_elec__c &lt;&gt; NULL ,  Code_offre_gaz__c &lt;&gt; NULL  ,  Code_pack__c &lt;&gt; NULL 
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Offre Reference</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

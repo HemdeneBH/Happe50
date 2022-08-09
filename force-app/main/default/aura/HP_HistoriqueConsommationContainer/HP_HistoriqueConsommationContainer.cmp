@@ -1,0 +1,22 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 06-18-2021
+  @last modified by  : Hemdene Ben Hammouda
+  Modifications Log 
+  Ver   Date         Author                 Modification
+  1.0   06-15-2021   Hemdene Ben Hammouda   Initial Version
+-->
+<aura:component implements="lightning:isUrlAddressable,flexipage:availableForAllPageTypes" access="global" >
+
+    <lightning:workspaceAPI aura:id="workspace" />
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <aura:attribute type="String" name="hprefclient"/>
+    <aura:attribute type="String" name="currentPDL"/>
+    <aura:attribute type="String" name="currentPCE"/>
+    <aura:attribute type="String" name="idContratGaz"/>
+    <aura:attribute type="String" name="idContratElec"/>
+    <aura:attribute type="String" name="contratLocaux"/>
+    <c:hp_historiqueConsommation label="Historique de Consommation" hprefclient="{!v.hprefclient}" currentPDL="{!v.currentPDL}" currentPCE="{!v.currentPCE}" idContratGaz="{!v.idContratGaz}" idContratElec="{!v.idContratElec}" contratLocaux="{!v.contratLocaux}"/>    
+</aura:component>

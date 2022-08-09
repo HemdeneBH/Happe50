@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HP_Prestation</fullName>
+    <columns>Date_de_prestation__c</columns>
+    <columns>NAME</columns>
+    <columns>Type_de_prestation__c</columns>
+    <columns>Numero_affaire_distributeur__c</columns>
+    <columns>LAST_UPDATE</columns>
+    <columns>UPDATEDBY_USER</columns>
+    <columns>Statut__c</columns>
+    <columns>Type_OPS__c</columns>
+    <columns>Numero_PDL_PCE__c</columns>
+    <columns>Situation_de_vente__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Numero_PDL_PCE__c</field>
+        <operation>equals</operation>
+        <value>01438929005493</value>
+    </filters>
+    <label>Toutes les prestations distributeurs</label>
+    <sharedTo>
+        <roleAndSubordinatesInternal>HP_HAPPE</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

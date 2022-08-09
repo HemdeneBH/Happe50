@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property type="String" name="titreNouveauMotDePasse" default="Renvoyer l'e-mail d'Activation"/>
+            <property type="String" name="texteMention" default="* L'adresse e-mail est celle que vous avez utilisé lors de la souscription à votre offre d'énergie happ-e."/>
+            <property type="String" name="labelInputEmail" default="Adresse email :"/>
+            <property type="String" name="placeHolderInputEmail" default="Ex : Martin@email.com"/>
+            <property type="String" name="messageErreurInputEmail" default="Mauvais Format d'Email"/>
+            <property type="String" name="messageConfirmation" default="L'e-mail d'activation vous a été envoyé"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

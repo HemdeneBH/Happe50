@@ -1,0 +1,90 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 05-05-2022
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<apex:page controller="HP_VF_MaintenancePageController" showHeader="false" title="{!$Label.site.in_maintenance}" cache="false">
+<style type="text/css">
+    @font-face {
+        font-family: "font_AvantBold";
+        src: url('{!HP_EC_AvantBold}') format('woff');
+    }
+    @font-face {
+        font-family: "font_AvantRegular";
+        src: url('{!HP_EC_AvantRegular}') format('woff');
+    }
+    .body-container {
+        display: flex;
+        font-family: 'font_AvantBold';
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background-color: #000000;
+        background-image: url('{!HP_EC_BG_stars}');
+        position: relative;
+        min-height: 100vh;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    .bloc-maintenance {
+        max-width: 450px;
+        border: 30px solid #604ee1;
+        background-image: linear-gradient(49deg, #e5ebf5 23%, #fff 97%);
+        box-shadow: -5px 5px 15px 0 rgba(12, 29, 38, 0.21);
+        padding: 30px 40px;
+    }
+    h1 {
+        display: block;
+        text-align: center;
+        margin: 20px 0 30px 0;
+    }
+    h2 {
+        display: block;
+        font-family: 'font_AvantBold';
+        font-size: 25px;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+    p {
+        font-family: 'font_AvantRegular';
+        font-size: 18px;
+        margin: 0;
+        padding: 30px 0;
+    }
+    .footer {
+        background-image: url('{!HP_EC_footer_dark}');
+        background-color: #26242b;
+        width: 100%;
+        margin-bottom: 0;
+        position: absolute;
+        height: 125px;
+        bottom: 0;
+    }
+    @media (max-width: 576px) { 
+        /* mobiles */
+        .bloc-maintenance {
+            max-width: none;
+            border: 20px solid #604ee1;
+            padding: 30px 30px;
+        }
+  }
+</style>
+<div class="body-container">
+    <div class="bloc-maintenance">
+        <h1>
+            <img alt="Happe" src="{!HP_EC_black_logo}" />
+        </h1>
+        <h2>
+            Maintenance en cours
+        </h2>
+        <p>
+            Votre Espace Client est actuellement en maintenance. Nous déployons tous les efforts nécessaires pour le
+            rendre à nouveau disponible et vous offrir une meilleure expérience.
+        </p>
+    </div>
+    <div class="footer"></div>
+</div>
+<site:previewAsAdmin />
+</apex:page>

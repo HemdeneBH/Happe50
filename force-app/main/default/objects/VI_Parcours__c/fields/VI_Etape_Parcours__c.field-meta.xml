@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_Etape_Parcours__c</fullName>
+    <externalId>false</externalId>
+    <label>Etape Parcours</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>situation</fullName>
+                <default>false</default>
+                <label>situation</label>
+            </value>
+            <value>
+                <fullName>energy</fullName>
+                <default>false</default>
+                <label>energy</label>
+            </value>
+            <value>
+                <fullName>client_energy</fullName>
+                <default>false</default>
+                <label>client_energy</label>
+            </value>
+            <value>
+                <fullName>identification_local</fullName>
+                <default>false</default>
+                <label>identification_local</label>
+            </value>
+            <value>
+                <fullName>OFFER</fullName>
+                <default>false</default>
+                <label>OFFER</label>
+            </value>
+            <value>
+                <fullName>CONTRACT</fullName>
+                <default>false</default>
+                <label>CONTRACT</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

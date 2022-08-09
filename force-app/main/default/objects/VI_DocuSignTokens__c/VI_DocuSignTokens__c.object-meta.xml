@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>Contains keys to decrypt the Mandat or CPV envelope&apos;s id during the DocuSign redirection</description>
+    <enableFeeds>false</enableFeeds>
+    <label>Token DocuSign</label>
+    <visibility>Public</visibility>
+</CustomObject>

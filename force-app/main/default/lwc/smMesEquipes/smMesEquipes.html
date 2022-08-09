@@ -1,0 +1,46 @@
+<!--
+  @description       : Affichage des équipes du site avec une barre de recherche
+  @author            : Mohamed Aamer
+  @last modified on  : 04-13-2022
+  @last modified by  : Mohamed Aamer
+-->
+<template>
+    <div class="container">
+        <template if:false={teamError}>
+            <div class="vl"></div>
+            <h2>{label.Title}: <span class="site">{sitePresta}</span></h2>
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_4-of-12 global-search">
+                    <lightning-input type="text"
+                    value={searchValue}
+                    label="Chercher une équipe"
+                    onchange={searchKeyword}
+                    ></lightning-input>
+                </div>
+            </div>
+            <div class="slds-grid slds-wrap teams">
+                <template if:true={equipes}>
+                    <ul class="navTeams">
+                        <template for:each={equipes} for:item="equipe">
+                            <li key={equipe.nom} class="slds-col slds-size_3-of-12 team-elem" data-id={equipe.nom}>
+                                <label class="title">{equipe.nom}</label>
+                                <label class="constitute" onclick={composeTeam}
+                                data-responsables={equipe.responsables}
+                                data-conseillers={equipe.conseillers}
+                                data-nom-equipe={equipe.nom}>
+                                    {titleHover}
+                                </label>
+                            </li>
+                        </template>
+                    </ul>
+                </template>
+            </div>
+        </template>
+        <template if:true={noTeam}>
+            <div class="no-team">{label.NoTeam}</div>
+        </template>
+        <template if:true={teamError}>
+            <div class="error-team">{label.TeamError}</div>
+        </template>
+    </div>  
+</template>

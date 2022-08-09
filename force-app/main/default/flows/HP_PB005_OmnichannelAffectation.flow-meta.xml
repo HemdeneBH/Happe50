@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <processMetadataValues>
+            <name>apexSelection</name>
+            <value>
+                <stringValue>HP_SM044_ExitPB</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_1_A1</name>
+        <label>HP_SM044_ExitPB</label>
+        <locationX>100</locationX>
+        <locationY>200</locationY>
+        <actionName>HP_SM044_ExitPB</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+    </actionCalls>
+    <actionCalls>
+        <processMetadataValues>
+            <name>apexSelection</name>
+            <value>
+                <stringValue>HP_SM032_OmnichannelSkillsRoutage</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_3_A1</name>
+        <label>HP_SM032_OmnichannelSkillsRoutage</label>
+        <locationX>300</locationX>
+        <locationY>200</locationY>
+        <actionName>HP_SM032_OmnichannelSkillsRoutage</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>String</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>casesId</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>maxOccurs</name>
+                <value>
+                    <numberValue>1.0</numberValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>objectType</name>
+                <value>
+                    <stringValue/>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Reference</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>casesId</name>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <processMetadataValues>
+            <name>apexSelection</name>
+            <value>
+                <stringValue>HP_SM037_OmnichannelFiltering</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_5_A1</name>
+        <label>Delete PSR</label>
+        <locationX>500</locationX>
+        <locationY>200</locationY>
+        <actionName>HP_SM037_OmnichannelFiltering</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>String</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>casesId</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>maxOccurs</name>
+                <value>
+                    <numberValue>1.0</numberValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>objectType</name>
+                <value>
+                    <stringValue/>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Reference</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>casesId</name>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>49.0</apiVersion>
+    <decisions>
+        <processMetadataValues>
+            <name>index</name>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </processMetadataValues>
+        <name>myDecision</name>
+        <label>myDecision</label>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>myDecision2</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myRule_1</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_1</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_1_A1</targetReference>
+            </connector>
+            <label>ByPass</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <processMetadataValues>
+            <name>index</name>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </processMetadataValues>
+        <name>myDecision2</name>
+        <label>myDecision2</label>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>myDecision4</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myRule_3</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_3</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_3_A1</targetReference>
+            </connector>
+            <label>HP Niv 1/HP Niv 2</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <processMetadataValues>
+            <name>index</name>
+            <value>
+                <numberValue>2.0</numberValue>
+            </value>
+        </processMetadataValues>
+        <name>myDecision4</name>
+        <label>myDecision4</label>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myRule_5</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_5</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_5_A1</targetReference>
+            </connector>
+            <label>Closed Canceled cases</label>
+        </rules>
+    </decisions>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>$Setup.ByPassSettings__c.ProcessBuilder__c </stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_1</name>
+        <dataType>Boolean</dataType>
+        <expression>{!$Setup.ByPassSettings__c.ProcessBuilder__c}</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>[Case].HP_isHappe__c &amp;&amp;
+TEXT([Case].HP_Type__c )  &lt;&gt; &apos;HP_AUTOMATED_PROCESS&apos; &amp;&amp;
+NOT([Case].IsClosed) &amp;&amp;
+LEFT([Case].OwnerId, 3) = &apos;00G&apos; &amp;&amp;
+
+( [Case].Owner:Queue.DeveloperName = &apos;HP_Niveau_1&apos; 
+||
+ [Case].Owner:Queue.DeveloperName = &apos;HP_Niveau_2&apos;)
+&amp;&amp;
+(
+ISNULL([Case].HP_TreatmentDate__c) ||
+    (
+    NOT(ISNULL([Case].HP_TreatmentDate__c)) &amp;&amp; 
+        (
+            [Case].HP_TreatmentDate__c &lt; TODAY() ||
+			(
+				[Case].HP_TreatmentDate__c = TODAY() &amp;&amp; 
+
+                               NOT([Case].HP_TECH_TreatmentTime__c)
+
+			)
+		)
+    )
+)</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_3</name>
+        <dataType>Boolean</dataType>
+        <expression>{!myVariable_current.HP_isHappe__c} &amp;&amp;
+TEXT({!myVariable_current.HP_Type__c} )  &lt;&gt; &apos;HP_AUTOMATED_PROCESS&apos; &amp;&amp;
+NOT({!myVariable_current.IsClosed}) &amp;&amp;
+LEFT({!myVariable_current.OwnerId}, 3) = &apos;00G&apos; &amp;&amp;
+
+
+
+( {!myVariable_current.Owner:Queue.DeveloperName} = &apos;HP_Niveau_1&apos; 
+||
+ {!myVariable_current.Owner:Queue.DeveloperName} = &apos;HP_Niveau_2&apos;)
+&amp;&amp;
+(
+ISNULL({!myVariable_current.HP_TreatmentDate__c}) ||
+    (
+    NOT(ISNULL({!myVariable_current.HP_TreatmentDate__c})) &amp;&amp; 
+        (
+            {!myVariable_current.HP_TreatmentDate__c} &lt; TODAY() ||
+			(
+				{!myVariable_current.HP_TreatmentDate__c} = TODAY() &amp;&amp; 
+
+                               NOT({!myVariable_current.HP_TECH_TreatmentTime__c})
+
+			)
+		)
+    )
+)</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>[Case].HP_isHappe__c &amp;&amp;
+TEXT([Case].HP_Type__c )  &lt;&gt; &apos;Prestation GRD automatique&apos; &amp;&amp;
+(
+  TEXT([Case].Status) = &quot;CLOSED&quot; ||
+  TEXT([Case].Status) = &quot;CANCELED&quot;
+)</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_5</name>
+        <dataType>Boolean</dataType>
+        <expression>{!myVariable_current.HP_isHappe__c} &amp;&amp;
+TEXT({!myVariable_current.HP_Type__c} )  &lt;&gt; &apos;Prestation GRD automatique&apos; &amp;&amp;
+(
+  TEXT({!myVariable_current.Status}) = &quot;CLOSED&quot; ||
+  TEXT({!myVariable_current.Status}) = &quot;CANCELED&quot;
+)</expression>
+    </formulas>
+    <interviewLabel>HP_PB005_OmnichannelAffectation-26_InterviewLabel</interviewLabel>
+    <label>HP_PB005_OmnichannelAffectation</label>
+    <processMetadataValues>
+        <name>ObjectType</name>
+        <value>
+            <stringValue>Case</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>ObjectVariable</name>
+        <value>
+            <elementReference>myVariable_current</elementReference>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OldObjectVariable</name>
+        <value>
+            <elementReference>myVariable_old</elementReference>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>TriggerType</name>
+        <value>
+            <stringValue>onAllChanges</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Workflow</processType>
+    <startElementReference>myDecision</startElementReference>
+    <status>Active</status>
+    <variables>
+        <name>myVariable_current</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+    <variables>
+        <name>myVariable_old</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+</Flow>

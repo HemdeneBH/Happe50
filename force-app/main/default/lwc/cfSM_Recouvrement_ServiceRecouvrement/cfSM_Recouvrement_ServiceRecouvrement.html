@@ -1,0 +1,80 @@
+<template>
+            <div class="slds-grid slds-wrap slds-is-relative ">
+            <div if:false={cardLoaded} class="slds-is-absolute vloc-loader_override" style="height: 100%; width: 100%; min-height:50px; background: white; z-index: 99;">
+  <div>
+   <vlocity_cmt-spinner
+      variant="brand"
+      alternative-text="Loading content..."
+      size="medium"
+      theme="slds"
+      ></vlocity_cmt-spinner>
+  </div>
+</div>
+            <template if:false={hasPermission}>
+              You don't have required permissions to view this card.
+            </template>
+            <template if:true={hasPermission}>
+              <template if:true={hasRecords}>
+                      <vlocity_cmt-flex-card-state   data-statue="true"  data-index="0" data-rindex={rindex} class="cf-vlocity-state-0 cf-vlocity-state slds-size_12-of-12"  tracking-obj={_childCardTrackingObj} >
+      <div if:true={cardLoaded} class="slds-grid slds-wrap slds-card slds-p-around_x-small slds-m-bottom_x-small" style="">
+          <div data-style-id="state0element0" class="" data-rindex={rindex} style=""><vlocity_cmt-data-table data-style-id="state0element0_child"     cell-level-edit="true"  columns='\[{"fieldName":"Date","format":"DD/MM/YYYY","label":"Date","searchable":false,"sortable":true,"type":"date"},{"fieldName":"nom","label":"nom","searchable":false,"sortable":true,"type":"text"}]'  group-order="asc"  issearchavailable="false"  issortavailable="true"  pagelimit="3"  records={records}  theme="slds"  ></vlocity_cmt-data-table>
+      </div><div data-style-id="state0element1" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element1_child"  record={record}  card={card}  collapsed-by-default="false"  collapsible="false"  label="Block"  theme="slds" ><div class="slds-grid slds-wrap">
+          
+        </div></vlocity_cmt-block>
+    </div><div data-style-id="state0element2" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-custom-lwc-wrapper element-name="c-s-m_-recouvrement_-modif-blocage" property='\{}' data-rindex={rindex} records={records} record={record} record-id={recordId} card={card}><c-s-m_-recouvrement_-modif-blocage  ></c-s-m_-recouvrement_-modif-blocage></vlocity_cmt-custom-lwc-wrapper>
+    </div>
+        </div>
+      </vlocity_cmt-flex-card-state><vlocity_cmt-flex-card-state   data-statue="true"  data-index="1" data-rindex={rindex} class="cf-vlocity-state-1 cf-vlocity-state slds-size_12-of-12"  tracking-obj={_childCardTrackingObj} >
+      <div if:true={cardLoaded} class="slds-grid slds-wrap slds-card slds-p-around_x-small slds-m-bottom_x-small" style="">
+          <div data-style-id="state1element0" class="" data-rindex={rindex} style=""><vlocity_cmt-output-field data-style-id="state1element0_child"     record={record}  card={card}  merge-field="%3Cdiv%20class=%22slds-text-color_destructive%22%3EPas%20d'information%20disponible%3C/div%3E"  theme="slds"  ></vlocity_cmt-output-field>
+      </div><div data-style-id="state1element1" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state1element1_child"  record={record}  card={card}  collapsed-by-default="false"  collapsible="false"  label="Block"  theme="slds" ><div class="slds-grid slds-wrap">
+          
+        </div></vlocity_cmt-block>
+    </div><div data-style-id="state1element2" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-custom-lwc-wrapper element-name="c-s-m_-recouvrement_-modif-blocage" property='\{}' data-rindex={rindex} records={records} record={record} record-id={recordId} card={card}><c-s-m_-recouvrement_-modif-blocage  ></c-s-m_-recouvrement_-modif-blocage></vlocity_cmt-custom-lwc-wrapper>
+    </div>
+        </div>
+      </vlocity_cmt-flex-card-state>
+                </template>
+                <template if:false={hasRecords}>
+                      <vlocity_cmt-flex-card-state   data-statue="false"  data-index="0" data-rindex={rindex} class="cf-vlocity-state-0 cf-vlocity-state slds-size_12-of-12"  tracking-obj={_childCardTrackingObj} >
+      <div if:true={cardLoaded} class="slds-grid slds-wrap slds-card slds-p-around_x-small slds-m-bottom_x-small" style="">
+          <div data-style-id="state0element0" class="" data-rindex={rindex} style=""><vlocity_cmt-data-table data-style-id="state0element0_child"     cell-level-edit="true"  columns='\[{"fieldName":"Date","format":"DD/MM/YYYY","label":"Date","searchable":false,"sortable":true,"type":"date"},{"fieldName":"nom","label":"nom","searchable":false,"sortable":true,"type":"text"}]'  group-order="asc"  issearchavailable="false"  issortavailable="true"  pagelimit="3"  records={records}  theme="slds"  ></vlocity_cmt-data-table>
+      </div><div data-style-id="state0element1" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element1_child"  record={record}  card={card}  collapsed-by-default="false"  collapsible="false"  label="Block"  theme="slds" ><div class="slds-grid slds-wrap">
+          
+        </div></vlocity_cmt-block>
+    </div><div data-style-id="state0element2" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-custom-lwc-wrapper element-name="c-s-m_-recouvrement_-modif-blocage" property='\{}' data-rindex={rindex} records={records} record={record} record-id={recordId} card={card}><c-s-m_-recouvrement_-modif-blocage  ></c-s-m_-recouvrement_-modif-blocage></vlocity_cmt-custom-lwc-wrapper>
+    </div>
+        </div>
+      </vlocity_cmt-flex-card-state><vlocity_cmt-flex-card-state   data-statue="false"  data-index="1" data-rindex={rindex} class="cf-vlocity-state-1 cf-vlocity-state slds-size_12-of-12"  tracking-obj={_childCardTrackingObj} >
+      <div if:true={cardLoaded} class="slds-grid slds-wrap slds-card slds-p-around_x-small slds-m-bottom_x-small" style="">
+          <div data-style-id="state1element0" class="" data-rindex={rindex} style=""><vlocity_cmt-output-field data-style-id="state1element0_child"     record={record}  card={card}  merge-field="%3Cdiv%20class=%22slds-text-color_destructive%22%3EPas%20d'information%20disponible%3C/div%3E"  theme="slds"  ></vlocity_cmt-output-field>
+      </div><div data-style-id="state1element1" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state1element1_child"  record={record}  card={card}  collapsed-by-default="false"  collapsible="false"  label="Block"  theme="slds" ><div class="slds-grid slds-wrap">
+          
+        </div></vlocity_cmt-block>
+    </div><div data-style-id="state1element2" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-custom-lwc-wrapper element-name="c-s-m_-recouvrement_-modif-blocage" property='\{}' data-rindex={rindex} records={records} record={record} record-id={recordId} card={card}><c-s-m_-recouvrement_-modif-blocage  ></c-s-m_-recouvrement_-modif-blocage></vlocity_cmt-custom-lwc-wrapper>
+    </div>
+        </div>
+      </vlocity_cmt-flex-card-state>
+                </template>
+            </template>
+            <template if:true={hasError}>
+            {error}
+            </template>
+            
+      <vlocity_cmt-action action-wrapperclass="slds-hide" re-render-flyout class="action-trigger slds-col" onupdateos={updateOmniscript} onselectcards={updateSelectedCards} onsetvalue={updateAction}>
+      
+      </vlocity_cmt-action>
+  
+            <vlocity_cmt-action class="execute-action" re-render-flyout action-wrapperclass="slds-hide" onupdateos={updateOmniscript} onselectcards={updateSelectedCards} onsetvalue={updateAction}>
+            
+            </vlocity_cmt-action>
+            </div>
+          </template>

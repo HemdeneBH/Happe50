@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_URL_Mandat__c</fullName>
+    <description>Champ pour stocker l&apos;URL vers l&apos;enveloppe du mandat Sepa envoyé par DocuSign</description>
+    <externalId>false</externalId>
+    <label>URL Mandat</label>
+    <length>131072</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>2</visibleLines>
+</CustomField>

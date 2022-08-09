@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>Staut_Env_Session__c</columns>
+    <columns>Date_de_la_session_reelle__c</columns>
+    <columns>Date_fin_session_prev__c</columns>
+    <columns>Date_de_la_session_pr_visionnelle__c</columns>
+    <columns>Date_fin_de_la_session_r_elle__c</columns>
+    <columns>Statut_de_la_session__c</columns>
+    <columns>Cible__c</columns>
+    <columns>Module__c</columns>
+    <columns>NB_conseiller_pr_visionnel__c</columns>
+    <columns>NB_conseiller_r_el__c</columns>
+    <columns>Nb_managers_pr_visionnel__c</columns>
+    <columns>Nb_managers_r_el__c</columns>
+    <columns>NAME</columns>
+    <filterScope>Everything</filterScope>
+    <label>Toutes les sessions de formation SMILE</label>
+</ListView>

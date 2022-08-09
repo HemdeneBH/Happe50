@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property type="String" name="titleText" default="Mon Offre"/>
+            <property type="String" name="detailOffreText" default="Voir le détail de l’offre"/>
+            <property type="String" name="detailOffreURLElec" default="https://www.google.com"/>
+            <property type="String" name="detailOffreURLGaz" default="https://www.google.com"/>
+            <property type="String" name="detailOffreURLDual" default="https://www.google.com"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

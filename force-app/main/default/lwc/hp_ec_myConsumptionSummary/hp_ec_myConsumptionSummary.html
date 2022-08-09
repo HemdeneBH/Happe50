@@ -1,0 +1,85 @@
+<!--
+  @description       : 
+  @author            : Badr Eddine Belkarchi
+  @group             : 
+  @last modified on  : 07-08-2022
+  @last modified by  : Badr Eddine Belkarchi
+-->
+<template>
+    <div class="consumption c-content-bg slds-col">
+        <div class="consumption-tabs">
+            <div class={consumptionTabClass} onclick={switchToConsumptionTab}>
+                <a class="consumption-tab__link consumption-tab__link--summary hp-bigTitle">{titreFirstTab}</a>
+            </div>
+            <!-- <div class="consumption-tab" if:false={communicatingMeter}> -->
+            <div class={releveTabClass} onclick={switchToReleveTab}>
+                <a class="consumption-tab__link consumption-tab__link--reading hp-bigTitle">Ma relève</a>
+            </div>
+            <!-- <div class="consumption-tab" if:true={communicatingMeter}>
+                <a class="consumption-tab__link consumption-tab__link--alert hp-bigTitle">Mon alerte <span>!</span></a>
+            </div> -->
+        </div>
+        <template if:false={showTextPasDeConsommations}>
+            <ul class="consumption-graph" if:true={showGas}>
+                <template for:each={gasConsumptions} for:item="consumption">
+                    <li key={consumption.date}>
+                        <c-hp_ec_consumption-bar 
+                            consumption={consumption}
+                            type="gas"
+                            alert-treshold={alertTreshold}
+                            max-value={maxGasValue}
+                            max-price={maxGasPrice}
+                            show-value={showValue}
+                            show-price={showPrice}
+                            display-details={displayDetails}
+                        >
+                        </c-hp_ec_consumption-bar>
+                    </li>
+                </template>
+            </ul>
+            <ul class="consumption-graph" if:true={showElec}>
+                <template for:each={elecConsumptions} for:item="consumption">
+                    <li key={consumption.date}>
+                        <c-hp_ec_consumption-bar 
+                            consumption={consumption}
+                            type="elec"
+                            alert-treshold={alertTreshold}
+                            max-value={maxElecValue}
+                            max-price={maxElecPrice}
+                            show-value={showValue}
+                            show-price={showPrice}
+                            display-details={displayDetails}
+                        >
+                        </c-hp_ec_consumption-bar>
+                    </li>
+                </template>
+            </ul>
+        </template>
+        <template if:true={showTextPasDeConsommations}>
+            <div>
+                <h1>Merci d'avoir rejoint Happ-e!</h1>
+                <p>{textPasDeConsommations}</p>
+                <h1>Repassez nous voir bientôt!</h1>
+            </div>
+        </template>
+
+        <div class="consumption-footer">
+            <template if:false={showTextPasDeConsommations}>
+                <div class="switch-button">
+                    <c-hp_ec_switch-button
+                        name="typeSwitch"
+                        options={typeOptions}
+                        onswitchchange={handleType}
+                    ></c-hp_ec_switch-button>
+                </div>
+            </template>
+
+            <div class="hp-link">
+                <a class="hp-consumptionDetails" onclick={handleNavigationToLienSpecifique}>
+                    <span class="leftBloc">{libelleDuLien}</span>
+                    <span class="rightBloc"> <span class="chevron right"></span></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</template>

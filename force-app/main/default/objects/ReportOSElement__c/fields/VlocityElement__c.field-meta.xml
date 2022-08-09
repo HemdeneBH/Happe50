@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VlocityElement__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Actual OmniScript element</description>
+    <externalId>false</externalId>
+    <label>Vlocity OmniScript Element</label>
+    <referenceTo>vlocity_cmt__Element__c</referenceTo>
+    <relationshipLabel>Report OmniScript Elements</relationshipLabel>
+    <relationshipName>ReportOmniScriptElements</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

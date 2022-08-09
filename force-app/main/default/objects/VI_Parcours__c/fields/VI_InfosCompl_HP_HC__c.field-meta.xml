@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_InfosCompl_HP_HC__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Champ étape Informations complémentaires
+Relevé compteur : Cadran Elec</description>
+    <externalId>false</externalId>
+    <label>HP/HC</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

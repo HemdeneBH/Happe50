@@ -1,0 +1,403 @@
+<!--
+  @description       : 
+  @author            : Slimene Belhaj Ali
+  @group             : 
+
+  @last modified on  : 03-22-2021
+
+  @last modified by  : Slimene Belhaj Ali
+  Modifications Log 
+  Ver   Date         Author               Modification
+  1.0   03-02-2021   Slimene Belhaj Ali   Initial Version
+-->
+<aura:component controller="HP_SM056_CaseTaskManager"
+ implements="flexipage:availableForRecordHome,flexipage:availableForAllPageTypes,force:hasRecordId,force:appHostable,force:lightningQuickAction,force:hasSObjectName">
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    <aura:handler event="force:showToast" action="{!c.init}"/>
+
+    <aura:attribute name="lastTask" type="Task" default="{ 'sobjectType': 'Task' }"/>
+    <aura:attribute name="hasDiabPermission" type="Boolean" default="true"/>
+
+    <aura:attribute name="taskDisplay" type="Boolean" default="false"/>
+    <div class="{!v.taskDisplay ? '' : 'hide'}">
+
+        <lightning:card>
+        
+        <div style="margin-left: 0.5rem;">
+        <lightning:icon iconName="standard:task" size="small" alternativeText="Object"/> <label class="slds-text-heading--small slds-truncate slds-m-right--xx-small" style="margin-left : 0.75em"><b>Tâche</b></label>
+    </div>
+    <div style="text-align: end;margin-right: 1rem;">
+      
+        <lightning:button label="Modifier la tâche" title="Neutral action" onclick="{!c.editTask}"/>
+    </div>
+  
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Object</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.Subject}"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Type d’appel</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.HP_TypeAppel__c}"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Sens de l'appel</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.CallType}"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Ancienneté du client</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.HP_AncienneteClient__c}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Où avez-vous trouvé notre numéro de tél?</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.HP_Origin__c}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Situation client</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.HP_SituationClient__c}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Type offre</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.HP_TypeOffre__c}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Type requête</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.HP_CaseType__c}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Sous type requête</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.HP_CaseSubtype__c}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Contractualisation</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.HP_isContractualisation__c}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Proposition de l’offre verte</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.HP_isGreenElectricity__c}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Déjà client happ-e</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.HP_isHappe__c}"/>
+                    </div>
+                </div>
+            </div> 
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Proposition de DEPEX</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.HP_isDEPEX__c}"/>
+                    </div>
+                </div>
+            </div> 
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Proposition de mensualisation</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.HP_isMensualisation__c}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Proposition de DEGEx</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.HP_isDEGEX__c}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Statut de l'appel</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.Retour_de_l_appel__c}"/>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Résultat de l'appel</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.CallDisposition}"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Date de l’appel</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.ActivityDate}"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+
+                        <span class="test-id__field-label">Type de tâche</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.Type}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+
+                        <span class="test-id__field-label">Sous-type de tâche</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.TaskSubtype}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Durée d'appel</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.CallDurationInSeconds}"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Numéro de téléphone du contact</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.Phone_c__c}"/>
+                    </div>
+                </div>
+            </div>
+
+            
+
+            
+           
+
+
+            
+             
+
+             
+
+            
+
+            
+
+             
+
+             
+
+
+           
+            <aura:if isTrue="{!v.hasDiabPermission == true}">
+           
+           
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Numéro affiché</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.Displayed_Number_c__c}"/>
+                    </div>
+                </div>
+            </div> 
+
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Numéro service</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.Service_Number_c__c}"/>
+                    </div>
+                </div>
+            </div> 
+
+
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Compagne</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.Campaign_c__c}"/>
+                    </div>
+                </div>
+            </div> 
+
+
+
+            <div class="slds-col slds-size_1-of-1">
+                <div style="height: 4rem;margin-left: 0.5rem;;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Enregistrement des appels</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.Dbl_Record_Url__c}"/>
+                    </div>
+                </div>
+            </div> 
+
+            
+
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Durée de la numérotation</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.Dbl_Dialing_Duration__c}"/>
+                    </div>
+                </div>
+            </div> 
+
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Durée de la conversation</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.Dbl_Talk_Duration__c}"/>
+                    </div>
+                </div>
+            </div> 
+
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Durée de mise en garde (Hold)</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.Dbl_Hold_Duration__c}"/>
+                    </div>
+                </div>
+            </div> 
+
+            <div class="slds-col slds-size_1-of-2">
+                <div style="height: 4rem;margin-left: 0.5rem;;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218))">
+                    <div class="test-id__field-label-container slds-form-element__label no-utility-icon">
+                        <span class="test-id__field-label">Temps de clôture (wrapup)</span>
+                    </div>
+                    <div class="slds-form-element__control" >
+                        <force:outputField value="{!v.lastTask.Dbl_Wrapup_Duration__c}"/>
+                    </div>
+                </div>
+            </div> 
+        </aura:if>
+          </div>
+         
+    
+</lightning:card>
+
+</div>
+
+
+</aura:component>

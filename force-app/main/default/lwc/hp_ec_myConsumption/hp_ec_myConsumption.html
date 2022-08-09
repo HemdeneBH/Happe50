@@ -1,0 +1,125 @@
+<!--
+  @description       : 
+  @author            : Badr Eddine Belkarchi
+  @group             : 
+  @last modified on  : 06-29-2022
+  @last modified by  : Badr Eddine Belkarchi
+-->
+<template>
+    <div class="consumption c-content-bg slds-col">
+        <h2 class="consumption-header hp-bigTitle">Ma consommation</h2>
+        <ul class="consumption-legend">
+            <template if:true={displayDetails}>
+                <li><span class="color-legend subscription"></span> Abonnement</li>
+                <li><span class="color-legend tax"></span> Comptage et taxes</li>
+                <li if:true={showGas}><span class="color-legend gas"></span> Conso gaz</li>
+                <li if:true={showElec}><span class="color-legend elec"></span> Conso elec.</li>
+            </template>
+            <template if:false={displayDetails}>
+                <li if:false={communicatingMeter}>
+                    <span class="color-legend estimated"></span> Index estimé
+                </li>
+                <li if:true={showGas}><span class="color-legend gas"></span> Index Réel</li>
+                <li if:true={showElec}><span class="color-legend elec"></span> Index Réel</li>
+            </template>
+            <li>
+                <span class="color-legend previous"></span> Conso précédente
+            </li>
+        </ul>
+        <ul class="consumption-graph" if:true={showGas}>
+            <template for:each={gasConsumptions} for:item="consumption">
+                <li key={consumption.date}>
+                    <c-hp_ec_consumption-bar 
+                        consumption={consumption}
+                        type="gas"
+                        alert-treshold={alertTreshold}
+                        max-value={maxGasValue}
+                        max-price={maxGasPrice}
+                        show-value={showValue}
+                        show-price={showPrice}
+                        display-details={displayDetails}
+                    >
+                    </c-hp_ec_consumption-bar>
+                </li>
+            </template>
+        </ul>
+        <ul class="consumption-graph" if:true={showElec}>
+            <template for:each={elecConsumptions} for:item="consumption">
+                <li key={consumption.date}>
+                    <c-hp_ec_consumption-bar 
+                        consumption={consumption}
+                        type="elec"
+                        alert-treshold={alertTreshold}
+                        max-value={maxElecValue}
+                        max-price={maxElecPrice}
+                        show-value={showValue}
+                        show-price={showPrice}
+                        display-details={displayDetails}
+                    >
+                    </c-hp_ec_consumption-bar>
+                </li>
+            </template>
+        </ul>
+        <div class="consumption-filters">
+            <h3 class="consumption-filters__header">Vue</h3>
+            <div class="consumption-filters__switcher">
+                <c-hp_ec_switch-button
+                    name="showValuePriceSwitch"
+                    options={showValuePriceOptions}
+                    onswitchchange={handleShowValuePrice}
+                ></c-hp_ec_switch-button>
+            </div>
+            <div class="consumption-filters__switcher" if:true={displayDetailSwitchButton}>
+                <c-hp_ec_switch-button
+                    name="showDetailsSwitch"
+                    options={showDetailsOptions}
+                    onswitchchange={handleShowDetails}
+                ></c-hp_ec_switch-button>
+            </div>
+
+            <h3 class="consumption-filters__header">Période</h3>
+            <div class="consumption-filters__switcher" if:true={communicatingMeter}>
+                <c-hp_ec_switch-button
+                    name="timeSwitch"
+                    options={timeOptions}
+                    onswitchchange={handleTime}
+                ></c-hp_ec_switch-button>
+            </div>
+            <div class="consumption-filters__input-wrapper">
+                <span class="consumption-filters__input-icon">
+                    <lightning-icon icon-name="utility:date_input" size="x-small" alternative-text="date"></lightning-icon>
+                </span>
+                <span class="consumption-filters__input">
+                    <label for="start">
+                        du <span class="consumption-filters__input--text">{startDateLocaleString}</span>
+                    </label>
+                    <input
+                        id="start"
+                        class="consumption-filters__input--date"
+                        type="date"
+                        value={startDateISOString}
+                        max={endDateISOString}
+                        data-type="start"
+                        onfocus={handleDateFocus}
+                        onchange={handleDateChange}
+                    />
+                </span>
+                <span class="consumption-filters__input">
+                    <label for="end">
+                        au <span class="consumption-filters__input--text">{endDateLocaleString}</span>
+                    </label>
+                    <input
+                        id="end"
+                        class="consumption-filters__input--date"
+                        type="date"
+                        value={endDateISOString}
+                        min={startDateISOString}
+                        data-type="end"
+                        onfocus={handleDateFocus}
+                        onchange={handleDateChange}
+                    />
+                </span>
+            </div>
+        </div>
+    </div>
+</template>

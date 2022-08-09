@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HP_VR002_AnnulerSouscription</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(!$Setup.ByPassSettings__c.ValidationRule__c,
+ISCHANGED(HP_Statut__c),
+OR($UserRole.DeveloperName =
+&quot;HP_Conseiller_Niveau_1&quot;,$UserRole.DeveloperName =
+&quot;HP_Conseiller_Niveau_2&quot;, $UserRole.DeveloperName =
+&quot;HP_Conseiller_Niveau_1_TAD&quot;, $UserRole.DeveloperName =
+&quot;HP_Conseiller_Niveau_2_TAD&quot;),
+ISPICKVAL( HP_Statut__c, &quot;CANCEL&quot;),
+ISBLANK( TEXT(HP_RaisonAnnulation__c)))</errorConditionFormula>
+    <errorMessage>la raison de l&apos;annulation est obligatoire.</errorMessage>
+</ValidationRule>

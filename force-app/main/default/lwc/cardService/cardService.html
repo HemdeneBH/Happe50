@@ -1,0 +1,137 @@
+<!--
+  @description       : 
+  @author            : Mohamed Aamer
+  @group             : 
+  @last modified on  : 02-24-2022
+  @last modified by  : Mohamed Aamer
+  @last modified on  : 25/07/2022
+  @last modified by  : Nourelimane SMOUNI
+-->
+<template>
+    <div class="container-card">
+        <lightning-card >
+            <h2 class="service-Title">{selecteditem.titreService}</h2>
+            <div class="icon-Info"><img src={information_Icone}  title={servicePrioritaire} onmousemove={handleServicePrioritaire} /></div>  
+            <div slot="actions">
+                <lightning-icon icon-name="utility:vide" size="small" if:true={nothing}></lightning-icon>
+                <lightning-button-icon icon-name="utility:chevronright" variant="bare" if:true={isServicesClose}
+                    alternative-text="Ouvrir les services" onclick={handleOpenRecordClick}>
+                </lightning-button-icon>
+                <lightning-button-icon icon-name="utility:chevrondown" variant="bare" if:true={isServicesOpen}
+                    alternative-text="Fermer les services" onclick={handleOpenRecordClick}>
+                </lightning-button-icon>
+            </div>
+            <div class="slds-m-around_medium bloc-card engie-card-contrat-body slds-card__body via-slds-card__body slds-theme--default slds-grid" 
+                if:true={selecteditem.errorContratWs}>
+                <h2 class="message-error">information indisponible pour le moment.</h2>
+
+
+                        </div>
+            <div class="slds-m-around_medium bloc-card engie-card-contrat-body slds-card__body via-slds-card__body slds-theme--default">
+            <div if:false={selecteditem.errorContratWs} class="slds-grid">
+                <div class="slds-size--1-of-2 slds-p-right_xx-small"></div>
+                <div class="slds-size--1-of-2 slds-p-right_xx-small">
+                    <lightning-button  variant="base" label="Ajouter un service payant"
+                        title="Ajouter un service" icon-name="utility:add"
+                        onclick={handleServicesPayants}
+                        ></lightning-button>
+                        <div if:true={isFelEncours}>
+                            <span class="slds-float--right">
+                                <img src={imgfelencours}  alt="FEL en cours"/><br>
+                                <lightning-button  variant="base" label="Modifier le service"
+                                title="Modifier le service" onclick={handleOpenFreeServices}
+                                ></lightning-button>
+                            </span>
+                        </div>
+                        <div if:true={isFelActive}>
+                                <img src={imgfelactive}  alt="FEL active"/><br>
+                                <lightning-button  variant="base" label="Modifier le service"
+                                title="Modifier le service" onclick={handleOpenFreeServices}
+                                ></lightning-button>
+                        </div>
+                        <div if:true={isFelDesactive} class="slds-clearfix">
+                            <lightning-button class="slds-float--right" variant="base" label="Activer la Facture en ligne"
+                                title="Activer la Facture en ligne" onclick={handleOpenFreeServices}
+                            ></lightning-button>
+                        </div>
+                        <div>
+                            <lightning-button class="slds-float--right" variant="base" label="Ajouter une option" 
+                            title="Ajouter une option" icon-name="utility:add" onclick={handleOpenOptions}></lightning-button>
+                            {getTitle}
+                        </div>
+                        <div if:true={hasServices}>
+                            <lightning-button class="slds-float--right" variant="base" label="Services et options" title="Successful action" onclick={handleNavigate}>
+                              
+                            </lightning-button>
+                          
+                        </div>
+                </div>
+                <div class="exampleHolder" if:false={showSpinner}>
+                    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                </div>
+            </div>     
+            <!--div if:false={selecteditem.errorContratWs} class="slds-grid slds-gutters">
+                <div class="slds-col">
+                    <div if:true={isFelEncours}>
+                        <span class="slds-float--right">
+                            <img src={imgfelencours}  alt="FEL en cours"/><br>
+                            <lightning-button  variant="base" label="Modifier le service"
+                            title="Modifier le service" 
+                            ></lightning-button>
+                        </span>
+                    </div>
+                    <div if:true={isFelActive}>
+                        <span class="slds-float--right">
+                            <img src={imgfelactive}  alt="FEL active"/><br>
+                            <lightning-button  variant="base" label="Modifier le service"
+                            title="Modifier le service" 
+                            ></lightning-button>
+                        </span>
+                    </div>
+                    <div if:true={isFelDesactive} class="slds-clearfix">
+                        <lightning-button class="slds-float--right" variant="base" label="Activer la Facture en ligne"
+                            title="Activer la Facture en ligne" 
+                        ></lightning-button>
+                    </div>
+                </div>
+            </div-->  
+        </div>
+        </lightning-card>
+        <section if:true={selecteditem.closeservice} aria-describedby="dialog-body-id-77" aria-labelledby="dialog-heading-id-81"
+            class="slds-popover slds-nubbin_top-right popup-card slds-p-around_x-large" role="dialog">
+            <table >
+                <thead>
+                    <tr class="header-table">
+                        <template for:each={columns} for:item='header'>
+                            <th key={header.key} scope="col" class="grayBackground slds-p-left_x-small">
+                                <div class="slds-truncate" >{header.value}</div>
+                            </th>
+                        </template>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={selecteditem.listServices} for:item='service'>
+                        <tr key={service.idContrat} class="body-table">
+                                <td data-label="services" class="slds-p-left_x-small">
+                                    <span if:true={service.actif}>{service.libOffreMaj}</span>
+                                    <span if:false={service.actif} class="color-disabled-table">{service.libOffreMaj}</span>
+                                </td>
+                                <td data-label="dateActivation" class="slds-p-left_x-small">
+                                    <span if:false={service.dateEffetMaj} class="color-disabled-table">--</span>
+                                    <span if:true={service.actif}><span if:true={service.dateEffetMaj}>{service.dateEffetMaj}</span></span>
+                                    <span if:false={service.actif} class="color-disabled-table"><span if:true={service.dateEffetMaj}>{service.dateEffetMaj}</span></span>
+                                </td>
+                                <td data-label="dateRésiliation" class="slds-p-left_x-small">
+                                    <span class="color-disabled-table" if:false={service.dateResiliationMaj}>--</span>
+                                    <span class="color-disabled-table">{service.dateResiliationMaj}</span>
+                                </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+            
+        </section>
+       
+    
+    </div>
+</template>

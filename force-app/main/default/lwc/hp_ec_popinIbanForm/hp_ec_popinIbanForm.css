@@ -1,0 +1,284 @@
+.visually-hidden {
+    clip: rect(0 0 0 0); 
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap; 
+    width: 1px;
+}
+
+.iban-modal {
+    top: 0;
+}
+
+.slds-backdrop_open.iban-backdrop::before,
+.slds-backdrop_open.iban-backdrop::after {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.slds-backdrop_open.iban-backdrop::before {
+    background-color: var(--disabled);
+    opacity: 0.4;
+}
+
+.slds-backdrop_open.iban-backdrop::after {
+    background-color: var(--dark-primary-colour);
+    opacity: 0.1;
+}
+
+/* Popin container */
+/* -------------------------------------------------------------------------------------------------- */
+.hp-iban-popin .hp-iban-popin__container {
+    width: 778px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.hp-container {
+    display: flex;
+    flex-direction: column;
+    width: 718px;
+    max-width: 100%;
+    height: auto;
+    margin: 0 -15px 0 auto;
+    box-shadow: var(--box-shadow);
+    border: 30px solid var(--primary-colour);
+    background-image: var(--bg);
+    overflow: hidden;
+    color: var(--text-color);
+    animation: slide-from-right 0.3s ease-in-out forwards;
+}
+
+.hp-header {
+    background-color: var(--modal-header);
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 40px;
+}
+
+.hp-bigTitle {
+    font-size: 25px;
+    letter-spacing: 0.75px;
+    line-height: 30px;
+}
+
+.hp-closeButton {
+    justify-self: end;
+}
+
+.hp-closeButton a {
+    justify-self: end;
+    color: var(--secondary-colour);
+    font-family: var(--font-bold);
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: extra-expanded;
+}
+
+.hp-wrapper {
+    position: relative;
+    flex-grow: 1;
+    flex-shrink: 1;
+    height: 100%;
+    overflow: auto;
+    padding: 30px 0;
+    z-index: 0;
+}
+
+.hp-wrapper::-webkit-scrollbar { width: 5px; height: 5px; border-radius: 3px;}
+.hp-wrapper::-webkit-scrollbar-track { background: var(--bg-base); border-radius: 3px; margin: 25px; }
+.hp-wrapper::-webkit-scrollbar-thumb { background: var(--secondary-colour); border-radius: 3px;}
+
+.hp-content {
+    position: relative;
+    flex-shrink: 1;
+    flex-grow: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 0 15px 0 40px;
+}
+
+.hp-content::after {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(to bottom, transparent, var(--bg-plain));
+    height: 48px;
+    z-index: 1;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 1.875rem;
+}
+
+label {
+    width: 100%;
+    display: block;
+    font-family: var(--font-bold);
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 0.54px;
+    margin-bottom: 1.5rem;
+}
+
+.input-wrapper {
+    max-width: calc(100% - 24px);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+input {
+    margin-right: 10px;
+    padding: 15px 0;
+    border: 3px solid;
+    border-color: var(--primary-colour);
+    background-color: var(--bg-plain);
+    color: var(--text-color);
+    text-align: center;
+    border-radius: 0;
+}
+input:focus,
+input:hover,
+input:active {
+    border-color: var(--secondary-colour);
+    border-radius: 0;
+}
+input:focus-visible {
+    outline: 1px solid transparent;
+  }
+
+.form-row.invalid input {
+    border-color: var(--rose);
+}
+
+input.hidden {
+    display: none;
+}
+
+.iban {
+    min-width: 2.75rem;
+    width: 4.375rem;
+}
+
+.iban-6 {
+    width: 5.25rem;
+}
+
+.iban-7 {
+    width: 2.75rem;
+}
+
+.bic {
+    min-width: 2.375rem;
+    width: 2.375rem;
+}
+
+.error {
+    display: none;
+    width: 100%;
+    margin-top: 15px;
+    font-family: var(--font-bold);
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--rose);
+}
+
+.form-row.invalid .error {
+    display: block;
+}
+
+.icon {
+    display: none;
+}
+
+.icon-valid {
+    --slds-c-icon-color-foreground-default: var(--primary-colour);
+}
+
+.icon-invalid {
+    --slds-c-icon-color-foreground-default: var(--rose);
+}
+
+.form-row.invalid .icon-invalid {
+    display: block;
+}
+
+.form-row.valid .icon-valid {
+    display: block;
+}
+
+.button-wrapper {
+    text-align: center;
+}
+
+.button-wrapper button {
+    margin: auto;
+    border: none;
+}
+
+button:disabled {
+    background-color: var(--grey);
+    color: var(--white);
+}
+
+@media (max-width: 768px) {
+    .iban-modal {
+        top: 80px;
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+    }
+
+    .hp-container {
+        border: 20px solid var(--primary-colour);
+        margin: 0;
+    }
+
+    input {
+        padding: 5px 0;
+        border-top: none;
+        border-right: none;
+        border-bottom: 2px solid var(--primary-colour);
+        border-left: none;
+        margin-right: 5px;
+        background-color: transparent;
+    }
+
+    .iban {
+        min-width: 1.25rem;
+        width: 2.25rem;
+    }
+
+    .iban-6 {
+        width: 2.75rem;
+    }
+
+    .iban-7 {
+        width: 1.25rem;
+    }
+
+    .bic {
+        min-width: 1.25rem;
+        width: 1.25rem;
+    }
+    .hp-bigTitle {
+        font-size: 20px;
+    }
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_TECH_VenteEtUserPrestaExterne__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+				AND(
+								/*Le parcours provient d&apos;un site externe*/
+								ISPICKVAL(Owner:User.Contact.VI_Site_Prestataire__r.VI_Type__c, &quot;Externe&quot;),
+								/*Ce site externe est le même que celui de l&apos;utilisateur connecté*/
+        $User.VI_TECH_IDDuSitePrestataireDuUser__c ==  Owner:User.VI_TECH_IDDuSitePrestataireDuUser__c
+				),
+				true,
+				false
+)</formula>
+    <label>TECH Vente et user presta externe</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

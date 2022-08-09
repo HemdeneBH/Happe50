@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HP_Record_Type__c</fullName>
+    <description>HP_Record_Type</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>HP_Record_Type</inlineHelpText>
+    <label>Record Type</label>
+    <required>false</required>
+    <type>TextArea</type>
+</CustomField>

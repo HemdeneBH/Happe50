@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HP_happ_e_relance_CPV_non_sign_es</fullName>
+    <booleanFilter>1 AND 2</booleanFilter>
+    <columns>CREATED_DATE</columns>
+    <columns>NAME</columns>
+    <columns>HP_Canal_de_vente__c</columns>
+    <columns>HP_Contact__c</columns>
+    <columns>HP_type_Souscription__c</columns>
+    <columns>HP_Type_Energie__c</columns>
+    <columns>HP_NumPDL__c</columns>
+    <columns>HP_NumberPCE__c</columns>
+    <columns>HP_Porte_Feuille_Contrat__c</columns>
+    <columns>HP_Souscription_Digital_Id__c</columns>
+    <columns>HP_Statut__c</columns>
+    <columns>HP_Client__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>HP_Statut__c</field>
+        <operation>equals</operation>
+        <value>SAVE_2_CONFIRMED,SAVE_3</value>
+    </filters>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>equals</operation>
+        <value>5/4/2021 12:00 AM</value>
+    </filters>
+    <label>happ-e : relance CPV non signées</label>
+    <sharedTo>
+        <roleAndSubordinatesInternal>HP_HAPPE</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

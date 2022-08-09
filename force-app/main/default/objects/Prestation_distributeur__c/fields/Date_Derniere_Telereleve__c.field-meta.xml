@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Date_Derniere_Telereleve__c</fullName>
+    <description>Gaz
+Date à laquelle on a reçu une relève du PDL</description>
+    <externalId>false</externalId>
+    <label>Date Derniere Telereleve</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

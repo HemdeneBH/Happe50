@@ -1,0 +1,75 @@
+.hp-bigTitle {
+  padding: 0 0 15px 0;
+}
+
+.hp-monContrat {
+  padding: 35px 40px;
+  margin: 15px;
+  min-height: 360px;
+}
+
+.hp-nav-title {
+  font-family: var(--font-bold);
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--primary-colour);
+  text-align: left;
+}
+
+.hp-contractInfo {
+  font-size: 14px;
+  font-weight: 200;
+  font-stretch: normal;
+  font-style: normal;
+  text-align: left;
+  color: var(--text-color);
+}
+
+.hp-smallBox {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.hp-btnContainer {
+  align-content: end;
+}
+
+.hp-contractTitle {
+  color: var(--blue);
+  font-family: var(--font-bold);
+  font-size: 16px;
+  font-weight: bold;
+  text-align: left;
+}
+
+
+@media (min-width: 1280px) {
+  /* 1440px screen and all screens larger */
+
+}
+
+@media (max-width: 1280px) {
+  /* 1280px screen and all screens smaller */
+
+}
+
+@media (max-width: 1024px) {
+
+  /* Ipad and tablets */
+  .hp-monContrat {
+    margin: 10px 0;
+    min-height: auto;
+  }
+}
+
+@media (max-width: 576px) {
+  /* mobiles */
+
+}
+@media (max-width: 374px) {
+  
+  .hp-monContrat {
+    padding: 25px 20px;
+  }
+  
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HP_CPVperimee__c</fullName>
+    <externalId>false</externalId>
+    <formula>if(and(or(ISPICKVAL(HP_Statut__c , &quot;SAVE_2&quot;), ISPICKVAL(HP_Statut__c , &quot;SAVE_2_CONFIRMED&quot;)),  DateValue(HP_DigitalDateSave2__c) &lt; Today() - 30), true, false)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>CPV périmée</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

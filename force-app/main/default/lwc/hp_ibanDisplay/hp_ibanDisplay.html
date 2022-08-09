@@ -1,0 +1,17 @@
+<template>
+    <lightning-card  title="">
+        <div style="margin-left: 2rem;">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-3" style="border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218));">
+                    IBAN <br/>{ibanDisplay}
+                </div>
+                <div class="slds-col slds-size_1-of-6" style="text-align: end;padding-right: 2rem;border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218));">
+                    <lightning-button-icon icon-name="utility:preview"  class="slds-m-left_xx-small" onclick={showIBAN}></lightning-button-icon>
+                  </div>
+                  <div class="slds-col slds-size_1-of-2">
+                   
+                  </div>
+              </div>
+    </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,23 @@
+<aura:component implements="lightning:isUrlAddressable">
+
+
+    <lightning:workspaceAPI aura:id="workspace" />
+    <aura:attribute name="eDocumentStatus" type="Boolean" default="{!v.pageReference.state.c__edocumentstatus}"></aura:attribute>
+    <aura:attribute name="felStatus" type="Boolean" default="{!v.pageReference.state.c__felstatus}"></aura:attribute>
+    <aura:attribute name="customerAreaUnavailable" type="Boolean" default="{!v.pageReference.state.c__customerareaunavailable}"></aura:attribute>
+    <aura:attribute name="noEmail" type="Boolean" default="{!v.pageReference.state.c__noemail}"></aura:attribute>
+
+    <aura:attribute name="recordId" type="String" default="{!v.pageReference.state.c__recordid}"></aura:attribute>
+    <aura:attribute name="accountContract" type="String" default="{!v.pageReference.state.c__accountcontract}"></aura:attribute>
+
+    <c:sm_FreeServices 
+    eDocumentStatus="{!v.eDocumentStatus}"
+    felStatus="{!v.felStatus}"
+    customerAreaUnavailable="{!v.customerAreaUnavailable}"
+    noEmail="{!v.noEmail}"
+
+    recordId="{!v.recordId}"
+    accountContract="{!v.accountContract}"
+    oncloseFreeServicesTab="{!c.handleCloseFreeServicesTab}"/>
+
+</aura:component>

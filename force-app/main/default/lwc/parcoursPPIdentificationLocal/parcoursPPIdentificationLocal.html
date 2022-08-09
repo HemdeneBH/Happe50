@@ -1,0 +1,1193 @@
+<template>
+	<div class="container" style="margin-bottom: 70px">
+		<div class="row">
+			<h1 class="col-lg-12 text-center" style="margin-top: 50px;">Identification local</h1>
+		</div>
+		<div class="row">
+			<div class="col-lg-12 text-center" style="margin-top: 30px;">
+				<p class="font-class-1">Type de recherche du local</p>
+			</div>
+		</div>
+		<br />
+		<div class="row" style="margin-top: 20px;">
+			<div class="col-lg-2"></div>
+			<div class="col-lg-4 text-center justify-content-center">
+				<button type="button" class="btn btn-outline-primary" onclick={handleButtonClick}
+					data-id="PDL/PCE connu par le client" data-current={isPDLPCE}>
+					<div style="position:relative" onclick={handleButtonClick} class="mb-4"
+						data-id="PDL/PCE connu par le client">
+						<span class="showImageOnHover" onclick={handleButtonClick}
+							data-id="PDL/PCE connu par le client">
+							<img class="btn-img-size " src={MaisonBleu} onclick={handleButtonClick}
+								data-id="PDL/PCE connu par le client">
+						</span>
+						<span class="hideImageOnHover" onclick={handleButtonClick}
+							data-id="PDL/PCE connu par le client">
+							<img class="btn-img-size " src={MaisonBlanc} onclick={handleButtonClick}
+								data-id="PDL/PCE connu par le client">
+						</span>
+					</div>
+					<p class="font-class-1" onclick={handleButtonClick} data-id="PDL/PCE connu par le client">PDL/PCE
+						connu par le client</p>
+				</button>
+			</div>
+			<div class="col-lg-4 text-center justify-content-center">
+				<button type="button" class="btn btn-outline-primary" onclick={handleButtonClick}
+					data-id="Recherche du local par adresse" data-current={isRecherche}>
+					<div style="position:relative" onclick={handleButtonClick} class="mb-4"
+						data-id="Recherche du local par adresse">
+						<span class="showImageOnHover" onclick={handleButtonClick}
+							data-id="Recherche du local par adresse">
+							<img class="btn-img-size " src={LocationBleu} onclick={handleButtonClick}
+								data-id="Recherche du local par adresse">
+						</span>
+						<span class="hideImageOnHover" onclick={handleButtonClick}
+							data-id="Recherche du local par adresse">
+							<img class="btn-img-size " src={LocationBlanc} onclick={handleButtonClick}
+								data-id="Recherche du local par adresse">
+						</span>
+					</div>
+					<p class="font-class-1" onclick={handleButtonClick} data-id="Recherche du local par adresse">
+						Recherche du local par adresse</p>
+				</button>
+			</div>
+			<div class="col-lg-2"></div>
+		</div>
+		<br />
+		<template if:true={isPDLPCE}>
+			<div class="slds-m-vertical_medium">
+				<div class="row">
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-3 text-center"></div>
+							<div class="col-lg-6 text-center">
+								<div class="container"
+									style="    border: 1px solid;border-radius: 16px;border-color: rgba(0, 157, 233, 1);">
+									<div class="row" style="margin-top:10px">
+										<div class="col-lg-2 text-center"></div>
+										<div class="col-lg-8 text-center">
+											<form onsubmit={onFormSubmit}>
+												<div class="form-group mt-5">
+													<label for="PDL">PDL</label>
+													<input type="number" class="form-control"
+														onwheel={removeNumberScroll} placeholder="" name="PDL"
+														value={_record.VI_PDLRechercheLocal__c} data-id="PDL"
+														oninput={handleSearchPDLPCEChange}>
+													<template if:true={PDLValidation}>
+														<p class="label-text-small-act lato-normal-monza-12px">Veuillez
+															renseigner 14 caractères</p>
+													</template>
+												</div>
+											</form>
+										</div>
+										<div class="col-lg-2 text-center"></div>
+									</div>.
+									<div class="row">
+										<div class="col-lg-2 text-center"></div>
+										<div class="col-lg-8 text-center">
+											<form onsubmit={onFormSubmit}>
+												<div class="form-group mb-5">
+													<label for="PCE">PCE</label>
+													<input type="number" class="form-control"
+														onwheel={removeNumberScroll} placeholder="" name="PCE"
+														value={_record.VI_PCERechercheLocal__c} data-id="PCE"
+														oninput={handleSearchPDLPCEChange}>
+													<template if:true={PCEValidation}>
+														<p class="label-text-small-act lato-normal-monza-12px">Veuillez
+															renseigner 14 caractères</p>
+													</template>
+
+												</div>
+											</form>
+										</div>
+										<div class="col-lg-2 text-center"></div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3 text-center"></div>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top:10px">
+					<div class="col-lg-1 text-center"></div>
+					<div class="col-lg-10 text-center">
+						<div class="form-check consentement-client">
+							<input id="ConsentementClient1" class="form-check-input" type="checkbox"
+								onchange={handleSearchPDLPCEChange} name="ConsentementClient"
+								value={_record.VI_AccordClientRechercheLocal__c}
+								checked={_record.VI_AccordClientRechercheLocal__c}>
+							<label class="font-class-1" for=ConsentementClient1>
+								Accord client&nbsp;&nbsp;
+							</label>
+							<lightning-helptext
+								content="Avant de lancer la recherche, le client doit donner son accord pour accéder aux données de son compteur.">
+							</lightning-helptext>
+						</div>
+					</div>
+					<div class="col-lg-1 text-center"></div>
+				</div>
+				<template if:true={afficherResultat}>
+					<div class="row" style="margin-top:40px;align-items: center;width:100%">
+						<!--DDPCM 1117 START-->
+						<template if:false={rechercheParPDLPCELoaded}>
+							<div>
+								<lightning-spinner class="rechercheParPDLPCESpinner" alternative-text="Loading"
+									size="medium"></lightning-spinner>
+							</div>
+							<br /><br />
+						</template>
+						<!--DDPCM 1117 END-->
+						<template if:true={rechercheParPDLPCELoaded}>
+							<div class="table-with-filtering lato-normal-sonic-silver-18px">{resultatDeRecherche}
+							</div>
+							<br /><br />
+							<div class="col-lg-12 text-center" style="position: relative;z-index: 0;">
+								<lightning-datatable key-field="PDL_PCE" data={currentPageData} columns={columns}
+									selected-rows={selectedRows} max-row-selection=1 onrowaction={handleRowAction}
+									onrowselection={openModalVisualisationCase} style="text-align: left;">
+								</lightning-datatable>
+								<br />
+								<lightning-layout-item size="5">
+									<ul class="slds-button-group-row">
+										<template if:true={hasPrev}>
+											<li style="cursor:pointer;margin-top: 3%;" class="btn-img-size">
+												<img src={FlecheGauche} onclick={onPrev} class="btn-img-size">
+											</li>
+										</template>
+										<template for:each={pagesList} for:item="pageNumber">
+											<li key={pageNumber}>
+												<div style="display: flex;justify-content: center;align-items: center;"
+													class="rectangle-copy text-center" onclick={onPageClick}
+													data-id={pageNumber}>
+													<p data-id={pageNumber} style="margin-bottom:0px;"
+														onclick={onPageClick}>
+														{pageNumber}</p>
+												</div>
+											</li>
+										</template>
+										<template if:true={hasNext}>
+											<li style="cursor:pointer;margin-top: 3%;" class="btn-img-size">
+												<img src={FlecheDroite} onclick={onNext} class="btn-img-size">
+											</li>
+										</template>
+									</ul>
+								</lightning-layout-item>
+								<br>
+							</div>
+						</template>
+					</div>
+				</template>
+				<div class="row" style="margin-top:10px">
+					<div class="col-lg-4 text-center"></div>
+					<button type="button" class="col-lg-4 btn" onclick={updateParcours} style="height: 44px;width: 260px;
+																																															 color: #fff;background-color: rgba(0, 153, 52, 1);
+																																															 border-color: rgba(0, 153, 52, 1);border-radius:0">
+						<p class="font-class-2" onclick={updateParcours}>Continuer avec ce local</p>
+					</button>
+					<div class="col-lg-4 text-center"></div>
+				</div>
+			</div>
+			<div style="position: absolute;height:10%;width: 100%;bottom: -60px;left: 0%;">
+				<button onclick={handlePrecedent} class="buttonPrecedent">Précédent</button>
+				<button onclick={handleSuivant} class="buttonSuivant">Suivant</button>
+			</div>
+		</template>
+		<template if:true={isRecherche}>
+			<div class="slds-m-vertical_medium">
+				<div class="row">
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-1 text-center"></div>
+							<div class="col-lg-10 text-center">
+								<div class="container"
+									style="    border: 1px solid;border-radius: 16px;border-color: rgba(0, 157, 233, 1);">
+									<!-- Start DDPCM - DDPCM-672 -->
+									<!-- Start DDPCM - 852 New Canaux-->
+									<template if:true={remplissageAutomatiqueNewCanaux}>
+										<template if:true={isRemplissageAutomatiqueLocal}>
+											<div class="row" style="margin-top:10px;margin-bottom:10px">
+												<div class="col-lg-1 text-center"></div>
+												<div class="col-lg-6 text-center">
+													<div class="form-check consentement-client">
+														<input data-id="remplissageAutomatiqueAdresseLocal"
+															id="remplissageAutomatiqueAdresseLocal"
+															class="form-check-input" type="checkbox"
+															onclick={handleRemplissageAutomatiqueAdresseLocal}
+															value={_record.VI_RemplissageAutomatiqueAdresseLocal__c}
+															name="RemplissageAutomatiqueAdresseLocal"
+															checked={_record.VI_RemplissageAutomatiqueAdresseLocal__c}>
+														<label class="font-class-1"
+															style="text-align: unset; padding-right: 40px"
+															for=remplissageAutomatiqueAdresseLocal>
+															Adresse de consommation différente &nbsp;&nbsp;
+														</label>
+													</div>
+												</div>
+												<div class="col-lg-5 text-center"></div>
+											</div>
+										</template>
+									</template>
+									<template if:false={remplissageAutomatiqueNewCanaux}>
+										<!-- Start DDPCM - 279 -->
+										<template if:true={isIdentificationClientCompleted}>
+											<div class="row" style="margin-top:10px;margin-bottom:10px">
+												<div class="col-lg-1 text-center"></div>
+												<div class="col-lg-6">
+													<div class="form-check consentement-client">
+														<input data-id="AdresseDeConsoIdentique"
+															id="AdresseDeConsoIdentique" class="form-check-input"
+															type="checkbox" onclick={handleAdresseIdentique}
+															value={_record.VI_AdresseDeConsoIdentique__c}
+															name="AdresseDeConsoIdentique"
+															checked={_record.VI_AdresseDeConsoIdentique__c}>
+														<label class="font-class-1"
+															style="text-align: unset; padding-right: 40px"
+															for=AdresseDeConsoIdentique>
+															Adresse de consommation identique &nbsp;&nbsp;
+														</label>
+													</div>
+												</div>
+												<div class="col-lg-5 text-center"></div>
+											</div>
+										</template>
+										<!-- END DDPCM - 279 -->
+									</template>
+									<!-- End DDPCM - 852 New Canaux-->
+									<!-- End DDPCM - DDPCM-672 -->
+									<div class="row" style="margin-top:10px">
+										<div class="col-lg-1 text-center"></div>
+										<div class="col-lg-5 text-center">
+											<form>
+												<div class="form-group">
+													<label for="Adresse">Adresse complète</label>
+													<input oninput={handleRechercheAdresseChange} type="text"
+														class="form-control" name="Adresse" placeholder=""
+														value={adresseClient}
+														checked={_record.VI_RechercheLocal_AdresseComplete__c}
+														data-id="adresse">
+													<div data-id="listAdressesSuggested"
+														class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid slds-hide "
+														role="listbox" style="position: relative;">
+														<ul class="slds-listbox slds-listbox_vertical"
+															role="presentation">
+															<template for:each={listAddresses} for:item="adresse">
+																<li role="option" class="slds-listbox__item"
+																	key={adresse}>
+																	<div data-value={adresse} data-label={adresse.label}
+																		data-numero={adresse.numero}
+																		data-voie={adresse.voie}
+																		data-codepostal={adresse.codePostal}
+																		data-ville={adresse.ville}
+																		data-codecommune={adresse.codeCommune} class="slds-media
+																						slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta  listtext-copy-8"
+																		role="option" onclick={selectAdresse}>
+																		<div class="overlap-group">
+																			<div class="adresse textbody-left">
+																				{adresse.numero} {adresse.voie}</div>
+																			<br>
+																			<div
+																				class="input-t text12-white-left text12-bluecorpo-left">
+																				{adresse.codePostal} {adresse.ville}
+																			</div>
+																		</div>
+																	</div>
+																</li>
+															</template>
+														</ul>
+													</div>
+												</div>
+												<div class="form-group">
+													<label for="CodePostal">Code Postal</label>
+													<input type="number" class="form-control"
+														onwheel={removeNumberScroll} name="CodePostal"
+														data-id="codePostal" oninput={handleRechercheAdresseChange}
+														placeholder="" value={codePostalClient}>
+												</div>
+											</form>
+										</div>
+										<div class="col-lg-5 text-center">
+											<form>
+												<div class="group-2">
+													<label for="N°">N°</label>
+													<input oninput={handleRechercheAdresseChange} type="text"
+														class="form-control" name="Num" placeholder=""
+														value={numeroRue} data-id="num">
+												</div>
+												<div class="group">
+													<label for="rue">Rue</label>
+													<input oninput={handleRechercheAdresseChange} type="text"
+														class="form-control" name="Rue" placeholder=""
+														value={rue} data-id="rue">
+												</div>
+												<div class="form-group">
+													<label for="Commune">Commune</label>
+													<input type="text" class="form-control" name="Commune"
+														data-id="ville" oninput={handleRechercheAdresseChange}
+														placeholder="" value={communeClient}
+														onclick={checkListVille}>
+													<div data-id="listVillesSuggested"
+														class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid slds-hide"
+														role="listbox" style="position: relative;">
+														<ul class="slds-listbox slds-listbox_vertical"
+															role="presentation">
+															<template for:each={listVilles} for:item="ville">
+																<li role="presentation" class="slds-listbox__item "
+																	key={ville}>
+																	<div data-value={ville} data-ville={ville.ville}
+																		data-codecommune={ville.idLocalite}
+																		class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta  listtext-copy-8"
+																		role="option" onclick={selectVilleValue}>
+																		<span class="overlap-group">
+																			<span
+																				class="adresse textbody-left">{ville.ville}</span>
+																		</span>
+																	</div>
+																</li>
+															</template>
+														</ul>
+													</div>
+												</div>
+											</form>
+										</div>
+										<div class="col-lg-1 text-center"></div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-1 text-center"></div>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top:10px">
+					<div class="col-lg-1 text-center"></div>
+					<div class="col-lg-10 text-center">
+						<div class="form-check consentement-client">
+							<input id="ConsentementClient2" class="form-check-input" type="checkbox"
+								onchange={handleSearchPDLPCEChange} value={_record.VI_AccordClientRechercheLocal__c}
+								name="ConsentementClientAdresse" checked={_record.VI_AccordClientRechercheLocal__c}>
+							<label class="font-class-1" for=ConsentementClient2>
+								Accord client &nbsp;&nbsp;
+							</label>
+							<lightning-helptext
+								content="Avant de lancer la recherche, le client doit donner son accord pour accéder aux données de son compteur.">
+							</lightning-helptext>
+						</div>
+					</div>
+					<div class="col-lg-1 text-center"></div>
+				</div>
+				<template if:true={afficherResultat}>
+					<div class="row" style="margin-top:40px;align-items: center;width:100%">
+						<!--DDPCM 1117 START-->
+						<template if:false={rechercheParAdresseLoaded}>
+							<div style="height: 30px;position: relative;left:50%">
+								<lightning-spinner class="rechercheParAdresseClientNonChoisiSpinner"
+									alternative-text="Loading" size="medium"></lightning-spinner>
+							</div>
+						</template>
+						<!--DDPCM 1117 END-->
+						<template if:true={rechercheParAdresseLoaded}>
+							<div class="table-with-filtering lato-normal-sonic-silver-18px">{resultatDeRecherche}
+							</div>
+							<br /><br />
+							<div class="col-lg-12 text-center" style="position: relative;
+						z-index: 0;">
+								<lightning-datatable key-field="PDL_PCE" data={currentPageData} columns={columns}
+									selected-rows={selectedRows} max-row-selection=1 onrowaction={handleRowAction}
+									onrowselection={openModalVisualisationCase} style="text-align: left;">
+								</lightning-datatable>
+
+								<br />
+								<lightning-layout-item size="5">
+									<ul class="slds-button-group-row">
+										<template if:true={hasPrev}>
+											<li style="curser:pointer;margin-top: 3%;" class="btn-img-size-arrows">
+												<img src={FlecheGauche} onclick={onPrev} class="btn-img-size-arrows">
+											</li>
+										</template>
+										<template for:each={pagesList} for:item="pageNumber">
+											<li key={pageNumber}>
+												<div style="display: flex;justify-content: center;align-items: center;"
+													class="rectangle-copy text-center" onclick={onPageClick}
+													data-id={pageNumber}>
+													<p data-id={pageNumber} style="margin-bottom:0px;"
+														onclick={onPageClick}>
+														{pageNumber}</p>
+												</div>
+											</li>
+										</template>
+										<template if:true={hasNext}>
+											<li style="curser:pointer;margin-top: 3%;" class="btn-img-size-arrows">
+												<img src={FlecheDroite} onclick={onNext} class="btn-img-size-arrows">
+											</li>
+										</template>
+									</ul>
+								</lightning-layout-item>
+								</br>
+								<!--DDPCM 1120 START-->
+								<template if:false={donneesLocauxLoaded}>
+									<div style="height: 40px;position: relative;">
+										<lightning-spinner class="rechercheParAdresseClientNonChoisiSpinner"
+											style="top:20%" alternative-text="Loading" size="medium">
+										</lightning-spinner>
+									</div>
+								</template>
+								<!--DDPCM 1120 END-->
+							</div>
+						</template>
+					</div>
+				</template>
+				<div class="row" style="margin-top:20px">
+					<div class="col-lg-4 text-center" onclick={updateParcoursAdresse}></div>
+					<button type="button" class="col-lg-4 btn" onclick={updateParcoursAdresse} style="height: 44px;width: 260px;
+																																													 color: #fff;background-color: rgba(0, 153, 52, 1);
+																																													 border-color: rgba(0, 153, 52, 1);border-radius:0">
+						<p class="font-class-2">Continuer avec ce local</p>
+					</button>
+					<div class="col-lg-4 text-center"></div>
+				</div>
+				<template if:false={afficherResultat}>
+					<div style="position: absolute;height:10%;width: 100%;bottom: -60px;left: 0%;">
+						<button onclick={handlePrecedent} class="buttonPrecedent">Précédent</button>
+						<button onclick={handleSuivant} class="buttonSuivant">Suivant</button>
+					</div>
+				</template>
+				<template if:true={afficherResultat}>
+					<div class="row" style="margin-top:10px">
+						<div class="col-lg-1 text-center"></div>
+						<div class="col-lg-10 text-center">
+							<div class="form-check consentement-client">
+								<input id="localNonIdentifié" class="form-check-input" type="checkbox"
+									name="localNonIdentifié" value={_record.VI_LocalNonIdentifieGenerationCase__c}
+									onchange={handleRechercheAdresseChange}
+									checked={_record.VI_LocalNonIdentifieGenerationCase__c}>
+								<label class="form-check-label" for=localNonIdentifié>
+									Local non identifié
+								</label>
+							</div>
+						</div>
+						<div class="col-lg-1 text-center"></div>
+					</div>
+					<div class="row" style="margin-top:10px">
+						<div class="col-lg-3 text-center"></div>
+						<div class="col-lg-8 text-center">
+							<div class="row" style="margin-top:10px">
+								<div class="col-lg-1 text-right">
+									<img class="btn-img-size-astuce " src={Astuce}>
+								</div>
+								<div class="col-lg-11 text-left">
+									<p class="astuce-pour-augmen lato-bold-tuatara-12px">
+										<span class="span1">Astuce :</span>
+										<span class="span2">
+											pour augmenter vos chances de trouver le local de votre interlocuteur ou
+											pour
+											vous
+											assurer de son exactitude,
+											veuillez renseigner les informations complémentaires suivantes</span>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-1 text-center"></div>
+					</div>
+					<template if:true={afficherResultat}>
+						<div class="row" style="margin-top:10px">
+							<div class="container " data-id="PDLnonIdentifie">
+								<div class="row">
+									<div class="col-lg-1 text-center"></div>
+									<div class="col-lg-10 text-center">
+										<div class="container"
+											style="    border: 1px solid;border-radius: 16px;border-color: rgba(0, 157, 233, 1);">
+											<div class="row" style="margin-top:10px">
+												<div class="col-lg-12 text-center" style="margin-top: 30px;">
+													<p class="font-class-1">Informations complémentaires</p>
+												</div>
+											</div>
+
+											<!-- Start DDPCM - 871 -->
+											<div if:false={isCHF} class="row" style="margin-top:10px">
+												<!-- End DDPCM - 871 -->
+												<div class="col-lg-1 text-center"></div>
+												<div class="col-lg-5 text-center">
+													<form onsubmit={onFormSubmit}>
+														<div class="form-group" onsubmit={onFormSubmit}>
+															<label for="NomPrédécesseur">Nom du Prédécesseur</label>
+															<input type="text" class="form-control"
+																name="NomPrédécesseur"
+																onchange={handleRechercheAdresseChange} placeholder=""
+																value={_record.VI_NomPredecesseurRechercheLocal__c}>
+														</div>
+													</form>
+												</div>
+											</div>
+
+											<div class="row" style="margin-top:10px ;">
+												<div class="col-lg-3 text-center text-title">Type du logement:</div>
+												<div class="form-check form-check-inline">
+													<input class="form-check-input" type="radio" name="TypeLogement"
+														id="Maison" value="Maison"
+														onchange={handleRechercheAdresseChange} checked={maisonChoisi}>
+													<label class="form-check-label" for="Maison">Maison</label>
+												</div>
+												<div class="form-check form-check-inline">
+													<input class="form-check-input"
+														onchange={handleRechercheAdresseChange} type="radio"
+														name="TypeLogement" id="Appartement" value="Appartement"
+														checked={appartChoisi}>
+													<label class="form-check-label"
+														for="Appartement">Appartement</label>
+												</div>
+											</div>
+											<template if:true={appartChoisi}>
+												<div class="row" style="margin-top:10px">
+													<div class="col-lg-1 text-center"></div>
+													<div class="col-lg-2 text-left">
+
+
+														<form onsubmit={onFormSubmit}>
+															<div class="form-group" onsubmit={onFormSubmit}>
+																<label for="Etage">Etage</label>
+																<input type="text" class="form-control" name="Etage"
+																	onsubmit={onFormSubmit}
+																	onchange={handleRechercheAdresseChange}
+																	placeholder="Ex: RDC"
+																	value={_record.VI_NumeroEtageRechercheLocal__c}>
+															</div>
+														</form>
+													</div>
+													<div class="col-lg-3 text-left">
+
+
+														<form onsubmit={onFormSubmit}>
+															<div class="form-group" onsubmit={onFormSubmit}>
+																<label for="NumAppartement">Numéro d'appartement</label>
+																<input type="text" class="form-control"
+																	onsubmit={onFormSubmit} name="NumAppartement"
+																	onchange={handleRechercheAdresseChange}
+																	placeholder="Ex: A2"
+																	value={_record.VI_NumeroAppartementRechercheLocal__c}>
+															</div>
+														</form>
+													</div>
+													<div class="col-lg-5 text-left">
+
+
+														<form onsubmit={onFormSubmit}>
+															<div class="form-group" onsubmit={onFormSubmit}>
+																<label for="DroiteGauche">&nbsp; </label>
+																<input type="text" class="form-control"
+																	onsubmit={onFormSubmit} name="DroiteGauche"
+																	onchange={handleRechercheAdresseChange}
+																	placeholder="Droite/Gauche"
+																	value={_record.VI_DroiteGaucheRechercheLocal__c}>
+															</div>
+														</form>
+													</div>
+													<div class="col-lg-1 text-center"></div>
+												</div>
+											</template>
+											<template if:true={isElectricite}>
+												<div class="row mt-4">
+													<div class="col-lg-3 text-center"></div>
+													<div class="col-lg-6 text-center">
+														<div class="container">
+															<div class="row mb-5 mt-2" style="margin-top:10px">
+																<div class="col-lg-12 text-center">
+																	<p class="font-class-1"
+																		style="color: rgba(0, 157, 233, 1)">
+																		Compteur
+																		électrique</p>
+																</div>
+															</div>
+															<div class="row mb-5" style="margin-top:10px">
+																<div class="col-lg-1 text-left"></div>
+																<div class="col-lg-10 text-left" style="border-bottom-width: 1px;
+												border-bottom-color:  rgb(227, 227, 227);
+												border-bottom-style: solid; height:70px">
+																	<div class="form-group">
+																		<div class="row">
+																			<div class="col-lg-10">
+																				<label
+																					for="MatriculeCompteurELEC">Matricule
+																					compteur ELEC</label>
+																				<input type="number"
+																					data-id="MatriculeCompteurELEC1"
+																					onwheel={removeNumberScroll}
+																					style="padding-left:1%;border-top:0;border-bottom:0;border-left:0;border-right:0;"
+																					placeholder=""
+																					name="MatriculeCompteurELEC"
+																					onkeydown={handleDecimal}
+																					oninput={handleRelevesChange}
+																					value={_record.VI_NumeroMatriculeRechercheLocal__c}
+																					class="form-control"></input>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="col-lg-1 text-left"></div>
+															</div>
+															<div class="row mb-5" style="margin-top:10px">
+																<div class="col-lg-1 text-left"></div>
+																<div class="col-lg-2 text-left">
+																	<label class="switch">
+																		<input type="checkbox" data-id="HP/HC"
+																			name="HP/HC" data-current={isHPHC}
+																			onclick={handleHPHCClick}
+																			value={_record.VI_InfosCompl_HP_HC__c}
+																			checked={_record.VI_InfosCompl_HP_HC__c}>
+																		<span class="slider round"></span>
+																		<!--span class="input-group-addon font-class-1 text-left"
+																style="margin-left: 80px;margin-right: 30px;">HP/HC</span-->
+																	</label>
+																</div>
+																<div class="col-lg-1 text-left mt-1 ml-2"
+																	style="font-size: 1rem;">HP/HC
+																</div>
+																<div class="col-lg-9 text-left"></div>
+															</div>
+															<template if:false={isHPHC}>
+																<div class="row mb-5" style="margin-top:10px">
+																	<div class="col-lg-1 text-left"></div>
+																	<div class="col-lg-10 text-left" style="border-bottom-width: 1px;
+													border-bottom-color:  rgb(227, 227, 227);
+													border-bottom-style: solid; height:70px">
+																		<div class="form-group">
+																			<div class="row">
+																				<div class="col-lg-10">
+
+																					<label for="VotreIndex1">Heures
+																						Simples
+																						(base)</label>
+																					<input type="number"
+																						data-id="IndexElec1"
+																						onwheel={removeNumberScroll}
+																						style="padding-left:1%;border-top:0;border-bottom:0;border-left:0;border-right:0;"
+																						placeholder="00000"
+																						value={_record.VI_InfosCompl_IndexElec__c}
+																						name="VotreIndex1"
+																						onkeydown={handleDecimal}
+																						oninput={handleRelevesChange}
+																						class="form-control"></input>
+																				</div>
+																				<div class="col-lg-2"
+																					style="align-self: flex-end;">
+																					<span style="font-size: 1rem;"
+																						class="font-class-1">kWh</span>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col-lg-1 text-left"></div>
+																</div>
+
+															</template>
+															<template if:true={isHPHC}>
+																<div class="row mb-5" style="margin-top:10px">
+																	<div class="col-lg-1 text-left"></div>
+																	<div class="col-lg-10 text-left" style="border-bottom-width: 1px;
+													border-bottom-color:  rgb(227, 227, 227);
+													border-bottom-style: solid; height:70px">
+																		<div class="form-group">
+																			<div class="row">
+																				<div class="col-lg-10">
+
+																					<label for="HeuresPleines">Heures
+																						pleines</label>
+
+																					<input type="number"
+																						data-id="HeuresPleines1"
+																						onwheel={removeNumberScroll}
+																						style="padding-left:1%;border-top:0;border-bottom:0;border-left:0;border-right:0;"
+																						placeholder="00000"
+																						name="HeuresPleines"
+																						onkeydown={handleDecimal}
+																						oninput={handleRelevesChange}
+																						value={_record.VI_InfosCompl_HeuresPleinesElec__c}
+																						class="form-control"></input>
+																				</div>
+																				<div class="col-lg-2"
+																					style="align-self: flex-end;">
+																					<span style="font-size: 1rem;"
+																						class="font-class-1">kWh</span>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col-lg-1 text-left"></div>
+																</div>
+																<div class="row mb-5" style="margin-top:10px">
+																	<div class="col-lg-1 text-left"></div>
+																	<div class="col-lg-10 text-left" style="border-bottom-width: 1px;
+													border-bottom-color:  rgb(227, 227, 227);
+													border-bottom-style: solid; height:70px">
+																		<div class="form-group">
+																			<div class="row">
+																				<div class="col-lg-10">
+																					<label for="HeuresPleines">Heures
+																						creuses</label>
+																					<input type="number"
+																						data-id="HeuresCreuses1"
+																						onwheel={removeNumberScroll}
+																						style="padding-left:1%;border-top:0;border-bottom:0;border-left:0;border-right:0;"
+																						placeholder="00000"
+																						name="HeuresCreuses"
+																						onkeydown={handleDecimal}
+																						oninput={handleRelevesChange}
+																						value={_record.VI_InfosCompl_HeuresCreusesElec__c}
+																						class="form-control"></input>
+																				</div>
+																				<div class="col-lg-2"
+																					style="align-self: flex-end;">
+																					<span style="font-size: 1rem;"
+																						class="font-class-1">kWh</span>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col-lg-1 text-left"></div>
+																</div>
+															</template>
+														</div>
+													</div>
+													<div class="col-lg-3 text-center"></div>
+												</div>
+											</template>
+											<template if:true={isGaz}>
+												<div class="row mt-4">
+													<div class="col-lg-3 text-center"></div>
+													<div class="col-lg-6 text-center">
+														<div class="container">
+															<div class="row mb-5 mt-2" style="margin-top:10px">
+																<div class="col-lg-12 text-center">
+																	<p class="font-class-1"
+																		style="color: rgba(0, 157, 233, 1)">
+																		Compteur Gaz
+																	</p>
+																</div>
+															</div>
+															<div class="row mb-5" style="margin-top:10px">
+																<div class="col-lg-1 text-left"></div>
+																<div class="col-lg-10 text-left" style="border-bottom-width: 1px;
+												border-bottom-color:  rgb(227, 227, 227);
+												border-bottom-style: solid; height:70px">
+																	<div class="form-group">
+																		<div class="row">
+																			<div class="col-lg-10">
+																				<label
+																					for="MatriculeCompteurGAZ">Matricule
+																					compteur
+																					GAZ</label>
+																				<input type="number"
+																					data-id="MatriculeCompteurGAZ1"
+																					onwheel={removeNumberScroll}
+																					style="padding-left:1%;border-top:0;border-bottom:0;border-left:0;border-right:0;"
+																					placeholder=""
+																					name="MatriculeCompteurGAZ"
+																					onkeydown={handleDecimal}
+																					oninput={handleRelevesChange}
+																					value={_record.VI_NumeroMatriculeGAZRechercheLocal__c}
+																					class="form-control"></input>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="col-lg-1 text-left"></div>
+															</div>
+															<div class="row mb-5" style="margin-top:10px">
+																<div class="col-lg-1 text-left"></div>
+																<div class="col-lg-10 text-left" style="border-bottom-width: 1px;
+														border-bottom-color:  rgb(227, 227, 227);
+														border-bottom-style: solid; height:70px">
+																	<div class="form-group">
+																		<div class="row">
+																			<div class="col-lg-10">
+																				<label for="VotreIndex2">Votre
+																					Index</label>
+																				<input type="number" data-id="IndexGaz1"
+																					onwheel={removeNumberScroll}
+																					style="padding-left:1%;border-top:0;border-bottom:0;border-left:0;border-right:0;"
+																					placeholder="00000"
+																					name="VotreIndex2"
+																					onkeydown={handleDecimal}
+																					oninput={handleRelevesChange}
+																					value={_record.VI_InfosCompl_IndexGaz__c}
+																					class="form-control"></input>
+																			</div>
+																			<div class="col-lg-2"
+																				style="align-self: flex-end;">
+																				<span style="font-size: 1rem;"
+																					class="font-class-1">m<sup>3</sup></span>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="col-lg-1 text-left"></div>
+															</div>
+														</div>
+													</div>
+													<div class="col-lg-3 text-center"></div>
+												</div>
+											</template>
+											<template if:true={isGazEtElectricite}>
+												<div class="row mt-4">
+													<div class="col-lg-1 text-center"></div>
+													<div class="col-lg-5 text-center">
+														<div class="container">
+															<div class="row mb-5 mt-2" style="margin-top:10px">
+																<div class="col-lg-12 text-center">
+																	<p class="font-class-1"
+																		style="color: rgba(0, 157, 233, 1)">
+																		Compteur
+																		électrique</p>
+																</div>
+															</div>
+															<div class="row mb-5" style="margin-top:10px">
+																<div class="col-lg-1 text-left"></div>
+																<div class="col-lg-10 text-left" style="border-bottom-width: 1px;
+												border-bottom-color:  rgb(227, 227, 227);
+												border-bottom-style: solid; height:70px">
+																	<div class="form-group">
+																		<div class="row">
+																			<div class="col-lg-10">
+																				<label
+																					for="MatriculeCompteurELEC">Matricule
+																					compteur ELEC</label>
+																				<input type="number"
+																					data-id="MatriculeCompteurELEC2"
+																					onwheel={removeNumberScroll}
+																					style="padding-left:1%;border-top:0;border-bottom:0;border-left:0;border-right:0;"
+																					placeholder=""
+																					name="MatriculeCompteurELEC"
+																					onkeydown={handleDecimal}
+																					oninput={handleRelevesChange}
+																					value={_record.VI_NumeroMatriculeRechercheLocal__c}
+																					class="form-control"></input>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="col-lg-1 text-left"></div>
+															</div>
+															<div class="row mb-5" style="margin-top:10px">
+																<div class="col-lg-1 text-left"></div>
+																<div class="col-lg-2 text-left">
+																	<label class="switch">
+																		<input type="checkbox" data-id="HP/HC"
+																			name="HP/HC" data-current={isHPHC}
+																			onclick={handleHPHCClick}
+																			value={_record.VI_InfosCompl_HP_HC__c}
+																			checked={_record.VI_InfosCompl_HP_HC__c}>
+																		<span class="slider round"></span>
+																		<!--span class="input-group-addon font-class-1 text-left"
+																style="margin-left: 80px;margin-right: 30px;">HP/HC</span-->
+																	</label>
+																</div>
+																<div class="col-lg-1 text-left mt-1 ml-2"
+																	style="font-size: 1rem;">HP/HC
+																</div>
+																<div class="col-lg-9 text-left"></div>
+															</div>
+															<template if:false={isHPHC}>
+																<div class="row mb-5" style="margin-top:10px">
+																	<div class="col-lg-1 text-left"></div>
+																	<div class="col-lg-10 text-left" style="border-bottom-width: 1px;
+													border-bottom-color:  rgb(227, 227, 227);
+													border-bottom-style: solid; height:70px">
+																		<div class="form-group">
+																			<div class="row">
+																				<div class="col-lg-10">
+
+																					<label for="VotreIndex1">Heures
+																						Simples
+																						(base)</label>
+
+
+																					<input type="number"
+																						data-id="IndexElec2"
+																						onwheel={removeNumberScroll}
+																						style="padding-left:1%;border-top:0;border-bottom:0;border-left:0;border-right:0;"
+																						placeholder="00000"
+																						name="VotreIndex1"
+																						onkeydown={handleDecimal}
+																						oninput={handleRelevesChange}
+																						value={_record.VI_InfosCompl_IndexElec__c}
+																						class="form-control"></input>
+																				</div>
+																				<div class="col-lg-2"
+																					style="align-self: flex-end;">
+																					<span style="font-size: 1rem;"
+																						class="font-class-1">kWh</span>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col-lg-1 text-left"></div>
+																</div>
+
+															</template>
+															<template if:true={isHPHC}>
+																<div class="row mb-5" style="margin-top:10px">
+																	<div class="col-lg-1 text-left"></div>
+																	<div class="col-lg-10 text-left" style="border-bottom-width: 1px;
+													border-bottom-color:  rgb(227, 227, 227);
+													border-bottom-style: solid; height:70px">
+																		<div class="form-group">
+																			<div class="row">
+																				<div class="col-lg-10">
+
+																					<label for="HeuresPleines">Heures
+																						pleines</label>
+
+																					<input type="number"
+																						data-id="HeuresPleines2"
+																						onwheel={removeNumberScroll}
+																						style="padding-left:1%;border-top:0;border-bottom:0;border-left:0;border-right:0;"
+																						placeholder="00000"
+																						name="HeuresPleines"
+																						onkeydown={handleDecimal}
+																						oninput={handleRelevesChange}
+																						value={_record.VI_InfosCompl_HeuresPleinesElec__c}
+																						class="form-control"></input>
+																				</div>
+																				<div class="col-lg-2"
+																					style="align-self: flex-end;">
+																					<span style="font-size: 1rem;"
+																						class="font-class-1">kWh</span>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col-lg-1 text-left"></div>
+																</div>
+																<div class="row mb-5" style="margin-top:10px">
+																	<div class="col-lg-1 text-left"></div>
+																	<div class="col-lg-10 text-left" style="border-bottom-width: 1px;
+													border-bottom-color:  rgb(227, 227, 227);
+													border-bottom-style: solid; height:70px">
+																		<div class="form-group">
+																			<div class="row">
+																				<div class="col-lg-10">
+																					<label for="HeuresPleines">Heures
+																						creuses</label>
+
+																					<input type="number"
+																						data-id="HeuresCreuses2"
+																						onwheel={removeNumberScroll}
+																						style="padding-left:1%;border-top:0;border-bottom:0;border-left:0;border-right:0;"
+																						placeholder="00000"
+																						name="HeuresCreuses"
+																						onkeydown={handleDecimal}
+																						oninput={handleRelevesChange}
+																						value={_record.VI_InfosCompl_HeuresCreusesElec__c}
+																						class="form-control"></input>
+																				</div>
+																				<div class="col-lg-2"
+																					style="align-self: flex-end;">
+																					<span style="font-size: 1rem;"
+																						class="font-class-1">kWh</span>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col-lg-1 text-left"></div>
+																</div>
+															</template>
+														</div>
+													</div>
+													<template if:true={isHPHC}>
+														<hr
+															style="width:1px;height:480px;background-color:rgba(0, 157, 233, 1)">
+													</template>
+													<template if:false={isHPHC}>
+														<hr
+															style="width:1px;height:350px;background-color:rgba(0, 157, 233, 1)">
+													</template>
+													<div class="col-lg-5 text-center">
+														<div class="container">
+															<div class="row mb-5" style="margin-top:10px">
+																<div class="col-lg-12 text-center">
+																	<p class="font-class-1"
+																		style="color: rgba(0, 157, 233, 1)">
+																		Compteur Gaz
+																	</p>
+																</div>
+															</div>
+															<div class="row mb-5" style="margin-top:10px">
+																<div class="col-lg-1 text-left"></div>
+																<div class="col-lg-10 text-left" style="border-bottom-width: 1px;
+												border-bottom-color:  rgb(227, 227, 227);
+												border-bottom-style: solid; height:70px">
+																	<div class="form-group">
+																		<div class="row">
+																			<div class="col-lg-10">
+																				<label
+																					for="MatriculeCompteurGAZ">Matricule
+																					compteur
+																					GAZ</label>
+																				<input type="number"
+																					data-id="MatriculeCompteurGAZ2"
+																					onwheel={removeNumberScroll}
+																					style="padding-left:1%;border-top:0;border-bottom:0;border-left:0;border-right:0;"
+																					placeholder=""
+																					name="MatriculeCompteurGAZ"
+																					onkeydown={handleDecimal}
+																					oninput={handleRelevesChange}
+																					value={_record.VI_NumeroMatriculeGAZRechercheLocal__c}
+																					class="form-control"></input>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="col-lg-1 text-left"></div>
+															</div>
+															<div class="row mb-5" style="margin-top:10px">
+																<div class="col-lg-1 text-left"></div>
+																<div class="col-lg-10 text-left" style="border-bottom-width: 1px;
+														border-bottom-color:  rgb(227, 227, 227);
+														border-bottom-style: solid; height:70px">
+																	<div class="form-group">
+																		<div class="row">
+																			<div class="col-lg-10">
+																				<label for="VotreIndex2">Votre
+																					Index</label>
+																				<input type="number" data-id="IndexGaz2"
+																					onwheel={removeNumberScroll}
+																					style="padding-left:1%;border-top:0;border-bottom:0;border-left:0;border-right:0;"
+																					placeholder="00000"
+																					name="VotreIndex2"
+																					onkeydown={handleDecimal}
+																					value={_record.VI_InfosCompl_IndexGaz__c}
+																					oninput={handleRelevesChange}
+																					class="form-control"></input>
+																			</div>
+																			<div class="col-lg-2"
+																				style="align-self: flex-end;">
+																				<span style="font-size: 1rem;"
+																					class="font-class-1">m<sup>3</sup></span>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="col-lg-1 text-left"></div>
+															</div>
+														</div>
+													</div>
+													<div class="col-lg-1 text-center"></div>
+												</div>
+											</template>
+										</div>
+									</div>
+									<div class="col-lg-1 text-center"></div>
+								</div>
+							</div>
+						</div>
+						<div class="row" style="margin-top:10px">
+							<div class="col-lg-5 text-center"></div>
+							<button type="button" class="col-lg-2 btn" onclick={updateParcoursNonidentifie}
+								style="height: 44px;width: 260px;color: #fff;background-color: rgba(0, 157, 233, 1);border-color: rgba(0, 157, 233, 1);border-radius:0">
+								<p class="font-class-2">Suivant</p>
+							</button>
+							<div class="col-lg-5 text-center"></div>
+						</div>
+						<div style="position: absolute;height:10%;width: 100%;bottom: -150px;left: 0%;">
+							<button onclick={handlePrecedent} class="buttonPrecedent">Précédent</button>
+							<button onclick={handleSuivant} class="buttonSuivant">Suivant</button>
+						</div>
+					</template>
+				</template>
+
+			</div>
+		</template>
+
+		<!-- Start DDPCM-727 New Cannaux -->
+		<template if:true={showVisualisationDesCases}>
+
+			<!-- Start DDPCM - 371 -->
+
+			<div if:true={isModalVisualisationCaseOpen} class="vi-modal-VisualisationCase container">
+				<div class="row">
+					<div class="col-lg-12 text-center" style="margin-top: 30px;">
+						<p class="font-class-1">Offre(s) en cours de souscription reliée(s) à ce local</p>
+					</div>
+				</div>
+				</br>
+				<template if:true={isOffreEnCoursReliee}>
+
+					<div class="row nocopy" oncontextmenu={handleContext} onpaste={handlePaste}>
+						<div class="col-lg-1 text-center"></div>
+						<div style="height:200px;padding:0px" class="col-lg-10">
+							<div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+								<table class="table table-bordered mb-0">
+									<thead>
+										<tr>
+											<th style="width:33%" scope="col">Canal </th>
+											<th style="width:33%" scope="col">Energie</th>
+											<th style="width:33%" scope="col">Date d'envoi des CPV</th>
+										</tr>
+									</thead>
+									<tbody style="overflow-y:scroll;position: sticky; left: 0; ">
+										<template for:each={selectLocalForPopup.cases} for:item="section">
+											<tr key={section.canal}>
+												<td style="width:33%">{section.canal}</td>
+												<td style="width:33%">{section.energie}</td>
+												<td style="width:33%">{section.dateDenvoi}</td>
+											</tr>
+										</template>
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+						<div class="col-lg-1 text-center"></div>
+					</div>
+
+					</br>
+					</br>
+
+					<div class="row">
+						<div class="col-lg-1 text-center"></div>
+						<button type="button" class="col-lg-4 btn" style="height: 44px;width: 260px;color: #2196f3;
+									background-color: #ffffff;
+									border-color: #2196f3;border-radius:0" onclick={cancelParcours}>
+							<p class="font-class-2">Annuler le parcours actuel</p>
+						</button>
+						<div class="col-lg-2 text-center"></div>
+						<button type="button" class="col-lg-4 btn" style="height: 44px;width: 260px;color: #fff;
+									background-color: rgba(0, 153, 52, 1);
+									border-color: rgba(0, 153, 52, 1);border-radius:0" onclick={closeModalVisualisationCase}>
+							<p class="font-class-2">Continuer avec le parcours actuel</p>
+						</button>
+						<div class="col-lg-1 text-center"></div>
+					</div>
+				</template>
+				<template if:false={isOffreEnCoursReliee}>
+					<div class="row">
+						</br>
+						</br>
+						<p class="col-lg-12 text-center font-class-5" style="margin-top: 20px;">
+							Il n'y a aucune offre en cours de souscription reliée à ce local.</p>
+					</div>
+					</br>
+					</br>
+					</br>
+					</br>
+					<div class="row">
+						<div class="col-lg-4 text-center"></div>
+						<button type="button" class="col-lg-4 btn" style="height: 44px;width: 260px;color: #fff;
+									background-color: rgba(0, 153, 52, 1);
+									border-color: rgba(0, 153, 52, 1);border-radius:0" onclick={closeModalVisualisationCase}>
+							<p class="font-class-2">Continuer avec le parcours actuel</p>
+						</button>
+						<div class="col-lg-4 text-center"></div>
+					</div>
+				</template>
+			</div>
+			<!-- "Fond grisé" des popups -->
+			<div onclick={closeModalVisualisationCase} class="vi-modal-background"
+				if:true={isModalOpenBackgroundVisualisationCase}></div>
+			<!-- END DDPCM - 371 -->
+
+		</template>
+		<!-- Start DDPCM-727 New Cannaux -->
+
+	</div>
+</template>

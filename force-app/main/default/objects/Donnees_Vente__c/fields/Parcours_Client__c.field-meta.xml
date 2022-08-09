@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Parcours_Client__c</fullName>
+    <externalId>false</externalId>
+    <label>Parcours Client</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>EMDM</fullName>
+                <default>false</default>
+                <label>EMDM</label>
+            </value>
+            <value>
+                <fullName>Emménagement</fullName>
+                <default>false</default>
+                <label>Emménagement</label>
+            </value>
+            <value>
+                <fullName>Changement de fournisseur</fullName>
+                <default>false</default>
+                <label>Changement de fournisseur</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

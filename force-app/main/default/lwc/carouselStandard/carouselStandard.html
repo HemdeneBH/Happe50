@@ -1,0 +1,27 @@
+<!--
+  @description       : 
+  @author            : Mohamed Aamer
+  @group             : 
+  @last modified on  : 08-20-2020
+  @last modified by  : Mohamed Aamer
+  Modifications Log 
+  Ver   Date         Author          Modification
+  1.0   08-20-2020   Mohamed Aamer   Initial Version
+-->
+<template>
+    <div class="slds-box" >
+        <lightning-carousel >
+                <template for:each={items} for:item="infocouleur">
+                        <lightning-carousel-image 
+                            key={infocouleur}
+                            src={infocouleur.image}
+                            header={infocouleur.header}
+                            description={infocouleur.description}
+                            alternative-text={infocouleur.description}
+                            href={infocouleur.href}
+                        >
+                        </lightning-carousel-image>
+                        </template>
+        </lightning-carousel>
+    </div>
+</template>

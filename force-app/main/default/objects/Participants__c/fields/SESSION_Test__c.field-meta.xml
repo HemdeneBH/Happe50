@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SESSION_Test__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Date de session</description>
+    <externalId>false</externalId>
+    <label>SESSION_Test</label>
+    <referenceTo>Session_SMILE__c</referenceTo>
+    <relationshipLabel>ParticipantS</relationshipLabel>
+    <relationshipName>ParticipantS</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

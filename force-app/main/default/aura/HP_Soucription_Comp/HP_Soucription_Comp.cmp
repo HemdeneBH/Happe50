@@ -1,0 +1,26 @@
+<aura:component implements="lightning:recordHomeTemplate" access="global" description="Souscription Happe Layout">
+    <aura:attribute name="header" type="Aura.Component[]" />
+    <aura:attribute name="main" type="Aura.Component[]" />
+    <aura:attribute name="left" type="Aura.Component[]" />
+    <aura:attribute name="right" type="Aura.Component[]" />
+
+    <div>
+        <lightning:layout verticalAlign="spread">
+            <lightning:layoutItem class="page-section page-header">
+                {!v.header}
+            </lightning:layoutItem>
+            <lightning:layoutItem class="page-section page-header">
+                {!v.main}
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout horizontalAlign="spread">
+            <lightning:layoutItem class="sidebarLayout leftPanel">
+                {!v.left}
+            </lightning:layoutItem>
+            <lightning:layoutItem class="sidebarLayout rightPanel">
+                {!v.right}
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+
+</aura:component>

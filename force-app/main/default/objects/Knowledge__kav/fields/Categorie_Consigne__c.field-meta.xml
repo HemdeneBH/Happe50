@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Categorie_Consigne__c</fullName>
+    <description>@description: champ pour la catégorie de consigne Knowledge@projet: smile</description>
+    <externalId>false</externalId>
+    <label>Categorie Consigne</label>
+    <required>false</required>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>Acquisition</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Acquisition</label>
+            </value>
+            <value>
+                <fullName>Acquisition - CHF</fullName>
+                <default>false</default>
+                <label>Acquisition - CHF</label>
+            </value>
+            <value>
+                <fullName>Acquisition - EM</fullName>
+                <default>false</default>
+                <label>Acquisition - EM</label>
+            </value>
+            <value>
+                <fullName>Ajustement de mensualisation</fullName>
+                <default>false</default>
+                <label>Ajustement de mensualisation</label>
+            </value>
+            <value>
+                <fullName>Changement d&apos;offre</fullName>
+                <default>false</default>
+                <label>Changement d&apos;offre</label>
+            </value>
+            <value>
+                <fullName>Communication Relevé d’index</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Communication Relevé d’index</label>
+            </value>
+            <value>
+                <fullName>Communication Relevé Index</fullName>
+                <default>false</default>
+                <label>Communication Relevé Index</label>
+            </value>
+            <value>
+                <fullName>Contestation d&apos;index</fullName>
+                <default>false</default>
+                <label>Contestation d&apos;index</label>
+            </value>
+            <value>
+                <fullName>Coupure pour non paiement</fullName>
+                <default>false</default>
+                <label>Coupure pour non paiement</label>
+            </value>
+            <value>
+                <fullName>Création fiche client</fullName>
+                <default>false</default>
+                <label>Création fiche client</label>
+            </value>
+            <value>
+                <fullName>Création OPS</fullName>
+                <default>false</default>
+                <label>Création OPS</label>
+            </value>
+            <value>
+                <fullName>Délai de paiement</fullName>
+                <default>false</default>
+                <label>Délai de paiement</label>
+            </value>
+            <value>
+                <fullName>Demande de duplicata</fullName>
+                <default>false</default>
+                <label>Demande de duplicata</label>
+            </value>
+            <value>
+                <fullName>Détection de projet</fullName>
+                <default>false</default>
+                <label>Détection de projet</label>
+            </value>
+            <value>
+                <fullName>Dossier Solidarité</fullName>
+                <default>false</default>
+                <label>Dossier Solidarité</label>
+            </value>
+            <value>
+                <fullName>Facture en ligne</fullName>
+                <default>false</default>
+                <label>Facture en ligne</label>
+            </value>
+            <value>
+                <fullName>Historique conso</fullName>
+                <default>false</default>
+                <label>Historique conso</label>
+            </value>
+            <value>
+                <fullName>Historique factures</fullName>
+                <default>false</default>
+                <label>Historique factures</label>
+            </value>
+            <value>
+                <fullName>Mensualisation</fullName>
+                <default>false</default>
+                <label>Mensualisation</label>
+            </value>
+            <value>
+                <fullName>Mise en place prélèvement</fullName>
+                <default>false</default>
+                <label>Mise en place prélèvement</label>
+            </value>
+            <value>
+                <fullName>Modification/annulation des OPS</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Modification/annulation des OPS</label>
+            </value>
+            <value>
+                <fullName>Modification coordonnée bancaire</fullName>
+                <default>false</default>
+                <label>Modification coordonnée bancaire</label>
+            </value>
+            <value>
+                <fullName>Modification des données personnelles</fullName>
+                <default>false</default>
+                <label>Modification des données personnelles</label>
+            </value>
+            <value>
+                <fullName>Modification OPS</fullName>
+                <default>false</default>
+                <label>Modification OPS</label>
+            </value>
+            <value>
+                <fullName>Payeur divergent</fullName>
+                <default>false</default>
+                <label>Payeur divergent</label>
+            </value>
+            <value>
+                <fullName>Résiliation</fullName>
+                <default>false</default>
+                <label>Résiliation</label>
+            </value>
+            <value>
+                <fullName>Services Payant</fullName>
+                <default>false</default>
+                <label>Services Payant</label>
+            </value>
+            <value>
+                <fullName>Situation de compte</fullName>
+                <default>false</default>
+                <label>Situation de compte</label>
+            </value>
+            <value>
+                <fullName>Suivi activation</fullName>
+                <default>false</default>
+                <label>Suivi activation</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>3</visibleLines>
+</CustomField>

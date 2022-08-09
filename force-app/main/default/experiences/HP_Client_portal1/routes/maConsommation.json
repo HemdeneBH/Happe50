@@ -1,0 +1,10 @@
+{
+  "activeViewId" : "996b28e8-af76-4c32-8989-43270ea46c0c",
+  "appPageId" : "7e89266e-f5a3-4029-bb48-38a8a732ab93",
+  "configurationTags" : [ ],
+  "id" : "1809edf8-18ae-43d6-864a-00b6fa3ae747",
+  "label" : "Ma consommation",
+  "routeType" : "custom-ma-consommation",
+  "type" : "route",
+  "urlPrefix" : "ma-consommation"
+}

@@ -1,0 +1,73 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId" controller="LCC05_EnvoiConsentement" access="global">
+	<aura:attribute name="recordId" type="Id" />
+	<aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+	<aura:attribute name="lead" type="Lead" />
+	<aura:attribute name="errorMessage" type="String" />
+	<aura:attribute name="consentementEngie" type="String" />
+	<aura:attribute name="consentementPartenaire" type="String" />
+	<aura:attribute name="xdataId" type="Boolean" />
+	<aura:attribute name="datas" type="Object" />
+	<aura:html tag="style">
+		.cuf-content {
+		padding: 0 0rem !important;
+		}
+		.slds-p-around--medium {
+		padding: 0rem !important;
+		}       
+		.slds-modal__content{
+		overflow-y:hidden !important;
+		height:unset !important;
+		max-height:unset !important;
+		}
+
+		.slds-wrap{
+		width: 100%;
+		}
+
+    .slds-spinner_container {
+    right: -1000px;
+    left: -1000px;
+}
+	</aura:html>
+
+	<header class="slds-modal__header">
+		<h2 id="header43" class="slds-text-heading--small" style="text-align:center;">
+			Envoyer consentement
+		</h2>
+	</header>
+	<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+		<div class="slds-grid slds-wrap">
+			<div class="slds-col slds-size_1-of-2">
+				Consentement Engie actuel ?<br/>
+				{!v.consentementEngie}
+			</div>
+			<div class="slds-col slds-size_1-of-2">
+				Consentement Partenaires actuel ?<br/>
+				{!v.consentementPartenaire}
+			</div>
+			<div class="slds-col slds-size_1-of-1">
+				<lightning:select name="select1" label="J’accepte de recevoir des communications concernant des offres de produits ENGIE et de ses filiales" required="true" value="{!v.lead.Consent_prospection_engie_analogue__c}">
+					<option value=""></option>
+					<option value="Oui">Oui</option>
+					<option value="Non">Non</option>
+				</lightning:select>
+			</div>
+
+			<div class="slds-col slds-size_1-of-1">
+				<br/>
+				<lightning:select name="select1" label="J’accepte de recevoir des communications concernant des offres de produits partenaires d’ENGIE" required="true" value="{!v.lead.Consent_prospection_partenaire__c}">
+					<option value=""></option>
+					<option value="Oui">Oui</option>
+					<option value="Non">Non</option>
+				</lightning:select>
+			</div>
+		</div>
+	</div>
+	<footer class="slds-modal__footer">
+		<div class="Errors">
+			<ui:outputText value="{!v.errorMessage}"/>
+		</div>
+		<button class="slds-button slds-button--neutral" onclick="{!c.cancelModal}">Fermer</button>
+		<button class="slds-button slds-button--neutral" onclick="{!c.handleSendConsent}"  >Valider</button>
+	</footer>
+</aura:component>

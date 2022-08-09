@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ReportOmniScript__c</fullName>
+    <description>Copy of the parent OmniScript</description>
+    <externalId>false</externalId>
+    <label>Report OmniScript</label>
+    <referenceTo>ReportOmniScript__c</referenceTo>
+    <relationshipLabel>Report OmniScript Elements</relationshipLabel>
+    <relationshipName>ReportOmniScriptElements</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

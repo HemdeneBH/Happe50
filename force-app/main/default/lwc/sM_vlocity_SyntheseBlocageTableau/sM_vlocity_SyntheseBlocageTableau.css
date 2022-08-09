@@ -1,0 +1,85 @@
+.sm_bottom_left{
+    margin-left: 2.5%;
+}
+
+/*Début de la partie popup création , modification et suppression du blocage*/
+/*Partie Header*/
+.blocage-header{
+    border-color: white;
+}
+
+/*Partie Bouttons du Footer*/
+.footer-buttons{
+    background-color: white;
+    border-color: white;
+    text-align: center;
+}
+
+.create-blocage-button{
+    color: white ;
+    background-color:#36CFA0;
+    border-color: #36CFA0;
+    border-radius: 2px;
+    width: 116px;
+    height: 40px;
+}
+	.modify-blocage-button{
+    font-size: 15px;
+    color: white ;
+    background-color:#36CFA0;
+    border-color: #36CFA0;
+    border-radius: 2px;
+    height: 40px;
+}
+.cancel-blocage-button{
+    font-size: 14px;
+    color:#059CE7;
+    border-radius: 2px;
+    width: 90px;
+    height: 40px;
+    text-align: center;
+}
+
+.delete-blocage{
+    color: #36CFA0;
+    background-color:white;
+    border-color: #36CFA0;
+    border-radius: 2px;
+    width: 116px;
+    height: 40px;
+}
+
+/*Partie Formulaire de création , modification et suppression du blocage*/
+.center-form{
+    margin-left: 18%;
+}
+
+.blocage-form{
+    width: 80%;
+}
+
+
+.slds-modal__content{
+    overflow: initial;
+}
+
+/*Pop-up de confirmation de suppression de Blocage*/
+.containerdelete{
+    max-width: 80rem !important;
+    width: 40% !important;
+    margin: auto;
+    margin-top: 300px;
+
+}
+.yes-delete-blocage{
+    font-size: 15px;
+    color: white ;
+    background-color:#36CFA0;
+    border-color: #36CFA0;
+    border-radius: 2px;
+    width: 100px;
+    height: 40px;
+}
+
+
+/*Fin de la partie popup création , modification et suppression du blocage*/

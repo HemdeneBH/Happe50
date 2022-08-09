@@ -1,0 +1,4 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId">
+    <aura:attribute name="recordId" type="String" />
+    <c:hp_caseEscalade recordid="{!v.recordId}"></c:hp_caseEscalade>
+</aura:component>

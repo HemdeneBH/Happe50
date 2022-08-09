@@ -1,0 +1,29 @@
+<!--
+  @description       : 
+  @author            : Clément Bauny
+  @group             : 
+  @last modified on  : 07-04-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <div class="componentContainer">
+        <div data-id="menuContent" class="hp-navigationMenu">
+            <c-hp_ec_menu-header
+             menumessage={menuMessage}
+             titre={menuMessage}></c-hp_ec_menu-header>
+            <lightning-vertical-navigation>
+                <nav role="navigation" class="c-verticalMenu" aria-label="">
+                    <ul class="hp-nav">
+                        <template for:each={menuItems} for:item="item">
+                            <li key={item.id} class="slds-item hp-nav-item">
+                                <c-hp_ec_menu-item item={item}></c-hp_ec_menu-item>
+                            </li>
+                        </template>
+                    </ul>
+                </nav>
+                <c-hp_ec_menu-phone phonenumber={phoneNumber}></c-hp_ec_menu-phone>
+                <c-hp_ec_app-download></c-hp_ec_app-download> 
+            </lightning-vertical-navigation>
+        </div>
+    </div>
+</template>

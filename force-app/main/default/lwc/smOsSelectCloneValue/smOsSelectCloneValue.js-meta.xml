@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>OS Override - Select - Clone value</masterLabel>
+    <description>Override of a Select element that copies its valeur to another node when this one is updated</description>
+    <runtimeNamespace>vlocity_cmt</runtimeNamespace>
+</LightningComponentBundle>

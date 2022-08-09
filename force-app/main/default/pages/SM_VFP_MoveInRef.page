@@ -1,0 +1,87 @@
+<apex:page standardStylesheets="false" showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0" controller="vlocity_cmt.VFPageControllerBase" 
+           language="{!$CurrentPage.parameters.LanguageCode}">
+    <apex:includeScript value="/support/console/47.0/integration.js"/>
+    <html>
+        <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
+            <style>
+                .vlc-slds-bpTree-step-chart__container{
+                    background: #fff;
+                }
+                
+                .via-slds ul.vlc-slds-knowledge-item .vlc-slds-knowledge-list-item .vlc-slds-control-action__container > p[ng-click]{
+                    width: 60%;
+                    max-width: 60%;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="vlocity via-slds" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" ng-app="MoveIn">
+                <vlocity_cmt:BusinessProcessComponent strOmniScriptType="smContact"
+                                                      strOmniScriptSubType="MoveInDecoupage"
+                                                      strOmniScriptLang="French"
+                                                      previewMode="{!$CurrentPage.parameters.previewEmbedded}"
+                                                      verticalMode="{!$CurrentPage.parameters.verticalMode}"
+                                                      strOmniScriptId="{!$CurrentPage.parameters.designerPreviewId}"
+                                                      scriptLayout="lightning"
+                                                      />
+                <script type="text/javascript">
+                    var modules = ['vlocity-business-process'];
+                    var myModule = angular.module('MoveIn', modules);
+                    sforce.console.disableTabClose(true, false);
+                </script>
+                <script type="text/javascript">
+
+                  
+
+                    $(function() {
+                        
+                        if(!baseCtrl.prototype.$scope.bpTree.sInstanceId){
+                            baseCtrl.prototype.$scope.bpTree.response.isInstance = 'PremierChargement'; // dans le cadre de l'US SMIL-1234 , besoin détecter si il s'agit du premier chargement de l'os ou d'une reprise (saveforLater)
+                        }else{
+                            baseCtrl.prototype.$scope.bpTree.response.isInstance = 'repriseOs';
+                            $('.list-group-item').css({"pointer-events":"none"});
+                        }
+                        baseCtrl.prototype.$scope.$apply(); 
+                        $("#CaracteristiquesOffre_nextBtn").on('click', function() {
+                            $('.list-group-item').css({"pointer-events":"none"});
+                        });
+                        
+                        $("#Recap_nextBtn").on('click', function() {
+                            console.log('in button');
+                            $('.list-group-item').css({"pointer-events":"none"});
+                        });
+                        $('input#chooseSellingOption').on('change', function() {
+                            // alert(this.value);
+                            if(this.value=='Changement de fournisseur'){
+                                var days=30;
+                                var sNewDate  = new Date();
+                                sNewDate.setDate(sNewDate.getDate() + days);
+                                // alert(sNewDate.toString());
+                                baseCtrl.prototype.$scope.applyCallResp( { "EffectiveDate" :sNewDate.toString()} );
+                                //baseCtrl.prototype.$scope.bpTree.response.ChoixElements.EffectiveDate=sNewDate.toString(); 
+                                baseCtrl.prototype.$scope.$apply();
+                                //$('#EffectiveDate').val(baseCtrl.prototype.$scope.bpTree.response.ChoixElements.EffectiveDate).trigger('select').trigger('change');
+                            }else{
+                                if(this.value=='Emménagement'){
+                                    var days=1;
+                                    var sNewDate  = new Date();
+                                    sNewDate.setDate(sNewDate.getDate() + days);
+                                    //  alert(sNewDate);
+                                    //alert(sNewDate.toString());
+                                    baseCtrl.prototype.$scope.applyCallResp( { "EffectiveDate" : sNewDate.toString()} );
+                                    baseCtrl.prototype.$scope.$apply();
+                                }
+                            }
+                        });
+                    });
+                </script>
+                <style> 
+                    #PrestationGaz_prevBtn{ display: none; }
+                    #PrestationElec_prevBtn{ display: none; }
+                </style>
+            </div>
+            <vlocity_cmt:VFActionFunction />
+        </body>
+    </html>
+</apex:page>

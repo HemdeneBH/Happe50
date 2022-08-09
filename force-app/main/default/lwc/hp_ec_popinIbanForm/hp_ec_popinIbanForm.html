@@ -1,0 +1,101 @@
+<template>
+    <div class="hp-popup hp-iban-popin">
+        <section
+            role="dialog"
+            tabindex="-1"
+            aria-labelledby="modal-heading-01"
+            aria-modal="true"
+            aria-describedby="modal-content-id-1"
+            class="slds-modal slds-fade-in-open iban-modal"
+        >
+            <div class="hp-iban-popin__container slds-modal__container">
+                <div class="hp-container">
+                    <header class="slds-modal__header hp-header">
+                        <h1 class="hp-bigTitle">{titleText}</h1>
+                        <span class="hp-closeButton">
+                        <a onclick={closePopin}>
+                            <img class="hp-close-icon" src={iconClose} alt="close" />
+                        </a>
+                        </span>
+                    </header>
+                    <div class="hp-content">
+                        <div class="hp-wrapper">
+                            <form onsubmit={handleSubmit} id="ibanForm">
+                                <div class="form-row">
+                                    <label for="iban-1">
+                                        Je renseigne mon nouvel IBAN :
+                                        <span class="visually-hidden">(4 premiers charactères)</span>
+                                    </label>
+                                    <label for="iban-2" class="visually-hidden">IBAN (4 charactères suivants)</label>
+                                    <label for="iban-3" class="visually-hidden">IBAN (4 charactères suivants)</label>
+                                    <label for="iban-4" class="visually-hidden">IBAN (4 charactères suivants)</label>
+                                    <label for="iban-5" class="visually-hidden">IBAN (4 charactères suivants)</label>
+                                    <label for="iban-6" class="visually-hidden">IBAN (5 charactères suivants)</label>
+                                    <label for="iban-7" class="visually-hidden">IBAN (2 derniers charactères)</label>
+                                    <div class="input-wrapper">
+                                        <input id="iban-1" class="iban iban-1" type="text" maxlength="4" oninput={handleInput} onkeydown={handleKeydown} />
+                                        <input id="iban-2" class="iban iban-2" type="text" maxlength="4" oninput={handleInput} onkeydown={handleKeydown} />
+                                        <input id="iban-3" class="iban iban-3" type="text" maxlength="4" oninput={handleInput} onkeydown={handleKeydown} />
+                                        <input id="iban-4" class="iban iban-4" type="text" maxlength="4" oninput={handleInput} onkeydown={handleKeydown} />
+                                        <input id="iban-5" class="iban iban-5" type="text" maxlength="4" oninput={handleInput} onkeydown={handleKeydown} />
+                                        <input id="iban-6" class="iban iban-6" type="text" maxlength="5" oninput={handleInput} onkeydown={handleKeydown} />
+                                        <input id="iban-7" class="iban iban-7" type="text" maxlength="2" oninput={handleInput} onkeydown={handleKeydown} />
+                                    </div>
+                                    <input type="hidden" name="IBAN" />
+                                    <span class="icon icon-valid">
+                                        <lightning-icon icon-name="utility:check" size="small"></lightning-icon>
+                                    </span>
+                                    <span class="icon icon-invalid">
+                                        <lightning-icon icon-name="utility:close" size="small"></lightning-icon>
+                                    </span>
+                                    <p class="error">IBAN invalide</p>
+                                </div>
+                                <div class="form-row">
+                                    <label for="bic-1">
+                                        Je renseigne mon nouveau BIC :
+                                        <span class="visually-hidden">(premier charactère)</span>
+                                    </label>
+                                    <label for="bic-2" class="visually-hidden">BIC (charactère suivant)</label>
+                                    <label for="bic-3" class="visually-hidden">BIC (charactère suivant)</label>
+                                    <label for="bic-4" class="visually-hidden">BIC (charactère suivant)</label>
+                                    <label for="bic-5" class="visually-hidden">BIC (charactère suivant)</label>
+                                    <label for="bic-6" class="visually-hidden">BIC (charactère suivant)</label>
+                                    <label for="bic-7" class="visually-hidden">BIC (charactère suivant)</label>
+                                    <label for="bic-8" class="visually-hidden">BIC (charactère suivant)</label>
+                                    <label for="bic-9" class="visually-hidden">BIC (charactère suivant)</label>
+                                    <label for="bic-10" class="visually-hidden">BIC (charactère suivant)</label>
+                                    <label for="bic-11" class="visually-hidden">BIC (dernier charactère)</label>
+                                    <div class="input-wrapper">
+                                        <input id="bic-1" class="bic" type="text" maxlength="1" oninput={handleInput} onkeydown={handleKeydown} />
+                                        <input id="bic-2" class="bic" type="text" maxlength="1" oninput={handleInput} onkeydown={handleKeydown} />
+                                        <input id="bic-3" class="bic" type="text" maxlength="1" oninput={handleInput} onkeydown={handleKeydown} />
+                                        <input id="bic-4" class="bic" type="text" maxlength="1" oninput={handleInput} onkeydown={handleKeydown} />
+                                        <input id="bic-5" class="bic" type="text" maxlength="1" oninput={handleInput} onkeydown={handleKeydown} />
+                                        <input id="bic-6" class="bic" type="text" maxlength="1" oninput={handleInput} onkeydown={handleKeydown} />
+                                        <input id="bic-7" class="bic" type="text" maxlength="1" oninput={handleInput} onkeydown={handleKeydown} />
+                                        <input id="bic-8" class="bic" type="text" maxlength="1" oninput={handleInput} onkeydown={handleKeydown} />
+                                        <input id="bic-9" class="bic" type="text" maxlength="1" oninput={handleInput} onkeydown={handleKeydown} />
+                                        <input id="bic-10" class="bic" type="text" maxlength="1" oninput={handleInput} onkeydown={handleKeydown} />
+                                        <input id="bic-11" class="bic" type="text" maxlength="1" oninput={handleInput} onkeydown={handleKeydown} />
+                                    </div>
+                                    <input type="hidden" name="BIC" />
+                                    <span class="icon icon-valid">
+                                        <lightning-icon icon-name="utility:check" size="small"></lightning-icon>
+                                    </span>
+                                    <span class="icon icon-invalid">
+                                        <lightning-icon icon-name="utility:close" size="small"></lightning-icon>
+                                    </span>
+                                    <p class="error">BIC invalide</p>
+                                </div>
+                                <div class="button-wrapper">
+                                    <button type="submit" class="hp-firstButton">Valider</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open iban-backdrop"></div>
+    </div>
+</template>

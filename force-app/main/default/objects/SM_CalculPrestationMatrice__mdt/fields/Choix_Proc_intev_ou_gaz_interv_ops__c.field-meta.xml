@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Choix_Proc_intev_ou_gaz_interv_ops__c</fullName>
+    <defaultValue>&apos;NA&apos;</defaultValue>
+    <description>Choix_Proc_intev_ou_gaz_interv_ops</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Choix_Proc_intev_ou_gaz_interv_ops</label>
+    <length>255</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

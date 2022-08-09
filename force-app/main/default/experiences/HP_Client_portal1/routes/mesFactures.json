@@ -1,0 +1,10 @@
+{
+  "activeViewId" : "573cacec-d044-450b-ab0e-8c199a2aa67c",
+  "appPageId" : "7e89266e-f5a3-4029-bb48-38a8a732ab93",
+  "configurationTags" : [ ],
+  "id" : "1eefd236-0aa2-4669-8b72-3b0579b72238",
+  "label" : "Mes factures",
+  "routeType" : "custom-mes-factures-et-paiements",
+  "type" : "route",
+  "urlPrefix" : "mes-factures-et-paiements"
+}

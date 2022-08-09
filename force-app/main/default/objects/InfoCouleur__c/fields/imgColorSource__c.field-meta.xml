@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>imgColorSource__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( ISPICKVAL(Couleur__c, &apos;Rouge&apos;) , $Label.SM_URL &amp; &apos;resource/SM_ImageR&apos;, 
+IF( ISPICKVAL(Couleur__c, &apos;Verte&apos;)  , $Label.SM_URL &amp; &apos;resource/SM_ImageVert&apos;, 
+IF( ISPICKVAL(Couleur__c, &apos;Violette&apos;)  , $Label.SM_URL &amp; &apos;resource/SM_ImageV&apos;, 
+IF( ISPICKVAL(Couleur__c, &apos;Bleue&apos;) , $Label.SM_URL &amp; &apos;resource/SM_ImageB&apos;, 
+IF( ISPICKVAL(Couleur__c, &apos;Orange&apos;) , $Label.SM_URL &amp; &apos;resource/SM_ImageO&apos;, 
+
+$Label.SM_URL
+
+)
+)
+)
+)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>imgColorSource</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>gaz_vert_plus__c</fullName>
+    <externalId>false</externalId>
+    <label>gaz vert +</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>true</fullName>
+                <default>false</default>
+                <label>true</label>
+            </value>
+            <value>
+                <fullName>false</fullName>
+                <default>false</default>
+                <label>false</label>
+            </value>
+            <value>
+                <fullName>non</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>non</label>
+            </value>
+            <value>
+                <fullName>oui</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>oui</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

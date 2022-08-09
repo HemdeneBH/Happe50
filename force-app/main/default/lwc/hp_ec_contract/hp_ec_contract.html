@@ -1,0 +1,76 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 07-06-2022
+  @last modified by  : Badr Eddine Belkarchi
+-->
+<template>
+    <div data-id="container" class="hp-contrat c-content-bg slds-col">
+        <div data-id="title" class="hp-bigTitle">{titleText}</div>
+        <div data-id="blocInfo">
+            <div class="hp-contrat-item">
+                <p class={contratItemTitleClass}>{contractText}</p>
+                <p class="hp-clientRef">N°{idContract}</p>
+            </div>
+            <div class="hp-contrat-item">
+                <p class={contratItemTitleClass}>{refClientText}</p>
+                <p class="hp-clientRef">N°{idClient}</p>
+            </div>
+            <div class="hp-contrat-item">
+                <p class={contratItemTitleClass}>{pdlPceText}</p>
+                <p class="hp-clientRef">N°{idPdlPce}</p>
+            </div>
+            <template if:true={isElec}>
+            <div class="hp-contrat-item">
+                <p class={contratItemTitleClass}>{puissanceText}</p>
+                <p class="hp-clientRef">{puissance}</p>
+            </div>
+            <div class="hp-contrat-item">
+                <p class={contratItemTitleClass}>{typeComptageText}</p>
+                <p class="hp-clientRef">{typeComptage}</p>
+            </div>
+            </template>
+            <template if:true={isGaz}>
+                <div class="hp-contrat-item">
+                    <p class={contratItemTitleClass}>{plageConsoText}</p>
+                    <p class="hp-clientRef">{plageConso}</p>
+                </div>
+            </template>
+        </div>
+        <div data-id="buttonBloc" class="hp-btnContainer">
+            <div class="hp-firstButton" onclick={handleVoirContract}>
+                {voirContractButtonLabel}
+            </div>
+            <div class="hp-secondButton" onclick={handleJustificatif}>
+                {justificatifButtonLabel}
+            </div>
+            <div data-id="resilBloc" class="hp-resilBox">
+                <a onclick={openResilPopin}>
+                    Résilier
+                    <span class="chevron right"></span>  
+                </a>
+            </div>
+        </div>
+    </div>
+    <template if:true={showResilPopin}>
+        <div class="hp-popup" >
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-scrollable_y ">
+                <div class="slds-modal__container">
+                    <c-hp_ec_popin-resiliation popinresiliationtitle = "Résiliation" 
+                            popinresiliationmessagealerte = "Êtes-vous sur de vouloir résilier votre contrat happ-e ?" 
+                            popinresiliationtexteexplicatif = "N’oubliez pas que si vous souhaitez simplement déménager, vous pouvez faire suivre votre contrat dans votre nouveau logement."
+                            popinresiliationbouttondemenager = "Déménager"
+                            popinresiliationtexte = "Résilier" 
+                            popinresliationtexteresiliation = "Pour résilier votre contrat, veuillez contacter votre conseiller happ-e par téléphone ou par email."
+                            popinresiliationnumero = "09 77 420 410"
+                            popinresiliationresilierboutton = "Résilier"
+                            onopenpopinresiliation={openPopinDonneesCollectees}>
+                    </c-hp_ec_popin-resiliation>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+</template>

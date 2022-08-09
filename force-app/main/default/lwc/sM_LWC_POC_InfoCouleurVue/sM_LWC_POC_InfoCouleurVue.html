@@ -1,0 +1,29 @@
+<!--
+  @File Name          : sM_LWC_POC_InfoCouleurVue.html
+  @Description        : Composant Carrousel
+  @Author             : Jihad AZAMI HASSANI
+  @Last Modified On   : 15/05/2020 à 12:15:06
+  @Ticket             : FT2-289, FT2-291 / Sprint 10
+  Ver       Date            Author      		    Modification
+  1.0    05/03/2020   Jihad AZAMI HASSANI     Initial Version
+-->
+<template>
+        <div class="slds-box" >
+          <template if:true={isCarousel.data}>
+            <lightning-carousel >
+                    <template if:true={infoCouleurs.data} for:each={infoCouleurs.data} for:item="infocouleur">
+                            <lightning-carousel-image 
+                                key={infocouleur}
+                                src={infocouleur.imgColorSource__c}
+                                header={infocouleur.Name}
+                                description={infocouleur.Name}
+                                alternative-text={infocouleur.Name}
+                                data-url={infocouleur.Id}
+                                href={infocouleur.Info_Url__c}
+                                onclick={handleItemClicked}>
+                                </lightning-carousel-image>
+                            </template>
+            </lightning-carousel>
+          </template>
+        </div>
+</template>

@@ -1,0 +1,11 @@
+<template>
+    <div class="slds-size_1-of-2">
+        <lightning-input type="toggle" 
+                        onchange={toggleCheckBoxFn} 
+                        label={jsonDef.propSetMap.label} 
+                        name={jsonDef.name} 
+                        checked={elementValue}
+                        message-toggle-active="Oui"
+                        message-toggle-inactive="Non"></lightning-input>
+    </div>
+</template>

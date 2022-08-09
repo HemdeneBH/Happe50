@@ -1,0 +1,16 @@
+.smile-blue-box {
+    background-color:#e6f5fc;
+    border:none;
+}
+
+.smile-red-box {
+    background-color:#fda9a9;
+    border:none;
+}
+
+.smile-blue-text{
+    color:#059ce7;
+}
+.smile-border-radius{
+    border-radius: 20px;
+}

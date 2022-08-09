@@ -1,0 +1,41 @@
+<template>
+    <div class="container-btn-demandeClient">
+
+            <button type="button" onclick={openModal} class="slds-button blue-custom-btn">J’ai répondu à la demande du client</button>
+
+    </div>
+    <vlocity_cmt-navigate-action
+    target-type="Component"
+    target-name="c__NavigateHandler"
+    replace    
+    >
+    </vlocity_cmt-navigate-action>
+    <!-- modal détails -->
+    <vlocity_cmt-modal
+    size="small"    
+    hideheader
+    theme="slds"
+    >
+    <div slot="header">
+        <div slot="header">
+            <h1>Confirmer</h1>
+        </div>    </div>
+    <div slot="content">
+        <div slot="content">
+            <span>{message}</span>
+        </div>    </div>
+    <div slot="footer">
+        <div slot="footer">
+            <ul class="slds-button-group-row">
+                <li class="slds-button-group-item">
+                    <vlocity_cmt-button variant="neutral" label="Non" onclick={closeModal}>
+                    </vlocity_cmt-button>
+                </li>
+                <li class="slds-button-group-item">
+                    <vlocity_cmt-button variant="neutral" label="Oui" onclick={handleSave}>
+                    </vlocity_cmt-button>
+                </li>
+            </ul>
+        </div>    </div>
+    </vlocity_cmt-modal>
+</template>

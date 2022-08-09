@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reponse__c</fullName>
+    <description>@description: champ pour les réponses FAQ Knowledge 
+@projet: smile</description>
+    <externalId>false</externalId>
+    <label>Reponse</label>
+    <length>32768</length>
+    <type>Html</type>
+    <visibleLines>25</visibleLines>
+</CustomField>

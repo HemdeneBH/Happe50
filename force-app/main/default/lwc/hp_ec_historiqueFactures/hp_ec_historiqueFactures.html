@@ -1,0 +1,73 @@
+<!--
+  @description       : 
+  @author            : Zaatouche Younes
+  @group             : 
+  @last modified on  : 07-12-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+
+<template>
+  <div data-id="container" class="hp-historiqueDesFactures c-content-bg slds-col">
+    <div data-id="title" class="hp-bigTitle">{titleText}</div>
+
+    <div data-id="blocInfo">
+      <template if:true={spinnerLoad}>
+        <div class="exampleHolder">
+          <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </div>
+      </template>
+        <ul>
+          <li onclick={openFacture} title="Item One" role="presentation" class="hp-historiqueDesFactures-items">
+            <a class="leftBloc" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1"
+              id="tab-default-1__item">{factureLabel}
+              <span class="chevron right"></span>
+            </a>
+          </li>
+  
+          <li onclick={opentPaiement} title="Item Two" role="presentation" class="hp-historiqueDesFactures-items">
+            <a class="leftBloc" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1"
+              id="tab-default-2__item">{paimentLabel}
+              <span class="chevron right"></span>
+            </a>
+          </li>
+  
+          <template if:true={containEcheancier}>
+            <li onclick={opentEcheance} title="Item Three" role="presentation" class="hp-historiqueDesFactures-items">
+              <a class="leftBloc" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1"
+                id="tab-default-3__item">{echeanceLabel}
+                <span class="chevron right"></span>
+              </a>
+            </li>
+          </template>
+          <template if:true={containPlansApurement}>
+            <li onclick={openPlansApurement} title="Item Four" role="presentation" class="hp-historiqueDesFactures-items">
+              <a class="leftBloc" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1"
+                id="tab-default-4__item">{planApurementLabel}
+                <span class="chevron right"></span>
+              </a>
+            </li>
+          </template>
+  
+          <li onclick={openTarifURL} title="Item Five" role="presentation" class="hp-historiqueDesFactures-items">
+            <a class="leftBloc" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1"
+              id="tab-default-5__item">{lienTarif}
+              <span class="chevron right"></span>
+            </a>
+          </li>
+        </ul>
+
+      
+      
+    </div>
+  </div>
+  <template if:true={showHistoriqueFactPaiementPopin}>
+    <c-hp_ec_popin-history contenu-tool-tip={contenuToolTip} url-help={urlHelp}
+     title-text={labelPopinTitle} popin-boutton={labelPopinBouton} payments={paiements}
+      schedules={echeanceLink} clearance-plans={plansApurement} invoices={factures} show-invoices={tabFactureIsShown}
+      show-payments={tabPaiementIsShown} show-schedules={tabEcheanceIsShown}
+      show-clearance-plans={tabPlanApurementIsShown} contain-plans-apurement={containPlansApurement}
+      mode-paiement-is-anuel={containEcheancier} download-url={cpvUrl}
+      onopenpopinhistoriquefacturespaiements={openPopinHistoriqueFacturePaiement}>
+    </c-hp_ec_popin-history>
+  </template>
+</template>

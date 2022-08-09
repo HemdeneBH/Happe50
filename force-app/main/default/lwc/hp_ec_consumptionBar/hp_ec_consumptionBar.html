@@ -1,0 +1,40 @@
+<!--
+  @description       : 
+  @author            : Badr Eddine Belkarchi
+  @group             : 
+  @last modified on  : 06-29-2022
+  @last modified by  : Badr Eddine Belkarchi
+-->
+<template>
+    <div class="consumption-bar" data-active={isActive}>
+        <p class="total">
+            <template if:true={showValue}>
+                <strong>{consumption.value}</strong>
+                <span>{consumption.units}</span>
+            </template>
+            <template if:true={showPrice}>
+                <strong>{consumption.priceValue}</strong>
+                <span>{consumption.priceUnits}</span>
+            </template>
+        </p>
+        <span class="track">
+            <template if:true={isActive}>
+                <span if:true={showMeasuredValue} class={valueType} style={styleValue}></span>
+                <span if:true={showEstimatedValue} class="estimated" style={styleValue}></span>
+                <span if:true={showPrice} class={type} style={stylePrice}></span>
+                <span if:true={displayDetails} class="tax" style={styleTax}></span>
+                <span if:true={displayDetails} class="subscription" style={styleSubscription}></span>
+            </template>
+            <template if:false={isActive}>
+                <span if:true={showPrice} class="previous" style={stylePrice}></span>
+                <span if:true={showValue} class="previous" style={styleValue}></span>
+            </template>
+        </span>
+        <p class="date">
+            <span if:true={consumption.startDate}>{formattedConsoStartDate}</span>
+            <span if:true={consumption.endDate}>{formattedConsoEndDate}</span>
+            <span if:true={consumption.year}>{year}</span>
+            <span if:true={consumption.month}>{formattedMonthDate}</span>
+        </p>
+    </div>
+</template>

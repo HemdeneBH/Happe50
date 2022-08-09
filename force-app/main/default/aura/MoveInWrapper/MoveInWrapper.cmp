@@ -1,0 +1,38 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+@last modified on  : 06-08-2022
+  @last modified by  : Mohamed Aamer
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   01-14-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+-->
+<aura:component implements="force:appHostable,flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    <lightning:workspaceAPI aura:id="workspace" />
+    
+    <!-- <lightning:button label="Refresh Focused Tab" onclick="{!c.refreshFocusedTab}"/> -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <c:containerView recordId="{#v.recordId}" 
+                     onopenenviechanger="{!c.openEnvieChanger}"
+                     onopenmovein="{!c.openMovein}"
+                     onopentransmissionindex="{!c.openTransmissionIndex}" 
+                     onopentransmissionindexLWC="{!c.openTransmissionIndexLWC}" 
+                     onopendetectionproject="{!c.openDetectionProject}"
+                     onopenmoveinemmenagement="{!c.openMoveinEmmenagement}"
+                     onopenduplicatadocumentLWC="{!c.openDuplicataDocumentLWC}"
+                     onopenresiliation="{!c.openResiliation}"
+                     onopenresiliationlwc="{!c.openResiliationLWC}"             
+                     onopenRecouvrement="{!c.openRecouvrement}"
+                     onopenops="{!c.openOPS}"
+                     onopenservicepayant="{!c.openServicePayant}"
+                     onopenPayeurDivergent="{!c.openPayeurDivergent}"                     
+                     onopenSyntheseBlocage ="{!c.openSyntheseBlocage}"                   
+                     onopenfreeservices="{!c.openFreeServices}" 
+                     onopendelaipaiement="{!c.openDelaiPaiement}"
+                     onopenSituationCompte="{!c.openSituationCompte}"
+                     onopenOutilEstimation="{!c.openOutilEstimation}"
+                     onopenoptions="{!c.openOptions}"
+                     onopenHistoriqueSymphonie="{!c.openHistoriqueSymphonie}"></c:containerView>
+    
+</aura:component>

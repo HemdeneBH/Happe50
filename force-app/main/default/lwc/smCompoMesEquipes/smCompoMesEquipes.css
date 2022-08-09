@@ -1,0 +1,68 @@
+.container {
+    max-width: 100%;
+    background-color: white;
+    height: 70vh;
+    padding: 0 10px;
+}
+.no-team {
+    font-size: x-large;
+    position: absolute;
+    left: 60%;
+    top: 60%;
+}
+
+h2 {
+    font-size: 26px;
+    text-align: center;
+    padding: 15px 0;
+}
+
+.errorMessage{
+    color:red;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+}
+.enregistrerBtn{
+    text-align: right;
+    margin-top: 20px;
+}
+.equipes, .responsables {
+    font-size: 20px;
+}
+.equipes h3.title, .responsables h3.title {
+    display: inline-block;
+}
+.responsables span.options {
+    color: #0a7033;
+}
+.equipes span.option {
+    color: #3d23a7;
+}
+.equipe{
+    color: darkblue;
+}
+.filtre-title {
+    display: block;
+}
+.filtre {
+    width: 62%;
+}
+.global-search {
+    width: 80%;
+    margin-left: auto;
+    text-align: center;
+}
+.header-infos {
+    margin-bottom: 15px;
+}
+.equipes span.option {
+    color: #3d23a7;
+}
+.equipes {
+    font-size: 20px;
+    text-align: center;
+}
+.equipes h3.title{
+    display: inline-block;
+}

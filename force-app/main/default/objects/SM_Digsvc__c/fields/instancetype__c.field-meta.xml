@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>instancetype__c</fullName>
+    <description>@project : SMILE / @description permet de savoir si on est sur une org de prod / sandbox</description>
+    <externalId>false</externalId>
+    <label>instancetype</label>
+    <length>30</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

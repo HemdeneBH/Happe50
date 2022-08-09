@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_TechRelanceCpvParametrablemetier__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+OR(
+ISPICKVAL(
+VI_Case__r.VI_StatutEnveloppe__c ,&quot;Signed&quot;
+),
+ISPICKVAL(
+VI_Case__r.VI_StatutEnveloppe__c,&quot;Declined&quot;
+),
+VI_Stop_Relance__c=true
+),TRUE,FALSE)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Tech relance cpv paramétrable métier</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

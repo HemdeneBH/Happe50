@@ -1,0 +1,22 @@
+.error-log{
+    background-color:rgb(255, 99, 132);
+}
+.success-log {
+    background-color: #D6FFB5;
+}
+.chartokko{
+    height: 400px;
+    width: 400px;
+}
+.chartavrage{
+    height: 400px;
+    width: 700px;
+}
+.chartOKKOByApi{
+    height: 400px;
+    width: 500px;
+}
+.chartLineTime{
+    height: 400px;
+    width: 500px;
+}

@@ -1,0 +1,1378 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+
+
+
+  @last modified on  : 09-06-2021
+
+
+
+  @last modified by  : AE
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   07-09-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+--><template>
+    <div class="slds-m-bottom_xx-large">
+        <lightning-card>
+            <div class="slds-card__header slds-card__body_inner">
+                <h1 class="pageTitle"> <B>SOLIDARITE </B></h1>
+            </div>
+
+            <br />
+            <br />
+
+            <!--<h2 style="padding-left:1%"> <B>INFORMATIONS CLIENT </B></h2>-->
+
+            <br>
+
+            <h1 style="padding-left:1%"> <B>Dossier solidarité</B></h1><br>
+
+            <div class="exampleHolder" if:true={showSpinnerLoading}>
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </div>
+
+            <!--Données client-->
+            <div class="slds-grid slds-wrap">
+                <div class="slds-size_1-of-2 ">
+                    <div class="slds-m-around_x-small">
+                        <div class="slds-box">
+                            <h2>DONNEES CLIENT</h2>
+                            <div class="slds-grid slds-gutters">
+                                <div class="slds-col">
+                                    <span>
+                                        <dl class="slds-dl_inline">
+                                            <dt class="slds-dl_inline__label">Civilité :</dt>
+                                            <dd class="slds-dl_inline__detail">&nbsp; {civiliteContact}</dd>
+
+                                            <dt class="slds-dl_inline__label">Prénom :</dt>
+                                            <dd class="slds-dl_inline__detail">&nbsp; {prenomContact}</dd>
+
+                                            <dt class="slds-dl_inline__label">Nom :</dt>
+                                            <dd class="slds-dl_inline__detail">&nbsp; {nomContact}</dd>
+                                        </dl>
+                                    </span>
+                                </div>
+
+                                <div class="slds-col">
+                                    <span>
+                                        <dl class="slds-dl_inline">
+                                            <dt class="slds-dl_inline__label">BP client :</dt>
+                                            <dd class="slds-dl_inline__detail">&nbsp; {IdBusinessPartner}</dd>
+
+                                            <dt class="slds-dl_inline__label">Compte client :</dt>
+                                            <dd class="slds-dl_inline__detail">&nbsp; {NoCompteContrat}</dd>
+
+                                            <dt class="slds-dl_inline__label">Adresse logement :</dt>
+                                            <dd class="slds-dl_inline__detail">&nbsp;{numeroVoie}&nbsp;{libelleVoie}
+                                                <p>{complementAdresse}</p>
+                                                <p>{codePostal}&nbsp;{ville}</p>
+                                            </dd>
+                                        </dl>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-only demo-only--sizing slds-grid slds-wrap">
+                <div class="slds-size_1-of-2 ">
+                    <div class="slds-m-around_x-small">
+                        <div class="slds-box">
+                            <h2>DOSSIER SOLIDARITE</h2>
+                            <div class="slds-grid slds-gutters">
+                                <div class="slds-col">
+                                    <span>
+                                        <dl class="slds-dl_inline">
+                                            <dt class="slds-dl_inline__label">Chèque énergie :</dt>
+                                            <dd class="slds-dl_inline__detail">&nbsp; {validiteChequeEnergie}</dd>
+
+                                            <dt class="slds-dl_inline__label">Numéro chèque énergie :</dt>
+                                            <dd class="slds-dl_inline__detail">&nbsp; {numeroChequeEnergievalue}</dd>
+
+                                            <dt class="slds-dl_inline__label">Date fin de validité :</dt>
+
+                                            <dd class="slds-dl_inline__detail"> &nbsp;
+                                                {dateFinValiditechequeValueFormater}</dd>
+
+                                            <dt class="slds-dl_inline__label">Canal :</dt>
+                                            <dd class="slds-dl_inline__detail">&nbsp; {typecanalchequeenergievalue}</dd>
+
+                                            <dt class="slds-dl_inline__label">Aide FSL le :</dt>
+
+                                            <dd class="slds-dl_inline__detail">{dateAideFSLvalue}</dd>
+
+                                            <dt class="slds-dl_inline__label">Aidé :</dt>
+                                            <dd class="slds-dl_inline__detail">{aideClientValue}</dd>
+                                        </dl>
+
+                                    </span>
+                                </div>
+
+                                <div class="slds-col">
+                                    <span>
+                                        <dl>
+                                            <dt class="slds-dl_inline__label">Attestation Chèque énergie :</dt>
+                                            <dd class="slds-dl_inline__detail"> &nbsp; {validiteAttestation}</dd>
+
+                                            <dt class="slds-dl_inline__label">Date fin de validité :</dt>
+                                            <dd class="slds-dl_inline__detail">&nbsp;
+                                                {datefinvaliditeattestationvalueFormater}</dd>
+
+                                            <dt class="slds-dl_inline__label">Canal :</dt>
+                                            <dd class="slds-dl_inline__detail">&nbsp; {canalattestationvalue}</dd>
+                                        </dl>
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="slds-size_1-of-2 ">
+                    <div class="slds-m-around_x-small">
+                        <div class="slds-box">
+                            <h2>DONNEES DE FACTURATION</h2>
+
+                            <div class="slds-grid slds-gutters">
+                                <div class="slds-col">
+                                    <span>
+
+                                        <dl class="slds-dl_inline">
+
+                                            <dt class="slds-dl_inline__label">Solde :</dt>
+                                            <dd class="slds-dl_inline__detail">{soldeEnCours}</dd>
+
+                                            <dt class="slds-dl_inline__label">Règlements :</dt>
+                                            <dd class="slds-dl_inline__detail">
+
+                                                <ul class="slds-m-around_medium">
+                                                    <template for:each={arrayLValue} for:item="item" for:index="index">
+
+
+                                                        <li key={item.idPaiement}>{item.datePaiement}
+                                                            ({item.typePiece}) : {item.montantTTC}</li>
+
+
+                                                    </template>
+                                                </ul>
+
+                                            </dd>
+                                            <dt class="slds-dl_inline__label">Date de la prochaine facture :</dt>
+                                            <dd class="slds-dl_inline__detail">{dateProchaineFactureSolde}</dd>
+
+                                            <dt class="slds-dl_inline__label">Mensualisation :</dt>
+                                            <dd class="slds-dl_inline__detail">{MensualisationSolde}</dd>
+
+                                            <dt class="slds-dl_inline__label">Montant de la mensualisation :</dt>
+                                            <dd class="slds-dl_inline__detail">{MontantCumuleEcheance}</dd>
+
+                                        </dl>
+
+                                    </span>
+                                </div>
+                                <div class="slds-col">
+                                    <span>
+                                        <dl class="slds-dl_inline">
+
+                                            <dt class="slds-dl_inline__label">
+                                                <span if:true={isDelaiPaiement} class="text-color click-action"
+                                                    onclick={navigateToDelaiPaiement}>Délai
+                                                    de paiement :</span>
+                                                <span if:false={isDelaiPaiement}>Délai
+                                                    de paiement :</span>
+                                            </dt>
+                                            <dd class="slds-dl_inline__detail">{isPlanApurementData}</dd>
+
+                                            <dt class="slds-dl_inline__label">Service recouvrement :</dt>
+                                            <dd class="slds-dl_inline__detail">{dossierRecouvrement}</dd>
+
+                                            <dt class="slds-dl_inline__label">Blocage relance :</dt>
+                                            <dd class="slds-dl_inline__detail">{blocageRelance}</dd>
+
+                                            <dt class="slds-dl_inline__label">Type de blocage :</dt>
+
+                                            <dd class="slds-dl_inline__detail">{typeDeBlocage}</dd>
+
+                                        </dl>
+
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="slds-size_1-of-2">
+
+                    <div class=" slds-m-around_x-small">
+
+                        <div class="slds-card__header slds-card__body_inner">
+                            HISTORIQUE DES DOSSIERS
+                        </div>
+
+                        <div class="slds-p-around_large slds-clearfix">
+                            <!-- <article class="slds-card slds-p-around_large"> -->
+                            <!-- <div>  -->
+                            <!-- Ce tableau permet d'afficher l'historique des dossiers solidarité--> 
+                            <table id="dossierTable">
+                                <caption style="display: none;">HISTORIQUE DES DOSSIERS</caption>
+                                <thead>
+                                    <tr class="tableListPa">
+                                        <th class="" scope="col">
+                                            TYPE D'AIDE
+                                        </th>
+                                        <th class="" scope="col">
+                                            ETAPE
+                                        </th>
+                                        <th class="" scope="col">
+                                            CATEGORIE
+                                        </th>
+
+                                        <th class="" scope="col">
+                                            DATE D'AIDE
+                                        </th>
+                                        <th class="" scope="col">
+                                            DESCRIPTION
+                                        </th>
+                                        <th class="" scope="col">
+                                            STATUT DU DOSSIER
+                                        </th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr if:true={noData}>
+                                        <td colspan="7" style="text-align: center;">
+                                            Le client n’a pas d’historique de dossier solidarité
+                                        </td>
+                                    </tr>
+                                    <template if:false={noData} for:each={dossiersAffaire}
+                                        for:item="dossierAffaireDetail" for:index="index">
+                                        <tr key={dossierAffaireDetail.retourLireDALoop.idDossierAffaire}
+                                            onclick={displayFilDariane} data-key={index}
+                                            class={dossierAffaireDetail.style}>
+                                            <td data-label="Type d'aide">
+                                                {dossierAffaireDetail.retourLireDALoop.typeAideDossierAffaireLibelle}
+                                            </td>
+                                            <td data-label="Etape">
+                                                {dossierAffaireDetail.FirstJalon.typeDate.libelleCourt}
+                                            </td>
+                                            <td data-label="Catégorie">
+                                                {dossierAffaireDetail.retourLireDALoop.canalDossierAffaireLibelle}
+                                            </td>
+
+                                            <td data-label="Date d’aide">
+
+                                                {dossierAffaireDetail.retourLireDALoop.dateCreationDossierAffaire}
+
+                                            </td>
+
+                                            <td data-label="Description">
+                                                {dossierAffaireDetail.retourLireDALoop.description}
+                                            </td>
+                                            <td data-label="Statut du dossier">
+                                                {dossierAffaireDetail.retourLireDALoop.statutDossierlibelleCourt}
+                                            </td>
+                                            <template if:true={hasPermissionAccess}>
+                                                <td>
+
+                                                    <a class="slds-button" style="text-decoration: underline; color: #006dcc; font-weight: 700;" data-key={index} onclick={modifier}>Modifier</a>
+
+                                                </td>
+                                            </template>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+
+                            <div class="exampleHolder" if:false={showSpinner}>
+                                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div if:false={noData} class="slds-size_1-of-2">
+                    <div class=" slds-m-around_x-small">
+
+                        <div class="slds-card__header slds-card__body_inner">
+                            <B>PARCOURS DOSSIER</B>
+
+                        </div>
+                        <div if:false={isClicked} class="slds-card__header slds-card__body_inner"
+                            style="text-align: center;">
+                            <B>Sélectionnez un dossier ci-dessus pour suivre son traitement</B>
+
+                        </div>
+
+                        <br>
+                        <br>
+
+                        <div if:true={isClicked} class="slds-progress slds-progress_vertical">
+                            <ol class="slds-progress__list">
+                                <template for:each={steps} for:item="step" for:index="index">
+                                    <li data-id="stageblock" key={step.value} class={step.style}>
+                                        <span if:true={step.isCompleted}
+                                            class="slds-icon_container slds-icon-utility-success slds-progress__marker slds-progress__marker_icon slds-progress__marker_icon-success"
+                                            title="Complete">
+                                            <svg class="slds-icon slds-icon_xx-small" aria-hidden="true">
+                                                <use
+                                                    xlink:href="/resource/sLDS/assets/icons/utility-sprite/svg/symbols.svg#success">
+                                                </use>
+                                            </svg>
+                                            <span class="slds-assistive-text">Complete</span>
+                                        </span>
+                                        <div if:false={step.isCompleted} class="slds-progress__marker">
+                                            <span class="slds-assistive-text">Active</span>
+                                        </div>
+                                        <div if:true={step.isCompleted}
+                                            class="slds-progress__item_content slds-grid slds-grid_align-spread"
+                                            style="color:#767676">
+                                            {step.label}</div>
+                                        <div if:false={step.isCompleted}
+                                            class="slds-progress__item_content slds-grid slds-grid_align-spread">
+                                            {step.label}</div>
+                                    </li>
+                                </template>
+                            </ol>
+                            <div aria-valuemin="0" aria-valuemax="100" aria-valuenow="25" role="progressbar">
+                                <span class="slds-assistive-text">Progress: 25%</span>
+                            </div>
+                        </div>
+
+                        <br>
+                        <br>
+
+                    </div>
+                </div>
+                <template if:true={hasPermissionAccess}>
+                    <div style="width: -webkit-fill-available;">
+                        <div class=" slds-m-around_x-small">
+
+                            <a class="slds-button slds-card__body_inner creer-dossier-sol" onclick={creerDossier}> + Créer
+                                un dossier</a>
+
+                            <br /><br />
+
+                            <div class="slds-card__header slds-card__body_inner faire-demande">
+                                Faire une demande
+                            </div>
+                            <div class="slds-box" style="width: max-content;">
+                                <button class="slds-button slds-button_brand button-faire-demande"
+                                    onclick={ficheDeRenseignement}>FICHE DE RENSEIGNEMENT</button>
+                                <button class="slds-button slds-button_brand button-faire-demande"
+                                    onclick={openBlocageDesRelances}>BLOCAGE DES RELANCES</button>
+                                <button class="slds-button slds-button_brand button-faire-demande"
+                                    onclick={delaiDePaiement}>DELAI DE PAIEMENT</button>
+                            </div>
+                        </div>
+                    </div>
+                 </template>
+                 <br />
+
+                 
+                <!--articles knowledge-->
+                    <div class="slds-size_1-of-1">
+                        <div class="slds-m-around_x-small">
+                            <div class="slds-card__header slds-card__body_inner" style="font-size: 15px; font-weight: bold;">
+                                Articles suggérés
+                            </div>
+                            <div class="slds-box">
+                            <lightning-formatted-rich-text value={articleKnowledge}> 
+                                </lightning-formatted-rich-text>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+    
+                <!--Creer formulaire Dossier Solidarité-->
+
+                <template if:true={openFormModal}>
+
+                    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                        aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open scroll-section">
+                        <div class="slds-modal__container">
+                            <!-- modal header start -->
+                            <header class="slds-modal__header slds-modal__header_empty">
+                                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                    title="Close" onclick={annulerCreationDossier}>
+                                    <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                                        size="small">
+                                    </lightning-icon>
+                                    <span class="slds-assistive-text">Close</span>
+                                </button>
+                                <h2 class="slds-text-heading_medium">CRÉATION DU DOSSIER SOLIDARITÉ</h2>
+                            </header>
+
+                            <!-- modal body start -->
+                            <div class="slds-modal__content slds-p-around_medium">
+                                <template if:true={isLoading}>
+                                    <div class="demo-only demo-only_viewport" style="height:0.3rem;position:relative">
+                                        <div role="status" class="slds-spinner slds-spinner_medium">
+                                          <span class="slds-assistive-text">Loading</span>
+                                          <div class="slds-spinner__dot-a"></div>
+                                          <div class="slds-spinner__dot-b"></div>
+                                        </div>
+                                      </div>
+                                </template>
+                                <h2 class="slds-p-horizontal--medium">INFORMATIONS</h2>
+                                <div class="slds-grid slds-gutters">
+                                    <div class="slds-col">
+                                        <span>
+                                            <div class="slds-form slds-form_stacked">
+                                                <!-- insert your field attributes here inside div class="slds-form-element" for those many fields you want to show in one column -->
+                                                <div class="slds-form-element">
+                                                    <div class="slds-form-element__control">
+                                                        <div class="slds-p-horizontal--medium">
+                                                            <dl class="slds-dl_inline">
+                                                                <dt class="slds-dl_inline__label inputValue">Compte
+                                                                    client :</dt>
+                                                                <dd class="slds-dl_inline__detail">&nbsp;
+                                                                    {NoCompteContrat}</dd>
+                                                            </dl>
+                                                        </div>
+                                                        <div class="slds-p-horizontal--medium">
+                                                            <lightning-input label="Description" class="inputValue" value={description} onchange={descriptionHandleChange}
+                                                                required></lightning-input>
+                                                        </div>
+                                                        <div class="slds-p-horizontal--medium">
+                                                            <lightning-combobox 
+                                                                name="Statut du dossier"
+                                                                value={statutDossierFieldData}
+                                                                label="Statut du dossier" 
+                                                                placeholder="Sélectionnez"
+                                                                options={statutDossierOptions}
+                                                                onchange={dossierStatusHandleChange} 
+                                                                required
+                                                                class="inputValue">
+                                                            </lightning-combobox>
+                                                        </div>
+                                                        
+                                                        <div class="slds-p-horizontal--medium">
+                                                            <lightning-combobox 
+                                                                label="Catégorie" 
+                                                                value={CategoryFieldData}
+                                                                placeholder="Sélectionnez" 
+                                                                options={categoriesOptions}
+                                                                onchange={categoryHandleChange} 
+                                                                required
+                                                                class="inputValue">
+                                                            </lightning-combobox>
+                                                        </div>
+                                                        <div class="slds-p-horizontal--medium">
+                                                            <lightning-combobox 
+                                                                label="Type d'aide" 
+                                                                value={typeAideFieldData}
+                                                                placeholder="Sélectionnez" 
+                                                                options={typeOptions}
+                                                                onchange={typeHandleChange}
+                                                                required 
+                                                                class="inputValue">
+                                                            </lightning-combobox>
+                                                        </div>
+                                                        <div class="slds-p-horizontal--medium">
+                                                            <lightning-combobox 
+                                                                name="Etape" label="Etape"
+                                                                value={stageFieldData} 
+                                                                placeholder="Sélectionnez"
+                                                                options={etapeOptions} 
+                                                                onchange={EtapeHandleChange}
+                                                                required 
+                                                                dropdown-alignment="auto"
+                                                                class="inputValue">   
+                                                            </lightning-combobox>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </div>
+                                    <div class="slds-col">
+                                        <span>
+                                            <div class="slds-form slds-form_stacked">
+                                                <!-- insert your field attributes here inside div class="slds-form-element" for those many fields you want to show in one column -->
+                                                <div class="slds-form-element">
+                                                    <label class="slds-form-element__label slds-p-horizontal--medium"
+                                                        for="textarea-id-01">
+                                                        <abbr class="slds-required" title="required">*
+                                                        </abbr>Commentaire
+                                                    </label>
+                                                    <div class="slds-form-element__control">
+                                                        <textarea id="textarea-id-01" 
+                                                            class="slds-textarea commentTextarea" maxlength="500"
+                                                            required="" name="Commentaire" value={commentValue} onchange={handleComment}></textarea>
+                                                        <!--<lightning-textarea name="Commentaire" label="Commentaire" class="commentTextarea" maxlength="500" required></lightning-textarea>-->
+                                                        <span class="caract">0/500</span><span class="errorCreerComment" lwc:dom="manual"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- modal footer start-->
+                                <div class="button-footer slds-form-element">
+                                    <a class="slds-button slds-card__body_inner cancel-dossier-sol"
+                                        onclick={cancelCreationDossier}>Annuler</a>
+                                    <button class="slds-button slds-button_brand save-dossier-sol" onclick={saveCreationDossier}>Enregistrer</button> 
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open"></div>
+                </template>
+
+
+                <!--Editer formulaire Dossier Solidarité-->
+                <!--FT2-1247 Modification dossier solidarité --> 
+                <template if:true={openEditFormModal}>
+
+                    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                        aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open scroll-section">
+
+                        <div class="slds-modal__container">
+                            <!-- modal header start -->
+                            <header class="slds-modal__header slds-modal__header_empty">
+                                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+
+                                    title="Close" onclick={annulerEditDossier}>
+
+                                    <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                                        size="small">
+                                    </lightning-icon>
+                                    <span class="slds-assistive-text">Close</span>
+                                </button>
+
+                                <h2 class="slds-text-heading_medium">MODIFICATION DU DOSSIER SOLIDARITÉ</h2>
+
+                            </header>
+
+                            <!-- modal body start -->
+                            <div class="slds-modal__content slds-p-around_medium">
+                                <template if:true={modifyDSError}>
+                                    <div class="slds-notify slds-notify_alert slds-alert_error" role="alert">
+                                        <span class="slds-assistive-text">error</span>
+                                        <span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small" title="Description of icon when needed">
+                                        <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                                            <use xlink:href="/resource/copado__SLDS/assets/icons/utility-sprite/svg/symbols.svg#warning"></use>
+                                        </svg>
+                                        </span>
+                                        Un problème technique est survenu, la modification n&#39;a pas été réalisée
+                                    </div>
+                                </template>
+                                <template if:true={isLoading}>
+                                    <div class="demo-only demo-only_viewport" style="height:0.3rem;position:relative">
+                                        <div role="status" class="slds-spinner slds-spinner_medium">
+                                          <span class="slds-assistive-text">Loading</span>
+                                          <div class="slds-spinner__dot-a"></div>
+                                          <div class="slds-spinner__dot-b"></div>
+                                        </div>
+                                      </div>
+                                </template>
+                                <h2 class="slds-p-horizontal--medium">INFORMATIONS</h2>
+                                <div class="slds-grid slds-gutters">
+                                    <div class="slds-col">
+                                        <span>
+                                            <div class="slds-form slds-form_stacked">
+                                                <!-- insert your field attributes here inside div class="slds-form-element" for those many fields you want to show in one column -->
+                                                <div class="slds-form-element">
+                                                    <div class="slds-form-element__control">
+                                                        <div class="slds-p-horizontal--medium">
+                                                            <dl class="slds-dl_inline">
+                                                                <dt class="slds-dl_inline__label inputValue">Compte
+                                                                    client :</dt>
+                                                                <dd class="slds-dl_inline__detail">&nbsp;
+                                                                    {NoCompteContrat}</dd>
+                                                            </dl>
+                                                            <dl class="slds-dl_inline">
+                                                                <dt class="slds-dl_inline__label inputValue">Numéro de dossier solidarité :</dt>
+                                                                <dd class="slds-dl_inline__detail">&nbsp;
+                                                                    {numeroDossier}</dd>
+                                                            </dl>
+                                                            <dl class="slds-dl_inline">
+                                                                <dt class="slds-dl_inline__label inputValue">Date d'effet :</dt>
+                                                                <dd class="slds-dl_inline__detail">&nbsp;
+                                                                    {dateEffet}</dd>
+                                                            </dl>
+                                                        </div>
+                                                        <div class="slds-p-horizontal--medium">
+                                                            <lightning-input label="Description" class="inputValue" value={description} 
+                                                                placeholder={description}
+                                                                onchange={editDescriptionHandleChange}
+                                                                required>
+                                                            </lightning-input>
+                                                        </div>
+                                                        <div class="slds-p-horizontal--medium">
+                                                            <lightning-combobox 
+                                                                name="Statut du dossier"
+                                                                value={existingStatutDossier}
+                                                                label="Statut du dossier" 
+                                                                options={statutDossierOptions}
+                                                                onchange={editDossierStatusHandleChange} 
+                                                                required
+                                                                class="inputValue">
+                                                            </lightning-combobox>
+                                                        </div>
+                                                        
+                                                        <div class="slds-p-horizontal--medium">
+                                                            <lightning-combobox 
+                                                                label="Catégorie" 
+                                                                value={existingCategory}
+                                                                placeholder={CategoryFieldData} 
+                                                                options={categoriesOptions}
+                                                                onchange={editCategoryHandleChange} 
+                                                                required
+                                                                class="inputValue">
+                                                            </lightning-combobox>
+                                                        </div>
+                                                        <div class="slds-p-horizontal--medium">
+                                                            <lightning-combobox 
+                                                                label="Type d'aide" 
+                                                                value={existingTypeAide}
+                                                                placeholder={typeAideFieldData}
+                                                                options={typeOptions}
+                                                                onchange={editTypeHandleChange}
+                                                                required 
+                                                                class="inputValue">
+                                                            </lightning-combobox>
+                                                        </div>
+                                                        <div class="slds-p-horizontal--medium">
+                                                            <lightning-combobox 
+                                                                name="Etape" label="Etape"
+                                                                value={existingEtape} 
+                                                                options={etapeOptions} 
+                                                                onchange={editEtapeHandleChange}
+                                                                required 
+                                                               dropdown-alignment="auto"
+                                                                class="inputValue">   
+                                                            </lightning-combobox>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </div>
+                                    <div class="slds-col">
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <span>
+                                            <div class="slds-form slds-form_stacked">
+                                                <!-- insert your field attributes here inside div class="slds-form-element" for those many fields you want to show in one column -->
+                                                <span class="etape">Étapes précédentes :</span>
+                                                <br>
+                                                <ul class="slds-has-dividers_around">
+                                                    <template for:each={etapesPrecedentes} for:item="etapePrecedente">
+                                                        <li key={etapePrecedente.value} class="slds-item">
+                                                            {etapePrecedente.label1}
+                                                        </li>
+                                                    </template>
+                                                </ul>
+                                                <br>
+                                                <div class="slds-form-element">
+                                                    <label class="slds-form-element__label slds-p-horizontal--medium"
+                                                        for="textarea-id-01">
+                                                        <abbr class="slds-required" title="required">*
+                                                        </abbr>Commentaire
+                                                    </label>
+                                                    <div class="slds-form-element__control">
+                                                        <textarea id="textarea-id-02" 
+                                                            class="slds-textarea commentTextareaEdit" maxlength="300"
+                                                            required="" name="Commentaire" onchange={editHandleComment}>{commentaireFieldData}</textarea>
+                                                        <!--<lightning-textarea name="Commentaire" label="Commentaire" class="commentTextarea" maxlength="500" required></lightning-textarea>-->
+                                                        <span class="caract">0/500 </span><span class="errorEditComment" lwc:dom="manual"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- modal footer start-->
+                                <div class="button-footer slds-form-element">
+                                    <a class="slds-button slds-card__body_inner cancel-dossier-sol"
+                                        onclick={annulerEditDossier}>Annuler</a>
+                                    <button class="slds-button slds-button_brand save-dossier-sol" data-key={index} onclick={saveEditDossier}>Mettre à jour</button> 
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open"></div>
+                </template>
+
+                <!--KD | FT2-1252 : Formulaire Fiche de renseignement-->
+                <template if:true={openFormModalFicheReng}>
+
+                    <template if:true={isLoading}>
+                        <div class="demo-only demo-only_viewport" style="height:0.3rem;position:relative">
+                            <div role="status" class="slds-spinner slds-spinner_medium">
+                              <span class="slds-assistive-text">Loading</span>
+                              <div class="slds-spinner__dot-a"></div>
+                              <div class="slds-spinner__dot-b"></div>
+                            </div>
+                          </div>
+                    </template>
+
+                    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                        aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open scroll-section">
+                        <div class="slds-modal__container">
+                            <!-- modal header start -->
+                            <header class="slds-modal__header slds-modal__header_empty">
+                                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                    title="Close" onclick={cancelEnvoyerFiche}>
+                                    <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                                        size="small">
+                                    </lightning-icon>
+                                    <span class="slds-assistive-text">Close</span>
+                                </button>
+                                <h2 class="slds-text-heading_medium">FICHE DE RENSEIGNEMENT</h2>
+                            </header>
+
+                            <!-- modal body start -->
+                            <div class="slds-modal__content slds-p-around_medium">
+                                <template if:true={isLoading}>
+                                    <div class="demo-only demo-only_viewport" style="height:0.5rem;position:relative">
+
+                                        <div role="status" class="slds-spinner slds-spinner_medium">
+                                          <span class="slds-assistive-text">Loading</span>
+                                          <div class="slds-spinner__dot-a"></div>
+                                          <div class="slds-spinner__dot-b"></div>
+                                        </div>
+                                    </div>
+                                </template>
+                                <div class="slds-size_1-of-2">
+                                    <div class="slds-col">
+                                        <div class="slds-p-horizontal--medium">
+                                            <h2>INFORMATIONS CLIENT</h2>
+                                            <dl class="slds-dl_inline">
+                                                <dt class="slds-dl_inline__label inputValue">Compte
+                                                    client :</dt>
+                                                <dd class="slds-dl_inline__detail">&nbsp;
+                                                    {NoCompteContrat}
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="demo-only demo-only--sizing slds-grid slds-wrap">
+                                    <div class="slds-size_3-of-5">
+                                        <div class="slds-m-around_small">
+                                            <div class="slds-box">
+                                                <h2>INFORMATIONS DE PAIEMENT</h2>
+                                                <div class="slds-form-element__control slds-list_horizontal">
+                                                    <dl class="slds-dl_inline">
+                                                         <dt class="slds-dl_inline__label inputValue" > Montant dû à date : </dt>&nbsp;
+                                                        <dd class="slds-dl_inline__detail">&nbsp;
+                                                            {soldeEnCours}&nbsp;
+                                                        </dd>
+                                                    </dl>  
+                                                </div>
+                                                <div class="slds-list_horizontal">
+                                                    <dl class="slds-dl_inline ">
+                                                        <dt class="slds-dl_inline__label inputValue"><div class="required"></div> Arriéré : </dt>
+                                                        <dd class="slds-dl_inline__detail">
+                                                            <span class="slds-radio">
+                                                                <input type="radio" id="radio-1" value="O"  class="arrAvec" name="arriereOptions" onchange={onClickArriereRadio} />
+                                                                <label class="slds-radio__label arriere" for="radio-1">
+                                                                    <span class="slds-radio_faux"></span>
+                                                                    <span class="slds-form-element__label">Avec arriéré</span>
+                                                                </label>
+                                                            </span>
+                                                            <span class="slds-radio">
+                                                                <input type="radio" id="radio-2" value="N"  class="arrSans" name="arriereOptions" onchange={onClickArriereRadio} />
+                                                                <label class="slds-radio__label" for="radio-2">
+                                                                    <span class="slds-radio_faux"></span>
+                                                                    <span class="slds-form-element__label">Sans arriéré</span>
+                                                                </label>
+                                                            </span>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                                <span class="errorArrVal" lwc:dom="manual"></span>  
+                                                <div class="">
+                                                    <dl class="slds-dl_inline slds-list_horizontal">
+                                                        <dt class="slds-dl_inline__label inputValue" > Prélèvement en cours : </dt> &nbsp;
+                                                        <dd class="slds-dl_inline__detail slds-grid slds-gutters ">&nbsp;
+                                                            <div class="slds-col">
+                                                                <span class="slds-radio">
+                                                                    <input type="radio" id="radio-3" value="O" name="prelevementOptions" onchange={onClickPrelevementRadio} checked={showPrelevementRadio}/>
+                                                                    <label class="slds-radio__label prel" for="radio-3">
+                                                                        <span class="slds-radio_faux"></span>
+                                                                        <span class="slds-form-element__label">Oui</span>
+                                                                    </label>
+                                                                </span>
+                                                                <span class="slds-radio">
+                                                                    <input type="radio" id="radio-4" value="N" name="prelevementOptions" onchange={onClickPrelevementRadio} checked={hidePrelevementRadio}/>
+                                                                    <label class="slds-radio__label " for="radio-4">
+                                                                        <span class="slds-radio_faux"></span>
+                                                                        <span class="slds-form-element__label">Non</span>
+                                                                    </label>
+                                                                </span>  
+                                                            </div>
+                                                        </dd>
+                                                     </dl>
+                                                </div>
+                                                <template if:true={showPrelevementRadio}>
+                                                    <div class="slds-form_horizontal slds-form-element__control inputValue">
+                                                            <label>Montant du prélèvement en cours:  </label>
+                                                        <input class="montantInput" type="number" name="montantPrelevementEnCours" placeholder="00.00" value={montantPrelevementEnCours}  
+                                                        onchange={montantPrelevementEncoursHandleChange} formatter="currency" step="1.00"/>
+                                                        <span>  € sous réserve de l'encaissement</span>
+                                                    </div>   
+                                                    </template>
+                                                <div class="">
+                                                    <dl class="slds-dl_inline">
+                                                        <dt class="slds-dl_inline__label inputValue"  >Plan d'apurement en cours : </dt> &nbsp;
+                                                        <dd class="slds-dl_inline__detail">&nbsp;
+                                                            <span class="slds-radio">
+                                                                <input type="radio" id="radio-5" value="O" name="planApurementEnCoursOptions" onchange={onClickPlanApurementEnCoursRadio} checked={planApurementStatutRadio}/>
+                                                                <label class="slds-radio__label plan" for="radio-5">
+                                                                    <span class="slds-radio_faux"></span>
+                                                                    <span class="slds-form-element__label">Oui</span>
+                                                                </label>
+                                                            </span>
+                                                            <span class="slds-radio">
+                                                                <input type="radio" id="radio-6" value="N" name="planApurementEnCoursOptions" onchange={onClickPlanApurementEnCoursRadio} checked={hideplanApurementStatutRadio} />
+                                                                <label class="slds-radio__label " for="radio-6">
+                                                                    <span class="slds-radio_faux"></span>
+                                                                    <span class="slds-form-element__label">Non</span>
+                                                                </label>
+                                                            </span>  
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="">
+                                                    <dl class="slds-dl_inline">
+                                                        <dt class="slds-dl_inline__label notbold" >Date de dernier règlement : </dt>&nbsp;
+                                                        <dd class="slds-dl_inline__detail">
+                                                            &nbsp;{dateDernierReglement}
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="slds-list_horizontal">
+                                                    <dl class="slds-dl_inline">
+                                                        <dt class="slds-dl_inline__label inputValue" > Client mensualisé : </dt> &nbsp;
+                                                        <dd class="slds-dl_inline__detail">&nbsp;
+                                                            <span class="slds-radio">
+                                                                <input type="radio" id="radio-7" value="O" name="clientMensualiseOptions" onchange={onClickclientMensualiseRadio} checked={MensualisationSoldeRadio}/>
+                                                                <label class="slds-radio__label mens" for="radio-7">
+                                                                    <span class="slds-radio_faux"></span>
+                                                                    <span class="slds-form-element__label">Oui</span>
+                                                                </label>
+                                                            </span>
+                                                            <span class="slds-radio">
+                                                                <input type="radio" id="radio-8" value="N" name="clientMensualiseOptions" onchange={onClickclientMensualiseRadio} checked={hideMensualisationSoldeRadio}/>
+                                                                <label class="slds-radio__label " for="radio-8">
+                                                                    <span class="slds-radio_faux"></span>
+                                                                    <span class="slds-form-element__label">Non</span>
+                                                                </label>
+                                                            </span> 
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="">
+                                                    <dl class="slds-dl_inline">
+                                                        <dt class="slds-dl_inline__label notbold" >Mensualités : </dt>&nbsp;
+                                                        <dd class="slds-dl_inline__detail">  {MontantCumuleEcheance} </dd>&nbsp;
+                                                    </dl>
+                                                </div>
+                                                <div class="">
+                                                    <dl class="slds-dl_inline">
+                                                        <dt class="slds-dl_inline__label notbold" >Date de prochaine facture : </dt>&nbsp;
+                                                        <dd class="slds-dl_inline__detail">&nbsp;{dateProchaineFacture}</dd>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-size_2-of-5">
+                                        <div class="slds-m-around_small">
+                                            <div class="slds-box ">
+                                                <h2>INFORMATIONS DE CONTACT</h2>
+                                                <fieldset class="slds-form-element">
+                                                    <legend class="slds-form-element__legend slds-form-element__label">Energie(s) souscrite(s): </legend>
+                                                    <div class="slds-form-element__control slds-list_horizontal">
+                                                        <ul class="slds-list_horizontal">
+                                                            <li>
+                                                                <lightning-input if:true={isContratElec} type="checkbox" class="checkbox1" value={isContratElec} name="elecOptions"  onclick={onClickContratElec} checked="true"></lightning-input>
+                                                                <lightning-input if:false={isContratElec} type="checkbox" class="checkbox1" value={isContratElec} name="elecOptions"  onclick={onClickContratElec}></lightning-input>
+                                                            </li>
+                                                            <li><img class="elec" src={pictoElect}>&nbsp;Electricité</li>
+                                                        </ul>
+                                                        <div class="slds-p-left_medium"></div>
+                                                        <ul class="slds-list_horizontal">
+                                                            <li>
+                                                                <lightning-input if:true={isContratGaz} type="checkbox" class="checkbox2" value={isContratGaz} name="gazOptions" data-id="checkbox-gaz"  onclick={onClickContratGaz} checked="true"></lightning-input>
+                                                                <lightning-input if:false={isContratGaz} type="checkbox" class="checkbox2" value={isContratGaz} name="gazOptions" data-id="checkbox-gaz"  onclick={onClickContratGaz}></lightning-input>
+                                                            </li>
+                                                            <li><img class="gaz" src={pictoGaz}>&nbsp;Gaz</li>
+                                                        </ul>
+                                                    </div>
+                                                </fieldset>
+                                                <br>
+                                                <div class="slds-list_horizontal">
+                                                    <dl class="slds-dl_inline ">
+                                                        <dt class="slds-dl_inline__label inputValue"><div class="required"></div> Contrat résilié : </dt>
+                                                        <dd class="slds-dl_inline__detail">
+                                                            <span class="slds-radio">
+                                                                <input type="radio" id="radio-9" value="O"  class="resilOui" name="contratResilieOptions" onchange={onClickContratResilieRadio} />
+                                                                <label class="slds-radio__label res" for="radio-9">
+                                                                <span class="slds-radio_faux"></span>
+                                                                <span class="slds-form-element__label">Oui</span>
+                                                                </label>
+                                                            </span>
+                                                            <span class="slds-radio">
+                                                                <input type="radio" id="radio-10" value="N"  class="resilNon" name="contratResilieOptions" onchange={onClickContratResilieRadio} />
+                                                                <label class="slds-radio__label" for="radio-10">
+                                                                <span class="slds-radio_faux"></span>
+                                                                <span class="slds-form-element__label">Non</span>
+                                                                </label>
+                                                            </span>  
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+												<span class="errorContratResil" lwc:dom="manual"></span>
+                                                <div class=" slds-list_horizontal">
+                                                    <dl class="slds-dl_inline">
+                                                        <dt class="slds-dl_inline__label inputValue">Chèque énergie : </dt>
+                                                            <dd class="slds-dl_inline__detail">
+                                                                <span class="slds-radio">
+                                                                    <input type="radio" id="radio-11" value="O" name="chequeEnergieOptions" onchange={onClickChequeEnergieRadio} checked={chequeEnergieRadio}/>
+                                                                    <label class="slds-radio__label cheque" for="radio-11">
+                                                                        <span class="slds-radio_faux"></span>
+                                                                        <span class="slds-form-element__label">Oui</span>
+                                                                    </label>
+                                                                </span>
+                                                                <span class="slds-radio">
+                                                                    <input type="radio" id="radio-12" value="N" name="chequeEnergieOptions" onchange={onClickChequeEnergieRadioFalse} checked={hidechequeEnergieRadio}/>
+                                                                    <label class="slds-radio__label " for="radio-12">
+                                                                        <span class="slds-radio_faux"></span>
+                                                                        <span class="slds-form-element__label">Non</span>
+                                                                    </label>
+                                                                </span> 
+                                                            </dd>
+                                                        </dl>
+                                                </div>
+                                                <div class="slds-list_horizontal">
+                                                    <dl class="slds-dl_inline">
+                                                        <dt class="slds-dl_inline__label inputValue ">Attestation chèque énergie : </dt>
+                                                            <dd class="slds-dl_inline__detail">
+                                                                <span class="slds-radio">
+                                                                    <input type="radio" id="radio-13" value="O" name="attestationChequeEnergieOptions" onchange={onClickAttestationChequeEnergieRadio} checked={attestationChequeEnergieRadio}/>
+                                                                    <label class="slds-radio__label attestation" for="radio-13">
+                                                                        <span class="slds-radio_faux"></span>
+                                                                        <span class="slds-form-element__label">Oui</span>
+                                                                    </label>
+                                                                </span>
+                                                                <span class="slds-radio">
+                                                                    <input type="radio" id="radio-14" value="N" name="attestationChequeEnergieOptions" onchange={onClickAttestationChequeEnergieRadioFalse} checked={hideattestationChequeEnergieRadio}/>
+                                                                    <label class="slds-radio__label " for="radio-14">
+                                                                        <span class="slds-radio_faux"></span>
+                                                                        <span class="slds-form-element__label">Non</span>
+                                                                    </label>
+                                                                </span> 
+                                                            </dd>
+                                                        </dl>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="demo-only demo-only--sizing slds-grid slds-wrap">	  
+                                    <div class="slds-size_1-of-2">
+                                        <div class="slds-m-around_small">
+                                            <h2>CONTACT SERVICES SOCIAUX</h2>
+                                            <div class="slds-col">
+                                                <div class="slds-p-horizontal--medium">
+                                                    <lightning-combobox 
+                                                        label="Civilité" value={salutationValue}
+                                                        placeholder="Choisissez la civilité" options={salutationOptions}
+                                                        onchange={salutationHandleChange} required class="inputValue salutationInputValue">
+                                                    </lightning-combobox>  
+                                                    <lightning-input label="Nom" class="inputValue" value={nomValue} 
+                                                        placeholder="Ex. DUPONT" onchange={nomHandleChange} required>
+                                                    </lightning-input>    
+                                                </div>    
+                                            </div>
+                                        </div>  
+                                    </div>
+                                    <div class="slds-size_1-of-2">
+                                        <div class="slds-m-around_small">
+                                            <h2 class="hideH2">CONTACT SERVICES SOCIAUX</h2>
+                                            <div class="slds-col">
+                                                <div class="slds-p-horizontal--medium"> 
+                                                    <lightning-combobox 
+                                                        label="Civilité"
+                                                        placeholder="Choisissez la civilité" class="hideInputValue">
+                                                    </lightning-combobox>  
+                                                    <lightning-input label="Adresse email" class="inputValue" value={adressEmailValue} 
+                                                        placeholder="Ex. adresse@email.fr"
+                                                        onchange={adressEmailHandleChange}
+                                                        required>
+                                                    </lightning-input> 
+													<span class="error" lwc:dom="manual"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <!-- modal footer start-->
+                                <div class="button-footer slds-form-element">
+                                    <a class="slds-button slds-card__body_inner "
+                                        onclick={cancelEnvoyerFiche}>Annuler</a>
+                                    <button class="slds-button slds-button_brand save-fiche-rens" onclick={saveEnvoyerFiche}>Envoyer la fiche</button> 
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="slds-backdrop slds-backdrop_open"></div>
+                </template>
+                <!--FT2-1254 + FT2-1265 Ouverture écran création blocage pour un client NON bloqué et Client Bloqué-->
+
+                <template if:true={openBlocageRelances}>
+
+
+                    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                        aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open blockgeCont">
+                        <div class="slds-modal__container">
+                            <!-- modal header start -->
+                            <header class="slds-modal__header slds-modal__header_empty">
+                                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+
+                                    title="Close" onclick={closeBlocageDesRelancesCNB}>
+
+                                    <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                                        size="small">
+                                    </lightning-icon>
+                                    <span class="slds-assistive-text">Close</span>
+                                </button>
+                                <h2 class="slds-text-heading_medium titleStyle">BLOCAGE DE LA RELANCE COMPTE CLIENT</h2>
+                            </header>
+
+                            <!-- modal body start -->
+                            <div class="slds-modal__content slds-p-around_medium">
+
+
+                                <!--FT2-1254 Formulaire pour un client NON bloqué-->
+                                <!--FT2-1505 Repositionnement du champ motif de blocage-->
+                                
+                                <div if:true={openBlocageRelancesCNB} class="slds-grid slds-gutters">
+                                    <div class="slds-col">
+                                        <span>
+                                            <div class="slds-form slds-form_stacked">
+                                                <div class="center-form">
+                                                    <div class="slds-form-element__control">
+                                                        <div class="slds-p-horizontal--medium">
+                                                            <div class="slds-form-element">
+                                                            <lightning-combobox value={valueMotifCNB} 
+
+                                                                placeholder="Sélectionnez" options={motifsOptions}
+                                                                onchange={motifHandleChange} label="Motif"
+                                                                class="inputValue" required>
+                                                            </lightning-combobox>
+                                                            </div>
+                                                        </div>
+                                                        <div class="slds-p-horizontal--medium">
+                                                                
+
+                                                            <lightning-input class="inputValue" type="date" readonly label ="Date de début" date-style="short" value={dateDebutCNB} onchange ={dateDebutHandleChange}></lightning-input>
+                                                            
+
+                                                        </div>
+                                                        <div class="slds-p-horizontal--medium">
+                                                            <lightning-input class="inputValue" type="date" required label="Date de fin" date-style="short"  value={dateFinCNB} min={dateDebutCNB} max={dateMax} onchange ={dateFinHandleChange}></lightning-input>
+                                                        </div>
+
+                                                        </div>
+
+
+                                                        </br>
+                                                        <!-- Cancel and Save Buttons -->
+                                                        <div class="cancel-blocage">
+                                                            <a class="slds-button slds-card__body_inner cancel-dossier-sol"
+
+                                                                onclick={closeBlocageDesRelancesCNB}>Annuler</a>
+                                                            <button class="slds-button slds-button_brand save-dossier-sol" onclick={saveBlocageDesRelancesCNB}>Enregistrer</button>
+
+                                                        </div>
+
+                                                    </div>
+                                                     
+                                                    
+                                                </div>
+                                        </span>
+                                    </div>
+                                    
+                                </div>
+
+                                <!--FT2-1265 Formulaire pour un client bloqué-->
+                                <!--FT2-1505 Repositionnement du champ motif de blocage-->
+                                <div if:true={openBlocageRelancesCB} class="slds-grid slds-gutters">
+                                    <div class="slds-col">
+                                        <span>
+                                            <div class="slds-form slds-form_stacked">
+                                                <div class="center-form">
+                                                    <div class="slds-form-element__control">
+                                                        <div class="slds-p-horizontal--medium">
+                                                            <div class="slds-form-element">
+                                                            <lightning-combobox value={valueMotifCB} readonly
+                                                                options={motifsOptions} placeholder={valueMotifCB} 
+                                                                onchange={motifHandleChange} label="Motif"
+                                                                class="inputValue" required>
+                                                            </lightning-combobox>
+                                                            </div>
+                                                        </div>
+                                                        <div class="slds-p-horizontal--medium">
+                                                                
+                                                            <lightning-input class="inputValue" type="date" readonly required label ="Date de début" date-style="short" placeholder={dateDebutCB}  value={dateDebutCB} onchange ={dateDebutCBHandleChange}></lightning-input>
+                                                            
+                                                        </div>
+                                                        <div class="slds-p-horizontal--medium">
+                                                            <lightning-input class="inputValue" type="date" readonly required label="Date de fin" date-style="short" placeholder={dateFinPlaceholderCB} value={dateFinCB} min={dateDebutCB} max={dateMax} onchange={dateFinHandleChange}></lightning-input>
+                                                        </div>
+                                                        </div>
+                                                        </br>
+                                                        <!-- Cancel and Delete and Modify Buttons -->
+                                                        <div class="cancel-blocage">
+                                                            <a class="slds-button slds-card__body_inner cancel-dossier-sol"
+                                                                onclick={closeBlocageDesRelancesCB}>Annuler</a>
+                                                            <button class="slds-button slds-button_outline-brand delete-blocage-sol" onclick={deleteBlocageDesRelancesCB}>Supprimer</button>&nbsp;&nbsp;
+                                                            <button class="slds-button slds-button_brand modify-blocage-sol" onclick={modifyBlocageDesRelancesCB}>Modifier</button>
+                                                        </div>
+                
+                                                    </div>
+                                                </div>
+                                        </span>
+                                    </div>  
+
+                                </div>
+
+
+                                 <!--FT2-1340 Formulaire de modification pour un client bloqué-->
+                                 <!--FT2-1505 Repositionnement du champ motif de blocage-->
+                                 <div if:true={openBlocageRelancesCBModification} class="slds-grid slds-gutters">
+                                    <div class="slds-col">
+                                        <span>
+                                            <div class="slds-form slds-form_stacked">
+                                                <div class="center-form">
+                                                    <div class="slds-form-element__control">
+                                                        <div class="slds-p-horizontal--medium">
+                                                            <div class="slds-form-element">
+                                                            <lightning-combobox value={valueMotifCB}
+                                                                options={motifsOptions} placeholder={valueMotifCB} 
+                                                                onchange={motifCBHandleChange} label="Motif"
+                                                                class="inputValue" required>
+                                                            </lightning-combobox>
+                                                            </div>
+                                                        </div>
+                                                        <div class="slds-p-horizontal--medium">                                          
+                                                            <lightning-input class="inputValue" type="date" readonly required label ="Date de début" date-style="short" placeholder={dateDebutCB}  value={dateDebutCB} onchange ={dateDebutCBHandleChange}></lightning-input>                                                          
+                                                        </div>
+
+
+                                                        <!-- FT2-1523 - Gestion des dates dans les formulaires blocage - Correction du bug du champ date de fin mis en évidence même s'il est rempli -->
+                                                        <div if:true={dateFinRequired} class="slds-p-horizontal--medium">
+                                                            <lightning-input class="inputValue" type="date"  required label="Date de fin" date-style="short" placeholder={dateFinPlaceholderCB} value={dateFinCB} min={dateMin} max={dateMax} onchange={dateFinCBHandleChange}></lightning-input>
+                                                        </div>
+                                                        <div if:false={dateFinRequired} class="slds-p-horizontal--medium">
+                                                            <lightning-input class="inputValue" type="date"  label="Date de fin" date-style="short" placeholder={dateFinPlaceholderCB} value={dateFinCB} min={dateMin} max={dateMax} onchange={dateFinCBHandleChange}></lightning-input>
+                                                        </div>
+
+                                                        </div>
+                                                        </br>
+                                                        <!-- Cancel and Delete and Modify Buttons -->
+                                                        <div class="cancel-blocage">
+                                                            <a class="slds-button slds-card__body_inner cancel-dossier-sol"
+                                                                onclick={closeBlocageDesRelancesCBModification}>Annuler</a>
+                                                            <button class="slds-button widen-button slds-button_brand modify-blocage-sol" onclick={updateBlocageDesRelancesCB}>Enregistrer les modifications</button>
+                                                        </div>  
+                                                    </div>                                                
+                                                </div>
+                                        </span>
+                                    </div>
+                                </div>
+                               
+                                </br></br>
+                                    <!-- Ce tableau permet d'afficher la liste des courriers réglementaires-->
+                                    <!-- Les jalons considérés pour les courrier sont ceux dont le <code> =COU-->
+                                    <!-- On affiche max les 6 dernières (la plus ancienne tout en bas et la plus récente tout haut)-->
+                                       
+                                    <table class='tebleDimentions'>
+                                        <caption style="display: none;">COURRIERS RÉGLEMENTAIRES</caption>
+                                        <thead>
+                                            <tr class="tableListFirst">
+                                                <th id="courriesreg" colspan ="4" class="slds-text-heading_medium slds-hyphenate slds-text-align--center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COURRIERS RÉGLEMENTAIRES </th>
+                                            </tr>
+                                            <tr class="tableListHead">
+
+                                                <th class="slds-text-align--center tableListHead" scope="col">Factures</th>
+
+                                                <th class="slds-text-align--center tableListHead" scope="col">Courriers réglementaires</th>
+
+                                                <th class="slds-text-align--center tableListHead" scope="col">Date d'envoi</th>
+                                                <th class="slds-text-align--center tableListHead" scope="col">Montant</th>
+                                             </tr>
+                                        </thead>
+
+                                        <tbody class = 'tableBody'>
+                                        <template for:each={productArray} for:item="histo" for:index="index">
+                                            
+                                            <tr key={histo.jalonNumeroFacture} >
+                                                <td data-label="N° FACTURE" rowspan={histo.rowspan} class = 'slds-text-align--center tableBody'>
+                                                    {histo.jalonNumeroFacture}
+                                                </td>
+                                            </tr>  
+
+                                            <template for:each={histo.jalons} for:item="jalon" for:index="index">
+                                            
+                                            <tr key={histo.jalonNumeroFacture}>
+
+                                                <td data-label="COURRIERS RÉGLEMENTAIRES" class="tableBody" >
+                                                    <a style="text-decoration: underline; color: #006dcc; font-weight: 700;">{jalon.jalonNom}</a>
+                                                </td>
+                                                <td data-label="DATE D'ÉMISSION" class="tableBody">
+                                                    {jalon.jalonDate}
+                                                </td>
+                                                <td data-label="MONTANT RELANCE" class="tableBody" >
+                                                    {jalon.jalonMontant}€
+                                                </td>
+
+                                            </tr>
+
+                                            </template>
+                                        </template>
+                                        </tbody>
+                                    </table>
+                            </div>
+                        </div>
+
+                        <!--FT2-1341  Pop-up de confirmation de suppression de Blocage -->
+                        <template if:true={openConfirmDeeleteModal}>
+                            <section role="dialog" tabindex="-1" aria-label="Meaningful description of the modal content" 
+                            aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                                <div class="containerdelete">
+                            
+                                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                <p>Etes vous sûr de vouloir supprimer ce blocage?</p>
+                                </div>
+            
+                                <footer class="slds-modal__footer">
+                                <button class="slds-button slds-button_outline-brand delete-blocage-sol"  onclick={noDeleteBlocageDesRelancesCB}>Non</button>
+                                <button class="slds-button slds-button_brand modify-blocage-sol" onclick={yesDeleteBlocageDesRelancesCB}>Oui</button>
+                                </footer>
+
+
+                          </div>
+                            </section>
+                            <div class="slds-backdrop slds-backdrop_open"></div>
+                        </template>
+                    </section>
+                    <div if:false={openConfirmDeeleteModal} class="slds-backdrop slds-backdrop_open"></div>
+                </template>
+
+
+                
+
+            </div>
+
+
+
+
+            <!--div if:true={isClicked} class="slds-progress">
+                <ol class="slds-progress__list">
+                    <template for:each={steps} for:item="step" for:index="index">
+                        <li data-id="stageblock" key={step.value} class={step.style}>
+                            <span if:true={step.isCompleted}
+                                class="slds-icon_container slds-icon-utility-success slds-progress__marker slds-progress__marker_icon slds-progress__marker_icon-success">
+                                <svg class="slds-icon slds-icon-text-success slds-icon_x-small" aria-hidden="true">
+                                    <use
+                                        xlink:href="/resource/copado__SLDS/assets/icons/utility-sprite/svg/symbols.svg#success">
+                                    </use>
+                                </svg>
+                                <span class="slds-assistive-text">{step.label}</span>
+                            </span>
+
+                            <div if:false={step.isCompleted} class="slds-progress__marker">
+                                <span class="slds-assistive-text">{step.label}</span>
+                            </div>
+                           
+
+                        </li>
+
+                    </template>
+
+                </ol>
+                <div class="slds-progress-bar slds-progress-bar_x-small" aria-valuemin="0" aria-valuemax="100"
+                    aria-valuenow="100" role="progressbar">
+                    <span id="helloTest" class="slds-progress-bar__value" style="width: 100%;background:green">
+                        <span class="slds-assistive-text">Progress: 100%</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="slds-grid slds-gutters">
+                <template for:each={steps} for:item="step" for:index="index">
+                    <p key={step.value} class={step.styleDiv}>{step.label}</p>
+
+                </template>
+            </div-->
+            <div class="slds-card__footer">
+                <div class="slds-grid slds-wrap">
+
+
+                    <div class="slds-col slds-size_1-of-2 slds-m-top_x-small">
+                        <div class="slds-float_left">
+                            <span class="slds-checkbox">
+                                <input type="checkbox" name="options" id="checkbox-1" value="checkbox-1"
+                                    onchange={handlePause} />
+                                <label class="slds-checkbox__label" for="checkbox-1">
+                                    <span class="slds-checkbox_faux"></span>
+                                    <span class="slds-form-element__label"> Appel interrompu - Tracer
+                                        l'interaction</span>
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-m-top_x-small">
+                        <div class="slds-float_right">
+                            <span class="slds-checkbox">
+                                <input type="checkbox" name="options" id="checkbox-2" value="checkbox-2"
+                                    onchange={handleInteraction} />
+                                <label class="slds-checkbox__label" for="checkbox-2">
+                                    <span class="slds-checkbox_faux"></span>
+                                    <span class="slds-form-element__label"> J'ai répondu à la demande du
+                                        client</span>
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-2 slds-m-top_x-small">
+                        <div class=" slds-float_left slds-m-top_small">
+                            <lightning-button variant="brand" label="Fermer" title="Fermer" onclick={closeTab}
+                                class="slds-float_left"></lightning-button>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-m-top_x-small">
+                        <div class="slds-float_right slds-m-top_small">
+                            <lightning-button variant="brand" label="Suivant" title="Suivant" onclick={caseNavigate}
+                                class="slds-float_right" disabled={nextDisabled}></lightning-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </lightning-card>
+    </div>
+</template>

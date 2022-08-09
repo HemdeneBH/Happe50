@@ -1,0 +1,25 @@
+<!--
+  @description       : 
+  @author            : ZAATOUCHE Younes
+  @group             : 
+  @last modified on  : 05-30-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+  <div class="slds-notify_container slds-is-relative" data-id="display-toast">
+      <div class="slds-notify slds-notify_toast slds-theme_info" role="status">
+      <span class="slds-assistive-text">info</span>
+      <div class="slds-notify__content">
+      <h2 class="slds-text-heading_small">{messageToast}
+      </h2>
+      </div>
+      <div class="slds-notify__close">
+        <span class="hp-closeButton">
+          <a onclick={closePopinToast}>
+              <img class="hp-close-icon" src={iconClose} alt="close" />
+          </a>
+        </span>
+      </div>
+      </div>
+      </div>
+</template>

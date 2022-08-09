@@ -1,0 +1,116 @@
+.c-content-bg {
+  box-shadow: var(--box-shadow);
+  background-image: var(--bg);
+}
+
+.hp-bigTitle {
+  padding: 0 0 15px 0;
+}
+
+.hp-status {
+  padding: 35px 40px;
+  margin: 15px;
+  min-height: 270px;
+}
+
+.blue {
+  color: var(--blue);
+  font-weight: bold;
+  font-family: var(--font-bold);
+}
+
+.rose {
+  color: var(--rose);
+  font-weight: bold;
+  font-family: var(--font-bold);
+}
+
+.purple {
+  color: var(--primary-colour);
+  font-weight: bold;
+  font-family: var(--font-bold);
+}
+
+.status_contract_purple {
+  font-family: var(--font-bold);
+  font-size: 16px;
+  font-weight: bold;
+  text-align: left;
+  color: var(--primary-colour);
+  padding: 10px 0 15px 0;
+}
+
+.status_contract_blue {
+  font-family: var(--font-bold);
+  font-size: 16px;
+  font-weight: bold;
+  text-align: left;
+  color: var(--blue);
+  padding: 10px 0 15px 0;
+}
+
+.status_contract_rose {
+  font-family: var(--font-bold);
+  font-size: 16px;
+  font-weight: bold;
+  text-align: left;
+  color: var(--rose);
+  padding: 10px 0 15px 0;
+}
+
+.info_date {
+  /* font-family: var(--font-bold);
+  font-size: 16px;
+  font-weight: bold;
+  text-align: left;
+  color: var(--primary-colour); */
+}
+
+.info_date .text-style {
+  font-family: var(--font-regular);
+  font-size: 14px;
+  font-weight: lighter;
+  color: var(--text-color);
+  padding: 0 0 0 5px;
+}
+
+@media (min-width: 1280px) {
+  /* 1440px screen and all screens larger */
+}
+
+@media (max-width: 1280px) {
+  /* 1280px screen and all screens smaller */
+}
+
+@media (max-width: 1024px) {
+
+  /* Ipad and tablets */
+  .hp-status {
+    margin: 10px 0;
+    min-height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  /* mobiles */
+}
+
+@media (max-width: 576px) {
+
+  /* mobiles */
+  .status_contract {
+    font-size: 14px;
+  }
+
+  .info_date {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 374px) {
+  
+  .hp-status{
+    padding: 25px 20px;
+  }
+  
+}

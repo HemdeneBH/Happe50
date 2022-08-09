@@ -1,0 +1,77 @@
+<!--
+  @description       : 
+  @author            : Clément Bauny
+  @group             : 
+  @last modified on  : 07-04-2022
+  @last modified by  : Badr Eddine Belkarchi
+-->
+<template>
+    <div data-id='headerContentMobile' class='c-header-menu-mobile c-header-container'>
+        <div class="left">
+            <ul>
+                <li>
+                    <button class="burgerMenu" onclick={showMenu}>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </li>
+                <li>
+                    <div class="hp-nav-logo-mobile">
+                        <img class="hp-logo" src ={logoHappeWhite} alt="happe logo"/>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="c-header__btns right">
+            <ul class="c-header__btns_list">
+                <li>
+                    <button class="c-btn-aideContact">
+                        <span class="c-btn-call_icon">
+                            <img class="c-btn-aideContact_icon_img" src ={iconCall} alt="call icon"/>
+                        </span>
+                    </button>
+                </li>
+                <li>
+                    <button class="c-btn-aideContact" onclick={handleContactClick}>
+                        <span class="c-btn-aideContact_icon">
+                            <img class="c-btn-aideContact_icon_img icon-mail" src ={aideContactIcon} alt="aideContact icon"/>
+                        </span>
+                    </button>
+                </li>
+                <li>
+                    <button class="hp-nav-profile-icon-container-mobile" onclick={handleClick}>
+                        <span class="hp-nav-profile-icon-mobile">
+                            <img src ={avatarToDisplay}/>
+                        </span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+   
+    <template if:true={menu}>
+        <div class="hp-popup-menu-mobile">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-modal-menu-mobile slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <c-hp_ec_menu-mobile menuname={menuName} phonenumber={phoneNumber} menumessage={menuMessage} onclosemenumobile={handleCloseMenuMobile}></c-hp_ec_menu-mobile>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop-menu-mobile slds-backdrop_open"></div>
+        </div>
+    </template>
+    <template if:true={menuProfilVisible}>
+        <div class="hp-popup">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-modal-menu-profil slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <c-hp_ec_popin-profil onopenpopinprofil={openPopinProfil}>
+                    </c-hp_ec_popin-profil>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop-menu-profil slds-backdrop_open"></div>
+        </div>
+    </template>
+</template>

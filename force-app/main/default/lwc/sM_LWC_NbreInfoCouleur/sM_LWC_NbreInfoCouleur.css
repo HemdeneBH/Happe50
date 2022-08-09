@@ -1,0 +1,47 @@
+.alignClassRouge {
+    text-align: center!important;
+    font-size: 50px;
+    font-weight: bold;
+    color: red;
+  
+}
+
+
+.alignClassRouge1 {
+    text-align: center!important;
+    font-size: 20px;
+    color: red;
+    
+}
+
+.alignClassBleu {
+    text-align: center!important;
+    font-size: 50px;
+    font-weight: bold;
+    color: blue;
+  
+}
+
+
+.alignClassBleu1 {
+    text-align: center!important;
+    font-size: 20px;
+    color: blue;
+    
+}
+
+.alignClassViolette {
+    text-align: center!important;
+    font-size: 50px;
+    font-weight: bold;
+    color:blueviolet;
+    
+}
+
+
+.alignClassViolette1 {
+    text-align: center!important;
+    font-size: 20px;
+    color: blueviolet;
+   
+}

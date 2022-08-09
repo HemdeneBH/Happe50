@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property type="String" name="titreRenouvelerMotDePasse" default="Renouveler mon mot de passe"/>
+            <property type="String" name="labelInputEmail" default="Adresse email associée : "/>
+            <property type="String" name="labelInputIdentite" default="Identité associée :"/>
+            <property type="String" name="labelInputMDP" default="Mot de passe : "/>
+            <property type="String" name="labelInputConfirmationMDP" default="Confirmer mon mot de passe :"/>
+            <property type="String" name="placeHolderInputEmail" default="martin.dupont@gmail.com"/>
+            <property type="String" name="placeHolderInputIdentite" default="Martin DUPONT"/>
+            <property type="String" name="placeHolderInputMDP" default="Mot de passe"/>
+            <property type="String" name="messageErreurInputEmail" default="Mauvais Format d'Email"/>
+            <property type="String" name="messageConfirmation" default="Succès"/>
+            <property type="String" name="messageFormatIncorrecte" default="Le mot de passe doit être 8 caractères minimum et doit contenir au moins une minuscule, une majiscule, un chiffre et un caractère spéciale"/>
+            <property type="String" name="messageConfirmationIncorrecte" default="Les deux mot de passe saisi ne correspondent pa"/>
+            <property type="String" name="messageInfoBulle" default="Le mot de passe doit contenir"/>
+            <property type="String" name="messageErreurActivationExpiree" default="Le lien utilisé pour réinitialiser votre mot de passe n'est plus valable, veuillez renouveler votre demand"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

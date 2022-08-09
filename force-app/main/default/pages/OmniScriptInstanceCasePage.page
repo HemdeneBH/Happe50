@@ -1,0 +1,14 @@
+<apex:page standardStylesheets="false" showHeader="false" standardController="Case" extensions="vlocity_cmt.VFPageControllerBase" sidebar="true" docType="html-5.0" >
+    <vlocity_cmt:OmniScriptInstanceComponent standardController="{!stdController}"/>
+     
+    <script type="text/javascript">    
+        setTimeout(function(){ 
+         $("div th:contains('Name')").html('Nom');
+         $("div th:contains('Status')").html('Statut');
+         $("div th:contains('Last Saved')").html('Date sauvegarde');
+         $("div td a:contains('In Progress')").html('En Cours');
+         $("div td a[target]").attr('target', '_self');
+        }, 100);     
+    </script> 
+                             
+</apex:page>

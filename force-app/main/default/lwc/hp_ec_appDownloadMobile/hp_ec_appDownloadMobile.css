@@ -1,0 +1,63 @@
+.hp-bloc-app-happe {
+  box-shadow: var(--box-shadow);
+  background-image: var(--bg);
+  margin: 20px;
+  display: flex;
+  padding: 10px;
+  font-weight: bold;
+  align-items: center;
+  position: relative;
+  max-height: 93px;
+  color: var(--text-color);
+}
+
+.hp-bloc-app-happe:hover,
+.hp-bloc-app-happe:focus,
+.hp-bloc-app-happe:active {
+  background: var(--secondary-colour);
+  color: var(--black);
+}
+
+.hp-bloc-app-happe p,
+.hp-bloc-app-happe p a {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.hp-bloc-app-happe img {
+  width: 65px;
+  height: 65px;
+}
+
+.hp-bloc-app-happe p {
+  font-family: "font_AvantBold";
+  font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: 0.45px;
+  text-align: left;
+  padding-right: 30px;
+}
+
+.hp-bloc-app-happe p a .chevron::before {
+  border-style: solid;
+  font-size: 16px;
+  border-width: 0.15em 0.15em 0 0;
+  content: '';
+  display: inline-block;
+  height: 0.60em;
+  right: 0.15em;
+  position: absolute;
+  top: 18px;
+  transform: rotate(-45deg);
+  vertical-align: top;
+  width: 0.60em;
+}
+
+.hp-bloc-app-happe p a .chevron.right:before {
+  top: 45%;
+  right: 30px;
+  transform: rotate(45deg);
+}

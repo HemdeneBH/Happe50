@@ -1,0 +1,78 @@
+.hp-blocConfirm.blue{
+  background: var(--bg-blue);
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  color: var(--text-color);
+}
+
+p {
+  font-family: var(--font-bold);
+  color: var(--text-color);
+}
+
+
+.c-blocConfirm-icon.blue {
+  background: var(--blue);
+  border: 7px solid var(--bg-blue);
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+
+.c-blocConfirm-icon {
+  border-radius: 50%;
+  width: 65px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  flex: 0 0 auto;
+  margin: 1rem;
+  align-items: center;
+  align-content: center;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+
+.c-blocConfirm {
+  display: flex;
+  align-items: center;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  position: relative;
+  margin: 25px 0 0 0;
+}
+.c-blocConfirm__text {
+  font-family: var(--font-bold);
+  font-size: 14px;
+
+}
+
+.c-blocConfirm-innerCircle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+.c-blocConfirm-img {
+  width: 32px;
+  height: auto;
+}
+
+
+ 
+  @media (max-width: 1280px) {
+    /* 1280px screen and all screens smaller */
+  
+}
+  
+  @media (max-width: 1024px) {
+    /* Ipad and tablets */
+    .c-blocConfirm__text {
+      justify-self: center;
+      padding: 20px 20px 20px 0;
+    }
+}
+
+@media (max-width: 576px) { 
+        /* mobiles */
+  
+}

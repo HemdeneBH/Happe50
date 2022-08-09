@@ -1,0 +1,86 @@
+/* .container{
+	padding: 5% 25%;
+ } */
+ /* .container{
+	 width: 95%;
+ }
+ .header{
+	width: 95%; 
+ } */
+ .THIS{
+	height: 50%;
+}
+.display-none{
+   display: none;
+}
+.slds-page-header_title{
+   color: #00396b;
+}
+/* .slds-page-header_title::after{
+   font-size: 0;
+   display: block;
+   width: 100%;
+   overflow: hidden;
+   min-height: .1rem;
+   height: .1rem;
+   content: " ";
+   background: linear-gradient(141deg,#05a6df,#1fc8db 51%,#50e3c2 75%);
+   margin-top: 20px;
+} */
+/* .THIS span.slds-form-element__label{
+   color: #49739c !important;
+} */
+
+/* h1{
+   text-align: center;
+} */
+
+/* h2{
+   color: #80a53d;
+   font-weight: 400;
+} */
+.THIS{
+   text-decoration-color: #3e3e3c;
+   font-family: Helvetica;
+
+}
+.title.slds-p-top_x-large.slds-m-bottom_x-small{
+   color: #00396b;	
+   font-weight: 400;
+}
+/* .header::after{
+   font-size: 0;
+   display: block;
+   width: 100%;
+   overflow: hidden;
+   min-height: .1rem;
+   height: .1rem;
+   content: " ";
+   background: linear-gradient(141deg,#05a6df,#1fc8db 51%,#50e3c2 75%);
+   margin-top: 10px;
+
+} */
+.ce{
+   background-color: white;
+   
+}
+.slds-modal__footer.slds-m-top_large {
+   margin-bottom: 60px;
+}
+.tst.slds-col.slds-size_6-of-6{
+	display:inline-block;
+}
+ .svgd{
+	padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+    vertical-align: middle;
+    justify-content: center;
+    border: 1px solid rgb(217, 219, 221);
+    transition: border .15s linear;
+    background-color: rgb(0, 112, 210);
+    border-color: rgb(0, 112, 210);
+	color: rgb(255, 255, 255);
+	font-family:'Salesforce Sans',Arial,sans-serif;
+	
+	}

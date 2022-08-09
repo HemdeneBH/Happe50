@@ -1,0 +1,56 @@
+<template>
+    
+    <div style="width: 95%;padding-left: 5%;">
+        <ol class="slds-progress__list">
+    <template for:each={listEtapesWrapper} for:item="etapeWrapper" for:index="indexvar">
+        <!-- Bar -->
+        <template if:false={etapeWrapper.isFirst}>
+            <!-- If the Step not grey, show green bar -->
+            <template if:true={etapeWrapper.isLineGreen}>
+            <div key= {etapeWrapper.number} class="hr-line_green" ></div>
+            </template>
+    
+     <!-- If the Step isGrey, show grey bar -->
+            <template if:true={etapeWrapper.isLineGrey}>
+            <div key= {etapeWrapper.number} class="hr-line_grey"></div>
+    </template>
+            </template>
+    
+            <!-- Icon -->
+             <!-- If the Step isSuccess, show check icon -->
+        <template if:true={etapeWrapper.isSuccess}>
+    <li key= {etapeWrapper.number} class="slds-progress__item slds-is-completed">
+        <lightning-icon icon-name="action:check" size="xx-small" class="my-icon" ></lightning-icon>
+    </li>
+    </template>
+      <!-- If the Step isGrey, show grey icon -->
+    <template if:true={etapeWrapper.isGrey}>
+        <li key= {etapeWrapper.number} class="slds-progress__item">
+            <button class="slds-button slds-progress__marker">
+            </button>
+            </li>
+        </template>
+    
+      <!-- If the Step isError, show error icon -->
+        <template if:true={etapeWrapper.isError}>
+            <li key= {etapeWrapper.number} class="slds-progress__item slds-has-error">
+                <button class="slds-button slds-button_icon slds-progress__marker slds-progress__marker_icon" title="Step 3 - Error">
+                    <lightning-icon icon-name="utility:error" alternative-text="Account" title="Account" size="small" class="red-icon"></lightning-icon>
+                 </button>
+              </li>
+            </template>
+    
+             <!-- If the Step isCurrent, show grey icon -->
+    <template if:true={etapeWrapper.isCurrent}>
+            <li key= {etapeWrapper.number}  class="slds-progress__item slds-is-active">
+                <button class="slds-button slds-progress__marker">
+                </button>
+                </li>
+                </template>
+    
+    
+    </template>
+    </ol>
+    </div>
+    
+    </template>

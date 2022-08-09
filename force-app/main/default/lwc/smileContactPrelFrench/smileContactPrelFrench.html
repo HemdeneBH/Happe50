@@ -1,0 +1,116 @@
+<template>
+    <template if:false={_bActiveSection}>
+        <lightning-layout vertical-align="stretch">
+            <lightning-layout-item flexibility="auto" padding="around-small" class="slds-text-align_center slds-p-around_small" size="1">
+                <lightning-icon icon-name="utility:error" alternative-text="Error!" variant="error" size="large">
+                </lightning-icon>
+            </lightning-layout-item>
+            <lightning-layout-item flexibility="auto" padding="around-small" class="custom-box">
+                <p class="slds-text-heading_medium">{_label.OmniScriptError}</p>
+                <p class="bold">{_label.OmniScriptNotFound3}</p>
+                <dl class="slds-dl_inline">
+                    <dt class="slds-dl_inline__label"><strong>{_label.OmniScriptType}:</strong></dt>
+                    <dd class="slds-dl_inline__detail">smileContact</dd>
+                    <dt class="slds-dl_inline__label"><strong>{_label.OmniScriptSubType}:</strong></dt>
+                    <dd class="slds-dl_inline__detail">Prel</dd>
+                    <dt class="slds-dl_inline__label"><strong>{_label.OmniScriptLang}:</strong></dt>
+                    <dd class="slds-dl_inline__detail">French</dd>
+                </dl>
+                <p class="footer-message">{_label.OmniScriptNotFound2}</p>
+            </lightning-layout-item>
+        </lightning-layout>
+    </template>
+    <template if:true={_bActiveSection}>
+        <template if:false={compLoaded}>
+            <div class="slds-spinner-container__wrapper">
+                <vlocity_cmt-spinner variant="brand"
+                                    alternative-text="Loading.."
+                                    size="medium">
+                </vlocity_cmt-spinner>
+            </div>
+        </template>
+        <template if:true={firstRender}>
+            <article class="omniscript-article slds-card slds-grid slds-wrap"
+                    data-content-position={stepChartProps.position}>
+                <vlocity_cmt-omniscript-step-chart json-def={jsonDef}
+                                                    json-data={jsonDef.response}
+                                                    if:false={jsonDef.propSetMap.hideStepChart}
+                                                    data-omni-key='omniscriptStepChart'
+                                                    class="slds-col slds-m-top_x-small slds-p-left_large slds-size_1-of-1"
+                                                    props={stepChartProps}
+                                                    layout={layout}>
+                </vlocity_cmt-omniscript-step-chart>
+                <div data-stepborder={stepChartProps.position}
+                    class={contentSldsClass}>
+                    <template if:true={pageLoading}>
+                        <vlocity_cmt-spinner variant="brand"
+                                            alternative-text="Loading..."
+                                            extraouterclass="slds-theme_default"
+                                            size="medium">
+                        </vlocity_cmt-spinner>
+                    </template>
+                    <template for:each={jsonDef.children} for:item="item" for:index="idx"><vlocity_cmt-omniscript-set-values if:true={item.bSetValues} key={item.lwcId} json-def={item} data-omni-key={item.name} json-data={jsonDef.response} layout={layout} resume={resume} script-header-def={scriptHeaderDef}></vlocity_cmt-omniscript-set-values><vlocity_cmt-omniscript-ip-action if:true={item.bIntegrationProcedureAction} key={item.lwcId} json-def={item} data-omni-key={item.name} json-data={jsonDef.response} layout={layout} resume={resume} script-header-def={scriptHeaderDef}></vlocity_cmt-omniscript-ip-action><vlocity_cmt-omniscript-remote-action if:true={item.bRemoteAction} key={item.lwcId} json-def={item} data-omni-key={item.name} json-data={jsonDef.response} layout={layout} resume={resume} script-header-def={scriptHeaderDef}></vlocity_cmt-omniscript-remote-action><vlocity_cmt-omniscript-step if:true={item.bStep} key={item.lwcId} json-def={item} data-omni-key={item.name} json-data={jsonDef.response} layout={layout} resume={resume} script-header-def={scriptHeaderDef} seed-json={jsonDef.propSetMap.seedDataJSON}><template for:each={item.children} for:item="itemChild0" for:index="itemChild0Idx"><template for:each={itemChild0.eleArray} for:item="itemChild0Ele" for:index="itemChild0Idx"><vlocity_cmt-omniscript-block if:true={itemChild0Ele.bBlock} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} layout={layout} resume={resume} script-header-def={scriptHeaderDef} seed-json={jsonDef.propSetMap.seedDataJSON}><template for:each={itemChild0Ele.children} for:item="itemChild0EleChild0" for:index="itemChild0EleChild0Idx"><template for:each={itemChild0EleChild0.eleArray} for:item="itemChild0EleChild0Ele" for:index="itemChild0EleChild0Idx"><vlocity_cmt-omniscript-text-block if:true={itemChild0EleChild0Ele.bTextBlock} key={itemChild0EleChild0Ele.lwcId} json-def={itemChild0EleChild0Ele} data-omni-key={itemChild0EleChild0Ele.name} json-data={jsonDef.response} layout={layout} resume={resume} script-header-def={scriptHeaderDef}></vlocity_cmt-omniscript-text-block><vlocity_cmt-omniscript-select if:true={itemChild0EleChild0Ele.bSelect} key={itemChild0EleChild0Ele.lwcId} json-def={itemChild0EleChild0Ele} data-omni-key={itemChild0EleChild0Ele.name} json-data={jsonDef.response} layout={layout} resume={resume} script-header-def={scriptHeaderDef} seed-json={jsonDef.propSetMap.seedDataJSON}></vlocity_cmt-omniscript-select><vlocity_cmt-omniscript-formula if:true={itemChild0EleChild0Ele.bFormula} key={itemChild0EleChild0Ele.lwcId} json-def={itemChild0EleChild0Ele} data-omni-key={itemChild0EleChild0Ele.name} json-data={jsonDef.response} layout={layout} resume={resume} script-header-def={scriptHeaderDef}></vlocity_cmt-omniscript-formula><vlocity_cmt-omniscript-ip-action if:true={itemChild0EleChild0Ele.bIntegrationProcedureAction} key={itemChild0EleChild0Ele.lwcId} json-def={itemChild0EleChild0Ele} data-omni-key={itemChild0EleChild0Ele.name} json-data={jsonDef.response} layout={layout} resume={resume} script-header-def={scriptHeaderDef}></vlocity_cmt-omniscript-ip-action><vlocity_cmt-omniscript-text if:true={itemChild0EleChild0Ele.bText} key={itemChild0EleChild0Ele.lwcId} json-def={itemChild0EleChild0Ele} data-omni-key={itemChild0EleChild0Ele.name} json-data={jsonDef.response} layout={layout} resume={resume} script-header-def={scriptHeaderDef} seed-json={jsonDef.propSetMap.seedDataJSON}></vlocity_cmt-omniscript-text><vlocity_cmt-omniscript-line-break if:true={itemChild0EleChild0Ele.bLineBreak} key={itemChild0EleChild0Ele.lwcId} json-def={itemChild0EleChild0Ele} data-omni-key={itemChild0EleChild0Ele.name} layout={layout} resume={resume} script-header-def={scriptHeaderDef}></vlocity_cmt-omniscript-line-break><vlocity_cmt-omniscript-textarea if:true={itemChild0EleChild0Ele.bTextarea} key={itemChild0EleChild0Ele.lwcId} json-def={itemChild0EleChild0Ele} data-omni-key={itemChild0EleChild0Ele.name} json-data={jsonDef.response} layout={layout} resume={resume} script-header-def={scriptHeaderDef} seed-json={jsonDef.propSetMap.seedDataJSON}></vlocity_cmt-omniscript-textarea><vlocity_cmt-omniscript-checkbox if:true={itemChild0EleChild0Ele.bCheckbox} key={itemChild0EleChild0Ele.lwcId} json-def={itemChild0EleChild0Ele} data-omni-key={itemChild0EleChild0Ele.name} json-data={jsonDef.response} layout={layout} resume={resume} script-header-def={scriptHeaderDef} seed-json={jsonDef.propSetMap.seedDataJSON}></vlocity_cmt-omniscript-checkbox><vlocity_cmt-omniscript-date-time if:true={itemChild0EleChild0Ele.bDateTime} key={itemChild0EleChild0Ele.lwcId} json-def={itemChild0EleChild0Ele} data-omni-key={itemChild0EleChild0Ele.name} json-data={jsonDef.response} layout={layout} resume={resume} script-header-def={scriptHeaderDef} seed-json={jsonDef.propSetMap.seedDataJSON}></vlocity_cmt-omniscript-date-time><vlocity_cmt-omniscript-set-values if:true={itemChild0EleChild0Ele.bSetValues} key={itemChild0EleChild0Ele.lwcId} json-def={itemChild0EleChild0Ele} data-omni-key={itemChild0EleChild0Ele.name} json-data={jsonDef.response} layout={layout} resume={resume} script-header-def={scriptHeaderDef}></vlocity_cmt-omniscript-set-values></template></template></vlocity_cmt-omniscript-block><vlocity_cmt-omniscript-formula if:true={itemChild0Ele.bFormula} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} layout={layout} resume={resume} script-header-def={scriptHeaderDef}></vlocity_cmt-omniscript-formula><vlocity_cmt-omniscript-text-block if:true={itemChild0Ele.bTextBlock} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} layout={layout} resume={resume} script-header-def={scriptHeaderDef}></vlocity_cmt-omniscript-text-block><vlocity_cmt-omniscript-line-break if:true={itemChild0Ele.bLineBreak} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} layout={layout} resume={resume} script-header-def={scriptHeaderDef}></vlocity_cmt-omniscript-line-break><vlocity_cmt-omniscript-checkbox if:true={itemChild0Ele.bCheckbox} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} layout={layout} resume={resume} script-header-def={scriptHeaderDef} seed-json={jsonDef.propSetMap.seedDataJSON}></vlocity_cmt-omniscript-checkbox><vlocity_cmt-omniscript-radio if:true={itemChild0Ele.bRadio} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} layout={layout} resume={resume} script-header-def={scriptHeaderDef} seed-json={jsonDef.propSetMap.seedDataJSON}></vlocity_cmt-omniscript-radio><vlocity_cmt-omniscript-select if:true={itemChild0Ele.bSelect} key={itemChild0Ele.lwcId} json-def={itemChild0Ele} data-omni-key={itemChild0Ele.name} json-data={jsonDef.response} layout={layout} resume={resume} script-header-def={scriptHeaderDef} seed-json={jsonDef.propSetMap.seedDataJSON}></vlocity_cmt-omniscript-select></template></template></vlocity_cmt-omniscript-step><vlocity_cmt-omniscript-dr-extract-action if:true={item.bDataRaptorExtractAction} key={item.lwcId} json-def={item} data-omni-key={item.name} json-data={jsonDef.response} layout={layout} resume={resume} script-header-def={scriptHeaderDef}></vlocity_cmt-omniscript-dr-extract-action><vlocity_cmt-omniscript-dr-post-action if:true={item.bDataRaptorPostAction} key={item.lwcId} json-def={item} data-omni-key={item.name} json-data={jsonDef.response} layout={layout} resume={resume} script-header-def={scriptHeaderDef}></vlocity_cmt-omniscript-dr-post-action><vlocity_cmt-omniscript-dr-transform-action if:true={item.bDataRaptorTransformAction} key={item.lwcId} json-def={item} data-omni-key={item.name} json-data={jsonDef.response} layout={layout} resume={resume} script-header-def={scriptHeaderDef}></vlocity_cmt-omniscript-dr-transform-action></template>
+                    <div class="slds-grid slds-wrap slds-gutters slds-p-horizontal_medium">
+                        <div class="slds-col slds-size_12-of-12 slds-medium-size_6-of-12"></div>
+                        <div class="slds-col slds-size_12-of-12 slds-medium-size_6-of-12">
+                            <div class="slds-grid slds-wrap slds-grid_align-end">
+                                <template if:true={hasPrev}>
+                                        <vlocity_cmt-button type="button"
+                                                            label={navButton.previous.label}
+                                                            variant="brand"
+                                                            class={navButton.previous.classes}
+                                                            extraclass="slds-size_1-of-1 slds-p-horizontal_none slds-text-align_center"
+                                                            onclick={prevStep}>
+                                        </vlocity_cmt-button>
+                                </template>
+                                <template if:true={hasNext}>
+                                        <vlocity_cmt-button type="button"
+                                                            label={navButton.next.label}
+                                                            variant="brand"
+                                                            class={navButton.next.classes}
+                                                            extraclass="slds-size_1-of-1 slds-p-horizontal_none slds-text-align_center"
+                                                            onclick={nextStep}>
+                                        </vlocity_cmt-button>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <template for:each={modalEvents}
+                    for:item="modallvl1"
+                    for:index="indexlvl1">
+                <vlocity_cmt-omniscript-modal data-omni-key='omnimodal'
+                                            key={modallvl1.modalHeader}
+                                            type={modallvl1.type}
+                                            layout={layout}
+                                            hide-footer={modallvl1.hideFooter}
+                                            hide-header={modallvl1.hideHeader}>
+                    <div slot="header">
+                        <h1>{modallvl1.modalHeader}</h1>
+                    </div>
+                    <div slot="content">
+                        {modallvl1.modalMessage}
+                    </div>
+                    <div slot="footer">
+                        <ul class="slds-button-group-row">
+                            <template for:each={modallvl1.buttons}
+                                    for:item="modalbutton"
+                                    for:index="modalbuttonindex">
+                                <template if:true={modalbutton.label}>
+                                    <li class="slds-button-group-item"
+                                        key={modalbutton.key}>
+                                        <lightning-button label={modalbutton.label}
+                                                        value={indexlvl1}
+                                                        onclick={modalbutton.handleClick}>
+                                        </lightning-button>
+                                    </li>
+                                </template>
+                            </template>
+                        </ul>
+                    </div>
+                </vlocity_cmt-omniscript-modal>
+            </template>
+        </template>
+    </template>
+</template>

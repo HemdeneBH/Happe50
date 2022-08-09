@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RQF__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Nom du RQF</description>
+    <externalId>false</externalId>
+    <label>Référent - RQF</label>
+    <referenceTo>User</referenceTo>
+    <relationshipName>SESSIONS_Test</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

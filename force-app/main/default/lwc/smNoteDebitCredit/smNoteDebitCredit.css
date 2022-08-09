@@ -1,0 +1,54 @@
+.pageTitle{
+    font-weight: bold;
+    font-size: 20px;
+}
+.addressTitle{
+    font-size: 10px;
+}
+
+.tableListPa{
+    height: 45px;
+    border: solid 1px #979797;
+    background-color: #767f85;
+    table-layout: fixed;
+    width: 129px;                                           
+    color: #ffffff;
+}
+
+table tr td:first-child::before {
+    min-width: 1em;
+    margin-right: 0.5em;
+}
+.grayBackground{
+    background-color:#e6ebec
+}
+
+
+.brand {
+    background-color: #059ce7;    
+}
+.slds-button-neutral {
+   color: white;
+    border-color:white;
+}
+
+td,th {
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+    text-align: -internal-center;
+    /*width:1.5rem;*/
+    height:45px;
+    padding: 1%;
+}
+
+ 
+tbody tr:nth-child(odd) {
+     background-color:rgba(54, 207, 160, 0.1); /*Donne la couleur au ligne pair*/
+}
+
+.buttonContainer{
+    display: inline-block;
+    text-align: right;
+    width: 100%;
+}

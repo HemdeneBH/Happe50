@@ -1,0 +1,44 @@
+.bloc-card {
+    height: 450px;
+    text-align: center;
+    position: relative;
+}
+
+.margin-20 {
+    margin-bottom: 20px;
+}
+
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translate(-50%, -50%);
+}
+
+.title {
+    font-size: 30px;
+    font-weight: bolder;
+    text-transform: uppercase;
+    color: #059ce7;
+}
+
+.text-bold {
+    font-size: 18px;
+    font-weight: bold;
+    color: #767172;
+}
+
+.text {
+    font-size: 16px;
+    color: #767172;
+    width: calc( 100% - 50px);
+    float: left;
+    padding-left: 5px;
+}
+
+.container-icon {
+    width: 50px;
+    float: left;
+}

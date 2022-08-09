@@ -1,0 +1,46 @@
+:host(.lightTheme) .hp-donnesPersonnelles  {
+  box-shadow: -5px 5px 15px 0 rgba(12, 29, 38, 0.21);
+  background-image: linear-gradient(26deg, #e5ebf5 23%, #ffffff 96%);
+  color: var(--black);
+} 
+:host(.darkTheme) .hp-donnesPersonnelles  {
+  box-shadow: -5px 5px 25px 0 rgba(0, 0, 0, 0.7);
+  background-image: linear-gradient(14deg, #26242b -19%, #424242 119%);
+  color: var(--white);
+} 
+
+  .hp-styleClass >a {
+    color: #43e6ee;
+  }
+  .hp-styleClass{
+    margin: 7px 8px 10px 17px;
+    font-family: "font_AvantBold";
+    font-size: 12px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 0.94;
+    letter-spacing: 0.68px;
+    color: #43e6ee;
+  }
+
+  .hp-bigTitle{
+    font-family: "font_AvantBold";
+    font-size: 20px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: 0.54px;
+    text-align: left;
+    color: var(--white);
+    margin: 23px 12px 25px 5px;
+    padding-left: 35px;
+    text-transform: uppercase;
+  }
+
+
+
+  .hp-donnesPersonnelles{
+      text-align: left;
+      width: 50%;
+  }

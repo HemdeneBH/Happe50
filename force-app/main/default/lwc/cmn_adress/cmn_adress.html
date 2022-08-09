@@ -1,0 +1,25 @@
+<!--
+  @File Name          : cmn_adress.html
+  @Description        : 
+  @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
+  @Group              : 
+  @Last Modified By   : ChangeMeIn@UserSettingsUnder.SFDoc
+  @Last Modified On   : 10/04/2020 à 10:44:23
+  @Modification Log   : 
+  Ver       Date            Author      		    Modification
+  1.0    10/04/2020   ChangeMeIn@UserSettingsUnder.SFDoc     Initial Version
+-->
+<template>
+    <template if:true={isLast}>
+      <div>
+        <span if:true={numerovoie}>{numerovoie},</span><span>{libellevoie}</span>
+      </div>
+      <div if:true={complementadresse}>
+        {complementadresse}
+      </div>
+      <div>{codepostal} <span if:true={ville}>{ville}</span></div>
+      <template if:false={loaded}>
+       <lightning-icon icon-name="utility:spinner" title="Loading" size="small"></lightning-icon>
+      </template>
+    </template>
+  </template>

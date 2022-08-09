@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_StatutduCase__c</fullName>
+    <description>Données techniques, statut du case</description>
+    <externalId>false</externalId>
+    <label>OLDStatut du case</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>CPV Délivrées</fullName>
+                <default>true</default>
+                <label>CPV Délivrées</label>
+            </value>
+            <value>
+                <fullName>CPV Signées</fullName>
+                <default>false</default>
+                <label>CPV Signées</label>
+            </value>
+            <value>
+                <fullName>A traiter BO</fullName>
+                <default>false</default>
+                <label>A traiter BO</label>
+            </value>
+            <value>
+                <fullName>En traitement BO</fullName>
+                <default>false</default>
+                <label>En traitement BO</label>
+            </value>
+            <value>
+                <fullName>Vente à compléter</fullName>
+                <default>false</default>
+                <label>Vente à compléter</label>
+            </value>
+            <value>
+                <fullName>Vente transformée</fullName>
+                <default>false</default>
+                <label>Vente transformée</label>
+            </value>
+            <value>
+                <fullName>Vente perdue</fullName>
+                <default>false</default>
+                <label>Vente perdue</label>
+            </value>
+            <value>
+                <fullName>Abandon</fullName>
+                <default>false</default>
+                <label>Abandon</label>
+            </value>
+            <value>
+                <fullName>Annulé</fullName>
+                <default>false</default>
+                <label>Annulé</label>
+            </value>
+            <value>
+                <fullName>Rétracté</fullName>
+                <default>false</default>
+                <label>Rétracté</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

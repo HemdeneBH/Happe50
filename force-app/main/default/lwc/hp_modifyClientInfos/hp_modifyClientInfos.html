@@ -1,0 +1,172 @@
+<!--
+  @File Name          : hp_modifyClientInfos.html
+  @Description        : 
+  @Author             : Mohamed Aamer
+  @Group              : 
+  @Last Modified By   : Mouhamadoune Coulibaly
+  @Last Modified On   : 24/03/2020 à 11:58:24
+  @Modification Log   : 
+  Ver       Date            Author      		    Modification
+  1.0    20/01/2020   Mohamed Aamer     Initial Version
+-->
+<template>
+	<div class="container slds-theme_default slds-p-left_xx-large ">
+		<div class="header slds-m-bottom_xx-large">
+			<div class=" slds-m-vertical_x-large ">
+				<div class="info slds-border_bottom">
+					<div class="ce slds-border_bottom">
+						<h1
+							class="title slds-p-top_x-large slds-m-bottom_x-small slds-text-heading_large slds-page-header_title ">
+							Modification de la fiche client</h1>
+							<!-- REMOVED UNTIL MVP -->
+					<!-- 	<div class="slds-box  slds-p-top_x-large ">
+							<table>
+								<tr>
+									<td><span class="slds-text-title_bold">Client :</span>{firstname} {lastname}</td>
+									<td><span class="slds-text-title_bold">Logement :</span> <span
+											class="slds-text-color_weak slds-m-left_xx-small">9 ruelle Brit,
+											27200</span>
+									</td>
+									<td><span class="slds-text-title_bold">Contrat :</span><span
+											class="slds-text-color_weak slds-m-left_xx-small">XXXXX</span></td>
+									<td><span class="slds-text-title_bold">PDL :</span><span
+											class="slds-text-color_weak slds-m-left_xx-small">XXXXXXXXX</span></td>
+								</tr>
+							</table>
+						</div> -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<lightning-record-edit-form record-id={recordId} object-api-name="Contact" onsubmit={handleSubmit}
+			class="slds-grid slds-grid_vertical slds-p-top_large ">
+			<section>
+				<lightning-output-field field-name="Salutation" class=" slds-size_2-of-6 vlc-color">
+				</lightning-output-field>
+				<lightning-output-field field-name="FirstName" class=" slds-size_2-of-6 vlc-color">
+				</lightning-output-field>
+				<lightning-output-field field-name="LastName" class=" slds-size_2-of-6 vlc-color">
+				</lightning-output-field>
+			</section>
+			<section class="slds-m-top_large">
+				<h2 class="slds-text-heading_large slds-m-bottom_large">Adresse de contact</h2>
+				<div>
+					<lightning-radio-group name="radioGroup" class="slds-form-element__label  slds-m-bottom_medium"
+						label="Mode de saisie d'adresse" options={options} value={value} type="radio"
+						onchange={handleOnChange}>
+					</lightning-radio-group>
+				</div>
+				<div>
+					<lightning-messages></lightning-messages>
+					<div class="auto display-none slds-size_2-of-6">
+						<lightning-input label="Adresse de contact" list="valueList" onchange={getSearchResult}
+							value={curentSearchResult} required></lightning-input>
+						
+						<div data-id="listbox"
+							class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid " role="listbox"
+							style="position: relative;">
+							<ul class="slds-listbox slds-listbox_vertical" role="presentation">
+								<template for:each={searchResult} for:item="feature">
+									<li role="presentation" class="slds-listbox__item" key={feature.type}>
+										<div data-id={feature.properties.id} data-name={feature.properties.label}
+											data-housenumber={feature.properties.housenumber}
+											data-street={feature.properties.street}
+											data-postcode={feature.properties.postcode}
+											data-city={feature.properties.city}
+											data-citycode={feature.properties.citycode}
+											class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+											role="option" onclick={selectedValue}>
+											<span class="slds-media__body">
+												<span
+													class="slds-listbox__option-text slds-listbox__option-text_entity">{feature.properties.label}</span>
+											</span>
+										</div>
+									</li>
+								</template>
+							</ul>
+						</div>
+					
+					</div>
+					<section class="slds-m-top_large manu">
+						<lightning-input-field field-name="No_Voie__c" class="slds-size_2-of-6 noVoie" required onchange={handleChangeNumStreet}> </lightning-input-field>
+						<lightning-input-field field-name="MailingStreet" class="slds-size_2-of-6 noStreet" required onchange={handleChangeStreet}> </lightning-input-field>
+						<lightning-input-field field-name="Complement_adresse__c" class="slds-col slds-size_2-of-6 cmpAdress" onchange={handleChangeCompAddr}></lightning-input-field>
+						<lightning-input-field field-name="MailingPostalCode" class="slds-col slds-size_2-of-6 noPostal" required onchange={handleChangePC}></lightning-input-field>
+						<lightning-input-field field-name="MailingCity" class="slds-col slds-size_2-of-6 noCity" required onchange={handleChangeCity}></lightning-input-field>
+							<lightning-button label="Vérifier ELD" onclick={handleClickELD}></lightning-button>
+					</section>
+					<div if:true={isElecGazELD}>La ville est une entreprise locale de distribution pour le gaz et
+						l'électricité, cette adresse n'est pas compatible avec un contrat happ-e.</div>
+					<div if:false={isElecGazELD}>
+						
+						<div if:true={isGazELD}>La ville est une entreprise locale de distribution pour le gaz, cette
+							adresse nest pas compatible avec un contrat happ-e gaz.</div>
+						<div if:true={isElecELD}> La ville est une entreprise locale de distribution pour l'électricité,
+							cette adresse n'est pas compatible avec un contrat happ-e électricité.</div>
+					</div>
+				</div>
+			</section>
+			<section class="slds-m-top_large">
+				<h2 class="slds-text-heading_large slds-m-bottom_large">Contact</h2>
+				<lightning-input-field field-name="HP_IsHappe__c"  class= "slds-hide isHappe"> </lightning-input-field>
+				<lightning-input-field field-name="Email" class="slds-col slds-size_2-of-6 email" onchange={handleChangeEmail}></lightning-input-field>
+			<div class="row">
+				
+				<lightning-input-field field-name="MobilePhone"  class="slds-col slds-size_2-of-6 num1" value={numMobileFormatted} onchange={checkMobile} required></lightning-input-field>
+			</div>
+				<div class="mobileError slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error slds-col slds-size_2-of-6 display-none" role="alert">
+					<h2>Veuillez saisir un numéro commençant par 06 ou 07 suivi de 8 chiffres</h2>
+				</div>
+				<div class="notvalid1 slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error slds-col slds-size_2-of-6 display-none"
+                role="alert">
+                <h2>Donnée invalide</h2>
+                </div>
+				<lightning-input-field field-name="Phone" value={numFixeFormatted} class="slds-col slds-size_2-of-6 num2" onchange={checkFixe}></lightning-input-field>
+				<div class="fixeError slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error slds-col slds-size_2-of-6 display-none"
+					role="alert">
+					<h2>Veuillez saisir un numéro commençant par 01 à 05 ou 09 suivi de 8 chiffres</h2>
+				</div>
+				<div class="notvalid2 slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error slds-col slds-size_2-of-6 display-none"
+                role="alert">
+                <h2>Donnée invalide</h2>
+                </div>
+			</section>
+			<section class="slds-m-top_large slds-m-bottom_xx-large">
+				<h2 class="slds-text-heading_large slds-m-bottom_large">Consentements</h2>
+				<template for:each={consentementList} for:item="consentement" class="slds-m-bottom_xx-large">
+					<div key={consentement.idQuestionnaire} class="slds-grid slds-gutters slds-m-top_medium ">
+						<div class="slds-col slds-size_10-of-12">
+							<span>{consentement.libelleQuestion}</span>
+						</div>
+						<div class="slds-col slds-size_2-of-12">
+							<input type="radio" name={consentement.name} checked={consentement.checkYes}
+								onchange={getmodifiedConsent} value="checkYes">
+							<span class="slds-p-left_xx-small">Oui</span>
+							<input type="radio" name={consentement.name} checked={consentement.checkNo}
+								onchange={getmodifiedConsent} value="checkNo" class="slds-m-left_medium">
+							<span class="slds-p-left_xx-small">Non</span>
+						</div>
+					</div>
+				</template>
+			</section>
+			<section class="slds-m-top_large slds-m-bottom_xx-large">
+				<h2 class="slds-text-heading_large slds-m-bottom_large">Recapitulatif</h2>
+				<div class="slds-list_horizontal">
+					<label>Souhaitez-vous recevoir une confirmation par email de ces modifications ?</label>
+					<lightning-input class="confirmation-email slds-m-left_large" type="checkbox" value={confirmationEmail} disabled onchange={isSendEmailChecked}></lightning-input>
+				</div>
+				<div class="slds-list_horizontal">
+					<label>Souhaitez-vous recevoir une confirmation par SMS de ces modifications ?</label>
+					<lightning-input class="confirmation-sms slds-m-left_large" type="checkbox" value={confirmationSMS} disabled onchange={isSendSMSChecked}></lightning-input>
+				</div>
+			</section>
+			<footer class="slds-modal__footer slds-m-top_large">
+				<button title="SAUVEGARDER" class="svgd slds-button slds-button_brand" type="submit"
+					name="update">Sauvegarder</button>
+			</footer>
+		</lightning-record-edit-form>
+		<div class="exampleHolder" if:true={loading}>
+			<lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+		</div>
+	</div>
+</template>

@@ -1,0 +1,33 @@
+<aura:component implements="force:hasRecordId,force:lightningQuickActionWithoutHeader" controller="SM_LC01_UpdateEmailMessage_Controller">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="caseIdLC" type="String" />
+    <aura:attribute name="listCaseWrappers" type="List[]"/>
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="error" type="String" />
+    <lightning:workspaceAPI aura:id="workspace"/>
+
+    
+    <aura:if isTrue="{! !empty(v.error)}">
+        <ui:message title="Error" severity="error" closable="true">
+            {!v.error}
+        </ui:message>
+    </aura:if>
+    
+    <lightning:select name="caseId" label="Select a Case : " aura:id="caseIdSelect">
+        <option value="">Choisir un case </option>
+        <aura:iteration items="{!v.listCaseWrappers}" var="caseWrapper">
+            <option value="{!caseWrapper.caseId}">
+                {!caseWrapper.caseSubject}
+            </option>
+        </aura:iteration>
+    </lightning:select>
+    <br/>
+    <div style="margin-left:80%">
+        <lightning:button variant="brand" label="Enregistrer" onclick="{! c.handleClick }"/>    
+    </div>
+    
+    
+    
+    
+</aura:component>

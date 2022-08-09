@@ -1,0 +1,22 @@
+.delete-icon{
+    --sds-c-icon-color-foreground-default: red;
+ }
+.warning-icon{
+    --sds-c-icon-color-foreground-default: orange;
+}
+.containerdelete{
+    background-color: white ;
+    max-width: 80rem !important;
+    width: 40% !important;
+    margin: auto;
+    margin-top: 400px;
+}
+.headerPopupDelete{
+    font-size:1.25rem; 
+    line-height: 1.25;
+    font-weight: bold;
+}
+.btn_delete{
+    position: absolute;
+    bottom: 13.5px;
+}

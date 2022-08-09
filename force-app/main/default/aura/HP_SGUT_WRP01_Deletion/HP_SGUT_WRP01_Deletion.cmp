@@ -1,0 +1,3 @@
+<aura:component  implements="force:lightningQuickActionWithoutHeader,force:hasRecordId">
+    <c:HP_SGUTComp operation="deletion" recordId ="{!v.recordId }"/>
+</aura:component>

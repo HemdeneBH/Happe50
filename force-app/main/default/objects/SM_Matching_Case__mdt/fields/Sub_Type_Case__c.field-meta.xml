@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sub_Type_Case__c</fullName>
+    <description>Sous type case</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Sub_Type_Case</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Emménagement</fullName>
+                <default>true</default>
+                <label>Emménagement</label>
+            </value>
+            <value>
+                <fullName>Gestion des données bancaire et moyen de paiement</fullName>
+                <default>false</default>
+                <label>Gestion des données bancaire et moyen de paiement</label>
+            </value>
+            <value>
+                <fullName>Modification données personnelles/administrative</fullName>
+                <default>false</default>
+                <label>Modification données personnelles/administrative</label>
+            </value>
+            <value>
+                <fullName>Suivi consommation / contestation index</fullName>
+                <default>false</default>
+                <label>Suivi consommation / contestation index</label>
+            </value>
+            <value>
+                <fullName>Délai de paiement / plan d&apos;apurement</fullName>
+                <default>false</default>
+                <label>Délai de paiement / plan d&apos;apurement</label>
+            </value>
+            <value>
+                <fullName>Aides sociales</fullName>
+                <default>false</default>
+                <label>Aides sociales</label>
+            </value>
+            <value>
+                <fullName>Rétractation</fullName>
+                <default>false</default>
+                <label>Rétractation</label>
+            </value>
+            <value>
+                <fullName>Information offres, tarifs et reconduction</fullName>
+                <default>false</default>
+                <label>Information offres, tarifs et reconduction</label>
+            </value>
+            <value>
+                <fullName>Réclamation NV1</fullName>
+                <default>false</default>
+                <label>Réclamation NV1</label>
+            </value>
+            <value>
+                <fullName>A qualifier</fullName>
+                <default>false</default>
+                <label>A qualifier</label>
+            </value>
+            <value>
+                <fullName>Mise en place ou résiliation de prélèvement ou de mensualisation</fullName>
+                <default>false</default>
+                <label>Mise en place ou résiliation de prélèvement ou de mensualisation</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

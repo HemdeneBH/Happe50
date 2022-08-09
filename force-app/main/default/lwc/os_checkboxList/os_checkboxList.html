@@ -1,0 +1,37 @@
+<template>
+    <div if:false={tableNodeData}><b>Aucun document correspondant n'a été trouvé </b></div>
+
+
+    <lightning-accordion allow-multiple-sections-open active-section-name={activeSections} class="accordList">
+        <lightning-accordion-section name="A" label={omniJsonDef.propSetMap.label}>
+            <table class="slds-table slds-table--cell-buffer vlc-slds-table" style="border:none;">
+
+                    <tbody>
+                
+                        <template for:each={tableNodeData} for:item="tableNodeItem">
+                            <tr key={tableNodeItem.rowId}>        
+                                <th class="slds-cell-shrink">
+                                    <label class="slds-checkbox">
+                                        <lightning-input type="checkbox" value={tableNodeItem.rowId} onchange={handleCheck} checked={tableNodeItem.isSelected}></lightning-input>            
+                                    </label>
+                                </th>    
+            
+                                <td>
+        
+                                    <div if:true={tableNodeItem.url}><div class="slds-truncate"><a href={tableNodeItem.url} target="_blank">{fieldlabels.valueChb}{tableNodeItem.valueChb}</a></div></div>
+                                    <div if:false={tableNodeItem.url}><div class="slds-truncate">{fieldlabels.valueChb}{tableNodeItem.valueChb}</div></div>
+                                    <div if:true={tableNodeItem.value} class="slds-truncate">{fieldlabels.value}{tableNodeItem.value}</div>
+                                
+                                </td>
+                            </tr>
+        
+        
+                        </template>
+        
+                    </tbody>
+
+                </table>
+        </lightning-accordion-section>
+    </lightning-accordion>
+
+</template>

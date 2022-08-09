@@ -1,0 +1,83 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 06-27-2022
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<template>
+    <div class="hp-donneesPersonnelles c-content-bg slds-col">
+        <div class="hp-bigTitle">
+            {titre}
+        </div>
+
+
+        <div class="hp-link">
+            <a class="hp-link-item" onclick={showPopinConsentements}>
+                <span class="leftBloc">
+                    {consentementLabel}
+                </span>
+                <span class="rightBloc">
+                    <span class=" chevron right"></span>
+                </span>  
+            </a>
+        </div>
+
+        <div class="hp-link">
+            <a class="hp-link-item" onclick={showPopinDonneesCollectees}>
+                <span class="leftBloc">
+                    {donneesCollectesLabel}
+                </span>
+                <span class="rightBloc">
+                    <span class=" chevron right"></span>
+                </span>  
+            </a>
+        </div>
+
+
+        <div class="hp-link">
+            <a class="hp-link-item" onclick={openCharteURL}>
+                <span class="leftBloc">
+                    {charteLabel}
+                </span>
+                <span class="rightBloc">
+                    <span class=" chevron right"></span>
+                </span>  
+            </a>
+        </div>
+
+    </div>
+
+    <template if:true={showConsentementsPopup}>
+        <div class="hp-popup">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-scrollable_y">
+                <div class="slds-modal__container">
+                    <c-hp_ec_popin-consentements popinconsentementstitle={popinConsentementsTitle} 
+                                                 idclient={idClient}
+                                                 boutonsubmitpopinconsentement={popinConsentementsLibelleBouton}
+                                                 onopenpopinconsentements={openPopinConsentements}>
+                    </c-hp_ec_popin-consentements>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+
+    <template if:true={showDonneesCollectesPopup}>
+        <div class="hp-popup">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-scrollable_y ">
+                <div class="slds-modal__container">
+                    <c-hp_ec_popin-donnees-collectees popindonneescollecteestitle={popinDonneesCollecteesTitle}
+                        popindonneescollecteestexteexplicatif={popinDonneesCollecteesTexteExplicatif}
+                        popindonneescollecteesmessageerreur={popinDonneesCollecteesMessageErreur}
+                        popindonneescollecteeslibellebouton={popinDonneesCollecteesLibelleBouton} recordid={recordId}
+                        onopenpopindonneescollectees={openPopinDonneesCollectees}>
+                    </c-hp_ec_popin-donnees-collectees>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,211 @@
+<!--
+  @description       : Tableau qui affiche la liste des blocages
+  @author            : KD
+  @group             : FT2
+  @last modified on  : 26-05-2022
+  @last modified by  : HBO
+-->
+<template>
+    <div class="exampleHolder" if:true={showSpinnerLoading}>
+      <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </div>
+    <vlocity_cmt-data-table class="sm-table_custom" extraclass="slds-table_bordered" issearchavailable="false" issortavailable="false"
+        theme={theme} draggable="false" columns={columns} records={listeBlocagesUpdated} row-delete="false">
+        <vlocity_cmt-data-table-cell data-field-name="type" class="dataTableCell">
+        </vlocity_cmt-data-table-cell>
+        <vlocity_cmt-data-table-cell data-field-name="dateDebut" class="dataTableCell">
+        </vlocity_cmt-data-table-cell>
+        <vlocity_cmt-data-table-cell data-field-name="dateFin" class="dataTableCell">
+        </vlocity_cmt-data-table-cell>
+        <vlocity_cmt-data-table-cell data-field-name="motif" class="dataTableCell">
+        </vlocity_cmt-data-table-cell>
+      <!--FT2-1618 -Bouton permettant d'ouvrir la popup de Modification/Suppression du blocage-->
+      <c-sm_vlocity_-synthese-blocage-table-cell-action data-field-name="modifSuppBlocage" class="dataTableCell" onmodifysuppblocageok={handleModifySuppBlocage} onrowdata={handleRowData} style="width:10px">
+      </c-sm_vlocity_-synthese-blocage-table-cell-action>
+    </vlocity_cmt-data-table> 
+  <br>
+  <br>
+
+  <!-- Create buttons for each type of blocage that turns grey if blocage already exists-->
+  <template if:true={blocageRelance}>
+    <button class="slds-button slds-button_brand"  disabled="" onclick={handleAction}>RELANCE</button>
+  </template>
+  <template if:false={blocageRelance}>
+  <button class="slds-button slds-button_brand" data-typeblocage="Relance" onclick={handleAction}>RELANCE</button>
+  </template>
+
+  <template if:true={blocageFacture}>
+    <button class="slds-button slds-button_brand sm_bottom_left" disabled="" onclick={handleAction}>FACTURE</button>
+  </template>
+  <template if:false={blocageFacture}>
+  <button class="slds-button slds-button_brand sm_bottom_left" data-typeblocage="Facture" onclick={handleAction}>FACTURE</button>
+  </template>
+
+  <template if:true={blocagePrelevement}>
+    <button class="slds-button slds-button_brand sm_bottom_left" disabled="" onclick={handleAction}>ENCAISSEMENT</button>
+  </template>
+  <template if:false={blocagePrelevement}>
+  <button class="slds-button slds-button_brand sm_bottom_left" data-typeblocage="Prelevement" onclick={handleAction}>ENCAISSEMENT</button>
+</template>
+
+<template if:true={blocageDecaissement}>
+  <button class="slds-button slds-button_brand sm_bottom_left" disabled="" onclick={handleAction}>DECAISSEMENT</button>
+</template>
+<template if:false={blocageDecaissement}>
+  <button class="slds-button slds-button_brand sm_bottom_left" data-typeblocage="Decaissement" onclick={handleAction}>DECAISSEMENT</button>
+  </template>
+
+ 
+  <!-- FT2-1624 : Add modal popup that opens on button click-->
+  <template if:true={isModalOpenBlocage}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+            
+                <!-- Modal/Popup Box LWC header here -->
+                <div class="slds-modal__header blocage-header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeBlocageModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small" ></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <!--FT2-1608 - afficheg du bon titre correspondant à chaque type de blocage-->  
+                    <template if:true={isOpenDecaissement}>                    
+                      <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">BLOCAGE DE DECAISSEMENT</h2>
+                    </template>  
+                    <template if:true={isOpenFacture}>                    
+                      <h2 id="modal-heading-02" class="slds-text-heading_medium slds-hyphenate">BLOCAGE FACTURE</h2>
+                    </template>  
+                    <template if:true={isOpenPrelevement}>                    
+                      <h2 id="modal-heading-03" class="slds-text-heading_medium slds-hyphenate">BLOCAGE D’ENCAISSEMENT</h2>
+                    </template>  
+                    <template if:true={isOpenRelance}>                    
+                      <h2 id="modal-heading-04" class="slds-text-heading_medium slds-hyphenate">BLOCAGE DE LA RELANCE COMPTE CLIENT</h2>
+                    </template> 
+                </div>
+                <!-- Modal/Popup Box LWC body starts here -->
+                <!-- FT2-1608 -formulaire de création du blocage-->
+              <template if:false={isModifSuppOpen}> 
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                  <div class="slds-form slds-form_stacked">
+                    <div class="center-form">
+                      <div class="slds-form-element__control blocage-form">
+
+                        <div class="slds-p-horizontal--medium">
+                            <div class="slds-form-element">
+                              <template if:true={isCreate}>
+                            <lightning-combobox value={valueMotif} placeholder="Sélectionnez" 
+                                options={motifsBlocageOptions} onchange={motifHandleChange} label="Motif"
+                                class="inputValue" required>
+                            </lightning-combobox>
+                              </template>
+                              <template if:false={isCreate}>
+                                <lightning-combobox value={valueMotifCB} placeholder={valueMotifCB}
+                                  options={motifsBlocageOptions} onchange={motifCBHandleChange} label="Motif"
+                                  class="inputValue" required>
+                                </lightning-combobox>
+                              </template>
+                            </div>
+                        </div>
+                        <template if:true={isCreate}>
+                        <div class="slds-p-horizontal--medium">                                 
+                            <lightning-input class="inputValue" type="date" readonly label ="Date de début" date-style="short" value={dateMin} ></lightning-input>
+                        </div>
+
+                        <div class="slds-p-horizontal--medium">
+                            <lightning-input class="inputValue" type="date" required label="Date de fin" date-style="short"  min={dateMin} max={dateMax} onchange ={dateFinHandleChange}></lightning-input>
+                        </div>
+                        </template>
+                        <template if:false={isCreate}>
+                          <div class="slds-p-horizontal--medium">                                 
+                            <lightning-input class="inputValue" type="date" readonly required label ="Date de début" date-style="short" placeholder={dateDebutCB}  value={dateDebutCB} onchange ={dateDebutCBHandleChange}></lightning-input>
+                          </div>
+                          <div if:true={dateFinRequired} class="slds-p-horizontal--medium">
+                            <lightning-input class="inputValue" type="date" required label="Date de fin" date-style="short" placeholder={dateFinPlaceholderCB} value={dateFinCB} min={dateMin} max={dateMax} onchange={dateFinCBHandleChange}></lightning-input>
+                          </div>
+                          <div if:false={dateFinRequired} class="slds-p-horizontal--medium">
+                            <lightning-input class="inputValue" type="date" label="Date de fin" date-style="short" placeholder={dateFinPlaceholderCB} value={dateFinCB} min={dateMin} max={dateMax} onchange={dateFinCBHandleChange}></lightning-input>
+                          </div>
+                        </template>
+                      </div>
+                      </br>
+                    </div>
+                  </div>            
+                </div>
+                <!-- Modal/Popup Box LWC footer starts here -->
+                <div class="slds-modal__footer footer-buttons">
+                    <template if:true={isCreate}>
+                      <button class="slds-button slds-button_neutral slds-card__body_inner cancel-blocage-button" onclick={closeBlocageModal}>Annuler</button>
+                      <button class="slds-button slds-button_brand create-blocage-button" onclick={createBlocage} title="Save">Enregistrer</button>
+                    </template>
+                    <template if:false={isCreate}>
+                      <button class="slds-button slds-button_neutral slds-card__body_inner cancel-blocage-button" onclick={closeBlocageCBModification}>Annuler</button>
+                      <button class="slds-button slds-button_brand modify-blocage-button" onclick={updateBlocage}>Enregistrer les modifications</button>               
+                    </template>
+                </div>
+              </template>
+
+              <!-- FT2-1618 -formulaire de Modification/Suppression du blocage-->
+              <template if:true={isModifSuppOpen}> 
+              <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-3">
+                  <div class="slds-form slds-form_stacked">
+                  <div class="center-form">
+                    <div class="slds-form-element__control blocage-form">
+
+                      <div class="slds-p-horizontal--medium">
+                          <div class="slds-form-element">
+                          <lightning-combobox value={valueMotifCB} placeholder={valueMotifCB} 
+                              options={motifsBlocageOptions} onchange={motifHandleChange} label="Motif"
+                              class="inputValue" readonly>
+                          </lightning-combobox>
+                          </div>
+                      </div>
+
+                      <div class="slds-p-horizontal--medium">                                 
+                          <lightning-input class="inputValue" type="date" readonly label ="Date de début" date-style="short" value={dateDebutCB} onchange ={dateDebutHandleChange}></lightning-input>
+                      </div>
+
+                      <div class="slds-p-horizontal--medium">
+                          <lightning-input class="inputValue" type="date" readonly label="Date de fin" date-style="short"  value={dateFinCB} onchange ={dateFinHandleChange}></lightning-input>
+                      </div>
+
+                    </div>
+                    </br>
+                  </div>
+                </div>            
+              </div>
+              <!-- Modal/Popup Box LWC footer starts here -->
+              <div class="slds-modal__footer footer-buttons">
+                  <button class="slds-button slds-button_neutral slds-card__body_inner cancel-blocage-button" onclick={closeBlocageModal}>Annuler</button>
+                  <button class="slds-button slds-button_outline-brand delete-blocage" onclick={deleteBlocageConfirmModal} title="Delete">Supprimer</button>
+                  <button class="slds-button slds-button_brand create-blocage-button" onclick={modifyBlocage} title="Modify">Modifier</button>
+              </div>
+              </template>
+          </div>
+
+          <!--FT2-1619  Pop-up de confirmation de suppression de Blocage -->
+          <template if:true={openConfirmDeeleteModal}>
+            <section role="dialog" tabindex="-1" aria-label="Meaningful description of the modal content" 
+             aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <!-- FT2-1849 make the spinner working-->
+                <div class="exampleHolder" if:true={showSpinnerLoading}>
+                  <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                </div>
+                <div class="containerdelete">
+            
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <p>Etes vous sûr de vouloir supprimer ce blocage?</p>
+                </div>
+
+                <footer class="slds-modal__footer">
+                <button class="slds-button slds-button_outline-brand delete-blocage"  onclick={noDeleteBlocage}>Non</button>
+                <button class="slds-button slds-button_brand yes-delete-blocage" onclick={yesDeleteBlocage}>Oui</button>
+                </footer>
+
+
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+          </template>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+  </template>
+</template>

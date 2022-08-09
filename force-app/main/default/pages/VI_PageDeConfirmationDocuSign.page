@@ -1,0 +1,83 @@
+<apex:page sidebar="false" showHeader="false"  >
+    <apex:image url="{!$Resource.VI_logoEngie}" style="max-width: 150px;padding: 10px;" />
+    <br/>
+    <body>
+        <apex:outputPanel rendered="{!$CurrentPage.parameters.event == 'signing_complete'}">
+            <center>
+                <apex:outputText value="Merci de votre signature !" style="white-space: pre;font-size:30px;font-weight: bold;text-align:center;" escape="false" />
+                <br/>
+                <br/>
+                <apex:outputText value="Vous recevrez un mail de confirmation prochainement."  style="white-space: pre;font-size:20px;text-align:center;" />
+            </center>
+        </apex:outputPanel>
+    </body>
+    <body>
+        <apex:outputPanel rendered="{!$CurrentPage.parameters.event == 'decline'}">
+            <br/>
+            <apex:image url="{!$Resource.VI_PhonePicto}" style="display: block;margin-left: auto; margin-right: auto;" />
+            <br/>
+            <br/>
+            <center>
+                <apex:outputText value="Vous n'avez pas signé votre contrat." style="white-space: pre;font-weight: bold; font-size:30px;text-align:center;" />
+                <br/>
+                <br/>
+                <apex:outputText value="Pour toute question vous pouvez joindre votre conseiller au 09 77 42 00 31." style="white-space: pre;font-size:20px;text-align:center;" />
+                <br/>
+                <br/>
+                <apex:outputText value="Il se fera un plaisir de répondre à vos interrogations et vous accompagnera dans vos dernières démarches."  style="white-space: pre;font-size:20px;text-align:center;" />
+            </center>
+        </apex:outputPanel>
+    </body>
+    <body>
+        <apex:outputPanel rendered="{!$CurrentPage.parameters.event == 'cancel'}">
+            <br/>
+            <apex:image url="{!$Resource.VI_PhonePicto}" style="display: block;margin-left: auto; margin-right: auto;" />
+            <br/>
+            <br/>
+            <center>
+                <apex:outputText value="Il semble que vous ayez besoin d’aide." style="white-space: pre;font-weight: bold; font-size:30px;text-align:center;" />
+                <br/>
+                <br/>
+                <apex:outputText value="Pour toute question vous pouvez joindre votre conseiller au 09 77 42 00 31." style="white-space: pre;font-size:20px;text-align:center;" />
+                <br/>
+                <br/>
+                <apex:outputText value="Il se fera un plaisir de répondre à vos interrogations et vous accompagnera dans vos dernières démarches."  style="white-space: pre;font-size:20px;text-align:center;" />
+            </center>
+        </apex:outputPanel>
+    </body>
+    
+    <body>
+        <apex:outputPanel rendered="{!$CurrentPage.parameters.event == 'session_timeout'}">
+            <center>
+                <apex:outputText value="Votre page a expiré." style="white-space: pre;font-size:30px;font-weight: bold;text-align:center;" escape="false" />
+                <br/>
+                <br/>
+                <apex:outputText value="Mais ce n’est pas trop tard, vous pouvez accéder de nouveau à votre contrat en cliquant "  style="white-space: pre;font-size:20px;text-align:center;" />
+                <apex:outputlink onclick="window.open('{!$Label.VI_DocuSignRedirectionURL}/RedirectDocusign?e={!$CurrentPage.parameters.e}')" target="_self" style="white-space: pre;font-size:20px;text-align:center;color:blue" >ici</apex:outputlink>            
+            </center>
+        </apex:outputPanel>
+    </body>
+    <body>
+        <apex:outputPanel rendered="{!$CurrentPage.parameters.event == 'envelopeExpired'}">
+            <center>
+                <apex:outputText value="Merci pour votre intérêt." style="white-space: pre;font-size:30px;font-weight: bold;text-align:center;" escape="false" />
+                <br/>
+                <br/>
+                <apex:outputText value="Le délai de validité de 15 jours pour votre proposition de contrat est dépassé."  style="white-space: pre;font-size:20px;text-align:center;" />         
+                <br/>
+                <apex:outputText value="Vous pouvez prendre contact avec votre conseiller ENGIE au 09 77 42 00 31 pour toute nouvelle demande."  style="white-space: pre;font-size:20px;text-align:center;" /> 
+            </center>
+        </apex:outputPanel>
+    </body>
+    <body>
+        <apex:outputPanel rendered="{!$CurrentPage.parameters.event == 'ttl_expired'}">
+            <center>
+                <apex:outputText value="Une erreur est survenue."  style="white-space: pre;font-size:30px;font-weight: bold;text-align:center;" escape="false"></apex:outputText>
+                <br/>
+                <br/>
+                <apex:outputText rendered="{!$CurrentPage.parameters.Type == 'CPV'}"  value="Veuillez recliquer sur le bouton 'Finaliser la demande' de l'email." style="white-space: pre;font-size:20px;text-align:center;" escape="false"> </apex:outputText> 
+                <apex:outputText rendered="{!$CurrentPage.parameters.Type == 'Mandat'}"  value="Veuillez recliquer sur le bouton 'Signez votre mandat Sepa' de l'email." style="white-space: pre;font-size:20px;text-align:center;" escape="false"> </apex:outputText> 
+            </center>
+        </apex:outputPanel>
+    </body>
+</apex:page>

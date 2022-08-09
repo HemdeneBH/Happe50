@@ -1,0 +1,136 @@
+.hp_container{
+  display: block;
+  width: 500px;
+  height: auto;
+  margin: 0 auto;
+  box-shadow: var(--box-shadow);
+  border: solid 30px var(--primary-colour);
+  background-image: var(--bg);
+}
+.hp-bigTitle {
+  text-align: left;
+  justify-self: start;
+}
+
+.hp-header {
+  background-color: var(--bg-base);
+  border: none;
+  display: grid;
+  grid-template-columns: 7fr 1fr;
+  align-items: center;
+  padding: 25px 40px;
+}
+
+.hp-closeButton {
+  justify-self: end;
+}
+
+.hp-closeButton a {
+  justify-self: end;
+  color: var(--secondary-colour);
+  font-family: var(--font-bold);
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: extra-expanded;
+}
+
+.hp-content {
+  padding: 30px 40px;
+}
+
+
+.hp-alert {
+  display: grid;
+  grid-template-columns: 1fr 9fr;
+  align-items: center;
+  padding: 20px 0;
+  max-width: 250px;
+}
+
+.hp-alert-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: var(--white);
+  background: var(--rose);
+}
+
+.hp-alert-text {
+  padding: 0 0 0 15px;
+  color: var(--rose);
+  font-family: var(--font-bold);
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.07;
+}
+
+.hp-secondButton {
+  min-width: 250px;
+}
+
+.slds-modal {
+  top: 80px;
+}
+
+.hp-content-title {
+  color: var(--primary-colour);
+  font-family: var(--font-bold);
+  font-size: 16px;
+}
+
+.hp-content-text {
+  color: var(--text-color);
+  font-family: var(--font-regular);
+  font-size: 14px;
+  padding: 10px 0;
+}
+
+
+
+@media (max-width: 1024px) {
+  /* Ipad and tablets */
+
+
+
+}
+
+@media (max-width: 768px) {
+  /* mobiles */
+
+}
+
+@media (max-width: 576px) {
+
+  .hp_container {
+    width: auto;
+    height: auto;
+    border: solid 20px var(--primary-colour);
+    margin: 0 15px;
+  }
+
+  .hp-alert-text {
+    padding: 0 0 0 15px;
+    font-size: 14px;
+  }
+
+  /* mobiles */
+  .hp-secondButton {
+    min-width: auto;
+  }
+
+  .hp-alert {
+    max-width: auto;
+  }
+
+  .hp-content {
+    padding: 20px;
+  }
+
+  .hp-header {
+    padding: 20px 10px 20px 20px;
+  }
+
+}

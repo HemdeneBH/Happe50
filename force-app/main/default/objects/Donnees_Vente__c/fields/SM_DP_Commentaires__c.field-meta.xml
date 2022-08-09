@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_DP_Commentaires__c</fullName>
+    <description>champ spécifique au parcours détection de projet</description>
+    <externalId>false</externalId>
+    <label>Commentaires</label>
+    <length>70000</length>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>10</visibleLines>
+</CustomField>

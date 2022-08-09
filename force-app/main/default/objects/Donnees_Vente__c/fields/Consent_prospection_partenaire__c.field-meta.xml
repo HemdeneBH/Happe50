@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Consent_prospection_partenaire__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>CONSENT_PROSPECTION_PARTENAIRE</description>
+    <externalId>false</externalId>
+    <label>Consent prospection partenaire</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

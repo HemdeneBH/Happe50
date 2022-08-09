@@ -1,0 +1,197 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <div class="appointment c-content-bg slds-col">
+        <div class="appointment__content" if:true={showAppointment}>
+            <button class="close" onclick={handleClose}>
+                <span>Annuler</span>
+                <img src={iconClose} alt="close" />
+            </button>
+            <template if:true={showFormStep}>
+                <h2 class="hp-bigTitle">Modifier ma date de RDV</h2>
+                <form class="appointment__form">
+                    <div class="form-col form-col--datetime">
+                        <fieldset>
+                            <div class="form-row form-row--half">
+                                <label for="date">Date :</label>
+                                <input
+                                    id="date"
+                                    name="date"
+                                    type="date"
+                                    class="hp-textInput slds-input"
+                                    value={selectedDateISOString}
+                                    min={todayISOString}
+                                    onfocus={handleDateFocus}
+                                    onchange={handleDateChange}
+                                />
+                            </div>
+                            <div class="form-row form-row--half">
+                                <label for="time">Créneau :</label>
+                                <select id="time" name="time" class="hp-textInput slds-input" >
+                                    <option>Début Matinée</option>
+                                    <option>Matinée</option>
+                                    <option>Fin matinée</option>
+                                    <option>Mi journée</option>
+                                    <option>Début a-m</option>
+                                    <option>Après-midi</option>
+                                    <option>Fin a-m</option>
+                                    <option>Début Soirée</option>
+                                    <option>Soirée</option>
+                                    <option>Fin Soirée</option>
+                                </select>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="form-col form-col--contact">
+                        <fieldset>
+                            <legend>Contact pour ce RDV :</legend>
+                            <div class="form-row">
+                                <select name="civility" class="hp-textInput slds-input" >
+                                    <option disabled selected>Civilité</option>
+                                    <option>M.</option>
+                                    <option>Mme</option>
+                                    <option>Autre</option>
+                                </select>
+                            </div>
+                            <div class="form-row">
+                                <label for="lastname" class="placeholder-label">Nom</label>
+                                <input id="lastname" name="lastname" type="text" class="hp-textInput slds-input" onchange={handleChange} />
+                            </div>
+                            <div class="form-row">
+                                <label for="firstname" class="placeholder-label">Prénom</label>
+                                <input id="firstname" name="firstname" class="hp-textInput slds-input" type="text" onchange={handleChange} />
+                            </div>
+                            <div class="form-row">
+                                <label for="tel" class="placeholder-label">N° de téléphone</label>
+                                <input id="tel" name="tel" type="text" class="hp-textInput slds-input" onchange={handleChange} />
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Commentaire :</legend>
+                            <div class="form-row">
+                                <label for="info" class="placeholder-label">Informations supplémentaires</label>
+                                <input id="info" name="info" type="text" class="hp-textInput slds-input" onchange={handleChange} />
+                            </div>
+                        </fieldset>
+                    </div>
+                    <p class="alert" if:true={showDateAlert}>
+                        <span class="icon"><img src={iconAlert} /></span>
+                        <span>La date choisie est dans un délai de moins de 24h, des frais d’urgence vont s’appliquer.</span>
+                    </p>
+                    <div class="form-buttons">
+                        <button class="hp-secondButton" type="button" onclick={handleClose}>Fermer</button>
+                        <button class="hp-firstButton" type="submit" onclick={handleStep}>Valider</button>
+                    </div>
+                </form>
+            </template>
+            <template if:true={showSelectorStep}>
+                <h2 class="hp-bigTitle">
+                    <span class="alert"><span class="icon"><img src={iconAlert} /></span></span>
+                    Nouvelle date indisponible
+                </h2>
+                <form>
+                    <fieldset>
+                        <legend>Liste des RDV disponibles :</legend>
+                        <ul class="time-slots">
+                            <li>
+                                <input type="radio" name="slot" id="0"/>
+                                <label for="0"><span>{selectedDateISOString} après-midi</span></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="slot" id="1"/>
+                                <label for="1"><span>{selectedDateISOString} soirée</span></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="slot" id="2"/>
+                                <label for="2"><span>{selectedDateISOString} fin journée</span></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="slot" id="3"/>
+                                <label for="3"><span>{selectedDateISOString} début a-m</span></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="slot" id="4"/>
+                                <label for="4"><span>{selectedDateISOString} matin</span></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="slot" id="5"/>
+                                <label for="5"><span>{selectedDateISOString} début matinée</span></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="slot" id="6"/>
+                                <label for="6"><span>{selectedDateISOString} fin matinée</span></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="slot" id="7"/>
+                                <label for="7"><span>{selectedDateISOString} fin a-m</span></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="slot" id="8"/>
+                                <label for="8"><span>{selectedDateISOString} mi journée</span></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="slot" id="9"/>
+                                <label for="9"><span>{selectedDateISOString} début soirée</span></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="slot" id="10"/>
+                                <label for="10"><span>{selectedDateISOString} fin soirée</span></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="slot" id="11" />
+                                <label for="11"><span>{selectedDateISOString} journée</span></label>
+                            </li>
+                        </ul>
+                    </fieldset>
+                    <div class="form-buttons">
+                        <button class="hp-secondButton" type="button" onclick={handleClose}>Fermer</button>
+                        <button class="hp-firstButton" type="submit" onclick={handleStep}>Valider</button>
+                    </div>
+                </form>
+            </template>
+            <template if:true={showConfirmationStep}>
+                <h2 class="hp-bigTitle">Modifier ma date de rdv</h2>
+                <div class="confirmation-message">
+                    <p class="blue">Nouvelle date validée ! </p>
+                    <p>RDV le 12.01.21 le matin</p>
+                </div>
+                <form class="confirmation-form">
+                    <fieldset>
+                        <div class="form-row">
+                            <input type="checkbox" id="email-notification" name="email-notification" value="true" onchange={handleNotification} />
+                            <label for="email-notification">Recevoir une confirmation par email</label>
+                        </div>
+                        <div class="form-row">
+                            <input type="checkbox" id="sms-notification" name="sms-notification" value="true" onchange={handleNotification} />
+                            <label for="sms-notification">Recevoir une confirmation par sms</label>
+                        </div>
+                    </fieldset>
+                    <div class="form-buttons mobile-wrap">
+                        <button class="hp-secondButton" type="button" onclick={handleClose}>Fermer</button>
+                        <template if:true={disableSubmit}>
+                            <button class="hp-firstButton" type="submit" disabled onclick={handleStep}>
+                                Envoyer la notification
+                            </button>
+                        </template>
+                        <template if:false={disableSubmit}>
+                            <button class="hp-firstButton" type="submit" onclick={handleStep}>
+                                Envoyer la notification
+                            </button>
+                        </template>
+                    </div>
+                </form>
+            </template>
+            <template if:true={showErrorStep}>
+                <h2 class="hp-bigTitle">Modifier ma date de rdv</h2>
+                <div class="error">
+                    <p class="alert error-message">
+                        Erreur lors de l'enregistrement
+                    </p>
+                    <div class="form-buttons mobile-wrap">
+                        <button class="hp-secondButton" type="submit" onclick={handleStep}>Appeler un conseiller</button>
+                        <button class="hp-secondButton" type="button" onclick={handleClose}>Fermer</button>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

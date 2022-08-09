@@ -1,0 +1,59 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 08-23-2021
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<template>
+    <lightning-card title="HISTORIQUE FACTURES">
+        <template if:true={isAdressLoaded}>
+            <lightning-card title="ADRESSE DU LOGEMENT">
+                <div class="slds-m-left_small slds-m-bottom_small">
+                    <lightning-icon icon-name="utility:home" alternative-text="Adresse" title="Adresse" size="x-small"></lightning-icon>
+                    &nbsp;&nbsp;&nbsp;{_contratLocaux.numeroVoie}, {_contratLocaux.libelleVoie} {_contratLocaux.complementAdresse} {_contratLocaux.codePostal} {_contratLocaux.ville}
+                </div>
+            </lightning-card> 
+        </template>
+        <template if:true={showELEC}>
+            <lightning-card title="CONTRAT">
+                <div class="slds-m-left_small slds-m-bottom_small">
+                    <h1>Electricité : {_idContratElec}</h1>
+                </div>
+                <div class="tablecontainer">
+                    <lightning-datatable data={facturesELEC}
+                        columns={columnsELEC} 
+                        key-field="id" 
+                        hide-checkbox-column="true"
+                        default-sort-direction={defaultSortDirection}
+                        sorted-direction={sortDirectionElec}
+                        sorted-by={sortedByElec}
+                        onsort={onHandleSortElec}
+                        onheaderaction={handleHeaderActionELEC}
+                        onrowaction={handleRowAction}> 
+                    </lightning-datatable> 
+                </div>
+            </lightning-card>
+        </template>
+        <template if:true={showGAZ}>
+            <lightning-card title="CONTRAT">
+                <div class="slds-m-left_small slds-m-bottom_small">
+                    <h1>Gaz : {_idContratGaz}</h1>
+                </div>
+                <div class="tablecontainer">
+                    <lightning-datatable data={facturesGAZ}
+                        columns={columnsGAZ} 
+                        key-field="id" 
+                        hide-checkbox-column="true"
+                        default-sort-direction={defaultSortDirection}
+                        sorted-direction={sortDirectionGAZ}
+                        sorted-by={sortedByGAZ}
+                        onsort={onHandleSortGAZ}
+                        onheaderaction={handleHeaderActionGAZ}
+                        onrowaction={handleRowAction}> 
+                    </lightning-datatable> 
+                </div>
+            </lightning-card>
+        </template>
+    </lightning-card>
+</template>

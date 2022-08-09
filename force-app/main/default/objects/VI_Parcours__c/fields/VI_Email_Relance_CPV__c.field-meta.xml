@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_Email_Relance_CPV__c</fullName>
+    <description>Ce chant remplis la parti variable de l&apos;email template &quot;Email n°5 - Relance CPV&quot;  en étant égale aux champs VI_Email_Relance_CPV 1, 2, 3, 4 ou 5 de Donées Parcours</description>
+    <externalId>false</externalId>
+    <label>Email Relance CPV</label>
+    <length>131072</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Html</type>
+    <visibleLines>25</visibleLines>
+</CustomField>

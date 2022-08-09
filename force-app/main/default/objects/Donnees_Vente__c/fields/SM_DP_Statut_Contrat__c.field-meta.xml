@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_DP_Statut_Contrat__c</fullName>
+    <description>Champ spécifique au parcours détection de projet tranquility</description>
+    <externalId>false</externalId>
+    <label>Statut Contrat Tranquility</label>
+    <length>250</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

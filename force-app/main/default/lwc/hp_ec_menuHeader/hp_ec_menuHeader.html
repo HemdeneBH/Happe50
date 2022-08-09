@@ -1,0 +1,37 @@
+<!--
+  @description       : 
+  @author            : Clément Bauny
+  @group             : 
+  @last modified on  : 07-04-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <div data-id='menuHeaderContent' class="c-menuHeader">
+      <div class="hp-nav-header">
+        <h1 class="hp-nav-logo">
+            <img class="hp-logo" src ={logoHappeWhite} alt="happe logo"/>
+        </h1>
+        <p class="hp-nav-title">{titre}</p>
+        <div class="hp-nav-profile-icon-container">
+            <div class="hp-nav-profile-icon">
+                <span>
+                    <a href="#">
+                        <img onclick={navigateToUserProfile} src ={avatarToDisplay}/>
+                    </a>
+                </span>                  
+            </div>
+        </div>
+        <div class="hp-client">
+            <div class="hp-client-infos">
+                <p class="hp-clientName">{userName}</p>
+                <p class="hp-clientRef">Référence client : {userRef}</p>
+            </div>
+            <div class="hp-modify-btn">
+                <a onclick={navigateToUserProfile}>
+                    <img src ={iconModify} alt="modify"/>
+                </a>
+            </div>
+        </div>
+      </div>
+    </div>
+</template>

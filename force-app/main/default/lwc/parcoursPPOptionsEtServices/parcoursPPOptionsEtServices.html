@@ -1,0 +1,517 @@
+<template>
+    <template if:false={loaded}>
+        <div class="exampleHolder">
+            <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+        </div>
+    </template>
+    <template if:true={loaded}>
+        <div class="col-lg-12 text-center">
+            <h1 style="margin-top: 60px;margin-bottom: 60px">Les options et services</h1>
+        </div>
+        <template if:true={isOptionElecNotNull}>
+            <div style="position: relative;margin-left: 10%;width: 80%;">
+                <div class="container" style={boxOptionElecColor}>
+                    <div class="slds-grid slds-gutters" style="margin-left: 2%;margin-top: 40px;">
+                        <div class="slds-col slds-size_1-of-12">
+                            <input data-id="checkboxOptionId" id="checkboxOptionId" checked={checkBoxOption}
+                                class="checkboxClass" type="checkbox" onclick={handleOptionCheck}>
+                        </div>
+                        <div class="slds-col slds-size_4-of-12">
+                            <label class="labelCheckbox" for="checkboxOptionId"><Strong>{optionLabel}</Strong></label>
+                        </div>
+                        <div class="slds-col slds-size_3-of-12"></div>
+                        <div class="slds-col slds-size_4-of-12">
+                            <Strong><span if:true={optionPriceNotZero} class="priceCheckbox">{optionValue}
+                                    &euro; TTC / mois</span></Strong>
+                        </div>
+                    </div>
+                    <div style="margin-top: 25px;margin-left: 70px;">
+                        <lightning-formatted-rich-text value={Description_Option_Elec_v}>
+                        </lightning-formatted-rich-text>
+                    </div>
+                    <div style="margin-top: 15px;margin-left: 70px;">
+                        <img class="smileyOption" src={SmileyImage} data-id="smileyId">
+                        <lightning-formatted-rich-text value={Description_Option_Elec_Vert_2}>
+                        </lightning-formatted-rich-text>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <template if:true={isOptionGazNotNull}>
+            <div style="position: relative;margin-top: 8%;margin-left: 10%;width: 80%;">
+                <div class="container" style={boxOptionGazColor}>
+                    <div class="slds-grid slds-gutters" style="margin-left: 2%;margin-top: 40px;">
+                        <div class="slds-col slds-size_1-of-12">
+                            <input data-id="checkboxOptionGazId" id="checkboxOptionGazId" checked={checkBoxOptionGaz}
+                                class="checkboxClass" type="checkbox" onclick={handleOptionGazCheck}>
+                        </div>
+                        <div class="slds-col slds-size_4-of-12">
+                            <label class="labelCheckbox"
+                                for="checkboxOptionGazId"><Strong>{optionGazLabel}</Strong></label>
+                        </div>
+                        <div class="slds-col slds-size_3-of-12"></div>
+                        <div class="slds-col slds-size_4-of-12">
+                            <Strong><span if:true={optionPriceGazNotZero} class="priceCheckbox">{optionGazValue}
+                                    &euro; TTC / mois</span></Strong>
+                        </div>
+                    </div>
+                    <div style="margin-top: 25px;margin-left: 70px;">
+                        <lightning-formatted-rich-text value={Description_Option_Gaz_Vert}>
+                        </lightning-formatted-rich-text>
+                    </div>
+                    <div style="margin-top: 15px;margin-left: 70px;">
+                        <img class="smileyOption" src={SmileyImage} data-id="smileyId">
+                        <lightning-formatted-rich-text value={Description_Option_Gaz_Vert_2}>
+                        </lightning-formatted-rich-text>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <template if:true={optionsEtServicesObject.hasAssuranceFacture}>
+            <div style="position: relative;margin-top: 8%;margin-left: 10%;width: 80%;">
+                <div class="container" style={boxAFColor}>
+                    <div class="slds-grid slds-gutters" style="margin-left: 2%;margin-top: 40px;">
+                        <div class="slds-col slds-size_1-of-12">
+                            <input data-id="checkboxOptionAFId" id="checkboxOptionAFId" name="checkboxOptionAFId"
+                                checked={assuranceFactureChecked} class="checkboxClass" type="checkbox"
+                                onclick={handlecheckBoxOptionAF}>
+                        </div>
+                        <div class="slds-col slds-size_4-of-12">
+                            <label for="checkboxOptionAFId"
+                                class="labelCheckbox"><Strong>{assuranceLabel}</Strong></label>
+                        </div>
+                        <div class="slds-col slds-size_3-of-12"></div>
+                        <div class="slds-col slds-size_4-of-12">
+                            <Strong><span if:true={optionPriceGazNotZero}
+                                    class="priceCheckbox">{optionsEtServicesObject.AssuranceFacturePrixTTC}
+                                    &euro; TTC / mois</span></Strong>
+                        </div>
+                    </div>
+                    <div style="margin-top: 25px;margin-left: 70px;">
+                        <lightning-formatted-rich-text value={VI_DescriptionAssuranceFacture1}>
+                        </lightning-formatted-rich-text>
+                    </div>
+                    <div style="margin-top: 15px;margin-left: 70px;">
+                        <img class="smileyOption" src={SmileyImage} data-id="smileyId">
+                        <lightning-formatted-rich-text value={VI_DescriptionAssuranceFacture2}>
+                        </lightning-formatted-rich-text>
+                    </div>
+                    <template if:true={assuranceFactureChecked}>
+                        <div class="row" style="margin-top:10px ;">
+                            <div class="col-lg-1 text-center"></div>
+                            <div class="col-lg-5 text-center">
+                                <div class="form-group form-check-label">
+                                    <label for="parcoursDeSouscription">Parcours de souscription ?</label>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" style="margin-right: 30px"
+                                        data-id="parcoursDeSouscription" name="parcoursDeSouscription"
+                                        oninput={handleAF} selected={_record.VI_ParcoursDeSouscriptionAF__c}
+                                        value={_record.VI_ParcoursDeSouscriptionAF__c}>
+                                        <option selected disabled hidden>
+                                            {_record.VI_ParcoursDeSouscriptionAF__c}</option>
+                                        <option>Courrier</option>
+                                        <option>Email</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 text-center"></div>
+                        </div>
+                        <div class="row" style="margin-top:10px ;">
+                            <div class="col-lg-1 text-center"></div>
+                            <div class="col-lg-2 form-group form-check-label">Civilité :*</div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="Civilité" id="Monsieur"
+                                    value="Monsieur" checked={monsieurChoisi} disabled>
+                                <label class="form-check-label" for="Monsieur">Monsieur</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="Civilité" id="Madame" value="Madame"
+                                    checked={madameChoisi} disabled>
+                                <label class="form-check-label" for="Madame">Madame</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="Civilité" id="Co-Titulaire"
+                                    value="Co-titulaire" checked={coTitulaireChoisi} disabled>
+                                <label class="form-check-label" for="Co-Titulaire">Co-Titulaire</label>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:10px">
+                            <div class="col-lg-1 text-center"></div>
+                            <div class="col-lg-5">
+                                <form onsubmit={onFormSubmit}>
+                                    <div class="form-group form-check-label">
+                                        <label for="NomAF">Nom :*</label>
+                                        <input type="text" class="form-control" name="NomAF" data-id="NomAF"
+                                            value={nomClient} placeholder="" disabled>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-lg-5">
+                                <form onsubmit={onFormSubmit}>
+                                    <div class="form-group form-check-label">
+                                        <label for="PrenomAF">Prénom :*</label>
+                                        <input type="text" class="form-control" name="PrenomAF" data-id="PrenomAF"
+                                            value={prenomClient} placeholder="" disabled>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-lg-1 text-center"></div>
+                        </div>
+                        <div class="row" style="margin-top:10px">
+                            <div class="col-lg-1 text-center"></div>
+                            <div class="col-lg-5">
+                                <template if:false={redLabelBirthDate}>
+                                    <label>Date de naissance :* </label>
+                                </template>
+                                <template if:true={redLabelBirthDate}>
+                                    <label style="color: rgba(255,0,0)">Date de naissance :* </label>
+                                </template>
+                                <lightning-input type="date" id="DateNaissance" name="DateNaissance"
+                                    data-id="DateNaissance" variant="label-hidden"
+                                    message-when-bad-input="Merci de renseigner un format de date correcte : dd/mm/aaaa"
+                                    date-style="short" placeholder="jj/mm/aaaa" onchange={handleAF}
+                                    value={_record.VI_DateDeNaissanceAF__c}>
+                                </lightning-input>
+                            </div>
+                            <div class="col-lg-5 ">
+                                <label >Ville :</label>
+                                <input type="text" class="form-control" name="VilleID" onchange={handleAF}
+                                    value={_record.VI_VilleNaissanceAF__c} placeholder="" >
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:10px">
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-5 form-group ">
+                                <label >Pays :</label>
+                                <input type="text" class="form-control" name="PaysID" onchange={handleAF}
+                                    value={_record.VI_PaysNaissanceAF__c} placeholder="" >
+                            </div>
+                            <div class="col-lg-5">
+                                <label>Code postal :</label>
+                                <input type="number" class="form-control" data-id="CodePostalID" name="CodePostalID" onchange={handleAF}
+                                     value={_record.VI_CodePostalNaissanceAF__c} placeholder="" >
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-5">
+                                <template if:false={redLabelCSP}>
+                                    <label>
+                                        Catégorie socioprofessionnelle (CSP) ?*
+                                    </label>
+                                </template>
+                                <template if:true={redLabelCSP}>
+                                    <label style="color: rgba(255,0,0)">
+                                        Catégorie socioprofessionnelle (CSP) ?*
+                                    </label>
+                                </template>
+                                <div class="form-group">
+                                    <select class="form-control" 
+                                        data-id="CatégorieSocioprofessionnelle" name="CatégorieSocioprofessionnelle"
+                                        oninput={handleAF} selected={_record.VI_CategorieSocioprofessionnelleAF__c}
+                                        value={_record.VI_CategorieSocioprofessionnelleAF__c}>
+                                        <option selected disabled hidden>
+                                            {_record.VI_CategorieSocioprofessionnelleAF__c}</option>
+                                        <option>Agriculteur exploitant</option>
+                                        <option>Artisan commerçant chef d'entr. </option>
+                                        <option>Cadre profession intellect</option>
+                                        <option>Profession intermédiaire</option>
+                                        <option>Employé</option>
+                                        <option>Ouvrier</option>
+                                        <option>Retraité</option>
+                                        <option>Sans activité prof</option>
+                                        <option>Ne veut pas répondre</option>
+                                        <option>NSP</option>
+                                        <option>Autre</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 text-center"></div>
+                        </div>
+
+                        <div class="row" style="margin-top:10px ;">
+                            <div class="col-lg-1 text-center"></div>
+                            <template if:false={redLabelArretTravail}>
+                                <div class="col-lg-4 form-group form-check-label">
+                                    Arrêt de travail raison de santé ?*</div>
+                            </template>
+                            <template if:true={redLabelArretTravail}>
+                                <div class="col-lg-4 form-group form-check-label" style="color: rgba(255,0,0)">
+                                    Arrêt de travail raison de santé ?*</div>
+                            </template>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="arretTravail" data-id="arretOui"
+                                    id="arretOui" data-current={arretTravail} value="Oui" onclick={handleAF}
+                                    checked={isArretOui}>
+                                <label class="form-check-label" style="margin-left:5px ;margin-right: 30px"
+                                    for="arretOui">Oui</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="arretTravail" data-id="arretNon"
+                                    id="arretNon" data-current={arretTravail} value="Non" onclick={handleAF}
+                                    checked={isArretNon}>
+                                <label class="form-check-label" style="margin-left:5px" for="arretNon">Non</label>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:10px ;">
+                            <div class="col-lg-1 text-center"></div>
+                            <template if:false={redLabelRenteInvalidite}>
+                                <div class="col-lg-4 form-group form-check-label">
+                                    Rente d'invalidité ?*</div>
+                            </template>
+                            <template if:true={redLabelRenteInvalidite}>
+                                <div class="col-lg-4 form-group form-check-label" style="color: rgba(255,0,0)">
+                                    Rente d'invalidité ?*</div>
+                            </template>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="invalidité" data-id="InvaliditeOui"
+                                    id="InvaliditeOui" data-current={invalidité} value="Oui" onclick={handleAF}
+                                    checked={isInvaliditeOui}>
+                                <label class="form-check-label" style="margin-left:5px ;margin-right: 30px"
+                                    for="InvaliditeOui">Oui</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="invalidité" data-id="InvaliditeNon"
+                                    id="InvaliditeNon" data-current={invalidité} value="Non" onclick={handleAF}
+                                    checked={isInvaliditeNon}>
+                                <label class="form-check-label" style="margin-left:5px" for="InvaliditeNon">Non</label>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:10px ;">
+                            <div class="col-lg-1 text-center"></div>
+                            <div class="col-lg-4 form-group form-check-label">Mode de paiement :*</div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="Ponctuel" id="Ponctuel" disabled
+                                    checked>
+                                <label class="form-check-label" for="Ponctuel">Paiement Ponctuel</label>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row" style="margin-top:10px ;">
+                            <template if:true={redLabelAFIncomplet}>
+                                <div class="col-lg-1 text-center"></div>
+                                <div class="col-lg-10 form-group form-check-label text-center"
+                                    style="color: rgba(255,0,0)">
+                                    Merci de renseigner tous les champs obligatoires à minima pour
+                                    valider la souscription
+                                </div>
+                                <div class="col-lg-1 text-center"></div>
+                            </template>
+                            <template if:true={redLabelAFImpossible}>
+                                <div class="col-lg-4 text-center"></div>
+                                <div class="col-lg-4 form-group form-check-label text-center"
+                                    style="color: rgba(255,0,0)">
+                                    -- SOUSCRIPTION IMPOSSIBLE --
+                                </div>
+                                <div class="col-lg-4 text-center"></div>
+                            </template>
+                            <template if:true={redLabelAFBirthdayInaccepte}>
+                                <div class="col-lg-1 text-center"></div>
+                                <div class="col-lg-10 form-group form-check-label text-center"
+                                    style="color: rgba(255,0,0)">
+                                    L’assuré doit être âgé de plus de 18 ans et de moins de 85 ans au 31
+                                    décembre de l’année d’adhésion
+                                </div>
+                                <div class="col-lg-1 text-center"></div>
+                            </template>
+                            <template if:true={redLabelAFArretEtRenteInaccepte}>
+                                <div class="col-lg-1 text-center"></div>
+                                <div class="col-lg-10 form-group form-check-label text-center"
+                                    style="color: rgba(255,0,0)">
+                                    L’assuré ne doit pas être en arrêt de travail pour raison de santé ni
+                                    bénéficier d’une pension ou d’une rente d’invalidité
+                                </div>
+                                <div class="col-lg-1 text-center"></div>
+                            </template>
+                        </div>
+                        <br>
+                        <div class="row mt-4 mb-4">
+                            <div class="col-lg-4 text-center"></div>
+                            <button type="button" class="col-lg-4 btn" style="height: 44px;width: 260px;color: #fff;
+                                background-color: rgba(0, 153, 52, 1);
+                                border-color: rgba(0, 153, 52, 1);border-radius:0" onclick={handleEnregistrer}>
+                                <p class="font-class-2">Enregistrer</p>
+                            </button>
+                            <div class="col-lg-4 text-center"></div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </template>
+        <template if:true={optionsEtServicesObject.promoEligible}>
+            <div if:true={isShowCodePromo} data-id="divCodePromoId" class="slds-grid slds-wrap row"
+                style={divPromoStyle}>
+                <div class="slds-col slds-size_3-of-12"></div>
+                <div class="slds-col slds-size_1-of-12">
+                    <img class="giftOption" src={giftImage} data-id="giftId">
+                </div>
+                <div class="select-box" style="width:400px; margin-right: 40px;">
+                    <div class="select-box__current" tabindex="0">
+                        <div class="select-box__value" key={selectedPromoList.NomPromotion}>
+                            <div class="container">
+                                <div class="row">
+                                    <label style="background-color: #faf9f9;z-index:10"
+                                        class="col-lg-2 select-box__option font-class-1">
+                                    </label>
+                                    <label if:true={isCodePromoSelected} class="col-lg-10"
+                                        style="background-color: #faf9f9;">
+                                        <strong>{selectedPromoList.CodePromo}</strong> -
+                                        {selectedPromoList.NomPromotion}<br>
+                                        {selectedPromoList.DescriptifPromotion}<br>
+                                        Début - fin de validité : {selectedPromoList.DebutValidity} -
+                                        {selectedPromoList.FinValidity}
+                                    </label>
+                                    <label if:false={isCodePromoSelected} class="col-lg-10"
+                                        style="background-color: #faf9f9; font-style: italic;">
+                                        <br>
+                                        Code promo (optionnel)
+                                        <br><br>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <img class="select-box__icon grayscale" src={optionDropImage} alt="Arrow Icon"
+                            aria-hidden="true" />
+                    </div>
+                    <ul class="select-box__list" style="z-index: 7;" id="myUl">
+                        <template for:each={promotions_Offre_Choisi} for:item="option">
+                            <li style="z-index: 7;" key={option.NomPromotion} onclick={handleChoixPromo}
+                                data-canaldevente={option.CanalDeVente} data-codepromo={option.CodePromo}
+                                data-debutvalidity={option.DebutValidity}
+                                data-descriptifpromotion={option.DescriptifPromotion}
+                                data-finvalidity={option.FinValidity} data-libellesurfacture={option.LibelleSurFacture}
+                                data-nompromotion={option.NomPromotion} data-numpromotion={option.NumPromotion}>
+                                <div style="z-index: 7;" class="container" onclick={handleChoixPromo}
+                                    data-canaldevente={option.CanalDeVente} data-codepromo={option.CodePromo}
+                                    data-debutvalidity={option.DebutValidity}
+                                    data-descriptifpromotion={option.DescriptifPromotion}
+                                    data-finvalidity={option.FinValidity}
+                                    data-libellesurfacture={option.LibelleSurFacture}
+                                    data-nompromotion={option.NomPromotion} data-numpromotion={option.NumPromotion}>
+                                    <div style="z-index: 7;" class="row" onclick={handleChoixPromo}
+                                        data-canaldevente={option.CanalDeVente} data-codepromo={option.CodePromo}
+                                        data-debutvalidity={option.DebutValidity}
+                                        data-descriptifpromotion={option.DescriptifPromotion}
+                                        data-finvalidity={option.FinValidity}
+                                        data-libellesurfacture={option.LibelleSurFacture}
+                                        data-nompromotion={option.NomPromotion} data-numpromotion={option.NumPromotion}>
+                                        <label style="z-index: 7;" class="col-lg-2 select-box__option font-class-1"
+                                            onclick={handleChoixPromo} data-canaldevente={option.CanalDeVente}
+                                            data-codepromo={option.CodePromo} data-debutvalidity={option.DebutValidity}
+                                            data-descriptifpromotion={option.DescriptifPromotion}
+                                            data-finvalidity={option.FinValidity}
+                                            data-libellesurfacture={option.LibelleSurFacture}
+                                            data-nompromotion={option.NomPromotion}
+                                            data-numpromotion={option.NumPromotion}>
+                                        </label>
+                                        <label key={option.NomPromotion} onclick={handleChoixPromo}
+                                            data-canaldevente={option.CanalDeVente} data-codepromo={option.CodePromo}
+                                            data-debutvalidity={option.DebutValidity}
+                                            data-descriptifpromotion={option.DescriptifPromotion}
+                                            data-finvalidity={option.FinValidity}
+                                            data-libellesurfacture={option.LibelleSurFacture}
+                                            data-nompromotion={option.NomPromotion}
+                                            data-numpromotion={option.NumPromotion}
+                                            class="col-lg-10 select-box__option ;z-index: 7;" for={option.NomPromotion}
+                                            style="color: #808080; font-size:14px" aria-hidden="aria-hidden">
+                                            <strong>{option.CodePromo}</strong> - {option.NomPromotion}<br>
+                                            {option.DescriptifPromotion}<br>
+                                            Début - fin de validité : {option.DebutValidity} - {option.FinValidity}
+                                        </label>
+                                    </div>
+                                </div>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+                <div class="slds-col slds-size_2-of-12">
+                    <button class="buttonAppliquerOffre" onclick={handleAppliquerPromo}>
+                        Appliquer
+                    </button>
+                </div>
+                <div class="slds-col slds-size_2-of-12"></div>
+            </div>
+        </template>
+        <div class="recapBottomClass row">
+            <div style="position: relative;height: 30%;width: 100%;font-size: 24px;">
+                <span style="position: absolute; left: 14%;">Récapitulatif des mensualités</span>
+            </div>
+            <div if:true={isOffreSelected} style="position: relative;width: 100%;height: 15%;font-size: 18px;">
+                <span style="float:left;">{nameOffreSelected}</span>
+                <span style="float:right;">{priceOffreSelected}€</span>
+            </div>
+            <div if:true={isOptionSelected} style="position: relative;width: 100%;height: 15%;font-size: 18px;">
+                <span style="float:left;">{optionLabel}</span>
+                <span style="float:right;">{valueifOptionSelected}€</span>
+            </div>
+            <div if:true={isOptionGazSelected} style="position: relative;width: 100%;height: 15%;font-size: 18px;">
+                <span style="float:left;">{optionGazLabel}</span>
+                <span style="float:right;">{valueifOptionGazSelected}€</span>
+            </div>
+            <div if:true={assuranceFactureChecked} style="position: relative;width: 100%;height: 15%;font-size: 18px;">
+                <span style="float:left;">{assuranceLabel}</span>
+                <span style="float:right;">{valueifAssuranceFactureSelected}€</span>
+            </div>
+            <div if:true={isCodePromo} style="position: relative;width: 100%;height: 15%;font-size: 18px;">
+                <div style="position: relative;width: 100%;height: 15%;">
+                    <div style="position: absolute;top: 50%;bottom: 0%;width: 100%;height: 2px;background: black;">
+                    </div>
+                </div>
+                <div style="position: relative;width: 100%;height: 10%; margin-top: 6px; font-size: 18px;color: black;">
+                    <Strong>
+                        <span style="float:left;">Sous-total des mensualités</span>
+                        <span style="float:right;">{finalCalculValue}€</span>
+                        <br>
+                    </Strong>
+                </div>
+                <br>
+                <div style="position: relative;width: 100%;height: 15%; font-size: 18px;color: rgba(0, 153, 52, 1);">
+                    <span style="float:left;">Code promo</span>
+                    <span style="float:right;">- 0€</span>
+                </div>
+            </div>
+            <br>
+            <div style="position: relative;width: 100%;height: 15%;">
+                <div
+                    style="position: absolute;top: 50%;bottom: 0%;width: 100%;height: 2px; background: rgba(0, 153, 52, 1);">
+                </div>
+            </div>
+            <div style="position: relative;width: 100%;height: 10%;font-size: 18px; color: rgba(0, 153, 52, 1);">
+                <Strong>
+                    <span style="float:left;">Total des mensualités</span>
+                    <span style="float:right;">{finalCalculValue}€</span>
+                </Strong>
+            </div>
+            <!-- Start DDPCM 1192 -->
+            <div if:true={isCodePromo1Applied} style="padding-top: 8%; z-index: 8;">
+                <label style="position: relative;width: 80%;height: 15%; font-size: 18px;float:left;">
+                    <strong>{_record.VI_CodePromo__c}</strong> - {_record.VI_NomPromotion__c}
+                </label>
+                <img style="float:right;" onclick={handleDeletePromo1} src={greydeleteImage} alt="Icon Delete Promo"
+                    aria-hidden="true" width="25" height="25" />
+                <label style="position: relative;width: 100%;height: 15%; font-size: 18px;margin-top: -5px">
+                    {_record.VI_LibelleSurFacture__c}<br>
+                    Début - fin de validité : {_record.VI_DebutValidity__c} - {_record.VI_FinValidity__c}
+                </label>
+            </div>
+            <div if:true={isCodePromo2Applied} style="padding-top: 8%; z-index: 8;">
+                <label style="position: relative;width: 80%;height: 15%; font-size: 18px;margin-top: -5px">
+                    <strong>{_record.VI_CodePromo2__c}</strong> - {_record.VI_NomPromotion2__c}
+                </label>
+                <img style="float:right;" onclick={handleDeletePromo2} src={greydeleteImage} alt="Icon Delete Promo 2"
+                    aria-hidden="true" width="25" height="25" />
+                <label style="position: relative;width: 100%;height: 15%; font-size: 18px;margin-top: -5px">
+                    {_record.VI_LibelleSurFacture2__c}<br>
+                    Début - fin de validité : {_record.VI_DebutValidity2__c} - {_record.VI_FinValidity2__c}
+                </label>
+            </div>
+            <!-- End DDPCM 1192 -->
+
+        </div>
+        <div style="position: absolute;height: 100px;width: 100%;bottom: -150px;left: 0%;">
+            <button onclick={handlePrecedent} class="buttonPrecedent">Précédent</button>
+            <button onclick={handleSuivant} class="buttonSuivant">Suivant</button>
+        </div>
+    </template>
+</template>

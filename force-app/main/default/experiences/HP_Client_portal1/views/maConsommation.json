@@ -1,0 +1,161 @@
+{
+  "appPageId" : "7e89266e-f5a3-4029-bb48-38a8a732ab93",
+  "componentName" : "community_layout:sldsFlexibleLayout",
+  "id" : "996b28e8-af76-4c32-8989-43270ea46c0c",
+  "label" : "Ma consommation",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "backgroundImageConfig" : "",
+        "backgroundImageOverlay" : "rgba(0,0,0,0)",
+        "sectionConfig" : "{\"UUID\":\"9194191b-3593-4030-babd-59351604fa67\",\"columns\":[{\"UUID\":\"bf33e5d3-5659-4ab8-a952-bfb0cb12cf45\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}"
+      },
+      "componentName" : "community_layout:section",
+      "id" : "9194191b-3593-4030-babd-59351604fa67",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "sectionConfig" : "{\"UUID\":\"67d755b7-d443-48d1-a036-424e9b531740\",\"columns\":[{\"UUID\":\"eb43e118-5a62-45db-b3d6-4f5d52142ceb\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}"
+          },
+          "componentName" : "dxp_layout:columns",
+          "id" : "67d755b7-d443-48d1-a036-424e9b531740",
+          "regions" : [ {
+            "components" : [ {
+              "componentAttributes" : {
+                "detailOffreText" : "Voir le détail de l’offre",
+                "detailOffreURLElec" : "https://www.google.com/",
+                "detailOffreURLGaz" : "https://www.google.com/",
+                "titleText" : "Mon Offre"
+              },
+              "componentName" : "c:hp_ec_offre",
+              "id" : "0124b4fc-b0a2-4b95-a174-9f874be54459",
+              "renderPriority" : "NEUTRAL",
+              "renditionMap" : { },
+              "type" : "component"
+            }, {
+              "componentAttributes" : { },
+              "componentName" : "c:hp_ec_myConsumption",
+              "id" : "6c015790-07b3-40e7-9f4b-eb6913259f23",
+              "renderPriority" : "NEUTRAL",
+              "renditionMap" : { },
+              "type" : "component"
+            }, {
+              "componentAttributes" : {
+                "sectionConfig" : "{\"UUID\":\"57cabc23-f398-4f31-af03-6f9e7fd17aab\",\"columns\":[{\"UUID\":\"1e61d92a-6286-4a4f-a702-f79f883ebda9\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"4\",\"seedComponents\":[]},{\"UUID\":\"8386baa6-90d8-4150-8b1d-f10c1f8d1521\",\"columnName\":\"Column 2\",\"columnKey\":\"bb902\",\"columnWidth\":\"8\",\"seedComponents\":[]}]}"
+              },
+              "componentName" : "dxp_layout:columns",
+              "id" : "57cabc23-f398-4f31-af03-6f9e7fd17aab",
+              "regions" : [ {
+                "components" : [ {
+                  "componentAttributes" : { },
+                  "componentName" : "c:hp_ec_bilan",
+                  "id" : "a9e99830-69d3-4c19-a98b-4eb461c70b13",
+                  "renderPriority" : "NEUTRAL",
+                  "renditionMap" : { },
+                  "type" : "component"
+                }, {
+                  "componentAttributes" : {
+                    "lienSpecifique" : "/",
+                    "titre" : "Je déménage"
+                  },
+                  "componentName" : "c:hp_ec_LienSpecifiqueLight",
+                  "id" : "c6193889-c6e0-449f-8087-5ff1398377c3",
+                  "renderPriority" : "NEUTRAL",
+                  "renditionMap" : { },
+                  "type" : "component"
+                }, {
+                  "componentAttributes" : { },
+                  "componentName" : "c:hp_ec_disconnect",
+                  "id" : "1b4979db-22fe-4984-9426-285b8256f8dc",
+                  "renderPriority" : "NEUTRAL",
+                  "renditionMap" : { },
+                  "type" : "component"
+                } ],
+                "id" : "1e61d92a-6286-4a4f-a702-f79f883ebda9",
+                "regionLabel" : "Column 1",
+                "regionName" : "col1",
+                "renditionMap" : { },
+                "type" : "region"
+              }, {
+                "components" : [ {
+                  "componentAttributes" : { },
+                  "componentName" : "c:hp_ec_releve",
+                  "id" : "5eadca85-1f8d-4208-9d1b-812c8f526c5c",
+                  "renderPriority" : "NEUTRAL",
+                  "renditionMap" : { },
+                  "type" : "component"
+                }, {
+                  "componentAttributes" : { },
+                  "componentName" : "c:hp_ec_push",
+                  "id" : "9c411f3e-20ca-4c86-9027-99f969689b11",
+                  "renderPriority" : "NEUTRAL",
+                  "renditionMap" : { },
+                  "type" : "component"
+                }, {
+                  "componentAttributes" : {
+                    "lienSpecifique" : "/",
+                    "texteDescriptif" : "Faire suivre mon contrat dans mon nouveau logement",
+                    "titre" : "Je déménage"
+                  },
+                  "componentName" : "c:hp_ec_LienSpecifique",
+                  "id" : "7c772e61-8705-4f4c-8e45-fc08141a416e",
+                  "renderPriority" : "NEUTRAL",
+                  "renditionMap" : { },
+                  "type" : "component"
+                } ],
+                "id" : "8386baa6-90d8-4150-8b1d-f10c1f8d1521",
+                "regionLabel" : "Column 2",
+                "regionName" : "bb902",
+                "renditionMap" : { },
+                "type" : "region"
+              } ],
+              "renderPriority" : "NEUTRAL",
+              "renditionMap" : { },
+              "type" : "component"
+            } ],
+            "id" : "eb43e118-5a62-45db-b3d6-4f5d52142ceb",
+            "regionLabel" : "Column 1",
+            "regionName" : "col1",
+            "renditionMap" : { },
+            "type" : "region"
+          } ],
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "bf33e5d3-5659-4ab8-a952-bfb0cb12cf45",
+        "regionLabel" : "Column 1",
+        "regionName" : "col1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "scopedBrandingSetId" : null,
+      "type" : "component"
+    } ],
+    "id" : "ef89c204-ab1e-4725-b659-f02a345abcd9",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "pageTitle" : "Ma consommation",
+        "recordId" : "{!recordId}"
+      },
+      "componentName" : "community_builder:seoAssistant",
+      "id" : "081ff8ab-62aa-4f94-adc6-c82fa505e0e4",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "256ebb4b-d793-47ec-baf1-5e4126c54997",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "bpHmsKcRsRJVAxsjPUCXd7yA8oGvLt",
+  "type" : "view",
+  "viewType" : "custom-ma-consommation"
+}

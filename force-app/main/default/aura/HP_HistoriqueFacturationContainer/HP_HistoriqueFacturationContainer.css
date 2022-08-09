@@ -1,0 +1,35 @@
+.THIS .slds-th__action{
+    /* background-color : rgb(204, 202, 202);
+    color : black;
+    font-weight: bold; */
+    border:collapse;
+    justify-content: center !important; 
+  }
+.THIS tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+.THIS tr:hover {
+    background-color: rgb(111, 212, 243);
+}
+.THIS .tablecontainer {
+    margin-left: 15px;
+    margin-right: 15px;
+    border-collapse: collapse;
+}
+
+.THIS table {
+    width: fit-content;
+}
+
+.THIS .marked-p1 {
+    background : rgba(112, 110, 107, 0.4);
+}
+
+.THIS .marked-p2 {
+    background : rgba(243, 136, 136, 0.5);
+}
+
+.THIS .marked-p3 {
+    background : rgba(112, 110, 107, 0.4);
+}

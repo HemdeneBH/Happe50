@@ -1,0 +1,66 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 07-05-2022
+  @last modified by  : Badr Eddine Belkarchi
+-->
+<template>
+    <div class="hp-blocConfirm rose">
+        <div class="c-blocConfirm rose">
+            <div class="c-blocConfirm-icon rose">
+                <div class="c-blocConfirm-innerCircle">
+                    <img class="c-blocConfirm-img" src={iconLamp} alt="confirm icon" />
+                </div>
+            </div>
+            <div class="c-blocConfirm__text-wrapper">
+                <div class="c-blocConfirm__text">
+                    <p>Vous êtes en période de relève!
+                    </p>
+                    <p>Pensez à saisir vos données 
+                    </p>
+                </div>
+                <div class="hp-firstButton desktop" onclick={openRelevePopin}>
+                    Saisir ma relève
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hp-btnContainer">
+        <div class="hp-firstButton mobile" onclick={openRelevePopin}>
+            Saisir ma relève
+        </div>
+    </div>
+
+    <template if:true={showRelevePopin}>
+        <div class="hp-popup" >
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-scrollable_y">
+                <div class="slds-modal__container">
+                    <c-hp_ec_popin-releve
+                    idclient={idclient}
+                    isperiodeargaz={isperiodeargaz}
+                    isperiodearelec={isperiodearelec}
+                    contractgaz={contractgaz}
+                    contractelec={contractelec}
+                    typecomptage={typecomptage}
+                    pdl={pdl}
+                    pce={pce}
+                    lastestindexelec={lastestindexelec}
+                    lastestindexhpelec={lastestindexhpelec}
+                    latestindexgaz={latestindexgaz}
+                    title-popin-releve={titlePopinReleve}
+                    message-index-error={messageIndexError}
+                    message-index-no-valid-error={messageIndexNoValidError}
+                    custom-url-popin-releve={customUrlPopinReleve}
+                    custom-url-label-popin-releve={customUrlLabelPopinReleve} 
+                    onenvoieindexevent={hanldeEnvoieIndexEvent}
+                    onopenpopinreleve={closeRelevePopin}>
+                    </c-hp_ec_popin-releve> 
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+
+</template>

@@ -1,0 +1,27 @@
+<template>
+    <div class={messageClass}>
+        <button class="message-toggle hp-link" onclick={toggleMessage}>
+            <span class="message-icon">
+                <img src={iconMail} alt=""/>
+            </span>
+            <h2 class="message-info">
+                <span class="category">{message.category}</span>
+                <span class="title">{message.title}</span>
+                <span class="date">{message.date}</span>
+            </h2>
+            <span if:false={message.open} class="chevron right"></span>
+            <span if:true={message.open} class="chevron down"></span>
+        </button>
+        <template if:true={message.open}>
+            <div class="message-content">
+                <lightning-formatted-rich-text value={message.content}></lightning-formatted-rich-text>
+            </div>
+            <div class="hp-link answer-link">
+                <a onclick={handleNewMessage}>
+                    Répondre au message
+                    <span class="chevron right"></span>
+                </a>
+            </div>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,104 @@
+.hp-lienSpecifique {
+  padding: 20px 40px;
+  margin: 15px;
+  display: grid;
+  grid-template-columns: 2fr 3fr 1fr;
+  align-items: center;
+  text-decoration: none;
+  min-height: 100px;
+}
+
+.hp-lienSpecifique-text {
+  font-family: var(--font-regular);
+  font-size: 16px;
+  color: var(--text-color);
+  text-decoration: none;
+}
+.hp-lienSpecifique-text:hover,
+.hp-lienSpecifique-text:active,
+.hp-lienSpecifique-text:focus {
+  color: var(--secondary-colour);
+  text-decoration: none;
+}
+.hp-lienSpecifique-container a{
+  text-decoration: none;
+}
+.hp-lienSpecifique-container a:hover,
+.hp-lienSpecifique-container a:active, 
+.hp-lienSpecifique-container a:focus {
+  text-decoration: none;
+}
+
+.hp-lienSpecifique-link {
+  justify-self: end;
+  position: relative;
+}
+
+.hp-lienSpecifique-link>a {
+  color: var(--secondary-colour);
+  font-family: var(--font-bold);
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.hp-lienSpecifique-link>a:hover,
+.hp-lienSpecifique-link>a:active,
+.hp-lienSpecifique-link>a:focus {
+  color: var(--text-color);
+}
+.hp-lienSpecifique-link a {
+  position: relative;
+}
+
+.hp-lienSpecifique-link .chevron::before {
+  border-style: solid;
+  font-size: 22px;
+  border-width: 0.15em 0.15em 0 0;
+  content: '';
+  display: inline-block;
+  height: 0.60em;
+  right: 0.15em;
+  position: absolute;
+  top: -6px;
+  transform: rotate(-45deg);
+  vertical-align: top;
+  width: 0.60em;
+}
+.hp-lienSpecifique-link .chevron.right:before {
+  right: -5px;
+  transform: rotate(45deg);
+}
+
+@media (min-width: 1280px) {
+  /* 1440px screen and all screens larger */
+
+}
+
+@media (max-width: 1280px) {
+  /* 1280px screen and all screens smaller */
+
+}
+
+@media (max-width: 1024px) {
+
+  /* Ipad and tablets */
+  .hp-lienSpecifique {
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 576px) {
+  /* mobiles */
+  .hp-lienSpecifique {
+    grid-template-columns: 1fr;
+  }
+  
+  .hp-lienSpecifique-link .chevron::before {
+    top: -45px;
+  }
+  .hp-lienSpecifique-text {
+    padding: 10px 10px 10px 0;
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Site__c</fullName>
+    <externalId>false</externalId>
+    <label>Site</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Prestataire__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>globalSite</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>Prestataire Armatis DGP</controllingFieldValue>
+            <valueName>Armatis Caen DGP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Prestataire Armatis DGP</controllingFieldValue>
+            <valueName>Armatis Guimaraes DGP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Prestataire Armatis DGP</controllingFieldValue>
+            <valueName>Armatis Porto DGP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Prestataire Armatis DGP</controllingFieldValue>
+            <valueName>Armatis Tunis DGP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>La Baule DGP</controllingFieldValue>
+            <valueName>ESSENTIEL LA BAULE DGP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>La Baule DGP</controllingFieldValue>
+            <valueName>PREMIUM LA BAULE DGP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>La Baule DGP</controllingFieldValue>
+            <valueName>SOLIDARITE LA BAULE DGP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Prestataire Sitel Group DGP</controllingFieldValue>
+            <valueName>Sitel Group Dakar</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Prestataire Sitel Group DGP</controllingFieldValue>
+            <valueName>Sitel Group FES DGP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Prestataire Sitel Group DGP</controllingFieldValue>
+            <valueName>Sitel Group La Rochelle DGP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Prestataire Sitel Group DGP</controllingFieldValue>
+            <valueName>Sitel Group Nancy DGP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Prestataire Téléperformance DGP</controllingFieldValue>
+            <valueName>Téléperformance Lyon DGP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Prestataire Téléperformance DGP</controllingFieldValue>
+            <valueName>Téléperformance Tunis DGP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Prestataire Arvato DGP</controllingFieldValue>
+            <valueName>Arvato Casablanca DGP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Prestataire Arvato DGP</controllingFieldValue>
+            <valueName>Arvato Chaumont DGP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Prestataire Arvato DGP</controllingFieldValue>
+            <valueName>Arvato Dakar DGP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Prestataire Arvato DGP</controllingFieldValue>
+            <valueName>Arvato Dunkerque DGP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Prestataire Arvato DGP</controllingFieldValue>
+            <valueName>Arvato Marrakech DGP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Prestataire COMDATA DGP</controllingFieldValue>
+            <valueName>COMDATA Casablanca DGP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Prestataire COMDATA DGP</controllingFieldValue>
+            <valueName>COMDATA MarcqEnBaroeul</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Prestataire COMDATA DGP</controllingFieldValue>
+            <valueName>COMDATA Soissons</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Quimper DGP</controllingFieldValue>
+            <valueName>Premium Quimper DGP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Quimper DGP</controllingFieldValue>
+            <valueName>QUIMPER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Metz DGP</controllingFieldValue>
+            <valueName>Essentiel Metz DGP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Metz DGP</controllingFieldValue>
+            <valueName>METZ</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Metz DGP</controllingFieldValue>
+            <valueName>Premium Metz DGP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Metz DGP</controllingFieldValue>
+            <valueName>Solidarité Metz DGP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dunkerque DGP</controllingFieldValue>
+            <valueName>DUNKERQUE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dunkerque DGP</controllingFieldValue>
+            <valueName>EM/DM Dunkerque DGP</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,113 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 02-02-2022
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<template>
+
+
+  <div class="hp_popinCotitulaire">
+
+    <header class="hp-header">
+      <h1 class="hp-bigTitle">
+        co-titulaire
+      </h1>
+      <span class="hp-closeButton">
+        <a onclick={closePopinCotitulaire}>
+          <img class="hp-close-icon" src={iconClose} alt="close icon" />
+        </a>
+      </span>
+    </header>
+
+    <div class="hp-content">
+      <div class="hp-btnContainer">
+        <div class="hp-secondButton" onclick={showAddCotitulaire}>
+          Ajouter un co-titulaire 
+        </div>
+      </div>
+    </div>
+
+    <template if:true={addCotitulaire}>
+      <div class="hp-content">
+        <form class="addTitulaire">
+          <div class="form-container">
+            <div class="form-item">
+                <select name="civility" class="hp-textInput slds-input" >
+                    <option disabled selected>Civilité</option>
+                    <option>M.</option>
+                    <option>Mme</option>
+                    <option>Autre</option>
+                </select>
+            </div>
+            <div class="form-item">
+                <input id="hp-input-nom" name="prénom" type="text" class="hp-textInput slds-input" placeholder="Nom" required="" aria-describedby={messageErreurInputEmail}
+                aria-invalid="true"/>
+            </div>
+            <div class="form-item">
+                <input id="hp-input-prenom" name="nom" class="hp-textInput slds-input" type="text"  placeholder="Prénom" required="" aria-describedby={messageErreurInputEmail}
+                aria-invalid="true" />
+            </div>
+          
+          </div>
+          <div class="hp-btnContainer">
+            <div class="hp-secondButton" onclick={closePopinCotitulaire}>
+              Annuler
+            </div>
+            <div class="hp-firstButton" onclick={showModifyCotitulaire}>
+              Valider
+            </div>
+          </div>
+        </form>
+      </div>
+    </template>
+    
+    <template if:true={modifyCotitulaire}>
+      <div class="hp-content">
+        <div class="inputs-container">
+            <div class="hp-client-infos">
+                <p class="hp-civilite">
+                  M.
+                </p>
+                <p class="hp-nom">
+                   Dupont
+                </p>
+                <p class="hp-prenom">
+                   David
+                </p>
+            </div>
+            <div class="hp-modifs-btns">
+              <div class="hp-modify-btn">
+                <a href="#" class="button edit">
+                    <img src={iconModify} alt="modify" />
+                </a>
+              </div>
+              <div class="hp-remove-btn" onclick={showDeleteCotitulaire}>>
+                <a href="#" class="button remove">
+                    <img class="remove-icon" src={iconClose} alt="remove" />
+                </a>
+              </div>
+            </div>
+       
+        </div>
+      </div>
+    </template>
+
+
+    <template if:true={deleteCotitulaire}>
+      <div class="hp-content">
+        <div class="hp-delete-msg">
+          Voulez-vous supprimer l'enregistrement de votre co-titulaire ?
+        </div>
+        <div class="hp-btnContainer">
+          <div class="hp-secondButton" onclick={closePopinCotitulaire}>
+            Confirmer la suppression
+          </div>
+        </div>
+      </div>
+    </template>
+
+
+  </div>
+</template>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_VR02_Raison_escalade</fullName>
+    <active>false</active>
+    <description>@description: Champ à renseigner dans le cas où l&apos;escalade n&apos;est pas justifiée
+@projet: Smile</description>
+    <errorConditionFormula>AND(
+ISPICKVAL( Escalade_justifie__c , &apos;Non&apos;),
+ISBLANK( TEXT( Raison_escalade_injustif__c )))</errorConditionFormula>
+    <errorDisplayField>Raison_escalade_injustif__c</errorDisplayField>
+    <errorMessage>Merci de renseigner la raison de l&apos;escalade injustifiée.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_Type_de_vente__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( /* Vente en cours de signature CHF */
+AND(
+				OR(
+				 AND( /*CPV envoyées*/
+						CONTAINS(TEXT(VI_StatutParcours__c),&quot;CPV Envoyées&quot;),
+						NOT(ISPICKVAL(VI_Case__r.VI_StatutEnveloppe__c ,&quot;Delivered&quot;)),
+	     NOT(ISPICKVAL(VI_Case__r.VI_StatutEnveloppe__c ,&quot;Signed&quot;))
+					),
+			 		ISPICKVAL(VI_Case__r.VI_StatutEnveloppe__c ,&quot;Delivered&quot;)
+			    ),												
+	ISPICKVAL(VI_ChoixParcours__c,&quot;CHF&quot;)),&quot;Ventes en cours de signature&quot;,	
+
+
+IF( /* Vente nette EM &amp; CHF */
+OR( /* Vente transformée*/
+		AND(ISPICKVAL(VI_Case__r.Status, &quot;En attente&quot;),
+      ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;Retour distributeur&quot;)
+  ),
+  AND(ISPICKVAL(VI_Case__r.Status, &quot;A traiter&quot;),
+      ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;Absence retour distributeur&quot;)
+  ),
+  AND(ISPICKVAL(VI_Case__r.Status, &quot;En traitement&quot;),
+      ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;Absence retour distributeur&quot;)
+  ),
+  AND(ISPICKVAL(VI_Case__r.Status, &quot;Pré-clôturé&quot;),
+      OR(ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;Conforme&quot;),
+         ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;&quot;)
+      )
+  ),
+  AND(ISPICKVAL(VI_Case__r.Status, &quot;Clôturé&quot;),
+     OR(ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;Conforme&quot;),
+        ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;&quot;)))),&quot;Ventes nettes&quot;,					
+
+
+IF( /* Vente brute EM et CHF */
+OR(AND(  /*Partie 1 - Vente brute EM*/
+	      OR(AND( /*CPV envoyées*/
+															CONTAINS(TEXT(VI_StatutParcours__c),&quot;CPV Envoyées&quot;),
+													  NOT(ISPICKVAL(VI_Case__r.VI_StatutEnveloppe__c ,&quot;Delivered&quot;)),
+	         	    NOT(ISPICKVAL(VI_Case__r.VI_StatutEnveloppe__c ,&quot;Signed&quot;))
+											),
+		         ISPICKVAL(VI_Case__r.VI_StatutEnveloppe__c ,&quot;Delivered&quot;),
+	         	ISPICKVAL(VI_Case__r.VI_StatutEnveloppe__c ,&quot;Signed&quot;) /*CPV signées*/
+       ),
+       ISPICKVAL(VI_ChoixParcours__c,&quot;EM&quot;)
+   ),
+   AND(  /*Partie 1 - Vente brute CHF*/
+	      ISPICKVAL(VI_Case__r.VI_StatutEnveloppe__c ,&quot;Signed&quot;), /*CPV signées*/
+       ISPICKVAL(VI_ChoixParcours__c,&quot;CHF&quot;)
+   ),				
+   AND(  /*Partie 2 - Vente brute EM + Partie 2 - Vente brute CHF */
+							OR(
+							    AND( /*En traitement BO*/
+					    		    OR(AND(ISPICKVAL(VI_Case__r.Status, &quot;En Traitement&quot;),
+                      ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;&quot;)
+                  ),
+                      AND(ISPICKVAL(VI_Case__r.Status, &quot;En attente&quot;),
+                      ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;Retour client&quot;)
+                  ),
+                  AND(ISPICKVAL(VI_Case__r.Status, &quot;A traiter&quot;),
+                      ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;Retour client&quot;)
+                  ),
+                 ISPICKVAL(VI_Case__r.Status, &quot;Différé&quot;)
+			    			      )
+			    				),
+		        	AND( /*A traiter BO*/
+			        			 OR(ISPICKVAL(VI_Case__r.Status, &quot;A traiter&quot;),
+                  ISPICKVAL(VI_Case__r.Status, &quot;Affecté&quot;)
+               ),
+               OR(ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;&quot;),
+                  ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;Retour Partenaire&quot;)
+                /*ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;Absence retour Partenaire&quot;)*/ 
+				    		    	)
+			        ),
+			        AND( /*Vente à completer*/
+					    		    ISPICKVAL(VI_Case__r.Status, &quot;En attente&quot;),
+               ISPICKVAL(VI_Case__r.Sous_statut__c, &quot;Retour Partenaire&quot;)
+           )
+							)	
+				)
+),&quot;Ventes brutes&quot;,					
+&quot;Autre&quot;)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Type de vente</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

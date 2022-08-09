@@ -1,0 +1,20 @@
+<aura:documentation>
+	<aura:description>
+        <p><b> <![CDATA[ <c:CMN_SearchSOSL_CMP> ]]></b> est un composant utilisable
+        dans l'App Builder Lightning pour n'importe quel type de page. Il permet
+        d'effectuer une recherche SOSL sur plusieurs type objets à partir d'un
+        critère saisissable par l'utilisateur et d'en afficher les résultats
+        sous forme d'un accordéon de listes par type d'objet.
+        Les résultats sont cliquables pour accéder à la page standard de l'objet
+        concerné.</p>
+        <p>Son apparence générale est configurable (titre,icone...).</p>
+        <p>Pour le debug, il est possible d'afficher la requête effectivement
+        utilisée.</p>
+    </aura:description>
+	<aura:example name="Exemple" ref="exempleStandard" label="Exemple">
+        <p>L'utilisation principale du composant s'effectue directement via
+            l'App Builder Lightning pour intégration dans les Page Layouts</p>
+        <p>Il est tout de même possible de l'utiliser dans l'utility bar des
+            applications Lightning.</p>
+	</aura:example>
+</aura:documentation>

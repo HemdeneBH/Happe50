@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_ChoixEnergie__c</fullName>
+    <description>Le prospect au téléphone souhaite utiliser de l&apos;électricité verte, du gaz naturel ou du dual (gaz naturel + Electricité verte)</description>
+    <externalId>false</externalId>
+    <label>Choix de l&apos;énergie</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Electricité</fullName>
+                <default>false</default>
+                <label>Electricité</label>
+            </value>
+            <value>
+                <fullName>Gaz</fullName>
+                <default>false</default>
+                <label>Gaz</label>
+            </value>
+            <value>
+                <fullName>Electricité + Gaz</fullName>
+                <default>false</default>
+                <label>Electricité + Gaz</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

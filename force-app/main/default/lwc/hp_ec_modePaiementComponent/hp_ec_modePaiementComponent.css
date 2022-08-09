@@ -1,0 +1,103 @@
+.hp-mon-mode-paiements {
+    width: 690px;
+    height: 359px;
+    padding: 30px;
+    box-shadow: -5px 5px 25px 0 rgba(0, 0, 0, 0.7);
+    background-image: linear-gradient(10deg, #26242b 12%, #424242 109%, #424242 113%);
+}
+
+.hp-mes-modes-paiements {
+    width: 690px;
+    height: 359px;
+    padding: 30px;
+    box-shadow: -5px 5px 25px 0 rgba(0, 0, 0, 0.7);
+    background-image: linear-gradient(10deg, #26242b 12%, #424242 109%, #424242 113%);
+}
+
+.hp-bigTitle {
+    width: 600px;
+    height: 32px;
+    font-family: "font_AvantBold";
+    font-size: 25px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: 0.75px;
+    text-align: left;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.Mon-mode-de-paiement {
+    font-family: AvantGardeLT;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    text-align: left;
+    color: #fff;
+}
+
+.Actif {
+    font-family: "font_AvantBold";
+    font-size: 12px;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.08;
+    letter-spacing: 0.36px;
+    text-align: center;
+    color: #8b6ff6;
+}
+
+.Rectangle-4721 {
+    width: 487px;
+    height: 111px;
+    margin: 6px 12px 12px 2px;
+    padding: 1px 47px 9px 20px;
+    opacity: 0.15;
+    background-color: #05a8ff;
+}
+
+.message-1 {
+    width: 305px;
+    height: 45px;
+    font-family: "font_AvantBold";
+    font-size: 16px;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.56;
+    letter-spacing: 0.48px;
+    text-align: left;
+    color: #fff;
+}
+
+.message-2 {
+    font-family: "font_AvantBold";
+    font-size: 14px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.43;
+    letter-spacing: 0.42px;
+    text-align: left;
+    color: #05a8ff;
+}
+
+.message-2 .text-style-1 {
+    font-weight: normal;
+    color: #fff;
+}
+
+.enSavoirPlus {
+  font-family: "font_AvantBold";
+  font-size: 12px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.08;
+  letter-spacing: 0.36px;
+  text-align: center;
+  color: #43e6ee;
+  text-decoration: underline;
+  cursor: pointer;
+}

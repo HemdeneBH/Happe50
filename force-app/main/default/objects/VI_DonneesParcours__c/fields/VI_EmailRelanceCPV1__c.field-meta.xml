@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_EmailRelanceCPV1__c</fullName>
+    <description>Contenu du champ { VI_Email_Relance_CPV } de l&apos;email template &quot;Email n°5 - Relance CPV&quot;  pour la première relance.</description>
+    <externalId>false</externalId>
+    <label>Email Relance CPV 1</label>
+    <length>131072</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Html</type>
+    <visibleLines>25</visibleLines>
+</CustomField>

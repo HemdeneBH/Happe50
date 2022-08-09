@@ -1,0 +1,282 @@
+.slds-has-error .slds-form-element__help, .slds-required {
+  color: var(--rose) !important;
+}
+
+.slds-form-element__label {
+  font-family: var(--font-bold);
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--true-black);
+  text-align: left;
+}
+
+.slds-input::placeholder {
+  font-family: var(--font-normal);
+  color: var(--placeholder);
+  font-size: 16px;
+  letter-spacing: 0.48px;
+  cursor: text;
+}
+
+.hp-error{
+  color : var(--rose);
+  font-family: var(--font-bold);
+  padding: 10px 0;
+  font-size: 14px;
+}
+
+.hp-mentionBox {
+  font-family: var(--font-regular);
+  font-weight: lighter;
+  color: var(--dark-disabled);
+  font-size: 14px;
+  text-align: left;
+  padding: 20px 0 0 0;
+}
+
+.hp-restConnected input[type=checkbox] {
+  position: relative;
+  cursor: pointer;
+}
+.hp-restConnected input[type=checkbox]:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 0;
+  left: 0;
+  background-color: #EBEEF7;
+  border: 2px solid var(--secondary-colour);
+  border-radius: 0;
+}
+.hp-restConnected input[type=checkbox]:checked:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 0;
+  left: 0;
+  background-color: var(--primary-colour);
+  border: 2px solid var(--primary-colour);
+}
+.hp-restConnected input[type=checkbox]:checked:after {
+  content: "";
+  display: block;
+  width: 7px;
+  height: 13px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  position: absolute;
+  top: 2px;
+  left: 7px;
+}
+
+.hp-restConnected label {
+ color: var(--black);
+ font-family: var(--font-regular);
+ font-size: 14px;
+ padding: 0 0 0 20px;
+}
+.hp-restConnected  {
+  display: flex;
+  align-items: start;
+ }
+
+.hp-connexion {
+  padding: 50px 40px;
+  min-height: 600px;
+  height: auto;
+  width: 480px;
+  box-shadow: -5px 5px 15px 0 rgba(12, 29, 38, 0.21);
+  border: solid 30px var(--light-primary-colour);
+  background-image:  var(--light-bg);
+
+}
+.slds-form-element{
+  margin: 20px 0;
+}
+
+.hp-bigTitle {
+  text-align: center;
+  color: var(--true-black);
+  text-transform: uppercase;
+  padding: 40px 0 10px 0;
+  font-size: 22px;
+}
+
+.hp-logo {
+  display: flex;
+  justify-content: center;
+}
+
+.hp-logo img {
+  width: 175px;
+  height: auto;
+  object-fit: contain;
+}
+
+.hp-firstButton {
+  min-width: 210px;
+}
+.hp-link {
+  display: flex;
+  justify-content: center;
+}
+
+.hp-link a{
+  font-family: var(--font-regular);
+  color: var(--light-primary-colour);
+  font-size: 14px;
+  padding: 5px 0 0 0;
+}
+
+.hp-link a:hover,
+.hp-link a:focus,
+.hp-link a:active {
+  color: var(--secondary-colour);
+}
+.hp-btnConnexions {
+  text-align: center;
+  padding: 50px 0 0 0;
+}
+
+.hp-btnConnexions p {
+  text-transform: uppercase;
+  color: var(--black);
+  font-size: 18px;
+  padding: 0 0 20px 0;
+}
+
+
+.hp-btnContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.hp-facebook, .hp-google {
+  margin: 0 10px;
+}
+
+.hp-bloc-app-happe {
+  display: flex;
+  padding: 25px 10px;
+  font-weight: bold;
+  align-items: center;
+  position: relative;
+  background-color: var(--light-primary-colour);
+  box-shadow: var(--dark-box-shadow);
+  max-width: 480px;
+  cursor: pointer;
+}
+
+.slds-modal{
+  top: auto;
+}
+
+.hp-bloc-app-happe-green {
+  display: flex;
+  padding: 25px 10px;
+  font-weight: bold;
+  align-items: center;
+  position: relative;
+  background-color: var(--secondary-colour);
+  box-shadow: var(--dark-box-shadow);
+  max-width: 480px;
+  cursor: pointer;
+}
+
+
+.hp-bloc-app-happe:hover,
+.hp-bloc-app-happe:focus, 
+.hp-bloc-app-happe:active  {
+  background: var(--secondary-colour);
+  cursor: pointer;
+} 
+
+.hp-bloc-app-happe img, .hp-bloc-app-happe-green img{
+  width: 100px;
+  height: 100px;
+  padding: 0 10px 0 0;
+}
+
+.hp-bloc-app-happe p, .hp-bloc-app-happe-green p{
+  font-family: "font_AvantBold";
+  font-size: 15px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: 0.45px;
+  text-align: left;
+  padding-right: 55px;
+  color: var(--white);
+}
+
+.hp-bloc-app-happe p a, .hp-bloc-app-happe-green p a{
+ text-decoration: none;
+ color: var(--white);
+}
+
+.hp-bloc-app-happe p a .chevron::before, .hp-bloc-app-happe-green p a .chevron::before{
+  font-size: 16px;
+  border-style: solid;
+  border-width: 0.15em 0.15em 0 0;
+  content: '';
+  display: inline-block;
+  height: 0.60em;
+  right: 0.15em;
+  position: absolute;
+  top: 18px;
+  transform: rotate(-45deg);
+  vertical-align: top;
+  width: 0.60em;
+  color: var(--white);
+}
+
+.hp-bloc-app-happe p a .chevron.right:before {
+  top: 45%;
+  right: 30px;
+  transform: rotate(45deg);
+}
+
+
+.hp-bloc-app-happe-green p a .chevron.right:before {
+  top: 45%;
+  right: 30px;
+}
+
+
+@media (max-width: 1024px) {
+  /* Ipad and tablets */
+  .hp-connexion {
+    padding: 40px 25px;
+    height: auto;
+    max-width: 420px;
+    border: solid 20px var(--light-primary-colour);
+  }
+  .hp-logo img {
+    width: 160px;
+  }
+  .hp-bigTitle {
+    font-size: 20px;
+  }
+
+  .hp-bloc-app-happe, .hp-bloc-app-happe-green {
+    max-width: 420px;
+    background: transparent;
+  }
+  .hp-bloc-app-happe:hover,
+  .hp-bloc-app-happe:focus, 
+  .hp-bloc-app-happe:active  {
+    background: transparent;
+} 
+
+}
+@media (max-width: 576px) { 
+      /* mobiles */
+}

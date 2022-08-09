@@ -1,0 +1,99 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 02-17-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<apex:page controller="HP_VF_LiveAgentFeedBack_Controller" showHeader="false" standardStylesheets="false">
+<style>
+.btn-chatbot-review{
+    cursor: pointer;
+    background-image: linear-gradient(60deg,#6647eb 55%,#20a7f9 115%);
+    background-size: 200%;
+    background-position: 100% 0;
+    color: #fff;
+    transition: background-position .3s ease-in-out;
+    font-family: "Raleway",sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.1rem;
+    letter-spacing: 1.4px;
+    border-radius: 24px;
+    padding: 16px 20px;
+    border: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1 auto;
+    text-decoration: none;
+    min-width: 140px;
+    vertical-align: middle;
+    }
+.btn-chatbot-review:hover{
+    background-position: 0 50%;
+    color: #fff;
+    box-shadow: 0 2px 21px 0 rgb(0 0 0 / 21%);
+    }
+h2.mainTitle{
+    display:none
+    }
+h1.title-review{
+    padding: 0;
+    margin: 0;
+    font-size: 1.1rem;
+    font-family: "Raleway", sans-serif;
+    }
+.question-review, .yes-review{
+    font-size: 0.9rem;
+    font-family: "Raleway", sans-serif;
+    margin:0;
+    }
+.question-review{padding-bottom:10px;}
+.button-send-review{width:100%;text-align:center;}
+.info-review{
+    font-size: 0.9rem;
+    font-family: "Raleway", sans-serif;
+    margin:0;
+    }
+h2.mainTitle{
+    display:none
+    }
+</style>      
+      <apex:pageBlock title="Votre avis" rendered="{!show}">
+            <apex:form >
+                  <h1 class="title-review">Dans un objectif d'évaluation de notre service client, nous vous invitons à répondre à ces 3 questions</h1><br />
+                  <p class="question-review">Quel est votre niveau de satisfaction de la réponse apportée par notre conseiller happ-e ?</p>
+                  <span id="rating">
+                      <apex:selectRadio value="{!score}">
+                            <apex:selectOption itemValue="1" itemLabel="😦"/>
+                            <apex:selectOption itemValue="2" itemLabel="🙁"/>
+                            <apex:selectOption itemValue="3" itemLabel="😐"/>
+                            <apex:selectOption itemValue="4" itemLabel="🙂"/>
+                            <apex:selectOption itemValue="5" itemLabel="😀"/>
+                      </apex:selectRadio>
+                  </span>
+                  <p class="question-review">Avez-vous contacté happ-e pour la même demande récemment ?</p>
+                      <apex:selectRadio value="{!oed}">
+                            <apex:selectOption itemValue="true" itemLabel="Oui"/>
+                            <apex:selectOption itemValue="false" itemLabel="Non"/>
+                      </apex:selectRadio>
+                  <p class="question-review">Laissez-nous un commentaire ou une suggestion afin d’améliorer l’efficacité de notre service client.</p>
+                  <apex:inputTextarea value="{!verbatim}" cols="40" rows="5"></apex:inputTextarea> <br /><br />         
+
+                  <div class="button-send-review">
+                  <apex:commandButton value="Envoyer" action="{! saveNoteSat }" rerender="hiddenBlock" styleClass="btn-chatbot-review">
+                        <apex:param name="childquerry" value="{!$CurrentPage.parameters.chatDetails}" assignTo="{!chatDetails}"></apex:param>
+                        <apex:param name="childquerry2" value="{!$CurrentPage.parameters.attachedRecords}" assignTo="{!attachedRecords}"></apex:param>
+                  </apex:commandButton>
+                  </div>
+            </apex:form>
+</apex:pageBlock>
+
+<apex:pageBlock title="Merci" rendered="{!NOT(show)}">
+    <apex:form >
+        <span class="info-review">Le service client est ouvert du lundi au vendredi de 9h à 18h et le samedi de 9h à 17h. Merci pour votre confiance.</span><br />
+    </apex:form>
+</apex:pageBlock>
+
+</apex:page>

@@ -1,0 +1,10 @@
+{
+  "activeViewId" : "2b020c9f-5a7e-4048-b093-415448493a1c",
+  "appPageId" : "7e89266e-f5a3-4029-bb48-38a8a732ab93",
+  "configurationTags" : [ ],
+  "id" : "7ea3e9af-c7f2-438f-aa87-734382dfe069",
+  "label" : "Réinitialiser le Mot de Passe",
+  "routeType" : "custom-reset-password",
+  "type" : "route",
+  "urlPrefix" : "reset-password"
+}

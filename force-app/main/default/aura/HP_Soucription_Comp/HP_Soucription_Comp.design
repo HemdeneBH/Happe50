@@ -1,0 +1,13 @@
+<design:component label="ThreeColumnsNoPadding">
+    <flexipage:template >
+        <flexipage:region name="left" defaultWidth="MEDIUM">
+            <flexipage:formfactor type="MEDIUM" width="SMALL" />
+        </flexipage:region>
+        <flexipage:region name="main" defaultWidth="LARGE">
+            <flexipage:formfactor type="LARGE" width="MEDIUM" />
+        </flexipage:region>
+        <flexipage:region name="right" defaultWidth="MEDIUM">
+            <flexipage:formfactor type="MEDIUM" width="SMALL" />
+        </flexipage:region>
+    </flexipage:template>
+</design:component>

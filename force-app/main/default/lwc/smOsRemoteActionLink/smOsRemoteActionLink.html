@@ -1,0 +1,34 @@
+<template>
+    <slot>
+      <template if:true={_isBtn}>
+          
+        <div class="slds-is-relative slds-p-top_xx-small">
+          <!--replaced c-button from original template by this simple link-->
+          <a onclick={execute}>{_propSetMap.label}</a>
+          <template if:true={isBtnLoading}>
+            <vlocity_cmt-spinner variant="brand"
+                       alternative-text="Loading..."
+                       theme={_theme}
+                       size="small">
+            </vlocity_cmt-spinner>
+          </template>
+        </div>
+        <template if:true={_isDesignMode}>
+          <template if:true={_isActionBlock}>
+            <p>{allCustomLabelsUtil.ODCActionBlockDrop4ElementsBelow}</p>
+            <div class="slds-m-top_small slds-p-around_small omni-designer-action-container">
+              <slot name="actionBlockDesignTimeChildren"></slot>
+            </div>
+          </template>
+        </template>
+      </template>
+      <template if:true={isPageLoading}>
+        <vlocity_cmt-spinner variant="brand"
+                   alternative-text="Loading..."
+                   theme={_theme}
+                   message={spinnerActionMessage}
+                   size="medium">
+        </vlocity_cmt-spinner>
+      </template>
+    </slot>
+  </template>

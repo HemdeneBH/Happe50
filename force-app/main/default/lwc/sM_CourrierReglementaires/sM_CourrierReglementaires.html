@@ -1,0 +1,57 @@
+<template>
+    
+    <div class="slds-box slds-theme_default">
+        <table class="slds-table slds-table_bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Facture
+                      </th>
+                      <th>
+                        Courriers réglementaires
+                      </th>
+                      <th>
+                        Date d'envoi
+                        </th>
+                        <th>
+                          Montant
+                        </th>
+                </tr>
+            </thead>
+            <tbody>
+                 <!--template for:each={finalList} for:item="facture">
+                <tr key={facture.id}>
+                        <td rowspan={facture.rowspan}>{facture.numeroFacture}</td>
+                        <td>{facture.numeroCourrier}</td>
+                        <td>{facture.Date}</td>
+                        <td>{facture.montant}</td>
+                    </tr>
+                    <template if:true={facture.isCourrier2}>
+                    <tr key={facture.id}>
+                        <td>{facture.numeroCourrier2} </td>
+                        <td>{facture.date2}</td>
+                        <td>{facture.montant2}</td>
+                    </tr>
+                </template>
+                    </template-->
+                     <template for:each={finalList} for:item="facture">
+                <tr key={facture.id}>
+                        <td rowspan={facture.rowspan}>{facture.numeroFacture}</td>
+                        <td>{facture.numeroCourrier}</td>
+                        <td>{facture.Date}</td>
+                        <!--FT2-1704  afficher le montant de facture une seule fois et fusionner les 2 cellules-->
+                        <td rowspan={facture.rowspan}>{facture.montant}</td>
+                    </tr>
+                    <template if:true={facture.isCourrier2}>
+                    <tr key={facture.id}>
+                        <td>{facture.numeroCourrier2} </td>
+                        <td>{facture.date2}</td>
+                    </tr>
+                </template>
+                    </template>
+                    
+            </tbody>
+        </table>
+    </div>   
+
+</template>

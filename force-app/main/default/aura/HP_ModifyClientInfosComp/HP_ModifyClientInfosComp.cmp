@@ -1,0 +1,9 @@
+<aura:component implements="lightning:isUrlAddressable,lightning:availableForFlowScreens" access="global">
+
+	<aura:handler value="{!this}" name="init" action="{!c.init}"/>
+	<lightning:workspaceAPI aura:id="workspace"/>
+	<aura:attribute name="recordId" type="String" default="{!v.pageReference.state.c__recordId}"></aura:attribute>
+	<aura:attribute name="personId" type="Integer" default="{!v.pageReference.state.c__personId}"></aura:attribute>
+    <c:hp_modifyClientInfos oncloseclicked="{!c.handleFilterChange}" recordId="{!v.recordId}" personId="{!v.personId}"/>
+
+</aura:component>

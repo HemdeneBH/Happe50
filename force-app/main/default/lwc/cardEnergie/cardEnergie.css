@@ -1,0 +1,258 @@
+.active {
+  color: #19a546;
+}
+
+.enCours {
+  color: #ff7f1d;
+}
+
+.prevContract {
+  color: #c1c0c0;
+  line-height: 1;
+  position: absolute;
+  bottom: 0;
+  padding-right: 5px;
+  width: 100%;
+  padding-right: 30px;
+}
+
+.bloc-card {
+  height: 200px;
+}
+
+.position-right {
+    right: 0;
+}
+
+.close-popover:hover {
+    cursor: pointer;   
+}
+
+.container-card {
+  position: relative;
+  font-family: 'Salesforce Sans', Arial, sans-serif ! important;
+  font-size: 1.2em;
+}
+
+.popover-260 {
+  min-height: 270px;
+}
+
+.container-card .popup-card {
+  position: absolute;
+  top: 0;
+  right: calc(-100% - 12px);
+  background-color: #e0f5ff;
+}
+
+.container-card .label {
+  font-size: 10px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #767676;
+}
+
+.container-card .value {
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: black;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.container-card .value-active {
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #19a546;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.container-card .value-en-cours {
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ff7f1d;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.display-block {
+  display: block;
+}
+
+.icon-energie {
+  position: absolute;
+  top: -10px;
+  left: -18px;
+  height: 65px;
+  width: 90px;
+}
+
+.title-energie {
+  position: absolute;
+  top: 10px;
+  left: 55px;
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+.close-icon {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.close-icon:hover {
+  cursor: pointer;
+}
+
+.statut-text {
+  font-size: 16px;
+}
+
+.date-text {
+  font-size: 13px;
+}
+
+.offrePoussee{
+  width: 47%;
+}
+.offrePoussee .divOffre {
+  width: 100%;
+}
+
+.offreRepli .offrePoussee:first-child{
+  margin-right: 6%;
+}
+
+.message-error {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #c10e24;
+  padding: 20px;
+}
+
+.divOffre:focus {
+  outline: none;
+}
+.divOffre.colLeft {
+  margin-right: 6%;
+}
+
+.divOffre .column1 {
+  padding: 10px;
+}
+
+.divOffre .column2 {
+  border-left: solid 1px rgba(118, 118, 118, 0.3);
+  min-width: 30%;
+  border-color:#059ce7;
+}
+.divOffre .custStyle {
+  font-size: 16px;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #007fff;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.divOffre .topRight{
+  padding: 10px;
+  color: white;
+  background-color: #cce1eb;
+  background-color: #059ce7;
+}
+.divOffre .topRight .mainAmount {
+  font-size: 22px;
+  font-weight:bold;
+  margin-right: 6px;
+}
+.divOffre .lowRight {
+  padding: 10px;
+  font-size: 10px;
+  
+}
+.divOffre .lowRight .strongText {
+  font-weight:bold;
+  font-size: 13px;
+}
+/* .divOffre.selected {
+  border-color:#059ce7;
+  .topRight{
+      background-color: #059ce7;
+  }
+  .column2 {
+      border-color:#059ce7;
+  }
+} */
+.divOffre {
+  margin-top: 20px;
+  border: solid 2px rgba(118, 118, 118, 0.3);
+  background-color: white;
+  vertical-align: top;
+  color: #343434;
+  position: relative;
+  font-size: 13px;
+  cursor: pointer;
+  border-color:#059ce7;
+}
+
+.title-repli {
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #007fff;
+  margin-left:45%;
+}
+
+.slds-icon {
+  fill: #007fff;
+}
+
+.consoZone{
+  border-radius: 10px;
+  border-color: #007fff;
+  border-width: 1px;
+  padding: 5px;
+  border-style: solid;
+}
+.consoHeader::after{
+  content: " ";
+  display: block; 
+  height: 0; 
+  clear: both;
+}
+.consoHeaderRight{
+  float:right; 
+  text-align: right;
+}
+.consoHeaderLeft{
+  float:left; 
+  text-align: left;
+}
+.consoBody {
+  margin-top: 10px;
+}
+.clearfix {
+overflow: auto;
+}

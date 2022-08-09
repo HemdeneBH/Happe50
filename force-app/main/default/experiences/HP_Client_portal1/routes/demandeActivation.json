@@ -1,0 +1,10 @@
+{
+  "activeViewId" : "8804e887-8265-4ffc-a8ce-0764cd6f519f",
+  "appPageId" : "7e89266e-f5a3-4029-bb48-38a8a732ab93",
+  "configurationTags" : [ ],
+  "id" : "254c5e61-acc2-4934-9654-df3dc880f8c2",
+  "label" : "Demande Activation",
+  "routeType" : "custom-demande-activation",
+  "type" : "route",
+  "urlPrefix" : "demande-activation"
+}

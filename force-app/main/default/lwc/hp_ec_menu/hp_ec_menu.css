@@ -1,0 +1,42 @@
+:host{
+    --lwc-colorTextDefault: var(--secondary-colour);
+    --lwc-brandPrimary: transparent;
+    --lwc-colorTextIconDefault: var(--secondary-colour);
+    --lwc-squareIconSmallBoundary: 16px;
+  }
+
+  .hp-navigationMenu  {
+    box-shadow: var(--box-shadow);
+    background-image: var(--bg);
+  } 
+
+ .c-verticalMenu .hp-nav li{
+    position : relative;
+  }
+  .c-verticalMenu {
+    padding: 15px 0;
+  }
+  .hp-navigationMenu {
+    height: auto;
+  }
+  @media (min-width: 1280px) {
+    /* 1440px screen and all screens larger */
+ 
+}
+  
+@media (max-width: 1280px) {
+    /* 1280px screen and all screens smaller */
+    .hp-navigationMenu {
+     display: none;
+    }
+}
+  
+  @media (max-width: 1024px) {
+    /* Ipad and tablets */
+   
+}
+
+@media (max-width: 576px) { 
+        /* mobiles */
+  
+}

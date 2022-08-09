@@ -1,0 +1,60 @@
+<aura:component implements="flexipage:availableForAllPageTypes,lightning:isUrlAddressable,force:hasRecordId"
+  access="global">
+  <lightning:workspaceAPI aura:id="workspace" />
+  <aura:handler value="{!this}" name="init" action="{!c.init}" />
+  <aura:attribute name="recordId" type="String" default="{!v.pageReference.state.c__recordId}"></aura:attribute>
+  <aura:attribute name="libelleVoie" type="String" default="{!v.pageReference.state.c__libelleVoie}"></aura:attribute>
+  <aura:attribute name="ville" type="String" default="{!v.pageReference.state.c__ville}"></aura:attribute>
+  <aura:attribute name="complementAdresse" type="String" default="{!v.pageReference.state.c__complementAdresse}">
+  </aura:attribute>
+  <aura:attribute name="numeroVoie" type="String" default="{!v.pageReference.state.c__numeroVoie}"></aura:attribute>
+  <aura:attribute name="codePostal" type="String" default="{!v.pageReference.state.c__codePostal}"></aura:attribute>
+  <aura:attribute name="NoCompteContrat" type="String" default="{!v.pageReference.state.c__NoCompteContrat}">
+  </aura:attribute>
+  <aura:attribute name="NoCompteContratMaj" type="String" default="{!v.pageReference.state.c__NoCompteContratMaj}">
+  </aura:attribute>
+  <aura:attribute name="uniteReleveGaz" type="String" default="{!v.pageReference.state.c__uniteReleveGaz}">
+  </aura:attribute>
+  <aura:attribute name="uniteReleveElec" type="String" default="{!v.pageReference.state.c__uniteReleveElec}">
+  </aura:attribute>
+  <aura:attribute name="dateTechniqueProchaineFacture" type="String"
+    default="{!v.pageReference.state.c__dateTechniqueProchaineFacture}"></aura:attribute>
+  <aura:attribute name="dateReelleProchaineFacture" type="String"
+    default="{!v.pageReference.state.c__dateReelleProchaineFacture}"></aura:attribute>
+  <aura:attribute name="pce" type="String" default="{!v.pageReference.state.c__pce}"></aura:attribute>
+  <aura:attribute name="pdl" type="String" default="{!v.pageReference.state.c__pdl}"></aura:attribute>
+  <aura:attribute name="IdPortefeuilleContrat" type="String"
+    default="{!v.pageReference.state.c__IdPortefeuilleContrat}"></aura:attribute>
+  <aura:attribute name="IdBusinessPartner" type="String" default="{!v.pageReference.state.c__IdBusinessPartner}">
+  </aura:attribute>
+  <aura:attribute name="AccountId" type="String" default="{!v.pageReference.state.c__AccountId}"></aura:attribute>
+  <aura:attribute name="idContratElec" type="String" default="{!v.pageReference.state.c__idContratElec}">
+  </aura:attribute>
+  <aura:attribute name="idContratGaz" type="String" default="{!v.pageReference.state.c__idContratGaz}"></aura:attribute>
+  <aura:attribute name="factureEnLigne" type="String" default="{!v.pageReference.state.c__factureEnLigne}">
+  </aura:attribute>
+  <aura:attribute name="SoldeEnCours" type="String" default="{!v.pageReference.state.c__SoldeEnCours}"></aura:attribute>
+
+  <aura:attribute name="isSoldePositif" type="String" default="{!v.pageReference.state.c__isSoldePositif}">
+  </aura:attribute>
+
+  <aura:attribute name="ModePrelevement" type="String" default="{!v.pageReference.state.c__ModePrelevement}">
+  </aura:attribute>
+  <aura:attribute name="DLP" type="String" default="{!v.pageReference.state.c__DLP}"></aura:attribute>
+  <aura:attribute name="offreGaz" type="String" default="{!v.pageReference.state.c__offreGaz}"></aura:attribute>
+  <aura:attribute name="offreElec" type="String" default="{!v.pageReference.state.c__offreElec}"></aura:attribute>
+  <aura:attribute name="EnqSat" type="String" default="{!v.pageReference.state.c__EnqSat}"></aura:attribute>
+
+  <c:sM_InfoConso recordId="{!v.recordId}" libelleVoie="{!v.libelleVoie}" ville="{!v.ville}"
+    complementAdresse="{!v.complementAdresse}" idContratGaz="{!v.idContratGaz}" idContratElec="{!v.idContratElec}"
+    DLP="{!v.DLP}" ModePrelevement="{!v.ModePrelevement}" numeroVoie="{!v.numeroVoie}" codePostal="{!v.codePostal}"
+    NoCompteContrat="{!v.NoCompteContrat}" pce="{!v.pce}" pdl="{!v.pdl}"
+    dateReelleProchaineFacture="{!v.dateReelleProchaineFacture}" SoldeEnCours="{!v.SoldeEnCours}"
+    NoCompteContratMaj="{!v.NoCompteContratMaj}" uniteReleveGaz="{!v.uniteReleveGaz}"
+    uniteReleveElec="{!v.uniteReleveElec}" dateTechniqueProchaineFacture="{!v.dateTechniqueProchaineFacture}"
+    factureEnLigne="{!v.factureEnLigne}" isSoldePositif="{!v.isSoldePositif}" onopenInteraction="{!c.openInteraction}"
+    AccountId="{!v.AccountId}" onopencontestationindex="{!c.openContestationIndex}"
+    oncloseclicked="{!c.handleFilterChange}" IdBusinessPartner="{!v.IdBusinessPartner}"
+    IdPortefeuilleContrat="{!v.IdPortefeuilleContrat}" offreGaz="{!v.offreGaz}" offreElec="{!v.offreElec}"  EnqSat="{!v.EnqSat}"/>
+
+</aura:component>

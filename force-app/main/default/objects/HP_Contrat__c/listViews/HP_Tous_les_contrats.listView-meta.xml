@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HP_Tous_les_contrats</fullName>
+    <columns>NAME</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>HP_Contrat_XdataId__c</columns>
+    <columns>HP_Type_de_Compteur__c</columns>
+    <columns>HP_Id_Compteur__c</columns>
+    <columns>HP_Porte_Feuille_Contrat__c</columns>
+    <columns>HP_Souscription__c</columns>
+    <columns>HP_Proposition_Commerciale_XdataId__c</columns>
+    <columns>LAST_UPDATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>HP_PortefeuilleContratXdataId__c</field>
+        <operation>equals</operation>
+        <value>98490220</value>
+    </filters>
+    <label>happ-e : Tous les contrats</label>
+    <sharedTo>
+        <roleAndSubordinatesInternal>HP_HAPPE</roleAndSubordinatesInternal>
+    </sharedTo>
+</ListView>

@@ -1,0 +1,117 @@
+<template>
+    <div class="container mr-0">
+        <div class="row">
+            <div class="col-3 FixedSteps" >
+                <div class="container-fluid">
+                    <template for:each={_stepInfo} for:item="section">
+                        <div key={section.name} class="section">
+                            <div class="row vertical" onclick={handleChange}
+                            data-section={section.name}>
+                                <div class="col text-right line" onclick={handleChange}
+                                data-section={section.name} >
+                                    <a type="button" class="btn btn-circle" onclick={handleChange}
+                                        data-section={section.name} data-status={section.status} style="z-index: 10;"></a>
+                                </div>
+                                <div class="col align-self-left" onclick={handleChange}  
+                                data-section={section.name} data-status={section.status}>{section.label}</div>
+                            </div>
+                            <template for:each={section.steps} for:item="step">
+                                <div key={section.name} class="row vertical" onclick={handleChange}
+                                data-section={step.name}>
+                                    <div class="col text-right line-sm" onclick={handleChange}
+                                    data-section={step.name}>
+                                        <a type="button" class="btn btn-circle-sm" onclick={handleChange}
+                                            data-section={step.name} data-status={step.status} style="z-index: 10;"></a>
+                                    </div>
+                                    <div class="col align-self-left" onclick={handleChange}  
+                                    data-section={step.name} data-status={step.status}>{step.label}</div>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="shadow p-3 mb-5 bg-white rounded">
+                    <template if:true={isSituation}>
+                        <div class="slds-m-vertical_medium">
+                            <c-parcours-pp-ident-souhait record={record} onsouhaitchange={handleSouhaitChange}
+                            onsuivant={handleSuivantSouhait}></c-parcours-pp-ident-souhait>
+                        </div>
+                    </template>
+                    <template if:true={isEnergy}>
+                        <div class="slds-m-vertical_medium">
+                            <c-parcours-pp-ident-besoin record={record} onbesoinchange={handleBesoinChange}
+                            onsuivant={handleSuivantBesoin} onprecedent={handlePrecedentBesoin}></c-parcours-pp-ident-besoin>
+                        </div>
+                    </template>
+                    <template if:true={isRechercheClient}>
+                        <div class="slds-m-vertical_medium">
+                            <c-parcours-p-p-recherche-client record={record}  recordupdated={recordUpdated} emailchangedonly={emailChangedOnly} recorddonnee={recorddonnee}
+                            onclientselection={handleClientSelection} oncreateclient={handleClientCreation} onclientsearch={handleclientsearch} onreinitializeclient={handleReinitializeclient}
+                            onsuivant={handleSuivantClient} onprecedent={handlePrecedentClient}></c-parcours-p-p-recherche-client>
+                        </div>
+                    </template>
+                    <template if:true={isIdentificationLocal}>
+                        <div class="slds-m-vertical_medium">
+                            <c-parcours-p-p-identification-local record={record} recordupdated={recordUpdated} ontypederecherchelocalchange={handleTypeDeRechercheLocalChange} onlocalnonidentifie={handlelocalnonidentifie}
+							ondetailsrelevesvides={handleInfoComplDetailsReleveVides}	ondetailsreleveremplis={handleInfoComplDetailsReleveRemplis} ondetailsrelevesinities={handleInfoComplDetailsReleveInities} 
+                            onreinitializeaddresslocal={handleReinitializeAddressLocal} onhandlesaveetapelocal={handleSaveEtapeLocal} onhandlecontinuer={handleContinuer}
+                            onsuivant={handleSuivantLocal} onprecedent={handlePrecedentLocal}></c-parcours-p-p-identification-local>
+                        </div>
+                    </template>
+                    <template if:true={isEstimationConsommation}>
+                        <div class="slds-m-vertical_medium">
+                            <c-parcours-p-p-estimation-consommation record={record} stepsforinfo={stepsForInfoComplementaires} 
+                            onestimationinitialized={handleEstimationDeLaConsommationAvailable}
+                            onestimationdone={handleEstimationDeLaConsommationCompleted}
+                            onpasseretape={handlePasserEtapeEstimationConso}
+                            onprecedent={handleEstimationConsoPrecedent}></c-parcours-p-p-estimation-consommation>
+                        </div>
+                    </template>
+                    <template if:true={isConstitutionPanier}>
+                        <div class="slds-m-vertical_medium">
+                            <c-parcours-p-p-constitution-panier record={record} recorddonnee={recorddonnee}
+							onpasdoffrechoisie={handlePasDOffreChoisie} onprecedent={handleConstitutionDuPanierPrecedent} onetapeencours={handleConstitionDuPanierEnCours}
+                            onvalideretape={handleValiderEtape} onoffrechoisie={handleConstitionDuPanierCompleted}></c-parcours-p-p-constitution-panier>
+                        </div>
+                    </template>
+                    <template if:true={isOptionEtServices}>
+                        <div class="slds-m-vertical_medium">
+                            <c-parcours-p-p-options-et-services record={record} recordupdated={recordUpdated} 
+                            recorddonnee={recorddonnee} onserviceoptionsafterminee={handleServicesEtOptionsCompleted} onserviceoptionsafencours={handleServicesEtOptionsEnCours}
+                            onsuivant={handleServicesEtOptionsSuivant} onprecedent={handleServicesEtOptionsPrecedent}></c-parcours-p-p-options-et-services>
+                        </div>
+                    </template>
+                    <template if:true={isInfosComplementaires}>
+                        <div class="slds-m-vertical_medium">
+                            <c-parcours-p-p-info-complementaires record={record} recordupdated={recordUpdated} stepsdone={stepsForSubscription}
+                            ondatecontratremplie={handleDateContratRemplie} ondetailsreleveremplis={handleDetailsReleveRemplis} ondetailsrelevesinities={handleDetailsRelevesInities} 
+                            onpasseretape={handlePasserEtapeInfoCompl} ondatecontratvide={handledateContratVide}
+                            onprecedent={handleInfosComplPrecedent}></c-parcours-p-p-info-complementaires>
+                        </div>
+                    </template>
+                    <template if:true={isPaiements}>
+                        <div class="slds-m-vertical_medium">
+                            <c-parcours-p-p-saisie-paiements record={record} reopenpopupmensualisation={reopenPopUpMensualisation} alliscompleted={allIsCompleted} recordupdated={recordUpdated} 
+                            onprecedent={handleSaisiePaiementPrecedent} onupdateparcours={udParcours} oncontinuer={handlePasserEtapeSaisiePaiement} onsaisiepaiementnoninitialized={handlesaisiepaiementnoninitialized} 
+                            onsaisiepaiementcompleted={handlesaisiepaiementompleted}  onsaisiepaiementavailable={handlesaisiepaiementavailable} 
+                            onsaisiepaiementcheckbox={handlesaisiepaiementcheckbox} onsaisiepaiementavailableiban={handlesaisiepaiementavailableiban} onstatusservicedegestion={handlestatusservicedegestion}></c-parcours-p-p-saisie-paiements>
+                        </div>
+                    </template>
+                    <template if:true={isRecap}>
+                        <div class="slds-m-vertical_medium">
+                            <c-parcours-p-p-recap-souscription record={record} alliscompleted={allIsCompleted} onfindeparcours={handlefindeparcours} onfindeparcourserreur={handlefindeparcourserreur} 
+                            onmodifiersituation={handleSituation} onmodifierenergie={handleEnergy} onmodifierclient={handleClient} onmodifierlocal={handleLocal} onmodifierpanier={handlePanier} 
+                            onmodifiercontrat={handleContrat} onmodifierpaiement={handlePaiement} recordupdated={recordUpdated} onfermeparcours={updateParcoursRecap}
+                            onmodifierbesoincommentaire={handleBesoinCom} onmodifierclientcommentaire={handleClientCom} onmodifierlocalcommentaire={handleLocalCom} onmodifierpaniercommentaire={handlePanierCom} 
+                            onmodifiercontratcommentaire={handleContratCom} onmodifierpaiementcommentaire={handlePaiementCom} onmodifierestimationcommentaire={handleEstimation} onmodifierrecapcommentaire={handleRecapCom}></c-parcours-p-p-recap-souscription>
+                        </div>
+                    </template>
+                    <c-parcours-pp-round-button class="FixedButtons" parcours={record} onsaverecord={saveRecord} recordupdated={recordUpdated} currentstepvalue={currentStepValue} recorddonnee={recorddonnee}
+                    firstload="true" onhandlesavecomment={handleSaveComment} ></c-parcours-pp-round-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

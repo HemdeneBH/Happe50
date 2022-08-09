@@ -1,0 +1,277 @@
+<!--
+  @File Name          : hp_containerView.html
+  @Description        : 
+  @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
+  @Group              : 
+  @Last Modified By   : Hemdene Ben Hammouda
+
+  @Last Modified On   : 12-01-2021
+
+
+
+
+
+
+
+  @Modification Log   : 
+  Ver       Date            Author      		    Modification
+  1.0    31/03/2020   ChangeMeIn@UserSettingsUnder.SFDoc     Initial Version
+-->
+<template>
+        
+        <center  if:true={modeTab}>
+                <lightning-button-group>
+                        <lightning-button label="Vue 360" variant={vue360Variant} onclick={displayVue360}></lightning-button>
+                        <lightning-button label={compLabel} variant={compVariant} onclick={displayComp}></lightning-button>
+                        
+                </lightning-button-group>
+                <hr style="margin : 0;height: 0px;margin-top: 0.4rem;"></hr>
+        </center>
+       
+                <div style="margin-top: 0.75rem;">
+            <lightning-progress-bar value={progress}></lightning-progress-bar>  
+        </div>
+        <template if:false={opsSelected}>
+        <template if:true={clientHasContract}>
+<br/>
+<div if:false={showComp}>
+        <template if:true={hasPermissionViewLog}>
+                <lightning-icon if:true={iconAction} icon-name={iconAction} size="xx-small" style="margin-right: 0.5rem;margin-bottom: 0.2rem;"></lightning-icon>
+                <template if:true={showLog}>
+                        <lightning-icon onclick={viewDetails} icon-name="action:more" size="xx-small" style="float:right;margin-left: 0.5rem;margin-right: 0.5rem;"></lightning-icon>
+                        <lightning-icon onclick={refresh} icon-name="action:refresh" size="xx-small" style="float:right;"></lightning-icon>
+                        First Contrat Load Time : <b>{durationFirstContrat} ms</b>. Time load data : <b>{totalDuration} ms</b> 
+                    </template>
+                </template>
+    <div class="header-container-emmenagement-adresses" if:false={error}>
+        <div if:false={longList} class="header-container slds-tabs_default">
+                <div class="header-container-adresses slds-grid">
+                        <template for:each={firstListAdresses} for:item="adress"
+                                key={adress.idPortefeuilleContrat}>
+                                <div key={adress.key} class="slds-col slds-size_1-of-3">
+                                        <div id={adress.key} if:false={adress.selected}
+                                                class="header-bloc-adresse" onclick={changeLocal}>
+                                                <template iterator:it={adress.locaux}>
+                                                        <c-cmn_adress key={it.value.idLocal}  
+                                                        numerovoie={it.value.numeroVoie} 
+                                                        libellevoie={it.value.libelleVoie} 
+                                                        complementadresse={it.value.complementAdresse} 
+                                                        codepostal={it.value.codePostal} 
+                                                        ville={it.value.ville} loaded={adress.isLoaded}
+                                                        is-last={it.last}></c-cmn_adress>
+                                                </template>
+                                                <span if:true={adress.idPortefeuilleContrat}>({adress.idPortefeuilleContrat})</span>
+                                                <span if:true={adress.duplicate}> - {adress.typeEnergie}</span>
+                                                <span if:true={adress.isStay}> - STAY</span>
+                                        </div>
+                                        <div id={adress.key} if:true={adress.selected} onclick={changeLocal}
+                                                class="selected header-bloc-adresse">
+                                                <template iterator:it={adress.locaux}>
+                                                        <c-cmn_adress key={it.value.idLocal} 
+                                                        numerovoie={it.value.numeroVoie} 
+                                                        libellevoie={it.value.libelleVoie} 
+                                                        complementadresse={it.value.complementAdresse} 
+                                                        codepostal={it.value.codePostal} 
+                                                        ville={it.value.ville} loaded={adress.isLoaded}
+                                                        is-last={it.last}></c-cmn_adress>
+                                                </template>
+                                                <span if:true={adress.idPortefeuilleContrat}>({adress.idPortefeuilleContrat})</span>
+                                                <span if:true={adress.duplicate}> - {adress.typeEnergie}</span>
+                                                <span if:true={adress.isStay}> - STAY</span>
+                                        </div>
+                                </div>
+                        </template>
+                </div>
+        </div>
+        <div if:true={longList} class="header-container long-list slds-tabs_default">
+                <div class="header-container-adresses slds-grid">
+                        <template for:each={firstListAdresses} for:item="adress"
+                                key={adress.idPortefeuilleContrat}>
+                                <div key={adress.key} class="slds-col slds-size_1-of-3">
+                                        <div id={adress.key} if:false={adress.selected}
+                                                class="header-bloc-adresse" onclick={changeLocal}>
+                                                <template iterator:it={adress.locaux}>
+                                                        <c-cmn_adress key={it.value.idLocal} 
+                                                        numerovoie={it.value.numeroVoie} 
+                                                        libellevoie={it.value.libelleVoie} 
+                                                        complementadresse={it.value.complementAdresse} 
+                                                        codepostal={it.value.codePostal} 
+                                                        ville={it.value.ville} loaded={adress.isLoaded}
+                                                        is-last={it.last}></c-cmn_adress>
+                                                </template>
+                                                <span if:true={adress.idPortefeuilleContrat}> ({adress.idPortefeuilleContrat})</span>
+                                                <span if:true={adress.duplicate}> - {adress.typeEnergie}</span>
+                                                <span if:true={adress.isStay}> - STAY</span>
+                                        </div>
+                                        <div id={adress.key} if:true={adress.selected} onclick={changeLocal}
+                                                class="selected header-bloc-adresse">
+                                                <template iterator:it={adress.locaux}>
+                                                        <c-cmn_adress key={it.value.idLocal} 
+                                                        numerovoie={it.value.numeroVoie} 
+                                                        libellevoie={it.value.libelleVoie} 
+                                                        complementadresse={it.value.complementAdresse} 
+                                                        codepostal={it.value.codePostal} 
+                                                        ville={it.value.ville} loaded={adress.isLoaded}
+                                                        is-last={it.last}></c-cmn_adress>
+                                                </template>
+                                                <span if:true={adress.idPortefeuilleContrat}>({adress.idPortefeuilleContrat})</span>
+                                                <span if:true={adress.duplicate}> - {adress.typeEnergie}</span>
+                                                <span if:true={adress.isStay}> - STAY</span>
+                                        </div>
+                                </div>
+                        </template>
+                </div>
+        </div>
+        <div if:true={longList} class="second-list-adresses-length" onclick={handleSecondAdresses}>
+                +{secondListSize}
+                <br>
+                <lightning-icon icon-name="utility:chevrondown" size="xx-small" if:false={openSecondAdresses}>
+                </lightning-icon>
+                <lightning-icon icon-name="utility:chevronup" size="xx-small" if:true={openSecondAdresses}>
+                </lightning-icon>
+        </div>
+        <div if:true={openSecondAdresses} class="second-list-adresses">
+                <template for:each={secondListAdresses} for:item="adress" key={adress.idPortefeuilleContrat}>
+                        <div key={adress.key} class="container-second-adresse-item">
+                                <div id={adress.key} if:false={adress.selected}
+                                        class="header-bloc-adresse second-adresse-item"
+                                        onclick={changeLocal}>
+                                        <template iterator:it={adress.locaux}>
+                                                <c-cmn_adress key={it.value.idLocal} 
+                                                numerovoie={it.value.numeroVoie} 
+                                                libellevoie={it.value.libelleVoie} 
+                                                complementadresse={it.value.complementAdresse} 
+                                                codepostal={it.value.codePostal} 
+                                                ville={it.value.ville} loaded={adress.isLoaded}
+                                                is-last={it.last}></c-cmn_adress>
+                                        </template>
+                                        <span if:true={adress.idPortefeuilleContrat}>
+                                                ({adress.idPortefeuilleContrat})</span>
+                                                <span if:true={adress.isStay}> - STAY</span>
+                                </div>
+                                <div id={adress.key} if:true={adress.selected} onclick={changeLocal}
+                                        class="selected header-bloc-adresse second-adresse-item">
+                                        <template iterator:it={adress.locaux}>
+                                                <c-cmn_adress key={it.value.idLocal} 
+                                                numerovoie={it.value.numeroVoie} 
+                                                libellevoie={it.value.libelleVoie} 
+                                                complementadresse={it.value.complementAdresse} 
+                                                codepostal={it.value.codePostal} 
+                                                ville={it.value.ville} loaded={adress.isLoaded}
+                                                is-last={it.last}></c-cmn_adress>
+                                        </template>
+                                        <span if:true={adress.idPortefeuilleContrat}>
+                                                ({adress.idPortefeuilleContrat})</span>
+                                                <span if:true={adress.isStay}> - STAY</span>
+                                </div>
+                        </div>
+                </template>
+        </div>
+<div if:true={showMenu} class="header-container-emmenagement">
+        <!-- <lightning-button-icon icon-name="utility:home" variant="bare" class="slds-button__icon_large"
+                alternative-text="parcours emménagement" onclick={handleOpenEmmenagement}>
+        </lightning-button-icon> -->
+        <lightning-icon  icon-name="utility:home" alternative-text="parcours emménagement"
+                onclick={handleOpenEmmenagement}></lightning-icon>
+</div>
+</div>
+<div class="body-container">
+    <div  class="slds-grid slds-wrap">
+           <c-hp_card-pdl-pce onpopupevent={popupEvent} onnewidtransaction={newidtransaction} popupstate={popupstate} masterdata={masterData} type="gaz" selectedpfcid={selectedPfcId}
+            class="slds-size_1-of-3 slds-p-right_xx-small slds-m-bottom_x-small"></c-hp_card-pdl-pce>
+            <c-hp_card-pdl-pce onpopupevent={popupEvent} onnewidtransaction={newidtransaction}  popupstate={popupstate} masterdata={masterData} type="elec" selectedpfcid={selectedPfcId}
+            class="slds-size_1-of-3 slds-p-right_xx-small slds-m-bottom_x-small"></c-hp_card-pdl-pce>
+            <c-hp_card-information-logement class="slds-size--1-of-6 slds-p-right_xx-small slds-m-bottom_x-small"></c-hp_card-information-logement>
+            <c-hp_card-information-logement class="slds-size--1-of-6 slds-p-right_xx-small slds-m-bottom_x-small" ></c-hp_card-information-logement>
+            <c-hp_card-energie onopenops={openops} onnewidtransaction={newidtransaction} onpopupevent={popupEvent} popupstate={popupstate} 
+            masterdata={masterData} type="gaz" selectedpfcid={selectedPfcId} pfcdata={selectedPfc} secondarydata={dataSecondary}
+                 class="slds-size--1-of-3 slds-p-right_xx-small slds-m-bottom_x-small"></c-hp_card-energie>
+            <c-hp_card-energie onopenops={openops} onnewidtransaction={newidtransaction} onpopupevent={popupEvent} popupstate={popupstate} masterdata={masterData} type="elec" selectedpfcid={selectedPfcId} pfcdata={selectedPfc} secondarydata={dataSecondary}
+                 class="slds-size--1-of-3 slds-p-right_xx-small slds-m-bottom_x-small"></c-hp_card-energie>
+            <c-hp_card-service masterdata={masterData}  selectedpfcid={selectedPfcId} pfcdata={selectedPfc} secondarydata={dataSecondary}
+                 class="slds-size--1-of-3 slds-p-right_xx-small slds-m-bottom_x-small"
+                 onloadoptionvert={loadoptionvert}></c-hp_card-service>
+                 <c-hp_card-solde class="slds-size--1-of-3 slds-p-right_xx-small slds-m-bottom_x-small" masterdata={masterData}
+                                selectedpfcid={selectedPfcId} pfcdata={selectedPfc} secondarydata={dataSecondary}></c-hp_card-solde>
+                <c-hp_card-paiement-facturation class="slds-size--2-of-3 slds-p-right_xx-small slds-m-bottom_x-small" masterdata={masterData} onopendossieraide={opendossieraide}
+                                selectedpfcid={selectedPfcId} pfcdata={selectedPfc} secondarydata={dataSecondary}></c-hp_card-paiement-facturation>
+                <c-hp_footer-view360 class="slds-size--1-of-1" onactivateresiliation={activateresiliation}
+                                masterdata={masterData}
+                                selectedpfcid={selectedPfcId} pfcdata={selectedPfc} secondarydata={dataSecondary}>
+                </c-hp_footer-view360>
+    </div>
+</div>
+</div>
+
+
+
+</template>
+
+</template>
+<div if:true={opsSelected}>
+        <c-hp_ops-detail oncloseops={closeops} masterdata={masterData} ops={currentOPS}
+                                selectedpfcid={selectedPfcId} pfcdata={selectedPfc} 
+                                secondarydata={dataSecondary}></c-hp_ops-detail>
+        </div>
+<template if:true={showData}>
+        <div class="demo-only" style="height: 640px;">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container" style="max-width: 60rem;width: 90%;">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closePopupModal}>
+                            <lightning-icon icon-name="utility:close" size="medium">
+                            </lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2>Log Details</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <div class="slds-grid slds-wrap">
+                            <lightning-tabset>
+                                <lightning-tab label="Result Data">
+                                    <div class="slds-col slds-size_1-of-1" style="padding-right : 1em">
+                                        Total execution server Time: <b> {totalDurationWithoutNetworkTime} ms</b> <br/>
+                                      <pre class="displayData">
+                                                {logResult}
+                                            </pre>
+                                </div>
+                                </lightning-tab>
+                                <lightning-tab label="API LOG">
+                                    <c-hp_log-console vue360="true" transactionid={transactionIdList}></c-hp_log-console>
+                                </lightning-tab> 
+                            </lightning-tabset>
+                    </div>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+        </template>
+        <template if:true={clientHasntContract}>
+                <div style="margin-top: 2rem;">
+                <lightning-card>
+                <div style="color: red;margin-left: 2rem;font-weight: bold;">
+
+
+               Ce client ne dispose pas de contrat happ-e ou ENGIE. 
+<br/>
+Vous pouvez souscrire un contrat pour ce contact via le portail admin.
+                </div>
+        </lightning-card>
+</div>
+        </template>
+
+        <div class={classComp}>
+                <c-hp_resiliation if:true={isRes} onactivateresiliation={activateresiliation} masterdata={masterData}
+                                   selectedpfcid={selectedPfcId} pfcdata={selectedPfc} secondarydata={dataSecondary}></c-hp_resiliation>
+                     
+                                   <c-hp_edit-name-client if:true={isEditName} masterdata={masterData} 
+                                   onactivateresiliation={activateresiliation}></c-hp_edit-name-client>
+                </div>
+        <div class={classComp}>
+                <c-hp_dossier-aide if:true={isDossierAide} onopendossieraide={opendossieraide} pfcdata={selectedPfc} masterdata={masterData} selectedpfcid={selectedPfcId} secondarydata={dataSecondary}></c-hp_dossier-aide>
+        </div>
+        <div class="exampleHolder" if:true={showSpinner}>
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </div>
+</template>

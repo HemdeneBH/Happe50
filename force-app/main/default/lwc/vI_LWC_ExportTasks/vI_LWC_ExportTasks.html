@@ -1,0 +1,24 @@
+<template>
+  <lightning-card>
+			
+			
+    <div class="parent" style="width:100%">
+      <span style="width:100%">
+        <lightning-icon class="child" icon-name="standard:task" title={Title} size="medium"></lightning-icon>
+        <div class="child" style="left:1%;position:relative;top:12px;">
+          Taches<br/><b style="font-size:18px">{Title}</b>
+        </div>
+					<lightning-button label="Exporter les tâches" slot="actions" class="exportButton child" onclick={exportTasks}></lightning-button>
+					
+      </span>
+    </div>
+    <lightning-input type="search" onblur={handleKeyChange} class="slds-m-bottom_small searchField child" label="Search"></lightning-input>
+    
+    <template if:true={listRecs}>
+      <div style="height: 300px;">
+        <lightning-datatable key-field="Id" data={listRecs} columns={columns} sorted-by={sortBy} sorted-direction={sortDirection} onsort={handleSortdata} onrowaction={handleRowAction}></lightning-datatable>
+      </div>
+    </template>
+    <template if:true={error}> {error}></template>
+  </lightning-card>
+</template>

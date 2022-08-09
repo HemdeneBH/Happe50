@@ -1,0 +1,24 @@
+<template>
+    <div class="account-activation c-content-bg slds-col">
+        <h2 class="hp-bigTitle">Mon suivi d'activation de compte</h2>
+        <c-hp_ec_steps-bar total-steps="4" active-step="3" alert-step="2"></c-hp_ec_steps-bar>
+        <ul class="activation-steps">
+            <li class="step active">
+                <h3>étape 1</h3>
+                <p>Contrat signé le: <span>23.01.21</span></p>
+            </li>
+            <li class="step alert">
+                <h3>étape 2 : <span>ma relève</span></h3>
+                <p>Relevé de vos index le : <span>23.01.21</span></p>
+                <button class="c-btn c-btn--outline">Saisir ma relève</button>
+            </li>
+            <li class="step">
+                <h3>étape 3 : <span>attente distributeur</span></h3>
+            </li>
+            <li class="step">
+                <h3>étape 4</h3>
+                <p>Contrat actif prévu pour le : <span>23.01.21</span></p>
+            </li>
+        </ul>
+    </div>
+</template>

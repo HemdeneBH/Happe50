@@ -1,0 +1,55 @@
+<template>
+    <div class="container" style="margin-bottom: 70px">
+        <div class="row">
+            <h1 class="col-lg-12 text-center" style="margin-top: 50px;">Identifions vos besoins</h1>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center" style="margin-top: 30px;">
+                <p class="font-class-1">Vous souhaitez</p>
+            </div>
+        </div>
+        <br />
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-lg-2"></div> 
+            <div class="col-lg-4 text-center justify-content-center">
+                <button type="button" class="btn btn-outline-primary" onclick={handleButtonClick} data-id="EM"
+                data-current={isLogementActive}>
+                    <div  onclick={handleButtonClick} class="mb-4" data-id="EM">
+                        <span class="showImageOnHover" onclick={handleButtonClick} data-id="EM">
+                            <img class="btn-img-size-truck" src={trucImage} onclick={handleButtonClick} data-id="EM">
+                        </span>
+                        <span class="hideImageOnHover" onclick={handleButtonClick} data-id="EM">
+                            <img class="btn-img-size-truck " src={trucImageInBlue} onclick={handleButtonClick} data-id="EM"> 
+                        </span>
+                    </div>
+                    <p class="font-class-1" onclick={handleButtonClick} data-id="EM">emménager dans un nouveau logement</p >
+                </button>
+            </div>
+            <div class="col-lg-4 text-center justify-content-center">
+                <button type="button" class="btn btn-outline-primary" onclick={handleButtonClick} data-id="CHF"
+                data-current={isChangementActive}>
+                    <div  onclick={handleButtonClick} class="mb-4" data-id="CHF">
+                        <span class="showImageOnHover" onclick={handleButtonClick} data-id="CHF">
+                            <img class="btn-img-size " src={ElecImage} onclick={handleButtonClick} data-id="CHF">
+                        </span>
+                        <span class="hideImageOnHover" onclick={handleButtonClick} data-id="CHF">
+                            <img class="btn-img-size " src={ElecImageInBlue} onclick={handleButtonClick} data-id="CHF">
+                        </span>
+                        <span class="showImageOnHover" onclick={handleButtonClick} data-id="CHF">
+                            <img class="btn-img-size " src={GazImage} onclick={handleButtonClick} data-id="CHF">
+                        </span>
+                        <span class="hideImageOnHover" onclick={handleButtonClick} data-id="CHF">
+                            <img class="btn-img-size " src={GazImageInBlue} onclick={handleButtonClick} data-id="CHF">
+                        </span>
+                    </div>
+                    <p class="font-class-1" onclick={handleButtonClick} data-id="CHF">changer de fournisseur d'énergie</p>
+                </button>
+            </div>
+            <div class="col-lg-2"></div> 
+        </div>
+        <br />
+        <div style="position: absolute;height:10%;width: 100%;bottom: -50px;left: 0%;">
+			<button onclick={handleSuivant} class="buttonSuivant">Suivant</button>
+		</div>
+    </div>
+</template>

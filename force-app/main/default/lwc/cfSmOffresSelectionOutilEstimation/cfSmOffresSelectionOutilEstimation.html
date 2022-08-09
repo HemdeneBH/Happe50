@@ -1,0 +1,80 @@
+<template>
+            <div class="slds-grid slds-wrap slds-is-relative ">
+            <div if:false={cardLoaded} class="slds-is-absolute vloc-loader_override" style="height: 100%; width: 100%; min-height:50px; background: white; z-index: 99;">
+  <div>
+   <vlocity_cmt-spinner
+      variant="brand"
+      alternative-text="Loading content..."
+      size="medium"
+      theme="slds"
+      ></vlocity_cmt-spinner>
+  </div>
+</div>
+            <template if:false={hasPermission}>
+              You don't have required permissions to view this card.
+            </template>
+            <template if:true={hasPermission}>
+              <template if:true={hasRecords}>
+                        <template for:each={_records} for:item="record" for:index="rindex">
+                            <vlocity_cmt-flex-card-state if:true={record}  key={record._flex.uniqueKey} data-recordid={record.Id} record={record} data-statue="true"  data-index="0" data-rindex={rindex} class="cf-vlocity-state-0 cf-vlocity-state slds-large-size_6-of-12 slds-medium-size_12-of-12 slds-small-size_12-of-12 slds-size_12-of-12 "  tracking-obj={_childCardTrackingObj} >
+      <div if:true={cardLoaded} class="slds-grid slds-wrap slds-card slds-m-vertical_small slds-m-horizontal_medium " style="     : #ccc 1px solid; 
+         ">
+          <div data-style-id="state0element0" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element0_child"  card={card}  record={record}  label="Block"  collapsible="false"  collapsed-by-default="false"  action='\{"name":"","label":"Action","iconName":"standard-default","eventType":"onclick","actionData":{"stateObj":"{record}","card":"{card}","stateAction":{"id":"flex-action-1639154392770","type":"Event","displayName":"Action","vlocityIcon":"standard-default","openUrlIn":"Current Window","subType":"PubSub","eventName":"smOffer","message":"select","hasExtraParams":true,"extraParams":{"nodeName":"{Parent.nodeName}","offer":"{record}"}}}}'  extraclass=" slds-text-link_reset"  theme="slds" onclick={executeAction} data-action-index="index0"><div class="slds-grid slds-wrap">
+          <div data-style-id="state0element0block_element0" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element0block_element0_child"  card={card}  record={record}  label="Block"  collapsible="false"  collapsed-by-default="false"  action='\null'  theme="slds" ><div class="slds-grid slds-wrap">
+          <div data-style-id="state0element0block_element0block_element0" class="" data-rindex={rindex} style=""><vlocity_cmt-output-field data-style-id="state0element0block_element0block_element0_child"     card={card}  record={record}  placeholder="output"  field-name="libelleOffre"  label=""  type="text"  theme="slds"  ></vlocity_cmt-output-field>
+      </div><div data-style-id="state0element0block_element0block_element1" class="" data-rindex={rindex} style=""><vlocity_cmt-output-field data-style-id="state0element0block_element0block_element1_child"     card={card}  record={record}  merge-field="%3Cdiv%3E%3Cspan%20style=%22font-size:%2014pt;%22%3E%3Cstrong%3E%7BmensTotalDisplay%7D%3C/strong%3E%3C/span%3E%20TTC/mois&nbsp;%20&nbsp;11%20mensualit&eacute;s/an%3C/div%3E%0A%3Cdiv%3E&nbsp;%3C/div%3E%0A%3Cdiv%3E%3Cspan%20style=%22font-size:%208pt;%22%3E-10%25%20:%20%7BmensTotalMin10%7D%20&nbsp;%20&nbsp;%20&nbsp;%20+10%25%20:%20%7BmensTotalPlus10%7D%20%3C/span%3E%3C/div%3E"  theme="slds"  ></vlocity_cmt-output-field>
+      </div>
+        </div></vlocity_cmt-block>
+    </div><div data-style-id="state0element0block_element1" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element0block_element1_child"  card={card}  record={record}  label="Block"  collapsible="false"  collapsed-by-default="false"  theme="slds" ><div class="slds-grid slds-wrap">
+          <div data-style-id="state0element0block_element1block_element0" class="" data-rindex={rindex} style=""><vlocity_cmt-output-field data-style-id="state0element0block_element1block_element0_child"     card={card}  record={record}  merge-field="%3Cdiv%3E&nbsp;%3C/div%3E%0A%3Cdiv%3E%3Cspan%20style=%22font-size:%2018pt;%22%3E%3Cstrong%3E%7BTotalPriceDisplay%7D%3C/strong%3E%3C/span%3E%20TTC/an%3C/div%3E"  theme="slds"  ></vlocity_cmt-output-field>
+      </div>
+        </div></vlocity_cmt-block>
+    </div><div data-style-id="state0element0block_element2" class="" data-rindex={rindex} style=""><c-cf-sm-offres-selection-details-outil-estimation data-style-id="state0element0block_element2_child"  tracking-obj={_childCardTrackingObj}  is-inside-parent={insideParent} parent-uniquekey={uniqueKey}  card-node="\{record}"  parent-record={record}  records={_records}  parent-mergefields={card}  record-id={recordId}  is-child-card-tracking-enabled="false"  parent-attribute='\{"energyType":"{Parent.energyType}"}'  theme="slds"  onupdateparent={updateParentData}></c-cf-sm-offres-selection-details-outil-estimation>
+    </div>
+        </div></vlocity_cmt-block>
+    </div>
+        </div>
+      </vlocity_cmt-flex-card-state>
+                        </template>
+                      </template>
+                      <template if:false={hasRecords}>
+                            <vlocity_cmt-flex-card-state  record={record} data-statue="false"  data-index="0" data-rindex={rindex} class="cf-vlocity-state-0 cf-vlocity-state slds-large-size_6-of-12 slds-medium-size_12-of-12 slds-small-size_12-of-12 slds-size_12-of-12 "  tracking-obj={_childCardTrackingObj} >
+      <div if:true={cardLoaded} class="slds-grid slds-wrap slds-card slds-m-vertical_small slds-m-horizontal_medium " style="     : #ccc 1px solid; 
+         ">
+          <div data-style-id="state0element0" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element0_child"  card={card}  record={record}  label="Block"  collapsible="false"  collapsed-by-default="false"  action='\{"name":"","label":"Action","iconName":"standard-default","eventType":"onclick","actionData":{"stateObj":"{record}","card":"{card}","stateAction":{"id":"flex-action-1639154392770","type":"Event","displayName":"Action","vlocityIcon":"standard-default","openUrlIn":"Current Window","subType":"PubSub","eventName":"smOffer","message":"select","hasExtraParams":true,"extraParams":{"nodeName":"{Parent.nodeName}","offer":"{record}"}}}}'  extraclass=" slds-text-link_reset"  theme="slds" onclick={executeAction} data-action-index="index1"><div class="slds-grid slds-wrap">
+          <div data-style-id="state0element0block_element0" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element0block_element0_child"  card={card}  record={record}  label="Block"  collapsible="false"  collapsed-by-default="false"  action='\null'  theme="slds" ><div class="slds-grid slds-wrap">
+          <div data-style-id="state0element0block_element0block_element0" class="" data-rindex={rindex} style=""><vlocity_cmt-output-field data-style-id="state0element0block_element0block_element0_child"     card={card}  record={record}  placeholder="output"  field-name="libelleOffre"  label=""  type="text"  theme="slds"  ></vlocity_cmt-output-field>
+      </div><div data-style-id="state0element0block_element0block_element1" class="" data-rindex={rindex} style=""><vlocity_cmt-output-field data-style-id="state0element0block_element0block_element1_child"     card={card}  record={record}  merge-field="%3Cdiv%3E%3Cspan%20style=%22font-size:%2014pt;%22%3E%3Cstrong%3E%7BmensTotalDisplay%7D%3C/strong%3E%3C/span%3E%20TTC/mois&nbsp;%20&nbsp;11%20mensualit&eacute;s/an%3C/div%3E%0A%3Cdiv%3E&nbsp;%3C/div%3E%0A%3Cdiv%3E%3Cspan%20style=%22font-size:%208pt;%22%3E-10%25%20:%20%7BmensTotalMin10%7D%20&nbsp;%20&nbsp;%20&nbsp;%20+10%25%20:%20%7BmensTotalPlus10%7D%20%3C/span%3E%3C/div%3E"  theme="slds"  ></vlocity_cmt-output-field>
+      </div>
+        </div></vlocity_cmt-block>
+    </div><div data-style-id="state0element0block_element1" class="" data-rindex={rindex} style="">
+    <vlocity_cmt-block data-style-id="state0element0block_element1_child"  card={card}  record={record}  label="Block"  collapsible="false"  collapsed-by-default="false"  theme="slds" ><div class="slds-grid slds-wrap">
+          <div data-style-id="state0element0block_element1block_element0" class="" data-rindex={rindex} style=""><vlocity_cmt-output-field data-style-id="state0element0block_element1block_element0_child"     card={card}  record={record}  merge-field="%3Cdiv%3E&nbsp;%3C/div%3E%0A%3Cdiv%3E%3Cspan%20style=%22font-size:%2018pt;%22%3E%3Cstrong%3E%7BTotalPriceDisplay%7D%3C/strong%3E%3C/span%3E%20TTC/an%3C/div%3E"  theme="slds"  ></vlocity_cmt-output-field>
+      </div>
+        </div></vlocity_cmt-block>
+    </div><div data-style-id="state0element0block_element2" class="" data-rindex={rindex} style=""><c-cf-sm-offres-selection-details-outil-estimation data-style-id="state0element0block_element2_child"  tracking-obj={_childCardTrackingObj}  is-inside-parent={insideParent} parent-uniquekey={uniqueKey}  card-node="\{record}"  parent-record={record}  records={_records}  parent-mergefields={card}  record-id={recordId}  is-child-card-tracking-enabled="false"  parent-attribute='\{"energyType":"{Parent.energyType}"}'  theme="slds"  onupdateparent={updateParentData}></c-cf-sm-offres-selection-details-outil-estimation>
+    </div>
+        </div></vlocity_cmt-block>
+    </div>
+        </div>
+      </vlocity_cmt-flex-card-state>
+                      </template>
+            </template>
+            <template if:true={hasError}>
+            {error}
+            </template>
+            
+      <vlocity_cmt-action action-wrapperclass="slds-hide" re-render-flyout class="action-trigger slds-col" onupdateos={updateOmniscript} onselectcards={updateSelectedCards} onsetvalue={updateAction}>
+      
+      </vlocity_cmt-action>
+  
+            <vlocity_cmt-action class="execute-action" re-render-flyout action-wrapperclass="slds-hide" onupdateos={updateOmniscript} onselectcards={updateSelectedCards} onsetvalue={updateAction}>
+            
+            </vlocity_cmt-action>
+            </div>
+          </template>

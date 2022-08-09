@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HP_ResultatRappel__c</fullName>
+    <externalId>false</externalId>
+    <label>Résultat de l’appel</label>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>HP_ReponseRappel__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>HP_ResultatsRappel</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>HP_ReceptionOffreIgnore</controllingFieldValue>
+            <controllingFieldValue>HP_PasLeTemps</controllingFieldValue>
+            <controllingFieldValue>HP_OffrePasInteressante</controllingFieldValue>
+            <controllingFieldValue>HP_SouhaiteReflechir</controllingFieldValue>
+            <valueName>HP_DemandeRappel</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>HP_ReceptionOffreIgnore</controllingFieldValue>
+            <controllingFieldValue>HP_PasLeTemps</controllingFieldValue>
+            <controllingFieldValue>HP_OffrePasInteressante</controllingFieldValue>
+            <controllingFieldValue>HP_SouhaiteReflechir</controllingFieldValue>
+            <valueName>HP_LeadTransforme</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>HP_ReceptionOffreIgnore</controllingFieldValue>
+            <controllingFieldValue>HP_ResteChezEngie</controllingFieldValue>
+            <controllingFieldValue>HP_PasLeTemps</controllingFieldValue>
+            <controllingFieldValue>HP_PrefereConcurrence</controllingFieldValue>
+            <controllingFieldValue>HP_Doublons</controllingFieldValue>
+            <controllingFieldValue>HP_TarifSpecial</controllingFieldValue>
+            <controllingFieldValue>HP_OffrePasInteressante</controllingFieldValue>
+            <controllingFieldValue>HP_SouhaiteReflechir</controllingFieldValue>
+            <valueName>HP_LeadNonTransforme</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>HP_Injoignable</controllingFieldValue>
+            <valueName>HP_ClientInjoignable</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>HP_Injoignable</controllingFieldValue>
+            <valueName>HP_ARappeler</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,142 @@
+/* Popin container */
+/* -------------------------------------------------------------------------------------------------- */
+
+
+.hp-payments-popin__container {
+  width: 1455px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+
+.hp_popinIframe {
+  display: flex;
+  flex-direction: column;
+  width: 1140px;
+  max-width: 100%;
+  height: 100%;
+  margin: 0 -15px 0 auto;
+  box-shadow: var(--box-shadow);
+  border-left: 30px solid var(--light-primary-colour);
+  border-right: 30px solid var(--light-primary-colour);
+  background-image: var(--light-bg);
+  overflow: hidden;
+  color: var(--black);
+}
+
+
+.hp-bigTitle {
+  font-size: 25px;
+  letter-spacing: 0.75px;
+  line-height: 30px;
+  color: var(--black);
+}
+
+.hp-header {
+  background-color: var(--light-bg-plain);
+  border: none;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  align-items: center;
+  padding: 40px;
+}
+
+.hp-closeButton {
+  justify-self: end;
+}
+
+.hp-closeButton a {
+  justify-self: end;
+  color: var(--secondary-colour);
+  font-family: var(--font-bold);
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: extra-expanded;
+}
+
+.hp-content {
+  padding: 30px 40px;
+}
+
+
+.slds-backdrop_open.payments-backdrop {
+  background-color: transparent;
+}
+
+.slds-backdrop_open.payments-backdrop::before,
+.slds-backdrop_open.payments-backdrop::after {
+  content: '';
+  position: absolute;
+  display: block;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.slds-backdrop_open.payments-backdrop::before {
+  background-color: var(--disabled);
+  opacity: 0.4;
+}
+
+.slds-backdrop_open.payments-backdrop::after {
+  background-color: var(--dark-primary-colour);
+  opacity: 0.1;
+}
+ /* Scrollbar */
+.hp-wrapper {
+  position: relative;
+  flex-grow: 1;
+  flex-shrink: 1;
+  height: 100%;
+  overflow: auto;
+  /* padding: 30px 15px 30px 30px; */
+  padding: 0px;
+  z-index: 0;
+}
+
+.hp-wrapper::-webkit-scrollbar { width: 5px; height: 5px; border-radius: 3px;}
+.hp-wrapper::-webkit-scrollbar-track { background: var(--bg-base); border-radius: 3px; margin: 25px; }
+.hp-wrapper::-webkit-scrollbar-thumb { background: var(--secondary-colour); border-radius: 3px;}
+
+
+
+/* Media Queries */
+/* -------------------------------------------------------------------------------------------------- */
+@media (max-width: 1280px) {
+
+  .hp-iframe-popin .iframe-modal,
+  .hp-iframe-popin .iframe-backdrop {
+    top: 60px;
+  }
+}
+
+@media (max-width: 1024px) {
+
+  .hp-payments-popin__container {
+    width: 100%;
+  }
+  .hp-header {
+    padding: 30px 40px;
+  }
+
+  .hp_popinIframe {
+    border: none;
+    margin: 0;
+    animation-name: slide-from-bottom;
+  }
+
+}
+@media (max-width: 768px) {
+  .hp-payments-popin .hp-payments-popin__container {
+      top: 60px;
+      width: 100%;
+  }
+
+  .hp-container {
+      border: none;
+      width: 100%;
+      height: 100%;
+  }
+}

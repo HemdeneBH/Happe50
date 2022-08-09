@@ -1,0 +1,66 @@
+<apex:page standardController="Case">
+    <apex:includeScript value="/soap/ajax/31.0/connection.js" />
+    <apex:includeScript value="/support/console/49.0/integration.js"/>
+    <script type="text/javascript">
+    
+        sforce.connection.sessionId = '{!$Api.Session_ID}';
+
+        // récupérer les informations du case
+        var myquery = "SELECT Id,TECH_dernier_niveau_escalade__c,Status,Sous_statut__c FROM Case WHERE Id = '{!Case.Id}'";
+
+        result = sforce.connection.query(myquery);
+        records = result.getArray("records");
+        var myCase = records[0];
+        
+        // mettre à jour le status du case si (status = En attente ET le case ait déjà été escaladé)
+        var updateCase = new Array();
+        if (myCase.Status == 'En attente' && myCase.TECH_dernier_niveau_escalade__c !=null && myCase.TECH_dernier_niveau_escalade__c !=''){
+            myCase.Status = 'Escaladé';
+            myCase.Sous_statut__c = myCase.TECH_dernier_niveau_escalade__c;
+            updateCase.push(myCase);
+        }else{
+            // affichage d'un message d'erreur
+            alert('Vous ne pouvez pas faire cette action!');
+        }
+        if(updateCase.length > 0){
+            result = sforce.connection.update(updateCase);
+            // afficher un message en cas d'erreur de MAJ
+            if(result[0].getBoolean("success") == false){
+                alert(result[0].errors.message);
+            }
+        }
+        
+    	// fermer la page et faire une redirection
+         if (sforce.console.isInConsole()) {
+                var subTabId;
+                var getTabId = function getTabId(result) {
+                        sforce.console.getEnclosingPrimaryTabId(openSubtab);
+                        subTabId =result.id;
+                };  
+                var getTabId2 = function getTabId2(result) {
+                    sforce.console.refreshSubtabById(result.id, true, refreshSuccess);
+                };  
+                var refreshSuccess = function refreshSuccess(result) {
+                    if (result.success == true) {
+                        sforce.console.closeTab(subTabId);
+                    } else {
+                    }
+                };
+             	var closeSubtab = function closeSubtab(result) {
+                    sforce.console.closeTab(result.id);
+                };
+                var openSubtab = function openSubtab(result) {
+                    var primaryTabId = result.id;
+                    sforce.console.openSubtab(primaryTabId , '/{!Case.Id}', true,'{!Case.CaseNumber}',null, openSuccess,'{!Case.CaseNumber}');
+                    
+                }
+                var openSuccess = function openSuccess(result) {
+                    if (result.success == true) {
+                        sforce.console.getFocusedSubtabId(getTabId2);
+                    } 
+                };
+                sforce.console.getFocusedSubtabId(getTabId);
+            } 
+        
+    </script>
+</apex:page>

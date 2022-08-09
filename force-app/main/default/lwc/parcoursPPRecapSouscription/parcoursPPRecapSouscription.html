@@ -1,0 +1,1280 @@
+<template>
+
+
+    <template if:false={loaded}>
+        <div class="exampleHolder">
+            <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+    </template>
+    <template if:true={loaded}>
+
+        <div data-id="mainDivId" class="container" style="margin-bottom: 10px;position:relative">
+            <div class="row" style="position: relative;">
+                <h1 class="col-lg-12 text-center" style="margin-top: 60px;">Récapitulatif de la souscription</h1>
+            </div>
+            <div class="row" style="position: relative;">
+                <div class="col-lg-12 text-center" style="margin-top: 10px;">
+                    <p style="font-size: 18px; color: dimgray">Avant de signer le contrat, veuillez vérifier
+                        l’exactitude des informations
+                        suivantes :</p>
+                </div>
+            </div>
+            <div class="divAllInfoClass">
+                <!-- Besoin client -->
+                <div style="position: relative;height: 5%;width: 40%;">
+                    <Strong><span style="color: var(--cerulean);font-size: 25px;">Besoin client</span></Strong>
+
+                </div>
+                <div style="margin-top:1%;position: relative;height: 1px;width: 100%;background: var(--cerulean);">
+                </div>
+                <div style="position: relative;height: 5%;width: 100%;">
+                    <div class="row">
+                        <span class="col-lg-5" style="font-size: 16px; margin-top: 16px; color: dimgray;">
+                            {situations}
+                        </span>
+                        <div class="col-lg-3"></div>
+
+
+                        <div class="col-lg-4 text-right">
+                            <span
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);font-size: 16px;margin-top: 17px;text-decoration: underline;"
+                                onclick={modifierSituation}>
+                                <img src={commentaireImage}
+                                    style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 19px;margin-right: 8px" />
+                                Modifier
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <span class="col-lg-5" style="font-size: 16px; margin-top: 8px; color: dimgray">
+                            {energies}
+                        </span>
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-4 text-right">
+                            <span
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);font-size: 16px;margin-top: 17px;text-decoration: underline;"
+                                onclick={modifierEnergie}>
+                                <img src={commentaireImage}
+                                    style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 19px;margin-right: 8px" />
+                                Modifier
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Informations client -->
+                <div class="row parcoursPP-margin-top-16">
+                    <div class="col-lg-5">
+                        <Strong><span class="parcoursPP-font-size-24" style="color: var(--cerulean)">Informations client
+                                {etape}</span></Strong>
+                    </div>
+                    <div class="col-lg-3"></div>
+                    <div class="col-lg-4 text-right" style="margin-top: 10px;">
+                        <span
+                            style="cursor:pointer;color: rgba(0, 157, 233, 1);font-size: 16px;text-decoration: underline;"
+                            onclick={modifierClient}>
+                            <img src={commentaireImage}
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 19px;margin-right: 8px" />
+                            Modifier
+                        </span>
+                    </div>
+                </div>
+                <div style="margin-top:1%;position: relative;height: 1px;width: 100%;background: var(--cerulean);">
+                </div>
+                <div style="position: relative;height: 5%;width: 100%;">
+
+                    <div style="font-size: 16px; margin-top: 16px; color: dimgray;">
+                        Référence client : {_record.VI_IDReferenceClient__c}
+                    </div>
+                    <div style="font-size: 16px; margin-top: 8px; color: dimgray;">
+                        {civilite} {nomClient} {prenomClient}
+                    </div>
+                    <div style="font-size: 16px; margin-top: 8px; color: dimgray;">
+                        {numeroRue} {rue} {codePostalClient} {communeClient}
+                    </div>
+
+                    <template if:true={isMail}>
+
+
+                        <template if:true={isPrincipalEmail1}>
+                            <div style="font-size: 16px; margin-top: 8px; color: dimgray;">
+                                Email : <b>{email1}</b> {email2}
+                            </div>
+                        </template>
+
+                        <template if:false={isPrincipalEmail1}>
+                            <div style="font-size: 16px; margin-top: 8px; color: dimgray;">
+                                Email : {email1} <b>{email2}</b>
+                            </div>
+                        </template>
+
+                    </template>
+                    <template if:true={isEmailCPV}>
+
+                        <div class="row">
+
+                            <div class="col-lg-9">
+                                <template if:true={isNewEmail}>
+                                    <div style="font-size: 16px; margin-top: 8px; color: dimgray;">
+                                        EMAIL ENVOI DES CPV : <b>{_record.VI_Email_CPV__c}</b> NOUVEL EMAIL ✔
+                                    </div>
+                                </template>
+
+                                <template if:false={isNewEmail}>
+                                    <div style="font-size: 16px; margin-top: 8px; color: dimgray;">
+                                        EMAIL ENVOI DES CPV : <b>{_record.VI_Email_CPV__c}</b>
+                                    </div>
+                                </template>
+
+                            </div>
+
+                            <div class="col-lg-3 text-right" style="margin-top: 10px;">
+                                <span
+                                    style="cursor:pointer;color: rgba(0, 157, 233, 1);font-size: 16px;text-decoration: underline;"
+                                    onclick={modifierClient}>
+                                    <img src={commentaireImage}
+                                        style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 19px;margin-right: 8px" />
+                                    Modifier
+                                </span>
+                            </div>
+                        </div>
+
+                    </template>
+
+                    <template if:false={isMail}>
+                        <div style="font-size: 16px; margin-top: 8px; color: dimgray;">
+
+                            Email non renseigné.
+
+                        </div>
+                    </template>
+
+                    <template if:true={isTel}>
+
+                        <template if:true={isPrincipalPortable1}>
+                            <div style="font-size: 16px; margin-top: 8px; color: dimgray;">
+                                Téléphone portable : <b>{telephone_portable1}</b> {telephone_portable2}
+                            </div>
+                        </template>
+
+                        <template if:false={isPrincipalPortable1}>
+                            <div style="font-size: 16px; margin-top: 8px; color: dimgray;">
+                                Téléphone portable : {telephone_portable1} <b>{telephone_portable2}</b>
+                            </div>
+                        </template>
+
+                    </template>
+                    <template if:false={isTel}>
+                        <div style="font-size: 16px; margin-top: 8px; color: dimgray;">
+
+                            Téléphone portable non renseigné.
+
+                        </div>
+                    </template>
+
+                    <template if:true={isFixe}>
+
+                        <template if:true={isPrincipalFixe1}>
+                            <div style="font-size: 16px; margin-top: 8px; color: dimgray;">
+                                Téléphone fixe : <b>{telephone_fixe1}</b> {telephone_fixe2}
+                            </div>
+                        </template>
+
+                        <template if:false={isPrincipalFixe1}>
+                            <div style="font-size: 16px; margin-top: 8px; color: dimgray;">
+                                Téléphone fixe : {telephone_fixe1} <b>{telephone_fixe2}</b>
+                            </div>
+                        </template>
+
+                    </template>
+
+                    <template if:false={isFixe}>
+                        <div style="font-size: 16px; margin-top: 8px; color: dimgray;">
+
+                            Téléphone fixe non renseigné.
+
+                        </div>
+                    </template>
+
+
+                </div>
+
+                <!-- Informations local -->
+
+                <div class="row parcoursPP-margin-top-16">
+                    <div class="col-lg-5">
+                        <Strong><span class="parcoursPP-font-size-24" style="color: var(--cerulean);">Informations local</span></Strong>
+                    </div>
+
+                    <div class="col-lg-3"></div>
+
+                    <div class="col-lg-4 text-right" style="margin-top: 10px;">
+                        <span
+                            style="cursor:pointer;color: rgba(0, 157, 233, 1);font-size: 16px;text-decoration: underline;"
+                            onclick={modifierLocal}>
+                            <img src={commentaireImage}
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 19px;margin-right: 8px" />
+                            Modifier
+                        </span>
+                    </div>
+                </div>
+                <div style="margin-top:1%;position: relative;height: 1px;width: 100%;background: var(--cerulean);">
+                </div>
+                <div style="position: relative;height: 5%;width: 100%;">
+
+                    <div style="margin-top: 16px;">
+
+                        <template if:false={_record.VI_LocalNonIdentifieGenerationCase__c}>
+                            <img src={unchecked}
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 20px;margin-right: 8px; margin-bottom:5px" />
+                            <span style="font-size:16px; color: dimgray">
+                                Local non identifié
+                            </span>
+                        </template>
+                        <template if:true={_record.VI_LocalNonIdentifieGenerationCase__c}>
+                            <img src={checked}
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 20px;margin-right: 8px; margin-bottom:5px" />
+                            <span style="font-size:16px; color: dimgray">
+                                Local non identifié
+                            </span>
+                        </template>
+                    </div>
+
+                    <div style="font-size: 16px; margin-top: 8px; color: dimgray">
+                        {_record.VI_NumeroRueRechercheLocal__c} {_record.VI_RueRechercheLocal__c}
+                        {_record.VI_CodePostalRechercheLocal__c} {_record.VI_CommuneRechercheLocal__c}
+                    </div>
+
+                    <div style="font-size: 16px; margin-top: 8px; color: dimgray">
+                        {predecesseur}
+                    </div>
+
+                    <template if:false={isApp}>
+                        <div style="font-size: 16px; margin-top: 8px; color: dimgray">
+                            {_record.VI_TypeLogementRechercheLocal__c}
+                        </div>
+                    </template>
+
+                    <template if:true={isApp}>
+                        <div style="font-size: 16px; margin-top: 8px; color: dimgray">
+                            {etage} {appartement} {porte}
+                        </div>
+                    </template>
+                    <div style="font-size: 16px; margin-top: 8px; color: dimgray">
+                        {matricule}
+                    </div>
+
+                </div>
+
+
+                <!-- Panier client -->
+                <div class="row parcoursPP-margin-top-16">
+                    <div class="col-lg-5">
+                        <Strong><span class="parcoursPP-font-size-24" style="color: var(--cerulean);">Panier client</span></Strong>
+                    </div>
+
+                    <div class="col-lg-3"></div>
+
+                    <div class="col-lg-4 text-right" style="margin-top: 10px;">
+                        <span
+                            style="cursor:pointer;color: rgba(0, 157, 233, 1);font-size: 16px;text-decoration: underline;"
+                            onclick={modifierPanier}>
+                            <img src={commentaireImage}
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 19px;margin-right: 8px" />
+                            Modifier
+                        </span>
+                    </div>
+                </div>
+                <div style="margin-top:1%;position: relative;height: 1px;width: 100%;background: var(--cerulean);">
+                </div>
+                <div style="position: relative;height: 5%;width: 100%;">
+
+                    <template if:true={isOffre}>
+                        <div style="font-size: 16px; margin-top: 16px; color: dimgray;">
+                            {total_panier}
+                        </div>
+                    </template>
+
+                    <template if:false={isOffre}>
+                        <div style="font-size: 16px; margin-top: 16px; color: dimgray;">
+                            Panier comprenant :
+                        </div>
+                    </template>
+
+                    <div style="font-size: 16px; margin-top: 8px; color: dimgray;">
+                        <template if:false={isAjuste}>
+                            - {_record.VI_LibelleOffrePanierClient__c}
+                            ({_record.VI_MontantdelaMensualitePanierClient__c} €/mois)
+                        </template>
+                        <template if:true={isAjuste}>
+                            - {_record.VI_LibelleOffrePanierClient__c}
+                            ({_record.VI_MontantdelaMensualitePanierClient__c} €/mois, <em
+                                class="barre">{_record.VI_MontantOffrePanierClient__c} €/mois</em>)
+                        </template>
+                    </div>
+                    <!--START Offre reference recap-->
+                    <template if:true={_record.VI_TechOffreReferenceChoisie__c}>
+                        <div style="font-size: 16px;color: dimgray;">
+                            <template if:true={isElec}>
+                                Electricité
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="ml-4">
+                                            <ul>
+                                                <li>
+                                                    <span style="color: #0569fe">♦ Abonnement Fourniture:
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <span style="color: #fa0064">♦ Abonnement Acheminement:
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <span style="color: #0569fe">♦ Consommation Fourniture:
+                                                    </span>
+                                                </li>
+                                                <template if:true={isHPHC}>
+                                                    <li><br /></li>
+                                                </template>
+                                                <li>
+                                                    <span style="color: #fa0064">♦ Consommation Acheminement:
+                                                    </span>
+                                                </li>
+                                                <template if:true={consoAcheminement2Quadrant}>
+                                                    <li><br /></li>
+                                                </template>
+                                                <template if:true={consoAcheminement4Quadrant}>
+                                                    <li><br /></li>
+                                                </template>
+                                                <template if:true={consoAcheminement4Quadrant}>
+                                                    <li><br /></li>
+                                                </template>
+                                                <template if:true={consoAcheminement4Quadrant}>
+                                                    <li><br /></li>
+                                                </template>
+                                                <li>
+                                                    <span style="color: #FF8C00">♦ Consommation Obligation:
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <ul>
+                                                <li>{_record.VI_MONTANT_ABO_ELEC_FOUR_TTC__c} €/an TTC
+                                                    ({_record.VI_MONTANT_ABO_ELEC_FOUR_HT__c} €/an HT)
+                                                </li>
+                                                <li>{_record.VI_MONTANT_ABO_ELEC_ACH_TTC__c} €/an TTC
+                                                    ({_record.VI_MONTANT_ABO_ELEC_ACH_HT__c} €/an HT)
+                                                </li>
+                                                <li>
+                                                    <template if:false={isHPHC}>
+                                                        {_record.VI_PRIX_KWH_ELEC_FOUR_TTC__c} €/kWh TTC
+                                                        ({_record.VI_PRIX_KWH_ELEC_FOUR_HT__c} €/kWh HT)
+                                                    </template>
+                                                    <template if:true={isHPHC}>
+                                                        <ul>
+                                                            <li><b>HP</b>:
+                                                                {_record.VI_PRIX_KWH_ELEC_FOUR_HP_TTC__c} €/kWh TTC
+                                                                ({_record.VI_PRIX_KWH_ELEC_FOUR_HP_HT__c} €/kWh HT)</li>
+                                                            <li><b>HC</b>:
+                                                                {_record.VI_PRIX_KWH_ELEC_FOUR_HC_TTC__c} €/kWh TTC
+                                                                ({_record.VI_PRIX_KWH_ELEC_FOUR_HC_HT__c}
+                                                                €/kWh HT)
+                                                            </li>
+                                                        </ul>
+                                                    </template>
+                                                </li>
+                                                <li>
+                                                    <template if:true={consoAcheminementBase}>
+                                                        {_record.VI_PRIX_KWH_ELEC_ACH_TTC__c} €/kWh TTC
+                                                        ({_record.VI_PRIX_KWH_ELEC_ACH_HT__c} €/kWh HT)
+                                                    </template>
+                                                    <template if:true={consoAcheminement2Quadrant}>
+                                                        <ul>
+                                                            <li><b>HP</b>:
+                                                                {_record.VI_PRIX_KWH_ELEC_ACH_HP_TTC__c} €/kWh TTC
+                                                                ({_record.VI_PRIX_KWH_ELEC_ACH_HP_HT__c} €/kWh HT)
+                                                            </li>
+                                                            <li><b>HC</b>:
+                                                                {_record.VI_PRIX_KWH_ELEC_ACH_HC_TTC__c} €/kWh TTC
+                                                                ({_record.VI_PRIX_KWH_ELEC_ACH_HC_HT__c}
+                                                                €/kWh HT)
+                                                            </li>
+                                                        </ul>
+                                                    </template>
+                                                    <template if:true={consoAcheminement4Quadrant}>
+                                                        <ul>
+                                                            <li><b>HC Basse</b>:
+                                                                {_record.VI_PRIX_KWH_ELEC_ACH_HCbasse_TTC__c} €/kWh TTC
+                                                                ({_record.VI_PRIX_KWH_ELEC_ACH_HCbasse_HTT__c} €/kWh HT)
+                                                            </li>
+                                                            <li><b>HC Haute</b>:
+                                                                {_record.VI_PRIX_KWH_ELEC_ACH_HChaute_TTC__c} €/kWh TTC
+                                                                ({_record.VI_PRIX_KWH_ELEC_ACH_HChaute_HTT__c}
+                                                                €/kWh HT)
+                                                            </li>
+                                                            <li><b>HP Basse</b>:
+                                                                {_record.VI_PRIX_KWH_ELEC_ACH_HPbasse_TTC__c} €/kWh TTC
+                                                                ({_record.VI_PRIX_KWH_ELEC_ACH_HPbasse_HTT__c}
+                                                                €/kWh HT)
+                                                            </li>
+                                                            <li><b>HP Haute</b>:
+                                                                {_record.VI_PRIX_KWH_ELEC_ACH_HPhaute_TTC__c} €/kWh TTC
+                                                                ({_record.VI_PRIX_KWH_ELEC_ACH_HPhaute_HTT__c}
+                                                                €/kWh HT)
+                                                            </li>
+                                                        </ul>
+                                                    </template>
+                                                </li>
+                                                <li>{_record.VI_PRIX_KWH_ELEC_OBLI__c} €/kWh TTC
+                                                    ({_record.VI_PRIX_KWH_ELEC_OBLI_HT__c} €/kWh HT)
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                            <template if:true={isGaz}>
+                                Gaz
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="ml-4">
+                                            <ul>
+                                                <li>
+                                                    <span style="color: #0569fe">♦ Abonnement Fourniture:
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <span style="color: #fa0064">♦ Abonnement Acheminement:
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <span style="color: #0569fe">♦ Consommation Fourniture:
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <span style="color: #fa0064">♦ Consommation Acheminement:
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <span style="color: #FF8C00">♦ Consommation Obligation:
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <ul>
+                                                <li>{_record.VI_MONTANT_ABO_GAZ_FOUR_TTC__c} €/an TTC
+                                                    ({_record.VI_MONTANT_ABO_GAZ_FOUR_HT__c}
+                                                    €/an HT)</li>
+                                                <li>{_record.VI_MONTANT_ABO_GAZ_ACH_TTC__c} €/an TTC
+                                                    ({_record.VI_MONTANT_ABO_GAZ_ACH_HT__c}
+                                                    €/an HT)</li>
+                                                <li>{_record.VI_PRIX_KWH_GAZ_FOUR_TTC__c}
+                                                    €/kWh TTC
+                                                    ({_record.VI_PRIX_KWH_GAZ_FOUR_HT__c}
+                                                    €/kWh HT)</li>
+                                                <li>{_record.VI_PRIX_KWH_GAZ_ACH_TTC__c} €/kWh TTC
+                                                    ({_record.VI_PRIX_KWH_GAZ_ACH_HT__c}
+                                                    €/kWh HT)</li>
+                                                <li>{_record.VI_PRIX_KWH_GAZ_OBLI__c}
+                                                    €/kWh TTC
+                                                    ({_record.VI_PRIX_KWH_GAZ_OBLI_HT__c}
+                                                    €/kWh HT)</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                    <!--END Offre reference recap-->
+                    <div style="font-size: 16px; margin-top: 8px; color: dimgray">
+                        <template if:true={isOption}>
+                            - {_record.VI_LibelleOptionPanierClient__c} ({_record.VI_ServiceOptionVerteElecPrixAbTTC__c}
+                            €/mois)
+                        </template>
+                    </div>
+                    <div style="font-size: 16px; margin-top: 8px; color: dimgray">
+                        <template if:true={isOptionGaz}>
+                            - {_record.VI_LibelleOptionGazPanierClient__c}
+                            ({_record.VI_ServiceOptionVerteGazPrixAbTTC__c} €/mois)
+                        </template>
+                    </div>
+                    <div style="font-size: 16px; margin-top: 8px; color: dimgray">
+                        <template if:true={hasCodePromo}>
+                            - {_record.VI_CodePromotionnelPanierClient__c}
+                        </template>
+                    </div>
+                    <div style="font-size: 16px; margin-top: 8px; color: dimgray">
+                        <template if:true={isOptionAF}>
+                            - Assurance Facture ({_record.VI_PrixAssuranceFacture__c} €/mois)
+                        </template>
+                    </div>
+
+                    <!-- Start DDPCM 1195 -->
+                    <div style="font-size: 16px; margin-top: 8px; color: dimgray">
+                        <template if:true={isCodePromo1}>
+                            - Code promo : {_record.VI_CodePromo__c} : {_record.VI_LibelleSurFacture__c}
+                        </template>
+                    </div>
+                    <div style="font-size: 16px; margin-top: 8px; color: dimgray">
+                        <template if:true={isCodePromo2}>
+                            - Code promo : {_record.VI_CodePromo2__c} : {_record.VI_LibelleSurFacture2__c}
+                        </template>
+                    </div>
+                    <!-- End DDPCM 1195 -->
+
+                </div>
+
+                <!-- Informations contrat -->
+                <div class="row parcoursPP-margin-top-16">
+                    <div class="col-lg-5">
+                        <Strong><span class="parcoursPP-font-size-24" style="color: var(--cerulean);">Informations
+                                contrat</span></Strong>
+                    </div>
+                    <div class="col-lg-3"></div>
+
+                    <div class="col-lg-4 text-right">
+                        <span
+                            style="cursor:pointer;color: rgba(0, 157, 233, 1);font-size: 16px;text-decoration: underline;"
+                            onclick={modifierContrat}>
+                            <img src={commentaireImage}
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 19px;margin-right: 8px" />
+                            Modifier
+                        </span>
+                    </div>
+                </div>
+                <div style="margin-top:1%;position: relative;height: 1px;width: 100%;background: var(--cerulean);">
+                </div>
+                <div style="position: relative;height: 5%;width: 100%;">
+
+                    <div style="font-size: 16px;margin-top: 16px; color: dimgray">
+                        Début de contrat : {dateFormat}
+                    </div>
+
+
+                    <div style="font-size: 16px; margin-top: 8px;">
+
+                        <template if:false={_record.VI_InfosCompl_MiseEnServiceUrgente__c}>
+                            <img src={unchecked}
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 20px;margin-right: 8px; margin-bottom:5px" />
+                            <span style="font-size:16px; color: dimgray">
+                                Mise en service urgente
+                            </span>
+                        </template>
+                        <template if:true={_record.VI_InfosCompl_MiseEnServiceUrgente__c}>
+                            <img src={checked}
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 20px;margin-right: 8px; margin-bottom:5px" />
+                            <span style="font-size:16px; color: dimgray">
+                                Mise en service urgente
+                            </span>
+                        </template>
+
+                    </div>
+                    <div style="margin-top: 8px;">
+                        <template if:false={_record.VI_InfosCompl_PremiereMiseEnService__c}>
+                            <img src={unchecked}
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 20px;margin-right: 8px; margin-bottom:5px" />
+                            <span style="font-size:16px; color: dimgray">
+                                Première mise en service
+                            </span>
+                        </template>
+                        <template if:true={_record.VI_InfosCompl_PremiereMiseEnService__c}>
+                            <img src={checked}
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 20px;margin-right: 8px; margin-bottom:5px" />
+                            <span style="font-size:16px; color: dimgray">
+                                Première mise en service
+                            </span>
+                        </template>
+
+                    </div>
+                    <div style="margin-top: 8px;">
+
+
+                        <template if:true={releves_compteurs}>
+                            <img src={checked}
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 20px;margin-right: 8px; margin-bottom:5px" />
+                            <span style="font-size:16px; color: dimgray">
+                                Relevé compteur
+                            </span>
+                        </template>
+
+
+                        <template if:false={releves_compteurs}>
+                            <img src={unchecked}
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 20px;margin-right: 8px; margin-bottom:5px" />
+                            <span style="font-size:16px; color: dimgray">
+                                Relevé compteur
+                            </span>
+                        </template>
+                    </div>
+                    <div  class="parcoursPP-margin-top-08">
+                        <template if:true={releves_compteurs}>
+                            <div style="font-size: 16px; color:dimgray">
+                                {indexGaz} 
+                                <template if:true={isIndexGaz}>
+                                    <span style="font-size: 16px; color:dimgray">
+                                        m<sup>3</sup>
+                                    </span>
+                                </template>
+                            </div>
+                            <div style="font-size: 16px;color:dimgray; margin-top: 8px;">
+                                {indexElec}
+                            </div>
+
+                            <div style="font-size: 16px;color:dimgray; margin-top: 8px;">
+                                <template if:true={_record.VI_InfosCompl_HP_HC__c}>Heures creuses :
+                                    {_record.VI_InfosCompl_HeuresCreusesElec__c} KWh , Heures pleines :
+                                    {_record.VI_InfosCompl_HeuresPleinesElec__c}KWh</template>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Moyens de paiement -->
+                <div class="row" style="margin-top: 17px;">
+
+                    <div if:false={isAutresCanaux} class="col-lg-5">
+                        <Strong><span style="color: var(--cerulean);font-size: 25px;">Moyens de paiement
+                            </span></Strong>
+                    </div>
+
+                    <div if:true={isAutresCanaux} class="col-lg-5">
+                        <Strong><span style="color: var(--cerulean);font-size: 25px;">Services de gestion
+                            </span></Strong>
+                    </div>
+
+                    <div class="col-lg-3"></div>
+
+                    <div class="col-lg-4 text-right" style="margin-top: 10px;">
+                        <span
+                            style="cursor:pointer;color: rgba(0, 157, 233, 1);font-size: 16px;text-decoration: underline;"
+                            onclick={modifierPaiement}>
+                            <img src={commentaireImage}
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 19px;margin-right: 8px" />
+                            Modifier
+                        </span>
+                    </div>
+                </div>
+                <div style="margin-top:1%;position: relative;height: 1px;width: 100%;background: var(--cerulean);">
+                </div>
+                <div style="position: relative;height: 5%;width: 100%;">
+                    <template if:true={isAuto}>
+                        <div class="parcoursPP-font-size-16 parcoursPP-margin-top-16 parcoursPP-color-05">
+                            Moyen de paiement : {_record.VI_ChoixMoyenPaiement__c}
+                            {_record.VI_FrequencePrelevementMoyendePaiement__c}
+                        </div>
+                    </template>
+                    <template if:false={isAuto}>
+                        <div class="parcoursPP-font-size-16 parcoursPP-margin-top-16 parcoursPP-color-05">
+                            Moyen de paiement : Paiement par carte bleue, TIP ou chèque
+                        </div>
+                    </template>
+
+                    <div class="parcoursPP-margin-top-08">
+                        <template if:true={_record.VI_IBANEnSelfCare__c}>
+                            <img src={checked}
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 20px;margin-right: 8px; margin-bottom:5px" />
+                            <span class="parcoursPP-font-size-16 parcoursPP-color-05">
+                                IBAN en selfcare
+                            </span>
+                        </template>
+                    </div>
+
+                    <template if:true={isAutresCanaux}>
+                        <template if:false={isMensualistionAutresCanaux}>
+                            <img src={unchecked}
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 20px;margin-right: 8px; margin-bottom:5px" />
+                            <span style="font-size:16px; color: dimgray">
+                                Mensualisation
+                            </span>
+                        </template>
+                        <template if:true={isMensualistionAutresCanaux}>
+                            <img src={checked}
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 20px;margin-right: 8px; margin-bottom:5px" />
+                            <span style="font-size:16px; color: dimgray">
+                                <template if:false={isAjuste}>
+                                    Mensualisation 
+                                    ({_record.VI_MontantdelaMensualitePanierClient__c} €/mois)
+                                </template>
+                                <template if:true={isAjuste}>
+                                    Mensualisation 
+                                    ({_record.VI_MontantdelaMensualitePanierClient__c} €/mois, <em
+                                        class="barre">{_record.VI_MontantOffrePanierClient__c} €/mois</em>)
+                                </template>
+                            </span>
+                        </template>
+                    </template>
+
+                    <template if:true={isAuto}>
+                        <div style="margin-top: 8px;">
+                            <template if:false={isFactureEnLigne}>
+                                <img src={unchecked}
+                                    style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 20px;margin-right: 8px; margin-bottom:5px" />
+                                <span class="parcoursPP-font-size-16 parcoursPP-color-05">
+                                    Facture en ligne
+                                </span>
+                            </template>
+                            <template if:true={isFactureEnLigne}>
+                                <img src={checked}
+                                    style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 20px;margin-right: 8px; margin-bottom:5px" />
+                                <span class="parcoursPP-font-size-16 parcoursPP-color-05">
+                                    Facture en ligne
+                                </span>
+                            </template>
+                        </div>
+                    </template>
+                    <div class="parcoursPP-margin-top-08">
+                        <template if:false={isEDoc}>
+                            <img src={unchecked}
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 20px;margin-right: 8px; margin-bottom:5px" />
+                            <span class="parcoursPP-font-size-16 parcoursPP-color-05">
+                                eDocuments 100% en ligne
+                            </span>
+                        </template>
+                        <template if:true={isEDoc}>
+                            <img src={checked}
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 20px;margin-right: 8px; margin-bottom:5px" />
+                            <span class="parcoursPP-font-size-16 parcoursPP-color-05">
+                                Documents 100% en ligne
+                            </span>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Commentaires -->
+                <div class="row parcoursPP-margin-top-16" >
+                    <div class="col-lg-5">
+                        <Strong><span class="parcoursPP-font-size-24" style="color: var(--cerulean);" >Commentaires
+                                {etape}</span></Strong>
+                    </div>
+
+                    <div class="col-lg-3"></div>
+                </div>
+                <div style="margin-top:1%;position: relative;height: 1px;width: 100%;background: var(--cerulean);">
+                </div>
+                <div style="position: relative;height: 5%;width: 100%;">
+                    <div class="row">
+                        <span class="col-lg-9 parcoursPP-font-size-16 parcoursPP-color-05 parcoursPP-margin-top-08"
+                            style="word-wrap: break-word; white-space: normal;">
+                            Identification besoin : {_record.VI_CommentaireGeneral_idbesoin__c}
+                        </span>
+                        <div class="col-lg-3 text-right">
+                            <span
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);font-size: 16px;margin-top: 17px;text-decoration: underline;"
+                                onclick={modifierBesoinCommentaire}>
+                                <img src={commentaireImage}
+                                    style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 19px;margin-right: 8px" />
+                                Modifier
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <span class="col-lg-9 parcoursPP-font-size-16 parcoursPP-color-05 parcoursPP-margin-top-08"
+                            style="word-wrap: break-word; white-space: normal;">
+                            Identification client : {_record.VI_CommentaireGeneral_idclient__c}
+                        </span>
+                        <div class="col-lg-3 text-right">
+                            <span
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);font-size: 16px;margin-top: 17px;text-decoration: underline;"
+                                onclick={modifierClientCommentaire}>
+                                <img src={commentaireImage}
+                                    style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 19px;margin-right: 8px" />
+                                Modifier
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <span class="col-lg-9 parcoursPP-font-size-16 parcoursPP-color-05 parcoursPP-margin-top-08"
+                            style="word-wrap: break-word; white-space: normal;">
+                            Identification local : {_record.VI_CommentaireGeneral_idlocal__c}
+                        </span>
+                        <div class="col-lg-3 text-right">
+                            <span
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);font-size: 16px;margin-top: 17px;text-decoration: underline;"
+                                onclick={modifierLocalCommentaire}>
+                                <img src={commentaireImage}
+                                    style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 19px;margin-right: 8px" />
+                                Modifier
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <span class="col-lg-9"
+                            style="font-size: 16px; margin-top: 8px; color: dimgray;word-wrap: break-word; white-space: normal;">
+                            Estimation de la consommation : {_record.VI_CommentaireGeneral_EstimationConso__c}
+                        </span>
+                        <div class="col-lg-3 text-right">
+                            <span
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);font-size: 16px;margin-top: 17px;text-decoration: underline;"
+                                onclick={modifierEstimationCommentaire}>
+                                <img src={commentaireImage}
+                                    style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 19px;margin-right: 8px" />
+                                Modifier
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <span class="col-lg-9 parcoursPP-font-size-16 parcoursPP-color-05 parcoursPP-margin-top-08"
+                            style="word-wrap: break-word; white-space: normal;">
+                            Constitution du panier client : {_record.VI_CommentaireGeneral_Constitutionpanier__c}
+                        </span>
+                        <div class="col-lg-3 text-right">
+                            <span
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);font-size: 16px;margin-top: 17px;text-decoration: underline;"
+                                onclick={modifierPanierCommentaire}>
+                                <img src={commentaireImage}
+                                    style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 19px;margin-right: 8px" />
+                                Modifier
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <span class="col-lg-9"
+                            style="font-size: 16px; margin-top: 8px; color: dimgray;word-wrap: break-word; white-space: normal;">
+                            Date et relevé : {_record.VI_CommentaireGeneral_InfosCompl__c}
+                        </span>
+                        <div class="col-lg-3 text-right">
+                            <span
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);font-size: 16px;margin-top: 17px;text-decoration: underline;"
+                                onclick={modifierContratCommentaire}>
+                                <img src={commentaireImage}
+                                    style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 19px;margin-right: 8px" />
+                                Modifier
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <span class="col-lg-9 parcoursPP-font-size-16 parcoursPP-color-05 parcoursPP-margin-top-08"
+                            style="word-wrap: break-word; white-space: normal;">
+                            Saisie des moyens de paiement : {_record.VI_CommentaireGeneral_MoyensPaiement__c}
+                        </span>
+                        <div class="col-lg-3 text-right">
+                            <span
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);font-size: 16px;margin-top: 17px;text-decoration: underline;"
+                                onclick={modifierPaiementCommentaire}>
+                                <img src={commentaireImage}
+                                    style="cursor:pointer;color: rgba(0, 157, 233, 1);height: 19px;margin-right: 8px" />
+                                Modifier
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <span class="col-lg-9 parcoursPP-font-size-16 parcoursPP-color-05 parcoursPP-margin-top-08"
+                            style="word-wrap: break-word; white-space: normal;">
+                            Récapitulatif de la souscription : {commentairesParcours}
+                        </span>
+                        <div class="col-lg-3 text-right">
+                            <span
+                                style="cursor:pointer;color: rgba(0, 157, 233, 1);font-size: 16px;margin-top: 17px;text-decoration: underline;"
+                                onclick={modifierRecapCommentaire}>
+                                <img src={commentaireImage} class="parcoursPP-color-06 parcoursPP-cursor-pointer parcoursPP-margin-right-08"
+                                    style="height: 19px;" />
+                                Modifier
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Consentements RGPD -->
+                <div class="row parcoursPP-margin-top-16">
+                    <div class="col-lg-5">
+                        <Strong><span class="parcoursPP-font-size-24" style="color: var(--cerulean);">Consentements RGPD</span></Strong>
+                    </div>
+                    <div class="col-lg-3"></div>
+                </div>
+                <div style="margin-top:1%;position: relative;height: 1px;width: 100%;background: var(--cerulean);"></div>
+                <div style="position: relative;width: 100%;" class="parcoursPP-margin-top-16">
+                    <!-- Start DDPCM 1299 -->
+                    <template if:true={questionsLoaded}>
+                        <div class="row parcoursPP-margin-top-08 parcoursPP-font-size-16">
+                            <div class="col-lg-10 text-left">
+                                <label class="parcoursPP-color-05" for="consentementEngie">
+                                    {consentementEngie.libelleQuestion}
+                                </label>
+                            </div>
+                            <div class="col-lg-1 parcoursPP-color-05 text-center">
+                                <input class="parcoursPP-cursor-pointer form-check-input" 
+                                    name="consentementEngieOui" onclick={handleChangeToSave}
+                                    value="Oui" checked={isConsentementRGPD1Oui} type="radio">
+                                <span class="parcoursPP-cursor-pointer parcoursPP-margin-horizontal-04" 
+                                id="consentementEngieOui" onclick={handleChangeToSave}>Oui</span>
+                            </div>
+                            <div class="col-lg-1 parcoursPP-color-05 text-center">
+                                <input class="parcoursPP-cursor-pointer form-check-input" name="consentementEngieNon"	
+                                onclick={handleChangeToSave} value="Non"
+                                checked={isConsentementRGPD1Non} type="radio">
+                                <span class="parcoursPP-cursor-pointer parcoursPP-margin-horizontal-04" 
+                                id="consentementEngieNon" onclick={handleChangeToSave}>Non</span>
+                            </div>
+                        </div>
+                        <div class="row parcoursPP-margin-top-08 parcoursPP-font-size-16">
+                            <div class="col-lg-10 text-left">
+                                <label class="parcoursPP-color-05" for="consentementPartner">
+                                    {consentementPartner.libelleQuestion}
+                                </label>
+                            </div>
+                            <div class="col-lg-1 parcoursPP-color-05 text-center">
+                                <input class="parcoursPP-cursor-pointer form-check-input" name="consentementPartnerOui"
+                                onclick={handleChangeToSave} value="Oui"
+                                checked={isConsentementRGPD2Oui} type="radio">
+                                <label class="parcoursPP-cursor-pointer parcoursPP-margin-horizontal-04"
+                                id="consentementPartnerOui" onclick={handleChangeToSave}>Oui</label>
+                            </div>
+                            <div class="col-lg-1 parcoursPP-color-05 text-center">
+                                <input class="parcoursPP-cursor-pointer form-check-input" name="consentementPartnerNon"	
+                                onclick={handleChangeToSave} value="Non"
+                                checked={isConsentementRGPD2Non} type="radio">
+                                <label class="parcoursPP-cursor-pointer parcoursPP-margin-horizontal-04"
+                                id="consentementPartnerNon" onclick={handleChangeToSave}>Non</label>
+                            </div>
+                        </div>
+                    </template>
+                    <!-- End DDPCM 1299 -->
+                </div>
+                <div class="row parcoursPP-margin-top-12">
+                    <div class="col-lg-12 text-left parcoursPP-color-05">
+                        <lightning-formatted-rich-text value={DonneesGDPR}></lightning-formatted-rich-text>
+                    </div>
+                </div>
+
+                <!--_______________________________________________________________________________________________________-->
+
+
+                <div class="row">
+                    <div class="col-lg-2"></div>
+
+                    <div class="col-lg-8">
+                        <h1 class="font-class-1 text-center" style="color: rgba(0, 157, 233, 1); margin-top: 20px;">
+                            Référence Back office :&nbsp;<span style="color: dimgray;">{numeroCase}</span>
+                            <!-- COmmentiere espace -->
+                        </h1>
+                    </div>
+                    <div class="col-lg-2"></div>
+                </div>
+
+                <!--________________________________________________________________________________________________________-->
+
+
+                <template if:true={_record.VI_InfosCompl_MiseEnServiceUrgente__c}>
+                    <div class="row" style="margin-top: 35px; margin-bottom:30px; position: relative;">
+                        <div class="col-lg-1">
+                        </div>
+                        <div class="col-lg-10 text-center">
+                            <template if:true={isOpen}>
+                                <img style="width: 25px; margin-right: 15px" src={iconInformation}>
+                                <span onclick={showMessage} class="font-class-1" style="color:dimgray">Transfert
+                                    d'appel</span>
+                                <img onclick={showMessage} class="optionsButton" src={optionDropImage} data-id="message"
+                                    style="transform: rotate(-90deg);">
+                            </template>
+                            <template if:false={isOpen}>
+                                <img style="width: 25px; margin-right: 15px" src={iconInformation}>
+                                <span onclick={showMessage} class="font-class-1" style="color:dimgray">Transfert
+                                    d'appel</span>
+                                <img onclick={showMessage} class="optionsButton" src={optionDropImage} data-id="message"
+                                    style="transform: rotate(90deg) translateX(2px)">
+                            </template>
+                        </div>
+
+
+                        <template if:true={isMessage}>
+
+                            <div class="row">
+                                <div class="col-lg-1"></div>
+                                <div class="col-lg-11">
+                                    <p class="text-center" style="color:#f00020; margin-top: 10px; font-size:18px">
+
+                                        Ce client souhaite une mise en service urgente. Son appel va être tranféré à un
+                                        conseiller ENGIE.
+
+                                        Numéro d'appel dédié mise en service Urgente : 09 74 42 09 54
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </template>
+
+                    </div>
+                </template>
+
+
+                <!--______________________________________________________________________________________________________-->
+
+            </div>
+            <!-- Boutton de validation-->
+            <div class="row" style="margin-top:17px">
+                <div class="col-lg-4 text-center"></div>
+                <button type="button" class="col-lg-4 btn" disabled={disableEnvoyerButton} style={buttonStyle}
+                    onclick={handleFinParcours}>
+                    <template if:true={isBoutonCHF}>
+                        <p class="font-class-2">Envoyer la proposition à signer</p>
+                    </template>
+                    <template if:true={isBoutonEM}>
+                        <p class="font-class-2">Envoi du contrat</p>
+                    </template>
+                    <template if:true={isBoutonARenvoyer}>
+                        <p class="font-class-2">Renvoyer les CPV</p>
+                    </template>
+                </button>
+                <div class="col-lg-4 text-center"></div>
+            </div>
+
+        </div>
+
+
+        <template if:true={isShowPopUp}>
+
+            <div class="demo-only" style="border-radius: 3px;">
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                    aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                            <div class="row">
+                                <div class="col-lg-10 text-center"></div>
+                                <div class="col-lg-2 text-center">
+                                    <img title="Close" onclick={closePopUp} style="cursor:pointer;margin-top: 20px;"
+                                        src={closeImage} />
+                                </div>
+                            </div>
+                            <h1 class="contrat-envoy titlekilo text-center" style="margin-top:10px;">Contrat envoyé</h1>
+
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <h1 class="font-class-1 text-center"
+                                        style="color: rgba(0, 157, 233, 1); margin-top: 20px;">
+                                        Référence client : <span style="color: gray;">{referenceClient}</span></h1>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <h1 class="font-class-1 text-center"
+                                        style="color: rgba(0, 157, 233, 1); margin-top: 20px;">
+                                        Numéro du dossier : <span style="color: gray;">{_record.Name}</span></h1>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <h1 class="font-class-1 text-center"
+                                        style="color: rgba(0, 157, 233, 1); margin-top: 20px;">
+                                        Référence Back office :&nbsp;<span style="color: gray;">{numeroCase}</span>
+                                        <!-- COmmentiere espace -->
+                                    </h1>
+                                </div>
+
+                            </div>
+                            <div class="row" style="margin-top: 20px; margin-bottom:30px; position: relative;">
+                                <div class="col-lg-12 text-center">
+                                    <template if:true={openEtape}>
+                                        <span onclick={openEtapes} class="font-class-1"
+                                            style="color: rgba(0, 157, 233, 1)">Prochaines étapes</span>
+                                        <img onclick={openEtapes} class="optionsButton" src={optionDropImage}
+                                            data-id="message" style="transform: rotate(-90deg)">
+                                    </template>
+                                    <template if:false={openEtape}>
+                                        <span onclick={openEtapes} class="font-class-1"
+                                            style="color: rgba(0, 157, 233, 1)">Prochaines étapes</span>
+                                        <img onclick={openEtapes} class="optionsButton" src={optionDropImage}
+                                            data-id="message" style="transform: rotate(90deg) translateX(2px)">
+                                    </template>
+                                </div>
+
+
+                                <template if:true={openEtape}>
+
+
+                                    <div class="row">
+                                        <div class="col-sm-1"></div>
+                                        <div class="col-sm-1" style="width: 40px;">
+                                            <img class="optionsButton text-right" src={prochainesEtapes}
+                                                data-id="etapes"
+                                                style="transform: rotate(0deg); width: 30px;  margin-left:70%; margin-top:13px;">
+                                        </div>
+                                        <template if:true={isEM}>
+                                            <div class="col-sm-9" style="margin-left: 0px;">
+                                                <div class="row" style="margin-top:18px;">
+                                                    <div class="col-lg-12" style="color:gray; font-size:16px">
+
+                                                        <span> Votre souscription a bien été enregistrée </span>
+                                                        <lightning-helptext
+                                                            style="padding-bottom: 2px; margin-left: 3px; width:6px"
+                                                            content="Les souscriptions sont traitées dans les 24h suivant la demande (même le dimanche !).">
+                                                        </lightning-helptext>
+                                                    </div>
+                                                </div>
+                                                <template if:true={isAuto}>
+                                                    <div class="row font-class-1" style="margin-top:25px;">
+                                                        <div class="col-lg-12" style="color:gray; font-size:16px">
+                                                            Engie s'occupe de mettre en place votre contrat.
+                                                            Je vous envoie votre contrat par mail, l'avez-vous bien reçu
+                                                            ?&nbsp;&nbsp;Vous avez la possibilité de transmettre votre
+                                                            IBAN et
+                                                            d’activer
+                                                            votre mandat SEPA à tout moment sur votre espace client.
+                                                        </div>
+                                                    </div>
+                                                </template>
+                                                <template if:false={isAuto}>
+                                                    <div class="row font-class-1" style="margin-top:37px;">
+                                                        <div class="col-lg-12" style="color:gray; font-size:16px">
+                                                            Engie s'occupe de mettre en place votre contrat.
+                                                            Je vous envoie votre contrat par mail, l'avez-vous bien reçu
+                                                            ?&nbsp;&nbsp;
+                                                        </div>
+                                                    </div>
+                                                </template>
+                                                <div class="row" style="margin-top:20px;">
+                                                    <div class="col-lg-12" style="color:gray; font-size:16px">
+                                                        Les démarches d'ouvertures des compteurs sont en cours. S'il
+                                                        manque une information, ou
+                                                        qu'un rendez-vous est nécessaire avec un technicien,
+                                                        un conseiller vous recontactera.
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="margin-top:20px;">
+                                                    <div class="col-lg-12" style="color:gray; font-size:16px">
+                                                        Votre contrat a été traité et sera mis en place à la date
+                                                        demandée : le {dateFormat}.
+                                                        Sachez que vous pouvez vous connecter à votre Espace Client pour
+                                                        gérer vos options, vos factures…
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </template>
+
+                                        <template if:true={isCHF}>
+
+                                            <div class="col-lg-9" style="margin-left: 0px;">
+                                                <div class="row" style="margin-top:18px;">
+                                                    <div class="col-lg-12" style="color:gray; font-size:16px">
+
+                                                        <span> Votre souscription a bien été enregistrée </span>
+                                                        <lightning-helptext
+                                                            style="padding-bottom: 2px; margin-left: 3px; width:6px"
+                                                            content="Les souscriptions sont traitées dans les 24h suivant la demande (même le dimanche !).">
+                                                        </lightning-helptext>
+                                                    </div>
+                                                </div>
+                                                <template if:true={isAuto}>
+                                                    <div class="row font-class-1" style="margin-top:28px;">
+                                                        <div class="col-lg-12" style="color:gray; font-size:16px">
+                                                            Engie s'occupe de mettre en place votre contrat.
+                                                            Je vous envoie votre contrat par mail, l'avez-vous bien reçu
+                                                            ?&nbsp;&nbsp;Vous avez la possibilité de transmettre votre
+                                                            IBAN et
+                                                            d’activer
+                                                            votre mandat SEPA à tout moment sur votre espace client.
+                                                        </div>
+                                                    </div>
+                                                </template>
+                                                <template if:false={isAuto}>
+                                                    <div class="row font-class-1" style="margin-top:37px;">
+                                                        <div class="col-lg-12" style="color:gray; font-size:16px">
+                                                            Engie s'occupe de mettre en place votre contrat.
+                                                            Je vous envoie votre contrat par mail, l'avez-vous bien reçu
+                                                            ?&nbsp;&nbsp;
+                                                        </div>
+                                                    </div>
+                                                </template>
+                                                <div class="row" style="margin-top:30px;">
+                                                    <div class="col-lg-12" style="color:gray; font-size:16px">
+                                                        Une fois le contrat signé par le client, les démarches
+                                                        d'ouvertures des compteurs
+                                                        sont lancés pour migrer votre lieu de consommation vers
+                                                        ENGIE. S'il manque une
+                                                        information, un conseiller vous recontactera.
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="margin-top:38px;">
+                                                    <div class="col-lg-12" style="color:gray; font-size:16px">
+                                                        Votre contrat a été traité et sera mis en place à la date
+                                                        demandée : le {dateFormat}.
+                                                        Sachez que vous pouvez vous connecter à votre Espace Client pour
+                                                        gérer vos options, vos factures…
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </template>
+                                        <div class="col-sm-1"></div>
+                                    </div>
+
+
+
+                                </template>
+
+                            </div>
+
+                            <template if:true={_record.VI_InfosCompl_MiseEnServiceUrgente__c}>
+                                <div class="row" style="margin-top: 0px; margin-bottom:10px; position: relative;">
+                                    <div class="col-lg-12 text-center">
+                                        <template if:true={isOpen}>
+                                            <span onclick={showMessage} class="font-class-1"
+                                                style="color: rgba(0, 157, 233, 1)">Transfert d'appel</span>
+                                            <img onclick={showMessage} class="optionsButton" src={optionDropImage}
+                                                data-id="message" style="transform: rotate(-90deg)">
+                                        </template>
+                                        <template if:false={isOpen}>
+                                            <span onclick={showMessage} class="font-class-1"
+                                                style="color: rgba(0, 157, 233, 1)">Transfert d'appel</span>
+                                            <img onclick={showMessage} class="optionsButton" src={optionDropImage}
+                                                data-id="message" style="transform: rotate(90deg) translateX(2px)">
+                                        </template>
+                                    </div>
+
+
+                                    <template if:true={isMessage}>
+
+
+                                        <div class="row" style="margin-top: 5px;">
+                                            <div class="col-lg-1"></div>
+                                            <div class="col-lg-10">
+                                                <span>
+                                                    <p class="text-center" style="color:gray; font-size:16px">
+                                                        Ce client souhaite une mise en servive urgente. Son appel va
+                                                        être tranféré à un conseiller ENGIE.
+                                                        Numéro d'appel dédié mise en service Urgente : 09 74 42 09 54
+                                                    </p>
+                                                </span>
+                                            </div>
+                                            <div class="col-lg-1"></div>
+                                        </div>
+
+
+
+                                    </template>
+
+                                </div>
+                            </template>
+
+
+                            <!-- Boutton de validation-->
+                            <div class="row" style="margin-top:12px; margin-bottom: 5px">
+                                <div class="col-lg-4 text-center"></div>
+                                <button type="button" class="col-lg-4 btn" style="height: 44px;width: 260px;color: #fff;
+            background-color: rgba(0, 157, 233, 1);
+            border-color: rgba(0, 157, 233, 1);border-radius:0" onclick={handleClose}>
+                                    <p class="font-class-2">Fin du Parcours</p>
+
+                                </button>
+                                <div class="col-lg-4 text-center"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </div>
+        </template>
+    </template>
+</template>

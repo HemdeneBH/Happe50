@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="title" label="Titre" type="String" default="Je déménage"/>
+            <property name="subtitle" label="Texte introductif" type="String" default="Faire suivre mon contrat dans mon nouveau logement :"/>
+            <property name="leftStepNumber" label="Numéro de la première étape" type="Integer" default="1"/>
+            <property name="leftStepTitle" label="Titre de la première étape" type="String" default="Souscription"/>
+            <property name="leftStepText" label="Texte de la première étape" type="String" default="Pour changer d’adresse, il vous suffit de souscrire à nouveau chez happ-e."/>
+            <property name="centerStepNumber" label="Numéro de la deuxième étape" type="Integer" default="2"/>
+            <property name="centerStepTitle" label="Titre de la deuxième étape" type="String" default="Simplification"/>
+            <property name="centerStepText" label="Texte de la deuxième étape" type="String" default="Vos informations actuelles seront rassemblées pour vous faciliter cette démarche."/>
+            <property name="rightStepNumber" label="Numéro de la troisième étape" type="Integer" default="3"/>
+            <property name="rightStepTitle" label="Titre de la troisième étape" type="String" default="Nouveau contrat"/>
+            <property name="rightStepText" label="Texte de la troisième étape" type="String" default="Votre ancien contrat sera automatiquement remplacé par le nouveau."/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

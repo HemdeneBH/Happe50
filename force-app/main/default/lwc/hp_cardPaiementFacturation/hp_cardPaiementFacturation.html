@@ -1,0 +1,236 @@
+<!--
+  @File Name          : cmn_cardPaiementFacturation.html
+  @Description        : 
+  @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
+  @Group              : 
+  @Last Modified By   : Hemdene Ben Hammouda
+  @Last Modified On   : 11-30-2021
+
+
+  @Modification Log   : 
+  Ver       Date            Author      		    Modification
+  1.0    24/12/2019   Mohamed Aamer     Initial Version
+-->
+<template>
+    <lightning-card title="PAIEMENT ET FACTURATION">
+        <div style="padding-left:0.5rem"
+            class="slds-m-around_medium bloc-card engie-card-contrat-body slds-card__body via-slds-card__body slds-theme--default">
+            <div class="slds-grid">
+                <div class="slds-size--1-of-4 slds-p-right_xx-small">
+                    <span class="slds-text-heading--label">MODE DE PAIEMENT</span>
+                    <div class="slds-tile__detail">
+                        <div if:true={pfcInfoAPI}>{pfcInfoAPI.libelleModeEncaissement}</div>
+                        <div if:true={isPrelevement}>
+                            <template if:true={currentInfoBank}>
+                                <p if:true={currentInfoBank.iBAN} class="back-to-line">
+                                  {ibanDisplay} 
+                                  <lightning-button-icon icon-name="utility:preview"  class="slds-m-left_xx-small" onclick={showIBAN}></lightning-button-icon>
+                                </p>
+                                <span class="slds-text-color_error" if:false={currentInfoBank.iBAN}>Coordonnées bancaires
+                                    indisponibles</span>
+                            </template>
+                            <template if:true={mandat}><p if:false={isStatutMondatError}>{mandat.statut}</p></template>
+                            <p if:true={isStatutMondatError} class="slds-text-color_error">Informations du mandat
+                                indisponibles</p>
+                        </div>
+                    </div>
+                        <div if:true={xdataPersonne}>
+                            <div class="slds-p-top_x-small" if:true={xdataPersonne.numeroChequeEnergie}>
+                                <span class="slds-text-heading--label"> Chèque Energie </span>
+                                <p><b>
+                                        <lightning-formatted-number value={xdataPersonne.montantChequeEnergie}
+                                            format-style="currency" currency-code="EUR"></lightning-formatted-number>
+                                    </b> ({dateFinValiditeChequeEnergieCustom} - {dateDebutValiditeChequeEnergieCustom}) </p>
+                            </div>
+                        </div>
+                </div>
+                <!-- Client mensualisé -->
+                <div class="slds-size--2-of-4 slds-p-right_xx-small slds-text-align_center" if:true={isMesualisee}>
+                    <div class="center">
+                        <span class="slds-text-heading--label">CLIENT MENSUALISÉ</span>
+                        <!-- mensualisation en cours -->
+                        <div class="facturation-middle-frame slds-grid slds-grid_vertical" if:true={isMensEnCours}>
+                                <div style="font-size: 0.7rem;">Prochain prélèvement le <lightning-formatted-date-time value={dateEcheance} day="2-digit"  month="2-digit" year="numeric" ></lightning-formatted-date-time> </div>
+                                <div><b>{montantEcheance}</b></div>
+                        </div>
+                        <!-- mensualisation terminée -->
+                        <div class="facturation-middle-frame slds-grid slds-grid_vertical" if:false={isMensEnCours}>
+                            <div>Facture de régul en cours</div>
+                            <div class="facturation-middle-frame slds-grid slds-grid_vertical" if:true={maxDateFacture}>
+                                <div style="color:#059ce7" class="slds-m-top_x-small" if:true={getInfosFactures}>Facture du  <lightning-formatted-date-time value={maxDateFacture.date_creation} day="2-digit"  month="2-digit" year="numeric" ></lightning-formatted-date-time> </div>
+                                <div if:true={isFacture}><b>{maxDateFacture.montant_ttc} €</b></div>
+                                <div if:false={isFacture} class="slds-text-color_error"><b>Informations de la
+                                        facture indisponibles</b></div>
+                            </div>
+                        </div>
+                        <p class="slds-text-color_error slds-m-top_x-small" if:false={conditionPaiement}>Aucune DRP renseignée</p>
+                        <p class="slds-m-top_x-small" if:true={conditionPaiement}>Date de règlement personnalisée :
+                            {conditionPaiement}</p>
+                    </div>
+                    <br />
+                </div>
+                <!-- Client non mensualisé -->
+                <div class="slds-size--2-of-4 slds-p-right_xx-small slds-text-align_center" if:false={isMesualisee}>
+                    <div class="center">
+                        <span class="slds-text-heading--label">FACTURATION TOUS LES 2 MOIS</span>
+                        <!-- Client prélevé -->
+                        <div class="facturation-middle-frame slds-grid slds-grid_vertical" if:true={maxDateFacture}>
+                            <div style="color:#059ce7" class="slds-m-top_x-small" if:true={isFacture}>Facture du  <lightning-formatted-date-time value={maxDateFacture.date_creation} day="2-digit"  month="2-digit" year="numeric" ></lightning-formatted-date-time></div>
+                            <div if:true={isFacture}><b>{maxDateFacture.montant_ttc} €</b></div>
+                            <div if:false={isFacture} class="slds-text-color_error"><b>Informations de la facture
+                                    indisponibles</b></div>
+                        </div>
+                        <p class="slds-text-color_error slds-m-top_x-small" if:false={conditionPaiement}>Aucune DRP
+                            renseignée</p>
+                        <p class="slds-m-top_x-small" if:true={conditionPaiement}>Date de règlement personnalisée :
+                            {conditionPaiement}</p>
+                    </div>
+                </div>
+                <div class="slds-size--1-of-4 slds-p-right_xx-small" style="text-align: center;">
+                <div if:true={showLink} >
+                  <a style="font-size: 0.67rem;margin-left: 0.5rem;" onclick={navitageToHistoriqueConsommation}>Historique Consommation</a>
+                </div>
+                <div if:true={showFactureLink}>
+                  <a style="font-size: 0.67rem;margin-left: 0.5rem;" onclick={navitageToHistoriqueFacturation}>Historique Factures</a>
+                </div>
+                <div>
+                  <a style="font-size: 0.67rem;margin-left: 0.5rem;" onclick={navitageToHistoriquePaiements}>Historique Paiements</a>
+                </div>
+                <div if:true={showAide}>
+                  <a style="font-size: 0.67rem;margin-left: 0.5rem;" onclick={navitageToDossierAide}>Dossier d’aide</a>
+                </div>
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+
+
+<!--<template if:true={showReclamationCase}>
+    <div class="demo-only" style="height: 640px;">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container" style="max-width: 75rem;width: 90%;">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closePopupModalReclamationCase}>
+                        <lightning-icon icon-name="utility:close" size="medium">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2>Création d’une réclamation pour le client {personneData.FirstName} {personneData.LastName}</h2>
+
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="slds-grid slds-wrap">
+                        <lightning-accordion class="example-accordion" style="width: 100%;" active-section-name="reclamationList">
+
+                            <lightning-accordion-section name="reclamationList" label="Liste des réclamations">
+                                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                                    <thead>
+                                      <tr class="slds-line-height_reset">
+                                        <th class="" scope="col">
+                                          <div class="slds-truncate">Numéro de la requête</div>
+                                        </th>
+                                        <th class="" scope="col">
+
+                                          <div class="slds-truncate">Statut</div>
+                                        </th>
+                                        <th class="" scope="col">
+                                          <div class="slds-truncate">Type Happe</div>
+                                        </th>
+                                        <th class="" scope="col">
+                                          <div class="slds-truncate">Motif de la requête</div>
+
+                                        </th>
+                                        <th class="" scope="col">
+                                          <div class="slds-truncate">Priorité</div>
+                                        </th>
+                                        <th class="" scope="col">
+
+                                          <div class="slds-truncate">Numéro de la facture</div>
+                                        </th>
+
+                                        <th class="" scope="col">
+                                          <div class="slds-truncate">Date de Creation</div>
+                                        </th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template if:true={reclamationCaseList}>
+                                        <template for:each={reclamationCaseList} for:item="caseItem">
+
+
+                                      <tr class="slds-hint-parent" key={caseItem.Id}>
+                                        <th data-label="Opportunity Name" scope="row">
+                                          <div class="slds-truncate">
+                                            <a href="javascript:void(0);" data-id={caseItem.Id} onclick={openReclamationCase}>{caseItem.CaseNumber}</a>
+                                          </div>
+                                        </th>
+
+                                        <td data-label="Prospecting">
+                                          <div class="slds-truncate">{caseItem.Status}</div>
+                                        </td>
+                                        <td data-label="Amount">
+                                          <div class="slds-truncate">{caseItem.HP_Type__c}</div>
+                                        </td>
+                                        <td data-label="Motif">
+                                          <div class="slds-truncate">{caseItem.Reason}</div>
+                                        </td>
+                                        <td data-label="Confidence">
+                                          <div class="slds-truncate">{caseItem.Priority}</div>
+                                        </td>
+                                        <td data-label="Close Date">
+                                          <div class="slds-truncate">{caseItem.HP_Numero_de_facture__c}</div>
+                                        </td>
+
+                                        <td data-label="Confidence">
+                                            <div class="slds-truncate">{caseItem.CreatedDate}</div>
+                                          </td>
+                                      </tr>
+                                      </template>
+                                    </template>
+                                    </tbody>
+                                </table>
+                            </lightning-accordion-section>
+                            <lightning-accordion-section name="createReclamation" label="Créer une nouvelle réclamation">
+            <lightning-record-edit-form record-type-id={reclamationRT} object-api-name="Case" onsuccess={handleSuccess} onsubmit ={handleSubmit} >
+                <div class="slds-grid slds-gutters" style="height: 20rem;">
+                    <div class="slds-col slds-size_1-of-2">
+
+                      <lightning-input-field field-name="HP_Type__c" required>
+                      </lightning-input-field>
+                    <lightning-input-field field-name="Priority" required>
+                </lightning-input-field>
+                <lightning-input-field field-name="HP_Numero_de_facture__c">
+                </lightning-input-field>
+</div>
+                    <div class="slds-col slds-size_1-of-2">
+                      <lightning-input-field field-name="HP_Motif__c" required>
+                      </lightning-input-field>
+                      <lightning-input-field field-name="HP_Comment__c" required>
+                        </lightning-input-field>
+                    </div>
+                  </div>
+
+              <div style="float:right">
+                <lightning-button class="slds-m-top_small" style="margin-right: 0.5rem;" onclick={closePopupModalReclamationCase}
+                label="Annuler"></lightning-button>
+                <lightning-button variant="brand" label="Créer requête" type="submit"
+                class="slds-m-top_small"></lightning-button>
+                <div class="exampleHolder" if:true={showSpinner}>
+                    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                </div>
+            </div>
+
+            </lightning-record-edit-form>
+            </lightning-accordion-section>
+            </lightning-accordion>
+                </div>
+                </div>
+
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
+    </template>-->
+
+
+</template>

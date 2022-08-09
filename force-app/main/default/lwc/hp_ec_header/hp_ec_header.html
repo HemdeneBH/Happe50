@@ -1,0 +1,29 @@
+<!--
+  @description       : 
+  @author            : Clément Bauny
+  @group             : 
+  @last modified on  : 05-16-2022
+  @last modified by  : Clément Bauny
+-->
+<template>
+    <div data-id='headerContent' class='c-header-menu'>
+        <slot name='content'></slot>
+        <div data-id='addressCotent'>
+            <c-hp_ec_dropdown-address class='c-address-dropdown' >
+            </c-hp_ec_dropdown-address>
+        </div>
+        <div data-id='helpContent'>
+            <button type="button" href="/" class='c-btn c-btn--secondary c-btn-aideContact' onclick={handleContactClick}>
+                {helpLabel}
+                <span class="c-btn-aideContact_icon">
+                    <img class="hp-aideContact_icon" src={aideContactIcon} alt="aideContactn icon"/>
+                </span>
+            </button>
+        </div>
+        <div data-id='disconnectContent'>
+            <a href={logoutLink} class='c-btn c-btn--secondary c-btn-deconnexion'>
+                {disconnectLabel}
+            </a>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,135 @@
+.infoMessage {
+    position: relative;
+    z-index: 1;
+    top: 23px;
+    right: 17px;
+    background: #b5e7f5;
+    padding: 10px;
+    border-radius: 8px;
+    font-size:10px;
+    
+    
+  }
+
+  .infoMessage2 {
+    position: relative;
+    z-index: 1;
+    right: 5px;
+    top:15px;
+    background: #b5e7f5;
+    padding: 10px;
+    border-radius: 8px;
+    font-size:10px;
+    
+    
+  }
+
+  .infoMessage2Bis {
+    position: relative;
+    z-index: 1;
+    right: 2px;
+    top:15px;
+    background: #b5e7f5;
+    padding: 10px;
+    border-radius: 8px;
+    font-size:10px;
+    
+    
+  }
+
+  .infoMessage2::after {
+    content: "";
+    position: absolute;
+    bottom: 9px;
+    left: -20px;
+    margin-right: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent #b5e7f5 transparent transparent;
+  }
+
+  .infoMessage2Bis::after {
+    content: "";
+    position: absolute;
+    bottom: 9px;
+    left: -20px;
+    margin-right: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent #b5e7f5 transparent transparent;
+  }
+
+  .infoMessage3 {
+    position: relative;
+    z-index: 1;
+    top:15px;
+    background: #b5e7f5;
+    padding: 10px;
+    border-radius: 8px;
+    font-size:10px;
+    
+    
+  }
+  .infoMessage3Bis {
+    position: relative;
+    z-index: 1;
+    top:16px;
+    background: #b5e7f5;
+    padding: 10px;
+    border-radius: 8px;
+    font-size:10px;
+    
+    
+  }
+
+  .infoMessage3Bis::after {
+    content: "";
+    position: absolute;
+    bottom: 9px;
+    left: -20px;
+    margin-right: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent #b5e7f5 transparent transparent;
+  }
+
+  .infoMessage3::after {
+    content: "";
+    position: absolute;
+    bottom: 9px;
+    left: -20px;
+    margin-right: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent #b5e7f5 transparent transparent;
+  }
+  
+  .infoMessage::after {
+    content: "";
+    position: absolute;
+    bottom: 9px;
+    left: -20px;
+    margin-right: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent #b5e7f5 transparent transparent;
+  }
+
+  .infoImage:hover {
+    cursor: pointer;
+  }
+
+  .imgCopy {
+    
+    width:20px;
+    padding-left: 5%;
+    
+    
+  }
+  .imgCopy:hover {
+    cursor: pointer;
+  }
+
+  .addressTitle{
+    font-size: 10px;
+}

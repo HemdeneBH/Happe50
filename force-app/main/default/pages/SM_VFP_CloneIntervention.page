@@ -1,0 +1,55 @@
+<apex:page standardController="Intervention__c">
+    <apex:includeScript value="/soap/ajax/31.0/connection.js" />
+    <apex:includeScript value="/support/console/49.0/integration.js"/>
+    <script type="text/javascript">
+        sforce.connection.sessionId = '{!$Api.Session_ID}';
+
+        // récupérer les informations de l'intervention
+        var myquery = "SELECT Id,Name,Type__c,Sous_type__c,Case__c,Description__c,Formulaire__c,Statut__c FROM Intervention__c WHERE Id = '{!Intervention__c.Id}'";
+
+        result = sforce.connection.query(myquery);
+        records = result.getArray("records");
+        var myIntervention = records[0];
+
+        // créer une nouvelle intervention avec les informations de la premiere
+        var newIntervention = new sforce.SObject("Intervention__c");
+        newIntervention.Type__c=myIntervention.Type__c;
+        newIntervention.Sous_type__c=myIntervention.Sous_type__c;
+        newIntervention.Case__c=myIntervention.Case__c;
+        newIntervention.Description__c=myIntervention.Description__c;
+        newIntervention.Formulaire__c=myIntervention.Formulaire__c;
+        newIntervention.Statut__c= 'En cours';
+
+        var result = sforce.connection.create([newIntervention]);
+    
+        // redirection
+    	var subTabId;
+    	var redirectId;
+        var getTabId = function getTabId(result) {
+            sforce.console.getEnclosingPrimaryTabId(openSubtab);
+            subTabId =result.id;
+        }; 
+        var openSubtab = function openSubtab(result) {
+            var primaryTabId = result.id;
+            if(redirectId!=null){
+                sforce.console.openSubtab(primaryTabId , '/'+redirectId, true,null,null, openSuccess,null);
+            }else{
+                sforce.console.openSubtab(primaryTabId , '/{!Intervention__c.Id}', true,'{!Intervention__c.Name}',null, openSuccess,'{!Intervention__c.Name}');
+            }
+            
+        }
+        var openSuccess = function openSuccess(result) {
+            if (result.success == true) {
+                sforce.console.closeTab(subTabId);
+            } 
+        };
+        if (result[0].getBoolean("success")) {
+            redirectId=result[0].id;
+        } else {
+            console.log(result[0]);
+        }
+    
+		sforce.console.getFocusedSubtabId(getTabId);    
+
+    </script>
+</apex:page>

@@ -1,0 +1,119 @@
+@import 'c/hp_ec_header';
+
+select {
+    width: 100%;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: var(--bg);
+    color: var(--text-color);
+}
+select option{
+  background: var(--bg);
+  color: var(--text-color);
+  font-family: var(--font-bold);
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.hp-select-container {
+    width: 100%;
+}
+
+.hp-select-logement {
+    font-family: var(--font-bold);
+    font-weight: bold;
+    border-radius: 0;
+    height: 60px;
+    padding: 10px 45px 10px 20px;
+    font-weight: bold;
+    font-size: 18px;
+    margin: 0;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    background: var(--bg-base);
+    color: var(--text-color);
+    border: 3px solid var(--primary-colour);
+}
+
+.hp-select-container {
+    position: relative;
+}
+
+
+.hp-select-container .chevron::before {
+    border-style: solid;
+    font-size: 17px;
+    border-width: 0.15em 0.15em 0 0;
+    content: '';
+    display: inline-block;
+    height: 0.60em;
+    right: 0.15em;
+    position: absolute;
+    top: 23px;
+    transform: rotate(-45deg);
+    vertical-align: top;
+    width: 0.60em;
+}
+
+.hp-select-container .chevron.down:before {
+    right: 25px;
+    transform: rotate(135deg);
+}
+
+.slds-form-element {
+    margin: 0;
+}
+
+.hp-select-logement:focus {
+    border: 3px solid var(--secondary-colour);
+}
+
+.hp-select-logement:focus:not(:focus-visible) {
+    outline: 0;
+}
+
+/* only on keyboard focus */
+.hp-select-logement:focus-visible {
+    outline: 1px dotted var(--light-primary-colour);
+}
+
+.hp-select-logement:active,
+.hp-select-logement:focus,
+.hp-select-logement:focus-visible {
+    box-shadow: none;
+    border-radius: 0;
+}
+
+
+@media (max-width: 1280px) {
+    /* 1280px screen and all screens smaller */
+
+
+}
+
+@media (max-width: 1024px) {
+    /* Ipad and tablets */
+
+    .hp-select-logement {
+        height: 50px;
+        padding: 10px 35px 10px 15px;
+        font-weight: bold;
+        font-size: 14px;
+        margin: 0;
+    }
+
+    .hp-select-container .chevron::before {
+        font-size: 15px;
+        top: 18px;
+    }
+
+    .hp-select-container .chevron.down:before {
+        right: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    /* mobiles */
+}

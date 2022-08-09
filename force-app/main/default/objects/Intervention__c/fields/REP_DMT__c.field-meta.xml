@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>REP_DMT__c</fullName>
+    <description>Renseigne la date et l&apos;heure du jour quand l&apos;intervention passe au statut clôturé.</description>
+    <externalId>false</externalId>
+    <formula>IF(ISPICKVAL( Statut__c , &quot;Clôturé&quot;), NOW(), null)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>REP_DMT</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>DateTime</type>
+</CustomField>

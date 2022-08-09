@@ -1,0 +1,261 @@
+.form-control:focus{
+		box-shadow: 0 0 0 0;
+}
+
+.form-control{
+		border-top: 0;
+		border-right: 0;
+		border-left:0;
+		border-bottom-color: rgb(227, 227, 227);
+}
+
+.form-group{
+		text-align: left;
+}
+
+.font-class-3 {
+	font-family: "Lato", Helvetica, Arial, serif;
+	font-size: 18px;
+}
+
+.btn-outline-primary:hover:active .hideImageOnHover {
+		visibility: hidden;
+}
+
+.btn-outline-primary:hover:active .showImageOnHover {
+		visibility: visible;
+}
+
+.btn-outline-primary[data-current="true"] {
+		background-color: #009de9;
+		color: #fff;
+}
+
+.btn-img-size {
+		width: 22px;
+		height: 27px;
+		cursor: pointer;
+}
+
+.lato-normal-sonic-silver-18px {
+		color: rgba(117,117,117,1.0);
+		font-family: "Lato", Helvetica, Arial, serif;
+		font-size: 18px;
+		font-style: normal;
+		font-weight: 400;
+}
+
+.table-with-filtering {
+		background-color: transparent;
+		flex-shrink: 0;
+		height: auto;
+		letter-spacing: 0px;
+		line-height: 32px;
+		min-height: 32px;
+		min-width: 210px;
+		text-align: center;
+		white-space: nowrap;
+		width: 100%;
+}
+
+.x2 {
+		background-color: transparent;
+		flex-shrink: 0;
+		height: auto;
+		letter-spacing: 0px;
+		line-height: 17px;
+		min-height: 17px;
+		min-width: 11px;
+		text-align: center;
+		white-space: nowrap;
+		width: auto;
+}
+
+.lato-normal-log-cabin-14px {
+		color:rgba(33, 33, 33, 1);
+		font-family: "Lato", Helvetica, Arial, serif;
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 400;
+}
+
+.rectangle-copy {
+		background-color: transparent;
+		flex-shrink: 0;
+		height: 32px;
+		width: 32px;
+		cursor: pointer;
+}
+
+.rectangle-copy:hover {
+		background-color: rgba(0, 157, 233, 1);
+		color:#fff;
+}
+.rectangle-click {
+		background-color: rgba(0, 157, 233, 1) !important;
+		color:#fff !important;
+}
+
+.x2 {
+		background-color: transparent;
+		flex-shrink: 0;
+		letter-spacing: 0px;
+		text-align: center;
+		white-space: nowrap;
+		cursor: pointer;
+}
+
+.adresse {
+		background-color: transparent;
+		font-family: "Lato", Helvetica, Arial, serif;
+		color: rgba(33, 33, 33, 1);
+		height: auto;
+		left: 0px;
+		line-height: 19px;
+		position: absolute;
+		text-align: left;
+		top: 0px;
+		white-space: nowrap;
+		width: auto;
+}
+
+
+.textbody-left {
+		font-family: "Lato", Helvetica, Arial, serif;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 400;
+}
+
+.overlap-group {
+		background-color: transparent;
+		flex-shrink: 0;
+		height: 34px;
+		position: relative;
+		width: 105px;
+}
+.listtext-copy-8 {
+		align-items: center;
+		background-color: white;
+		display: inline-flex;
+		flex-direction: row;
+		flex-shrink: 0;
+		height: 48px;
+		justify-content: flex-start;
+		padding: 0 20px;
+		width: 100%;
+		word-wrap: break-word;
+		white-space: normal;
+}
+.listtext-copy-8:hover {
+		background-color: whitesmoke;
+
+}
+
+.group-2 {
+		align-items: flex-start;
+		background-color: transparent;
+		display: flex;
+		flex-direction: column;
+		flex-shrink: 0;
+		height: auto;
+		float: left;
+		justify-content: flex-start;
+		min-height: 46px;
+		width: 110px;
+		margin-bottom: 1rem;
+}
+
+.group {
+		align-items: flex-start;
+		background-color: transparent;
+		display: flex;
+		flex-direction: column;
+		flex-shrink: 0;
+		height: auto;
+		justify-content: flex-start;
+		min-height: 25px;
+		margin-left: 140px;
+		width:auto;
+		margin-bottom: 1rem;
+}
+
+.border {
+  background-color: transparent;
+  flex-shrink: 0;
+  height: 44px;
+  width: 112px;
+}
+.button-background-m {
+  align-items: flex-start;
+  background-color: rgba(189, 189, 189, 1);
+  display: inline-flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  height: 44px;
+  justify-content: flex-start;
+  min-width: 198px;
+  width: auto;
+}
+.font-class-2{
+		color:rgba(0, 157, 233, 1);
+}
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666 !important;
+}
+
+.slds-has-focus{
+	 outline: none;
+	 box-shadow: none !important;
+}
+
+.inputRed{
+	border-bottom-color: red;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.testShadow{
+	box-shadow: none !important;
+}
+
+.buttonPrecedent {
+	position: absolute;
+    left: 1%;
+    background: transparent;
+    border-color: var(--cerulean);
+    border-style: solid;
+    color: var(--cerulean);
+    font-size: 18px;
+    width: 160px;
+    height: 50px;
+    outline: none;
+  }
+  
+  .buttonSuivant {
+	position: absolute;
+	left: 84%;
+	background: var(--cerulean);
+	border-color: var(--cerulean);
+	border-style: solid;
+	color: white;
+	font-size: 18px;
+	width: 160px;
+	height: 50px;
+	outline: none;
+  }
+
+  .rechercheContactSpinner{
+	display: block;
+	top: 30%;
+	z-index: unset;
+	background-color:transparent;
+  }

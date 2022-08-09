@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_InfosCompl_ChoixReleveCompteur__c</fullName>
+    <description>Champ étape Informations complémentaires
+Choix du relevé de compteur</description>
+    <externalId>false</externalId>
+    <label>Choix du relevé de compteur</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Saisir mes relevés</fullName>
+                <default>true</default>
+                <label>Saisir les relevés</label>
+            </value>
+            <value>
+                <fullName>Passer cette étape</fullName>
+                <default>false</default>
+                <label>Passer cette étape</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

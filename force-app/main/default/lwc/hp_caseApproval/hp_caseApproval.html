@@ -1,0 +1,27 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 07-08-2021
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   06-23-2021   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+-->
+<template>
+    <div class="slds-grid slds-wrap">
+        <br/><br/>
+        <lightning-record-edit-form style="width: 100%;" record-id={recordid} object-api-name="Case"
+                                    onsuccess={handleSuccess} onsubmit ={handleSubmit}  onerror={handleError}>
+            <div class="slds-grid slds-gutters" >
+                <lightning-input-field value="" field-name="HP_ContDemApprobation__c" required ></lightning-input-field>
+            </div>
+            <div style="float:right">
+                <lightning-button variant="brand" label="Envoyer" type="submit" class="slds-m-top_small"></lightning-button>
+                <div class="exampleHolder" if:true={showSpinner}>
+                    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                </div>
+            </div>
+        </lightning-record-edit-form>
+    </div>
+</template>

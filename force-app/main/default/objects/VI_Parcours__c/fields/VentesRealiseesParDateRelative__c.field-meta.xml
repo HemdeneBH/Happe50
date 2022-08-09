@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VentesRealiseesParDateRelative__c</fullName>
+    <externalId>false</externalId>
+    <formula>/*Ventes du jour*/
+IF(
+  OR(
+     VI_MajStatutCPVEnvoyeesPDLPCEConnu__c == TODAY() ,
+     VI_MajStatutCPVEnvoyeesPDLPCENonConnu__c == TODAY(),
+     VI_MajStatutCPVSignees__c == TODAY(),
+     VI_MajStatutCPVDelivrees__c == TODAY(),
+     VI_MajStatutVenteTransformee__c  == TODAY()	   
+  ),&quot;Vente du jour&quot;,
+
+/*Ventes de la semaine*/
+IF(
+  OR(
+     (VI_MajStatutCPVEnvoyeesPDLPCEConnu__c &gt;= TODAY() - CASE(WEEKDAY(TODAY()), 1, 6, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 0)),
+     (VI_MajStatutCPVEnvoyeesPDLPCENonConnu__c &gt;= TODAY() - CASE(WEEKDAY(TODAY()), 1, 6, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 0)),
+     (VI_MajStatutCPVSignees__c &gt;= TODAY() - CASE(WEEKDAY(TODAY()), 1, 6, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 0)),
+     (VI_MajStatutCPVDelivrees__c &gt;= TODAY() - CASE(WEEKDAY(TODAY()), 1, 6, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 0)),
+     (VI_MajStatutVenteTransformee__c  &gt;= TODAY() - CASE(WEEKDAY(TODAY()), 1, 6, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 0))
+  ), &quot;Vente de la semaine&quot;,
+
+/*Ventes du mois*/
+IF(
+  OR(
+    TEXT(MONTH(VI_MajStatutCPVEnvoyeesPDLPCEConnu__c)) = TEXT(MONTH(TODAY())),
+    TEXT(MONTH(VI_MajStatutCPVEnvoyeesPDLPCENonConnu__c)) = TEXT(MONTH(TODAY())),
+    TEXT(MONTH(VI_MajStatutCPVSignees__c)) = TEXT(MONTH(TODAY())),
+    TEXT(MONTH(VI_MajStatutCPVDelivrees__c)) = TEXT(MONTH(TODAY())),
+    TEXT(MONTH(VI_MajStatutVenteTransformee__c)) = TEXT(MONTH(TODAY()))
+  ), &quot;Vente du mois&quot;, 
+
+
+/*Ventes de la semaine dernière*/
+IF(
+  OR(
+     AND((VI_MajStatutCPVEnvoyeesPDLPCEConnu__c - TODAY()) + MOD( TODAY() - DATE(1900, 1, 8), 7) &lt;= -1,
+	  VI_MajStatutCPVEnvoyeesPDLPCEConnu__c - TODAY() &gt;= (-7 - MOD( TODAY() - DATE(1900, 1, 8), 7))),
+     AND((VI_MajStatutCPVEnvoyeesPDLPCENonConnu__c  - TODAY()) + MOD( TODAY() - DATE(1900, 1, 8), 7) &lt;= -1,
+	  VI_MajStatutCPVEnvoyeesPDLPCENonConnu__c  - TODAY() &gt;= (-7 - MOD( TODAY() - DATE(1900, 1, 8), 7))),
+     AND((VI_MajStatutCPVSignees__c  - TODAY()) + MOD( TODAY() - DATE(1900, 1, 8), 7) &lt;= -1,
+	  VI_MajStatutCPVSignees__c  - TODAY() &gt;= (-7 - MOD( TODAY() - DATE(1900, 1, 8), 7))),
+     AND((VI_MajStatutCPVDelivrees__c  - TODAY()) + MOD( TODAY() - DATE(1900, 1, 8), 7) &lt;= -1,
+	  VI_MajStatutCPVDelivrees__c  - TODAY() &gt;= (-7 - MOD( TODAY() - DATE(1900, 1, 8), 7))),
+     AND((VI_MajStatutVenteTransformee__c   - TODAY()) + MOD( TODAY() - DATE(1900, 1, 8), 7) &lt;= -1,
+	  VI_MajStatutVenteTransformee__c   - TODAY() &gt;= (-7 - MOD( TODAY() - DATE(1900, 1, 8), 7)))
+  ),&quot;Vente de la semaine dernière&quot;,
+
+&quot;Autre&quot;
+))))</formula>
+    <label>TEST Ventes réalisées par date relative</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

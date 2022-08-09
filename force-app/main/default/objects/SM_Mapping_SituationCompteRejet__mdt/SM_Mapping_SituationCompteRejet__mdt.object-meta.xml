@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>SM_Mapping_SituationCompteRejet</label>
+    <pluralLabel>SM_Mappings_SituationCompteRejet</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

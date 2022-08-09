@@ -1,0 +1,48 @@
+.slds-accordion__summary {
+    float:right!important;
+}
+.slds-template__container{
+    background-color: white;
+}
+.slds-accordion__list-item{
+    border-top:0px!important;
+}
+.grayBackground{
+    background-color:#e6ebec}
+.tableListPa{
+    height: 45px;
+    border: solid 1px #979797;
+    background-color: #767f85;table-layout: fixed;
+}
+.tableListPaTr{
+    width: 129px;                                           
+    color: #ffffff;
+}
+th {
+    width:1.5rem
+}
+.slds-card__footer{
+    text-align: left;margin-top: 0px;font-size: 18px;
+}
+.customTabStyle{
+    height: 45px;
+    table-layout: fixed;
+    font-size: 15px;
+}
+.SupprimerCss {
+    background-color: white;
+    color: #059ce7;
+    border-color:white;
+    height: 40px;
+}
+.buttonContainer{
+    display: inline-block;
+    text-align: right;
+    width: 100%;
+}
+.closeButton {
+    background-color: white!important;
+    color: #059ce7!important;
+    border-color:white!important;
+    height: 40px;
+}

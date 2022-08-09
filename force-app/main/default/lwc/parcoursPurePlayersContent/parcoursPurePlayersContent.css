@@ -1,0 +1,116 @@
+*{
+    color:black;
+}
+
+.translation{
+    transform: translateX(-5%);
+}
+.btn-circle {
+    width: 25px; /* 41px because if we have an even number, there is no middle*/
+    height: 25px; /* 41px because must match width to make circle duuhhh*/
+    padding: 8px 0;
+    border-radius: 25px;
+    position: relative;
+    z-index: 7000;
+  }
+  
+  .btn-circle-sm{
+      width: 11px; /* 41px because if we have an even number, there is no middle*/
+      height: 11px; /* 41px because must match width to make circle duuhhh*/
+      padding: 4px 0;
+      border-radius: 25px;
+      position: relative;
+      z-index: 7000;
+      margin-right: 7px;
+  }
+  
+  .row.vertical {
+    margin-bottom: 20px;
+  }
+  
+  .row.vertical .col.line:before {
+    top: 100%;
+    bottom: 0;
+    transform: translateX(
+      11px
+    ); /* will center the line in the middle of the circle,
+    since the width of the line is 3px => 40/2 - 1 to center the middle pixel*/
+    position: absolute;
+    content: " ";
+    width: 3px;
+    height: 40px;
+    background-color: #d0d0d0;
+  }
+  
+  .row.vertical .col.line-sm:before {
+      top: 100%;
+      bottom: 0;
+      transform: translateX(
+        4px
+      ); /* will center the line in the middle of the circle,
+      since the width of the line is 3px => 40/2 - 1 to center the middle pixel*/
+      position: absolute;
+      content: " ";
+      width: 3px;
+      height: 40px;
+      background-color: #d0d0d0;
+    }
+  
+  .section:last-of-type .col.line:before{
+    display: none !important;
+  }
+
+  .btn[data-status="available"]{
+    background-color:#009de9
+  }
+
+  .btn[data-status="completed"]{
+    background-color:#32b760
+  }
+
+  .btn[data-status="disabled"]{
+    background-color:#c2c1c1
+  }
+
+  .col{
+    cursor: pointer;
+		display: table;
+			padding-right:0px;
+  }
+
+  .col[data-status="available"]{
+    color:#009de9
+
+  }
+
+  .col[data-status="completed"]{
+    color:#32b760
+  }
+
+  .col[data-status="disabled"]{
+    color:#c2c1c1
+  }
+
+  .btn[data-status="nonInitialized"]{
+    background-color:#757575
+  }
+
+  .btn[data-status="error"]{
+    background-color:red
+  }
+
+  .FixedSteps{
+    position: fixed;
+    left: 0;
+  }
+
+  .FixedContainer{
+    left: 80px !important;
+  }
+
+.FixedButtons{
+		position: fixed !important;
+		top: 50px !important;
+    left: 92.1% !important;
+    z-index: 10;
+}

@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Article_Sugg_r</fullName>
+    <active>true</active>
+    <description>Permet de pousser les articles &quot;suggérés&quot; dans le parcours Vlocity dans le composant Knowledge</description>
+    <label>Article Suggéré</label>
+    <picklistValues>
+        <picklist>Categorie_Consigne__c</picklist>
+        <values>
+            <fullName>Acquisition - CHF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Acquisition - EM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ajustement de mensualisation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Changement d%27offre</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Communication Relevé Index</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contestation d%27index</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Coupure pour non paiement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Création fiche client</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Demande de duplicata</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dossier Solidarité</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Délai de paiement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Détection de projet</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Facture en ligne</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Historique conso</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Historique factures</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mensualisation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mise en place prélèvement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Modification OPS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Modification coordonnée bancaire</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Modification des données personnelles</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Payeur divergent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Résiliation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Services Payant</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Situation de compte</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Suivi activation</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Etape_de_l_omniscript__c</picklist>
+        <values>
+            <fullName>ANNULATION DE L%27OPS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ANNULATION ET REMPLACEMENT DE FACTURE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AUTO RELEVE OK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CHOIX DE L%27OFFRE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CHOIX DES CONTRATS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CHOIX DES COORDONNEES BANCAIRES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CHOIX DES SERVICES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CONSIGNES MÉTIERS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CONTESTATION AVEC FRAIS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CONTEXTE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CREATION DE LA FICHE CLIENT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CREATION NOTE DEBIT CREDIT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CREATION NOTE DEBIT%2FCREDIT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CREATION OPS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CRITÈRES DE NON RECEVABILITÉ DE L%27INDEX</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DEMANDE DE JUSTIFICATIF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DOSSIER DE RECOUVREMENT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DOUBLONS DETECTES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ENVOI DE DUPLICATA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ESTIMATION DE LA CONSOMMATION</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FACTURE EN LIGNE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FACTURE ET INDEX</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LOGEMENT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MENSUALISATION</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MENSUALITÉS ET ÉCHÉANCES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MODIFICATION DU RDV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MODIFIER LES MENSUALITÉS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OPS GAZ RELEVE SPECIALE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OPTIONS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PAYEUR DIVERGENT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PUSH DE l%E2%80%99ESPACE CLIENT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RECAPITULATIF CHO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RECHERCHE COMPTE CLIENT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RECHERCHER OU CRÉER UN PAYEUR DIVERGENT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RENSEIGNER VOTRE INTERACTION</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RÉCAPITULATIF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RÉCAPITULATIF SERVICES PAYANTS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SAISIE D%27INDEX</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SECURISATION DE LA DEMANDE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SERVICES DE GESTION</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SERVICES GESTION</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SERVICES PAYANTS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SYNTHÈSE OPS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TRANSFORMER PC CHO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TRANSFORMER PC ChF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TRANSFORMER PC EM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VALIDATION CPV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VALIDATION DU MANDAT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VALIDATION OPS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VALIDATION OPS CHO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VERIFICATION DE LA COHERENCE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VERIFICATION DES COORDONNEES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VERIFICATION DONNEE CONTACT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VERIFICATION DU MANDAT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VERIFICATION FOURNISSEUR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VISUALISATION DE LA PC %2F DES CPV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VÉRIFICATION DE L%27ACTIVATION DU CONTRAT</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Typologie_Informations__c</picklist>
+        <values>
+            <fullName>Info Bleue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Info dédiée</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Information Urgente</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

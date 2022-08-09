@@ -1,0 +1,62 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 08-18-2021
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<aura:component controller="HP_SM065_CaseActionsController" implements="lightning:availableForFlowScreens,flexipage:availableForRecordHome,force:hasRecordId,flexipage:availableForAllPageTypes" access="global">
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="buttons" type="HP_Case_Action__mdt" />
+    <aura:attribute name="creationComponent" type="String" access="global"/>
+    <aura:attribute name="isLWC" type="Boolean" access="global" default="false"/>
+    <aura:attribute name="isFlow" type="Boolean" access="global" default="false"/>
+    <aura:attribute name="showSpinner" type="Boolean" access="global" default="false"/>
+    <aura:attribute name="isModalOpen" type="boolean" default="false"/>
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+
+    <lightning:card>
+      <div class="slds-text-align_left slds-m-left_x-small">
+        <aura:iteration items="{!v.buttons}" var="item">
+          <lightning:button label="{!item.HP_Button_Label__c}" title="{!item.HP_Button_Label__c}" value="{!item.HP_LWC_Name__c}" onclick="{! c.handleClick }" name="{!item.HP_Order__c}" class="slds-m-left_x-small slds-m-bottom_x-small"/>
+        </aura:iteration>
+      </div>
+  </lightning:card>
+    <div class="slds-m-around_xx-large" >
+        <aura:if isTrue="{!v.isModalOpen}">
+            <section role="dialog" tabindex="-1"  aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_large" >
+                <div class="slds-modal__container" >
+                  <aura:if isTrue="{!v.isFlow}">
+                    <header class="slds-modal__header slds-modal__header_empty" >
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closeModel }"
+                                              alternativeText="Fermer"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                    </header>
+                  </aura:if>
+                    <aura:if isTrue="{!v.isLWC}">
+                      <div class="slds-grid slds-wrap"  style=" padding-bottom: 2rem; padding-top: 2rem;">
+                        <div class="slds-align_absolute-center" style="background: white;"> {!v.creationComponent}</div>
+                      </div>
+                  </aura:if>
+                  <aura:if isTrue="{!v.isFlow}">
+                    <div class="slds-grid slds-wrap" style=" padding-bottom: 2rem; padding-top: 2rem; width:100%; background: white;" >
+                      <div class="slds-align_absolute-center" style="background: white;">  <lightning:flow aura:id="flowData" /> </div>
+                    </div>
+                    <footer class="slds-modal__footer">
+                      <lightning:button label="Fermer" variant="brand" onclick="{!c.closeModel}" ></lightning:button>
+                    </footer>
+                  </aura:if>
+                  
+                <aura:if isTrue="{!v.showSpinner}">
+                  <div>
+                    <lightning:spinner alternativeText="Loading" size="medium" />
+                </div>
+                </aura:if>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </aura:if>
+    </div>
+</aura:component>

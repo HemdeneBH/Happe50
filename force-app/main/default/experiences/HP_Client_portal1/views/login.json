@@ -1,0 +1,74 @@
+{
+  "appPageId" : "7e89266e-f5a3-4029-bb48-38a8a732ab93",
+  "componentName" : "community_layout:sldsFlexibleLayout",
+  "id" : "5e1d7724-7182-460d-9c75-dfd280f16dd5",
+  "label" : "Login",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "backgroundImageConfig" : "",
+        "backgroundImageOverlay" : "rgba(0,0,0,0)",
+        "sectionConfig" : "{\"UUID\":\"e65269d8-822b-408e-8920-8992e03b1d00\",\"columns\":[{\"UUID\":\"ef66a9c1-28d3-4345-82e4-64afbf289335\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}"
+      },
+      "componentName" : "community_layout:section",
+      "id" : "e65269d8-822b-408e-8920-8992e03b1d00",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "labelBoutonPrimaire" : "Me connecter",
+            "labelEmailActivation" : "Recevoir à nouveau l'email d'activation",
+            "labelInputEmail" : "Adresse email :",
+            "labelInputMDP" : "Mot de passe :",
+            "labelLienAppMobile" : "Télécharger l’appli mobile happ-e",
+            "labelMDPOoublie" : "Mot de passe ou email oublié",
+            "labelResterConnecte" : "Rester connecté(e)",
+            "lienAppStore" : "https://www.apple.com/fr/app-store/",
+            "lienGooglePlay" : "https://play.google.com/",
+            "messageEchecConnexion" : "Echec de connexion",
+            "messageEchecConnexionSocialMedia" : "Echec de connexion",
+            "placeHolderInputEmail" : "Ex : Martin@email.com",
+            "placeHolderInputMDP" : "Mot de passe",
+            "titreConnexion" : "MON ESPACE CLIENT"
+          },
+          "componentName" : "c:hp_ec_connexion",
+          "id" : "15a2408c-59e3-468f-9428-48e5caa8d2d3",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "ef66a9c1-28d3-4345-82e4-64afbf289335",
+        "regionLabel" : "Column 1",
+        "regionName" : "col1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "scopedBrandingSetId" : null,
+      "type" : "component"
+    } ],
+    "id" : "f7c34932-8db5-4321-916b-c32bf2423f53",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "pageTitle" : "Login",
+        "recordId" : "{!recordId}"
+      },
+      "componentName" : "community_builder:seoAssistant",
+      "id" : "f7ff659f-f996-4766-a370-0e5e81e381df",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "6e214310-a957-4101-b5c2-961d25cef657",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "PFlC31YDquY3kutKC990xhLaNFbuiZ",
+  "type" : "view",
+  "viewType" : "login-main"
+}

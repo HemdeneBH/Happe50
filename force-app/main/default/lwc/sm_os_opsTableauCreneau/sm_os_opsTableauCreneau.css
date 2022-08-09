@@ -1,0 +1,24 @@
+.creneau {
+    background-color: #d3edff;
+    height: 40px;
+    border-radius: 5px;
+    color: #666666;
+    font-size: 13px;
+    cursor: pointer;
+    outline-width: 0;
+    border: 1px solid #d3edff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.creneau:hover {
+    color: #059ce7;
+}
+.creneau:hover, .creneau.selected {
+    border-color: #059ce7;
+}
+.creneau.selected {
+    background-color: #059ce7;
+    color: white;
+    cursor: auto;
+}

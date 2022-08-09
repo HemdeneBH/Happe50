@@ -1,0 +1,167 @@
+<template>
+    <div class="slds-m-bottom_xx-large">
+        <lightning-card>
+            <div class="slds-card__body slds-card__body_inner">
+                <h2 class="pageTitle">{label.factureTitle}</h2>
+            </div>
+            <div class="slds-p-around_large">
+                <h6 class="addressTitle">{label.addressTitle}</h6>
+                <div class="slds-grid slds-wrap">
+                    <div>
+                        <lightning-icon icon-name="utility:home" size="x-small" alternative-text="Home">
+                        </lightning-icon> &nbsp;&nbsp;
+                    </div>
+                    <div>
+                        <p>{numeroVoie}&nbsp;{libelleVoie} </p>
+                        <p>{complementAdresse}</p>
+                        <p>{codePostal}&nbsp;{ville}</p>
+                        <p if:true={NoCompteContratMaj}>({NoCompteContratMaj})</p>
+                    </div>
+                    <p></p>
+                </div>
+
+            </div>
+
+            <div class="slds-p-around_large slds-clearfix">
+                <!-- <article class="slds-card slds-p-around_large"> -->
+                <!-- <div>  -->
+                <table>
+                    <thead>
+                        <tr class="tableListPa">
+                            <th class="" scope="col">
+                                DATE D'EMISSION
+                            </th>
+                            <th class="" scope="col">
+                                DATE LIMITE DE PAIEMENT
+                            </th>
+                            <th class="" scope="col">
+                                MONTANT TOTAL
+                            </th>
+                            <th class="" scope="col">
+                                LIBELLE
+                            </th>
+                            <th class="" scope="col">
+                                N°
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr if:true={noData}>
+                            <td colspan="5" style="text-align: center;">
+                                {label.noFacture}
+                            </td>
+                        </tr>
+                        <template for:each={facturePage} for:item="factureDetails" for:index="index">
+                            <tr key={factureDetails.dateComptable} class="tableListPaTr">
+                                <td data-label="Date d'émission">
+                                    <lightning-formatted-date-time value={factureDetails.dateComptable} day="2-digit"
+                                        month="2-digit" year="numeric"></lightning-formatted-date-time>
+                                </td>
+                                <td data-label="Date limite de paiement">
+                                    <lightning-formatted-date-time value={factureDetails.dateDEcheance} day="2-digit"
+                                        month="2-digit" year="numeric"></lightning-formatted-date-time>
+                                </td>
+                                <td data-label="Montant total">
+                                    {factureDetails.montantTotal} €
+                                </td>
+                                <td data-label="Libellé" if:true={factureDetails.typeCalcul}>
+                                    {factureDetails.typeCalcul}
+                                </td>
+                                <td data-label="Libellé" if:false={factureDetails.typeCalcul}>
+                                    {label.facture}
+                                </td>
+
+                                <td data-label="N°" if:true={factureDetails.factureLink}>
+                                    <a href={factureDetails.factureLink} target="_blank">{factureDetails.numeroFacture}
+                                    </a>
+                                </td>
+                                <td data-label="N°" if:false={factureDetails.factureLink}>
+                                    {factureDetails.numeroFacture}
+                                </td>
+
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+
+                <!-- Footer -->
+                <div class="slds-card__footer">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-1">
+                            <div if:true={paginationShow} class=" slds-float_right">
+                                <button title="Précédent" onclick={handleClickPrev}
+                                    class="slds-button slds-button_brand brand" if:true={start}>
+                                    Précédent
+                                </button>
+                                <button title="Suivant" onclick={handleClickNext}
+                                    class="slds-button slds-button_neutral" if:true={checkLast}>
+                                    Suivant
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="slds-col slds-size_1-of-2 slds-m-top_x-small">
+                            <div class="slds-float_left">
+                                <span class="slds-checkbox">
+                                    <input type="checkbox" name="options" id="checkbox-1" value="checkbox-1"
+                                        onchange={handlePause} />
+                                    <label class="slds-checkbox__label" for="checkbox-1">
+                                        <span class="slds-checkbox_faux"></span>
+                                        <span class="slds-form-element__label"> Appel interrompu - Tracer
+                                            l'interaction</span>
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-m-top_x-small">
+                            <div class="slds-float_right">
+                                <span class="slds-checkbox">
+                                    <input type="checkbox" name="options" id="checkbox-2" value="checkbox-2"
+                                        onchange={handleInteraction} />
+                                    <label class="slds-checkbox__label" for="checkbox-2">
+                                        <span class="slds-checkbox_faux"></span>
+                                        <span class="slds-form-element__label"> J'ai répondu à la demande du
+                                            client</span>
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="slds-col slds-size_1-of-1 slds-m-top_x-small">
+                            <div if:true={showSpinner} class=" slds-float_left">
+                                <lightning-button label="Voir la situation de compte" title="Non-primary action" onclick={navigateToSituationCompte}></lightning-button>
+                            </div>
+                        </div>
+                        
+                        <div class="slds-col slds-size_1-of-1 slds-m-top_x-small">
+                            <div if:true={showSpinner} class=" slds-float_left">
+                                <lightning-button label={label.toHistoConso} title="Non-primary action" onclick={navigateToHistoConso}></lightning-button>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-m-top_x-small">
+                            <div class=" slds-float_left slds-m-top_small">
+                                <lightning-button variant="brand" label="Fermer" title="Fermer" onclick={closeTab}
+                                    class="slds-float_left"></lightning-button>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-m-top_x-small">
+                            <div class="slds-float_right slds-m-top_small">
+                                <lightning-button variant="brand" label="Suivant" title="Suivant" onclick={caseNavigate}
+                                    class="slds-float_right" disabled={nextDisabled}></lightning-button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exampleHolder" if:false={showSpinner}>
+                    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                </div>
+
+            </div>
+
+        </lightning-card>
+    </div>
+
+</template>

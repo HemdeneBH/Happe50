@@ -1,0 +1,58 @@
+<template>
+    <div class="slds-card container-card">
+        <div class="slds-card__header slds-grid slds-clearfix">
+            <h2 class="slds-card__header-title slds-size_1-of-2 title-solde slds-float_left slds-p-vertical_x-small">SOLDE</h2>
+            <h2 class="slds-card__header-title slds-size_1-of-2 solde-card slds-float_right" if:true={showSpinner}>
+                <span if:true={isBlackSolde} class="null-solde">{soldeFormater} €</span>
+                <span if:true={isRedSolde} class="positif-solde">{soldeFormater} €</span>
+                <span if:true={isBlueSolde} class="negatif-solde">{soldeFormater} €</span>
+                <span if:true={isNoColorSolde} class="null-solde">{soldeFormater} €</span>
+            </h2>
+        </div>           
+        <div class="slds-card__body slds-grid slds-m-around_medium bloc-card engie-card-contrat-body">
+            <div class="slds-size_1-of-1 slds-p-right_xx-small">
+                <div class="slds-tile__detail slds-m-bottom_small" if:true={showDelai}>
+                    <div class="slds-text-heading--label">DATE LIMITE DE PAIEMENT</div>
+                    <span class="slds-text-heading--label" if:true={transformDateEcheance}>{transformDateEcheance}</span>
+                    <!-- <span class="slds-text-heading--label" if:true={isDateEcheanceMensualisee}>{dateEcheanceMensualisee}</span> -->
+                    <span class="slds-text-heading--label" if:true={isDateEcheanceMensualiseeAvecRegul}>{dateEcheanceMensualiseeAvecRegul}</span>
+                </div>
+                    <div class="slds-tile__detail slds-m-bottom_small" if:true={isRecouvrement}>
+                        <!--FT2-1626 [Client coupé pour non paiement] - Mise à jour des libellés -->
+                        <div class="slds-text-heading--label">CRÉANCES TRANSFÉRÉES</div>
+                        <span class="slds-text-heading--label">{montantTotalFormater} €</span>
+                    </div>
+                <lightning-button variant="base" label="Payer par CB" if:true={positifSolde}
+                title="Payer par CB" icon-name="utility:inspector_panel"
+                class="display-block slds-m-left_x-small">
+                </lightning-button>
+                <br if:true={positifSolde}>
+                <!-- TO DO LV PPROD -->
+                <lightning-button variant="base" label="Délai de paiement"
+                    title="Délai de paiement" icon-name="utility:date_input"
+                    class="display-block slds-m-left_x-small" onclick={delaiPaiement}>
+                </lightning-button>
+                    <!-- <div if:true={isRecouvrement} class="recouvrement">⚠ Recouvrement</div> -->
+                <ul class="slds-list_horizontal icon-action" if:true={isRecouvrement}>
+                    <li>
+                        <lightning-icon icon-name="utility:warning" variant="error" size="xx-small"></lightning-icon>
+                    </li>
+                    <li class="margin-left-10">
+                        <span class="recouvrement" onclick={navigateToRecouvrement}>Recouvrement</span>
+                    </li>
+                </ul>
+                <ul class="slds-list_horizontal icon-action" if:true={isNotRecouvrement}>
+                    <li>
+                        <lightning-icon icon-name="utility:warning" variant="error" size="xx-small"></lightning-icon>
+                    </li>
+                    <li class="margin-left-10">
+                        <span class="recouvrement" >Irrécouvrable</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="exampleHolder" if:false={showSpinner}>
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </div>
+        </div>
+    </div>
+</template>

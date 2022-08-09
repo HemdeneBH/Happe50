@@ -1,0 +1,123 @@
+:host {
+  --lwc-colorTextDefault: var(--secondary-colour);
+  --lwc-brandPrimary: transparent;
+  --lwc-colorTextIconDefault: var(--secondary-colour);
+  --lwc-squareIconSmallBoundary: 16px;
+}
+.menuMobile {
+  display: none;
+}
+
+.hp-navigationMenu-mobile  {
+  background: var(--primary-colour);
+} 
+
+.menuMobile {
+  box-shadow: var(--box-shadow);
+  background-image: var(--bg);
+}
+
+.c-verticalMenu .hp-nav-mobile li{
+  position : relative;
+}
+
+.hp-navigationMenu-mobile {
+  height: auto;
+  color: var(--white);
+  margin: 0 0 20px 0;
+  background: var(--primary-colour);
+}
+
+.c-menuItemContent a {
+  display: block;
+  text-align: center;
+  line-height: 3em;
+  position: relative;
+  -webkit-transition: background 0.1s ease-in-out;
+  -moz-transition: background 0.1s ease-in-out;
+  transition: background 0.1s ease-in-out;
+  text-decoration: none;
+  border: 2px solid transparent;
+  color: var(--white);
+}
+
+.c-menuItemContent a:active,
+.c-menuItemContent a:hover,
+.c-menuItemContent a:focus {
+  font-family: var(--font-bold);
+  text-decoration: none;
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--black);
+  background: var(--secondary-colour);
+}
+
+.c-menuItemContent:active,
+.c-menuItemContent:hover, 
+.c-menuItemContent:focus {
+  font-family: var(--font-bold);
+  text-transform: none;
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--black);
+  background: var(--secondary-colour);
+}
+
+/* class for current item */
+.c-menuItemContent.current a {
+  font-weight: bolder;
+  text-decoration: none;
+  background: var(--secondary-colour);
+  color: var(--black);
+}
+
+.c-menuItemContent a:before {
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  text-indent: 0em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 1.4em;
+  -webkit-font-smoothing: antialiased;
+  text-decoration: none;
+}
+
+.c-menuItemContent .chevron::before {
+  border-style: solid;
+  font-size: 16px;
+  border-width: 0.15em 0.15em 0 0;
+  content: '';
+  display: inline-block;
+  height: 0.60em;
+  right: 0.15em;
+  position: absolute;
+  top: 18px;
+  transform: rotate(-45deg);
+  vertical-align: top;
+  width: 0.60em;
+}
+
+.c-menuItemContent .chevron.right:before {
+  right: 50px;
+  transform: rotate(45deg);
+}
+
+@media (max-width: 1280px) {
+  /* 1280px screen and all screens smaller */
+  .menuMobile {
+    display: block;
+  }
+}
+
+@media (max-width: 1024px) {
+  /* Ipad and tablets */
+}
+
+@media (max-width: 576px) { 
+      /* mobiles */
+
+}

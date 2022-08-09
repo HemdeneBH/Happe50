@@ -1,0 +1,263 @@
+@font-face {
+    font-family: "font_AvantBold";
+    src: url('/sfsites/c/resource/HP_EC_AvantBold') format('woff'),
+}
+
+@font-face {
+    font-family: "font_AvantRegular";
+    src: url('/sfsites/c/resource/HP_EC_AvantRegular') format('woff');
+}
+:host {
+    --light-shadow: rgba(12, 29, 38, 0.21);
+    --dark-shadow: rgba(0, 0, 0, 0.7);
+
+    --font-bold:  "font_AvantBold";
+    --font-regular: "font_AvantRegular";
+    --mask: rgba(139, 111, 246, 0.1);
+
+}
+
+:host(.lightTheme) {
+    --text-color: var(--black);
+    --primary-colour: var(--light-primary-colour);
+    --secondary-colour: var(--light-secondary-colour);
+    --secondary-colour-light: var(--light-secondary-colour-light);
+
+    --blue: var(--light-blue);
+    --rose: var(--light-rose);
+    --orange: var(--light-orange);
+    --yellow: var(--light-yellow);
+    --green: var(--light-green);
+
+    /* disabled */
+    --disabled: var(--light-disabled);
+
+   /* greyish Black and greyish white */
+    --bg-plain: var(--light-bg-plain);
+
+    /* background-image:  */
+    --bg: var(--light-bg);
+
+    --box-shadow: var(--light-box-shadow);
+    --box-shadow-color: var(--light-shadow);
+
+  /* True Black and white */
+    --bg-base: var(--white);
+
+    --border-profil: 13px solid rgba(67,230,238, 0.3);
+    --filter: invert(100%);
+
+    --bg-purple: rgba(102, 71, 234, 0.4);
+    --bg-blue: rgba(43, 151, 246, 0.2);
+    --bg-rose: rgba(197, 16, 157, 0.2);
+
+    --background: var(--light);
+    --header-mobile: linear-gradient(81deg, #e5ebf5 23%, #fff 98%);
+    --modal-header: var(--light-bg-plain);
+    --input-bg: var(--white);
+    --bg-tag: #FDFDFE;
+  
+
+}
+
+:host(.darkTheme) {
+    --text-color: var(--white);
+    --primary-colour: var(--dark-primary-colour);
+    --secondary-colour: var(--dark-secondary-colour);
+    --secondary-colour-light: var(--dark-secondary-colour-light);
+
+    --blue: var(--dark-blue);
+    --rose: var(--dark-rose);
+    --orange: var(--dark-orange);
+    --yellow: var(--dark-yellow);
+    --green: var(--dark-green);
+
+    /* disabled */
+    --disabled: var(--dark-disabled);
+
+       /* greyish Black and greyish white */
+    --bg-plain: var(--dark-bg-plain);
+
+      /* background-image:  */
+    --bg: var(--dark-bg);
+
+    --box-shadow: var(--dark-box-shadow);
+    --box-shadow-color: var(--dark-shadow);
+
+      /* True Black and white */
+    --bg-base: var(--true-black);
+
+    --border-profil: 13px solid rgba(1, 217, 240, .3);
+    --filter: invert(0%);
+
+    --bg-purple: rgba(139, 111, 246, 0.4);
+    --bg-blue: rgba(5, 168, 255, 0.2);
+    --bg-rose: rgba(218, 66, 189, 0.2);
+
+    --background: var(--dark);
+    --header-mobile: background-image: linear-gradient(76deg, #26242b 4%, #424242 96%);
+    --modal-header: var(--true-black);
+    --input-bg: var(--dark-bg-plain);
+    --bg-tag: #3C3B3D;
+
+
+}
+
+.c-global {
+    position: relative;
+}
+
+.interactions-component.webruntimedesign-componentWrapper_componentWrapper {
+    min-height: 0 !important;
+}
+
+.c-body {
+    background-image: url('/sfsites/c/resource/HP_EC_BG_stars');
+    min-height: 100%;
+    position: relative;
+    font-family: "font_AvantRegular";
+}
+
+.c-body__container {
+    display: grid;
+    grid-template: "menu content"/ 330px auto;
+    grid-gap: 15px;
+    max-width: 1455px;
+    flex-grow: 1;
+    position: relative;
+    margin: auto;
+    align-items: start;
+}
+
+.hp-bigTitle {
+    color: var(--text-color);
+}
+
+.footer_bg {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.c-content-bg, 
+.menu {
+    box-shadow: var(--box-shadow);
+    background-image: var(--bg);
+}
+
+:host(.lightTheme) .c-body {
+    background-color: var(--light);
+    color: var(--black);
+}
+
+:host(.lightTheme) .main {
+    background-color: var(--light);
+}
+
+:host(.lightTheme) .footer_bg {
+    background-image: url('/sfsites/c/resource/HP_EC_footer_light');
+    background-color: var(--light);
+}
+
+:host(.darkTheme) .c-body {
+    background-color: var(--dark);
+    color: var(--white);
+}
+
+:host(.darkTheme) .main {
+    background-color: var(--dark);
+}
+
+:host(.darkTheme) .footer_bg {
+    background-image: url('/sfsites/c/resource/HP_EC_footer_dark');
+    background-color: var(--dark);
+}
+
+.header {
+    grid-area: header;
+    padding: 0;
+    margin: 0;
+}
+
+.menu {
+    grid-area: menu;
+}
+
+.main {
+    grid-area: main;
+    margin: 40px 0 0 0;
+}
+
+.footer {
+    grid-area: footer;
+}
+
+.footer_bg {
+    grid-area: footer_bg;
+}
+
+.hp-bigTitle {
+    font-family: "font_AvantBold";
+    font-size: 25px;
+    font-weight: bold;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+@media (min-width: 1280px) {
+
+    /* 1440px screen and all screens larger */
+    .c-body__container {
+        /* background: green;*/
+    }
+
+    .c-body__container> :first-child {
+        grid-area: menu;
+    }
+
+    .c-body__container> :nth-child(2) {
+        grid-area: content;
+    }
+}
+
+@media (max-width: 1280px) {
+
+    /* 1280px screen and all screens smaller */
+    .c-body__container {
+        /* background: red;*/
+    }
+
+    .c-body__container {
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-areas: "content";
+    }
+
+    .c-body__container> :first-child {
+        grid-area: content;
+        grid-row: 2;
+    }
+
+    .main {
+        margin: 20px;
+    }
+}
+
+@media (max-width: 1024px) {
+
+    /* Ipad and tablets */
+    .c-body__container {
+        /* background:  blue;*/
+    }
+}
+
+@media (max-width: 576px) {
+
+    /* mobiles */
+    .c-body__container {
+        /* background:  orange;*/
+    }
+}

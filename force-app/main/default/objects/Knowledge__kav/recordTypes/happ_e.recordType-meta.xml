@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>happ_e</fullName>
+    <active>true</active>
+    <compactLayoutAssignment>KnowledgeCompactLayout</compactLayoutAssignment>
+    <description>Knowledge base for the use of Happ-e</description>
+    <label>happ-e</label>
+    <picklistValues>
+        <picklist>Categorie_Consigne__c</picklist>
+        <values>
+            <fullName>Acquisition - EM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Communication Relevé Index</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Demande de duplicata</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Délai de paiement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Historique conso</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Historique factures</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Modification OPS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Modification des données personnelles</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Résiliation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Suivi activation</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Etape_de_l_omniscript__c</picklist>
+        <values>
+            <fullName>CHOIX DE L%27OFFRE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CONSIGNES MÉTIERS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CONTEXTE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CREATION OPS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CRITÈRES DE NON RECEVABILITÉ DE L%27INDEX</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LOGEMENT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PUSH DE l%E2%80%99ESPACE CLIENT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RÉCAPITULATIF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SAISIE D%27INDEX</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SERVICES DE GESTION</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SYNTHÈSE OPS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VISUALISATION DE LA PC %2F DES CPV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VÉRIFICATION DE L%27ACTIVATION DU CONTRAT</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Typologie_Informations__c</picklist>
+        <values>
+            <fullName>Info Bleue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Info dédiée</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Information Urgente</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

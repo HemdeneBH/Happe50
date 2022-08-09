@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AccountId__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>@Projet : Smile</description>
+    <externalId>false</externalId>
+    <label>Nom du compte</label>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Données Ventes</relationshipLabel>
+    <relationshipName>Donnees_Ventes</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

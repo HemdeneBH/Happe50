@@ -1,0 +1,122 @@
+<template>
+    <!-- FT2-1213: [Clients Coupés pour Non-Paiement] Condition d'affichage du bouton d'annulation de prestation -->
+    <!-- Affichage du template uniquement si "checkIfCancel" est à "true", cad: le bouton à afficher est celui de l'annulation -->
+    <template if:true={checkIfCancel} for:each={listButtons} for:item="buttonDetails">
+        <!-- Affichage du bouton d'annulation uniquement si "checkDateForCancel" est à "true", cad: la date de prestation supérieure à la date du jour -->
+        <button if:true={checkDateForCancel} key={Annuler} type="submit"
+            class="slds-button slds-button_brand slds-button_stretch" title={Annuler} onclick={actionAnnulerDemande}
+            style="margin-bottom: 4%; margin-left:0% !important;">
+            Annuler la demande
+        </button>
+    </template>
+
+    <!-- FT2-1208: [Suivi de coupure] Création Objet prestation distrib (objet OPS) -->
+    <!-- Dans le cas où les boutons "rétablissement" et "restauration" existent tous les deux dans listButtons, les deux seront affichés" -->
+    <template if:true={checkIfRetablissementAndRestauration} for:each={listButtons} for:item="buttonDetails">
+        <!-- FT2-1584 - [Suivi de coupure] Ajout Checkbox à l'étape client réduit -->
+        <p key={Urg} style="padding: 5px; border: 1px solid lightgrey; border-radius: 5px; text-align: center; ">
+            <lightning-input key={Urgent} type="checkbox" label="Demande urgente" onchange={isUrgentChecked}>
+            </lightning-input>
+        </p>
+
+        <button key={Retablissement} type="submit" class="slds-button slds-button_brand slds-button_stretch"
+            title={Retablissement} onclick={actionRetablissement}
+            style="margin-top: 4%; margin-bottom: 4%; margin-left:0% !important;">
+            Rétablissement
+        </button>
+        <button key={Restauration} type="submit" class="slds-button slds-button_brand slds-button_stretch"
+            title={Restauration} onclick={actionRestauration} style="margin-bottom: 80%; margin-left:0%">
+            Restauration
+        </button>
+    </template>
+
+    <!-- Dans le cas où seul le bouton de restauration existe dans listButtons, uniquement le bouton de restauration sera affiché -->
+
+    <template if:true={checkIfRestauration} for:each={listButtons} for:item="buttonDetails">
+        <button key={Restauration} type="submit" class="slds-button slds-button_brand slds-button_stretch"
+            title={Restauration} onclick={actionRestauration} style="margin-bottom: 4%; margin-left:0% !important;">
+            Restauration
+        </button>
+    </template>
+
+    <!-- Dans le cas où seul le bouton de rétablissement existe dans listButtons, uniquement le bouton de retablissement sera affiché" -->
+
+    <template if:true={checkIfRetablissement} for:each={listButtons} for:item="buttonDetails">
+        <button key={Retablissement} type="submit" class="slds-button slds-button_brand slds-button_stretch"
+            title={Retablissement} onclick={actionRetablissement} style="margin-bottom: 4%; margin-left:0% !important;">
+            Rétablissement
+        </button>
+    </template>
+
+    <!--FT2-1503: [Clients Coupés Pour Non-Paiement] Créer une demande de prestation (Client coupé / Client en réduction de puissance)-->
+    <!--Affichage de la boite de dialogue de confirmation lors du clic sur RESTAURATION-->
+    <template if:true={openRestaurationConfirmModal}>
+        <section role="dialog" tabindex="-1" aria-label="Meaningful description of the modal content" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <p> Etes vous sûr de vouloir poursuivre la RESTAURATION?</p>
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_outline-brand delete-blocage-sol"
+                        onclick={noRestauration}>Non</button>
+                    <button class="slds-button slds-button_brand modify-blocage-sol"
+                        onclick={yesRestauration}>Oui</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+
+    <!--FT2-1503: [Clients Coupés Pour Non-Paiement] Créer une demande de prestation (Client coupé / Client en réduction de puissance)-->
+    <!--Affichage de la boite de dialogue de confirmation lors du clic sur RETABLISSEMENT-->
+    <template if:true={openRetablissementConfirmModal}>
+        <section role="dialog" tabindex="-1" aria-label="Meaningful description of the modal content" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                    <p>Etes vous sûr de vouloir poursuivre le RETABLISSEMENT?</p>
+                </div>
+
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_outline-brand delete-blocage-sol"
+                        onclick={noRetablissement}>Non</button>
+                    <button class="slds-button slds-button_brand modify-blocage-sol"
+                        onclick={yesRetablissement}>Oui</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+
+    <!--FT2-1209: [Clients Coupés pour Non-Paiement] Annuler la demande de prestation (coupure / réduction de puissance)-->
+    <!--Affichage de la boite de dialogue de confirmation lors du clic sur ANNULER LA DEMANDE-->
+    <template if:true={openAnnulationConfirmModal}>
+        <section role="dialog" tabindex="-1" aria-label="Meaningful description of the modal content" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-3">
+                    <p> Etes vous sûr de vouloir poursuivre l’annulation de la prestation ? en cas d’annulation
+                        tardive (à moins de 48h de la date de rdv) des frais de débit peuvent être facturés par
+                        le distributeur</p>
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_outline-brand delete-blocage-sol"
+                        onclick={noAnnulation}>Non</button>
+                    <button class="slds-button slds-button_brand modify-blocage-sol"
+                        onclick={yesAnnulation}>Oui</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!--Affichage du spinner dans le cas de clic sur un bouton-->
+    <div if:true={showSpinnerLoading}>
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </div>
+</template>

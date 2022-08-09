@@ -1,0 +1,70 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 02-25-2022
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<template>
+    <div class="hp_container">
+        <div class="hp-renouvelerMotDePasse">
+            <div class="hp-content">
+                <div class="hp-logo">
+                    <img src={blackLogo}>
+                </div>
+                <div class="hp-bigTitle">
+                    {titreRenouvelerMotDePasse}
+                </div>
+                <div class="slds-form-element hp-identite">
+                    <label class="slds-form-element__label hp-inputLabel" for="hp-input-identite">
+                        {labelInputIdentite}
+                    </label>
+                    <div class="slds-form-element__control">
+                        <input class="hp-textInput slds-input" type="text" id="hp-input-identite"
+                            placeholder={placeHolderInputIdentite} required=""
+                            aria-describedby={messageErreurInputEmail} aria-invalid="true" />
+                    </div>
+                </div>
+
+                <div class="slds-form-element hp-emailAssocie">
+                    <label class="slds-form-element__label hp-inputLabel" for="hp-input-emailAssocie">
+                        {labelInputEmail}
+                    </label>
+                    <div class="slds-form-element__control">
+                        <input class="hp-textInput slds-input" type="email" id="hp-input-emailAssocie"
+                            placeholder={placeHolderInputEmail} required="" aria-describedby={messageErreurInputEmail}
+                            aria-invalid="true" />
+                    </div>
+                </div>
+
+                <div class="slds-form-element hp-mdp">
+                    <label class="slds-form-element__label hp-inputLabel" for="hp-input-mdp">
+                        {labelInputMDP}
+                    </label>
+                    <div class="slds-form-element__control">
+                        <input class="hp-textInput slds-input" type="password" id="hp-input-mdp"
+                            placeholder={placeHolderInputMDP} required="" aria-describedby={messageErreurInputEmail}
+                            aria-invalid="true" />
+                    </div>
+                </div>
+                <div class="slds-form-element hp-confirm-mdp">
+                    <label class="slds-form-element__label hp-inputLabel" for="hp-input-confirm-mdp">
+                        {labelInputConfirmationMDP}
+                    </label>
+                    <div class="slds-form-element__control">
+                        <input class="hp-textInput slds-input" type="password" id="hp-input-confirm-mdp"
+                            placeholder={placeHolderInputMDP} required="" aria-describedby={messageErreurInputEmail}
+                            aria-invalid="true" />
+                    </div>
+                </div>
+
+                <div class="hp-btnContainer">
+                    <div class="hp-firstButton" onclick={handleCreerDossier}>
+                        Valider
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</template>

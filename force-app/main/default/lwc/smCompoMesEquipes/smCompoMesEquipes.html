@@ -1,0 +1,99 @@
+<!-- sldsValidatorIgnore -->
+<!-- sldsValidatorIgnore -->
+<!--
+  @description       : LWC pour constituer une équipe de superviseurs ou conseillers
+  @author            : Mohamed Aamer
+  @last modified on  : 04-12-2022
+  @last modified by  : Mohamed Aamer
+-->
+<template>
+    <div class="container">
+        <template if:true={showDualList}>
+            <template if:true={isCompResponsable}>
+                <h2>Composition des superviseurs</h2>
+                <div class="slds-grid slds-wrap header-infos">
+                    <div class="slds-form-element slds-col equipes">
+                        <h3 class="title">Equipe: </h3>
+                        <span class="option">{equipe}</span>
+                    </div>
+                </div>
+            </template>
+            <template if:true={isCompConseiler}>
+                <h2>Composition des conseillers</h2>
+                <div class="slds-grid slds-wrap header-infos">
+                    <div class="slds-form-element slds-col slds-size_6-of-12 equipes">
+                        <h3 class="title">Equipe: </h3>
+                        <span class="option">{equipe}</span>
+                    </div>
+                    <div class="slds-form-element slds-col slds-size_6-of-12 responsables">
+                        <h3 class="title">Responsable(s): </h3>
+                        <template for:each={responsablesEquipe} for:item="resp">
+                            <span key={resp.label} class="options"> -- </span>
+                            <span key={resp.label} class="options">{resp.label}</span>
+                        </template>
+                    </div>
+                </div>
+            </template>
+            <div class="slds-grid slds-wrap">
+                <div class="slds-form-element slds-col slds-size_4-of-12">
+                    <label class="slds-form-element__label filtre-title" for="filtre">Filtrer par:</label>
+                    <select id="selectFiltre" name="filtre" class="slds-select filtre" data-id="filtreSelect" onchange={handleFiltre}>
+                    <template for:each={optionsFiltre} for:item="opt">
+                        <option key={opt.nom} value={opt.nom}>{opt.nom}</option>
+                    </template>
+                    </select>
+                </div>
+                <div class="slds-col slds-size_4-of-12">
+                    <lightning-input type="text" class="global-search"
+                    value={searchValue}
+                    label="Chercher un utilisateur"
+                    onchange={searchKeyword}
+                    ></lightning-input>
+                </div>
+                <div class="slds-col slds-size_4-of-12 enregistrerBtn">
+                    <lightning-button class="" variant="brand" label="Enregistrer" title="Enregistrer"
+                    onclick={submitUpdate} disabled={isNoUser}></lightning-button>
+                </div>
+            </div>
+            
+            <lightning-dual-listbox name="languages" label="" source-label="Liste des utilisateurs du site"
+            selected-label={compTitle} field-level-help="" options={options} value={values}
+            onchange={handleChange}
+            ></lightning-dual-listbox>
+            <p if:true={isNoUser} class="errorMessage">{noUserMessage}</p>
+        </template>
+        
+        <template if:false={showDualList}>
+            <div class="no-team">Aucune équipe choisie</div>
+        </template>
+    </div>
+      
+    <div class="exampleHolder" if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </div>
+
+    <template if:true={isTooMuchUsers}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close"
+                            alternative-text="close"
+                            variant="inverse"
+                            size="small" ></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Confirmation</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <p>Etes-vous sur de vouloir attribuer plusieurs responsable à votre équipes ?</p>
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Cancel</button>
+                    <button class="slds-button slds-button_brand" onclick={submitDetails} title="OK">OK</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

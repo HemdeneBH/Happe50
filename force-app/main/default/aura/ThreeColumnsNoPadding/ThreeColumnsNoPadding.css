@@ -1,0 +1,33 @@
+.THIS .slds-template_default{
+    padding: 0;
+}
+
+.THIS .flexipageComponent:not {
+    margin-bottom: 0;
+}
+
+.THIS .slds-tabs_card, .THIS .slds-tabs_card.slds-tabs_card {
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+}
+
+.THIS .sidebarLayout {
+	width: 300px;
+    min-width: 300px;
+}
+
+.THIS .mainLayout {
+    width: 100%;
+}
+
+.THIS .leftPanel {
+    border-right: 1px solid #dddbda;
+}
+
+.THIS .rightPanel {
+    border-left: 1px solid #dddbda;
+}
+.THIS .slds-grid_align-spread .slds-col{
+    flex-grow:1;
+}

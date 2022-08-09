@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property type="String" name="titre" default="Mes données personnelles"/>
+            <property type="String" name="consentementLabel" default="Mes consentements"/>
+            <property type="String" name="donneesCollectesLabel" default="Voir mes données collectées"/>
+            <property type="String" name="charteLabel" default="Charte de confidentialité"/>
+            <property type="String" name="charteURL" default="https://www.google.com"/>
+            <property type="String" name="popinDonneesCollecteesTitle" default="Données Collectées"/>
+            <property type="String" name="popinDonneesCollecteesTexteExplicatif" default="à tout moment, vous pouvez demander une copie de vos informations collectees par ENGIE"/>
+            <property type="String" name="popinDonneesCollecteesMessageErreur" default="Ce fichier ne restera disponible que pendant 5 jours"/>
+            <property type="String" name="popinDonneesCollecteesLibelleBouton" default="Créer le Dossier"/>
+            <property type="String" name="popinConsentementsLibelleBouton" default="Sauvegarder"/>
+            <property type="String" name="popinConsentementsTitle" default="Mes Consentements"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

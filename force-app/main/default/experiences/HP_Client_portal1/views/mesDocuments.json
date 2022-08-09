@@ -1,0 +1,95 @@
+{
+  "appPageId" : "7e89266e-f5a3-4029-bb48-38a8a732ab93",
+  "componentName" : "community_layout:sldsFlexibleLayout",
+  "id" : "59de0665-0d8d-4b10-b70b-2605be1922b2",
+  "label" : "Mes documents",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "backgroundImageConfig" : "",
+        "backgroundImageOverlay" : "rgba(0,0,0,0)",
+        "sectionConfig" : "{\"UUID\":\"5490329f-2718-476b-9e1c-630ad2014b01\",\"columns\":[{\"UUID\":\"aab74bac-601f-4c45-bff0-7658607d9076\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"7\",\"seedComponents\":[]},{\"UUID\":\"64849c4d-5826-400c-92ee-bb6c073b2960\",\"columnName\":\"Column 2\",\"columnKey\":\"5d57f\",\"columnWidth\":\"5\",\"seedComponents\":[]}]}"
+      },
+      "componentName" : "community_layout:section",
+      "id" : "5490329f-2718-476b-9e1c-630ad2014b01",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : { },
+          "componentName" : "c:hp_ec_profilClient",
+          "id" : "5898b2ea-fe6c-46c4-bcb7-f5dea8867586",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "aab74bac-601f-4c45-bff0-7658607d9076",
+        "regionLabel" : "Column 1",
+        "regionName" : "col1",
+        "renditionMap" : { },
+        "type" : "region"
+      }, {
+        "components" : [ {
+          "componentAttributes" : {
+            "title" : "Mes coordonnées bancaires"
+          },
+          "componentName" : "c:hp_ec_coordonneesBancaires",
+          "id" : "37777f19-203c-4299-96d3-98f6d2a4a485",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        }, {
+          "componentAttributes" : {
+            "charteLabel" : "Charte de confidentialité",
+            "charteURL" : "https://www.google.com",
+            "consentementLabel" : "Mes consentements",
+            "donneesCollectesLabel" : "Voir mes données collectées",
+            "titre" : "Mes données personnelles"
+          },
+          "componentName" : "c:hp_ec_donneesPersonnelles",
+          "id" : "f4c4ac2f-c66e-4f0f-8bbf-cbbe349d60e7",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        }, {
+          "componentAttributes" : { },
+          "componentName" : "c:hp_ec_blocDemenagement",
+          "id" : "42593f79-d98b-4f2f-83f4-f1b8a9782cec",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "64849c4d-5826-400c-92ee-bb6c073b2960",
+        "regionLabel" : "Column 2",
+        "regionName" : "5d57f",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "scopedBrandingSetId" : null,
+      "type" : "component"
+    } ],
+    "id" : "3588fa38-f642-4026-a819-95a685090c30",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "pageTitle" : "Mes documents",
+        "recordId" : "{!recordId}"
+      },
+      "componentName" : "community_builder:seoAssistant",
+      "id" : "6f7ac2d5-4b78-45a1-9e2a-48b042027de0",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "19584d75-aa9d-4189-9929-33b400fd3f51",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "bpHmsKcRsRJVAxsjPUCXd7yA8oGvLt",
+  "type" : "view",
+  "viewType" : "custom-mes-documents"
+}

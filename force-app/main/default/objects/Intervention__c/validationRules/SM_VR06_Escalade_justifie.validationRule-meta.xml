@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_VR06_Escalade_justifie</fullName>
+    <active>true</active>
+    <description>Permet de rendre Obligatoire le champs &quot;Escalade Justifiée&quot; à la cloture d&apos;une intervention.</description>
+    <errorConditionFormula>(ISPICKVAL(Statut__c , &quot;Clôturé&quot;) || ISPICKVAL(Statut__c , &quot;Clôturé KO&quot;)) 
+&amp;&amp; (ISPICKVAL(Escalade_justifie__c, &quot;&quot;) &amp;&amp; $Setup.ByPassSettings__c.ValidationRule__c==false)</errorConditionFormula>
+    <errorDisplayField>Escalade_justifie__c</errorDisplayField>
+    <errorMessage>Merci de renseigner le champs &quot;Escalade Justifiée&quot; pour clôturer l&apos;intervention.</errorMessage>
+</ValidationRule>

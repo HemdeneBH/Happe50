@@ -1,0 +1,132 @@
+{
+  "appPageId" : "7e89266e-f5a3-4029-bb48-38a8a732ab93",
+  "componentName" : "community_layout:sldsFlexibleLayout",
+  "id" : "6f30d46a-1946-4db9-a274-e1e301489f6b",
+  "label" : "Tableau de bord",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "backgroundImageConfig" : "",
+        "backgroundImageOverlay" : "rgba(0,0,0,0)",
+        "sectionConfig" : "{\"UUID\":\"192390c6-c6ce-4482-8363-fecce2901b48\",\"columns\":[{\"UUID\":\"d137a3eb-0f82-431c-9a8c-7e39fe0f179f\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"4\",\"seedComponents\":[]},{\"UUID\":\"bfb891d1-6ea1-4dfe-9403-022edcde879b\",\"columnName\":\"Column 2\",\"columnKey\":\"55299\",\"columnWidth\":\"8\",\"seedComponents\":[]}]}"
+      },
+      "componentName" : "community_layout:section",
+      "id" : "192390c6-c6ce-4482-8363-fecce2901b48",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "confirmationSoldeRegle" : "Vous avez déjà régler votre facture.",
+            "crediteur" : "Solde en votre faveur qui sera déduit de votre prochaine facture",
+            "debiteur" : "A payer avant le",
+            "debiteurRetard" : "En retard depuit le",
+            "firstButton" : "PAYER PAR CARTE",
+            "messageRemerciement" : "Merci d'avoire rejoint happ_e!",
+            "prochaineFacture" : "Prochaine facture prévue le",
+            "secondButton" : "MA DERNIERE FACTURE",
+            "titleText" : "MON SOLDE"
+          },
+          "componentName" : "c:hp_ec_solde",
+          "id" : "67794073-6b86-41ad-9c36-89fc7c273cd6",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        }, {
+          "componentAttributes" : {
+            "justificatifButtonLabel" : "JUSTIFICATIF DOMICILE",
+            "titleText" : "MON CONTRAT",
+            "voirContractButtonLabel" : "VOIR MON CONTRAT"
+          },
+          "componentName" : "c:hp_ec_monContrat",
+          "id" : "81f71a51-d071-4dcd-9a1b-1b0aad66e633",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "d137a3eb-0f82-431c-9a8c-7e39fe0f179f",
+        "regionLabel" : "Column 1",
+        "regionName" : "col1",
+        "renditionMap" : { },
+        "type" : "region"
+      }, {
+        "components" : [ {
+          "componentAttributes" : { },
+          "componentName" : "c:hp_ec_myConsumptionSummary",
+          "id" : "9679b7d5-0e4c-4f0f-a225-f03084a93cba",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        }, {
+          "componentAttributes" : {
+            "sectionConfig" : "{\"UUID\":\"8b8106fb-cfd9-4285-b772-c2aee0f4d879\",\"columns\":[{\"UUID\":\"fe96d326-68d6-4d2d-90c6-860258326d0d\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"6\",\"seedComponents\":[]},{\"UUID\":\"b7779505-a3a7-4d51-a641-1d2f06322a78\",\"columnName\":\"Column 2\",\"columnKey\":\"fb5f4\",\"columnWidth\":\"6\",\"seedComponents\":[]}]}"
+          },
+          "componentName" : "dxp_layout:columns",
+          "id" : "8b8106fb-cfd9-4285-b772-c2aee0f4d879",
+          "regions" : [ {
+            "components" : [ {
+              "componentAttributes" : { },
+              "componentName" : "c:hp_ec_bilan",
+              "id" : "dc25663c-e55b-4bd5-a572-91d7ef44b699",
+              "renderPriority" : "NEUTRAL",
+              "renditionMap" : { },
+              "type" : "component"
+            } ],
+            "id" : "fe96d326-68d6-4d2d-90c6-860258326d0d",
+            "regionLabel" : "Column 1",
+            "regionName" : "col1",
+            "renditionMap" : { },
+            "type" : "region"
+          }, {
+            "components" : [ {
+              "componentAttributes" : { },
+              "componentName" : "c:hp_ec_paiementPlusieurs",
+              "id" : "fa091e4b-8c0c-4d69-8184-3114d1cb22d0",
+              "renderPriority" : "NEUTRAL",
+              "renditionMap" : { },
+              "type" : "component"
+            } ],
+            "id" : "b7779505-a3a7-4d51-a641-1d2f06322a78",
+            "regionLabel" : "Column 2",
+            "regionName" : "fb5f4",
+            "renditionMap" : { },
+            "type" : "region"
+          } ],
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "bfb891d1-6ea1-4dfe-9403-022edcde879b",
+        "regionLabel" : "Column 2",
+        "regionName" : "55299",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "scopedBrandingSetId" : null,
+      "type" : "component"
+    } ],
+    "id" : "6d538048-3720-4d4d-bbfd-3a16ec0897c2",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "pageTitle" : "Tableau de bord",
+        "recordId" : "{!recordId}"
+      },
+      "componentName" : "community_builder:seoAssistant",
+      "id" : "06b047a6-f75b-473e-84eb-13dbcceb012a",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "73eb5957-9611-40c9-809a-b4e5447e1b55",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "bpHmsKcRsRJVAxsjPUCXd7yA8oGvLt",
+  "type" : "view",
+  "viewType" : "custom-tableau-de-bord"
+}

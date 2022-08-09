@@ -1,0 +1,209 @@
+<!--
+   @description       : 
+   @author            : Slimene Belhaj Ali
+   @group             : 
+
+   @last modified on  : 04-23-2021
+
+   @last modified by  : Slimene Belhaj Ali
+   Modifications Log 
+   Ver   Date         Author               Modification
+   1.0   03-17-2021   Slimene Belhaj Ali   Initial Version
+   -->
+   <template>
+    <lightning-card  title="MODIFICATION DU TITULAIRE DU COMPTE">
+      <div style="padding-left: 1rem;margin-right: 1rem;">
+        <div class="slds-grid slds-gutters" style="margin-top: 1rem;">
+          <div class="slds-col slds-size_1-of-4">
+            <h2>IDENTITE ACTUELLE</h2>
+            <br/>
+                  {currentSalutation} {currentFirstName} {currentLastName}
+               
+          </div>
+          <div class="slds-col slds-size_3-of-4">
+            <h2>MOTIF DE LA MODIFICATION</h2>
+            <lightning-radio-group name="typeMotif"
+                     onchange={motifChange}
+                     options={motifOptions}
+
+                     value={motifValue} disabled={showNotification}
+
+                     type="radio"></lightning-radio-group>
+          </div>
+        </div>
+        <hr/>
+        <div if:true={isCorrection}>
+          <h2>NOUVELLES INFORMATIONS</h2>
+          <div class="slds-grid slds-wrap" style="margin-top:1rem">
+            <div class="slds-col slds-size_1-of-1 slds-grid slds-wrap" style="height: 3rem;">
+              <div class="slds-col slds-size_1-of-3">
+                        Civilité
+                     </div>
+              <div class="slds-col slds-size_2-of-3">
+                <div style="margin-top: -1.5rem;">
+                  <lightning-combobox 
+                      value={salutation} name="salutation" onchange={handleChangeData}
+                      options={civititeOptions}
+              ></lightning-combobox>
+                </div>
+              </div>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-grid slds-wrap" style="height: 3rem;">
+              <div class="slds-col slds-size_1-of-3">
+                        Prénom
+                     </div>
+              <div class="slds-col slds-size_2-of-3">
+                <div style="margin-top: -1.5rem;">
+                  <lightning-input type="text" value={firstName} name="firstName" onchange={handleChangeData}></lightning-input>
+                </div>
+              </div>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-grid slds-wrap" style="height: 3rem;">
+              <div class="slds-col slds-size_1-of-3">
+                Nom
+                     </div>
+              <div class="slds-col slds-size_2-of-3">
+                <div style="margin-top: -1.5rem;">
+                  <lightning-input type="text" value={lastName} name="lastName" onchange={handleChangeData}></lightning-input>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div if:true={isNotCorrection}>
+          <h2>TRAITER LES JUSTIFICATIFS OU TRANSMETTRE LES INSTRUCTIONS</h2>
+          <lightning-radio-group name="action"
+                            options={actionOptions}
+                            value={actionValue}
+                            type="button"
+                            onchange={actionChange}></lightning-radio-group>
+                            
+          <div if:true={isInstruction} class="slds-grid slds-wrap" style="margin-top:1rem">
+
+
+            <div class="slds-grid slds-wrap" style="margin-top:1rem">
+              <div class="slds-col slds-size_1-of-1 slds-grid slds-wrap" style="height: 3rem;">
+                <div class="slds-col slds-size_1-of-3">
+                          Civilité
+                       </div>
+                <div class="slds-col slds-size_2-of-3">
+                  <div style="margin-top: -1.5rem;">
+                    <lightning-combobox name="salutation" onchange={handleChangeData}
+                        value={salutation}
+                        options={civititeOptions}
+                ></lightning-combobox>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-col slds-size_1-of-1 slds-grid slds-wrap" style="height: 3rem;">
+                <div class="slds-col slds-size_1-of-3">
+                  Prénom
+                       </div>
+                <div class="slds-col slds-size_2-of-3">
+                  <div style="margin-top: -1.5rem;">
+                    <lightning-input type="text" value={firstName} name="firstName" onchange={handleChangeData}></lightning-input>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-col slds-size_1-of-1 slds-grid slds-wrap" style="height: 3rem;">
+                <div class="slds-col slds-size_1-of-3">
+                           Nom
+                       </div> 
+                <div class="slds-col slds-size_2-of-3">
+                  <div style="margin-top: -1.5rem;">
+                    <lightning-input type="text" value={lastName} name="lastName" onchange={handleChangeData}></lightning-input>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div if:false={isInstruction} style="margin-top:1rem">
+            <i>Information à transmettre au client : </i>
+            <br/>
+            Le client va recevoir un mail lui indiquant les documents nécessaires : 
+           
+            <ul style="list-style-type: square;margin-left: 2.5rem;">
+              
+              <li>En cas de mariage : certificat de mariage</li>
+              <li>En cas de décès : certificat de décès</li>
+            </ul>
+    <br/>
+    <div style="width:50%">
+            <lightning-input label="Confirmer l’adresse email pour l’envoi des instructions"
+             type="text" value={emailClient} name="emailClient" onchange={handleChangeData}></lightning-input>
+            </div>
+             <br/>
+          </div>
+        </div>
+
+        <div if:true={showNotification}>
+          <span style="color: green;">Mise à jour effectuée sur les outils ENGIE.</span>
+          <span style="color: green;" if:true={notifyElecOrGaz}> Veuillez effectuer la mise à jour sur les portails des Gestionnaires des Réseaux de Distribution.</span>
+          <br/><br/><br/>
+          <span style="font-weight: bold;">NOUVELLE IDENTITE</span>
+          <br/><br/>
+          {salutation} {firstName} {lastName}
+          <br/><br/><br/>
+          <div if:true={notifyElecOrGaz}>
+            <span style="font-weight: bold;">EFFECTUER LA MISE A JOURS SUR LES PORTAILS GRD</span>
+          <br/><br/>
+          <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_1-of-4" if:true={notifyElec}>
+              <a href="https://sge.gdfsuez.net/sgePortail/" target="_blank">Portail ENEDIS (SGE)</a>
+              <br/>
+              <lightning-input type="checkbox"
+                        label="Effectué sur SGE" name="sge"
+                        onchange={handleChangeData}>
+                        </lightning-input>
+            </div>
+
+            <div class="slds-col slds-size_1-of-4" if:true={notifyGaz}>
+              <a href="https://portailfournisseur.grdf.fr/login" target="_blank">Portail GrDF (OMEGA)</a>
+              <lightning-input type="checkbox"
+                        label="Effectué sur OMEGA" name="omega"
+                        onchange={handleChangeData}>
+                        </lightning-input>
+            </div>
+          </div>
+        </div>
+          <br/><br/>
+      </div>
+      </div>
+     <div style="text-align: end;margin-right: 1rem;margin-left: 1rem;">
+
+      <table>
+        <tr>
+          <template if:true={showNotification}>
+            <td>
+                <lightning-input type="checkbox"
+                label="Envoyer une confirmation par email" name="email"
+                onchange={handleChangeData}>
+                </lightning-input>
+            </td>
+            <td>
+                <lightning-input type="checkbox"
+             label="Envoyer une confirmation par sms" name="sms"
+             onchange={handleChangeData}>
+             </lightning-input>
+            </td>
+          </template>
+            
+            <td style="text-align: end;">
+              <lightning-button label="Fermer" onclick={closeEdit} class="slds-m-left_x-small"></lightning-button>
+              <lightning-button variant="brand" label={actionButtonLabel} onclick={saveClient} class="slds-m-left_x-small"></lightning-button>
+            </td>
+        </tr>
+    </table>
+
+      
+
+      
+     </div>
+    </lightning-card>
+
+    <div class="exampleHolder" if:true={showSpinner}>
+      <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+  </div>
+  </template>

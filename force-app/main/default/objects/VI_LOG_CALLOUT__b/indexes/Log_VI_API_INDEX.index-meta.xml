@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Index xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Log_VI_API_INDEX</fullName>
+    <fields>
+        <name>Date__c</name>
+        <sortDirection>ASC</sortDirection>
+    </fields>
+    <fields>
+        <name>Status__c</name>
+        <sortDirection>ASC</sortDirection>
+    </fields>
+    <fields>
+        <name>User_Id__c</name>
+        <sortDirection>ASC</sortDirection>
+    </fields>
+    <fields>
+        <name>Key_Row__c</name>
+        <sortDirection>ASC</sortDirection>
+    </fields>
+    <label>Log VI_API INDEX</label>
+</Index>

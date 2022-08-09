@@ -1,0 +1,276 @@
+<!--
+  @File Name          : cmn_cardService.html
+  @Description        : 
+  @Author             : Mohamed Aamer
+  @Group              : 
+
+  @Last Modified By   : ChangeMeIn@UserSettingsUnder.SFDoc
+
+  @Last Modified On   : 07-16-2021
+
+
+  @Modification Log   : 
+  Ver       Date            Author      		    Modification
+  1.0    26/12/2019   Mohamed Aamer     Initial Version
+-->
+<template>
+  <div class="container-card">
+      <lightning-card>
+     
+          <h2 class="title-service">{titre}</h2>
+          <div slot="actions">
+              <lightning-button-icon icon-name="utility:chevronright" variant="bare" alternative-text="Open record"
+                  onclick={handleOpenRecordClick}>
+              </lightning-button-icon>
+          </div>
+          <div style="padding-left:0.5rem"
+              class="slds-m-around_medium bloc-card engie-card-contrat-body slds-card__body via-slds-card__body slds-theme--default slds-grid">
+
+              <div class="slds-size--3-of-3 slds-p-right_xx-small">
+                <template if:true={serviceList}>
+                  <template for:each={serviceList} for:item="service">
+                      <div key={service.idContrat} class="service-text slds-p-bottom_medium">
+                          <b if:true={service.actif}>{service.libOffre}</b>
+                          <b if:false={service.actif} class="resilie-label">{service.libOffre}</b>
+                          <div if:true={service.actif} class="date-service">{service.dateEffetMaj}</div>
+                          <div class="resilie-label" if:false={service.actif}>du {service.dateEffetMaj} au
+                              {service.dateResiliationMaj}</div>
+                      </div>
+                  </template>
+                </template>
+                  <div class="slds-grid slds-p-bottom_medium">
+                      <div if:true={gazMode}>
+                          <div class="slds-size--2-of-2 slds-m-right_small ">
+                              <div class="slds-text-heading--label">Facture GAZ : </div>
+                          </div>
+                          <div class="slds-size--2-of-2 slds-m-right_small ">
+                              <p if:false={gazModeIsPaper}>{gazMode}</p>
+                              <a if:true={gazModeIsPaper} onclick={openGazchangeModePopupModal}>{gazMode}</a>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="slds-grid slds-p-bottom_medium">
+                      <div if:true={elecMode}>
+                          <div class="slds-size--2-of-2 slds-m-right_small slds-col">
+                              <div class="slds-text-heading--label">Facture ELEC : </div>
+                          </div>
+                          <div class="slds-size--2-of-2 slds-m-right_small slds-col">
+                              <p if:false={elecModeIsPaper}>{elecMode}</p>
+                              <a  if:true={elecModeIsPaper} onclick={openElecchangeModePopupModal}>{elecMode}</a>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="slds-grid slds-p-bottom_medium">
+
+                      <template if:true={energieVertActivation}>
+
+                    <div if:true={energieVert}>
+                        <div class="slds-size--2-of-2 slds-m-right_small slds-col">
+                            <div class="slds-text-heading--label">Option Vertelec+ happ-e </div>
+                        </div>
+                        <div class="slds-size--2-of-2 slds-m-right_small slds-col">
+                           
+                            <a onclick={openEnergieVertPopupModal}>{optionVertElecLabel}</a>
+
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+              </div>
+             
+
+
+          </div>
+
+
+          <!-- 
+          <div class="exampleHolder" if:false={showSpinner}>
+              <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+          </div>-->
+
+      </lightning-card>
+
+
+      <section if:true={openclose} aria-describedby="dialog-body-id-77" aria-labelledby="dialog-heading-id-81"
+          class="slds-popover slds-nubbin_left-top popup-card slds-size--1-of-1 slds-m-right_xx-small popover-260"
+          role="dialog">
+        
+          <button
+              class="slds-button slds-button_icon slds-button_icon-small slds-float_right slds-popover__close slds-button_icon-inverse"
+              title="Close dialog">
+              <svg class="slds-button__icon" aria-hidden="true">
+                  <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+              </svg>
+              <span class="slds-assistive-text">Close dialog</span>
+          </button>
+         
+          <header class="slds-popover__header">
+              <h2 class="slds-text-heading_small" id="dialog-heading-id-81">Détail service</h2>
+          </header>
+          <div class="slds-popover__body" id="dialog-body-id-77">
+              <p class="label">PUISSANCE</p>
+              <p class="value">XXX</p>
+              <p class="label">TYPE DE COMPTAGE</p>
+              <p class="value">XXX</p>
+              <p class="label">PRIX DE L'ABONNEMENT</p>
+              <p class="value">XXX</p>
+              <p class="label">PRIX DU KWH</p>
+              <p class="value">XXX</p>
+              <p class="label">Maintenue</p>
+              <p class="value">XXX</p>
+              <p class="label">CONSOMMATION ANNUELLE DE RÉFÉRENCE</p>
+              <p class="value">0</p>
+              <lightning-button variant="base" label="Comparer les offres" title="comparer avec d'autre offres"
+                  onclick={compaireOffre} icon-name="utility:preview" class="slds-align_absolute-center">
+              </lightning-button>
+          </div>
+      </section>
+  </div>
+
+
+  <template if:true={energieVertPopupModal}>
+    <div class="demo-only" style="height: 840px;">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container" style="max-width: 75rem;width: 70%;">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeEnergieVertPopupModal}>
+                        <lightning-icon icon-name="utility:close" size="medium">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Option Vertelec+ happ-e</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="slds-grid slds-p-bottom_medium">
+                        <div class="slds-size--1-of-2 slds-p-right_xx-small">
+                    <h2><b>ADRESSE DU LOGEMENT</b></h2>
+                        <br/>
+                        <lightning-icon icon-name="utility:home" size="x-small" style="margin-right: 1rem;"></lightning-icon>
+                        {currentPfc.numeroVoie} {currentPfc.libelleVoie} {currentPfc.codePostal} {currentPfc.ville}
+<br/>
+Contrat : {idContratVert} - PDL : {numeroPointDeLivraisonVert}
+                    </div>
+
+                    <div class="slds-size--1-of-2 slds-p-right_xx-small">
+                        <h2><b>{titreVert}</b></h2>
+<br/>
+
+{contenuVert}<br/>En cas de mensualisation, prévenir le client de la mise en place d’un nouvel échéancier.
+
+                    </div>
+                    </div>
+                    <div style="text-align: end;">
+                        <lightning-button label="Fermer" variant="neutral" onclick={closeEnergieVertPopupModal}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <lightning-button label={energieVertButtonLabel} variant="brand" onclick={activateDesactivate}></lightning-button>
+                     </div><br/>
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                        <thead>
+                          <tr class="slds-line-height_reset">
+                            <th class="" scope="col">
+                              <div class="slds-truncate">Date activation</div>
+                            </th>
+                            <th class="" scope="col">
+
+                              <div class="slds-truncate">Activation par</div>
+                            </th>
+                            <th class="" scope="col">
+                              <div class="slds-truncate">Date désactivation</div>
+                            </th>
+                            <th class="" scope="col">
+                              <div class="slds-truncate">Désactivation par</div>
+
+                            </th>
+                            <th class="" scope="col">
+                              <div class="slds-truncate">Date début</div>
+                            </th>
+                            <th class="" scope="col">
+
+                              <div class="slds-truncate">Date fin</div>
+                            </th>
+
+                            
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <template if:true={energieVert}>
+                            <template for:each={energieVert.output} for:item="opt">
+
+
+                          <tr class="slds-hint-parent" key={opt.option.date_activation}>
+                            
+
+                            <td data-label="Prospecting">
+                              <div class="slds-truncate">{opt.option.date_activation}</div>
+                            </td>
+                            <td data-label="Amount">
+                              <div class="slds-truncate">{opt.option.activation_par}</div>
+                            </td>
+                            <td data-label="Motif">
+                              <div class="slds-truncate">{opt.option.date_desactivation}</div>
+                            </td>
+                            <td data-label="Confidence">
+                              <div class="slds-truncate">{opt.option.desactivation_par}</div>
+                            </td>
+                            <td data-label="Close Date">
+                              <div class="slds-truncate">{opt.option.date_debut_periode}</div>
+                            </td>
+
+                            <td data-label="Confidence">
+                                <div class="slds-truncate">{opt.option.date_fin_periode}</div>
+                              </td>
+                          </tr>
+                          </template>
+                        </template>
+                        </tbody>
+                    </table>
+
+                    <div class="exampleHolder" if:true={showSpinner}>
+                        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                    </div>
+                    
+                 </div>
+                
+                 <footer>
+                   
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
+   
+    </template>
+
+
+  <template if:true={changeModePopupModal}>
+      <div class="demo-only" style="height: 640px;">
+          <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+              <div class="slds-modal__container">
+                  <header class="slds-modal__header">
+                      <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closechangeModePopupModal}>
+                          <lightning-icon icon-name="utility:close" size="medium">
+                          </lightning-icon>
+                          <span class="slds-assistive-text">Close</span>
+                      </button>
+                      <h2 class="slds-text-heading_medium slds-hyphenate">Modifier le mode d'envoi des factures</h2>
+                  </header>
+                  <div class="slds-modal__content slds-p-around_medium">
+
+                          <lightning-radio-group
+                          label="Passer à la facture électronique ?"
+                          options={optionsOuiNon} onchange={handleOnChangeOuiNon}
+                          value={valueOuiNon} type="button"
+                          required>
+                      </lightning-radio-group>
+                  </div>
+                  <footer class="slds-modal__footer">
+                      <lightning-button label="Annuler" variant="neutral" onclick={closechangeModePopupModal}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <lightning-button label="Enregistrer" variant="brand" onclick={savechangeModePopupModal}></lightning-button>
+                  </footer>
+              </div>
+          </section>
+          <div class="slds-backdrop slds-backdrop_open"></div>
+      </div>
+      </template>
+</template>

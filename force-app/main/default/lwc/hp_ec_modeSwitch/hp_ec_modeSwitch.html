@@ -1,0 +1,17 @@
+<!--
+  @description       : 
+  @author            : Clément Bauny
+  @group             : 
+  @last modified on  : 12-13-2021
+  @last modified by  : Clément Bauny
+-->
+<template>
+    <div data-id='switchContent' class="switch-container">
+        <p>Mode d&apos;affichage</p>
+        <c-hp_ec_switch-button
+            name="themeSwitch"
+            options={themeOptions}
+            onswitchchange={handleThemeChange}
+        ></c-hp_ec_switch-button>
+    </div>
+</template>

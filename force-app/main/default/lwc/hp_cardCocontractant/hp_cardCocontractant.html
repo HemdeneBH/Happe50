@@ -1,0 +1,100 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+
+  @last modified on  : 09-23-2020
+
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   09-15-2020   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+-->
+<template>
+
+
+
+
+    <template if:true={isCocontractant}>
+      <div style="padding: 10px;background-color: #c1c0c0;">
+        <lightning-card  class="container-card">
+        <h2 style="margin-left: 0.5rem;"><b>Co-contractant sur les contrats ci-dessous :</b></h2>
+
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered" style="font-size:0.7rem;margin-top:1rem;margin-right: 2.5%;margin-left: 2.5%;width:95%;">
+
+        <thead>
+          <tr class="slds-line-height_reset" >
+            <th class="" scope="col">
+              <div class="slds-truncate">Statuts des contrats</div>
+            </th>
+            <th class="" scope="col">
+
+
+
+
+              <div class="slds-truncate">Adresse du logement</div>
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate">Energie</div>
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate">Date d'activation du contrat</div>
+
+
+
+
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate">Contractant</div>
+            </th>
+            <th class="" scope="col">
+              <div class="slds-truncate">Solde</div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+            <template for:each={cocontractantList} for:item="cocontractant">
+
+
+
+          <tr class="slds-hint-parent" key={cocontractant.Id}>
+            <th data-label="Opportunity Name" scope="row">
+                <div class="slds-truncate">
+                    <div if:true={cocontractant.elecStatus}>Elec : {cocontractant.elecStatus}</div>
+                    <div if:true={cocontractant.gazStatus}>Gaz : {cocontractant.gazStatus}</div>
+                </div>
+            </th>
+
+
+
+
+            <td data-label="Prospecting">
+              <div class="slds-truncate">{cocontractant.address}</div>
+            </td>
+            <td data-label="Amount">
+              <div class="slds-truncate">{cocontractant.typeEnergie}</div>
+            </td>
+            <td data-label="Motif" scope="row">
+              <div class="slds-truncate">
+                <div if:true={cocontractant.elecDateContractualisation}>Elec : {cocontractant.elecDateContractualisation}</div>
+                <div if:true={cocontractant.gazDateContractualisation}>Gaz : {cocontractant.gazDateContractualisation}</div>
+              </div>
+            </td>
+            <td data-label="Confidence">
+              <div class="slds-truncate">
+                <a href="javascript:void(0);" data-id={cocontractant.idContractant} onclick={clickCocontractant}>{cocontractant.firstName} {cocontractant.lastName}</a>
+                </div>
+            </td>
+            <td data-label="Close Date">
+              <div class="slds-truncate">{cocontractant.solde}</div>
+            </td>
+          </tr>
+          </template>
+        </tbody>
+    </table>
+
+  </lightning-card>
+  </div>
+
+</template>
+</template>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_Stop_Relance__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Case à cocher remplie par le bouton &quot;Stop Relance&quot;</description>
+    <externalId>false</externalId>
+    <label>Stop Relance</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

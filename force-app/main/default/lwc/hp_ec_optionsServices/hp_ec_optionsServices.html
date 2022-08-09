@@ -1,0 +1,110 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 07-12-2022
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<template>
+    <div class="hp-optionsServices c-content-bg slds-col">
+        <div class="hp-bigTitle">{titleText}</div>
+
+        <div>
+            <div if:true={isElec} class="hp-option-item">
+                <div class="left">
+                    <span if:true={showCheckOptionVertElec} class="iconChecked">
+                        <img class="hp-checked_icon" src ={iconChecked} alt="checked icon"/>
+                    </span>
+                    <span class="option-item">
+                        {optionVertElecLabel}
+                    </span>
+                </div>
+                <div class="rightBloc">
+                    <span class="hp-status">{optionVertElecStatus}</span>
+                    <span class="hp-buttons" data-id="optionVerte" onclick={openPopinOption}>Gérer</span>
+                </div>
+            </div>
+            <div class="hp-option-item">
+                
+                <div class="left">
+                    <span if:true={showCheckFactureEnLigne} class="iconChecked">
+                        <img class="hp-checked_icon" src ={iconChecked} alt="checked icon"/>
+                    </span>
+                    <span class="option-item">
+                        {factureEnLigneLabel}
+                    </span>
+                </div>
+                <div class="rightBloc" >
+                    <span class="hp-status">{factureEnLigneStatus}</span>
+                    <span if:true={showGereFactureEnLigne} class="hp-buttons" data-id="factureEnLigne" onclick={openPopinOption}>Gérer</span>
+                </div>
+            </div>
+            <div class="hp-option-item">
+                <div class="left">
+                    <span if:true={showCheckDRP} class="iconChecked">
+                        <img class="hp-checked_icon" src ={iconChecked} alt="checked icon"/>
+                    </span>
+                    <span class="option-item">
+                        {dateReglementPersonnaliseLabel}
+                    </span>
+                </div>
+                <div class="rightBloc" >
+                    <span class="hp-status">{dateReglementStatus}</span>
+                    <span class="hp-buttons" onclick={handleClickDateReglement}>Modifier</span>
+                </div>
+            </div>
+            <div class="hp-option-item">
+                <div class="left">
+                    <span class="iconChecked">
+                        <img class="hp-checked_icon" src ={iconChecked} alt="checked icon"/>
+                    </span>
+                    <span class="option-item">
+                        {modePaiementLabel}
+                    </span>
+                </div>
+            </div>
+            <div class="hp-option-item">
+                <div class="left">
+                    <span if:true={hasDepanExpress} class="iconChecked">
+                        <img class="hp-checked_icon" src ={iconChecked} alt="checked icon"/>
+                    </span>
+                    <span class="option-item">
+                        {depanExpressLabel}
+                    </span>
+                </div>
+                <div class="rightBloc">
+                    <span if:false={hasDepanExpress} class="hp-link" ><a href={depanExpressURL} target="_blank">En savoir +</a></span>
+                    <span if:true={hasDepanExpress} class="hp-status">{depanExpressStatus}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="hp-linkBox">
+            <a href={voirOptionsURL} target="_blank">
+                {voirOptionsLabel}
+                <span class="chevron right"></span>
+            </a>
+        </div>
+    </div>
+
+    <template if:true={showPopin}>
+        <div class="hp-popup" >
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <c-hp_ec_popin-options-et-services  onopenpopinoptions={closePopinOption} 
+                                                        option={optionType} 
+                                                        contractid={currentContractId}
+                                                        texteintroductifpopin ={texteIntroductif}
+                                                        titrepopin={titrePopin}
+                                                        textealertepopin={texteAlertePopin}
+                                                        labelbouttonpopin={labelBouttonPopin}
+                                                        textexplicatifpopin={textExplicatifPopin}
+                                                        etat={etatOption}>
+                    </c-hp_ec_popin-options-et-services> 
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+</template>

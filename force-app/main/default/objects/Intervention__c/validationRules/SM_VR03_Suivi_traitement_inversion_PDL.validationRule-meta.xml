@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_VR03_Suivi_traitement_inversion_PDL</fullName>
+    <active>false</active>
+    <description>@description: Dans le cas d&apos;une inversion PDL, le conseiller doit renseigner le champ &quot;Suivi du traitement&quot;.
+@projet: smile</description>
+    <errorConditionFormula>AND(
+ISPICKVAL(  Type__c , &apos;Inversion PDL&apos;),
+ISBLANK( TEXT(  Suivi_du_traitement__c )))</errorConditionFormula>
+    <errorDisplayField>Suivi_du_traitement__c</errorDisplayField>
+    <errorMessage>Merci de renseigner le suivi du traitement.</errorMessage>
+</ValidationRule>

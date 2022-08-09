@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prestataire__c</fullName>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <label>Prestataire</label>
+    <required>true</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>Dunkerque DGP</fullName>
+                <default>false</default>
+                <label>Dunkerque DGP</label>
+            </value>
+            <value>
+                <fullName>ENGIE</fullName>
+                <default>false</default>
+                <label>ENGIE</label>
+            </value>
+            <value>
+                <fullName>LA BAULE DGP</fullName>
+                <default>false</default>
+                <label>LA BAULE DGP</label>
+            </value>
+            <value>
+                <fullName>Metz DGP</fullName>
+                <default>false</default>
+                <label>Metz DGP</label>
+            </value>
+            <value>
+                <fullName>Prestataire ACCENTURE DGP</fullName>
+                <default>false</default>
+                <label>Prestataire ACCENTURE DGP</label>
+            </value>
+            <value>
+                <fullName>Prestataire Armatis DGP</fullName>
+                <default>false</default>
+                <label>Prestataire Armatis DGP</label>
+            </value>
+            <value>
+                <fullName>Prestataire Arvato DGP</fullName>
+                <default>true</default>
+                <label>Prestataire Arvato DGP</label>
+            </value>
+            <value>
+                <fullName>Prestataire COMDATA DGP</fullName>
+                <default>false</default>
+                <label>Prestataire COMDATA DGP</label>
+            </value>
+            <value>
+                <fullName>Prestataire COMDATA DGP</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Prestataire COMDATA DGP</label>
+            </value>
+            <value>
+                <fullName>Prestataire Contentia DGP</fullName>
+                <default>false</default>
+                <label>Prestataire Contentia DGP</label>
+            </value>
+            <value>
+                <fullName>Prestataire DEAFI DGP</fullName>
+                <default>false</default>
+                <label>Prestataire DEAFI DGP</label>
+            </value>
+            <value>
+                <fullName>Prestataire Effico DGP</fullName>
+                <default>false</default>
+                <label>Prestataire Effico DGP</label>
+            </value>
+            <value>
+                <fullName>Prestataire Euro CRM DGP</fullName>
+                <default>false</default>
+                <label>Prestataire Euro CRM DGP</label>
+            </value>
+            <value>
+                <fullName>Prestataire Gayssot DGP</fullName>
+                <default>false</default>
+                <label>Prestataire Gayssot DGP</label>
+            </value>
+            <value>
+                <fullName>Prestataire GERI DGP</fullName>
+                <default>false</default>
+                <label>Prestataire GERI DGP</label>
+            </value>
+            <value>
+                <fullName>Prestataire Sitel Group DGP</fullName>
+                <default>false</default>
+                <label>Prestataire Sitel Group DGP</label>
+            </value>
+            <value>
+                <fullName>Prestataire Téléperformance DGP</fullName>
+                <default>false</default>
+                <label>Prestataire Téléperformance DGP</label>
+            </value>
+            <value>
+                <fullName>Quimper DGP</fullName>
+                <default>false</default>
+                <label>Quimper DGP</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

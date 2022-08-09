@@ -1,0 +1,106 @@
+<!--
+  @description       : 
+  @author            : Badr Eddine Belkarchi
+  @group             : 
+  @last modified on  : 09-16-2021
+  @last modified by  : Badr Eddine Belkarchi
+-->
+<template>
+    <div class="hp-navigationMenu">
+        <div class="hp-nav-header">
+            <h1 class="hp-nav-logo">
+                <img class="hp-logo" src ={logo} alt="happe logo"/>
+            </h1>
+            <p class="hp-nav-title">{titre}</p>
+            <div class="hp-nav-profile-icon-container">
+                <div class="hp-nav-profile-icon">
+                    <span>
+                        <a hred="#">
+                            <img onclick={navigateToUserProfile} src ={iconFox}/>
+                        </a>
+                        
+                        <!-- <img src ={iconFish}/> -->
+                        <!-- <img src ={iconParrot}/> -->
+                        <!-- <img src ={iconCow}/> -->
+                        <!-- <img src ={iconKoala}/> -->
+                        <!-- <img src ={iconCroco}/> -->
+
+                         <!-- <img src ={iconBear}/> -->
+                        <!-- <img src ={iconElephant}/> -->
+                        <!-- <img src ={iconRabbit}/> -->
+                        <!-- <img src ={iconRat}/> -->
+
+                         <!-- <img src ={iconReindeer}/> -->
+                        <!-- <img src ={iconDog}/> -->
+                        <!-- <img src ={iconDoggy}/> -->
+                        <!-- <img src ={iconChick}/> -->
+                    </span>                  
+                </div>
+            </div>
+            <div class="hp-client">
+                <div class="hp-client-infos">
+                    <p class="hp-clientName">{nameClient}</p>
+                    <p class="hp-clientRef">Référence client : {refClient}</p>
+                </div>
+                <div class="hp-modify-btn">
+                    <a hred="#">
+                        <img src ={iconModify} alt="modify"/>
+                    </a>
+                </div>
+            </div>
+            <svg class="slds-button__icon slds-button__icon_left" aria-hidden="true">
+                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#chevronright"></use>
+              </svg>
+        </div>
+        
+        <div class="">
+            <lightning-vertical-navigation selected-item="tableauDeBord">
+                <lightning-vertical-navigation-section>
+                    <nav class="slds-nav-vertical" aria-label="">
+                        <ul class="hp-nav">
+                            <li>
+                                <a href="#" onclick={navigateToMyDashboardPage} class="hp-nav-item">{labelDashboard}
+                                    <span class="chevron right"></span>  
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" onclick={navigateToMyContract} class=" hp-nav-item">{labelMyContract}
+                                    <span class="chevron right"></span>
+                                </a>
+                            </li>
+                            <li class="current">
+                                <a href="#" onclick={navigateToMyInvoice} class="hp-nav-item">{labelMyInvoice}
+                                    <span class="chevron right"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" onclick={navigateToMyDocuments} class="hp-nav-item">{labelMyDocuments}
+                                    <span class="chevron right"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" onclick={navigateToMyConsumption} class="hp-nav-item">{labelMyConsumption}
+                                    <span class="chevron right"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" onclick={navigateToMySponsorSpace} class="hp-nav-item">{labelMySponsorSpace}
+                                    <span class="chevron right"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </lightning-vertical-navigation-section>
+                <div class="hp-bloc-nav-phone">
+                    <a href="tel:+330977420410">{numTel}</a>
+                </div>
+                <div class="hp-bloc-app-happe">
+                    <img src={logoAppMobile} alt="app logo" />
+                    <p><a href={lienAppMobile} target="_blank">Télécharger l’appli mobile happ-e</a></p>
+                </div>
+            </lightning-vertical-navigation>
+            
+              
+        </div>
+    </div>
+</template>

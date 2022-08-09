@@ -1,0 +1,74 @@
+{
+  "appPageId" : "7e89266e-f5a3-4029-bb48-38a8a732ab93",
+  "componentName" : "community_layout:sldsFlexibleLayout",
+  "id" : "2b020c9f-5a7e-4048-b093-415448493a1c",
+  "label" : "Demande de nouveau mot de passe",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "backgroundImageConfig" : "",
+        "backgroundImageOverlay" : "rgba(0,0,0,0)",
+        "sectionConfig" : "{\"UUID\":\"e278aab5-9ae8-4ae5-9cbb-be2e61297048\",\"columns\":[{\"UUID\":\"bc4bfd20-06f8-4361-8820-f2549506dfbb\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}"
+      },
+      "componentName" : "community_layout:section",
+      "id" : "e278aab5-9ae8-4ae5-9cbb-be2e61297048",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "labelInputConfirmationMDP" : "Confirmer mon mot de passe :",
+            "labelInputEmail" : "Adresse email associée :",
+            "labelInputIdentite" : "Identité associée :",
+            "labelInputMDP" : "Mot de passe :",
+            "messageConfirmation" : "Succès",
+            "messageConfirmationIncorrecte" : "Les deux mot de passe saisi ne correspondent pa",
+            "messageErreurActivationExpiree" : "Le lien utilisé pour réinitialiser votre mot de passe n'est plus valable, veuillez renouveler votre demande",
+            "messageErreurInputEmail" : "Mauvais Format d'Email",
+            "messageFormatIncorrecte" : "Le mot de passe doit être 8 caractères minimum et doit contenir au moins une minuscule, une majiscule, un chiffre et un caractère spéciale",
+            "messageInfoBulle" : "Le mot de passe doit contenir 8 caractères minimum",
+            "placeHolderInputEmail" : "martin.dupont@gmail.com.com",
+            "placeHolderInputIdentite" : "Martin DUPONT",
+            "placeHolderInputMDP" : "Mot de passe",
+            "titreRenouvelerMotDePasse" : "Renouveler mon mot de passe"
+          },
+          "componentName" : "c:hp_ec_renouvelerMotDePasse",
+          "id" : "88a0fe4c-0e47-47f1-bda8-a043bef034e9",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "bc4bfd20-06f8-4361-8820-f2549506dfbb",
+        "regionLabel" : "Column 1",
+        "regionName" : "col1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "scopedBrandingSetId" : null,
+      "type" : "component"
+    } ],
+    "id" : "899566dc-1113-4dd1-9be5-d7e629be3f4e",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "pageTitle" : "Réinitialiser le Mot de Passe",
+        "recordId" : "{!recordId}"
+      },
+      "componentName" : "community_builder:seoAssistant",
+      "id" : "878237e5-39ad-4061-a863-a0b745ed79c9",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "a388bb5d-b39b-408e-844b-6c950259ea86",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "PFlC31YDquY3kutKC990xhLaNFbuiZ",
+  "type" : "view",
+  "viewType" : "custom-reset-password"
+}

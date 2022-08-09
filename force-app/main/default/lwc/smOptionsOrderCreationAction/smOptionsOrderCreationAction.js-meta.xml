@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Flexcard LWC - Order Creation Action for Options</masterLabel>
+    <description>Adds a button on the flexcard to the triggers order/cpv creation on SAP side. Designed for a single Option to be selected and created</description>
+    <runtimeNamespace>vlocity_cmt</runtimeNamespace>
+</LightningComponentBundle>

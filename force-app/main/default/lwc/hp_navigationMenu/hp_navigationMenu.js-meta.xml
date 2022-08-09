@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>45.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Navigation Menu</masterLabel>
+    <targets>
+        <target>lightning__HomePage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            
+            <property name="logo" label="Logo" type="String" default="/sfsites/c/resource/HP_EC_white_logo" datasource="
+                /sfsites/c/resource/HP_EC_app_logo,
+                /sfsites/c/resource/HP_EC_black_logo,
+                /sfsites/c/resource/HP_EC_white_logo"
+            ></property>
+
+            <property name="titre" label="Titre" type="String" default="Save.your.energy."></property>
+
+            <property name="labelDashboard" label="label du lien de la page Dashboard" type="String" default="Tableau de bord"></property>
+            <property name="labelMyContract" label="label du lien de la page MyContract" type="String" default="Mon contrat"></property>
+            <property name="labelMyInvoice" label="label du lien de la page MyInvoice" type="String" default="Mes factures"></property>
+            <property name="labelMyDocuments" label="label du lien de la page MyDocuments" type="String" default="Mes documents"></property>
+            <property name="labelMyConsumption" label="label du lien de la page MyConsumption" type="String" default="Ma consommation"></property>
+            <property name="labelMySponsorSpace" label="label du lien de la page MySponsorSpace" type="String" default="Mon espace parrain"></property>
+
+            <property name="numTel" label="Numéro téléphone" type="String" default="09 77 420 410"></property>
+
+            <property name="logoAppMobile" label="Logo application mobile" type="String" default="/sfsites/c/resource/HP_EC_app_logo"></property>
+            <property name="lienAppMobile" label="Lien application mobile" type="String" default="https://apps.apple.com/us/app/happ-e-by-engie/id1545612133"></property>
+            
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

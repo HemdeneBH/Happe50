@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Energie_production_eau_chaude__c</fullName>
+    <externalId>false</externalId>
+    <label>energie production eau chaude</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Gaz_naturel</fullName>
+                <default>false</default>
+                <label>Gaz naturel</label>
+            </value>
+            <value>
+                <fullName>Électricité</fullName>
+                <default>false</default>
+                <label>Électricité</label>
+            </value>
+            <value>
+                <fullName>Fioul</fullName>
+                <default>false</default>
+                <label>Fioul</label>
+            </value>
+            <value>
+                <fullName>Réseau_de_chaleur</fullName>
+                <default>false</default>
+                <label>Réseau de chaleur</label>
+            </value>
+            <value>
+                <fullName>Propane_GPL</fullName>
+                <default>false</default>
+                <label>Propane GPL</label>
+            </value>
+            <value>
+                <fullName>Butane</fullName>
+                <default>false</default>
+                <label>Butane</label>
+            </value>
+            <value>
+                <fullName>Bois</fullName>
+                <default>false</default>
+                <label>Bois</label>
+            </value>
+            <value>
+                <fullName>Solaire</fullName>
+                <default>false</default>
+                <label>Solaire</label>
+            </value>
+            <value>
+                <fullName>Autre_énergie_renouvelable</fullName>
+                <default>false</default>
+                <label>Autre énergie renouvelable</label>
+            </value>
+            <value>
+                <fullName>Autre</fullName>
+                <default>false</default>
+                <label>Autre</label>
+            </value>
+            <value>
+                <fullName>NSP</fullName>
+                <default>false</default>
+                <label>NSP</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

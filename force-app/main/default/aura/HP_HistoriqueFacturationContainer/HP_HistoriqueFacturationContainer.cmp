@@ -1,0 +1,18 @@
+<!--
+  @description       : 
+  @author            : Hemdene Ben Hammouda
+  @group             : 
+  @last modified on  : 08-20-2021
+  @last modified by  : Hemdene Ben Hammouda
+-->
+<aura:component implements="lightning:isUrlAddressable,flexipage:availableForAllPageTypes" access="global" >
+
+    <lightning:workspaceAPI aura:id="workspace" />
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <aura:attribute type="String" name="pfcdata"/>
+    <aura:attribute type="String" name="contratLocaux"/>
+    <aura:attribute type="String" name="idContratGaz"/>
+    <aura:attribute type="String" name="idContratElec"/>
+    <aura:attribute type="String" name="consommationData"/>
+    <c:hp_historiqueFacturation label="Historique factures" pfcdata="{!v.pfcdata}" contratLocaux="{!v.contratLocaux}" idContratGaz="{!v.idContratGaz}" idContratElec="{!v.idContratElec}" consommationData="{!v.consommationData}"/>    
+</aura:component>

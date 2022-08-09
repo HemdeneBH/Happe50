@@ -1,0 +1,145 @@
+<!--
+  @description       : 
+  @author            : Zaatouche Younes
+  @group             : 
+  @last modified on  : 04-12-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small"
+        aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+        <div class="hp_container">
+            <header class="slds-modal__header hp-header">
+                <h1 class="hp-bigTitle">
+                    {popinTitle}
+                </h1>
+                <a class="hp-closeButon" onclick={closePopinHisToriqueFacturePaiement}>X</a>
+            </header>
+            <div class="slds-tabs_default slds-tabs_medium">
+                <ul class="slds-tabs_default__nav" role="tablist">
+                    <li onclick={handleTab1Click} class="slds-tabs_default__item slds-is-active" title="Item One"
+                        role="presentation">
+                        <a class="slds-tabs_default__link" href="#" role="tab" tabindex="0" aria-selected="true"
+                            style="color: whitesmoke;" aria-controls="tab-default-1" id="tab-default-1__item">MES
+                            FACTURES</a>
+                    </li>
+                    <li onclick={handleTab2Click} class="slds-tabs_default__item" title="Item Two" role="presentation">
+                        <a class="slds-tabs_default__link" href="#" role="tab" tabindex="-1" aria-selected="false"
+                            style="color: whitesmoke;" aria-controls="tab-default-2" id="tab-default-2__item">MES
+                            PAIEMENT</a>
+                    </li>
+                    <template if:true={modePaiementIsAnuel}>
+                        <li onclick={handleTab3Click} class="slds-tabs_default__item" title="Item Three"
+                            role="presentation">
+                            <a class="slds-tabs_default__link" href="#" role="tab" tabindex="-1" aria-selected="false"
+                                style="color: whitesmoke;" aria-controls="tab-default-3" id="tab-default-3__item">MES
+                                ÉCHÉANCE</a>
+                        </li>
+                    </template>
+                    <template if:true={containPlansApurement}>
+                        <li onclick={handleTab4Click} class="slds-tabs_default__item" title="Item four"
+                            role="presentation">
+                            <a class="slds-tabs_default__link" href="#" role="tab" tabindex="-1" aria-selected="false"
+                                style="color: whitesmoke;" aria-controls="tab-default-3" id="tab-default-4__item">MON
+                                PLAN D'APUREMENT</a>
+                        </li>
+                    </template>
+
+                </ul>
+                <div class="slds-scrollable_y" style="height:5rem;width:24rem">
+                    <template if:true={tab1isShown}>
+                        <div id="tab-default-1" class={tab1IsActive} role="tabpanel"
+                            aria-labelledby="tab-default-1__item">
+                            <table>
+                                <template for:each={factures} for:item="fact">
+                                    <tr key={fact.ref_facture}>
+                                        <td style="padding-left:7px;"> {fact.typeFact}-{fact.energie}</td>
+                                        <td colspan="2"></td>
+                                    </tr>
+                                    <tr key={fact.ref_facture}>
+                                        <td style="padding-left:7px;"><a style="color: rgb(24, 21, 221);"
+                                                href=" #">{fact.ref_facture} du {fact.date_limite_de_paiement}</a></td>
+                                        <td>{fact.montant_ttc} </td>
+                                        <td> <a style="color: rgb(29, 41, 211);" href=" #">Icone</a> </td>
+                                    </tr>
+                                </template>
+                            </table>
+                        </div>
+                    </template>
+                    <template if:true={tab2isShown}>
+                        <div id="tab-default-2" class={tab2IsActive} role="tabpanel"
+                            aria-labelledby="tab-default-2__item">
+                            <table>
+                                <template for:each={paiements} for:item="paiement">
+                                    <tr key={paiement.ref_paiement}>
+                                        <td style="padding-left:7px;"> {paiement.type}-{paiement.enrg}</td>
+                                        <td colspan="2"></td>
+                                    </tr>
+                                    <tr key={paiement.ref_paiement}>
+                                        <td style="padding-left:7px;"><a style="color: rgb(16, 47, 221);"
+                                                href=" #">{paiement.ref_paiement} du {paiement.date_paiement}</a></td>
+                                        <td> {paiement.montant_ttc}</td>
+                                        <td> <a style="color: rgb(17, 57, 233);" href=" #">Icone</a> </td>
+                                    </tr>
+                                </template>
+                            </table>
+                        </div>
+                    </template>
+                    <template if:true={tab3isShown}>
+                        <div id="tab-default-3" class={tab3IsActive} role="tabpanel"
+                            aria-labelledby="tab-default-3__item">
+                            <table>
+                                <template for:each={echeances} for:item="echeance">
+                                    <tr key={echeance.reference}>
+                                        <td style="padding-left:7px;"> {echeance.type_decheance} -{echeance.enrg}</td>
+                                        <td colspan="2"></td>
+                                    </tr>
+                                    <tr key={echeance.reference}>
+                                        <td style="padding-left:7px;"><a style="color: rgb(44, 23, 231);"
+                                                href=" #">{echeance.reference} du {echeance.date_decheance}</a></td>
+                                        <td>{echeance.montant_ttc} </td>
+                                        <td> <a style="color: rgb(35, 48, 221);" href=" #">Icone</a> </td>
+                                    </tr>
+                                </template>
+                            </table>
+                        </div>
+                    </template>
+                    <template if:true={tab4isShown}>
+                        <div id="tab-default-4" class={tab4IsActive} role="tabpanel"
+                            aria-labelledby="tab-default-4__item">
+                            <table>
+                                <template for:each={plansApurement} for:item="plApurement">
+                                    <tr key={plApurement.id_plan_apurement}>
+                                        <td style="padding-left:7px;"> Plan d’apurement -[{plApurement.refFact}]</td>
+                                        <td colspan="2"></td>
+                                    </tr>
+                                    <tr key={plApurement.id_plan_apurement}>
+                                        <td style="padding-left:7px;"><a style="color: rgb(29, 49, 228);"
+                                                href=" #">{plApurement.id_plan_apurement} du
+                                                {plApurement.date_creation}</a></td>
+                                        <td> {plApurement.montant}</td>
+                                        <td> <a style="color: rgb(25, 12, 216);" href=" #">Icone</a> </td>
+                                    </tr>
+                                </template>
+                            </table>
+                        </div>
+                    </template>
+                    <div class="slds-form-element">
+                        <label class="slds-form-element__label" for="text-input-id-46"></label>
+                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_left">
+                            <!-- <svg class="slds-icon slds-input__icon slds-input__icon_left slds-icon-text-default"
+                        aria-hidden="true">
+                        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#search"></use>
+                    </svg> -->
+                            <input style="background-color: white;" type="text" id="text-input-id-46"
+                                placeholder="Placeholder text…" class="slds-input" />
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin:auto;">
+                        <button class="slds-button slds-button--brand" onclick={handleSubmit}>{popinBoutton}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>

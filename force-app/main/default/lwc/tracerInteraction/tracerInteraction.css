@@ -1,0 +1,11 @@
+.container-tracer-interaction {
+    position: absolute;
+    bottom: 13.5px;
+}
+.close-btn{
+    margin-top:10px;
+}
+.next-btn{
+    bottom: 13.5px;
+    float: right;
+}

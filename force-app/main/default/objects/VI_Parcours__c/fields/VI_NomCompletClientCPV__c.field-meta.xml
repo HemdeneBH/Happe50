@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VI_NomCompletClientCPV__c</fullName>
+    <description>Champ pour afficher sur les CPV le nom complet du client qu&apos;il ait été crée comme nouveau client ou qu&apos;il ait été existant</description>
+    <externalId>false</externalId>
+    <formula>(TEXT(VI_Contact__r.Salutation) +&quot; &quot;+ VI_Contact__r.LastName)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Nom complet client CPV</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

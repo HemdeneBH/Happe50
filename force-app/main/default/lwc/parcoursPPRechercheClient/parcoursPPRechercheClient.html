@@ -1,0 +1,313 @@
+<template>
+	<div class="container" style="margin-bottom: 70px">
+		<div class="row">
+			<h1 class="col-lg-12 text-center" style="margin-top: 50px;">Recherche Client</h1>
+		</div>
+		<div class="row">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-1 text-center"></div>
+					<div class="col-lg-10 text-center">
+						<div class="container"
+							style="    border: 1px solid;border-radius: 16px;border-color: rgba(0, 157, 233, 1);">
+							<div class="row" style="margin-top:10px">
+								<div class="col-lg-1 text-center"></div>
+								<div class="col-lg-5 text-center">
+									<form onsubmit={onFormSubmit}>
+										<div class="form-group">
+											<label for="Email">Email</label>
+											<input type="text" class="form-control" name="Email"
+												oninput={handleSearchClientChange} placeholder=""
+												value={_record.VI_Email1Client__c}>
+										</div>
+									</form>
+								</div>
+								<div class="col-lg-5 text-center">
+									<form onsubmit={onFormSubmit}>
+										<div class="form-group">
+											<label for="Téléphone">Téléphone</label>
+											<input type="number" maxlength="10" onwheel={removeNumberScroll}
+												class="form-control" name="Téléphone" oninput={handleSearchClientChange}
+												placeholder="" value={customerPhoneNumber}>
+										</div>
+									</form>
+								</div>
+								<div class="col-lg-1 text-center"></div>
+
+								<div class="col-lg-1 text-center"></div>
+								<div class="col-lg-5 text-center">
+									<form onsubmit={onFormSubmit}>
+										<div class="form-group">
+											<label for="Nom">Nom</label>
+											<input type="text" class="form-control" name="Nom"
+												oninput={handleSearchClientChange} placeholder=""
+												value={_record.VI_NomClient__c}>
+										</div>
+									</form>
+								</div>
+								<div class="col-lg-5 text-center">
+									<form onsubmit={onFormSubmit}>
+										<div class="form-group">
+											<label for="Prénom">Prénom</label>
+											<input type="text" class="form-control" name="Prénom" placeholder=""
+												oninput={handleSearchClientChange} value={_record.VI_PrenomClient__c}>
+										</div>
+									</form>
+								</div>
+								<div class="col-lg-1 text-center"></div>
+
+								<div class="col-lg-1 text-center"></div>
+								<div class="col-lg-2 text-center">
+									<form onsubmit={onFormSubmit}>
+										<div class="form-group">
+											<label for="CodePostal">Code Postal</label>
+											<input type="number" onwheel={removeNumberScroll} class="form-control"
+												name="CodePostal" data-id="CodePostal"
+												oninput={handleSearchClientChange} placeholder=""
+												value={_record.VI_CodePostalClient__c}>
+										</div>
+									</form>
+								</div>
+								<div class="col-lg-3 text-center">
+									<div class="form-group">
+										<label for="Commune">Commune</label>
+										<input type="text" class="form-control" name="Commune"
+											oninput={handleSearchClientChange} placeholder=""
+											value={_record.VI_CommuneClient__c} onclick={checkListVille}
+											data-id="ville">
+										<div data-id="listVillesSuggested"
+											class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid slds-hide "
+											role="listbox" style="position: relative;">
+											<ul class="slds-listbox slds-listbox_vertical" role="presentation">
+												<template for:each={mesVilles} for:item="ville">
+													<li role="presentation" class="slds-listbox__item " key={ville}>
+														<div data-value={ville}
+															class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta  listtext-copy-8"
+															role="option" onclick={selectVilleValue}>
+															<span class="overlap-group">
+																<span class="adresse textbody-left">{ville}</span>
+															</span>
+														</div>
+													</li>
+												</template>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-5 text-center">
+									<form onsubmit={onFormSubmit}>
+										<div class="form-group">
+											<label for="RefClient">Référence client (9 chiffres)</label>
+											<input type="number" class="form-control" onwheel={removeNumberScroll}
+												name="RefClient" oninput={handleSearchClientChange} placeholder=""
+												value={_record.VI_IDReferenceClient__c}>
+										</div>
+									</form>
+								</div>
+								<div class="col-lg-1 text-center"></div>
+							</div>
+							<template if:true={redLabelTéléphone}>
+								<div style="color: red;text-align:center;width: 100%;position: relative;">
+									<span>Merci de saisir au choix :</span> </br>
+									<span>- Un numéro de portable commençant par 06 ou 07 suivi de 8 chiffres</span>
+									</br>
+									<span>- Un numéro fixe commençant par 01 à 05 ou 09 suivi de 8 chiffres</span>
+									</br></br>
+								</div>
+							</template>
+						</div>
+					</div>
+					<div class="col-lg-1 text-center"></div>
+				</div>
+			</div>
+		</div>
+		<Template if:true={afficherResultat}>
+			<div class="row" style="margin-top:40px;align-items: center;width:100%">
+				<!--DDPCM 1052 START-->
+				<template if:false={rechercheContactSimilaire}>
+					<div>
+						<lightning-spinner class="rechercheContactSpinner" alternative-text="Loading" size="medium">
+						</lightning-spinner>
+					</div>
+				</template>
+				<!--DDPCM 1052 END-->
+				<template if:true={rechercheContactSimilaire}>
+					<div class="table-with-filtering lato-normal-sonic-silver-18px">{resultatDeRecherche}</div>
+					<br /><br />
+					<div class="col-lg-12 text-center" style="position: relative;z-index: 0;">
+						<lightning-datatable key-field="Id" data={currentPageData} columns={columns}
+							selected-rows={selectedRows} max-row-selection=1 style="text-align: left;"
+							onclick={afficherEmailPrefereAction}>
+							<!-- style="outline: none;"
+						class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped"-->
+						</lightning-datatable>
+						<br />
+						<lightning-layout-item size="5">
+							<ul class="slds-button-group-row">
+								<template if:true={hasPrev}>
+									<li style="cursor:pointer;margin-top: 3%;" class="btn-img-size">
+										<img src={FlecheGauche} onclick={onPrev} class="btn-img-size">
+									</li>
+								</template>
+								<template for:each={pagesList} for:item="pageNumber">
+									<li key={pageNumber}>
+										<div style="display: flex;justify-content: center;align-items: center;"
+											class="rectangle-copy text-center" onclick={onPageClick}
+											data-id={pageNumber}>
+											<p data-id={pageNumber} style="margin-bottom:0px;" onclick={onPageClick}>
+												{pageNumber}</p>
+										</div>
+									</li>
+								</template>
+								<template if:true={hasNext}>
+									<li style="cursor:pointer;margin-top: 3%;" class="btn-img-size">
+										<img src={FlecheDroite} onclick={onNext} class="btn-img-size">
+									</li>
+								</template>
+							</ul>
+						</lightning-layout-item>
+						</br>
+						<!-- <lightning-layout horizontal-align="space">
+	 <lightning-layout-item flexibility="auto">
+		<lightning-button label="Previous" icon-name="utility:chevronleft" onclick={previousHandler}>
+		</lightning-button>
+	 </lightning-layout-item>
+	 <lightning-layout-item flexibility="auto">
+		Page {page} of {totalPage}
+	 </lightning-layout-item>
+	 <lightning-layout-item flexibility="auto">
+		<lightning-button label="Next" icon-name="utility:chevronright" icon-position="right"
+				 onclick={nextHandler}></lightning-button>
+	 </lightning-layout-item>
+	</lightning-layout> -->
+					</div>
+				</template>
+			</div>
+		</Template>
+
+		<!-- Start DDPCM - 949 -->
+
+		<!--<div if:true={isShowCLientSContract}>
+			<br>
+			<template if:true={isCLientHasContract}>
+
+				<div class="row nocopy" oncontextmenu={handleContext} onpaste={handlePaste}>
+					<div class="col-lg-1 text-center"></div>
+					<div style="height:200px;padding:0px" class="col-lg-10">
+						<div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+							<table class="table table-bordered mb-0">
+								<thead>
+									<tr>
+										<th style="width:33%" scope="col">Contrats Energie</th>
+									</tr>
+								</thead>
+								<tbody style="overflow-y:scroll;position: sticky; left: 0; ">
+									<template for:each={selectLocalForPopup.cases} for:item="section">
+										<tr key={section.canal}>
+											<td style="width:33%">{section.canal}</td>
+											<td style="width:33%">{section.energie}</td>
+											<td style="width:33%">{section.dateDenvoi}</td>
+										</tr>
+									</template>
+								</tbody>
+							</table>
+						
+						</div>
+					</div>
+					<div class="col-lg-1 text-center"></div>
+				</div>
+			</template>
+			<template if:false={isCLientHasContract}>
+				<div class="col-lg-2 text-center"></div>
+				<div class="col-lg-6 text-center">
+					<table class="table table-bordered mb-0">
+						<thead>
+							<tr>
+								<th style="width:33%" scope="col">Contrats Energie</th>
+							</tr>
+						</thead>
+						<tbody style="overflow-y:scroll;position: sticky; left: 0; ">
+							<tr>
+								<td style="width:33%">Le client ne possède pas de contrat d'énergie.</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-lg-4 text-center"></div>
+			</template>
+		</div>
+		<br> -->
+		<!-- END DDPCM - 949 -->
+
+		<Template if:true={afficherEmailPrefere}>
+			<div style="margin-left: 20%;margin-top: 2%;width: 100%;position: relative;">
+				<div style="position: absolute; left: 0%;width: 30%;">
+					<input type="text" class={inputEmailRed} name="EmailAffichage"
+						placeholder="Email envoi CPV si différent" value={_record.VI_Email_CPV__c}
+						oninput={updateEmailCPV} onchange={updateEmailPrefere} data-id="inputEmailPrefereId">
+				</div>
+				<div style="position: absolute; left: 35%;width: 10%;top: 10px;">
+					<input id="EmailPréféré" class="form-check-input" type="checkbox"
+						style="transform: scale(1.3);outline: none;" onclick={handleCheckEmailPrefere}
+						checked={_record.VI_Email_CPV_IsFavori__c} data-id="checkBoxEmailPrefereId">
+				</div>
+				<div style="position: absolute; left: 35%;width: 20%;top: 9px;color: rgba(117,117,117,1.0);">
+					<label class="font-class-3" for="EmailPréféré">Nouvel email</label>
+				</div>
+			</div>
+			<Template if:true={errorMessageFormatEmail}>
+				<div style="color: red;margin-left: 37%;margin-top: 9%;width: 100%;position: relative;">
+					<span>Merci de renseigner un format d'email valide</span>
+				</div>
+			</Template>
+		</Template>
+		<div data-id="buttons" class="row" style="margin-top:90px;">
+
+			<div class="col-lg-4 text-center justify-content-center">
+				<button type="button" class="btn btn-outline-primary" onclick={showCreationClient}
+					style="height: 44px;width: 200px;border-radius: 0px;" disabled={buttonDisabled}>
+					<p style="font-family: 'Lato', Helvetica, Arial, serif;
+					font-size: 15px;
+					font-style: normal;
+					font-weight: 700;" onclick={showCreationClient}>Créer un nouveau client</p>
+				</button>
+			</div>
+			<div class="col-lg-4 text-center justify-content-center">
+				<button type="button" class="btn btn-outline-primary" onclick={updateParcours}
+					style="height: 44px;width: 200px;border-radius: 0px;margin-left:10%">
+					<p style="font-family: 'Lato', Helvetica, Arial, serif;
+				font-size: 15px;
+				font-style: normal;
+				font-weight: 700;" onclick={updateParcours}>Continuer avec ce client</p>
+				</button>
+			</div>
+			<div class="col-lg-4 text-center justify-content-center">
+				<button type="button" class="btn btn-outline-primary" onclick={reinitialiser}
+					style="height: 44px;width: 200px;border-radius: 0px;margin-left:10%"
+					disabled={buttonReinitializeDisabled}>
+					<p style="font-family: 'Lato', Helvetica, Arial, serif;
+				font-size: 15px;
+				font-style: normal;
+				font-weight: 700;" onclick={reinitialiser}>Réinitialiser la recherche</p>
+				</button>
+			</div>
+		</div>
+
+	</div>
+	<template if:false={showCreationClientComponent}>
+		<div style="position: absolute;height:10%;width: 100%;bottom: -60px;left: 0%;">
+			<button onclick={handlePrecedent} class="buttonPrecedent">Précédent</button>
+			<button onclick={handleSuivant} class="buttonSuivant">Suivant</button>
+		</div>
+	</template>
+	<c-parcours-p-p-creation-client if:true={showCreationClientComponent} parcours={_record} recorddonnee={recorddonnee}
+		firstload="true">
+	</c-parcours-p-p-creation-client>
+	<template if:true={showCreationClientComponent}>
+		<div style="position: absolute;height:10%;width: 100%;bottom: -250px;left: 0%;">
+			<button onclick={handlePrecedent} class="buttonPrecedent">Précédent</button>
+			<button onclick={handleSuivant} class="buttonSuivant">Suivant</button>
+		</div>
+	</template>
+</template>

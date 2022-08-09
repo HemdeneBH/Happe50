@@ -1,0 +1,53 @@
+<!--
+  @File Name          : cmn_cardSolde.html
+  @Description        : 
+  @Author             : Mouhamadoune Coulibaly
+  @Group              : 
+  @Last Modified By   : ChangeMeIn@UserSettingsUnder.SFDoc
+  @Last Modified On   : 30/04/2020 à 17:53:31
+  @Modification Log   : 
+  Ver       Date            Author      		    Modification
+  1.0    19/12/2019   Mouhamadoune Coulibaly     Initial Version
+-->
+<template>
+    <lightning-card title="SOLDE"> 
+        <div style="padding-left:0.5rem" class="slds-m-around_medium bloc-card engie-card-contrat-body slds-card__body via-slds-card__body slds-theme--default slds-grid">
+            <div class="solde-type">
+                <span class="slds-text-heading_small">{soldeType}</span></h2>
+            </div>
+            <div class="solde-card">
+                <span class={colorClass}>{hpSoldeFormater} €</span>
+
+            </div>
+            <div class="slds-grid slds-wrap header-border">
+                <div class="slds-col slds-size--1-of-2">
+                    <div class="slds-text-title_caps slds-text-body_small slds-p-top_x-small text-align-center">Date limite de paiement</div>
+                    <div class="slds-text-title_caps slds-text-body_small slds-p-top_x-small text-align-center">{dateLimite}</div>
+                    <div if:true={remboursement}>
+                            <div if:false={remboursement.remboursement_recupere} class="slds-m-left_x-small slds-text-body_small" >
+                                    Remboursement {remboursement.montant_ttc}€ le {remboursement.date_creation} pour la facture {remboursement.origine_remboursement}. 
+                                    
+                                    <span if:true={remboursement.date_validation}> Validé le {remboursement.date_validation}</span>
+                                    <span if:false={remboursement.date_validation}> Non validé</span>
+                            </div>
+                            <div if:true={remboursement.remboursement_recupere} class="slds-m-left_x-small slds-text-body_small" >
+                                    Remboursement {remboursement.montant_ttc}€ le {remboursement.date_creation} pour l'échéance  {remboursement.origine_remboursement}.
+                                    <span if:true={remboursement.date_validation}> Validé le {remboursement.date_validation}</span>
+                                    <span if:false={dateValidation}> Non validé</span>
+                                </div>
+                     </div> 
+                </div>
+                <div class="slds-col slds-size--1-of-2 slds-p-horizontal_none">
+                   <!-- <lightning-button variant="base" label="Payer par CB" title="CB" icon-name="utility:package_org_beta" class="slds-m-left_x-small slds-text-body_small" onclick={openAgilabSpaceCB}></lightning-button>
+                    <lightning-button variant="base" label="Délai de Paiement" title="Paiement" icon-name="utility:date_input" class="slds-m-left_x-small slds-text-body_small" onclick={openAgilabSpaceDP}></lightning-button>
+                   --><template if:true={isCollect}>
+						<lightning-button variant="base" label="Recouvrement" title="Recouvrement" icon-name="utility:warning" class="slds-m-left_x-small slds-text-body_small"></lightning-button>
+					</template>
+				</div>
+                <div class="slds-col slds-size--2-of-2 footer-solde">
+                    <p if:true={errorMessage} slot="footer" class="text-align-center slds-text-color_error">{errorsoldecard}</p>
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+</template>

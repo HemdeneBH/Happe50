@@ -1,0 +1,34 @@
+<!--
+  @description       : 
+  @author            : Badr Eddine Belkarchi
+  @group             : 
+  @last modified on  : 05-24-2022
+  @last modified by  : Badr Eddine Belkarchi
+-->
+<template>
+    <div data-id='pageContent' class={theme}>
+        <div class="hp-status c-content-bg slds-col">
+            <div class="hp-bigTitle">{title}</div>
+
+            <template if:true={isStatusAJourPaiement}>
+                <div class={statusClass}>À jour de paiement</div>
+            </template>
+            <template if:true={isStatusPaiementEnRetard}>
+                <div class={statusClass}>En retard de paiement</div>
+            </template>
+
+            <template if:true={dateDebutValidite}>
+                <div class={infoClass} data-id="date1">Date du contrat : <span class="text-style">{dateDebutValidite}</span></div>
+            </template>
+            <template if:true={dateReconduction}>
+                <div class={infoClass} data-id="date2">Renouvellement le : <span class="text-style">{dateReconduction}</span></div>
+            </template>
+            <template if:true={dateProchaineFacture}>
+                <div class={infoClass} data-id="date3">Prochaine facture le : <span class="text-style">{dateProchaineFacture}</span></div>
+            </template>
+            <template if:true={jourPrelevement}>
+                <div class={infoClass}  data-id="date4">Jour de prélèvement le : <span class="text-style">{jourPrelevement}</span></div>
+            </template>
+        </div>
+    </div>
+</template>

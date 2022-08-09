@@ -1,0 +1,129 @@
+.consumption {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    padding: 35px 40px 35px;
+    margin: 15px;
+}
+
+.consumption-tabs {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.consumption-tab {
+    margin-right: 28px;
+    padding-right: 28px;
+    border-right: 2px solid var(--bg-plain);
+}
+
+.consumption-tab:last-child {
+    padding-right: 0;
+    margin-right: 0;
+    border-right: 0;
+}
+
+.consumption-tab__link {
+    color: var(--grey);
+}
+
+.consumption-tab__link:hover,
+.consumption-tab.active .consumption-tab__link {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.consumption-tab__link--alert {
+    color: var(--rose);
+}
+
+.consumption-tab__link span {
+    display: inline-block;
+    vertical-align: middle;
+    height: 32px;
+    width: 32px;
+    margin: -22px 0 -12px 12px;
+    padding: 2px 0;
+    border-radius: 50%;
+    text-align: center;
+    background-color: var(--rose);
+    color: var(--text-color);
+}
+
+.consumption-graph {
+    width: 100%;
+    overflow: auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    margin-top: 19px;
+    padding-bottom: 19px;
+}
+
+.consumption-graph::-webkit-scrollbar { width: 5px; height: 5px; border-radius: 3px;}
+.consumption-graph::-webkit-scrollbar-track { background: var(--bg-plain); border-radius: 3px; }
+.consumption-graph::-webkit-scrollbar-thumb { background: var(--secondary-colour); border-radius: 3px;}
+
+.consumption-graph li { margin: 0 auto; }
+.consumption-graph li:first-child { margin-left: 0; }
+.consumption-graph li:last-child { margin-right: 0; }
+
+.consumption-footer {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 20px;
+}
+
+.consumption-footer .switch-button {
+    width: 136px;
+}
+
+.consumption-footer .hp-link .leftBloc {
+    margin-right: 10px;
+}
+
+.consumption-footer .hp-link .rightBloc {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+}
+
+.consumption-footer .hp-link .chevron::before {
+    transform: rotate(45deg);
+}
+
+.consumption-footer .hp-link a:hover,
+.consumption-footer .hp-link a:focus {
+    color: var(--text-color);
+}
+
+@media (max-width: 1024px) {
+
+    
+    .consumption-tab {
+        margin-right: 10px;
+        padding-right: 10px;
+    }
+
+    .consumption {
+        display: grid;
+        margin: 10px 0;
+    }
+
+    .consumption-footer .hp-link {
+        width: 100%;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 374px) {
+
+    .consumption {
+        padding: 25px 20px;
+    }
+
+}

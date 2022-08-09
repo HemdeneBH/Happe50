@@ -1,0 +1,26 @@
+.footer-container {
+    background-color: #eeeeee;
+    border: 1px solid #e3e3e3;
+   }
+   
+   .footer-item {
+       height: 40px;
+       /*line-height: 40px;*/
+       font-size: 13px;
+       font-family: Helvetica;
+       white-space: normal;
+       color: #059ce7;
+       text-align: center;
+       border-right: 1px solid #e3e3e3;
+       border-bottom: 1px solid #e3e3e3;
+   }
+   
+   /*
+   .footer-item:not(:last-child) {
+       border-right: 1px solid #e3e3e3;
+   }
+   */
+   
+   .footer-item:hover {
+       cursor: pointer;
+   }

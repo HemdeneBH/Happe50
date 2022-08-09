@@ -1,0 +1,42 @@
+<!--
+  @description       : UX Genesys Media used in the utility bar 'Media Pure Cloud'
+  @author            : Mohamed Aamer
+  @last modified on  : 01-10-2022
+  @last modified by  : Mohamed Aamer
+  @version           : 1.0
+-->
+<template>
+    <template if:true={listOfObjects}>
+        <div class="media-container">
+            <div class="media-header">
+                <h1 class="title">Liste des Medias à traiter</h1>
+            </div>
+            <div class="media-body">
+                <template for:each={listOfObjects} for:item="lm">
+                    <div class="toggle-wrapper" key={lm.Id}>
+                        <div class="toggle checkcross">
+                            <label class="media-label">{lm.type}</label>
+                            <div class="media-input-container">
+                                <input class="checkcrossInput" type="checkbox" name={lm.type} checked={lm.val} onclick={changeToggle}/>
+                                <label class="toggle-item" for="checkcross">
+                                    <div class="check"></div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <div data-id="updateBlock" class="update disable">
+                    <h5 class="update-button" onclick={handleSubmit}>Modifier</h5>   
+                </div>
+            </div>
+        </div>
+    </template>
+    <template if:true={errorMedias}>
+        <div class="media-container">
+            <div class="media-header error">
+                <h1 class="title">Aucun Média</h1>
+            </div>
+            <p class="error-media">{errorMessage}</p>
+        </div>
+    </template>
+</template>

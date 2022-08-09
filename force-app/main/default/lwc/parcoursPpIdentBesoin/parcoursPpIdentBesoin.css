@@ -1,0 +1,68 @@
+.btn-img-size {
+  width: 26px;
+  height: 42px;
+}
+
+.showImageOnHover{
+  display:none; /*by default this should hidden*/
+}
+
+.hideImageOnHover{
+  display:inline-block; /*by default this should be shown*/
+}
+.btn-outline-primary{
+		border-color: rgba(0, 157, 233, 1) !important;
+    color:rgba(0, 157, 233, 1) !important
+}
+
+.btn-outline-primary:hover:active .hideImageOnHover {
+  display:none;
+}
+
+.btn-outline-primary:hover:active .showImageOnHover {
+  display: inline-block;
+}
+
+.btn-outline-primary:hover{
+  background-color: #009de9 !important;
+  color:#fff !important;
+}
+
+.btn-outline-primary[data-current="true"] {
+  background-color: #009de9;
+  color:#fff !important;
+}
+
+.btn-outline-primary[data-current="true"] .hideImageOnHover {
+  display:none;
+}
+
+.btn-outline-primary[data-current="true"] .showImageOnHover {
+  display: inline-block;
+}
+
+.buttonPrecedent {
+  position: absolute;
+    left: 1%;
+    background: transparent;
+    border-color: var(--cerulean);
+    border-style: solid;
+    color: var(--cerulean);
+    font-size: 18px;
+    width: 160px;
+    height: 50px;
+    outline: none;
+}
+
+.buttonSuivant {
+  position: absolute;
+  left: 84%;
+  background: var(--cerulean);
+  border-color: var(--cerulean);
+  border-style: solid;
+  color: white;
+  font-size: 18px;
+  width: 160px;
+  height: 50px;
+  outline: none;
+}

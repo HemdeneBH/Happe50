@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_PrestationDistributeur</fullName>
+    <active>true</active>
+    <compactLayoutAssignment>SM_OPS</compactLayoutAssignment>
+    <label>SM_PrestationDistributeur</label>
+    <picklistValues>
+        <picklist>Civilite_interlocuteur_intervention__c</picklist>
+        <values>
+            <fullName>AUTRE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MLLE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MLLES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MME</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MME et MLLE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MMES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MR</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Creneau__c</picklist>
+        <values>
+            <fullName>Après midi</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Début d%27après midi</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Début de matinée</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Début de soirée</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fin d%27après midi</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fin d%E2%80%99après midi</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fin de journée</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fin de matinée</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fin de soirée</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Journée</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Matin</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Midi</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Milieu de soirée</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Soir</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Niveau_d_ouverture_aux_services__c</picklist>
+        <values>
+            <fullName>Inconnu</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Niveau 0</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Niveau 1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Niveau 2</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>SI_contractuel__c</picklist>
+        <values>
+            <fullName>DISCO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GINKO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inconnu</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Secteur_activite__c</picklist>
+        <values>
+            <fullName>Elec</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gaz</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Situation_de_vente__c</picklist>
+        <values>
+            <fullName>Changement d%27offre</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Changement de fournisseur</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Emménagement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Restauration</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rétablissement</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Statut__c</picklist>
+        <values>
+            <fullName>A initier</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Annulé</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>En cours</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Terminé</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type_OPS__c</picklist>
+        <values>
+            <fullName>Demande de coupure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Différé</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Online</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Recollement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Réduction de puissance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rétablissement</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type_de_compteur__c</picklist>
+        <values>
+            <fullName>Gazpar</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Historique</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inconnu</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LINKY</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

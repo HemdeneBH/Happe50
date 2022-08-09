@@ -1,0 +1,11 @@
+.slds-carousel__panel.panel-hide{
+    display: none;
+}
+.slds-carousel__panel img{
+    max-height: 100vh !important;
+}
+.indicator-white {
+    background: white;
+    border-color: #dddbda;
+    box-shadow: none;
+}

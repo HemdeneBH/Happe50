@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gaz_Intervention_facultative__c</fullName>
+    <description>Gaz
+Champ formule permettant de déterminer si une OPS avec Intervention est possible sur un PDL.</description>
+    <externalId>false</externalId>
+    <formula>IF(
+AND(
+TEXT(Secteur_activite__c)=$Label.SM_CL04_Secteur_activite_Gaz, TEXT(Type_de_compteur__c)&lt;&gt;$Label.SM_CL07_Type_compteur_Gazpar,Etat_du_compteur__c=$Label.SM_CL08_EtatCompteur_non_coupe,
+OR
+(
+AND(
+TEXT(Situation_de_vente__c)=$Label.SM_CL06_Situation_de_vente_EM,
+ISBLANK(Date_refus_telereleve__c),
+OR(
+AND(Etat_PDL__c=$Label.SM_CL09_Etat_PDL_non_libre,!DGI__c
+),
+AND(Etat_PDL__c=$Label.SM_CL09_Etat_PDL_libre,DGI__c
+),
+AND(Etat_PDL__c=$Label.SM_CL09_Etat_PDL_libre,!DGI__c
+)
+)
+),
+AND(
+TEXT(Situation_de_vente__c)=$Label.SM_CL10_Situation_de_vente_CHF
+
+)
+)
+)
+,true,false)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Gaz Intervention facultative</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

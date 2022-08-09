@@ -1,0 +1,40 @@
+<aura:component implements="flexipage:availableForAllPageTypes,lightning:isUrlAddressable,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+    <lightning:workspaceAPI aura:id="workspace" />
+    <aura:handler value="{!this}" name="init" action="{!c.init}"/>
+    <aura:attribute name="libelleVoie" type="String" default="{!v.pageReference.state.c__libelleVoie}"></aura:attribute>
+    <aura:attribute name="ville" type="String" default="{!v.pageReference.state.c__ville}"></aura:attribute>
+    <aura:attribute name="complementAdresse" type="String" default="{!v.pageReference.state.c__complementAdresse}"></aura:attribute>
+    <aura:attribute name="numeroVoie" type="String" default="{!v.pageReference.state.c__numeroVoie}"></aura:attribute>
+    <aura:attribute name="codePostal" type="String" default="{!v.pageReference.state.c__codePostal}"></aura:attribute>
+    <!--blocageRelance-->
+    <aura:attribute name="blocageRelance" type="String" default="{!v.pageReference.state.c__blocageRelance}"></aura:attribute>
+    <aura:attribute name="libelleMotifBlocageRelance" type="String" default="{!v.pageReference.state.c__libelleMotifBlocageRelance}"></aura:attribute>
+    <aura:attribute name="dateDebutBlocageRelance" type="String" default="{!v.pageReference.state.c__dateDebutBlocageRelance}"></aura:attribute>
+    <aura:attribute name="dateFinBlocageRelance" type="String" default="{!v.pageReference.state.c__dateFinBlocageRelance}"></aura:attribute>
+    <!--blocageFacturation-->
+    <aura:attribute name="blocageFacturation" type="String" default="{!v.pageReference.state.c__blocageFacturation}"></aura:attribute>
+    <aura:attribute name="libelleMotifBlocageFacturation" type="String" default="{!v.pageReference.state.c__libelleMotifBlocageFacturation}"></aura:attribute>
+    <aura:attribute name="dateDebutBlocageFacturation" type="String" default="{!v.pageReference.state.c__dateDebutBlocageFacturation}"></aura:attribute>
+    <aura:attribute name="dateFinBlocageFacturation" type="String" default="{!v.pageReference.state.c__dateFinBlocageFacturation}"></aura:attribute>
+    <!--blocageDecaissement-->
+    <aura:attribute name="blocageDecaissement" type="String" default="{!v.pageReference.state.c__blocageDecaissement}"></aura:attribute>
+    <aura:attribute name="libelleMotifBlocageDecaissement" type="String" default="{!v.pageReference.state.c__libelleMotifBlocageDecaissement}"></aura:attribute>
+    <aura:attribute name="dateDebutBlocageDecaissement" type="String" default="{!v.pageReference.state.c__dateDebutBlocageDecaissement}"></aura:attribute>
+    <aura:attribute name="dateFinBlocageDecaissement" type="String" default="{!v.pageReference.state.c__dateFinBlocageDecaissement}"></aura:attribute>
+    <!--blocagePrevelement-->
+    <aura:attribute name="blocagePrevelement" type="String" default="{!v.pageReference.state.c__blocagePrevelement}"></aura:attribute>
+    <aura:attribute name="libelleMotifBlocagePrevelement" type="String" default="{!v.pageReference.state.c__libelleMotifBlocagePrevelement}"></aura:attribute>
+    <aura:attribute name="dateDebutBlocagePrevelement" type="String" default="{!v.pageReference.state.c__dateDebutBlocagePrevelement}"></aura:attribute>
+    <aura:attribute name="dateFinBlocagePrevelement" type="String" default="{!v.pageReference.state.c__dateFinBlocagePrevelement}"></aura:attribute>
+
+
+
+
+     <c:sM_BlocageLWC  libelleVoie="{!v.libelleVoie}" ville="{!v.ville}" complementAdresse="{!v.complementAdresse}"  numeroVoie="{!v.numeroVoie}" codePostal="{!v.codePostal}"   oncloseTabBlocage="{!c.handlecloseBlocage}"
+    blocageRelance="{!v.blocageRelance}"  libelleMotifBlocageRelance="{!v.libelleMotifBlocageRelance}"  dateDebutBlocageRelance="{!v.dateDebutBlocageRelance}" dateFinBlocageRelance="{!v.dateFinBlocageRelance}"
+    blocageFacturation="{!v.blocageFacturation}"  libelleMotifBlocageFacturation="{!v.libelleMotifBlocageFacturation}"  dateDebutBlocageFacturation="{!v.dateDebutBlocageFacturation}" dateFinBlocageFacturation="{!v.dateFinBlocageFacturation}"
+    blocageDecaissement="{!v.blocageDecaissement}"  libelleMotifBlocageDecaissement="{!v.libelleMotifBlocageDecaissement}"  dateDebutBlocageDecaissement="{!v.dateDebutBlocageDecaissement}" dateFinBlocageDecaissement="{!v.dateFinBlocageDecaissement}"
+    blocagePrevelement="{!v.blocagePrevelement}"  libelleMotifBlocagePrevelement="{!v.libelleMotifBlocagePrevelement}"  dateDebutBlocagePrevelement="{!v.dateDebutBlocagePrevelement}" dateFinBlocagePrevelement="{!v.dateFinBlocagePrevelement}"
+    />
+
+</aura:component>

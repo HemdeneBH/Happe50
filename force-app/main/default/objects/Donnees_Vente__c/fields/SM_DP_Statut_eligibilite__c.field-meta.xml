@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_DP_Statut_eligibilite__c</fullName>
+    <externalId>false</externalId>
+    <label>Statut éligibilité Tranquility/MyPower</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Non éligible</fullName>
+                <default>false</default>
+                <label>Non éligible</label>
+            </value>
+            <value>
+                <fullName>Éligible</fullName>
+                <default>false</default>
+                <label>Éligible</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

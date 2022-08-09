@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HP_Effective_Date__c</fullName>
+    <description>Nouvelle date d’effet souhaitée par le client</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Nouvelle date d’effet souhaitée par le client</inlineHelpText>
+    <label>Date d&apos;effet souhaitée</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

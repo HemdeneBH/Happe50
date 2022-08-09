@@ -1,0 +1,13 @@
+.sm-offer-flexcard.sm-tradeoff-details .block-header .slds-button {   
+    text-align : left;
+}
+
+
+.sm-offer-flexcard.sm-tradeoff-details .block-header .slds-button:focus {
+    box-shadow: none;
+}
+
+.sm-offer-flexcard.sm-tradeoff-details.slds-form-element_horizontal .slds-form-element__label {
+    padding-top: 0px;
+    font-size: 1em;
+}
