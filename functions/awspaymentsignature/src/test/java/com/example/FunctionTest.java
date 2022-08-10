@@ -25,41 +25,36 @@ public class FunctionTest {
     AwspaymentsignatureFunction function = new AwspaymentsignatureFunction();
     FunctionOutput functionOutput = function.apply(createEventMock(), createContextMock());
 
-    assertThat(
-        functionOutput.getAccounts(),
-        hasItems(
-            pojo(Account.class)
-                .withProperty("id", equalTo("5003000000D8cuIQAA"))
-                .withProperty("name", equalTo("Account One, inc.")),
-            pojo(Account.class)
-                .withProperty("id", equalTo("6003000000D8cuIQAA"))
-                .withProperty("name", equalTo("Account Two, inc."))));
+    assert(
+        functionOutput.getSignedPayload()!=null);
   }
 
   private Context createContextMock() {
+    private String signature = "c062NjivoUW+TcHegKebFamCX8Cpmpmy6EiPmKwdpEuZZIpOHJYO";
     Context mockContext = mock(Context.class);
+    // Mockito.when(signatureHelper.generateSignature(Mockito.anyObject(), Mockito.anyObject())).thenReturn(signature);
+    // when(mockContext.getOrg()).then(i1 -> {
+    //   Org mockOrg = mock(Org.class, Mockito.RETURNS_DEEP_STUBS);
+    
+    //   when(mockOrg.getDataApi().query("SELECT Id, Name FROM Account")).then(i2 -> {
+    //     RecordQueryResult mockResult = mock(RecordQueryResult.class);
+    //     String mockStringResult;
 
-    when(mockContext.getOrg()).then(i1 -> {
-      Org mockOrg = mock(Org.class, Mockito.RETURNS_DEEP_STUBS);
+    //     Record firstRecord = mock(Record.class);
+    //     when(firstRecord.getStringField("Id")).thenReturn(Optional.of("5003000000D8cuIQAA"));
+    //     when(firstRecord.getStringField("Name")).thenReturn(Optional.of("Account One, inc."));
 
-      when(mockOrg.getDataApi().query("SELECT Id, Name FROM Account")).then(i2 -> {
-        RecordQueryResult mockResult = mock(RecordQueryResult.class);
+    //     Record secondRecord = mock(Record.class);
+    //     when(secondRecord.getStringField("Id")).thenReturn(Optional.of("6003000000D8cuIQAA"));
+    //     when(secondRecord.getStringField("Name")).thenReturn(Optional.of("Account Two, inc."));
 
-        Record firstRecord = mock(Record.class);
-        when(firstRecord.getStringField("Id")).thenReturn(Optional.of("5003000000D8cuIQAA"));
-        when(firstRecord.getStringField("Name")).thenReturn(Optional.of("Account One, inc."));
+    //     when(mockResult.getRecords()).thenReturn(Arrays.asList(firstRecord, secondRecord));
 
-        Record secondRecord = mock(Record.class);
-        when(secondRecord.getStringField("Id")).thenReturn(Optional.of("6003000000D8cuIQAA"));
-        when(secondRecord.getStringField("Name")).thenReturn(Optional.of("Account Two, inc."));
+    //     return mockResult;
+    //   });
 
-        when(mockResult.getRecords()).thenReturn(Arrays.asList(firstRecord, secondRecord));
-
-        return mockResult;
-      });
-
-      return Optional.of(mockOrg);
-    });
+    //   return Optional.of(mockOrg);
+    // });
 
     return mockContext;
   }
