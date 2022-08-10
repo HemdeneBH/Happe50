@@ -30,7 +30,6 @@ public class FunctionTest {
   }
 
   private Context createContextMock() {
-    private String signature = "c062NjivoUW+TcHegKebFamCX8Cpmpmy6EiPmKwdpEuZZIpOHJYO";
     Context mockContext = mock(Context.class);
     // Mockito.when(signatureHelper.generateSignature(Mockito.anyObject(), Mockito.anyObject())).thenReturn(signature);
     // when(mockContext.getOrg()).then(i1 -> {
