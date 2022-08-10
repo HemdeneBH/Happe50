@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 06-13-2022
+ * @last modified on  : 08-10-2022
  * @last modified by  : Hemdene Ben Hammouda
 **/
 public with sharing class HP_EC_UTIL_CryptoUtils {
@@ -137,23 +137,31 @@ public with sharing class HP_EC_UTIL_CryptoUtils {
     }
 
     public static String generateSignature(String payload){
+        
 
         HP_EC_Amazone_Pay_Setting__mdt mySetting = [SELECT Id, Security_Key__c  FROM HP_EC_Amazone_Pay_Setting__mdt LIMIT 1];
         blob pKey = Blob.valueOf(mySetting.Security_Key__c);
         blob privateKey = EncodingUtil.base64Decode(pKey.tostring());
         blob encodedPayload = Crypto.generateDigest(HASH_KEY, Blob.valueOf(payload));
         //blob encodedcanonicalRequest = Crypto.generateDigest(HASH_KEY, Blob.valueOf(canonicalRequest));
-        blob stringToSign = Blob.valueOf(AMAZON_HASH_KEY + '\n' + EncodingUtil.convertToHex(encodedPayload));
-        system.debug('String to Sign : '+ stringToSign.toString());
-        String salt = '20';
-        blob signatureKey = Crypto.generateMac('HmacSHA256', Blob.valueOf(salt), privateKey);
-        blob signature = Crypto.sign(SIGNATURE_KEY, stringToSign, privateKey);
+        blob stringToSign = Blob.valueOf(AMAZON_HASH_KEY + ' ' + EncodingUtil.convertToHex(encodedPayload));
+        // system.debug('String to Sign : '+ stringToSign.toString());
+        // String salt = '20';
+        // blob signatureKey = Crypto.generateMac('HmacSHA256', Blob.valueOf(salt), privateKey);
+        // blob signature = Crypto.sign(SIGNATURE_KEY, stringToSign, privateKey);
         
 
-        system.debug('------');
-        system.debug(EncodingUtil.base64Encode(signature));
-        system.debug('------');
-        return EncodingUtil.base64Encode(signature);
+        // system.debug('------');
+        // system.debug(EncodingUtil.base64Encode(signature));
+        // system.debug('------');
+        // return EncodingUtil.base64Encode(signature);
+        String myString = '{ "payload" : "'+stringToSign.toString()+'", "privateKeyFileName" : "AmazonPay_SANDBOX-AE53MFIWFLI5K3BPFA3NC5K2.pem"}';
+        System.debug('My Payload : '+ myString);
+        functions.Function myAwsFunction = functions.Function.get('Happe50.awspaymentsignature');
+        functions.FunctionInvocation invocation = myAwsFunction.invoke('{ "payload" : "'+stringToSign.toString()+'", "privateKeyFileName" : "AmazonPay_SANDBOX-AE53MFIWFLI5K3BPFA3NC5K2.pem"}');
+        String jsonResponse = invocation.getResponse();
+        System.debug('Got response ' + jsonResponse);
+        return jsonResponse;
     }
     
     public class AmazonPay_WRP{

@@ -2,12 +2,13 @@
  * @description       : 
  * @author            : Hemdene Ben Hammouda
  * @group             : 
- * @last modified on  : 08-02-2022
- * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+ * @last modified on  : 08-10-2022
+ * @last modified by  : Hemdene Ben Hammouda
 **/
 import { api, LightningElement, track, wire } from 'lwc';
 import { NavigationMixin } from "lightning/navigation";
 import generateSogenactifParams from '@salesforce/apex/HP_EC_UTIL_CryptoUtils.generateSogenactifParams';
+import generateAmazonPayParams from '@salesforce/apex/HP_EC_UTIL_CryptoUtils.generateAmazonPayParams';
 
 import HP_EC_icon_CB from '@salesforce/resourceUrl/HP_EC_icon_CB';
 import HP_EC_icon_paylib from '@salesforce/resourceUrl/HP_EC_icon_paylib';
