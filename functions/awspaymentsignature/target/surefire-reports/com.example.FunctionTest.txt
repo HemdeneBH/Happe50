@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: com.example.FunctionTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 2.4 s <<< FAILURE! - in com.example.FunctionTest
+test(com.example.FunctionTest)  Time elapsed: 2.238 s  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "com.example.FunctionInput.getPrivateKeyFileName()" because the return value of "com.salesforce.functions.jvm.sdk.InvocationEvent.getData()" is null
+	at com.example.FunctionTest.test(FunctionTest.java:26)
+

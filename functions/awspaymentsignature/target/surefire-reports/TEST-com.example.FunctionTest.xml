@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.example.FunctionTest" time="2.4" tests="1" errors="1" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="17"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\TW6234\OneDrive - ENGIE\Documents\Happe\Happe Sprint 51\Happe50\functions\awspaymentsignature\target\test-classes;C:\Users\TW6234\OneDrive - ENGIE\Documents\Happe\Happe Sprint 51\Happe50\functions\awspaymentsignature\target\classes;C:\Users\TW6234\.m2\repository\com\salesforce\functions\sf-fx-sdk-java\1.0.0\sf-fx-sdk-java-1.0.0.jar;C:\Users\TW6234\.m2\repository\org\slf4j\slf4j-api\1.7.30\slf4j-api-1.7.30.jar;C:\Users\TW6234\.m2\repository\junit\junit\4.13.1\junit-4.13.1.jar;C:\Users\TW6234\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\TW6234\.m2\repository\org\mockito\mockito-core\3.6.28\mockito-core-3.6.28.jar;C:\Users\TW6234\.m2\repository\net\bytebuddy\byte-buddy\1.10.18\byte-buddy-1.10.18.jar;C:\Users\TW6234\.m2\repository\net\bytebuddy\byte-buddy-agent\1.10.18\byte-buddy-agent-1.10.18.jar;C:\Users\TW6234\.m2\repository\org\objenesis\objenesis\3.1\objenesis-3.1.jar;C:\Users\TW6234\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\TW6234\.m2\repository\com\spotify\hamcrest-pojo\1.2.0\hamcrest-pojo-1.2.0.jar;C:\Users\TW6234\.m2\repository\com\google\guava\guava\18.0\guava-18.0.jar;C:\Users\TW6234\.m2\repository\com\spotify\hamcrest-util\1.2.0\hamcrest-util-1.2.0.jar;C:\Users\TW6234\.m2\repository\org\bouncycastle\bcprov-jdk15to18\1.69\bcprov-jdk15to18-1.69.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Europe/Paris"/>
+    <property name="user.country.format" value="US"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="FR"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-17.0.4\bin"/>
+    <property name="sun.java.command" value="C:\Users\TW6234\AppData\Local\Temp\surefire7703628500830654883\surefirebooter9438508277682313518.jar C:\Users\TW6234\AppData\Local\Temp\surefire7703628500830654883 2022-08-11T11-39-13_751-jvmRun1 surefire5106684826188347608tmp surefire_011842230018971728337tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\TW6234\OneDrive - ENGIE\Documents\Happe\Happe Sprint 51\Happe50\functions\awspaymentsignature\target\test-classes;C:\Users\TW6234\OneDrive - ENGIE\Documents\Happe\Happe Sprint 51\Happe50\functions\awspaymentsignature\target\classes;C:\Users\TW6234\.m2\repository\com\salesforce\functions\sf-fx-sdk-java\1.0.0\sf-fx-sdk-java-1.0.0.jar;C:\Users\TW6234\.m2\repository\org\slf4j\slf4j-api\1.7.30\slf4j-api-1.7.30.jar;C:\Users\TW6234\.m2\repository\junit\junit\4.13.1\junit-4.13.1.jar;C:\Users\TW6234\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\TW6234\.m2\repository\org\mockito\mockito-core\3.6.28\mockito-core-3.6.28.jar;C:\Users\TW6234\.m2\repository\net\bytebuddy\byte-buddy\1.10.18\byte-buddy-1.10.18.jar;C:\Users\TW6234\.m2\repository\net\bytebuddy\byte-buddy-agent\1.10.18\byte-buddy-agent-1.10.18.jar;C:\Users\TW6234\.m2\repository\org\objenesis\objenesis\3.1\objenesis-3.1.jar;C:\Users\TW6234\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\TW6234\.m2\repository\com\spotify\hamcrest-pojo\1.2.0\hamcrest-pojo-1.2.0.jar;C:\Users\TW6234\.m2\repository\com\google\guava\guava\18.0\guava-18.0.jar;C:\Users\TW6234\.m2\repository\com\spotify\hamcrest-util\1.2.0\hamcrest-util-1.2.0.jar;C:\Users\TW6234\.m2\repository\org\bouncycastle\bcprov-jdk15to18\1.69\bcprov-jdk15to18-1.69.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\TW6234"/>
+    <property name="user.language" value="fr"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2022-07-19"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-17.0.4"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\TW6234\OneDrive - ENGIE\Documents\Happe\Happe Sprint 51\Happe50\functions\awspaymentsignature"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\TW6234\AppData\Local\Temp\surefire7703628500830654883\surefirebooter9438508277682313518.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="17.0.4+11-LTS-179"/>
+    <property name="user.name" value="TW6234"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="Cp1252"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\TW6234\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\TW6234\AppData\Local\Temp\"/>
+    <property name="java.version" value="17.0.4"/>
+    <property name="user.dir" value="C:\Users\TW6234\OneDrive - ENGIE\Documents\Happe\Happe Sprint 51\Happe50\functions\awspaymentsignature"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.language.format" value="en"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-17.0.4\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Java\jdk-17.0.4\bin;C:\Python310\Scripts\;C:\Python310\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\apache-maven-3.8.6\bin;C:\Users\TW6234\AppData\Local\Microsoft\WindowsApps;C:\Users\TW6234\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\TW6234\AppData\Local\Programs\Git\cmd;C:\Program Files\sfdx\bin;C:\pmd-bin-6.41.0\bin;C:\Users\TW6234\Downloads\sonarqube-9.2.1.49989\sonarqube-9.2.1.49989\bin\windows-x86-64;C:\Users\TW6234\AppData\Roaming\npm;C:\Program Files\Java\jdk-17.0.4\bin;C:\Program Files (x86)\sfdx\bin;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="17.0.4+11-LTS-179"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="61.0"/>
+  </properties>
+  <testcase name="test" classname="com.example.FunctionTest" time="2.238">
+    <error message="Cannot invoke &quot;com.example.FunctionInput.getPrivateKeyFileName()&quot; because the return value of &quot;com.salesforce.functions.jvm.sdk.InvocationEvent.getData()&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke "com.example.FunctionInput.getPrivateKeyFileName()" because the return value of "com.salesforce.functions.jvm.sdk.InvocationEvent.getData()" is null
+	at com.example.FunctionTest.test(FunctionTest.java:26)
+</error>
+    <system-err><![CDATA[SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+]]></system-err>
+  </testcase>
+</testsuite>

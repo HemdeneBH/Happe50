@@ -36,6 +36,16 @@ import java.nio.file.Paths;
 import java.security.KeyFactory;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
+import org.bouncycastle.util.io.pem.PemObject;
+import org.bouncycastle.util.io.pem.PemReader;
+import java.io.CharArrayReader;
+import org.apache.commons.io.IOUtils;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Describe AwspaymentsignatureFunction here.
@@ -54,15 +64,78 @@ public class AwspaymentsignatureFunction implements SalesforceFunction<FunctionI
         final PSSParameterSpec pssParameterSpec = new PSSParameterSpec("SHA-256",
                 "MGF1", mgf1ParameterSpec, SALT_LENGTH, TRAILER_FIELD);
         signature.setParameter(pssParameterSpec);
-        byte[] key = Files.readAllBytes(Paths.get(event.getData().getPrivateKeyFileName()));
         LOGGER.info("private key file : " + event.getData().getPrivateKeyFileName());
-        LOGGER.info("path : " + Paths.get(event.getData().getPrivateKeyFileName()));
-        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(key);
-        PrivateKey finalKey = keyFactory.generatePrivate(keySpec);
+        ClassLoader classLoader = getClass().getClassLoader();         
+        InputStream resource = classLoader.getResourceAsStream(event.getData().getPrivateKeyFileName()); 
+        //InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filename)
+        char[] data = IOUtils.toCharArray(resource, StandardCharsets.UTF_8);
+       // byte[] key = Files.readAllBytes(Paths.get(resource.toURI()));
+        LOGGER.info("private key file : " + event.getData().getPrivateKeyFileName());
+        
+        // KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+        // PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(key);
+        //LOGGER.info("key : " + new String(key));
+        PrivateKey finalKey = buildPrivateKey(data);
         signature.initSign(finalKey);
         signature.update(event.getData().getPayload().getBytes());
 
     return new FunctionOutput(new String(Base64.encode(signature.sign())));
   }
+
+  public static PrivateKey buildPrivateKey(final char[] privateKey) throws Exception {
+        Security.addProvider(new BouncyCastleProvider());
+        if (privateKey == null || privateKey.length == 0) {
+             throw new Exception("Private key char array cannot be null or empty");
+        }
+        final PemObject pemObject = getPEMObjectFromKey(privateKey);
+        if (pemObject == null) {
+            throw new Exception("Private key string provided is not valid");
+        }
+
+        PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(pemObject.getContent());
+
+        PrivateKey privateKeyObject = null;
+        try {
+            final KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+            privateKeyObject = keyFactory.generatePrivate(spec);
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            throw new Exception(e.getMessage(), e);
+        }
+
+        return privateKeyObject;
+    }
+
+    /**
+     * To read the contents of the private key
+     * @param char[] privateKey the private key provided
+     * @return private key pem object
+     * @throws AmazonPayClientException When an error response is returned by Amazon Pay due to bad request or other issue
+     */
+    private static PemObject getPEMObjectFromKey(final char[] privateKey) throws Exception {
+        PemObject pemObject ;
+        try {
+            LOGGER.info("privateKey in char [] : " + new String(privateKey));
+            final PemReader pemReader = new PemReader(new CharArrayReader(privateKey));
+            LOGGER.info("pemReader : " + pemReader);
+            pemObject = pemReader.readPemObject();
+            LOGGER.info("pemObject : " + pemObject);
+            pemReader.close();
+
+        } catch (Exception e) {
+          LOGGER.info("e.getMessage() : " + e.getMessage());
+            throw new Exception(e.getMessage(), e);
+        }
+
+        return pemObject;
+    }
+
+    public static char[] bytesToChar(byte[] bytes) {
+        char[] buffer = new char[bytes.length >> 1];
+        for (int i = 0; i < buffer.length; i++) {
+            int bpos = i << 1;
+            char c = (char) (((bytes[bpos] & 0x00FF) << 8) + (bytes[bpos + 1] & 0x00FF));
+            buffer[i] = c;/*from w ww. j a  v a 2 s  . c o m*/
+        }
+        return buffer;
+    }
 }
