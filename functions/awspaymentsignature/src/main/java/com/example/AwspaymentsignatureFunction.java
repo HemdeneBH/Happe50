@@ -55,6 +55,8 @@ public class AwspaymentsignatureFunction implements SalesforceFunction<FunctionI
                 "MGF1", mgf1ParameterSpec, SALT_LENGTH, TRAILER_FIELD);
         signature.setParameter(pssParameterSpec);
         byte[] key = Files.readAllBytes(Paths.get(event.getData().getPrivateKeyFileName()));
+        LOGGER.info("private key file : " + event.getData().getPrivateKeyFileName());
+        LOGGER.info("path : " + Paths.get(event.getData().getPrivateKeyFileName()));
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(key);
         PrivateKey finalKey = keyFactory.generatePrivate(keySpec);
