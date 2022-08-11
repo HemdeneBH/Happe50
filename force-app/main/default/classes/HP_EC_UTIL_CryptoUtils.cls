@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 08-10-2022
+ * @last modified on  : 08-11-2022
  * @last modified by  : Hemdene Ben Hammouda
 **/
 public with sharing class HP_EC_UTIL_CryptoUtils {
@@ -159,6 +159,7 @@ public with sharing class HP_EC_UTIL_CryptoUtils {
         System.debug('My Payload : '+ myString);
         functions.Function myAwsFunction = functions.Function.get('Happe50.awspaymentsignature');
         functions.FunctionInvocation invocation = myAwsFunction.invoke('{ "payload" : "'+stringToSign.toString()+'", "privateKeyFileName" : "AmazonPay_SANDBOX-AE53MFIWFLI5K3BPFA3NC5K2.pem"}');
+        System.debug('Invokation : '+JSON.serializePretty(invocation));
         String jsonResponse = invocation.getResponse();
         System.debug('Got response ' + jsonResponse);
         return jsonResponse;

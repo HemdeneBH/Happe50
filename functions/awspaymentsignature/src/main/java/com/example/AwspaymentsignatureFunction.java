@@ -47,6 +47,7 @@ public class AwspaymentsignatureFunction implements SalesforceFunction<FunctionI
   @Override
   public FunctionOutput apply(InvocationEvent<FunctionInput> event, Context context)
       throws Exception {
+        Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
     final Signature signature = Signature.getInstance("SHA256WithRSA/PSS", BouncyCastleProvider.PROVIDER_NAME);
         final MGF1ParameterSpec mgf1ParameterSpec = new MGF1ParameterSpec("SHA-256");
         final PSSParameterSpec pssParameterSpec = new PSSParameterSpec("SHA-256",
