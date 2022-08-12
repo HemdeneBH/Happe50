@@ -64,17 +64,9 @@ public class AwspaymentsignatureFunction implements SalesforceFunction<FunctionI
         final PSSParameterSpec pssParameterSpec = new PSSParameterSpec("SHA-256",
                 "MGF1", mgf1ParameterSpec, SALT_LENGTH, TRAILER_FIELD);
         signature.setParameter(pssParameterSpec);
-        LOGGER.info("private key file : " + event.getData().getPrivateKeyFileName());
         ClassLoader classLoader = getClass().getClassLoader();         
         InputStream resource = classLoader.getResourceAsStream(event.getData().getPrivateKeyFileName()); 
-        //InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filename)
         char[] data = IOUtils.toCharArray(resource, StandardCharsets.UTF_8);
-       // byte[] key = Files.readAllBytes(Paths.get(resource.toURI()));
-        LOGGER.info("private key file : " + event.getData().getPrivateKeyFileName());
-        
-        // KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-        // PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(key);
-        //LOGGER.info("key : " + new String(key));
         PrivateKey finalKey = buildPrivateKey(data);
         signature.initSign(finalKey);
         signature.update(event.getData().getPayload().getBytes());
@@ -114,11 +106,8 @@ public class AwspaymentsignatureFunction implements SalesforceFunction<FunctionI
     private static PemObject getPEMObjectFromKey(final char[] privateKey) throws Exception {
         PemObject pemObject ;
         try {
-            LOGGER.info("privateKey in char [] : " + new String(privateKey));
             final PemReader pemReader = new PemReader(new CharArrayReader(privateKey));
-            LOGGER.info("pemReader : " + pemReader);
             pemObject = pemReader.readPemObject();
-            LOGGER.info("pemObject : " + pemObject);
             pemReader.close();
 
         } catch (Exception e) {
